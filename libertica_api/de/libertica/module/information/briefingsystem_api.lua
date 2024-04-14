@@ -1,0 +1,361 @@
+--- Ermöglicht das Definieren von Einleitungen
+---
+--- Der Höhepunkt für die Skripting-Dialoge und einfachen Kameraanimationen. Ein vielseitiges
+--- Werkzeug, um die Handlung der Karte zu skripten.
+---
+Lib.BriefingSystem = Lib.BriefingSystem or {};
+
+
+
+--- Startet eine Einleitung.
+---
+--- #### Einstellungen
+---
+--- Mögliche Felder für die Einleitungstabelle:
+--- * `Starting`                - Funktion, die beim Starten der Einleitung aufgerufen wird              
+--- * `Finished`                - Funktion, die beim Beenden der Einleitung aufgerufen wird             
+--- * `RestoreCamera`           - Kameraposition wird am Ende der Einleitung gespeichert und wiederhergestellt 
+--- * `RestoreGameSpeed`        - Spielgeschwindigkeit wird am Ende der Einleitung gespeichert und wiederhergestellt      
+--- * `EnableGlobalImmortality` - Während Einleitungen sind alle Entitäten unverwundbar        
+--- * `EnableSky`               - Zeigt den Himmel während der Einleitung an                   
+--- * `EnableFoW`               - Zeigt den Nebel des Krieges während der Einleitung an           
+--- * `EnableBorderPins`        - Zeigt die Randnadeln während der Einleitung an          
+---
+--- *-> Beispiel #1*
+---
+--- #### Animationen
+--- Die Kameraeinstellungen können vom Text der Seite getrennt werden. Dies ermöglicht nicht nur
+--- das flüssige Schreiben von Dialogen, sondern auch weitere Möglichkeiten werden freigeschaltet
+--- bei Verwendung der Notation. Um eine Animation zu erstellen, darf die Seite keine
+--- Position haben. Andernfalls werden Standardwerte verwendet.
+---
+--- Die Animationsrahmen sollten als Tabelle bereitgestellt werden. Rahmen werden linear interpoliert,
+--- wenn es mindestens 2 Einträge gibt, und kubisch interpoliert, wenn es mindestens 4 Einträge gibt.
+---
+--- *-> Beispiel #2*
+---
+--- *-> Beispiel #3*
+---
+--- *-> Beispiel #4*
+---
+--- #### Parallax
+--- Im Kontext eines Videospiels sind Parallaxen scrollbare Hintergründe. Dies
+--- Technik wurde von Side-Scrollers verwendet. Während einer Einleitungsseite bis zu 4 Ebenen
+--- von Grafiken angezeigt und animiert werden. Parallaxen werden ähnlich notiert wie
+--- Kameraanimationen. Das Scrollen erfolgt durch Einstellen der UV-Koordinaten.
+---
+--- Grafiken müssen immer im Format 16:9 vorliegen. Wenn ein Spieler eine 4:3-Auflösung hat
+--- wird das Bild links und rechts beschnitten, um in den Rahmen zu passen. Koordinaten - solange
+--- als relative Koordinaten bereitgestellt - werden angepasst.
+---
+--- Es ist auch möglich, eine Tabelle von Animationsrahmen für das Bild bereitzustellen.
+--- Die Rahmen werden linear interpoliert, wenn es mindestens 2 Einträge gibt und
+--- kubisch interpoliert, wenn es mindestens 4 Einträge gibt.
+---
+--- *-> Beispiel #5*
+---
+--- *-> Beispiel #6*
+---
+--- #### Beispiele
+---
+--- * Beispiel #1: Grundlegende Struktur
+--- ```lua
+--- function Briefing1(_Name, _PlayerID)
+---     local Briefing = {};
+---     local AP, ASP = AddBriefingPages(Briefing);
+---
+---     -- Seiten ...
+---
+---     Briefing.Starting = function(_Data)
+---     end
+---     Briefing.Finished = function(_Data)
+---     end
+---     StartBriefing(Briefing, _Name, _PlayerID);
+--- end
+--- ```
+---
+--- * Beispiel #2: Notation für Animationen
+--- ```lua
+--- Briefing.PageAnimation = {
+---     ["Seite1"] = {
+---         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
+---              {GetFrameVector("pos3", 500, "pos4", 1000)}},
+---     },
+---     ["Seite3"] = {
+---         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
+---              {GetFrameVector("pos3", 500, "pos4", 1000)},
+---              {GetFrameVector("pos7", 500, "pos8", 1000)},
+---              {GetFrameVector("pos5", 500, "pos6", 1000)}},
+---     },
+--- };
+--- ```
+---
+--- * Beispiel #3: Ersetzen von Animationen
+--- ```lua
+--- Briefing.PageAnimation = {
+---     ["Seite1"] = {
+---         Clear = true,
+---         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
+---              {GetFrameVector("pos3", 500, "pos4", 1000)}},
+---     },
+--- };
+--- ```
+---
+--- * Beispiel #4: Endlos wiederholte Animation
+--- ```lua
+--- Briefing.PageAnimation = {
+---     ["Seite1"] = {
+---         Repeat = true,
+---         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
+---              {GetFrameVector("pos3", 500, "pos4", 1000)},
+---              {GetFrameVector("pos7", 500, "pos8", 1000)},
+---              {GetFrameVector("pos5", 500, "pos6", 1000)}},
+---     },
+--- };
+--- ```
+---
+--- * Beispiel #5: Notation von Parallaxen
+--- ```lua
+--- Briefing.PageParallax = {
+---     ["Seite1"] = {
+---         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
+---          {0, 0, 0.8, 1, 255},
+---          {0.2, 0, 1, 1, 255}},
+---     },
+---     ["Seite3"] = {
+---         {"maps/externalmap/mapname/graphics/Parallax1.png", 1,
+---          {0, 0, 0.8, 1, 255},
+---          {0.2, 0, 1, 1, 255},
+---          {0, 0, 0.8, 1, 255},
+---          {0.2, 0, 1, 1, 255}},
+---     },
+---     ["Seite7"] = {
+---         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
+---          {0, 0, 0.8, 1, 255}},
+---     },
+--- };
+--- ```
+---
+--- * Beispiel #6: Parallaxen ersetzen
+--- ```lua
+--- Briefing.PageParallax = {
+---     ["Seite1"] = {
+---         Clear = true,
+---         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
+---          {0, 0, 0.8, 1, 255},
+---          {0.2, 0, 1, 1, 255}},
+---     },
+--- };
+--- ```
+---
+--- @param _Briefing table   Einleitungstabelle
+--- @param _Name string      Name der Einleitung
+--- @param _PlayerID integer Spieler-ID des Empfängers
+function StartBriefing(_Briefing, _Name, _PlayerID)
+end
+API.StartBriefing = StartBriefing;
+
+--- Überprüft, ob eine Einleitung aktiv ist.
+--- @param _PlayerID integer Spieler-ID des Empfängers
+--- @return boolean IsActive Einleitung ist aktiv
+function IsBriefingActive(_PlayerID)
+    return true;
+end
+API.IsBriefingActive = IsBriefingActive;
+
+--- Erstellt einen Punkt aus einer Position.
+--- @param _Entity any      Zielentität
+--- @param _ZOffset integer Z-Offset
+--- @return number X X-Koordinate
+--- @return number Y Y-Koordinate
+--- @return number Z Z-Koordinate
+function GetFramePosition(_Entity, _ZOffset)
+    return 0, 0, 0;
+end
+
+--- Erstellt einen Vektor aus 2 Positionen.
+--- @param _Entity1 any      Zielpositions-Entität
+--- @param _ZOffset1 integer Z-Offset der Position
+--- @param _Entity2 any      Ziel-LookAt-Entität
+--- @param _ZOffset2 integer Z-Offset von LookAt
+--- @return number X1        X-Koordinate Position
+--- @return number Y1        Y-Koordinate Position
+--- @return number Z1        Z-Koordinate Position
+--- @return number X2        X-Koordinate LookAt
+--- @return number Y2        Y-Koordinate LookAt
+--- @return number Z2        Z-Koordinate LookAt
+function GetFrameVector(_Entity1, _ZOffset1, _Entity2, _ZOffset2)
+    return 0, 0, 0, 0, 0, 0;
+end
+
+--- Bereitet die Einleitung vor und gibt die Seitenfunktionen zurück.
+---
+--- Muss aufgerufen werden, bevor Seiten hinzugefügt werden.
+--- @param _Briefing table Einleitungstabelle
+--- @return function AP  Seitenfunktion
+--- @return function ASP Kurze Seitenfunktion
+function AddBriefingPages(_Briefing)
+    return function() end, function() end;
+end
+API.AddBriefingPages = AddBriefingPages;
+
+--- Erstellt eine Seite.
+---
+--- #### Einleitungsseite
+--- Mögliche Felder für die Seite:
+---
+--- * `Title`           - Angezeigter Seitentitel
+--- * `Text`            - Angezeigter Seitentext
+--- * `Position`        - Skriptname der Position
+--- * `Duration`        - Zeit bis zum automatischen Überspringen
+--- * `DialogCamera`    - Verwendung der Nahaufnahmekamera
+--- * `DisableSkipping` - Erlauben/Verbieten des Überspringens von Seiten
+--- * `Action`          - Funktion, die aufgerufen wird, wenn die Seite angezeigt wird
+--- * `FarClipPlane`    - Renderabstand
+--- * `Rotation`        - Kamerarotation
+--- * `Zoom`            - Kamerazoom
+--- * `Angle`           - Kamerawinkel
+--- * `FadeIn`          - Dauer des Einblendens aus Schwarz
+--- * `FadeOut`         - Dauer des Ausblendens in Schwarz
+--- * `FaderAlpha`      - Maskenalpha
+--- * `BarOpacity`      - Deckkraft der Balken
+--- * `BigBars`         - Verwende große Balken
+--- * `FlyTo`           - Tabelle mit zweitem Satz von Kamerakonfigurationen, wobei die Kamera zufliegt
+--- * `MC`              - Tabelle mit Auswahlmöglichkeiten zum Abzweigen in Dialogen
+---
+--- *-> Beispiel #1*
+---
+--- #### Flusskontrolle
+--- In einer Einleitung kann der Spieler gezwungen werden, eine Wahl zu treffen, die
+--- verschiedene Ergebnisse haben wird. Das nennt man Multiple Choice. Optionen müssen bereitgestellt werden
+--- in einer Tabelle. Die Zielseite kann mit ihrem Namen definiert werden oder eine Funktion kann
+--- für mehr Kontrolle über den Ablauf bereitgestellt werden. Solche Funktionen müssen zurückgeben
+--- ein Seitenname.
+---
+--- *-> Beispiel #2*
+---
+--- Zusätzlich kann jede Funktion markiert werden, um entfernt zu werden, wenn sie verwendet wird,
+--- und nicht wieder angezeigt zu werden, wenn die Seite erneut betreten wird.
+---
+--- *-> Beispiel #3*
+---
+--- Auch Seiten können ausgeblendet werden, indem eine Funktion zum Überprüfen von Bedingungen bereitgestellt wird.
+---
+--- *-> Beispiel #4*
+---
+--- Wenn eine Einleitung verzweigt ist, muss sie manuell beendet werden, nachdem eine Verzweigung erfolgt ist
+--- oder es zeigt einfach die nächste Seite an. Um eine Einleitung zu beenden, muss eine leere Seite hinzugefügt werden.
+---
+--- *-> Beispiel #5*
+---
+--- Alternativ kann die Einleitung an einer anderen Seite fortgesetzt werden. Dies ermöglicht es, zu erstellen
+--- sich wiederholende Strukturen innerhalb einer Einleitung.
+---
+--- *-> Beispiel #6*
+---
+--- Um ausgewählte Antworten zu einem späteren Zeitpunkt zu erhalten, kann die Auswahl in einem
+--- globalen Variablen entweder in einem Optionsrückruf oder in der fertigen Funktion gespeichert werden. Die
+--- Die zurückgegebene Nummer ist die ID der Antwort.
+---
+--- *-> Beispiel #7*
+---
+--- #### Beispiele
+---
+--- * Beispiel #1: Eine einfache Seite
+--- ```lua
+--- AP {
+---    Title        = "Marcus",
+---    Text         = "Dies ist eine einfache Seite.",
+---    Position     = "Marcus",
+---    Rotation     = 30,
+---    DialogCamera = true,
+--- };
+--- ```
+---
+--- * Beispiel #2: Verwendung von mehreren Auswahlmöglichkeiten
+--- ```lua
+--- AP {
+---    Title        = "Marcus",
+---    Text         = "Das ist keine so einfache Seite.",
+---    Position     = "Marcus",
+---    Rotation     = 30,
+---    DialogCamera = true,
+---    MC = {
+---        {"Option 1", "ZielSeite"},
+---        {"Option 2", Option2Geklickt},
+---    },
+--- };
+--- ```
+---
+--- * Beispiel #3: Einmalige Verwendungsoption
+--- ```lua
+--- MC = {
+---     ...
+---     {"Option 3", "AndereSeite", Remove = true},
+--- }
+--- ```
+---
+--- * Beispiel #4: Option mit Bedingung
+--- ```lua
+--- MC = {
+---     ...
+---     {"Option 3", "AndereSeite", Disable = OptionIstDeaktiviert},
+--- }
+--- ```
+---
+--- * Beispiel #5: Briefing abbrechen
+--- ```lua
+--- AP()
+--- ```
+---
+--- * Beispiel #6: Springen zu anderer Seite
+--- ```lua
+--- AP("EinigeSeitenName")
+--- ```
+---
+--- * Beispiel #7: Ausgewählte Option abrufen
+--- ```lua
+--- Briefing.Finished = function(_Data)
+---     MeineAusgewählteOption = _Data:GetPage("Auswahl"):GetSelected();
+--- end
+--- ```
+---
+--- @param _Data table Seitendaten
+function AP(_Data)
+end
+
+--- Erstellt eine Seite auf vereinfachte Weise.
+---
+--- Die Funktion kann einen automatischen Seitennamen basierend auf dem Seitenindex erstellen. Ein
+--- Name kann ein optionales Parameter am Anfang sein.
+---
+--- #### Einstellungen
+--- Die Funktion erwartet die folgenden Parameter:
+--- 
+--- * `Name`           - (Optional) Name der Seite
+--- * `Title`          - Angezeigter Seitentitel
+--- * `Text`           - Angezeigter Seitentext
+--- * `DialogCamera`   - Verwendung der Nahaufnahmekamera
+--- * `Position`       - (Optional) Skriptname der fokussierten Entität
+--- * `Action`         - (Optional) Aktion, wenn die Seite angezeigt wird
+--- * `EnableSkipping` - (Optional) Erlauben/Verbieten des Überspringens der Seite
+---
+--- #### Beispiele
+---
+--- ```lua
+--- -- Totale Ansicht
+--- ASP("Titel", "Einige wichtige Texte.", false, "HQ");
+--- -- Seitennamen
+--- ASP("Seite1", "Titel", "Einige wichtige Texte.", false, "HQ");
+--- -- Nahaufnahme
+--- ASP("Titel", "Einige wichtige Texte.", true, "Marcus");
+--- -- Aktion aufrufen
+--- ASP("Titel", "Einige wichtige Texte.", true, "Marcus", MyFunction);
+--- -- Überspringen erlauben/verbieten
+--- ASP("Titel", "Einige wichtige Texte.", true, "HQ", nil, true);
+--- ```
+---
+--- @param ... any Liste der Seitendaten
+function ASP(...)
+end
+

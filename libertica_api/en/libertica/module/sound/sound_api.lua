@@ -1,0 +1,173 @@
+--- This module enables to controll the sound.
+---
+--- #### Features
+--- - Start/stop music playlists
+--- - Start/stop voice playback
+--- - Start/stop sound effecs
+--- - Change sound configuration
+---
+Lib.Sound = Lib.Sound or {};
+
+
+
+--- Starts an event playlist.
+---
+--- It is possible to import custom files into the game by saving them into
+--- the map archive. A playlist needs a XML file defining it and the files
+--- with the music.
+---
+--- To avoid problems with music files it is best practice to give all files
+--- a unique name. For example find a short prefix for all files taken from
+--- the map name. If multiple maps with the same files inside the playlist or
+--- music directory are present then files will be overwritten!
+---
+--- #### File structure for custom playlists:
+--- ```xml
+--- map_xyz.s6xmap.unpacked
+--- |-- music/*
+--- |-- config/sound/*
+--- |-- maps/externalmap/map_xyz/*
+--- |-- ...
+--- ```
+---
+--- #### Example structure of playlist:
+--- ```xml
+--- <?xml version="1.0" encoding="utf-8"?>
+--- <PlayList>
+---  <PlayListEntry>
+---    <FileName>Music\some_music_file.mp3</FileName>
+---    <Type>Loop</Type>
+---  </PlayListEntry>
+---  <!-- Add entries here -->
+--- </PlayList>
+--- ```
+---
+--- Playlist entries can be looped by using `Loop` as type or be played once
+--- with `Normal` as type.
+---
+--- Also a propability can be used. This indicates the probability of a track
+--- being played.
+--- 
+--- ```xml
+--- <Chance>10</Chance>
+--- ```
+--- @param _Playlist string Name of playlist
+--- @param _PlayerID integer ID of player
+function StartEventPlaylist(_Playlist, _PlayerID)
+end
+API.StartEventPlaylist = StartEventPlaylist;
+
+--- Stops an event playlist.
+--- @param _Playlist string Name of playlist
+--- @param _PlayerID integer ID of player
+function StopEventPlaylist(_Playlist, _PlayerID)
+end
+API.StopEventPlaylist = StopEventPlaylist;
+
+--- Plays an interface sound.
+---
+--- It is possible to import custom files into the game by saving them into
+--- the map archive. To avoid naming problems give all files a unique name.
+---
+--- #### File structure for custom sounds:
+--- ```xml
+--- map_xyz.s6xmap.unpacked
+--- |-- sounds/high/ui/*
+--- |-- sounds/low/ui/*
+--- |-- maps/externalmap/map_xyz/*
+--- |-- ...
+--- ```
+--- @param _Sound string Path to sound
+--- @param _PlayerID integer ID of player
+function Play2DSound(_Sound, _PlayerID)
+end
+API.Play2DSound = Play2DSound;
+
+--- Plays a sound at a world coordinate.
+---
+--- It is possible to import custom files into the game by saving them into
+--- the map archive. To avoid naming problems give all files a unique name.
+---
+--- #### File structure for custom sounds:
+--- ```xml
+--- map_xyz.s6xmap.unpacked
+--- |-- sounds/high/ui/*
+--- |-- sounds/low/ui/*
+--- |-- maps/externalmap/map_xyz/*
+--- |-- ...
+--- ```
+--- @param _Sound string Path to sound
+--- @param _X number X coordinate of sound
+--- @param _Y number Y coordinate of sound
+--- @param _Z number Z coordinate of sound
+--- @param _PlayerID integer ID of player
+function Play3DSound(_Sound, _X, _Y, _Z, _PlayerID)
+end
+API.Play3DSound = Play3DSound;
+
+--- Sets the master volume of the sound.
+---
+--- The current values are automatically saved as default if no default
+--- is found.
+--- @param _Volume integer Volume of sound property
+function SoundSetVolume(_Volume)
+end
+API.SoundSetVolume = SoundSetVolume;
+
+--- Sets the volume of the music.
+---
+--- The current values are automatically saved as default if no default
+--- is found.
+--- @param _Volume integer Volume of sound property
+function SoundSetMusicVolume(_Volume)
+end
+API.SoundSetMusicVolume = SoundSetMusicVolume;
+
+--- Sets the volume of voices.
+---
+--- The current values are automatically saved as default if no default
+--- is found.
+--- @param _Volume integer Volume of sound property
+function SoundSetVoiceVolume(_Volume)
+end
+API.SoundSetVoiceVolume = SoundSetVoiceVolume;
+
+--- Sets the volume of atmospheric sounds.
+---
+--- The current values are automatically saved as default if no default
+--- is found.
+--- @param _Volume integer Volume of sound property
+function SoundSetAtmoVolume(_Volume)
+end
+API.SoundSetAtmoVolume = SoundSetAtmoVolume;
+
+--- Sets the volume of interface sounds.
+---
+--- The current values are automatically saved as default if no default
+--- is found.
+--- @param _Volume integer Volume of sound property
+function SoundSetUIVolume(_Volume)
+end
+API.SoundSetUIVolume = SoundSetUIVolume;
+
+--- Manually saves the sound volumes as default.
+function SoundSave()
+end
+API.SoundSave = SoundSave;
+
+--- Manually restores the sound volumes to default.
+function SoundRestore()
+end
+API.SoundRestore = SoundRestore;
+
+--- Plays a sound file as voice.
+--- @param _File string Path to sound
+function PlayVoice(_File)
+end
+API.PlayVoice = PlayVoice;
+
+--- Stops a playing voice.
+function StopVoice()
+end
+API.StopVoice = StopVoice;
+
