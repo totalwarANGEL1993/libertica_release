@@ -1,3 +1,16 @@
+--- Fügt verschiedene Effekte für das Interface hinzu.
+---
+--- #### Reports
+--- `Report.CinematicActivated` - Ein Kinoevent, empfangen von einem bestimmten Spieler, startet.
+--- `Report.GameInterfaceShown` - Ein Kinoevent, empfangen von einem bestimmten Spieler, endet.
+--- `Report.GameInterfaceHidden` - Die normale Oberfläche wird dem Spieler angezeigt.
+--- `Report.ImageScreenShown` - Der Vollbildhintergrund wird dem Spieler angezeigt.
+--- `Report.ImageScreenHidden` - Der Vollbildhintergrund wird vor dem Spieler versteckt.
+---
+Lib.UIEffects = Lib.UIEffects or {};
+
+
+
 --- Ermöglicht das Anzeigen eines schwarzen Hintergrunds hinter der Benutzeroberfläche und über der Spielwelt.
 --- @param _PlayerID integer ID des Spielers
 function ActivateColoredScreen(_PlayerID, _Red, _Green, _Blue, _Alpha)
@@ -58,25 +71,23 @@ end
 API.FinishCinematicEvent = FinishCinematicEvent;
 
 ---
--- Gibt den Zustand des Kinoevent zurück.
---
--- @param _Identifier            Bezeichner oder ID
--- @param[type=number] _PlayerID ID des Spielers
--- @return[type=number] Zustand des Kinoevent
--- @within Anwenderfunktionen
---
+--- Gibt den Zustand des Kinoevent zurück.
+---
+--- @param _Identifier any Bezeichner oder ID
+--- @param _PlayerID integer ID des Spielers
+--- @return integer State Zustand des Kinoevent
+---
 function GetCinematicEvent(_Identifier, _PlayerID)
     return 0;
 end
 API.GetCinematicEvent = GetCinematicEvent;
 
 ---
--- Prüft ob gerade ein Kinoevent für den Spieler aktiv ist.
---
--- @param[type=number] _PlayerID ID des Spielers
--- @return[type=boolean] Kinoevent ist aktiv
--- @within Anwenderfunktionen
---
+--- Prüft ob gerade ein Kinoevent für den Spieler aktiv ist.
+---
+--- @param _PlayerID integer ID des Spielers
+--- @return boolean Active Kinoevent ist aktiv
+---
 function IsCinematicEventActive(_PlayerID)
     return false;
 end
@@ -122,4 +133,44 @@ function StartTypewriter(_Data)
     return "";
 end
 API.StartTypewriter = StartTypewriter;
+
+
+
+--- Ein Kinoevent, empfangen von einem bestimmten Spieler, startet.
+---
+--- #### Parameter
+--- * `EventID`  - ID des Kinoevent
+--- * `PlayerID` - ID des Empfängers
+Report.CinematicActivated = anyInteger;
+
+--- Ein Kinoevent, empfangen von einem bestimmten Spieler, endet.
+--- 
+--- #### Parameter
+--- * `EventID`  - ID des Kinoevent
+--- * `PlayerID` - ID des Empfängers
+Report.CinematicConcluded = anyInteger;
+
+--- Die normale Oberfläche wird dem Spieler angezeigt.
+---
+--- #### Parameter
+--- * `PlayerID` - ID des Spielers
+Report.GameInterfaceShown = anyInteger;
+
+--- Die normale Oberfläche wird vor dem Spieler versteckt.
+--- 
+--- #### Parameter
+--- * `PlayerID` - ID des Spielers
+Report.GameInterfaceHidden = anyInteger;
+
+--- Der Vollbildhintergrund wird dem Spieler angezeigt.
+---
+--- #### Parameter
+--- * `PlayerID` - ID des Spielers
+Report.ImageScreenShown = anyInteger;
+
+--- Der Vollbildhintergrund wird vor dem Spieler versteckt.
+--- 
+--- #### Parameter
+--- * `PlayerID` - ID des Spielers
+Report.ImageScreenHidden = anyInteger;
 

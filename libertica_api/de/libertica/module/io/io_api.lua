@@ -5,6 +5,12 @@
 --- * `disableobject <ScriptName>` - Ein Objekt wird deaktiviert
 --- * `initobject <ScriptName>`    - Das Objekt wird rudimentär aktiviert
 ---
+--- #### Reports
+--- * Report.ObjectClicked - Der Spieler hat auf die Interaktions-Schaltfläche geklickt.
+--- * Report.ObjectInteraction - Die Interaktion des Objekts war erfolgreich.
+--- * Report.ObjectReset - Die Interaktion wird vom Objekt gelöscht.
+--- * Report.ObjectDelete - Der Zustand eines Objekts wurde zurückgesetzt.
+---
 Lib.IO = Lib.IO or {};
 
 

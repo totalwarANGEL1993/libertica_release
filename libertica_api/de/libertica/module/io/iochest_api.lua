@@ -4,6 +4,10 @@
 --- * `goldchest <ScriptName>`   - Creates a random gold chest
 --- * `goodchest <ScriptName>`   - Creates a random resource chest
 --- * `luxurychest <ScriptName>` - Creates a random luxury chest
+---
+--- #### Reports
+--- * `Report.InteractiveTreasureActivated` - Der Spieler hat einen Schatz aktivier.
+---
 Lib.IOChest = Lib.IOChest or {};
 
 
@@ -50,11 +54,11 @@ API.CreateRandomLuxuryChest = CreateRandomLuxuryChest;
 
 
 
---- The player activated a treasure
+--- Der Spieler hat einen Schatz aktivier.
 --- 
 --- #### Parameters
---- * `ScriptName` - Scriptname of entity
---- * `KnightID`   - ID of activating hero
---- * `PlayerID`   - ID of activating player
+--- * `ScriptName` - Scriptname der Entität
+--- * `KnightID`   - ID des Helden
+--- * `PlayerID`   - ID des Spielers
 Report.InteractiveTreasureActivated = anyInteger;
 

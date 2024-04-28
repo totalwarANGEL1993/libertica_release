@@ -827,6 +827,31 @@ end
 function Reward_DiplomacyIncrease()
 end
 
+--- Initialisiert einen Handelsposten, bereitet die Angebote für einen Spieler
+--- vor und deaktiviert den Handelsposten danach.
+---
+--- @param _ScriptName string Skriptname des Handelsposten
+--- @param _PlayerID integer Spieler der Angebot erhält
+--- @param _PayType1 string Typ der Bezahlung
+--- @param _PayAmount1 integer Menge der Bezehlung
+--- @param _GoodType string Typ der Tauschware
+--- @param _GoodAmount1 integer Menge der Tauschware
+--- @param _PayType2 string Typ der Bezahlung
+--- @param _PayAmount2 integer Menge der Bezehlung
+--- @param _GoodType2 string Typ der Tauschware
+--- @param _GoodAmount2 integer Menge der Tauschware
+--- @param _PayType3 string Typ der Bezahlung
+--- @param _PayAmount3 integer AMenge der Bezehlung
+--- @param _GoodType3 string Typ der Tauschware
+--- @param _GoodAmount3 integer Menge der Tauschware
+--- @param _PayType4 string Typ der Bezahlung
+--- @param _PayAmount4 integer Menge der Bezehlung
+--- @param _GoodType4 string Typ der Tauschware
+--- @param _GoodAmount4 integer Menge der Tauschware
+---
+function Reward_TradePost(_ScriptName, _PlayerID, _PayType1, _PayAmount1, _GoodType, _GoodAmount1, _PayType2, _PayAmount2, _GoodType2, _GoodAmount2, _PayType3, _PayAmount3, _GoodType3, _GoodAmount3, _PayType4, _PayAmount4, _GoodType4, _GoodAmount4)
+end
+
 ---
 --- Erzeugt Handelsangebote im Lagerhaus des angegebenen Spielers.
 ---

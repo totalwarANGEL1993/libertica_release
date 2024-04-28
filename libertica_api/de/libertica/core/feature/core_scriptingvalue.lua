@@ -6,9 +6,78 @@
 --- * `CONST_SCRIPTING_VALUES.Health` - Gesundheit der Entität
 --- * `CONST_SCRIPTING_VALUES.Player` - Spieler-ID der Entität
 --- * `CONST_SCRIPTING_VALUES.Size` - Skalierung der Entität
---- * `CONST_SCRIPTING_VALUES.Visible` - Ist die Entität sichtbar
---- * `CONST_SCRIPTING_VALUES.NPC` - Art des NPCs
+--- * `CONST_SCRIPTING_VALUES.Visible` - Ist die Entität sichtbar (= 801280)
+--- * `CONST_SCRIPTING_VALUES.NPC` - Art des NPCs (> 0)
 Lib.Core.ScriptingValue = {}
+
+
+
+--- Gibt das aktuelle Bewegungsziel der Entität zurück.
+--- @param _Entity any ID oder Skriptname
+--- @return table Position Bewegungsziel der Entität
+function GetEntityDestination(_Entity)
+    return {};
+end
+
+--- Gibt die Gesundheit der Entität zurück.
+--- @param _Entity any ID oder Skriptname
+--- @return integer Health Gesundheit der Entität
+function GetEntityHealth(_Entity)
+    return 0;
+end
+
+--- Setzt die Gesundheit der Entität, ohne Prüfung auf plausibelität.
+--- @param _Entity any ID oder Skriptname
+--- @param _Health integer Gesundheit der Entität
+function SetEntityHealth(_Entity, _Health)
+end
+
+--- Gibt zurück, ob die Entität ein NPC ist.
+--- @param _Entity any ID oder Skriptname
+--- @return boolean Active Entität ist NPC 
+function GetEntityNpc(_Entity)
+    return true;
+end
+
+--- Gibt den Besitzer der Entität zurück.
+--- @param _Entity any ID oder Skriptname
+--- @return integer Player ID des Spielers
+function GetEntityPlayer(_Entity)
+    return 0;
+end
+
+--- Setzt den Eigentümer der Entität, ohne Prüfung auf plausibelität.
+--- @param _Entity any ID oder Skriptname
+--- @param _Player integer Player ID des Spielers
+function SetEntityPlayer(_Entity, _Player)
+end
+
+--- Gibt die Skalierung der Entität zurück.
+--- @param _Entity any
+--- @return number Scaling Skalierung der Entität
+function GetEntityScaling(_Entity)
+    return 0;
+end
+
+--- Setzt die Skalierung der Entität.
+--- @param _Entity any ID oder Skriptname
+--- @param _Scaling number Skalierung der Entität
+function GetEntityScaling(_Entity, _Scaling)
+end
+
+--- Gibt zurück, ob die Entität unsichtbar ist,
+--- @param _Entity any ID oder Skriptname
+--- @return boolean Visible Entity ist unsichtbar
+function IsEntityInvisible(_Entity)
+    return true;
+end
+
+--- Gibt zurück, ob die Entität nicht auswählbar ist.
+--- @param _Entity any ID oder Skriptname
+--- @return boolean Visible Entity nicht auswählbar
+function IsEntityInaccessible(_Entity)
+    return true;
+end
 
 --- Gibt den Wert des Index als Ganzzahl zurück.
 --- @param _Entity any ID oder Skriptname

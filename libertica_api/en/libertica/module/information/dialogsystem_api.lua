@@ -125,15 +125,15 @@ API.AddDialogPages = AddDialogPages;
 ---
 --- * Example #1: A simple page
 --- ```lua
--- AP {
---     Title        = "Hero",
---     Text         = "This page has an actor and a choice.",
---     Actor        = 1,
---     Duration     = 2,
---     FadeIn       = 2,
---     Position     = "npc1",
---     DialogCamera = true,
--- };
+--- AP {
+---     Title        = "Hero",
+---     Text         = "This page has an actor and a choice.",
+---     Actor        = 1,
+---     Duration     = 2,
+---     FadeIn       = 2,
+---     Position     = "npc1",
+---     DialogCamera = true,
+--- };
 --- ```
 ---
 ---

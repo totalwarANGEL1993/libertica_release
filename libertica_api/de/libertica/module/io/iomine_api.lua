@@ -1,4 +1,8 @@
 --- Ermöglicht das Erstellen von konstruierbaren Ressourcenquellen.
+---
+--- #### Reports
+--- * `Report.InteractiveMineErected` - Eine Ressourcenquelle wurde erstellt.
+---
 Lib.IOMine = Lib.IOMine or {};
 
 

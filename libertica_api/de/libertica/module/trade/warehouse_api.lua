@@ -4,6 +4,10 @@
 --- Beteiligung eines KI-Spielers kaufen kann. Es können jedoch keine Waren an das Lager verkauft werden. Die Bezahlung
 --- kann auf jeden beliebigen Ressourcentyp eingestellt werden.
 ---
+--- #### Reports
+--- * `Report.WarehouseOfferClicked` - Der Spieler hat auf ein Angebot geklickt.
+--- * `Report.WarehouseOfferBought` - Der Spieler hat ein Angebot gekauft.
+---
 Lib.Warehouse = Lib.Warehouse or {};
 
 

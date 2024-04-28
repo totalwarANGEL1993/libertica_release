@@ -5,9 +5,16 @@
 ---
 --- Zusätzlich besteht die Möglichkeit, Nutztiere verhungern zu lassen, wenn sie nicht gefüttert werden.
 ---
---- #### Fügt Pseudotechnologien hinzu:
+--- #### Pseudo-Technologien:
 --- * `Technologies.R_Cattle` - Ermöglicht die Zucht von Kühen
 --- * `Technologies.R_Sheep`  - Ermöglicht die Zucht von Schafen
+---
+--- #### Reports
+--- * `Report.BreedAnimalClicked` - Der Spieler hat auf die Schaltfläche zum Kauf eines Tieres geklickt.
+--- * `Report.CattleBought` - Der Spieler hat eine Kuh gekauft.
+--- * `Report.SheepBought` - Der Spieler hat ein Schaf gekauft.
+--- * `Report.CattleStarved` - Eine Kuh ist verhungert.
+--- * `Report.SheepStarved` - Ein Schaf ist verhungert.
 --- 
 Lib.LifestockSystem = Lib.LifestockSystem or {};
 
@@ -65,7 +72,7 @@ API.RequireTitleToBreedSheep = RequireTitleToBreedSheep;
 
 
 
---- Der Spieler hat auf die Schaltfläche zum Kauf eines Tieres geklickt
+--- Der Spieler hat auf die Schaltfläche zum Kauf eines Tieres geklickt.
 --- 
 --- #### Parameter
 --- * `Index   `   - "Cattle" oder "Sheep"

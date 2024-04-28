@@ -1,4 +1,12 @@
 --- Allows to place up to 6 additional buttons in building menus.
+---
+--- #### Reports
+--- * `Report.CancelUpgradeClicked` - An upgrade has been canceled
+--- * `Report.StartUpgradeClicked` - An upgrade has been started
+--- * `Report.FestivalClicked` - The festival button has been clicked
+--- * `Report.SermonClicked` - The sermon button has been clicked
+--- * `Report.TheatrePlayClicked` - The theatre play button has been clicked
+---
 Lib.UIBuilding = Lib.UIBuilding or {};
 
 

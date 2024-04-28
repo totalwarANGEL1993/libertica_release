@@ -4,5 +4,5 @@ API = {};
 Lib = {};
 QSB = {};
 
-
+-- Contains reports, the user can react to in the code.
 Report = {};

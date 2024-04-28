@@ -9,6 +9,7 @@
 
 Script.Load("maps/externalmap/" ..Framework.GetCurrentMapName().. "/libertica/librarian.lua");
 
+-- This must always be loaded!
 Lib.Require("core/Core");
 -- Include more
 

@@ -4,6 +4,10 @@
 --- * `goldchest <ScriptName>`   - Creates a random gold chest
 --- * `goodchest <ScriptName>`   - Creates a random resource chest
 --- * `luxurychest <ScriptName>` - Creates a random luxury chest
+---
+--- #### Reports
+--- * `Report.InteractiveTreasureActivated` - The player activated a treasure.
+---
 Lib.IOChest = Lib.IOChest or {};
 
 

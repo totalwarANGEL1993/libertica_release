@@ -772,6 +772,30 @@ end
 function Reward_DiplomacyIncrease()
 end
 
+--- Initaized an tradepost, sets it up for a player and deactivates it.
+---
+--- @param _ScriptName string Scriptname of tradepost 
+--- @param _PlayerID integer Player of offer
+--- @param _PayType1 string Name of Pay
+--- @param _PayAmount1 integer Amount of Pay
+--- @param _GoodType string Name of Good
+--- @param _GoodAmount1 integer Amount of Good
+--- @param _PayType2 string Name of Pay
+--- @param _PayAmount2 integer Amount of Pay
+--- @param _GoodType2 string Name of Good
+--- @param _GoodAmount2 integer Amount of Pay
+--- @param _PayType3 string Name of Pay
+--- @param _PayAmount3 integer Amount of Good
+--- @param _GoodType3 string Name of Good
+--- @param _GoodAmount3 integer Amount of Good
+--- @param _PayType4 string Name of Pay
+--- @param _PayAmount4 integer Amount of Pay
+--- @param _GoodType4 string Name of Good
+--- @param _GoodAmount4 integer Amount of Good
+---
+function Reward_TradePost(_ScriptName, _PlayerID, _PayType1, _PayAmount1, _GoodType, _GoodAmount1, _PayType2, _PayAmount2, _GoodType2, _GoodAmount2, _PayType3, _PayAmount3, _GoodType3, _GoodAmount3, _PayType4, _PayAmount4, _GoodType4, _GoodAmount4)
+end
+
 ---
 --- Generates trade offers in the warehouse of the specified player.
 ---

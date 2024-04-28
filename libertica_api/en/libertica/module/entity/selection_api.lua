@@ -7,6 +7,13 @@
 --- * Obtain selection from global script
 --- * Fixes trebuchet selection
 ---
+--- #### Reports
+--- * `Report.ExpelSettler` - A unit has been expelled.
+--- * `Report.SelectionChanged` - Die Auswahl von Einheiten eines Spielers hat sich geändert.
+--- * `Report.ForceTrebuchetTasklis`t - Ein Trebuchet wird zum Anhalten gezwungen.
+--- * `Report.ErectTrebuche`t - Ein Trebuchet wird aus einem Belagerungsmaschinenwagen gebaut.
+--- * `Report.DisambleTrebuchet` -Ein Trebuchet wird zu einem Belagerungsmaschinenwagen abgebaut.
+---
 Lib.Selection = Lib.Selection or {};
 
 

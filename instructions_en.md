@@ -14,15 +14,15 @@ Users can choose between a complete package or the individual import of componen
 * All required files are located in the subdirectory `single`. The map scripts are already prepared, so no further adjustments are necessary.
 * The file `mapscript.lua` must be imported into the map editor as a local script.
 * The file `localmapscript.lua` must be imported into the map editor as a local script.
-* The file `qsb.min.lua` must be imported into the map editor.
+* The file `qsb.lua` must be imported into the map editor.
 
 ### As a repository
 
-**Important:** Note that using the repository requires the BBA tool to import additional content into the map. Additionally, saving in the editor deletes all additional content. It is recommended to work with unpacked maps. The Lua debugger enables this.
+**Important:** Note that using the repository requires the BBA tool to import additional content into the map. Additionally, saving in the editor deletes all additional content. It is recommended to work with unpacked maps. The Lua debugger enables this by setting the Dev Mode key.
 
 * Import the subdirectory `libertica` into the map.
-* Move `mapscript.lua`, `localmapscript.lua`, and `qsb.min.lua` to the root directory of the map. (That is `maps/externalmap/nameofmap`.) The map scripts are already prepared, so they should function in principle without any adjustments.
-* Rename `qsb.min.lua` to `questsystembehavior.lua`.
+* Move `mapscript.lua`, `localmapscript.lua`, and `qsb.lua` to the root directory of the map. (That is `maps/externalmap/nameofmap`.) The map scripts are already prepared, so they should function in principle without any adjustments.
+* Rename `qsb.lua` to `questsystembehavior.lua`.
 * Customize the imports in both map scripts according to your needs. Imported components recursively load their dependencies.
 
 ## Configuring the Project
@@ -58,12 +58,12 @@ The contet of `settings.json` will look as follows:
 {
     "Lua.diagnostics.globals": [],
     "Lua.workspace.ignoreDir": [
-        "libertica_release/libertica_api/de",
-        "libertica_release/libertica",
-        "libertica_release/single",
+        "maps/externalmap/nameofmap/libertica_release/libertica_api/de",
+        "maps/externalmap/nameofmap/libertica_release/libertica",
+        "maps/externalmap/nameofmap/libertica_release/single",
     ],
     "Lua.workspace.library": [
-        "libertica_release/libertica_api/en"
+        "maps/externalmap/nameofmap/libertica_release/libertica_api/en"
     ]
 }
 ```

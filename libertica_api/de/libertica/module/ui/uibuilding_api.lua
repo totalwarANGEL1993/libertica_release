@@ -1,4 +1,12 @@
 --- Ermöglicht das Hinzufügen von bis zu 6 zusätzlichen Schaltflächen in Gebäudemenüs.
+---
+--- #### Reports
+--- * `Report.CancelUpgradeClicked` - Ein Ausbau wurde abgebrochen
+--- * `Report.StartUpgradeClicked` - Ein Ausbau wurde gestartet
+--- * `Report.FestivalClicked` - Der Button "Fest feiern" wurde geklickt
+--- * `Report.SermonClicked` - Der Button "Predigt abhalten" wurde geklickt
+--- * `Report.TheatrePlayClicked` - Der Button "Vorführung beginnen" wurde geklickt
+---
 Lib.UIBuilding = Lib.UIBuilding or {};
 
 

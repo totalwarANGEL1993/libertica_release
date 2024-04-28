@@ -5,6 +5,12 @@
 --- * `disableobject <ScriptName>` - A object is deactivated
 --- * `initobject <ScriptName>`    - The object is rudimentarily activated
 ---
+--- #### Reports
+--- * Report.ObjectClicked - The player has clicked the interaction button.
+--- * Report.ObjectInteraction - The interaction with the object was successfull.
+--- * Report.ObjectReset - The interaction is deleted from the object.
+--- * Report.ObjectDelete - The objects state has been reset.
+---
 Lib.IO = Lib.IO or {};
 
 
@@ -192,7 +198,7 @@ API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
 --- * `PlayerID`   - ID of activating player
 Report.ObjectClicked = anyInteger;
 
---- The interaction of the object was successfull.
+--- The interaction with the object was successfull.
 --- If the object has costs the activation concludes when the costs arrive.
 --- 
 --- #### Parameters

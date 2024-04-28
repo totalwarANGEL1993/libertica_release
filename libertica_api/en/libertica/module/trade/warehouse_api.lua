@@ -4,6 +4,10 @@
 --- an AI player involved. But goods can not be sold to the warehouse. Payment
 --- can be set to any type of resource.
 ---
+--- #### Reports
+--- * `Report.WarehouseOfferClicked` - The player clicked an offer.
+--- * `Report.WarehouseOfferBought` - The player bought an offer.
+---
 Lib.Warehouse = Lib.Warehouse or {};
 
 

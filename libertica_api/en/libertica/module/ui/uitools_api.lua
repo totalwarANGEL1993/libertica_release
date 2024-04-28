@@ -18,6 +18,9 @@
 --- * Show/Hide Select hero button
 --- * Show/Hide Select units button
 ---
+--- #### Reports
+--- `Report.BuildingPlaced` - A human player has placed a building.
+---
 Lib.UITools = Lib.UITools or {};
 
 
@@ -203,4 +206,12 @@ API.SetPlayerColor = SetPlayerColor;
 function SetPlayerPortrait(_PlayerID, _Portrait)
 end
 API.SetPlayerPortrait = SetPlayerPortrait;
+
+
+--- A human player has placed a building.
+--- 
+--- #### Parameter
+--- * `PlayerID` - ID of player
+--- * `EntityID` - ID of eneity
+Report.BuildingPlaced = anyInteger;
 

@@ -18,6 +18,9 @@
 --- * Anzeigen/Verstecken des Helden auswählen-Buttons
 --- * Anzeigen/Verstecken des Einheiten auswählen-Buttons
 ---
+--- #### Reports
+--- `Report.BuildingPlaced` - Ein menschlicher Spieler hat ein Gebäude platziert.
+---
 Lib.UITools = Lib.UITools or {};
 
 
@@ -202,4 +205,12 @@ API.SetPlayerColor = SetPlayerColor;
 function SetPlayerPortrait(_PlayerID, _Portrait)
 end
 API.SetPlayerPortrait = SetPlayerPortrait;
+
+
+--- Ein menschlicher Spieler hat ein Gebäude platziert.
+--- 
+--- #### Parameter
+--- * `PlayerID` - ID des Spielers
+--- * `EntityID` - ID der Baustelle
+Report.BuildingPlaced = anyInteger;
 

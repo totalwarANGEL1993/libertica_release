@@ -1,4 +1,8 @@
 --- Allows to create constructable resource sources.
+---
+--- #### Reports
+--- * `Report.InteractiveMineErected` - A resource source was constructed.
+---
 Lib.IOMine = Lib.IOMine or {};
 
 

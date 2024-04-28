@@ -7,6 +7,13 @@
 --- * Auswahl von globalen Skripten abrufen
 --- * Behebt die Auswahl von Triböcken
 ---
+--- #### Reports
+--- * `Report.ExpelSettler` - Eine Einheit wurde entlassen.
+--- * `Report.SelectionChanged` - The selection has changed.
+--- * `Report.ForceTrebuchetTasklis`t - A trebuchet was forced to stop.
+--- * `Report.ErectTrebuche`t - A trebuchet has been erected.
+--- * `Report.DisambleTrebuchet` - A trebuchet has been dismantled.
+---
 Lib.Selection = Lib.Selection or {};
 
 
@@ -56,7 +63,7 @@ API.GetSelectedEntities = GetSelectedEntities;
 
 
 
---- Eine Einheit wurde vertrieben.
+--- Eine Einheit wurde entlassen.
 ---
 --- #### Parameter
 --- * `EntityID` - ID der Einheit
