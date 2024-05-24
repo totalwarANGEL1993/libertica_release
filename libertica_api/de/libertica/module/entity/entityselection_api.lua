@@ -14,7 +14,7 @@
 --- * `Report.ErectTrebuche`t - A trebuchet has been erected.
 --- * `Report.DisambleTrebuchet` - A trebuchet has been dismantled.
 ---
-Lib.Selection = Lib.Selection or {};
+Lib.EntitySelection = Lib.EntitySelection or {};
 
 
 

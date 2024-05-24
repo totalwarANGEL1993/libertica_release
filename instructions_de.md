@@ -6,7 +6,7 @@ Diese Bibliothek für "DIE SIEDLER - Aufstieg eines Königreich" erweitert die
 mitgelieferte Bibliothek, die QSB, um zahlreiche weitere Funktionalitäten. Dabei
 wird das Rad nicht neu erfunden, sondern auf der bestehenden QSB aufgebaut. 
 
-Der Anwender kann zwischen einem Komplettpaket oder dem einzelnen Import
+Dabei kann der Anwender zwischen einem Komplettpaket oder dem einzelnen Import
 von Komponenten wählen.
 
 ## Installation
@@ -15,17 +15,17 @@ von Komponenten wählen.
 
 * Starte den Mapeditor und aktiviere den Expertenmodus.
 * Alle benötigten Dateien befinden sich im Unterverzeichnis `single`. Die Mapskripte sind bereits vorbereitet, sodass keine weiteren Anpassungen gemacht werden müssen.
-* Die Datei `mapscript.lua` muss im Mapeditor als lokales Skript importiert werden
+* Die Datei `mapscript.lua` muss im Mapeditor als globales Skript importiert werden
 * Die Datei `localmapscript.lua` muss im Mapeditor als lokales Skript importiert werden.
-* Die Datei `qsb.lua` muss im Mapeditor importiert werden.
+* Die Datei `qsb.min.lua` muss im Mapeditor importiert werden.
 
 ### Als Repository
 
-**Wichtig:** Beachte, dass für die Verwendung des Repository das BBA-Tool benötigt wird, um zusätzliche Inhalte in die Map zu importieren. Außerdem löscht jedes Speichern im Editor alle zusatzinhalte. Es empfielt sich, mit entpackten Maps zu arbeiten. Der Lua-Debugger ermöglicht dies durch setzen des Dev Mode Keys.
+**Wichtig:** Beachte, dass für die Verwendung des Repository das BBA-Tool benötigt wird, um zusätzliche Inhalte in die Map zu importieren. Außerdem löscht jedes Speichern im Editor alle zusatzinhalte. Es empfielt sich, mit entpackten Maps zu arbeiten. Der Lua-Debugger ermöglicht dies.
 
 * Importiere das Unterverveichnis `libertica` in die Map.
-* Verschiebe `mapscript.lua`, `localmapscript.lua` und `qsb.lua` in das Wurzelverzeichnis der Map. (Das ist `maps/externalmap/nameofmap`.) Die Mapskripte sind bereits vorbereitet, sodass sie ohne Anpassungen prinzipiell funktionieren.
-* Benenne `qsb.lua` in `questsystembehavior.lua` um.
+* Verschiebe `mapscript.lua`, `localmapscript.lua` und `qsb.min.lua` in das Wurzelverzeichnis der Map. (Das ist `maps/externalmap/nameofmap`.) Die Mapskripte sind bereits vorbereitet, sodass sie ohne Anpassungen prinzipiell funktionieren.
+* Benenne `qsb.min.lua` in `questsystembehavior.lua` um.
 * Passe die Imports in beiden Mapskripten nach deinen Bedürfnissen an. Importierte Komponenten laden rekursiv ihre Abhängigkeiten.
 
 ## Projekt konfigurieren
@@ -61,12 +61,12 @@ In diesem Fall sieht die `settings.json` wie folgt aus:
 {
     "Lua.diagnostics.globals": [],
     "Lua.workspace.ignoreDir": [
-        "maps/externalmap/nameofmap/libertica_release/libertica_api/en",
-        "maps/externalmap/nameofmap/libertica_release/libertica",
-        "maps/externalmap/nameofmap/libertica_release/single",
+        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica_api/en",
+        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica",
+        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/single",
     ],
     "Lua.workspace.library": [
-        "maps/externalmap/nameofmap/libertica_release/libertica_api/de"
+        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica_api/de"
     ]
 }
 ```
@@ -93,6 +93,6 @@ Project
 ```
 Diese Struktur vereinfacht das Auslagern von Skripten. Die Skripte liegen im Ordner `scripts` und werden in den Hauptskripten nur geladen. Während der Entwicklung kann anstelle des Path in der Map der absolute Path im System angegeben werden.
 
-`maps/externalmap/mapname/scripts/luafile.lua` - Das ist ein relativer Pfad innerhalb der Map.
+`maps/externalmap/mapname/scripts/luafile.lua` - Das ist ein relativer Pfad innerhalb des Spiels.
 
 `C:/Settlers6/mapname/scripts/luafile.lua` - Das ist ein absoluter Pfad auf deinem Rechner.

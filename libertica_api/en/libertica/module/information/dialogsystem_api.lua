@@ -48,6 +48,15 @@ function StartDialog(_Dialog, _Name, _PlayerID)
 end
 API.StartDialog = StartDialog;
 
+--- Asks the player for the permission to change graphic settings.
+---
+--- If the BriefingSystem is loaded, it's functionality will be used.
+---
+--- This feature is deactivated in Multiplayer.
+function RequestDialogAlternateGraphics()
+end
+API.RequestDialogAlternateGraphics = RequestDialogAlternateGraphics;
+
 --- Checks if a dialog ist active.
 --- @param _PlayerID integer PlayerID of receiver
 --- @return boolean IsActive Dialog is active

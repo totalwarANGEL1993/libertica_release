@@ -43,9 +43,19 @@ function StartCutscene(_Cutscene, _Name, _PlayerID)
 end
 API.StartCutscene = StartCutscene;
 
+--- Asks the player for the permission to change graphic settings.
+---
+--- If the BriefingSystem or the DialogSystem is loaded their functionality
+--- will be used instead.
+---
+--- This feature is deactivated in Multiplayer.
+function RequestCutsceneAlternateGraphics()
+end
+API.RequestCutsceneAlternateGraphics = RequestCutsceneAlternateGraphics;
+
 --- Checks if a cutscene ist active.
 --- @param _PlayerID integer PlayerID of receiver
---- @return boolean IsActive Briefing is active
+--- @return boolean IsActive Cutscene is active
 function IsCutsceneActive(_PlayerID)
     return true;
 end

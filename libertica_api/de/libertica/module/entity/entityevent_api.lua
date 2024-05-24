@@ -14,7 +14,7 @@
 --- * `Report.ThiefInfiltratedBuilding` - Ein Dieb hat ein Gebäude infiltriert.
 --- * `Report.ThiefDeliverEarnings` - Ein Dieb hat Einnahmen geliefert.
 ---
-Lib.Selection = Lib.Selection or {};
+Lib.EntityEvent = Lib.EntityEvent or {};
 
 
 
@@ -150,10 +150,10 @@ Report.EntityDestroyed = anyInteger;
 --- Eine Entität wurde verletzt.
 ---
 --- #### Parameter
---- `AttackedEntityID` - ID der angegriffenen Entität
---- `AttackedPlayerID` - Besitzer der angegriffenen Entität
 --- `AttackingEntityID` - ID der angreifenden Entität
 --- `AttackingPlayerID` - Besitzer der angreifenden Entität
+--- `AttackedEntityID` - ID der angegriffenen Entität
+--- `AttackedPlayerID` - Besitzer der angegriffenen Entität
 Report.EntityHurt = anyInteger;
 
 --- Eine Entität wurde getötet.

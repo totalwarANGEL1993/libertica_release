@@ -156,6 +156,13 @@ function StartBriefing(_Briefing, _Name, _PlayerID)
 end
 API.StartBriefing = StartBriefing;
 
+--- Asks the player for the permission to change graphic settings.
+---
+--- This feature is deactivated in Multiplayer.
+function RequestBriefingAlternateGraphics()
+end
+API.RequestBriefingAlternateGraphics = RequestBriefingAlternateGraphics;
+
 --- Checks if a briefing ist active.
 --- @param _PlayerID integer PlayerID of receiver
 --- @return boolean IsActive Briefing is active

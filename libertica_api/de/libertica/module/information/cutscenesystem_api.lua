@@ -42,6 +42,16 @@ function StartCutscene(_Cutscene, _Name, _PlayerID)
 end
 API.StartCutscene = StartCutscene;
 
+--- Fragt den Spieler um Erlaubnis, Grafikeinstellungen zu ändern.
+---
+--- Ist das BriefingSystem oder das DialogSystem geladen, werden stattdessen
+--- deren Funktionen verwendet.
+---
+--- Diese Funktionalität ist im Multiplayer deaktiviert.
+function RequestCutsceneAlternateGraphics()
+end
+API.RequestCutsceneAlternateGraphics = RequestCutsceneAlternateGraphics;
+
 --- Überprüft, ob eine Zwischensequenz aktiv ist.
 --- @param _PlayerID integer Spieler-ID des Empfängers
 --- @return boolean IsActive Zwischensequenz ist aktiv

@@ -155,6 +155,13 @@ function StartBriefing(_Briefing, _Name, _PlayerID)
 end
 API.StartBriefing = StartBriefing;
 
+--- Fragt den Spieler um Erlaubnis, Grafikeinstellungen zu ändern.
+---
+--- Diese Funktionalität ist im Multiplayer deaktiviert.
+function RequestBriefingAlternateGraphics()
+end
+API.RequestBriefingAlternateGraphics = RequestBriefingAlternateGraphics;
+
 --- Überprüft, ob eine Einleitung aktiv ist.
 --- @param _PlayerID integer Spieler-ID des Empfängers
 --- @return boolean IsActive Einleitung ist aktiv

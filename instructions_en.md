@@ -12,17 +12,17 @@ Users can choose between a complete package or the individual import of componen
 
 * Start the map editor and enable expert mode.
 * All required files are located in the subdirectory `single`. The map scripts are already prepared, so no further adjustments are necessary.
-* The file `mapscript.lua` must be imported into the map editor as a local script.
-* The file `localmapscript.lua` must be imported into the map editor as a local script.
-* The file `qsb.lua` must be imported into the map editor.
+* The file `mapscript.lua` must be imported into the map editor as the global script.
+* The file `localmapscript.lua` must be imported into the map editor as the local script.
+* The file `qsb.min.lua` must be imported into the map editor.
 
 ### As a repository
 
-**Important:** Note that using the repository requires the BBA tool to import additional content into the map. Additionally, saving in the editor deletes all additional content. It is recommended to work with unpacked maps. The Lua debugger enables this by setting the Dev Mode key.
+**Important:** Note that using the repository requires the BBA tool to import additional content into the map. Additionally, saving in the editor deletes all additional content. It is recommended to work with unpacked maps. The Lua debugger enables this.
 
 * Import the subdirectory `libertica` into the map.
-* Move `mapscript.lua`, `localmapscript.lua`, and `qsb.lua` to the root directory of the map. (That is `maps/externalmap/nameofmap`.) The map scripts are already prepared, so they should function in principle without any adjustments.
-* Rename `qsb.lua` to `questsystembehavior.lua`.
+* Move `mapscript.lua`, `localmapscript.lua`, and `qsb.min.lua` to the root directory of the map. (That is `maps/externalmap/nameofmap`.) The map scripts are already prepared, so they should function in principle without any adjustments.
+* Rename `qsb.min.lua` to `questsystembehavior.lua`.
 * Customize the imports in both map scripts according to your needs. Imported components recursively load their dependencies.
 
 ## Configuring the Project
@@ -47,7 +47,7 @@ The following is the project configuration. It is to be saved as `settings.json`
     ]
 }
 ```
-If you wish to locate the repository somewhere alse, the paths must be adjusted.
+If you wish to locate the repository somewhere else, the paths must be adjusted.
 
 ### Config for repository
 
@@ -58,12 +58,12 @@ The contet of `settings.json` will look as follows:
 {
     "Lua.diagnostics.globals": [],
     "Lua.workspace.ignoreDir": [
-        "maps/externalmap/nameofmap/libertica_release/libertica_api/de",
-        "maps/externalmap/nameofmap/libertica_release/libertica",
-        "maps/externalmap/nameofmap/libertica_release/single",
+        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica_api/de",
+        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica",
+        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/single",
     ],
     "Lua.workspace.library": [
-        "maps/externalmap/nameofmap/libertica_release/libertica_api/en"
+        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica_api/en"
     ]
 }
 ```
@@ -91,6 +91,6 @@ Project
 
 This structure simplifies the outsourcing of scripts. The scripts are located in the scripts folder and are only loaded in the main scripts. During development, the absolute path on the system can be specified instead of the path in the map.
 
-`maps/externalmap/mapname/scripts/luafile.lua` - This is a relative path within the map.
+`maps/externalmap/mapname/scripts/luafile.lua` - This is a relative path within the games file system.
 
 `C:/Settlers6/mapname/scripts/luafile.lua` - This is an absolute path on your computer.

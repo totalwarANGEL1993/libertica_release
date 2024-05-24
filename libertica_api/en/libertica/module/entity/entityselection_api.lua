@@ -14,7 +14,7 @@
 --- * `Report.ErectTrebuche`t - Ein Trebuchet wird aus einem Belagerungsmaschinenwagen gebaut.
 --- * `Report.DisambleTrebuchet` -Ein Trebuchet wird zu einem Belagerungsmaschinenwagen abgebaut.
 ---
-Lib.Selection = Lib.Selection or {};
+Lib.EntitySelection = Lib.EntitySelection or {};
 
 
 
