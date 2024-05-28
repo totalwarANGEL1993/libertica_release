@@ -6,8 +6,8 @@
 ---
 --- Functions:
 --- * Better balancing for archers
---- * Attacker advantage through negative territory bonus by default
---- * Adjusting unit combat power via Lua
+--- * Close Wall catapults weaken each other (only for humans)
+--- * Adjusting unit combat strength via Lua
 --- * Granting additional armor to units
 --- * Adjusting the Own Territory bonus
 --- * Adjusting the Height Modifier

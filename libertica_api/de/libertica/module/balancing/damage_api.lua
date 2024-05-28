@@ -6,7 +6,7 @@
 ---
 --- Funktionen:
 --- * Besseres Balancing für Bogenschützen
---- * Angreifer im Vorteil durch negativen voreingestellten Territorienbonus
+--- * Nahe Mauerkatapulte schwächen sich gegenseitig (gilt nicht für KI)
 --- * Anpassen der Kampfkraft von Einheiten über Lua
 --- * Zusätzliche Rüstung für Einheiten vergeben
 --- * Anpassen des Own Territoy bonus

@@ -1,5 +1,7 @@
 --- Allows to define cutscenes
 ---
+--- **Deprecated! This module exists only for backwards compability.**
+---
 --- Cutscenes are XML defined camera movemehts that can be played by the
 --- game engine. Cutscenes feature smooth camera animations.
 ---

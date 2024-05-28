@@ -1,5 +1,7 @@
 --- Ermöglicht das Definieren von Zwischensequenzen.
 ---
+--- **Veraltet! Das Modul ist nur für Rückwärtskompatibelität integriert.**
+---
 --- Zwischensequenzen sind XML-definierte Kamerabewegungen, die von der
 --- Spiel-Engine wiedergegeben werden können. Zwischensequenzen zeichnen sich
 --- durch flüssige Kamerabewegungen aus.
