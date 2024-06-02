@@ -2,7 +2,11 @@ Lib.Require("comfort/IsLocalScript");
 Lib.Register("module/ui/UIBuilding_API");
 
 function AddBuildingButtonAtPosition(_X, _Y, _Action, _Tooltip, _Update)
-    return Lib.UIBuilding.Local:AddButtonBinding(0, _X, _Y, _Action, _Tooltip, _Update);
+    assert(IsLocalScript());
+    Lib.UIBuilding.AquireContext();
+    local Button = this:AddButtonBinding(0, _X, _Y, _Action, _Tooltip, _Update);
+    Lib.UIBuilding.ReleaseContext();
+    return Button;
 end
 API.AddBuildingButtonAtPosition = AddBuildingButtonAtPosition;
 
@@ -13,7 +17,11 @@ end
 API.AddBuildingButton = AddBuildingButton;
 
 function AddBuildingButtonByTypeAtPosition(_Type, _X, _Y, _Action, _Tooltip, _Update)
-    return Lib.UIBuilding.Local:AddButtonBinding(_Type, _X, _Y, _Action, _Tooltip, _Update);
+    assert(IsLocalScript());
+    Lib.UIBuilding.AquireContext();
+    local Button = this:AddButtonBinding(_Type, _X, _Y, _Action, _Tooltip, _Update);
+    Lib.UIBuilding.ReleaseContext();
+    return Button;
 end
 API.AddBuildingButtonByTypeAtPosition = AddBuildingButtonByTypeAtPosition;
 
@@ -24,7 +32,11 @@ end
 API.AddBuildingButtonByType = AddBuildingButtonByType;
 
 function AddBuildingButtonByEntityAtPosition(_ScriptName, _X, _Y, _Action, _Tooltip, _Update)
-    return Lib.UIBuilding.Local:AddButtonBinding(_ScriptName, _X, _Y, _Action, _Tooltip, _Update);
+    assert(IsLocalScript());
+    Lib.UIBuilding.AquireContext();
+    local Button = this:AddButtonBinding(_ScriptName, _X, _Y, _Action, _Tooltip, _Update);
+    Lib.UIBuilding.ReleaseContext();
+    return Button;
 end
 API.AddBuildingButtonByEntityAtPosition = AddBuildingButtonByEntityAtPosition;
 
@@ -35,17 +47,26 @@ end
 API.AddBuildingButtonByEntity = AddBuildingButtonByEntity;
 
 function DropBuildingButton(_ID)
-    Lib.UIBuilding.Local:RemoveButtonBinding(0, _ID);
+    assert(IsLocalScript());
+    Lib.UIBuilding.AquireContext();
+    this:RemoveButtonBinding(0, _ID);
+    Lib.UIBuilding.ReleaseContext();
 end
 API.DropBuildingButton = DropBuildingButton;
 
 function DropBuildingButtonFromType(_Type, _ID)
-    Lib.UIBuilding.Local:RemoveButtonBinding(_Type, _ID);
+    assert(IsLocalScript());
+    Lib.UIBuilding.AquireContext();
+    this:RemoveButtonBinding(_Type, _ID);
+    Lib.UIBuilding.ReleaseContext();
 end
 API.DropBuildingButtonFromType = DropBuildingButtonFromType;
 
 function DropBuildingButtonFromEntity(_ScriptName, _ID)
-    Lib.UIBuilding.Local:RemoveButtonBinding(_ScriptName, _ID);
+    assert(IsLocalScript());
+    Lib.UIBuilding.AquireContext();
+    this:RemoveButtonBinding(_ScriptName, _ID);
+    Lib.UIBuilding.ReleaseContext();
 end
 API.DropBuildingButtonFromEntity = DropBuildingButtonFromEntity;
 

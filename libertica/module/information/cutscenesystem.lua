@@ -19,6 +19,7 @@ Lib.Require("module/ui/UITools");
 Lib.Require("module/information/Requester");
 Lib.Require("module/information/CutsceneSystem_Text");
 Lib.Require("module/information/CutsceneSystem_API");
+Lib.Require("module/information/CutsceneSystem_Behavior");
 Lib.Register("module/information/CutsceneSystem");
 
 CinematicEventTypes.Cutscene = 3;
@@ -428,7 +429,7 @@ function Lib.CutsceneSystem.Local:DisplayPageTitle(_PlayerID, _PageID)
     XGUIEng.SetText(TitleWidget, "");
     if Page.Title then
         local Title = ConvertPlaceholders(Localize(Page.Title));
-        if Title:find("^[A-Za-Z0-9_]+/[A-Za-Z0-9_]+$") then
+        if Title:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
             Title = XGUIEng.GetStringTableText(Title);
         end
         if Title:sub(1, 1) ~= "{" then
@@ -444,7 +445,7 @@ function Lib.CutsceneSystem.Local:DisplayPageText(_PlayerID, _PageID)
     XGUIEng.SetText(TextWidget, "Bockwurst");
     if Page.Text then
         local Text = ConvertPlaceholders(Localize(Page.Text));
-        if Text:find("^[A-Za-Z0-9_]+/[A-Za-Z0-9_]+$") then
+        if Text:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
             Text = XGUIEng.GetStringTableText(Text);
         end
         if Text:sub(1, 1) ~= "{" then

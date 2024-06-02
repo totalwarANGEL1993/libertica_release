@@ -9,9 +9,13 @@ Lib.Core.Local = {
     IsInstalled = false;
 };
 
+CONST_CURRENT_MODULE_CONTEXT = {};
+
 Lib.Require("comfort/IsHistoryEdition");
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("comfort/IsLocalScript");
+
+Lib.Require("core/QSB");
 
 Lib.Require("core/feature/Core_Chat");
 Lib.Require("core/feature/Core_Debug");
@@ -24,6 +28,7 @@ Lib.Require("core/feature/Core_Job");
 Lib.Require("core/feature/Core_Save");
 Lib.Require("core/feature/Core_Quest");
 
+Lib.Require("core/Core_Behavior");
 Lib.Register("core/Core");
 
 ---@diagnostic disable: deprecated
@@ -102,9 +107,18 @@ function Lib.Core.Global:Initialize()
 
         -- Initialize modules
         for i= 1, #Lib.Core.ModuleList do
-            local Module = Lib[Lib.Core.ModuleList[i]];
-            if Module.Global and Module.Global.Initialize then
-                Module.Global:Initialize();
+            local Name = Lib.Core.ModuleList[i];
+            Lib[Name].Global.Name = Name;
+
+            Lib[Name].AquireContext = function()
+                return Lib.Core.Global:AquireContext(Lib[Name].Global);
+            end
+            Lib[Name].ReleaseContext = function()
+                return Lib.Core.Global:ReleaseContext(Lib[Name].Global);
+            end
+
+            if Lib[Name].Global and Lib[Name].Global.Initialize then
+                Lib[Name].Global:Initialize();
             end
         end
 
@@ -134,9 +148,17 @@ function Lib.Core.Global:OnSaveGameLoaded()
 
     -- Restore modules
     for i= 1, #Lib.Core.ModuleList do
-        local Module = Lib[Lib.Core.ModuleList[i]];
-        if Module.Global and Module.Global.OnSaveGameLoaded then
-            Module.Global:OnSaveGameLoaded();
+        local Name = Lib.Core.ModuleList[i];
+
+        Lib[Name].AquireContext = function()
+            return Lib.Core.Global:AquireContext(Lib[Name].Global);
+        end
+        Lib[Name].ReleaseContext = function()
+            return Lib.Core.Global:ReleaseContext(Lib[Name].Global);
+        end
+
+        if Lib[Name].Global and Lib[Name].Global.OnSaveGameLoaded then
+            Lib[Name].Global:OnSaveGameLoaded();
         end
     end
 end
@@ -172,9 +194,9 @@ function Lib.Core.Global:InitReportListener()
         end
 
         for i= 1, #Lib.Core.ModuleList do
-            local Module = Lib[Lib.Core.ModuleList[i]];
-            if Module.Global and Module.Global.OnReportReceived then
-                Module.Global:OnReportReceived(_ID, ...);
+            local Name = Lib.Core.ModuleList[i];
+            if Lib[Name].Global and Lib[Name].Global.OnReportReceived then
+                Lib[Name].Global:OnReportReceived(_ID, ...);
             end
         end
 
@@ -193,6 +215,24 @@ function Lib.Core.Global:ExecuteLocal(_Command, ...)
         CommandString = CommandString:format(unpack(arg));
     end
     Logic.ExecuteInLuaLocalState(CommandString);
+end
+
+function Lib.Core.Global:AquireContext(_Module)
+    local Name = (type(_Module) == "table" and _Module.Name) or _Module;
+    assert(Lib[Name] ~= nil);
+    table.insert(CONST_CURRENT_MODULE_CONTEXT, Lib[Name].Global);
+    local Frame = #CONST_CURRENT_MODULE_CONTEXT;
+    this = CONST_CURRENT_MODULE_CONTEXT[Frame];
+end
+
+function Lib.Core.Global:ReleaseContext(_Module)
+    local Name = (type(_Module) == "table" and _Module.Name) or _Module;
+    assert(Lib[Name] ~= nil);
+    local Frame = #CONST_CURRENT_MODULE_CONTEXT;
+    Lib[Name].Global = CONST_CURRENT_MODULE_CONTEXT[Frame];
+    table.remove(CONST_CURRENT_MODULE_CONTEXT);
+    Frame = #CONST_CURRENT_MODULE_CONTEXT;
+    this = CONST_CURRENT_MODULE_CONTEXT[Frame];
 end
 
 -- -------------------------------------------------------------------------- --
@@ -239,9 +279,18 @@ function Lib.Core.Local:Initialize()
 
         -- Initialize modules
         for i= 1, #Lib.Core.ModuleList do
-            local Module = Lib[Lib.Core.ModuleList[i]];
-            if Module.Local and Module.Local.Initialize then
-                Module.Local:Initialize();
+            local Name = Lib.Core.ModuleList[i];
+            Lib[Name].Local.Name = Name;
+
+            Lib[Name].AquireContext = function()
+                return Lib.Core.Local:AquireContext(Lib[Name].Local);
+            end
+            Lib[Name].ReleaseContext = function()
+                return Lib.Core.Local:ReleaseContext(Lib[Name].Local);
+            end
+
+            if Lib[Name].Local and Lib[Name].Local.Initialize then
+                Lib[Name].Local:Initialize();
             end
         end
 
@@ -269,9 +318,17 @@ function Lib.Core.Local:OnSaveGameLoaded()
 
     -- Restore modules
     for i= 1, #Lib.Core.ModuleList do
-        local Module = Lib[Lib.Core.ModuleList[i]];
-        if Module.Local and Module.Local.OnSaveGameLoaded then
-            Module.Local:OnSaveGameLoaded();
+        local Name = Lib.Core.ModuleList[i];
+
+        Lib[Name].AquireContext = function()
+            return Lib.Core.Local:AquireContext(Lib[Name].Local);
+        end
+        Lib[Name].ReleaseContext = function()
+            return Lib.Core.Local:ReleaseContext(Lib[Name].Local);
+        end
+
+        if Lib[Name].Local and Lib[Name].Local.OnSaveGameLoaded then
+            Lib[Name].Local:OnSaveGameLoaded();
         end
     end
 
@@ -299,9 +356,9 @@ function Lib.Core.Local:InitReportListener()
         end
 
         for i= 1, #Lib.Core.ModuleList do
-            local Module = Lib[Lib.Core.ModuleList[i]];
-            if Module.Local and Module.Local.OnReportReceived then
-                Module.Local:OnReportReceived(_ID, ...);
+            local Name = Lib.Core.ModuleList[i];
+            if Lib[Name].Local and Lib[Name].Local.OnReportReceived then
+                Lib[Name].Local:OnReportReceived(_ID, ...);
             end
         end
 
@@ -324,6 +381,24 @@ function Lib.Core.Local:ExecuteGlobal(_Command, ...)
         CommandString = CommandString:format(unpack(arg));
     end
     GUI.SendScriptCommand(CommandString);
+end
+
+function Lib.Core.Local:AquireContext(_Module)
+    local Name = (type(_Module) == "table" and _Module.Name) or _Module;
+    assert(Lib[Name] ~= nil);
+    table.insert(CONST_CURRENT_MODULE_CONTEXT, Lib[Name].Local);
+    local Frame = #CONST_CURRENT_MODULE_CONTEXT;
+    this = CONST_CURRENT_MODULE_CONTEXT[Frame];
+end
+
+function Lib.Core.Local:ReleaseContext(_Module)
+    local Name = (type(_Module) == "table" and _Module.Name) or _Module;
+    assert(Lib[Name] ~= nil);
+    local Frame = #CONST_CURRENT_MODULE_CONTEXT;
+    Lib[Name].Local = CONST_CURRENT_MODULE_CONTEXT[Frame];
+    table.remove(CONST_CURRENT_MODULE_CONTEXT);
+    Frame = #CONST_CURRENT_MODULE_CONTEXT;
+    this = CONST_CURRENT_MODULE_CONTEXT[Frame];
 end
 
 -- -------------------------------------------------------------------------- --
@@ -378,12 +453,14 @@ function RegisterModule(_Name)
 end
 
 function ExecuteLocal(_Command, ...)
-    assert(not IsLocalScript(), "Can not be used in local script.");
-    Lib.Core.Global:ExecuteLocal(_Command, ...);
+    if not IsLocalScript() then
+        Lib.Core.Global:ExecuteLocal(_Command, ...);
+    end
 end
 
 function ExecuteGlobal(_Command, ...)
-    assert(IsLocalScript(), "Can not be used in global script.");
-    Lib.Core.Local:ExecuteGlobal(_Command, ...);
+    if IsLocalScript() then
+        Lib.Core.Local:ExecuteGlobal(_Command, ...);
+    end
 end
 

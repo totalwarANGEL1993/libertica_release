@@ -93,7 +93,7 @@ function Lib.Core.Text:GetStringTableOverwrite(_Key)
     self.StringTables[File] = self.StringTables[File] or {};
     if self.StringTables[File][Key] then
         local Text = self.StringTables[File][Key];
-        if type(Text) == "string" and Text:find("^[A-Za-Z0-9_]+/[A-Za-Z0-9_]+$") then
+        if type(Text) == "string" and Text:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
             Text = XGUIEng.GetStringTableText_Orig_Core(Text);
         end
         return ConvertPlaceholders(Localize(Text));

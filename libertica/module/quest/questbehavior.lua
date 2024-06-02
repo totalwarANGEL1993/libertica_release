@@ -15,6 +15,7 @@ Lib.Require("comfort/ToBoolean");
 Lib.Require("core/core");
 Lib.Require("module/quest/Quest");
 Lib.Require("module/quest/QuestBehavior_API");
+Lib.Require("module/quest/QuestBehavior_Behavior");
 Lib.Register("module/quest/QuestBehavior");
 
 -- -------------------------------------------------------------------------- --

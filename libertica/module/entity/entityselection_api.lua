@@ -6,7 +6,9 @@ function DisableReleaseThieves(_Flag)
         ExecuteLocal([[DisableReleaseThieves(%s)]], tostring(_Flag));
         return;
     end
-    Lib.EntitySelection.Local.ThiefRelease = not _Flag;
+    Lib.EntitySelection.AquireContext();
+    this.ThiefRelease = not _Flag;
+    Lib.EntitySelection.ReleaseContext();
 end
 API.DisableReleaseThieves = DisableReleaseThieves;
 
@@ -15,7 +17,9 @@ function DisableReleaseSiegeEngines(_Flag)
         ExecuteLocal([[DisableReleaseSiegeEngines(%s)]], tostring(_Flag));
         return;
     end
-    Lib.EntitySelection.Local.SiegeEngineRelease = not _Flag;
+    Lib.EntitySelection.AquireContext();
+    this.SiegeEngineRelease = not _Flag;
+    Lib.EntitySelection.ReleaseContext();
 end
 API.DisableReleaseSiegeEngines = DisableReleaseSiegeEngines;
 
@@ -24,48 +28,43 @@ function DisableReleaseSoldiers(_Flag)
         ExecuteLocal([[DisableReleaseSoldiers(%s)]], tostring(_Flag));
         return;
     end
-    Lib.EntitySelection.Local.MilitaryRelease = not _Flag;
+    Lib.EntitySelection.AquireContext();
+    this.MilitaryRelease = not _Flag;
+    Lib.EntitySelection.ReleaseContext();
 end
 API.DisableReleaseSoldiers = DisableReleaseSoldiers;
 
 function IsEntitySelected(_Entity, _PlayerID)
-    if IsExisting(_Entity) then
-        local EntityID = GetID(_Entity);
-        local PlayerID = _PlayerID or Logic.EntityGetPlayer(EntityID);
-        local SelectedEntities;
-        if not GUI then
-            SelectedEntities = Lib.EntitySelection.Global.SelectedEntities[PlayerID];
-        else
-            SelectedEntities = {GUI.GetSelectedEntities()};
-        end
-        for i= 1, #SelectedEntities, 1 do
-            if SelectedEntities[i] == EntityID then
-                return true;
+    local Existing = false;
+    local EntityID = GetID(_Entity);
+    if IsExisting(EntityID) then
+        Lib.EntitySelection.AquireContext();
+        for i= 1, #this.SelectedEntities[_PlayerID], 1 do
+            if this.SelectedEntities[_PlayerID][i] == EntityID then
+                Existing = true;
+                break;
             end
         end
+        Lib.EntitySelection.ReleaseContext();
     end
-    return false;
+    return Existing;
 end
 API.IsEntityInSelection = IsEntitySelected;
 
 function GetSelectedEntity(_PlayerID)
-    local SelectedEntity;
-    if not GUI then
-        SelectedEntity = Lib.EntitySelection.Global.SelectedEntities[_PlayerID][1];
-    else
-        SelectedEntity = Lib.EntitySelection.Local.SelectedEntities[_PlayerID][1];
-    end
-    return SelectedEntity or 0;
+    local SelectedEntity = 0;
+    Lib.EntitySelection.AquireContext();
+    SelectedEntities = this.SelectedEntities[_PlayerID][1];
+    Lib.EntitySelection.ReleaseContext();
+    return SelectedEntity;
 end
 API.GetSelectedEntity = GetSelectedEntity;
 
 function GetSelectedEntities(_PlayerID)
-    local SelectedEntities;
-    if not GUI then
-        SelectedEntities = Lib.EntitySelection.Global.SelectedEntities[_PlayerID];
-    else
-        SelectedEntities = Lib.EntitySelection.Local.SelectedEntities[_PlayerID];
-    end
+    local SelectedEntities = {};
+    Lib.EntitySelection.AquireContext();
+    SelectedEntities = this.SelectedEntities[_PlayerID];
+    Lib.EntitySelection.ReleaseContext();
     return SelectedEntities;
 end
 API.GetSelectedEntities = GetSelectedEntities;

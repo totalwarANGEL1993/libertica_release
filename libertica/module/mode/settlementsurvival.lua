@@ -861,7 +861,7 @@ function Lib.SettlementSurvival.Local:OverwriteGameCallbacks()
             GUI.CancelBuildingKnockDown(_BuildingID);
             return;
         end
-        Lib.Construction.Local.Orig_GameCallback_GUI_DeleteEntityStateBuilding(_BuildingID, _State);
+        Lib.SettlementSurvival.Local.Orig_GameCallback_GUI_DeleteEntityStateBuilding(_BuildingID, _State);
     end
 end
 

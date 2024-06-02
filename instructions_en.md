@@ -16,13 +16,13 @@ Users can choose between a complete package or the individual import of componen
 * The file `localmapscript.lua` must be imported into the map editor as the local script.
 * The file `qsb.min.lua` must be imported into the map editor.
 
-### As a repository
+### As a library
 
-**Important:** Note that using the repository requires the BBA tool to import additional content into the map. Additionally, saving in the editor deletes all additional content. It is recommended to work with unpacked maps. The Lua debugger enables this.
+**Important:** Note that using the library requires the BBA tool to import additional content into the map. Additionally, saving in the editor deletes all additional content. It is recommended to work with unpacked maps. The Lua debugger enables this.
 
+* As library a file `questsystembehavior.lua` is not used, hence it won't work with the quest assistent!
 * Import the subdirectory `libertica` into the map.
-* Move `mapscript.lua`, `localmapscript.lua`, and `qsb.min.lua` to the root directory of the map. (That is `maps/externalmap/nameofmap`.) The map scripts are already prepared, so they should function in principle without any adjustments.
-* Rename `qsb.min.lua` to `questsystembehavior.lua`.
+* Move `mapscript.lua` and `localmapscript.lua` to the root directory of the map. (That is `maps/externalmap/nameofmap`.) The map scripts are already prepared, so they should function in principle without any adjustments.
 * Customize the imports in both map scripts according to your needs. Imported components recursively load their dependencies.
 
 ## Configuring the Project
@@ -80,7 +80,7 @@ Project
  |- maps
   |- externalmap
    |- mapname
-    |- libertica_release
+    |- libertica
      |- ... library files
     |- scripts
     |- localmapscript.lua

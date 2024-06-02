@@ -29,7 +29,6 @@ function Lib.Damage.Global:Initialize()
             self.HeightModifier[PlayerID] = 1;
         end
         self:OverwriteVulnerabilityFunctions();
-        self:InitEntityBaseDamage();
 
         -- Garbage collection
         Lib.Damage.Local = nil;
@@ -45,6 +44,7 @@ end
 function Lib.Damage.Global:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
+        self:InitEntityBaseDamage();
     elseif _ID == Report.EntityDestroyed then
         self.InvulnerableList[arg[1]] = nil;
     elseif _ID == Report.EntityHurt then
@@ -52,185 +52,139 @@ function Lib.Damage.Global:OnReportReceived(_ID, ...)
     end
 end
 
-function Lib.Damage.Global:SetEntityTypeDamage(_Type, _Damage, ...)
-    assert(type(_Damage) == "number");
-    local Categories = {...};
-    self.EntityTypeDamage[_Type] = self.EntityTypeDamage[_Type] or {};
-    if #Categories == 0 then
-        self.EntityTypeDamage[_Type][0] = _Damage;
-        return;
-    end
-    for i= 1, #Categories do
-        self.EntityTypeDamage[_Type][Categories[i]] = _Damage;
-    end
-end
-
-function Lib.Damage.Global:SetEntityNameDamage(_Name, _Damage, ...)
-    assert(type(_Damage) == "number");
-    local Categories = {...};
-    self.EntityNameDamage[_Name] = self.EntityNameDamage[_Name] or {};
-    if #Categories == 0 then
-        self.EntityNameDamage[_Name][0] = _Damage;
-        return;
-    end
-    for i= 1, #Categories do
-        self.EntityNameDamage[_Name][Categories[i]] = _Damage;
-    end
-end
-
-function Lib.Damage.Global:SetEntityTypeArmor(_Type, _Armor)
-    assert(type(_Armor) == "number");
-    self.EntityTypeArmor[_Type] = _Armor;
-end
-
-function Lib.Damage.Global:SetEntityNameArmor(_Name, _Armor)
-    assert(type(_Armor) == "number");
-    self.EntityNameArmor[_Name] = _Armor;
-end
-
-function Lib.Damage.Global:SetTerritoryBonus(_PlayerID, _Bonus)
-    assert(type(_Bonus) == "number");
-    self.TerritoryBonus[_PlayerID] = _Bonus or 1;
-end
-
-function Lib.Damage.Global:SetHeightModifier(_PlayerID, _Bonus)
-    assert(type(_Bonus) == "number");
-    self.HeightModifier[_PlayerID] = _Bonus or 1;
-end
-
 function Lib.Damage.Global:IsInvulnerable(_Entity)
     return self.InvulnerableList[GetID(_Entity)] ~= nil;
 end
 
 function Lib.Damage.Global:InitEntityBaseDamage()
-    self:SetEntityTypeDamage(Entities.U_MilitaryBow, 20);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBow, 5,
+    SetEntityTypeDamage(Entities.U_MilitaryBow, 20);
+    SetEntityTypeDamage(Entities.U_MilitaryBow, 5,
         EntityCategories.AttackableBuilding,
         EntityCategories.PalisadeSegment,
         EntityCategories.SpecialBuilding
     );
-    self:SetEntityTypeDamage(Entities.U_MilitaryBow_RedPrince, 20);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBow_RedPrince, 5,
+    SetEntityTypeDamage(Entities.U_MilitaryBow_RedPrince, 20);
+    SetEntityTypeDamage(Entities.U_MilitaryBow_RedPrince, 5,
         EntityCategories.AttackableBuilding,
         EntityCategories.PalisadeSegment,
         EntityCategories.SpecialBuilding
     );
-    self:SetEntityTypeDamage(Entities.U_MilitarySword, 30);
-    self:SetEntityTypeDamage(Entities.U_MilitarySword, 5,
+    SetEntityTypeDamage(Entities.U_MilitarySword, 30);
+    SetEntityTypeDamage(Entities.U_MilitarySword, 5,
         EntityCategories.AttackableBuilding,
         EntityCategories.PalisadeSegment,
         EntityCategories.SpecialBuilding
     );
-    self:SetEntityTypeDamage(Entities.U_MilitarySword_RedPrince, 30);
-    self:SetEntityTypeDamage(Entities.U_MilitarySword_RedPrince, 5,
-        EntityCategories.AttackableBuilding,
-        EntityCategories.PalisadeSegment,
-        EntityCategories.SpecialBuilding
-    );
-    --
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_ME, 30);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_ME, 5,
-        EntityCategories.AttackableBuilding,
-        EntityCategories.PalisadeSegment,
-        EntityCategories.SpecialBuilding
-    );
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_ME, 20);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_ME, 5,
-        EntityCategories.AttackableBuilding,
-        EntityCategories.PalisadeSegment,
-        EntityCategories.SpecialBuilding
-    );
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_NA, 30);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_NA, 5,
-        EntityCategories.AttackableBuilding,
-        EntityCategories.PalisadeSegment,
-        EntityCategories.SpecialBuilding
-    );
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_NA, 20);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_NA, 5,
-        EntityCategories.AttackableBuilding,
-        EntityCategories.PalisadeSegment,
-        EntityCategories.SpecialBuilding
-    );
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_NE, 30);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_NE, 5,
-        EntityCategories.AttackableBuilding,
-        EntityCategories.PalisadeSegment,
-        EntityCategories.SpecialBuilding
-    );
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_NE, 20);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_NE, 5,
-        EntityCategories.AttackableBuilding,
-        EntityCategories.PalisadeSegment,
-        EntityCategories.SpecialBuilding
-    );
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_SE, 30);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_SE, 5,
-        EntityCategories.AttackableBuilding,
-        EntityCategories.PalisadeSegment,
-        EntityCategories.SpecialBuilding
-    );
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_SE, 20);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_SE, 5,
+    SetEntityTypeDamage(Entities.U_MilitarySword_RedPrince, 30);
+    SetEntityTypeDamage(Entities.U_MilitarySword_RedPrince, 5,
         EntityCategories.AttackableBuilding,
         EntityCategories.PalisadeSegment,
         EntityCategories.SpecialBuilding
     );
     --
-    self:SetEntityTypeDamage(Entities.U_MilitaryBallista, 50);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBallista, 10,
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_ME, 30);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_ME, 5,
+        EntityCategories.AttackableBuilding,
+        EntityCategories.PalisadeSegment,
+        EntityCategories.SpecialBuilding
+    );
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_ME, 20);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_ME, 5,
+        EntityCategories.AttackableBuilding,
+        EntityCategories.PalisadeSegment,
+        EntityCategories.SpecialBuilding
+    );
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_NA, 30);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_NA, 5,
+        EntityCategories.AttackableBuilding,
+        EntityCategories.PalisadeSegment,
+        EntityCategories.SpecialBuilding
+    );
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_NA, 20);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_NA, 5,
+        EntityCategories.AttackableBuilding,
+        EntityCategories.PalisadeSegment,
+        EntityCategories.SpecialBuilding
+    );
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_NE, 30);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_NE, 5,
+        EntityCategories.AttackableBuilding,
+        EntityCategories.PalisadeSegment,
+        EntityCategories.SpecialBuilding
+    );
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_NE, 20);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_NE, 5,
+        EntityCategories.AttackableBuilding,
+        EntityCategories.PalisadeSegment,
+        EntityCategories.SpecialBuilding
+    );
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_SE, 30);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_SE, 5,
+        EntityCategories.AttackableBuilding,
+        EntityCategories.PalisadeSegment,
+        EntityCategories.SpecialBuilding
+    );
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_SE, 20);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_SE, 5,
+        EntityCategories.AttackableBuilding,
+        EntityCategories.PalisadeSegment,
+        EntityCategories.SpecialBuilding
+    );
+    --
+    SetEntityTypeDamage(Entities.U_MilitaryBallista, 50);
+    SetEntityTypeDamage(Entities.U_MilitaryBallista, 10,
         EntityCategories.CityWallGate
     );
-    self:SetEntityTypeDamage(Entities.U_MilitaryCatapult, 50);
-    self:SetEntityTypeDamage(Entities.U_MilitaryCatapult, 10,
+    SetEntityTypeDamage(Entities.U_MilitaryCatapult, 50);
+    SetEntityTypeDamage(Entities.U_MilitaryCatapult, 10,
         EntityCategories.CityWallGate
     );
-    self:SetEntityTypeDamage(Entities.U_MilitaryBatteringRam, 120);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBatteringRam, 20,
+    SetEntityTypeDamage(Entities.U_MilitaryBatteringRam, 120);
+    SetEntityTypeDamage(Entities.U_MilitaryBatteringRam, 20,
         EntityCategories.CityWallSegment
     );
-    self:SetEntityTypeDamage(Entities.U_MilitarySiegeTower, 0);
-    self:SetEntityTypeDamage(Entities.U_MilitaryTrap, 800);
+    SetEntityTypeDamage(Entities.U_MilitarySiegeTower, 0);
+    SetEntityTypeDamage(Entities.U_MilitaryTrap, 800);
     --
-    self:SetEntityTypeDamage(Entities.A_ME_Bear, 120);
-    self:SetEntityTypeDamage(Entities.A_ME_Bear_black, 120);
-    self:SetEntityTypeDamage(Entities.A_ME_Wolf, 20);
-    self:SetEntityTypeDamage(Entities.A_NA_Lion_Female, 40);
-    self:SetEntityTypeDamage(Entities.A_NA_Lion_Male, 40);
-    self:SetEntityTypeDamage(Entities.A_NE_PolarBear, 120);
+    SetEntityTypeDamage(Entities.A_ME_Bear, 120);
+    SetEntityTypeDamage(Entities.A_ME_Bear_black, 120);
+    SetEntityTypeDamage(Entities.A_ME_Wolf, 20);
+    SetEntityTypeDamage(Entities.A_NA_Lion_Female, 40);
+    SetEntityTypeDamage(Entities.A_NA_Lion_Male, 40);
+    SetEntityTypeDamage(Entities.A_NE_PolarBear, 120);
 
     if g_GameExtraNo == 0 then
         return;
     end
 
-    self:SetEntityTypeDamage(Entities.U_MilitaryBow_Khana, 20);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBow_Khana, 5,
+    SetEntityTypeDamage(Entities.U_MilitaryBow_Khana, 20);
+    SetEntityTypeDamage(Entities.U_MilitaryBow_Khana, 5,
         EntityCategories.AttackableBuilding,
         EntityCategories.PalisadeSegment,
         EntityCategories.SpecialBuilding
     );
-    self:SetEntityTypeDamage(Entities.U_MilitarySword_Khana, 30);
-    self:SetEntityTypeDamage(Entities.U_MilitarySword_Khana, 5,
-        EntityCategories.AttackableBuilding,
-        EntityCategories.PalisadeSegment,
-        EntityCategories.SpecialBuilding
-    );
-    --
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_AS, 30);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_AS, 5,
-        EntityCategories.AttackableBuilding,
-        EntityCategories.PalisadeSegment,
-        EntityCategories.SpecialBuilding
-    );
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_AS, 20);
-    self:SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_AS, 5,
+    SetEntityTypeDamage(Entities.U_MilitarySword_Khana, 30);
+    SetEntityTypeDamage(Entities.U_MilitarySword_Khana, 5,
         EntityCategories.AttackableBuilding,
         EntityCategories.PalisadeSegment,
         EntityCategories.SpecialBuilding
     );
     --
-    self:SetEntityTypeDamage(Entities.A_AS_BearBlack, 120);
-    self:SetEntityTypeDamage(Entities.A_AS_Tiger, 40);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_AS, 30);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Melee_AS, 5,
+        EntityCategories.AttackableBuilding,
+        EntityCategories.PalisadeSegment,
+        EntityCategories.SpecialBuilding
+    );
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_AS, 20);
+    SetEntityTypeDamage(Entities.U_MilitaryBandit_Ranged_AS, 5,
+        EntityCategories.AttackableBuilding,
+        EntityCategories.PalisadeSegment,
+        EntityCategories.SpecialBuilding
+    );
+    --
+    SetEntityTypeDamage(Entities.A_AS_BearBlack, 120);
+    SetEntityTypeDamage(Entities.A_AS_Tiger, 40);
 end
 
 function Lib.Damage.Global:OverwriteVulnerabilityFunctions()

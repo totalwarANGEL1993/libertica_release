@@ -31,6 +31,7 @@ Lib.Require("core/Core");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/faker/Technology");
 Lib.Require("module/io/IO_API");
+Lib.Require("module/io/IO_Behavior");
 Lib.Register("module/io/IO");
 
 -- -------------------------------------------------------------------------- --

@@ -3,6 +3,9 @@
 --- Quests can be created as single quests or as nested quests. A nested quest
 --- is a simplified notation for quests that are dependend on oneanother.
 ---
+--- All texts inside a quest can be pulled out of string tables. The format for
+--- those texts will be "FileName/StringName".
+---
 --- #### Debug commands
 --- * `stop <QuestName>`      - Interrupts a quest
 --- * `start <QuestName>`     - Triggers a quest

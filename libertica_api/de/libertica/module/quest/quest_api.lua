@@ -4,6 +4,9 @@
 --- werden. Eine verschachtelte Quest ist eine vereinfachte Notation für Quests, 
 --- die voneinander abhängig sind.
 ---
+--- Alle Texte eines Quest-Texte können auch String Tables sein. Das Format für
+--- diese Texte ist "FileName/StringName".
+---
 --- #### Debug-Befehle
 --- * `stop <QuestName>`      - Unterbricht eine Quest
 --- * `start <QuestName>`     - Startet eine Quest
@@ -21,9 +24,9 @@ Lib.Quest = Lib.Quest or {};
 --- * Name:        Eindeutiger Name für die Quest
 --- * Sender:      Spieler-ID des Quest-Gebers
 --- * Receiver:    Spieler-ID des Quest-Empfängers
---- * Suggestion:  Vorschlagstext der Quest
---- * Success:     Erfolgsmeldung der Quest
---- * Failure:     Fehlermeldung der Quest
+--- * Suggestion:  Vorschlagstext des Quest
+--- * Success:     Erfolgsmeldung des Quest
+--- * Failure:     Fehlermeldung des Quest
 --- * Description: Benutzerdefinierte Quest-Beschreibung
 --- * Time:        Zeit bis zum automatischen Scheitern
 --- * Loop:        Loop-Funktion
@@ -43,7 +46,7 @@ Lib.Quest = Lib.Quest or {};
 --- }
 --- ```
 --- @param _Data table Quest-Daten
---- @return string Name Name der Quest
+--- @return string Name Name des Quest
 --- @return number Amount Quest-Betrag
 function SetupQuest(_Data)
     return "", 0;
@@ -55,7 +58,7 @@ API.CreateQuest = SetupQuest;
 --- #### Was sind verschachtelte Quests?
 --- Verschachtelte Quests vereinfachen die Notation von miteinander verbundenen 
 --- Quests. Die "Hauptquest" ist immer unsichtbar und enthält Segmente als 
---- "Unterquests". Jedes Segment der Quest ist selbst eine Quest, die weitere 
+--- "Unterquests". Jedes Segment des Quest ist selbst eine Quest, die weitere 
 --- Segmente enthalten kann.
 ---
 --- Der Name eines Segments kann definiert werden. Wenn er leer gelassen wird, 
@@ -117,7 +120,7 @@ API.CreateQuest = SetupQuest;
 --- ```
 ---
 --- @param _Data table Quest-Daten
---- @return string Name Name der Quest
+--- @return string Name Name des Quest
 function SetupNestedQuest(_Data)
     return "";
 end

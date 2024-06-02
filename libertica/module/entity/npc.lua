@@ -22,6 +22,7 @@ Lib.Require("comfort/GetClosestToTarget");
 Lib.Require("comfort/global/LookAt");
 Lib.Require("core/Core");
 Lib.Require("module/entity/NPC_API");
+Lib.Require("module/entity/NPC_Behavior");
 Lib.Register("module/entity/NPC");
 
 -- -------------------------------------------------------------------------- --

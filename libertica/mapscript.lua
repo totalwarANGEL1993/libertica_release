@@ -14,8 +14,6 @@ Lib.Require("core/Core");
 -- Include more
 
 function Mission_FirstMapAction()
-    Script.Load("maps/externalmap/" ..Framework.GetCurrentMapName().. "/questsystembehavior.lua");
-
     -- Mapeditor-Einstellungen werden geladen
     if Framework.IsNetworkGame() ~= true then
         Startup_Player();

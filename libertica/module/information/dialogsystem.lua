@@ -31,6 +31,7 @@ Lib.Require("module/ui/UITools");
 Lib.Require("module/information/Requester");
 Lib.Require("module/information/DialogSystem_Text");
 Lib.Require("module/information/DialogSystem_API");
+Lib.Require("module/information/DialogSystem_Behavior");
 Lib.Register("module/information/DialogSystem");
 
 CinematicEventTypes.Dialog = 5;
@@ -615,7 +616,7 @@ function Lib.DialogSystem.Local:DisplayPageTitle(_PlayerID, _PageID)
     local Page = self.Dialog[_PlayerID][_PageID];
     if Page.Title then
         local Title = ConvertPlaceholders(Localize(Page.Title));
-        if Title:find("^[A-Za-Z0-9_]+/[A-Za-Z0-9_]+$") then
+        if Title:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
             Title = XGUIEng.GetStringTableText(Title);
         end
         if Title:sub(1, 1) ~= "{" then

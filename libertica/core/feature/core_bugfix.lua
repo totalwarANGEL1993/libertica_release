@@ -35,10 +35,10 @@ end
 
 function Lib.Core.Bugfix:FixResourceSlotsInStorehouses()
     for i= 1, 8 do
-        local StoreHouseID = Logic.GetStoreHouse(i);
-        if StoreHouseID ~= 0 then
-            Logic.AddGoodToStock(StoreHouseID, Goods.G_Salt, 0, true, true);
-            Logic.AddGoodToStock(StoreHouseID, Goods.G_Dye, 0, true, true);
+        local StorehouseID = Logic.GetStoreHouse(i);
+        if StorehouseID ~= 0 then
+            Logic.AddGoodToStock(StorehouseID, Goods.G_Salt, 0, true, true);
+            Logic.AddGoodToStock(StorehouseID, Goods.G_Dye, 0, true, true);
         end
     end
 end
@@ -67,40 +67,37 @@ end
 -- Delivery checkpoint
 
 function Lib.Core.Bugfix:FixMerchantArrivedCheckpoints()
-    function QuestTemplate:IsMerchantArrived(objective)
-        if objective.Data[3] ~= nil then
-            if objective.Data[3] == 1 then
-                if objective.Data[5].ID ~= nil then
-                    objective.Data[3] = objective.Data[5].ID;
-                    DeleteQuestMerchantWithID(objective.Data[3]);
+    QuestTemplate.IsMerchantArrived = function(self, objective)
+        local data = objective.Data;
+        local merchantID = data[3];
+
+        if merchantID ~= nil then
+            if merchantID == 1 then
+                local newID = data[5].ID;
+                if newID ~= nil then
+                    data[3] = newID;
+                    DeleteQuestMerchantWithID(newID);
                     if MapCallback_DeliverCartSpawned then
-                        MapCallback_DeliverCartSpawned(self, objective.Data[3], objective.Data[1]);
+                        MapCallback_DeliverCartSpawned(self, newID, data[1]);
                     end
                 end
-            elseif Logic.IsEntityDestroyed(objective.Data[3]) then
-                DeleteQuestMerchantWithID(objective.Data[3]);
+            elseif Logic.IsEntityDestroyed(merchantID) then
+                DeleteQuestMerchantWithID(merchantID);
                 objective.Data[3] = nil;
                 objective.Data[5].ID = nil;
             else
-                local Target = objective.Data[6] and objective.Data[6] or self.SendingPlayer;
-                local StorehouseID = Logic.GetStoreHouse(Target);
-                local MarketplaceID = Logic.GetStoreHouse(Target);
-                local HeadquartersID = Logic.GetStoreHouse(Target);
-                local HasArrived = nil;
+                local isNearEntrance = function(_ID)
+                    if _ID == 0 then
+                        return false;
+                    end
+                    local x, y = Logic.GetBuildingApproachPosition(_ID)
+                    return GetDistance(merchantID, {X = x, Y = y}) < 1000;
+                end
 
-                if StorehouseID > 0 then
-                    local x,y = Logic.GetBuildingApproachPosition(StorehouseID);
-                    HasArrived = GetDistance(objective.Data[3], {X= x, Y= y}) < 1000;
-                end
-                if MarketplaceID > 0 then
-                    local x,y = Logic.GetBuildingApproachPosition(MarketplaceID);
-                    HasArrived = HasArrived or GetDistance(objective.Data[3], {X= x, Y= y}) < 1000;
-                end
-                if HeadquartersID > 0 then
-                    local x,y = Logic.GetBuildingApproachPosition(HeadquartersID);
-                    HasArrived = HasArrived or GetDistance(objective.Data[3], {X= x, Y= y}) < 1000;
-                end
-                return HasArrived;
+                local playerID = data[6] or self.SendingPlaye;
+                return isNearEntrance(Logic.GetStoreHouse(playerID)) or
+                       isNearEntrance(Logic.GetStoreHouse(playerID)) or
+                       isNearEntrance(Logic.GetStoreHouse(playerID));
             end
         end
         return false;
@@ -112,56 +109,63 @@ end
 
 function Lib.Core.Bugfix:FixInteractiveObjectClicked()
     GUI_Interaction.InteractiveObjectClicked = function()
-        local ButtonNumber = tonumber(XGUIEng.GetWidgetNameByID(XGUIEng.GetCurrentWidgetID()));
-        local ObjectID = g_Interaction.ActiveObjectsOnScreen[ButtonNumber];
-        if ObjectID == nil or not Logic.InteractiveObjectGetAvailability(ObjectID) then
+        local widgetID = XGUIEng.GetCurrentWidgetID();
+        local widgetName = XGUIEng.GetWidgetNameByID(widgetID);
+        local buttonID = tonumber(widgetName);
+        local objectID = g_Interaction.ActiveObjectsOnScreen[buttonID];
+
+        if objectID == nil then
             return;
         end
-        local PlayerID = GUI.GetPlayerID();
-        local Costs = {Logic.InteractiveObjectGetEffectiveCosts(ObjectID, PlayerID)};
-        local CanNotBuyString = XGUIEng.GetStringTableText("Feedback_TextLines/TextLine_NotEnough_Resources");
-
-        -- Check activation costs
-        local Affordable = true;
-        if Affordable and Costs ~= nil and Costs[1] ~= nil then
-            if Costs[1] == Goods.G_Gold then
-                CanNotBuyString = XGUIEng.GetStringTableText("Feedback_TextLines/TextLine_NotEnough_G_Gold");
-            end
-            if Costs[1] ~= Goods.G_Gold and Logic.GetGoodCategoryForGoodType(Costs[1]) ~= GoodCategories.GC_Resource then
-                error("Only resources can be used as costs for objects!");
-                Affordable = false;
-            end
-            Affordable = Affordable and GetPlayerGoodsInSettlement(Costs[1], PlayerID, false) >= Costs[2];
-        end
-        if Affordable and Costs ~= nil and Costs[3] ~= nil then
-            if Costs[3] == Goods.G_Gold then
-                CanNotBuyString = XGUIEng.GetStringTableText("Feedback_TextLines/TextLine_NotEnough_G_Gold");
-            end
-            if Costs[3] ~= Goods.G_Gold and Logic.GetGoodCategoryForGoodType(Costs[3]) ~= GoodCategories.GC_Resource then
-                error("Only resources can be used as costs for objects!");
-                Affordable = false;
-            end
-            Affordable = Affordable and GetPlayerGoodsInSettlement(Costs[3], PlayerID, false) >= Costs[4];
-        end
-        if not Affordable then
-            Message(CanNotBuyString);
+        if not Logic.InteractiveObjectGetAvailability(objectID) then
             return;
         end
 
-        -- Check click override
-        if not GUI_Interaction.InteractionClickOverride
-        or not GUI_Interaction.InteractionClickOverride(ObjectID) then
-            Sound.FXPlay2DSound( "ui\\menu_click");
+        local playerID = GUI.GetPlayerID();
+        local costs = {Logic.InteractiveObjectGetEffectiveCosts(objectID, playerID)};
+        local canNotBuyString = XGUIEng.GetStringTableText("Feedback_TextLines/TextLine_NotEnough_Resources");
+
+        local isAffordable = function(costType, amount)
+            if Logic.GetGoodCategoryForGoodType(costType) ~= GoodCategories.GC_Resource then
+                error("Only resources can be used as costs for objects!");
+                return false;
+            end
+            if costType == Goods.G_Gold then
+                canNotBuyString = XGUIEng.GetStringTableText("Feedback_TextLines/TextLine_NotEnough_G_Gold");
+            end
+            return GetPlayerGoodsInSettlement(costType, playerID, false) >= amount;
         end
-        -- Check feedback speech override
-        if not GUI_Interaction.InteractionSpeechFeedbackOverride
-        or not GUI_Interaction.InteractionSpeechFeedbackOverride(ObjectID) then
-            GUI_FeedbackSpeech.Add("SpeechOnly_CartsSent", g_FeedbackSpeech.Categories.CartsUnderway, nil, nil);
+
+        local affordable = true;
+        if costs[1] and costs[2] then
+            affordable = isAffordable(costs[1], costs[2]);
         end
-        -- Check action override and perform action
+        if affordable and costs[3] and costs[4] then
+            affordable = isAffordable(costs[3], costs[4]);
+        end
+        if not affordable then
+            Message(canNotBuyString);
+            return;
+        end
+
+        if not GUI_Interaction.InteractionClickOverride 
+        or not GUI_Interaction.InteractionClickOverride(objectID) then
+            Sound.FXPlay2DSound("ui\\menu_click");
+        end
+
+        if not GUI_Interaction.InteractionSpeechFeedbackOverride 
+        or not GUI_Interaction.InteractionSpeechFeedbackOverride(objectID) then
+            GUI_FeedbackSpeech.Add(
+                "SpeechOnly_CartsSent", 
+                g_FeedbackSpeech.Categories.CartsUnderway,
+                nil,
+                nil
+            );
+        end
+
         if not Mission_Callback_OverrideObjectInteraction
-        or not Mission_Callback_OverrideObjectInteraction(ObjectID, PlayerID, Costs) then
-            GUI.ExecuteObjectInteraction(ObjectID, PlayerID);
+        or not Mission_Callback_OverrideObjectInteraction(objectID, playerID, costs) then
+            GUI.ExecuteObjectInteraction(objectID, playerID);
         end
     end
 end
@@ -172,37 +176,41 @@ end
 function Lib.Core.Bugfix:FixDestroyAllPlayerUnits()
     QuestTemplate.IsObjectiveCompleted_Orig_Core_Bugfix = QuestTemplate.IsObjectiveCompleted;
     QuestTemplate.IsObjectiveCompleted = function(self, objective)
-        local objectiveType = objective.Type;
         if objective.Completed ~= nil then
             return objective.Completed;
         end
+
+        local objectiveType = objective.Type;
         local data = objective.Data;
 
         -- Solves the problem that special entities and construction sites
-        -- let the script beleave that the player is still alive.
+        -- let the script believe that the player is still alive.
         if objectiveType == Objective.DestroyAllPlayerUnits then
-            local PlayerEntities = GetPlayerEntities(data, 0);
-            local IllegalEntities = {};
+            local playerEntities = GetPlayerEntities(data, 0);
+            local illegalEntities = {};
+            local indestructableEntities = {
+                Entities.XD_ScriptEntity,
+                Entities.S_AIHomePosition,
+                Entities.S_AIAreaDefinition
+            };
 
-            for i= #PlayerEntities, 1, -1 do
-                local Type = Logic.GetEntityType(PlayerEntities[i]);
-                if Logic.IsEntityInCategory(PlayerEntities[i], EntityCategories.AttackableBuilding) == 0
-                or Logic.IsEntityInCategory(PlayerEntities[i], EntityCategories.Wall) == 0 then
-                    if Logic.IsConstructionComplete(PlayerEntities[i]) == 0 then
-                        table.insert(IllegalEntities, PlayerEntities[i]);
-                    end
+            for i = #playerEntities, 1, -1 do
+                local entityID = playerEntities[i];
+                local entityType = Logic.GetEntityType(entityID);
+
+                local notReady = Logic.IsConstructionComplete(entityID) == 0;
+                local notIsBuilding = Logic.IsEntityInCategory(entityID, EntityCategories.AttackableBuilding) == 0;
+                local notIsWall = Logic.IsEntityInCategory(entityID, EntityCategories.Wall) == 0;
+                if  (notIsBuilding or notIsWall) and notReady then
+                    table.insert(illegalEntities, entityID);
                 end
-                local IndestructableEntities = {
-                    Entities.XD_ScriptEntity,
-                    Entities.S_AIHomePosition,
-                    Entities.S_AIAreaDefinition
-                };
-                if table.contains(IndestructableEntities, Type) then
-                    table.insert(IllegalEntities, PlayerEntities[i]);
+
+                if table.contains(indestructableEntities, entityType) then
+                    table.insert(illegalEntities, entityID);
                 end
             end
 
-            if #PlayerEntities == 0 or #PlayerEntities - #IllegalEntities == 0 then
+            if #playerEntities == 0 or #playerEntities == #illegalEntities then
                 objective.Completed = true;
             end
         elseif objectiveType == Objective.Distance then
@@ -210,6 +218,7 @@ function Lib.Core.Bugfix:FixDestroyAllPlayerUnits()
         else
             return self:IsObjectiveCompleted_Orig_Core_Bugfix(objective);
         end
+        return objective.Completed;
     end
 end
 
@@ -237,97 +246,103 @@ end
 
 function Lib.Core.Bugfix:FixClimateZoneForHouseMenu()
     HouseMenuGetNextBuildingID = function(WidgetName)
-        local BuildingsList;
-        local FoundNumber = 0;
-        local HigherBuildingFound = false;
-        local PlayerID = GUI.GetPlayerID();
-        local Category = Lib.Core.Bugfix.HouseMenuWidgetToCategory[WidgetName];
+        local playerID = GUI.GetPlayerID();
+        local category = Lib.Core.Bugfix.HouseMenuWidgetToCategory[WidgetName];
+        local buildingsList;
+
         WidgetName = GetClimateEntityName(WidgetName);
         if HouseMenu.Widget.CurrentBuilding ~= WidgetName then
             HouseMenu.Widget.CurrentBuilding = WidgetName;
             HouseMenu.Widget.CurrentBuildingNumber = 0;
         end
-        if Category ~= nil then
-            BuildingsList = {Logic.GetPlayerEntitiesInCategory(PlayerID, Category)};
+
+        if category then
+            buildingsList = {Logic.GetPlayerEntitiesInCategory(playerID, category)};
         else
-            BuildingsList = {Logic.GetBuildingsByPlayer(PlayerID)};
+            buildingsList = {Logic.GetBuildingsByPlayer(playerID)};
         end
-        for i= 1, #BuildingsList do
-            local EntityType = Logic.GetEntityType(BuildingsList[i]);
-            local EntityName = Logic.GetEntityTypeName(EntityType);
-            if Category ~= nil or EntityName == WidgetName then
-                FoundNumber = i;
-                if FoundNumber > HouseMenu.Widget.CurrentBuildingNumber then
-                    HouseMenu.Widget.CurrentBuildingNumber = FoundNumber;
-                    HigherBuildingFound = true;
+
+        local foundNumber = 0;
+        local higherBuildingFound = false;
+
+        for i = 1, #buildingsList do
+            local entityType = Logic.GetEntityType(buildingsList[i]);
+            local entityName = Logic.GetEntityTypeName(entityType);
+            if category or entityName == WidgetName then
+                foundNumber = i;
+                if foundNumber > HouseMenu.Widget.CurrentBuildingNumber then
+                    HouseMenu.Widget.CurrentBuildingNumber = foundNumber;
+                    higherBuildingFound = true;
                     break;
                 end
             end
         end
-        if FoundNumber ~= 0 then
-            if not HigherBuildingFound then
-                for i = 1, #BuildingsList do
-                    local EntityType = Logic.GetEntityType(BuildingsList[i]);
-                    local EntityName = Logic.GetEntityTypeName(EntityType);
-                    if Category ~= nil or EntityName == WidgetName then
-                        HouseMenu.Widget.CurrentBuildingNumber = i;
-                        break;
-                    end
+
+        if foundNumber ~= 0 and not higherBuildingFound then
+            for i = 1, #buildingsList do
+                local entityType = Logic.GetEntityType(buildingsList[i]);
+                local entityName = Logic.GetEntityTypeName(entityType);
+                if category or entityName == WidgetName then
+                    HouseMenu.Widget.CurrentBuildingNumber = i;
+                    break;
                 end
             end
-            return BuildingsList[HouseMenu.Widget.CurrentBuildingNumber];
+            return buildingsList[HouseMenu.Widget.CurrentBuildingNumber];
         end
         return nil;
     end
 
     HouseMenuSetIconsPart = function(_Part, _HighlightBool)
-		local PlayerID = GUI.GetPlayerID();
-		local HouseMenuButtons = {XGUIEng.ListSubWidgets(_Part)};
-		local Buildings = {Logic.GetBuildingsByPlayer(PlayerID)};
-		local WidgetName, Category;
-		for i = 1, #HouseMenuButtons do
-			WidgetName = XGUIEng.GetWidgetNameByID(HouseMenuButtons[i]);
-			Category = Lib.Core.Bugfix.HouseMenuWidgetToCategory[WidgetName];
-			local WidgetPosEntry = Entities[WidgetName];
-			local Button = _Part .. "/" .. WidgetName .. "/Button";
-			SetIcon(Button, g_TexturePositions.Entities[WidgetPosEntry]);
-			local Count = 0;
-			local CategoryBuildings;
-			if Category ~= nil then
-				CategoryBuildings = {Logic.GetPlayerEntitiesInCategory(PlayerID, Category)};
-				Count = #CategoryBuildings;
-			else
-				for j = 1, #Buildings do
-					local EntityType = Logic.GetEntityType(Buildings[j]);
-					local EntityName = Logic.GetEntityTypeName(EntityType);
-					local ClimateWidgetName = GetClimateEntityName(WidgetName);
-					if EntityName == ClimateWidgetName then
-						Count = Count + 1;
-					end
-				end
-			end
-            XGUIEng.DisableButton(Button, (Count == 0 and 1) or 0);
-			local Amount = _Part .. "/" .. WidgetName .. "/Amount";
-			XGUIEng.SetText(Amount, "{center}" .. Count);
-			local StopWidget = _Part .. "/" .. WidgetName .. "/Stop";
-			UpdateStopOverlay(StopWidget, WidgetName, Count);
-			if WidgetName == HouseMenu.Widget.CurrentBuilding then
-				UpdateStopOverlay(HouseMenu.Widget.CurrentStop, HouseMenu.Widget.CurrentBuilding, Count);
-			end
-		end
-		HouseMenu.Counter = HouseMenu.Counter + 1;
-		if _HighlightBool or HouseMenu.Counter % 20 == 0 then
-			for j = 1, #HouseMenuButtons do
-				local WidgetNameHighlighted = XGUIEng.GetWidgetNameByID(HouseMenuButtons[j]);
-				local ButtonHighlighted = _Part .. "/" .. WidgetNameHighlighted .. "/Button";
-				WidgetNameHighlighted = GetClimateEntityName(WidgetNameHighlighted);
-                XGUIEng.HighLightButton(
-                    ButtonHighlighted,
-                    (WidgetNameHighlighted == HouseMenu.Widget.CurrentBuilding and 1) or 0
+        local playerID = GUI.GetPlayerID();
+        local houseMenuButtons = {XGUIEng.ListSubWidgets(_Part)};
+        local buildings = {Logic.GetBuildingsByPlayer(playerID)};
+
+        for i = 1, #houseMenuButtons do
+            local widgetName = XGUIEng.GetWidgetNameByID(houseMenuButtons[i]);
+            local category = Lib.Core.Bugfix.HouseMenuWidgetToCategory[widgetName];
+            local button = _Part .. "/" .. widgetName .. "/Button";
+            local climateWidgetName = GetClimateEntityName(widgetName);
+            SetIcon(button, g_TexturePositions.Entities[Entities[widgetName]]);
+
+            local count = 0;
+            if category then
+                buildings = {Logic.GetPlayerEntitiesInCategory(playerID, category)};
+                count = #buildings;
+            else
+                for j = 1, #buildings do
+                    local entityType = Logic.GetEntityType(buildings[j]);
+					local entityName = Logic.GetEntityTypeName(entityType);
+                    if entityName == climateWidgetName then
+                        count = count + 1;
+                    end
+                end
+            end
+
+            XGUIEng.DisableButton(button, (count == 0 and 1) or 0);
+            XGUIEng.SetText(_Part .. "/" .. widgetName .. "/Amount", "{center}" .. count);
+            UpdateStopOverlay(_Part .. "/" .. widgetName .. "/Stop", widgetName, count);
+
+            if widgetName == HouseMenu.Widget.CurrentBuilding then
+                UpdateStopOverlay(
+                    HouseMenu.Widget.CurrentStop,
+                    HouseMenu.Widget.CurrentBuilding,
+                    count
                 );
-			end
-		end
-	end
+            end
+        end
+
+        HouseMenu.Counter = HouseMenu.Counter + 1;
+        if _HighlightBool or HouseMenu.Counter % 20 == 0 then
+            for j = 1, #houseMenuButtons do
+                local building = HouseMenu.Widget.CurrentBuilding;
+                local highligtedName = XGUIEng.GetWidgetNameByID(houseMenuButtons[j]);
+                local button = _Part .. "/" .. highligtedName .. "/Button";
+                highligtedName = GetClimateEntityName(highligtedName);
+                local highlightFlag = (highligtedName == building and 1) or 0;
+                XGUIEng.HighLightButton(button, highlightFlag);
+            end
+        end
+    end
 end
 
 -- -------------------------------------------------------------------------- --
@@ -335,21 +350,36 @@ end
 
 function Lib.Core.Bugfix:FixAbilityInfoWhenHomeless()
     StartKnightVoiceForActionSpecialAbility = function(_KnightType, _NoPriority)
-        local PlayerID = GUI.GetPlayerID();
-        local StorehouseID = Logic.GetStoreHouse(PlayerID);
-        local KnightType = Logic.GetEntityType(Logic.GetKnightID(PlayerID));
-        if _KnightType == KnightType and StorehouseID ~= 0 and ActionAbilityIsExplained == nil then
-            LocalScriptCallback_StartVoiceMessage(PlayerID, "Hint_SpecialAbilityAction", false, PlayerID, _NoPriority);
+        local playerID = GUI.GetPlayerID();
+        local storehouseID = Logic.GetStoreHouse(playerID);
+        local knightType = Logic.GetEntityType(Logic.GetKnightID(playerID));
+        if  _KnightType == knightType
+        and storehouseID ~= 0
+        and ActionAbilityIsExplained == nil then
+            LocalScriptCallback_StartVoiceMessage(
+                playerID,
+                "Hint_SpecialAbilityAction",
+                false,
+                playerID,
+                _NoPriority
+            );
             ActionAbilityIsExplained = true;
         end
     end
 
     StartKnightVoiceForPermanentSpecialAbility = function(_KnightType)
-        local PlayerID = GUI.GetPlayerID();
-        local StorehouseID = Logic.GetStoreHouse(PlayerID);
-        local KnightType = Logic.GetEntityType(Logic.GetKnightID(PlayerID));
-        if _KnightType == KnightType and StorehouseID ~= 0 and PermanentAbilityIsExplained == nil then
-            LocalScriptCallback_StartVoiceMessage(PlayerID, "Hint_SpecialAbilityPermanetly", false, PlayerID);
+        local playerID = GUI.GetPlayerID();
+        local storehouseID = Logic.GetStoreHouse(playerID);
+        local knightType = Logic.GetEntityType(Logic.GetKnightID(playerID));
+        if  _KnightType == knightType
+        and storehouseID ~= 0
+        and PermanentAbilityIsExplained == nil then
+            LocalScriptCallback_StartVoiceMessage(
+                playerID,
+                "Hint_SpecialAbilityPermanetly",
+                false,
+                playerID
+            );
             PermanentAbilityIsExplained = true;
         end
     end
@@ -363,44 +393,44 @@ function Lib.Core.Bugfix:FixBanditCampFireplace()
     g_Outlaws.ReplaceCampType[Entities.D_X_Fireplace01] = Entities.D_X_Fireplace01_Expired;
     g_Outlaws.ReplaceCampType[Entities.D_X_Fireplace02] = Entities.D_X_Fireplace02_Expired;
 
-    ActivateFireplaceforBanditPack = function(_CampID)
-        local BanditsPlayerID = Logic.EntityGetPlayer(_CampID);
-        if g_Outlaws.Players[BanditsPlayerID][_CampID].CampFire == nil then
-            local ApX, ApY = Logic.GetBuildingApproachPosition(_CampID);
-            local PosX, PosY = Logic.GetEntityPosition(_CampID);
+    ActivateFireplaceforBanditPack = function(_CaMarketplaceID)
+        local playerID = Logic.EntityGetPlayer(_CaMarketplaceID);
+        if g_Outlaws.Players[playerID][_CaMarketplaceID].CampFire == nil then
+            local ApX, ApY = Logic.GetBuildingApproachPosition(_CaMarketplaceID);
+            local PosX, PosY = Logic.GetEntityPosition(_CaMarketplaceID);
             local x = (ApX - PosX) * 1.3 + ApX;
             local y = (ApY - PosY) * 1.3 + ApY;
 
             local FireplaceType = Entities.D_X_Fireplace01;
-            if Logic.IsEntityInCategory( _CampID, EntityCategories.Storehouse) == 1 then
+            if Logic.IsEntityInCategory(_CaMarketplaceID, EntityCategories.Storehouse) == 1 then
                 FireplaceType = Entities.D_X_Fireplace02;
             end
 
-            g_Outlaws.Players[BanditsPlayerID][_CampID].CampFireType = FireplaceType;
-            local OldID = g_Outlaws.Players[BanditsPlayerID][_CampID].ExtinguishedFire;
+            g_Outlaws.Players[playerID][_CaMarketplaceID].CampFireType = FireplaceType;
+            local OldID = g_Outlaws.Players[playerID][_CaMarketplaceID].ExtinguishedFire;
             Logic.DestroyEntity(OldID);
             local NewID = Logic.CreateEntityOnUnblockedLand(FireplaceType, x, y, 0, 0);
-            g_Outlaws.Players[BanditsPlayerID][_CampID].CampFire = NewID
-            g_Outlaws.Players[BanditsPlayerID][_CampID].CampFirePos = {X= x, Y= y};
+            g_Outlaws.Players[playerID][_CaMarketplaceID].CampFire = NewID
+            g_Outlaws.Players[playerID][_CaMarketplaceID].CampFirePos = {X= x, Y= y};
             return true;
         end
         return false;
     end
 
-    DisableFireplaceforBanditPack = function(_CampID)
-        local BanditsPlayerID = Logic.EntityGetPlayer(_CampID);
-        if g_Outlaws.Players[BanditsPlayerID][_CampID].CampFire ~= nil then
-            local x = g_Outlaws.Players[BanditsPlayerID][_CampID].CampFirePos.X;
-            local y = g_Outlaws.Players[BanditsPlayerID][_CampID].CampFirePos.Y;
+    DisableFireplaceforBanditPack = function(_CaMarketplaceID)
+        local playerID = Logic.EntityGetPlayer(_CaMarketplaceID);
+        if g_Outlaws.Players[playerID][_CaMarketplaceID].CampFire ~= nil then
+            local x = g_Outlaws.Players[playerID][_CaMarketplaceID].CampFirePos.X;
+            local y = g_Outlaws.Players[playerID][_CaMarketplaceID].CampFirePos.Y;
 
-            local OldID = g_Outlaws.Players[BanditsPlayerID][_CampID].CampFire;
+            local OldID = g_Outlaws.Players[playerID][_CaMarketplaceID].CampFire;
             Logic.DestroyEntity(OldID);
 
-            local CampfireType = g_Outlaws.Players[BanditsPlayerID][_CampID].CampFireType;
+            local CampfireType = g_Outlaws.Players[playerID][_CaMarketplaceID].CampFireType;
             local FireplaceType = g_Outlaws.ReplaceCampType[CampfireType];
             local NewID = Logic.CreateEntityOnUnblockedLand(FireplaceType, x, y, 0, 0);
-            g_Outlaws.Players[BanditsPlayerID][_CampID].ExtinguishedFire = NewID;
-            g_Outlaws.Players[BanditsPlayerID][_CampID].CampFire = nil;
+            g_Outlaws.Players[playerID][_CaMarketplaceID].ExtinguishedFire = NewID;
+            g_Outlaws.Players[playerID][_CaMarketplaceID].CampFire = nil;
         end
     end
 end

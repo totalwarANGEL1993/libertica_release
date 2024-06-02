@@ -17,8 +17,8 @@ Lib = {
 -- Prevent the null reference bug
 if Framework and Network then
     -- Search for files in map file
-    local Name = Framework.GetCurrentMapName();
-    table.insert(Lib.Loader.Paths, 1, "maps/externalmap/" ..Name.. "/");
+    local name = Framework.GetCurrentMapName();
+    table.insert(Lib.Loader.Paths, 1, "maps/externalmap/" ..name.. "/");
     -- Check for History Edition
     Lib.Loader.IsHistoryEdition = Network.IsNATReady ~= nil;
 end
@@ -39,7 +39,7 @@ QSB = {};
 --- @param _Path string Relative path
 function Lib.Loader.Require(_Path)
     _Path = _Path:lower();
-    local Key = _Path:gsub("/", "_");
+    local key = _Path:gsub("/", "_");
 
     -- Do not load globals in local
     if Lib.Loader.IsLocalEnv == true and _Path:find("/global/") then
@@ -51,13 +51,13 @@ function Lib.Loader.Require(_Path)
     end
 
     for i= 1, #Lib.Loader.Paths do
-        if not Lib.Loader.Loaded[Key] then
-            Lib.Loader.Sources[Key] = Lib.Loader.Paths[i];
+        if not Lib.Loader.Loaded[key] then
+            Lib.Loader.Sources[key] = Lib.Loader.Paths[i];
             Lib.Loader.LoadSourceFile(Lib.Loader.Paths[i], _Path);
         end
     end
-    assert(Lib.Loader.Loaded[Key] ~= nil, "\nFile not found: \n".._Path);
-    Lib.Loader.Sources[Key] = nil;
+    assert(Lib.Loader.Loaded[key] ~= nil, "\nFile not found: \n".._Path);
+    Lib.Loader.Sources[key] = nil;
 end
 Lib.Require = Lib.Loader.Require;
 
@@ -71,8 +71,8 @@ end
 --- Registers a component as found.
 --- @param _Path string Relative path
 function Lib.Loader.Register(_Path)
-    local Key = _Path:gsub("/", "_"):lower();
-    Lib.Loader.Loaded[Key] = Lib.Loader.Sources[Key] .. Lib.Loader.Root .. "/";
+    local key = _Path:gsub("/", "_"):lower();
+    Lib.Loader.Loaded[key] = Lib.Loader.Sources[key] .. Lib.Loader.Root .. "/";
 end
 Lib.Register = Lib.Loader.Register;
 
@@ -81,7 +81,7 @@ Lib.Register = Lib.Loader.Register;
 --- @param _Source string Path where the component is loaded from
 --- @param _Path string   Relative path of component
 function Lib.Loader.LoadSourceFile(_Source, _Path)
-    local Path = _Source .. Lib.Loader.Root .. "/" .._Path:lower();
-    Script.Load(Path.. ".lua");
+    local path = _Source .. Lib.Loader.Root .. "/" .._Path:lower();
+    Script.Load(path.. ".lua");
 end
 

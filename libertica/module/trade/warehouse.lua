@@ -40,6 +40,7 @@ Lib.Require("module/ui/UITools");
 Lib.Require("module/io/IO");
 Lib.Require("module/ui/UIBuilding");
 Lib.Require("module/trade/Warehouse_API");
+Lib.Require("module/trade/Warehouse_Behavior");
 Lib.Register("module/trade/Warehouse");
 
 -- -------------------------------------------------------------------------- --
