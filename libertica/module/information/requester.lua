@@ -34,6 +34,7 @@ Lib.Requester.Shared = {
 
 Lib.Require("core/core");
 Lib.Require("module/information/Requester_API");
+Lib.Require("module/information/Requester_Behavior");
 Lib.Register("module/information/Requester");
 
 -- -------------------------------------------------------------------------- --
@@ -59,6 +60,10 @@ end
 function Lib.Requester.Global:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
+    elseif _ID == Report.RequesterClosed then
+        -- HACK: Make Goal_Decide more safe
+        g_GoalDecideDialogDisplayed = false;
+        g_DecisionWindowResult = arg[3] == true;
     elseif _ID == Report.LanguageSelectionClosed then
         Lib.Core.Text:ChangeSystemLanguage(arg[1], arg[2], arg[3]);
     end
@@ -137,25 +142,27 @@ function Lib.Requester.Local:Callback(_PlayerID)
     if self.Requester.ActionFunction then
         self.Requester.ActionFunction(CustomGame.Knight + 1, _PlayerID);
     end
-    self:OnDialogClosed();
+    self:OnDialogClosed(CustomGame.Knight + 1);
 end
 
 function Lib.Requester.Local:CallbackRequester(_yes, _PlayerID)
     if self.Requester.ActionRequester then
         self.Requester.ActionRequester(_yes, _PlayerID);
     end
-    self:OnDialogClosed();
+    self:OnDialogClosed(_yes);
 end
 
-function Lib.Requester.Local:OnDialogClosed()
+function Lib.Requester.Local:OnDialogClosed(_Selected)
     if not self.SavingWasDisabled then
         DisableSaving(false);
     end
     if not IsMultiplayer() then
         Game.GameTimeSetFactor(GUI.GetPlayerID(), 1);
     end
+    SendReportToGlobal(Report.RequesterClosed, GUI.GetPlayerID(), self.DialogWindowShown, _Selected);
+    SendReport(Report.RequesterClosed, GUI.GetPlayerID(), self.DialogWindowShown, _Selected);
     self.SavingWasDisabled = false;
-    self.DialogWindowShown = false;
+    self.DialogWindowShown = nil;
     self:DialogQueueStartNext();
 end
 
@@ -196,8 +203,7 @@ function Lib.Requester.Local:OpenDialog(_PlayerID, _Title, _Text, _Action)
             _Text = _Text .. "{cr}";
         end
 
-        g_MapAndHeroPreview.SelectKnight = function(_Knight)
-        end
+        g_MapAndHeroPreview.SelectKnight = function(_Knight) end
 
         XGUIEng.ShowAllSubWidgets("/InGame/Dialog/BG",1);
         XGUIEng.ShowWidget("/InGame/Dialog/Backdrop",0);
@@ -231,7 +237,9 @@ function Lib.Requester.Local:OpenDialog(_PlayerID, _Title, _Text, _Action)
             self.SavingWasDisabled = true;
         end
         DisableSaving(true);
-        self.DialogWindowShown = true;
+        self.DialogWindowShown = 1;
+        -- HACK: Ensure Goal_Decide work safety
+        ExecuteGlobal("g_GoalDecideDialogDisplayed = true");
     else
         self:DialogQueuePush("OpenDialog", {_PlayerID, _Title, _Text, _Action});
     end
@@ -274,6 +282,9 @@ function Lib.Requester.Local:OpenRequesterDialog(_PlayerID, _Title, _Text, _Acti
         Action = Action .. "; XGUIEng.PopPage()";
         Action = Action .. "; Lib.Requester.Local.CallbackRequester(Lib.Requester.Local, false, GUI.GetPlayerID())"
         XGUIEng.SetActionFunction(RequesterDialog_No, Action);
+        self.DialogWindowShown = 2;
+        -- HACK: Ensure Goal_Decide work safety
+        ExecuteGlobal("g_GoalDecideDialogDisplayed = true");
     else
         self:DialogQueuePush("OpenRequesterDialog", {_PlayerID, _Title, _Text, _Action, _OkCancel});
     end
@@ -314,6 +325,9 @@ function Lib.Requester.Local:OpenSelectionDialog(_PlayerID, _Title, _Text, _Acti
         local x1, y1 = XGUIEng.GetWidgetScreenPosition(RequesterDialog_Ok);
         XGUIEng.SetWidgetScreenPosition(Container .. "HeroComboBoxMain", x1-25, y1-(90*(screen[2]/1080)));
         XGUIEng.SetWidgetScreenPosition(Container .. "HeroComboBoxContainer", x1-25, y1-(20*(screen[2]/1080)));
+        self.DialogWindowShown = 3;
+        -- HACK: Ensure Goal_Decide work safety
+        ExecuteGlobal("g_GoalDecideDialogDisplayed = true");
     else
         self:DialogQueuePush("OpenSelectionDialog", {_PlayerID, _Title, _Text, _Action, _List});
     end

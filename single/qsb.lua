@@ -11057,6 +11057,7 @@ function log(_Text, ...)
     if #arg > 0 then
         Text = string.format(Text, unpack(arg));
     end
+    Text = string.gsub(Text, "{cr}", "\n");
     Framework.WriteToLog(Text);
     return Text;
 end
@@ -15139,9 +15140,7 @@ function B_Goal_NPC:GetIcon()
     return {14,10}
 end
 
-if MapEditor or Lib.NPC then
-    RegisterBehavior(B_Goal_NPC);
-end
+RegisterBehavior(B_Goal_NPC);
 
 -- -------------------------------------------------------------------------- --
 
@@ -15889,6 +15888,93 @@ Lib.Sound.Text = {
     },
 };
 
+Lib.Register("module/information/Requester_Behavior");
+
+function Goal_Decide(...)
+    return B_Goal_Decide:new(...);
+end
+
+g_GoalDecideDialogDisplayed = nil;
+g_DecisionWindowResult = nil;
+
+B_Goal_Decide = {
+    Name = "Goal_Decide",
+    Description = {
+        en = "Goal: Opens a Yes/No Dialog. The decision dictates the quest result (yes=true, no=false).",
+        de = "Ziel: Öffnet einen Ja/Nein-Dialog. Die Entscheidung bestimmt das Quest-Ergebnis (ja=true, nein=false).",
+        fr = "Objectif: ouvre une fenêtre de dialogue oui/non. La décision détermine le résultat de la quête (oui=true, non=false).",
+    },
+    Parameter = {
+        { ParameterType.Default, en = "Text",          de = "Text",                fr = "Text", },
+        { ParameterType.Default, en = "Title",         de = "Titel",               fr = "Titre", },
+        { ParameterType.Custom,  en = "Button labels", de = "Button Beschriftung", fr = "Inscription sur le bouton", },
+    },
+}
+
+function B_Goal_Decide:GetGoalTable()
+    return { Objective.Custom2, { self, self.CustomFunction } }
+end
+
+function B_Goal_Decide:AddParameter( _Index, _Parameter )
+    if (_Index == 0) then
+        self.Text = _Parameter
+    elseif (_Index == 1) then
+        self.Title = _Parameter
+    elseif (_Index == 2) then
+        self.Buttons = (_Parameter == "Ok/Cancel" or _Parameter == true)
+    end
+end
+
+function B_Goal_Decide:CustomFunction(_Quest)
+    if Framework.IsNetworkGame() then
+        return false;
+    end
+    if IsCinematicEventActive and IsCinematicEventActive(_Quest.ReceivingPlayer) then
+        return;
+    end
+    if g_GoalDecideDialogDisplayed == nil then
+        g_GoalDecideDialogDisplayed = true;
+        ExecuteLocal(
+            [[DialogRequestBox("%s", "%s", function(_Yes) end, %s)]],
+            self.Title,
+            self.Text,
+            (self.Buttons and "true") or "nil"
+        );
+    end
+    local result = g_DecisionWindowResult
+    if result ~= nil then
+        g_GoalDecideDialogDisplayed = nil;
+        g_DecisionWindowResult = nil;
+        return result;
+    end
+end
+
+function B_Goal_Decide:GetCustomData(_Index)
+    if _Index == 2 then
+        return {"Yes/No", "Ok/Cancel"};
+    end
+end
+
+function B_Goal_Decide:Debug(_Quest)
+    if Framework.IsNetworkGame() then
+        debug(false, _Quest.Identifier.. ": " ..self.Name..": Can not be used in multiplayer!");
+        return true;
+    end
+    if _Quest.Visible == true then
+        debug(false, _Quest.Identifier.. ": " ..self.Name..": Is supposed to be used in invisible quests!");
+        return true;
+    end
+    return false;
+end
+
+function B_Goal_Decide:Reset()
+    g_GoalDecideDialogDisplayed = nil;
+end
+
+RegisterBehavior(B_Goal_Decide);
+
+-- -------------------------------------------------------------------------- --
+
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("comfort/IsLocalScript");
 Lib.Register("module/information/Requester_API");
@@ -15899,7 +15985,7 @@ function TextWindow(_Caption, _Content, _PlayerID)
     _Content = Localize(_Content);
     if not GUI then
         ExecuteLocal(
-            [[API.TextWindow("%s", "%s", %d)]],
+            [[TextWindow("%s", "%s", %d)]],
             _Caption,
             _Content,
             _PlayerID
@@ -16041,6 +16127,7 @@ Lib.Requester.Shared = {
 
 Lib.Require("core/core");
 Lib.Require("module/information/Requester_API");
+Lib.Require("module/information/Requester_Behavior");
 Lib.Register("module/information/Requester");
 
 -- -------------------------------------------------------------------------- --
@@ -16066,6 +16153,10 @@ end
 function Lib.Requester.Global:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
+    elseif _ID == Report.RequesterClosed then
+        -- HACK: Make Goal_Decide more safe
+        g_GoalDecideDialogDisplayed = false;
+        g_DecisionWindowResult = arg[3] == true;
     elseif _ID == Report.LanguageSelectionClosed then
         Lib.Core.Text:ChangeSystemLanguage(arg[1], arg[2], arg[3]);
     end
@@ -16144,25 +16235,27 @@ function Lib.Requester.Local:Callback(_PlayerID)
     if self.Requester.ActionFunction then
         self.Requester.ActionFunction(CustomGame.Knight + 1, _PlayerID);
     end
-    self:OnDialogClosed();
+    self:OnDialogClosed(CustomGame.Knight + 1);
 end
 
 function Lib.Requester.Local:CallbackRequester(_yes, _PlayerID)
     if self.Requester.ActionRequester then
         self.Requester.ActionRequester(_yes, _PlayerID);
     end
-    self:OnDialogClosed();
+    self:OnDialogClosed(_yes);
 end
 
-function Lib.Requester.Local:OnDialogClosed()
+function Lib.Requester.Local:OnDialogClosed(_Selected)
     if not self.SavingWasDisabled then
         DisableSaving(false);
     end
     if not IsMultiplayer() then
         Game.GameTimeSetFactor(GUI.GetPlayerID(), 1);
     end
+    SendReportToGlobal(Report.RequesterClosed, GUI.GetPlayerID(), self.DialogWindowShown, _Selected);
+    SendReport(Report.RequesterClosed, GUI.GetPlayerID(), self.DialogWindowShown, _Selected);
     self.SavingWasDisabled = false;
-    self.DialogWindowShown = false;
+    self.DialogWindowShown = nil;
     self:DialogQueueStartNext();
 end
 
@@ -16203,8 +16296,7 @@ function Lib.Requester.Local:OpenDialog(_PlayerID, _Title, _Text, _Action)
             _Text = _Text .. "{cr}";
         end
 
-        g_MapAndHeroPreview.SelectKnight = function(_Knight)
-        end
+        g_MapAndHeroPreview.SelectKnight = function(_Knight) end
 
         XGUIEng.ShowAllSubWidgets("/InGame/Dialog/BG",1);
         XGUIEng.ShowWidget("/InGame/Dialog/Backdrop",0);
@@ -16238,7 +16330,9 @@ function Lib.Requester.Local:OpenDialog(_PlayerID, _Title, _Text, _Action)
             self.SavingWasDisabled = true;
         end
         DisableSaving(true);
-        self.DialogWindowShown = true;
+        self.DialogWindowShown = 1;
+        -- HACK: Ensure Goal_Decide work safety
+        ExecuteGlobal("g_GoalDecideDialogDisplayed = true");
     else
         self:DialogQueuePush("OpenDialog", {_PlayerID, _Title, _Text, _Action});
     end
@@ -16281,6 +16375,9 @@ function Lib.Requester.Local:OpenRequesterDialog(_PlayerID, _Title, _Text, _Acti
         Action = Action .. "; XGUIEng.PopPage()";
         Action = Action .. "; Lib.Requester.Local.CallbackRequester(Lib.Requester.Local, false, GUI.GetPlayerID())"
         XGUIEng.SetActionFunction(RequesterDialog_No, Action);
+        self.DialogWindowShown = 2;
+        -- HACK: Ensure Goal_Decide work safety
+        ExecuteGlobal("g_GoalDecideDialogDisplayed = true");
     else
         self:DialogQueuePush("OpenRequesterDialog", {_PlayerID, _Title, _Text, _Action, _OkCancel});
     end
@@ -16321,6 +16418,9 @@ function Lib.Requester.Local:OpenSelectionDialog(_PlayerID, _Title, _Text, _Acti
         local x1, y1 = XGUIEng.GetWidgetScreenPosition(RequesterDialog_Ok);
         XGUIEng.SetWidgetScreenPosition(Container .. "HeroComboBoxMain", x1-25, y1-(90*(screen[2]/1080)));
         XGUIEng.SetWidgetScreenPosition(Container .. "HeroComboBoxContainer", x1-25, y1-(20*(screen[2]/1080)));
+        self.DialogWindowShown = 3;
+        -- HACK: Ensure Goal_Decide work safety
+        ExecuteGlobal("g_GoalDecideDialogDisplayed = true");
     else
         self:DialogQueuePush("OpenSelectionDialog", {_PlayerID, _Title, _Text, _Action, _List});
     end
@@ -22507,9 +22607,7 @@ function B_Goal_WinQuest:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Goal_WinQuest);
-end
+RegisterBehavior(B_Goal_WinQuest);
 
 -- -------------------------------------------------------------------------- --
 
@@ -22570,9 +22668,7 @@ function B_Goal_DiscoverPlayers:GetMsgKey()
     return "Quest_Discover";
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Goal_DiscoverPlayers);
-end
+RegisterBehavior(B_Goal_DiscoverPlayers);
 
 -- -------------------------------------------------------------------------- --
 
@@ -22623,9 +22719,7 @@ function B_Goal_DiscoverTerritories:GetMsgKey()
     return "Quest_Discover_Territory";
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Goal_DiscoverTerritories);
-end
+RegisterBehavior(B_Goal_DiscoverTerritories);
 
 -- -------------------------------------------------------------------------- --
 
@@ -22717,9 +22811,7 @@ function B_Trigger_OnAtLeastXOfYQuestsFailed:GetCustomData(_Index)
     end
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsFailed);
-end
+RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsFailed);
 
 -- -------------------------------------------------------------------------- --
 
@@ -22781,9 +22873,7 @@ function B_Trigger_OnExactOneQuestIsWon:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Trigger_OnExactOneQuestIsWon);
-end
+RegisterBehavior(B_Trigger_OnExactOneQuestIsWon);
 
 -- -------------------------------------------------------------------------- --
 
@@ -22845,9 +22935,7 @@ function B_Trigger_OnExactOneQuestIsLost:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Trigger_OnExactOneQuestIsLost);
-end
+RegisterBehavior(B_Trigger_OnExactOneQuestIsLost);
 
 -- -------------------------------------------------------------------------- --
 
@@ -22961,7 +23049,7 @@ function Lib.Quest.Global:CreateNestedQuest(_Data)
     table.insert(
         _Data,
         Goal_MapScriptFunction(self:GetCheckQuestSegmentsInlineGoal(), _Data.Name)
-    )
+    );
     -- Create quest
     local Name = self:CreateSimpleQuest(_Data);
     if Name ~= nil then
@@ -23263,7 +23351,7 @@ function Lib.Quest.Global.QuestLoop(_arguments)
             for i = 1, self.Triggers[0] do
                 -- Write Trigger to Log
                 local Text = Lib.Quest.Global:SerializeBehavior(self.Triggers[i], Triggers.Custom2, 4);
-                if Text then
+                if Text and Lib.Core.Debug.TraceQuests then
                     log("Quest '" ..self.Identifier.. "' " ..Text, true);
                 end
                 -- Check Trigger
@@ -23297,7 +23385,7 @@ function Lib.Quest.Global.QuestLoop(_arguments)
             for i = 1, self.Objectives[0] do
                 -- Write Trigger to Log
                 local Text = Lib.Quest.Global:SerializeBehavior(self.Objectives[i], Objective.Custom2, 1);
-                if Text then
+                if Text and Lib.Core.Debug.TraceQuests then
                     log("Quest '" ..self.Identifier.. "' " ..Text, true);
                 end
                 -- Check Goal
@@ -23343,7 +23431,7 @@ function Lib.Quest.Global.QuestLoop(_arguments)
             for i = 1, self.Rewards[0] do
                 -- Write Trigger to Log
                 local Text = Lib.Quest.Global:SerializeBehavior(self.Rewards[i], Reward.Custom, 3);
-                if Text then
+                if Text and Lib.Core.Debug.TraceQuests then
                     log("Quest '" ..self.Identifier.. "' " ..Text, true);
                 end
                 -- Add Reward
@@ -23353,7 +23441,7 @@ function Lib.Quest.Global.QuestLoop(_arguments)
             for i = 1, self.Reprisals[0] do
                 -- Write Trigger to Log
                 local Text = Lib.Quest.Global:SerializeBehavior(self.Reprisals[i], Reprisal.Custom, 3);
-                if Text then
+                if Text and Lib.Core.Debug.TraceQuests then
                     log("Quest '" ..self.Identifier.. "' " ..Text, true);
                 end
                 -- Add Reward
@@ -23416,16 +23504,63 @@ end
 -- -------------------------------------------------------------------------- --
 -- Chat Commands
 
-function Lib.Quest.Global:FindQuestNames(_Pattern, _ExactName)
-    local FoundQuests = FindQuestsByName(_Pattern, _ExactName);
-    if #FoundQuests == 0 then
-        return {};
+function Lib.Quest.Global:FindQuestsByAttribute(_MaxResults, ...)
+    _MaxResults = math.max(_MaxResults or 65565, 1);
+    local arg = {...};
+    local MatchingQuests = {};
+    for i= 1, Quests[0], 1 do
+        local IsMatching = true;
+        for j= 1, #arg, 2 do
+            if arg[j] == "Name" then
+                if not string.find(Quests[i].Identifier, "^" .. arg[j+1]) then
+                    IsMatching = false;
+                    break;
+                end
+            else
+                if Quests[i][arg[j]] ~= arg[j+1] then
+                    IsMatching = false;
+                    break;
+                end
+            end
+        end
+        if IsMatching then
+            table.insert(MatchingQuests, Quests[i]);
+        end
     end
-    local NamesOfFoundQuests = {};
-    for i= 1, #FoundQuests, 1 do
-        table.insert(NamesOfFoundQuests, FoundQuests[i].Identifier);
+    return MatchingQuests;
+end
+
+function Lib.Quest.Global:FindQuestsByExactName(_QuestName, _MaxResults)
+    return self:FindQuestsByAttribute(_MaxResults, "Identifier", _QuestName);
+end
+
+function Lib.Quest.Global:ListQuestsByAttribute(_MaxResults, ...)
+    _MaxResults = math.max(_MaxResults or 65565, 1);
+    local MatchingQuests = self:FindQuestsByAttribute(_MaxResults, ...);
+    local QuestNames = "";
+    local ResultCount = 0;
+    for i= 1, #MatchingQuests, 1 do
+        if ResultCount >= _MaxResults then
+            QuestNames = QuestNames .. "... (" .. (#MatchingQuests - ResultCount) .. " more)";
+            break;
+        end
+        QuestNames = QuestNames .. "> " .. MatchingQuests[i].Identifier .. "{cr}";
+        ResultCount = ResultCount +1;
     end
-    return NamesOfFoundQuests;
+    return "Found quests:{cr}"..QuestNames;
+end
+
+function Lib.Quest.Global:ListQuestsByState(_QuestState, _MaxResults)
+    return self:ListQuestsByAttribute(_MaxResults, "State", _QuestState);
+end
+
+function Lib.Quest.Global:ListQuestsByResult(_QuestResult, _MaxResults)
+    return self:ListQuestsByAttribute(_MaxResults, "Result", _QuestResult);
+end
+
+function Lib.Quest.Global:ListQuestsByName(_QuestName, _MaxResults)
+    -- HACK: Name will be converted to Identifier but it's a like search.
+    return self:ListQuestsByAttribute(_MaxResults, "Name", _QuestName);
 end
 
 function Lib.Quest.Global:ProcessChatInput(_Text, _PlayerID, _IsDebug)
@@ -23437,24 +23572,44 @@ function Lib.Quest.Global:ProcessChatInput(_Text, _PlayerID, _IsDebug)
             or Commands[i][1] == "restart"
             or Commands[i][1] == "stop"
             or Commands[i][1] == "win" then
-                local FoundQuests = self:FindQuestNames(Commands[i][2], true);
+                local FoundQuests = self:FindQuestsByExactName(Commands[i][2], 1);
                 error(#FoundQuests == 1, "Unable to find quest containing '" ..Commands[i][2].. "'");
                 if Commands[i][1] == "fail" then
-                    FailQuest(FoundQuests[1]);
-                    log("fail quest '" ..FoundQuests[1].. "'");
+                    FailQuest(FoundQuests[1].Identifier);
+                    log("forced quest to fail: '" ..FoundQuests[1].Identifier.. "'");
                 elseif Commands[i][1] == "restart" then
-                    RestartQuest(FoundQuests[1]);
-                    log("restart quest '" ..FoundQuests[1].. "'");
+                    RestartQuest(FoundQuests[1].Identifier);
+                    log("forced quest to restart: '" ..FoundQuests[1].Identifier.. "'");
                 elseif Commands[i][1] == "start" then
-                    StartQuest(FoundQuests[1]);
-                    log("trigger quest '" ..FoundQuests[1].. "'");
+                    StartQuest(FoundQuests[1].Identifier);
+                    log("forced quest to start: '" ..FoundQuests[1].Identifier.. "'");
                 elseif Commands[i][1] == "stop" then
-                    StopQuest(FoundQuests[1]);
-                    log("interrupt quest '" ..FoundQuests[1].. "'");
+                    StopQuest(FoundQuests[1].Identifier);
+                    log("forced quest to stop: '" ..FoundQuests[1].Identifier.. "'");
                 elseif Commands[i][1] == "win" then
-                    WinQuest(FoundQuests[1]);
-                    log("win quest '" ..FoundQuests[1].. "'");
+                    WinQuest(FoundQuests[1].Identifier);
+                    log("forced quest to succeed: '" ..FoundQuests[1].Identifier.. "'");
                 end
+            end
+
+            if Commands[i][1] == "stopped" then
+                AddNote(self:ListQuestsByResult(QuestResult.Interrupted, 15));
+                log(self:ListQuestsByResult(QuestResult.Interrupted));
+            elseif Commands[i][1] == "active" then
+                AddNote(self:ListQuestsByState(QuestState.Active, 15));
+                log(self:ListQuestsByState(QuestState.Active));
+            elseif Commands[i][1] == "won" then
+                AddNote(self:ListQuestsByResult(QuestResult.Success, 15));
+                log(self:ListQuestsByResult(QuestResult.Success));
+            elseif Commands[i][1] == "failed" then
+                AddNote(self:ListQuestsByResult(QuestResult.Failure, 15));
+                log(self:ListQuestsByResult(QuestResult.Failure));
+            elseif Commands[i][1] == "waiting" then
+                AddNote(self:ListQuestsByState(QuestState.NotTriggered, 15));
+                log(self:ListQuestsByState(QuestState.NotTriggered));
+            elseif Commands[i][1] == "find" then
+                AddNote(self:ListQuestsByName(Commands[i][2], 15));
+                log(self:ListQuestsByName(Commands[i][2]));
             end
         end
     end
@@ -23587,7 +23742,7 @@ function Lib.Quest.Local:OverwriteQuestTexts()
     ---
     --- @param _Quest table Quest
     --- @return string Name Name of string
-    --- @return string File Name of file
+    --- @return string? File Name of file
     GetTextOverride = function(_Quest)
         assert(type(_Quest) == "table");
 
@@ -23614,7 +23769,7 @@ function Lib.Quest.Local:OverwriteQuestTexts()
             Result = string.match(Text, g_OverrideTextKeyPattern);
         end
         if Result then
-            local OverrideTable, OverrideKey = string.match( Result, "^([^/]+)/([^/]+)$" )
+            local OverrideTable, OverrideKey = string.match(Result, "^([^/]+)/([^/]+)$");
             if OverrideTable and OverrideKey then
                 return OverrideKey, OverrideTable;
             end
@@ -23672,9 +23827,7 @@ function B_Goal_MoveToPosition:GetCustomData( _Index )
     return Data
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_MoveToPosition);
-end
+RegisterBehavior(B_Goal_MoveToPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -23735,9 +23888,7 @@ function B_Goal_AmmunitionAmount:GetCustomData( _Index )
     end
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_AmmunitionAmount);
-end
+RegisterBehavior(B_Goal_AmmunitionAmount);
 
 -- -------------------------------------------------------------------------- --
 
@@ -23799,9 +23950,7 @@ function B_Goal_CityReputation:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_CityReputation);
-end
+RegisterBehavior(B_Goal_CityReputation);
 
 -- -------------------------------------------------------------------------- --
 
@@ -23868,9 +24017,7 @@ function B_Goal_DestroySpawnedEntities:GetCustomData(_Index)
     end
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_DestroySpawnedEntities);
-end
+RegisterBehavior(B_Goal_DestroySpawnedEntities);
 
 -- -------------------------------------------------------------------------- --
 
@@ -23990,9 +24137,7 @@ function B_Goal_StealGold:Reset(_Quest)
     self.StohlenGold = 0;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_StealGold)
-end
+RegisterBehavior(B_Goal_StealGold)
 
 -- -------------------------------------------------------------------------- --
 
@@ -24130,9 +24275,7 @@ function B_Goal_StealFromBuilding:Interrupt(_Quest)
     Logic.DestroyEffect(self.Marker);
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_StealFromBuilding)
-end
+RegisterBehavior(B_Goal_StealFromBuilding)
 
 -- -------------------------------------------------------------------------- --
 
@@ -24243,9 +24386,7 @@ function B_Goal_SpyOnBuilding:Interrupt(_Quest)
     Logic.DestroyEffect(self.Marker);
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_SpyOnBuilding);
-end
+RegisterBehavior(B_Goal_SpyOnBuilding);
 
 -- -------------------------------------------------------------------------- --
 
@@ -24328,9 +24469,7 @@ function B_Goal_DestroySoldiers:GetIcon()
     return {7,12}
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_DestroySoldiers);
-end
+RegisterBehavior(B_Goal_DestroySoldiers);
 
 -- -------------------------------------------------------------------------- --
 
@@ -24415,9 +24554,7 @@ function B_Reprisal_SetPosition:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetPosition);
-end
+RegisterBehavior(B_Reprisal_SetPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -24476,9 +24613,7 @@ function B_Reprisal_ChangePlayer:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_ChangePlayer);
-end
+RegisterBehavior(B_Reprisal_ChangePlayer);
 
 -- -------------------------------------------------------------------------- --
 
@@ -24560,9 +24695,7 @@ function B_Reprisal_SetVisible:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetVisible);
-end
+RegisterBehavior(B_Reprisal_SetVisible);
 
 -- -------------------------------------------------------------------------- --
 
@@ -24636,9 +24769,7 @@ function B_Reprisal_SetVulnerability:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetVulnerability);
-end
+RegisterBehavior(B_Reprisal_SetVulnerability);
 
 -- -------------------------------------------------------------------------- --
 
@@ -24746,9 +24877,7 @@ function B_Reprisal_SetModel:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetModel);
-end
+RegisterBehavior(B_Reprisal_SetModel);
 
 -- -------------------------------------------------------------------------- --
 
@@ -24767,9 +24896,7 @@ B_Reward_SetPosition.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } };
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetPosition);
-end
+RegisterBehavior(B_Reward_SetPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -24788,9 +24915,7 @@ B_Reward_ChangePlayer.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } };
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_ChangePlayer);
-end
+RegisterBehavior(B_Reward_ChangePlayer);
 
 -- -------------------------------------------------------------------------- --
 
@@ -24871,9 +24996,7 @@ function B_Reward_MoveToPosition:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_MoveToPosition);
-end
+RegisterBehavior(B_Reward_MoveToPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -24988,9 +25111,7 @@ function B_Reward_VictoryWithParty:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_VictoryWithParty);
-end
+RegisterBehavior(B_Reward_VictoryWithParty);
 
 -- -------------------------------------------------------------------------- --
 
@@ -25009,9 +25130,7 @@ B_Reward_SetVisible.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } }
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetVisible);
-end
+RegisterBehavior(B_Reward_SetVisible);
 
 -- -------------------------------------------------------------------------- --
 
@@ -25030,9 +25149,7 @@ B_Reward_SetVulnerability.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } }
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetVulnerability);
-end
+RegisterBehavior(B_Reward_SetVulnerability);
 
 -- -------------------------------------------------------------------------- --
 
@@ -25051,9 +25168,7 @@ B_Reward_SetModel.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } }
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetModel);
-end
+RegisterBehavior(B_Reward_SetModel);
 
 -- -------------------------------------------------------------------------- --
 
@@ -25121,9 +25236,7 @@ function B_Reward_AI_SetEntityControlled:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_AI_SetEntityControlled);
-end
+RegisterBehavior(B_Reward_AI_SetEntityControlled);
 
 -- -------------------------------------------------------------------------- --
 
@@ -25174,9 +25287,7 @@ function B_Trigger_AmmunitionDepleted:Debug(_Quest)
     return false
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Trigger_AmmunitionDepleted)
-end
+RegisterBehavior(B_Trigger_AmmunitionDepleted);
 
 -- -------------------------------------------------------------------------- --
 
@@ -28327,9 +28438,7 @@ function B_Reprisal_Briefing:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.BriefingSystem then
-    RegisterBehavior(B_Reprisal_Briefing);
-end
+RegisterBehavior(B_Reprisal_Briefing);
 
 -- -------------------------------------------------------------------------- --
 
@@ -28348,9 +28457,7 @@ B_Reward_Briefing.GetRewardTable = function(self, _Quest)
     return { Reward.Custom,{self, self.CustomFunction} }
 end
 
-if MapEditor or Lib.BriefingSystem then
-    RegisterBehavior(B_Reward_Briefing);
-end
+RegisterBehavior(B_Reward_Briefing);
 
 -- -------------------------------------------------------------------------- --
 
@@ -28417,9 +28524,7 @@ function B_Trigger_Briefing:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.BriefingSystem then
-    RegisterBehavior(B_Trigger_Briefing);
-end
+RegisterBehavior(B_Trigger_Briefing);
 
 -- -------------------------------------------------------------------------- --
 
@@ -30034,9 +30139,7 @@ function B_Reprisal_Cutscene:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.CutsceneSystem then
-    RegisterBehavior(B_Reprisal_Cutscene);
-end
+RegisterBehavior(B_Reprisal_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 
@@ -30055,9 +30158,7 @@ B_Reward_Cutscene.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, {self, self.CustomFunction} }
 end
 
-if MapEditor or Lib.CutsceneSystem then
-    RegisterBehavior(B_Reward_Cutscene);
-end
+RegisterBehavior(B_Reward_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 
@@ -30124,9 +30225,7 @@ function B_Trigger_Cutscene:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.CutsceneSystem then
-    RegisterBehavior(B_Trigger_Cutscene);
-end
+RegisterBehavior(B_Trigger_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 
@@ -31028,9 +31127,7 @@ function B_Reprisal_Dialog:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.DialogSystem then
-    RegisterBehavior(B_Reprisal_Dialog);
-end
+RegisterBehavior(B_Reprisal_Dialog);
 
 -- -------------------------------------------------------------------------- --
 
@@ -31049,9 +31146,7 @@ B_Reward_Dialog.GetRewardTable = function(self, _Quest)
     return { Reward.Custom,{self, self.CustomFunction} }
 end
 
-if MapEditor or Lib.DialogSystem then
-    RegisterBehavior(B_Reward_Dialog);
-end
+RegisterBehavior(B_Reward_Dialog);
 
 -- -------------------------------------------------------------------------- --
 
@@ -31118,9 +31213,7 @@ function B_Trigger_Dialog:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.DialogSystem then
-    RegisterBehavior(B_Trigger_Dialog);
-end
+RegisterBehavior(B_Trigger_Dialog);
 
 -- -------------------------------------------------------------------------- --
 
@@ -40282,9 +40375,7 @@ function B_Goal_NPC:GetIcon()
     return {14,10}
 end
 
-if MapEditor or Lib.NPC then
-    RegisterBehavior(B_Goal_NPC);
-end
+RegisterBehavior(B_Goal_NPC);
 
 -- -------------------------------------------------------------------------- --
 
@@ -40417,9 +40508,7 @@ function B_Goal_WinQuest:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Goal_WinQuest);
-end
+RegisterBehavior(B_Goal_WinQuest);
 
 -- -------------------------------------------------------------------------- --
 
@@ -40480,9 +40569,7 @@ function B_Goal_DiscoverPlayers:GetMsgKey()
     return "Quest_Discover";
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Goal_DiscoverPlayers);
-end
+RegisterBehavior(B_Goal_DiscoverPlayers);
 
 -- -------------------------------------------------------------------------- --
 
@@ -40533,9 +40620,7 @@ function B_Goal_DiscoverTerritories:GetMsgKey()
     return "Quest_Discover_Territory";
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Goal_DiscoverTerritories);
-end
+RegisterBehavior(B_Goal_DiscoverTerritories);
 
 -- -------------------------------------------------------------------------- --
 
@@ -40627,9 +40712,7 @@ function B_Trigger_OnAtLeastXOfYQuestsFailed:GetCustomData(_Index)
     end
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsFailed);
-end
+RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsFailed);
 
 -- -------------------------------------------------------------------------- --
 
@@ -40691,9 +40774,7 @@ function B_Trigger_OnExactOneQuestIsWon:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Trigger_OnExactOneQuestIsWon);
-end
+RegisterBehavior(B_Trigger_OnExactOneQuestIsWon);
 
 -- -------------------------------------------------------------------------- --
 
@@ -40755,9 +40836,7 @@ function B_Trigger_OnExactOneQuestIsLost:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Trigger_OnExactOneQuestIsLost);
-end
+RegisterBehavior(B_Trigger_OnExactOneQuestIsLost);
 
 -- -------------------------------------------------------------------------- --
 
@@ -40806,9 +40885,7 @@ function B_Goal_MoveToPosition:GetCustomData( _Index )
     return Data
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_MoveToPosition);
-end
+RegisterBehavior(B_Goal_MoveToPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -40869,9 +40946,7 @@ function B_Goal_AmmunitionAmount:GetCustomData( _Index )
     end
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_AmmunitionAmount);
-end
+RegisterBehavior(B_Goal_AmmunitionAmount);
 
 -- -------------------------------------------------------------------------- --
 
@@ -40933,9 +41008,7 @@ function B_Goal_CityReputation:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_CityReputation);
-end
+RegisterBehavior(B_Goal_CityReputation);
 
 -- -------------------------------------------------------------------------- --
 
@@ -41002,9 +41075,7 @@ function B_Goal_DestroySpawnedEntities:GetCustomData(_Index)
     end
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_DestroySpawnedEntities);
-end
+RegisterBehavior(B_Goal_DestroySpawnedEntities);
 
 -- -------------------------------------------------------------------------- --
 
@@ -41124,9 +41195,7 @@ function B_Goal_StealGold:Reset(_Quest)
     self.StohlenGold = 0;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_StealGold)
-end
+RegisterBehavior(B_Goal_StealGold)
 
 -- -------------------------------------------------------------------------- --
 
@@ -41264,9 +41333,7 @@ function B_Goal_StealFromBuilding:Interrupt(_Quest)
     Logic.DestroyEffect(self.Marker);
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_StealFromBuilding)
-end
+RegisterBehavior(B_Goal_StealFromBuilding)
 
 -- -------------------------------------------------------------------------- --
 
@@ -41377,9 +41444,7 @@ function B_Goal_SpyOnBuilding:Interrupt(_Quest)
     Logic.DestroyEffect(self.Marker);
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_SpyOnBuilding);
-end
+RegisterBehavior(B_Goal_SpyOnBuilding);
 
 -- -------------------------------------------------------------------------- --
 
@@ -41462,9 +41527,7 @@ function B_Goal_DestroySoldiers:GetIcon()
     return {7,12}
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_DestroySoldiers);
-end
+RegisterBehavior(B_Goal_DestroySoldiers);
 
 -- -------------------------------------------------------------------------- --
 
@@ -41549,9 +41612,7 @@ function B_Reprisal_SetPosition:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetPosition);
-end
+RegisterBehavior(B_Reprisal_SetPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -41610,9 +41671,7 @@ function B_Reprisal_ChangePlayer:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_ChangePlayer);
-end
+RegisterBehavior(B_Reprisal_ChangePlayer);
 
 -- -------------------------------------------------------------------------- --
 
@@ -41694,9 +41753,7 @@ function B_Reprisal_SetVisible:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetVisible);
-end
+RegisterBehavior(B_Reprisal_SetVisible);
 
 -- -------------------------------------------------------------------------- --
 
@@ -41770,9 +41827,7 @@ function B_Reprisal_SetVulnerability:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetVulnerability);
-end
+RegisterBehavior(B_Reprisal_SetVulnerability);
 
 -- -------------------------------------------------------------------------- --
 
@@ -41880,9 +41935,7 @@ function B_Reprisal_SetModel:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetModel);
-end
+RegisterBehavior(B_Reprisal_SetModel);
 
 -- -------------------------------------------------------------------------- --
 
@@ -41901,9 +41954,7 @@ B_Reward_SetPosition.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } };
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetPosition);
-end
+RegisterBehavior(B_Reward_SetPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -41922,9 +41973,7 @@ B_Reward_ChangePlayer.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } };
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_ChangePlayer);
-end
+RegisterBehavior(B_Reward_ChangePlayer);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42005,9 +42054,7 @@ function B_Reward_MoveToPosition:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_MoveToPosition);
-end
+RegisterBehavior(B_Reward_MoveToPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42122,9 +42169,7 @@ function B_Reward_VictoryWithParty:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_VictoryWithParty);
-end
+RegisterBehavior(B_Reward_VictoryWithParty);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42143,9 +42188,7 @@ B_Reward_SetVisible.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } }
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetVisible);
-end
+RegisterBehavior(B_Reward_SetVisible);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42164,9 +42207,7 @@ B_Reward_SetVulnerability.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } }
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetVulnerability);
-end
+RegisterBehavior(B_Reward_SetVulnerability);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42185,9 +42226,7 @@ B_Reward_SetModel.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } }
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetModel);
-end
+RegisterBehavior(B_Reward_SetModel);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42255,9 +42294,7 @@ function B_Reward_AI_SetEntityControlled:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_AI_SetEntityControlled);
-end
+RegisterBehavior(B_Reward_AI_SetEntityControlled);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42308,9 +42345,7 @@ function B_Trigger_AmmunitionDepleted:Debug(_Quest)
     return false
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Trigger_AmmunitionDepleted)
-end
+RegisterBehavior(B_Trigger_AmmunitionDepleted);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42387,9 +42422,7 @@ function B_Reprisal_Briefing:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.BriefingSystem then
-    RegisterBehavior(B_Reprisal_Briefing);
-end
+RegisterBehavior(B_Reprisal_Briefing);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42408,9 +42441,7 @@ B_Reward_Briefing.GetRewardTable = function(self, _Quest)
     return { Reward.Custom,{self, self.CustomFunction} }
 end
 
-if MapEditor or Lib.BriefingSystem then
-    RegisterBehavior(B_Reward_Briefing);
-end
+RegisterBehavior(B_Reward_Briefing);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42477,9 +42508,7 @@ function B_Trigger_Briefing:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.BriefingSystem then
-    RegisterBehavior(B_Trigger_Briefing);
-end
+RegisterBehavior(B_Trigger_Briefing);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42530,9 +42559,7 @@ function B_Reprisal_Cutscene:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.CutsceneSystem then
-    RegisterBehavior(B_Reprisal_Cutscene);
-end
+RegisterBehavior(B_Reprisal_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42551,9 +42578,7 @@ B_Reward_Cutscene.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, {self, self.CustomFunction} }
 end
 
-if MapEditor or Lib.CutsceneSystem then
-    RegisterBehavior(B_Reward_Cutscene);
-end
+RegisterBehavior(B_Reward_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42620,9 +42645,7 @@ function B_Trigger_Cutscene:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.CutsceneSystem then
-    RegisterBehavior(B_Trigger_Cutscene);
-end
+RegisterBehavior(B_Trigger_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42673,9 +42696,7 @@ function B_Reprisal_Dialog:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.DialogSystem then
-    RegisterBehavior(B_Reprisal_Dialog);
-end
+RegisterBehavior(B_Reprisal_Dialog);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42694,9 +42715,7 @@ B_Reward_Dialog.GetRewardTable = function(self, _Quest)
     return { Reward.Custom,{self, self.CustomFunction} }
 end
 
-if MapEditor or Lib.DialogSystem then
-    RegisterBehavior(B_Reward_Dialog);
-end
+RegisterBehavior(B_Reward_Dialog);
 
 -- -------------------------------------------------------------------------- --
 
@@ -42763,9 +42782,94 @@ function B_Trigger_Dialog:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.DialogSystem then
-    RegisterBehavior(B_Trigger_Dialog);
+RegisterBehavior(B_Trigger_Dialog);
+
+-- -------------------------------------------------------------------------- --
+
+Lib.Register("module/information/Requester_Behavior");
+
+function Goal_Decide(...)
+    return B_Goal_Decide:new(...);
 end
+
+g_GoalDecideDialogDisplayed = nil;
+g_DecisionWindowResult = nil;
+
+B_Goal_Decide = {
+    Name = "Goal_Decide",
+    Description = {
+        en = "Goal: Opens a Yes/No Dialog. The decision dictates the quest result (yes=true, no=false).",
+        de = "Ziel: Öffnet einen Ja/Nein-Dialog. Die Entscheidung bestimmt das Quest-Ergebnis (ja=true, nein=false).",
+        fr = "Objectif: ouvre une fenêtre de dialogue oui/non. La décision détermine le résultat de la quête (oui=true, non=false).",
+    },
+    Parameter = {
+        { ParameterType.Default, en = "Text",          de = "Text",                fr = "Text", },
+        { ParameterType.Default, en = "Title",         de = "Titel",               fr = "Titre", },
+        { ParameterType.Custom,  en = "Button labels", de = "Button Beschriftung", fr = "Inscription sur le bouton", },
+    },
+}
+
+function B_Goal_Decide:GetGoalTable()
+    return { Objective.Custom2, { self, self.CustomFunction } }
+end
+
+function B_Goal_Decide:AddParameter( _Index, _Parameter )
+    if (_Index == 0) then
+        self.Text = _Parameter
+    elseif (_Index == 1) then
+        self.Title = _Parameter
+    elseif (_Index == 2) then
+        self.Buttons = (_Parameter == "Ok/Cancel" or _Parameter == true)
+    end
+end
+
+function B_Goal_Decide:CustomFunction(_Quest)
+    if Framework.IsNetworkGame() then
+        return false;
+    end
+    if IsCinematicEventActive and IsCinematicEventActive(_Quest.ReceivingPlayer) then
+        return;
+    end
+    if g_GoalDecideDialogDisplayed == nil then
+        g_GoalDecideDialogDisplayed = true;
+        ExecuteLocal(
+            [[DialogRequestBox("%s", "%s", function(_Yes) end, %s)]],
+            self.Title,
+            self.Text,
+            (self.Buttons and "true") or "nil"
+        );
+    end
+    local result = g_DecisionWindowResult
+    if result ~= nil then
+        g_GoalDecideDialogDisplayed = nil;
+        g_DecisionWindowResult = nil;
+        return result;
+    end
+end
+
+function B_Goal_Decide:GetCustomData(_Index)
+    if _Index == 2 then
+        return {"Yes/No", "Ok/Cancel"};
+    end
+end
+
+function B_Goal_Decide:Debug(_Quest)
+    if Framework.IsNetworkGame() then
+        debug(false, _Quest.Identifier.. ": " ..self.Name..": Can not be used in multiplayer!");
+        return true;
+    end
+    if _Quest.Visible == true then
+        debug(false, _Quest.Identifier.. ": " ..self.Name..": Is supposed to be used in invisible quests!");
+        return true;
+    end
+    return false;
+end
+
+function B_Goal_Decide:Reset()
+    g_GoalDecideDialogDisplayed = nil;
+end
+
+RegisterBehavior(B_Goal_Decide);
 
 -- -------------------------------------------------------------------------- --
 

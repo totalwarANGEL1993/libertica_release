@@ -45,9 +45,7 @@ function B_Reprisal_Cutscene:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.CutsceneSystem then
-    RegisterBehavior(B_Reprisal_Cutscene);
-end
+RegisterBehavior(B_Reprisal_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 
@@ -66,9 +64,7 @@ B_Reward_Cutscene.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, {self, self.CustomFunction} }
 end
 
-if MapEditor or Lib.CutsceneSystem then
-    RegisterBehavior(B_Reward_Cutscene);
-end
+RegisterBehavior(B_Reward_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 
@@ -135,9 +131,7 @@ function B_Trigger_Cutscene:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.CutsceneSystem then
-    RegisterBehavior(B_Trigger_Cutscene);
-end
+RegisterBehavior(B_Trigger_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 

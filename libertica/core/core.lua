@@ -40,6 +40,7 @@ function log(_Text, ...)
     if #arg > 0 then
         Text = string.format(Text, unpack(arg));
     end
+    Text = string.gsub(Text, "{cr}", "\n");
     Framework.WriteToLog(Text);
     return Text;
 end

@@ -45,9 +45,7 @@ function B_Reprisal_Briefing:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.BriefingSystem then
-    RegisterBehavior(B_Reprisal_Briefing);
-end
+RegisterBehavior(B_Reprisal_Briefing);
 
 -- -------------------------------------------------------------------------- --
 
@@ -66,9 +64,7 @@ B_Reward_Briefing.GetRewardTable = function(self, _Quest)
     return { Reward.Custom,{self, self.CustomFunction} }
 end
 
-if MapEditor or Lib.BriefingSystem then
-    RegisterBehavior(B_Reward_Briefing);
-end
+RegisterBehavior(B_Reward_Briefing);
 
 -- -------------------------------------------------------------------------- --
 
@@ -135,9 +131,7 @@ function B_Trigger_Briefing:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.BriefingSystem then
-    RegisterBehavior(B_Trigger_Briefing);
-end
+RegisterBehavior(B_Trigger_Briefing);
 
 -- -------------------------------------------------------------------------- --
 

@@ -8,7 +8,7 @@ function TextWindow(_Caption, _Content, _PlayerID)
     _Content = Localize(_Content);
     if not GUI then
         ExecuteLocal(
-            [[API.TextWindow("%s", "%s", %d)]],
+            [[TextWindow("%s", "%s", %d)]],
             _Caption,
             _Content,
             _PlayerID

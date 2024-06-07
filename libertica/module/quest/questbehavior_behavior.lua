@@ -43,9 +43,7 @@ function B_Goal_MoveToPosition:GetCustomData( _Index )
     return Data
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_MoveToPosition);
-end
+RegisterBehavior(B_Goal_MoveToPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -106,9 +104,7 @@ function B_Goal_AmmunitionAmount:GetCustomData( _Index )
     end
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_AmmunitionAmount);
-end
+RegisterBehavior(B_Goal_AmmunitionAmount);
 
 -- -------------------------------------------------------------------------- --
 
@@ -170,9 +166,7 @@ function B_Goal_CityReputation:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_CityReputation);
-end
+RegisterBehavior(B_Goal_CityReputation);
 
 -- -------------------------------------------------------------------------- --
 
@@ -239,9 +233,7 @@ function B_Goal_DestroySpawnedEntities:GetCustomData(_Index)
     end
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_DestroySpawnedEntities);
-end
+RegisterBehavior(B_Goal_DestroySpawnedEntities);
 
 -- -------------------------------------------------------------------------- --
 
@@ -361,9 +353,7 @@ function B_Goal_StealGold:Reset(_Quest)
     self.StohlenGold = 0;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_StealGold)
-end
+RegisterBehavior(B_Goal_StealGold)
 
 -- -------------------------------------------------------------------------- --
 
@@ -501,9 +491,7 @@ function B_Goal_StealFromBuilding:Interrupt(_Quest)
     Logic.DestroyEffect(self.Marker);
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_StealFromBuilding)
-end
+RegisterBehavior(B_Goal_StealFromBuilding)
 
 -- -------------------------------------------------------------------------- --
 
@@ -614,9 +602,7 @@ function B_Goal_SpyOnBuilding:Interrupt(_Quest)
     Logic.DestroyEffect(self.Marker);
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_SpyOnBuilding);
-end
+RegisterBehavior(B_Goal_SpyOnBuilding);
 
 -- -------------------------------------------------------------------------- --
 
@@ -699,9 +685,7 @@ function B_Goal_DestroySoldiers:GetIcon()
     return {7,12}
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Goal_DestroySoldiers);
-end
+RegisterBehavior(B_Goal_DestroySoldiers);
 
 -- -------------------------------------------------------------------------- --
 
@@ -786,9 +770,7 @@ function B_Reprisal_SetPosition:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetPosition);
-end
+RegisterBehavior(B_Reprisal_SetPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -847,9 +829,7 @@ function B_Reprisal_ChangePlayer:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_ChangePlayer);
-end
+RegisterBehavior(B_Reprisal_ChangePlayer);
 
 -- -------------------------------------------------------------------------- --
 
@@ -931,9 +911,7 @@ function B_Reprisal_SetVisible:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetVisible);
-end
+RegisterBehavior(B_Reprisal_SetVisible);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1007,9 +985,7 @@ function B_Reprisal_SetVulnerability:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetVulnerability);
-end
+RegisterBehavior(B_Reprisal_SetVulnerability);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1117,9 +1093,7 @@ function B_Reprisal_SetModel:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reprisal_SetModel);
-end
+RegisterBehavior(B_Reprisal_SetModel);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1138,9 +1112,7 @@ B_Reward_SetPosition.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } };
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetPosition);
-end
+RegisterBehavior(B_Reward_SetPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1159,9 +1131,7 @@ B_Reward_ChangePlayer.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } };
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_ChangePlayer);
-end
+RegisterBehavior(B_Reward_ChangePlayer);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1242,9 +1212,7 @@ function B_Reward_MoveToPosition:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_MoveToPosition);
-end
+RegisterBehavior(B_Reward_MoveToPosition);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1359,9 +1327,7 @@ function B_Reward_VictoryWithParty:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_VictoryWithParty);
-end
+RegisterBehavior(B_Reward_VictoryWithParty);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1380,9 +1346,7 @@ B_Reward_SetVisible.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } }
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetVisible);
-end
+RegisterBehavior(B_Reward_SetVisible);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1401,9 +1365,7 @@ B_Reward_SetVulnerability.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } }
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetVulnerability);
-end
+RegisterBehavior(B_Reward_SetVulnerability);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1422,9 +1384,7 @@ B_Reward_SetModel.GetRewardTable = function(self, _Quest)
     return { Reward.Custom, { self, self.CustomFunction } }
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_SetModel);
-end
+RegisterBehavior(B_Reward_SetModel);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1492,9 +1452,7 @@ function B_Reward_AI_SetEntityControlled:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Reward_AI_SetEntityControlled);
-end
+RegisterBehavior(B_Reward_AI_SetEntityControlled);
 
 -- -------------------------------------------------------------------------- --
 
@@ -1545,9 +1503,7 @@ function B_Trigger_AmmunitionDepleted:Debug(_Quest)
     return false
 end
 
-if MapEditor or Lib.QuestBehavior then
-    RegisterBehavior(B_Trigger_AmmunitionDepleted)
-end
+RegisterBehavior(B_Trigger_AmmunitionDepleted);
 
 -- -------------------------------------------------------------------------- --
 

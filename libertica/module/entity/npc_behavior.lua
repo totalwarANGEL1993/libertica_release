@@ -36,9 +36,7 @@ function B_Goal_NPC:GetIcon()
     return {14,10}
 end
 
-if MapEditor or Lib.NPC then
-    RegisterBehavior(B_Goal_NPC);
-end
+RegisterBehavior(B_Goal_NPC);
 
 -- -------------------------------------------------------------------------- --
 

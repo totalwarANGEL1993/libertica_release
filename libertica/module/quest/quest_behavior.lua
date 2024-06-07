@@ -47,9 +47,7 @@ function B_Goal_WinQuest:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Goal_WinQuest);
-end
+RegisterBehavior(B_Goal_WinQuest);
 
 -- -------------------------------------------------------------------------- --
 
@@ -110,9 +108,7 @@ function B_Goal_DiscoverPlayers:GetMsgKey()
     return "Quest_Discover";
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Goal_DiscoverPlayers);
-end
+RegisterBehavior(B_Goal_DiscoverPlayers);
 
 -- -------------------------------------------------------------------------- --
 
@@ -163,9 +159,7 @@ function B_Goal_DiscoverTerritories:GetMsgKey()
     return "Quest_Discover_Territory";
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Goal_DiscoverTerritories);
-end
+RegisterBehavior(B_Goal_DiscoverTerritories);
 
 -- -------------------------------------------------------------------------- --
 
@@ -257,9 +251,7 @@ function B_Trigger_OnAtLeastXOfYQuestsFailed:GetCustomData(_Index)
     end
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsFailed);
-end
+RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsFailed);
 
 -- -------------------------------------------------------------------------- --
 
@@ -321,9 +313,7 @@ function B_Trigger_OnExactOneQuestIsWon:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Trigger_OnExactOneQuestIsWon);
-end
+RegisterBehavior(B_Trigger_OnExactOneQuestIsWon);
 
 -- -------------------------------------------------------------------------- --
 
@@ -385,9 +375,7 @@ function B_Trigger_OnExactOneQuestIsLost:Debug(_Quest)
     return false;
 end
 
-if MapEditor or Lib.Quest then
-    RegisterBehavior(B_Trigger_OnExactOneQuestIsLost);
-end
+RegisterBehavior(B_Trigger_OnExactOneQuestIsLost);
 
 -- -------------------------------------------------------------------------- --
 
