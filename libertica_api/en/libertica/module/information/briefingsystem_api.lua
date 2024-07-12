@@ -57,6 +57,8 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 ---
 --- *-> Example #6*
 ---
+--- *-> Example #7*
+---
 --- #### Examples
 ---
 --- * Example #1: Basic structure
@@ -149,6 +151,18 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- };
 --- ```
 ---
+--- * Example #7: Endlessly repeating parallaxes
+--- ```lua
+--- Briefing.PageParallax = {
+---     ["Seite1"] = {
+---         Repeat = true,
+---         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
+---          {0, 0, 0.8, 1, 255},
+---          {0.2, 0, 1, 1, 255}},
+---     },
+--- };
+--- ```
+---
 --- @param _Briefing table   Briefing table
 --- @param _Name string      Name of briefing
 --- @param _PlayerID integer Player ID of receiver
@@ -214,6 +228,7 @@ API.AddBriefingPages = AddBriefingPages;
 ---
 --- * `Title`           - Displayed page title
 --- * `Text`            - Displayed page text
+--- * `Speech`          - Path to voiceover (MP3 file)
 --- * `Position`        - Script name of position
 --- * `Duration`        - Time until automatic skip
 --- * `DialogCamera`    - Use closeup camera

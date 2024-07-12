@@ -1,6 +1,6 @@
-Lib.Require("comfort/global/CreateStock");
-Lib.Require("comfort/global/CreateCartByGoodType");
-Lib.Register("comfort/global/SendCart");
+Lib.Require("comfort/CreateStock");
+Lib.Require("comfort/CreateCartByGoodType");
+Lib.Register("comfort/SendCart");
 
 function SendCart(_Position, _PlayerID, _GoodType, _Amount, _CartOverlay, _IgnoreReservation, _Overtake)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");

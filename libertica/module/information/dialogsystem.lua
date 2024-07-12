@@ -28,6 +28,7 @@ Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIEffects");
 Lib.Require("module/ui/UITools");
+Lib.Require("module/settings/Sound");
 Lib.Require("module/information/Requester");
 Lib.Require("module/information/DialogSystem_Text");
 Lib.Require("module/information/DialogSystem_API");
@@ -507,6 +508,7 @@ function Lib.DialogSystem.Local:EndDialog(_PlayerID, _DialogName, _Dialog)
         Camera.RTS_SetRotationAngle(self.Dialog[_PlayerID].Backup.Camera[3]);
         Camera.RTS_SetZoomFactor(self.Dialog[_PlayerID].Backup.Camera[4]);
     end
+    StopVoice("DialogSpeech");
 
     self:DeactivateCinematicMode(_PlayerID);
     ActivateNormalInterface(_PlayerID);
@@ -650,6 +652,11 @@ function Lib.DialogSystem.Local:DisplayPageText(_PlayerID, _PageID)
     end
     XGUIEng.SetText(SubtitlesWidget.. "/VoiceText1", Text .. Extension);
     self:SetSubtitlesPosition(_PlayerID, _PageID);
+
+    StopVoice("DialogSpeech");
+    if Page and Page.Speech then
+        PlayVoice(Page.Speech, "DialogSpeech");
+    end
 end
 
 function Lib.DialogSystem.Local:SetSubtitlesPosition(_PlayerID, _PageID)
@@ -867,6 +874,11 @@ function Lib.DialogSystem.Local:ActivateCinematicMode(_PlayerID)
         XGUIEng.PopPage();
     end
 
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
+
     -- Show throneroom updater
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 1);
     XGUIEng.PushPage("/InGame/ThroneRoom/Main", false);
@@ -916,8 +928,9 @@ function Lib.DialogSystem.Local:ActivateCinematicMode(_PlayerID)
     g_Fade.To = 0;
     SetFaderAlpha(0);
 
-    -- Push loadscreen if previously visible
-    -- (This should never happen)
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
     if not self.LoadscreenClosed then
         XGUIEng.PushPage("/LoadScreen/LoadScreen", false);
     end
@@ -929,6 +942,11 @@ function Lib.DialogSystem.Local:DeactivateCinematicMode(_PlayerID)
         return;
     end
     self.CinematicActive = false;
+
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
 
     -- Reset ui state
     g_Fade.To = 0;
@@ -966,6 +984,10 @@ function Lib.DialogSystem.Local:DeactivateCinematicMode(_PlayerID)
 
     ResetRenderDistance();
     self:ResetSubtitlesPosition(_PlayerID);
+
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
 end
 
 -- -------------------------------------------------------------------------- --

@@ -16,6 +16,7 @@ Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIEffects");
 Lib.Require("module/ui/UITools");
+Lib.Require("module/settings/Sound");
 Lib.Require("module/information/Requester");
 Lib.Require("module/information/CutsceneSystem_Text");
 Lib.Require("module/information/CutsceneSystem_API");
@@ -71,7 +72,7 @@ function Lib.CutsceneSystem.Global:OnReportReceived(_ID, ...)
     elseif _ID == Report.CutsceneSkipButtonPressed then
         SendReportToLocal(Report.CutsceneSkipButtonPressed, arg[1]);
     elseif _ID == Report.CutscenePageShown then
-        SendReportToLocal(Report.CutscenePageShown, arg[1], arg[2], arg[3]);
+        self:DisplayPage(arg[1], arg[2], arg[3]);
     end
 end
 
@@ -187,12 +188,12 @@ function Lib.CutsceneSystem.Global:EndCutsceneFlight(_PlayerID, _PageID)
     SendReportToLocal(Report.CutsceneFlightEnded, _PlayerID, _PageID);
 end
 
-function Lib.CutsceneSystem.Global:DisplayPage(_PlayerID, _PageID)
+function Lib.CutsceneSystem.Global:DisplayPage(_PlayerID, _PageID, _Duration)
     if self.Cutscene[_PlayerID] == nil then
         return;
     end
-    -- Nothing to do in global script so just propagete to local
-    SendReportToLocal(Report.CutscenePageShown, _PlayerID, _PageID);
+    SendReportToGlobal(Report.CutscenePageShown, _PlayerID, _PageID, _Duration);
+    -- Nothing to do in global script
 end
 
 function Lib.CutsceneSystem.Global:GetCurrentCutscene(_PlayerID)
@@ -298,6 +299,7 @@ function Lib.CutsceneSystem.Local:EndCutscene(_PlayerID)
     if not Framework.IsNetworkGame() then
         Game.GameTimeSetFactor(_PlayerID, 1);
     end
+    StopVoice("CutsceneSpeech");
     self:DeactivateCinematicMode(_PlayerID);
     ActivateNormalInterface(_PlayerID);
     ActivateBorderScroll(_PlayerID);
@@ -442,7 +444,7 @@ end
 function Lib.CutsceneSystem.Local:DisplayPageText(_PlayerID, _PageID)
     local Page = self.Cutscene[_PlayerID][_PageID];
     local TextWidget = "/InGame/ThroneRoom/Main/MissionBriefing/Text";
-    XGUIEng.SetText(TextWidget, "Bockwurst");
+    XGUIEng.SetText(TextWidget, "");
     if Page.Text then
         local Text = ConvertPlaceholders(Localize(Page.Text));
         if Text:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
@@ -455,6 +457,10 @@ function Lib.CutsceneSystem.Local:DisplayPageText(_PlayerID, _PageID)
             Text = "{cr}{cr}{cr}" .. Text;
         end
         XGUIEng.SetText(TextWidget, Text);
+    end
+    StopVoice("CutsceneSpeech");
+    if Page.Speech then
+        PlayVoice(Page.Speech, "CutsceneSpeech");
     end
 end
 
@@ -614,6 +620,12 @@ function Lib.CutsceneSystem.Local:ActivateCinematicMode(_PlayerID)
     if not self.LoadscreenClosed then
         XGUIEng.PopPage();
     end
+
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
+
     local ScreenX, ScreenY = GUI.GetScreenSize();
 
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 1);
@@ -675,6 +687,9 @@ function Lib.CutsceneSystem.Local:ActivateCinematicMode(_PlayerID)
     g_Fade.To = 1;
     SetFaderAlpha(1);
 
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
     if not self.LoadscreenClosed then
         XGUIEng.PushPage("/LoadScreen/LoadScreen", false);
     end
@@ -685,6 +700,11 @@ function Lib.CutsceneSystem.Local:DeactivateCinematicMode(_PlayerID)
         return;
     end
     self.CinematicActive = false;
+
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
 
     g_Fade.To = 0;
     SetFaderAlpha(0);
@@ -719,6 +739,10 @@ function Lib.CutsceneSystem.Local:DeactivateCinematicMode(_PlayerID)
     XGUIEng.SetText("/InGame/ThroneRoom/Main/MissionBriefing/Objectives", " ");
 
     ResetRenderDistance();
+
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
 end
 
 -- -------------------------------------------------------------------------- --

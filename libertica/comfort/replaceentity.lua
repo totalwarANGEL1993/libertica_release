@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/ReplaceEntity");
+Lib.Register("comfort/ReplaceEntity");
 
 function ReplaceEntity(_Entity, _Type, _NewOwner)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");

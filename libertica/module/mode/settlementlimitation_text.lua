@@ -21,7 +21,7 @@ Lib.SettlementLimitation.Text = {
         DisabledDone = {
             de = "Wurde bereits entwickelt!",
             en = "Territory already developed!",
-            fr = "Territoire déjà aménagé !",
+            fr = "Territoire déjà aménagé!",
         }
     },
 

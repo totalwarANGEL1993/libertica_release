@@ -44,7 +44,8 @@ end
 function Lib.Damage.Global:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
-        self:InitEntityBaseDamage();
+        self:InitEntityBaseDamageBsg();
+        self:InitEntityBaseDamageExt();
     elseif _ID == Report.EntityDestroyed then
         self.InvulnerableList[arg[1]] = nil;
     elseif _ID == Report.EntityHurt then
@@ -56,7 +57,7 @@ function Lib.Damage.Global:IsInvulnerable(_Entity)
     return self.InvulnerableList[GetID(_Entity)] ~= nil;
 end
 
-function Lib.Damage.Global:InitEntityBaseDamage()
+function Lib.Damage.Global:InitEntityBaseDamageBsg()
     SetEntityTypeDamage(Entities.U_MilitaryBow, 20);
     SetEntityTypeDamage(Entities.U_MilitaryBow, 5,
         EntityCategories.AttackableBuilding,
@@ -152,7 +153,9 @@ function Lib.Damage.Global:InitEntityBaseDamage()
     SetEntityTypeDamage(Entities.A_NA_Lion_Female, 40);
     SetEntityTypeDamage(Entities.A_NA_Lion_Male, 40);
     SetEntityTypeDamage(Entities.A_NE_PolarBear, 120);
+end
 
+function Lib.Damage.Global:InitEntityBaseDamageExt()
     if g_GameExtraNo == 0 then
         return;
     end
@@ -221,7 +224,7 @@ function Lib.Damage.Global:OnEntityHurtEntity(_EntityID1, _PlayerID1, _EntityID2
         return;
     end
 
-    local Damage = 1;
+    local Damage = 25;
 
     -- Player properties
     local TerritoryBonus = Logic.GetTerritoryBonus(AggressorID) * self.TerritoryBonus[_PlayerID1];
@@ -233,8 +236,8 @@ function Lib.Damage.Global:OnEntityHurtEntity(_EntityID1, _PlayerID1, _EntityID2
 
     -- Get attacker properties
     local MoralFactor  = Logic.GetPlayerMorale(_PlayerID1);
-    Damage = self:GetEntityTypeBaseDamage(EntityType1, EntityType2);
-    Damage = self:GetEntityNameBaseDamage(EntityName1, EntityType2);
+    Damage = self:GetEntityTypeBaseDamage(EntityType1, EntityType2) or Damage;
+    Damage = self:GetEntityNameBaseDamage(EntityName1, EntityType2) or Damage;
 
     -- Get defender properties
     local Armor = 0;
@@ -276,7 +279,6 @@ function Lib.Damage.Global:GetEntityTypeBaseDamage(_Type1, _Type2)
         end
         return self.EntityTypeDamage[_Type1][0] or 25;
     end
-    return 25;
 end
 
 -- Returns the base damage of the entity type depending on the target type.
@@ -289,7 +291,6 @@ function Lib.Damage.Global:GetEntityNameBaseDamage(_Name1, _Type2)
         end
         return self.EntityNameDamage[_Name1][0] or 25;
     end
-    return 25;
 end
 
 -- Returns a valid entity ID or 0. If entity is a leader the first soldier

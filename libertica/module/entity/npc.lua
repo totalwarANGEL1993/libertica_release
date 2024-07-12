@@ -10,7 +10,7 @@ Lib.NPC.Text = {
     StartConversation = {
         de = "Gespräch beginnen",
         en = "Start conversation",
-        fr = "Commencer la conversation",
+        fr = "Conversation",
     }
 };
 
@@ -19,7 +19,8 @@ CONST_LAST_HERO_INTERACTED = 0;
 
 Lib.Require("comfort/GetDistance");
 Lib.Require("comfort/GetClosestToTarget");
-Lib.Require("comfort/global/LookAt");
+Lib.Require("comfort/LookAt");
+Lib.Require("comfort/Move");
 Lib.Require("core/Core");
 Lib.Require("module/entity/NPC_API");
 Lib.Require("module/entity/NPC_Behavior");
@@ -31,11 +32,6 @@ Lib.Register("module/entity/NPC");
 -- Global initalizer method
 function Lib.NPC.Global:Initialize()
     if not self.IsInstalled then
-        --- Someone talks to an NPC
-        ---
-        --- #### Parameters
-        --- * `NpcEntityID`  - ID of npc
-        --- * `HeroEntityID` - ID of hero
         Report.NpcInteraction = CreateReport("Event_NpcInteraction");
 
         self:OverrideQuestFunctions();
@@ -47,6 +43,7 @@ function Lib.NPC.Global:Initialize()
         end);
         RequestJob(function()
             Lib.NPC.Global:InteractableMarkerController();
+            Lib.NPC.Global:NpcFollowHeroController();
         end);
 
         -- Garbage collection
@@ -81,6 +78,7 @@ function Lib.NPC.Global:CreateNpc(_Data)
     self.NPC[_Data.Name] = {
         Name              = _Data.Name,
         Active            = true,
+        Arrived           = false,
         Type              = _Data.Type or 1,
         Player            = _Data.Player or {1, 2, 3, 4, 5, 6, 7, 8},
         WrongPlayerAction = _Data.WrongPlayerAction,
@@ -89,6 +87,13 @@ function Lib.NPC.Global:CreateNpc(_Data)
         Distance          = _Data.Distance or 350,
         Condition         = _Data.Condition,
         Callback          = _Data.Callback,
+        Follow            = _Data.Follow == true,
+        FollowHero        = _Data.FollowHero,
+        FollowCallback    = _Data.FollowCallback,
+        FollowDestination = _Data.FollowDestination,
+        FollowDistance    = _Data.FollowDistance or 2000,
+        FollowArriveArea  = _Data.FollowArriveArea or 500,
+        FollowSpeed       = _Data.FollowSpeed or 1.0,
         UseMarker         = self.UseMarker == true,
         MarkerID          = 0
     }
@@ -146,10 +151,17 @@ function Lib.NPC.Global:PerformNpcInteraction(_PlayerID)
         end
 
         if Data.Condition == nil or Data:Condition(_PlayerID, CONST_LAST_HERO_INTERACTED) then
-            Data.Active = false;
-            if Data.Callback then
-                Data:Callback(_PlayerID, CONST_LAST_HERO_INTERACTED);
+            if not Data.Follow then
+                Data.Active = false;
+                if Data.Callback then
+                    Data:Callback(_PlayerID, CONST_LAST_HERO_INTERACTED);
+                end
+            else
+                if Data.FollowCallback then
+                    Data:FollowCallback(_PlayerID, CONST_LAST_HERO_INTERACTED, false);
+                end
             end
+
         else
             Data.TalkedTo = 0;
         end
@@ -319,10 +331,24 @@ function Lib.NPC.Global:OverrideQuestFunctions()
     end
 end
 
-function Lib.NPC.Global:GetClosestKnight(_EntityID, _PlayerID)
+function Lib.NPC.Global:GetClosestKnight(_Entity, _PlayerID)
+    local EntityID = GetID(_Entity);
     local KnightIDs = {};
     Logic.GetKnights(_PlayerID, KnightIDs);
-    return GetClosestToTarget(_EntityID, KnightIDs);
+    return GetClosestToTarget(EntityID, KnightIDs);
+end
+
+function Lib.NPC.Global:GetClosestKnightAllPlayer(_Entity)
+    local ScriptName = Logic.GetEntityName(GetID(_Entity));
+    if self.NPC[ScriptName] then
+        local KnightIDs = {};
+        for _, PlayerID in pairs(self.NPC[ScriptName].Player) do
+            local PlayerKnightIDs = {};
+            Logic.GetKnights(PlayerID, KnightIDs);
+            KnightIDs = Array_Append(KnightIDs, PlayerKnightIDs);
+        end
+        return GetClosestToTarget(ScriptName, KnightIDs);
+    end
 end
 
 function Lib.NPC.Global:ToggleMarkerUsage(_Flag)
@@ -400,18 +426,54 @@ function Lib.NPC.Global:InteractionTriggerController()
 end
 
 function Lib.NPC.Global:InteractableMarkerController()
-    for k, v in pairs(self.NPC) do
-        if v.Active then
-            if  v.UseMarker and IsExisting(v.MarkerID)
-            and GetInteger(v.MarkerID, CONST_SCRIPTING_VALUES.Visible) == 801280 then
+    for k, Data in pairs(self.NPC) do
+        if Data.Active then
+            if  Data.UseMarker and IsExisting(Data.MarkerID)
+            and GetInteger(Data.MarkerID, CONST_SCRIPTING_VALUES.Visible) == 801280 then
                 self:HideMarker(k);
             else
                 self:ShowMarker(k);
             end
-            local x1,y1,z1 = Logic.EntityGetPos(v.MarkerID);
+            local x1,y1,z1 = Logic.EntityGetPos(Data.MarkerID);
             local x2,y2,z2 = Logic.EntityGetPos(GetID(k));
             if math.abs(x1-x2) > 20 or math.abs(y1-y2) > 20 then
-                Logic.DEBUG_SetPosition(v.MarkerID, x2, y2);
+                Logic.DEBUG_SetPosition(Data.MarkerID, x2, y2);
+            end
+        end
+    end
+end
+
+function Lib.NPC.Global:NpcFollowHeroController()
+    for _, Data in pairs(self.NPC) do
+        if Data.Active and Data.Follow and not Data.Arrived then
+            local EntityID = GetID(Data.Name);
+            local LeadingEntity = GetID(Data.FollowHero);
+            local FollowDistance = Data.FollowDistance;
+            local FollowDestination = Data.FollowDestination;
+            local FollowArriveArea = Data.FollowArriveArea;
+            local FollowSpeed = Data.FollowSpeed;
+
+            -- Get leader
+            if not LeadingEntity then
+                LeadingEntity = self:GetClosestKnightAllPlayer(EntityID);
+            end
+            -- Move NPC
+            if LeadingEntity and not Logic.IsEntityMoving(EntityID) then
+                if  GetDistance(EntityID, LeadingEntity) <= FollowDistance
+                and GetDistance(EntityID, LeadingEntity) > FollowArriveArea / 2 then
+                    Logic.SetSpeedFactor(EntityID, FollowSpeed);
+                    Move(EntityID, LeadingEntity);
+                end
+            end
+            -- Check arrival
+            if LeadingEntity and GetDistance(EntityID, FollowDestination) <= FollowArriveArea then
+                if not Logic.IsEntityMoving(EntityID) then
+                    Move(EntityID, FollowDestination);
+                    if Data.FollowCallback then
+                        local PlayerID = Logic.EntityGetPlayer(LeadingEntity);
+                        Data:FollowCallback(PlayerID, LeadingEntity, true);
+                    end
+                end
             end
         end
     end

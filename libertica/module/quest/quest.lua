@@ -16,9 +16,9 @@ SegmentResult = {
     Ignore  = 3,
 }
 
-Lib.Require("comfort/global/GetQuestID");
-Lib.Require("comfort/global/IsValidQuest");
-Lib.Require("comfort/global/IsValidQuestName");
+Lib.Require("comfort/GetQuestID");
+Lib.Require("comfort/IsValidQuest");
+Lib.Require("comfort/IsValidQuestName");
 Lib.Require("core/core");
 Lib.Require("module/quest/Quest_API");
 Lib.Require("module/quest/Quest_Behavior");
@@ -30,6 +30,19 @@ Lib.Register("module/quest/Quest");
 -- Global initalizer method
 function Lib.Quest.Global:Initialize()
     if not self.IsInstalled then
+        Report.Internal_DebugFailQuest = CreateReport("Event_Internal_DebugFailQuest");
+        Report.Internal_DebugWinQuest = CreateReport("Event_Internal_DebugWinQuest");
+        Report.Internal_DebugStartQuest = CreateReport("Event_Internal_DebugStartQuest");
+        Report.Internal_DebugRestart = CreateReport("Event_Internal_DebugRestart");
+        Report.Internal_DebugStopQuests = CreateReport("Event_Internal_DebugStopQuests");
+
+        Report.Internal_DebugListFailedQuests = CreateReport("Event_Internal_DebugListFailedQuests");
+        Report.Internal_DebugListWonQuests = CreateReport("Event_Internal_DebugListWonQuests");
+        Report.Internal_DebugListActiveQuests = CreateReport("Event_Internal_DebugListActiveQuests");
+        Report.Internal_DebugListStoppedQuests = CreateReport("Event_Internal_DebugListStoppedQuests");
+        Report.Internal_DebugListWaitingQuests = CreateReport("Event_Internal_DebugListWaitingQuests");
+        Report.Internal_DebugListNamedQuests = CreateReport("Event_Internal_DebugListNamedQuests");
+
         Quest_Loop = self.QuestLoop;
         self:OverrideKernelQuestApi();
 
@@ -47,7 +60,50 @@ end
 function Lib.Quest.Global:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
-    elseif _ID == Report.ChatClosed then
+
+    elseif _ID == Report.Internal_DebugFailQuest then
+        local FoundQuests = self:FindQuestsByExactName(arg[1], 1);
+        error(#FoundQuests == 1, "Unable to find quest containing '" ..arg[1].. "'");
+        FailQuest(FoundQuests[1].Identifier);
+        log("forced quest to fail: '" ..FoundQuests[1].Identifier.. "'");
+    elseif _ID == Report.Internal_DebugWinQuest then
+        local FoundQuests = self:FindQuestsByExactName(arg[1], 1);
+        error(#FoundQuests == 1, "Unable to find quest containing '" ..arg[1].. "'");
+        RestartQuest(FoundQuests[1].Identifier);
+        log("forced quest to restart: '" ..FoundQuests[1].Identifier.. "'");
+    elseif _ID == Report.Internal_DebugStartQuest then
+        local FoundQuests = self:FindQuestsByExactName(arg[1], 1);
+        error(#FoundQuests == 1, "Unable to find quest containing '" ..arg[1].. "'");
+        StartQuest(FoundQuests[1].Identifier);
+        log("forced quest to start: '" ..FoundQuests[1].Identifier.. "'");
+    elseif _ID == Report.Internal_DebugRestart then
+        local FoundQuests = self:FindQuestsByExactName(arg[1], 1);
+        error(#FoundQuests == 1, "Unable to find quest containing '" ..arg[1].. "'");
+        StopQuest(FoundQuests[1].Identifier);
+        log("forced quest to stop: '" ..FoundQuests[1].Identifier.. "'");
+    elseif _ID == Report.Internal_DebugStopQuests then
+        local FoundQuests = self:FindQuestsByExactName(arg[1], 1);
+        error(#FoundQuests == 1, "Unable to find quest containing '" ..arg[1].. "'");
+        WinQuest(FoundQuests[1].Identifier);
+        log("forced quest to succeed: '" ..FoundQuests[1].Identifier.. "'");
+    elseif _ID == Report.Internal_DebugListFailedQuests then
+        AddStaticNote(self:ListQuestsByResult(QuestResult.Failure, 15));
+        log(self:ListQuestsByResult(QuestResult.Failure));
+    elseif _ID == Report.Internal_DebugListWonQuests then
+        AddStaticNote(self:ListQuestsByResult(QuestResult.Success, 15));
+        log(self:ListQuestsByResult(QuestResult.Success));
+    elseif _ID == Report.Internal_DebugListActiveQuests then
+        AddStaticNote(self:ListQuestsByState(QuestState.Active, 15));
+        log(self:ListQuestsByState(QuestState.Active));
+    elseif _ID == Report.Internal_DebugListStoppedQuests then
+        AddStaticNote(self:ListQuestsByResult(QuestResult.Interrupted, 15));
+        log(self:ListQuestsByResult(QuestResult.Interrupted));
+    elseif _ID == Report.Internal_DebugListWaitingQuests then
+        AddStaticNote(self:ListQuestsByState(QuestState.NotTriggered, 15));
+        log(self:ListQuestsByState(QuestState.NotTriggered));
+    elseif _ID == Report.Internal_DebugListNamedQuests then
+        AddStaticNote(self:ListQuestsByName(arg[1], 15));
+        log(self:ListQuestsByName(arg[1]));
     end
 end
 
@@ -576,7 +632,7 @@ function Lib.Quest.Global:ListQuestsByName(_QuestName, _MaxResults)
 end
 
 function Lib.Quest.Global:ProcessChatInput(_Text, _PlayerID, _IsDebug)
-    if _IsDebug then
+    if _IsDebug and IsHistoryEdition() then
         local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
         for i= 1, #Commands, 1 do
             if Commands[i][1] == "fail"
@@ -633,6 +689,19 @@ end
 -- Local initalizer method
 function Lib.Quest.Local:Initialize()
     if not self.IsInstalled then
+        Report.Internal_DebugFailQuest = CreateReport("Event_Internal_DebugFailQuest");
+        Report.Internal_DebugWinQuest = CreateReport("Event_Internal_DebugWinQuest");
+        Report.Internal_DebugStartQuest = CreateReport("Event_Internal_DebugStartQuest");
+        Report.Internal_DebugRestart = CreateReport("Event_Internal_DebugRestart");
+        Report.Internal_DebugStopQuests = CreateReport("Event_Internal_DebugStopQuests");
+
+        Report.Internal_DebugListFailedQuests = CreateReport("Event_Internal_DebugListFailedQuests");
+        Report.Internal_DebugListWonQuests = CreateReport("Event_Internal_DebugListWonQuests");
+        Report.Internal_DebugListActiveQuests = CreateReport("Event_Internal_DebugListActiveQuests");
+        Report.Internal_DebugListStoppedQuests = CreateReport("Event_Internal_DebugListStoppedQuests");
+        Report.Internal_DebugListWaitingQuests = CreateReport("Event_Internal_DebugListWaitingQuests");
+        Report.Internal_DebugListNamedQuests = CreateReport("Event_Internal_DebugListNamedQuests");
+
         self:OverwriteQuestTexts();
 
         -- Garbage collection
@@ -756,9 +825,11 @@ function Lib.Quest.Local:OverwriteQuestTexts()
     --- @return string Name Name of string
     --- @return string? File Name of file
     GetTextOverride = function(_Quest)
-        assert(type(_Quest) == "table");
-
         local Result;
+        if not _Quest then
+            return;
+        end
+        assert(type( _Quest ) == "table");
         if _Quest.State == QuestState.Over then
             if _Quest.Result == QuestResult.Success then
                 local Text = _Quest.QuestSuccessMsg or "";

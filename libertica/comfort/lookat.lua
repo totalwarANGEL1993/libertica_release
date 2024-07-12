@@ -1,5 +1,5 @@
 Lib.Require("comfort/IsValidPosition");
-Lib.Register("comfort/global/LookAt");
+Lib.Register("comfort/LookAt");
 
 function LookAt(_Entity, _Target)
     local ID1 = GetID(_Entity);

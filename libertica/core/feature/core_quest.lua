@@ -58,9 +58,9 @@ Lib.Require("comfort/IsLocalScript");
 Lib.Require("comfort/ToBoolean");
 Lib.Require("comfort/GetHealth");
 Lib.Require("comfort/CopyTable");
-Lib.Require("comfort/global/GetQuestID");
-Lib.Require("comfort/global/IsValidQuest");
-Lib.Require("comfort/global/SendCart");
+Lib.Require("comfort/GetQuestID");
+Lib.Require("comfort/IsValidQuest");
+Lib.Require("comfort/SendCart");
 Lib.Require("core/feature/Core_Report");
 Lib.Register("core/feature/Core_Quest");
 

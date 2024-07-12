@@ -47,7 +47,7 @@ Lib.LifestockSystem.Shared = {
     },
 };
 
-Lib.Require("comfort/global/SetHealth");
+Lib.Require("comfort/SetHealth");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIEffects");
 Lib.Require("module/ui/UITools");

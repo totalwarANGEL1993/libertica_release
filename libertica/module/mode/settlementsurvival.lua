@@ -66,7 +66,7 @@ Lib.SettlementSurvival.Shared = {
     },
 };
 
-Lib.Require("comfort/global/SetHealth");
+Lib.Require("comfort/SetHealth");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIBuilding");
 Lib.Require("module/ui/UITools");

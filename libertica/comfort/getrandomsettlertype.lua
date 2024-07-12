@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/GetRandomSettlerType");
+Lib.Register("comfort/GetRandomSettlerType");
 
 CONST_RANDOM_SETTLER_TYPES = {
     Male = {
@@ -31,6 +31,7 @@ CONST_RANDOM_SETTLER_TYPES = {
 }
 
 function GetRandomSettlerType()
+    assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
     local Gender = (math.random(1, 2) == 1 and "Male") or "Female";
     local Type   = math.random(1, #CONST_RANDOM_SETTLER_TYPES[Gender]);
     return CONST_RANDOM_SETTLER_TYPES[Gender][Type];
@@ -38,12 +39,14 @@ end
 API.GetRandomSettlerType = GetRandomSettlerType;
 
 function GetRandomMaleSettlerType()
+    assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
     local Type = math.random(1, #CONST_RANDOM_SETTLER_TYPES.Male);
     return CONST_RANDOM_SETTLER_TYPES.Male[Type];
 end
 API.GetRandomMaleSettlerType = GetRandomMaleSettlerType;
 
 function GetRandomFemaleSettlerType()
+    assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
     local Type = math.random(1, #CONST_RANDOM_SETTLER_TYPES.Female);
     return CONST_RANDOM_SETTLER_TYPES.Female[Type];
 end

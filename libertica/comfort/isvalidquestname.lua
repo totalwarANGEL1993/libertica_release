@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/IsValidQuestName");
+Lib.Register("comfort/IsValidQuestName");
 
 CONST_REGEX_QUEST_NAME = "^[A-Za-z0-9_ @ÄÖÜäöüß]+$";
 

@@ -84,6 +84,7 @@ API.AddDialogPages = AddDialogPages;
 --- * `Actor`           - (optional) Spieler-ID des Sprechers
 --- * `Title`           - (optional) Name des Akteurs (nur mit Akteur)
 --- * `Text`            - (optional) Angezeigter Seitentext
+--- * `Speech`          - Pfad zum Voiceover (MP3-Datei)
 --- * `Position`        - Position der Kamera (nicht mit Ziel)
 --- * `Target`          - Einheit, der die Kamera folgt (nicht mit Position)
 --- * `Distance`        - (optional) Entfernung der Kamera

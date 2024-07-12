@@ -40,7 +40,7 @@ The following is the project configuration. It is to be saved as `settings.json`
     "Lua.workspace.ignoreDir": [
         "C:/Settlers6/QSB/libertica_release/libertica_api/de",
         "C:/Settlers6/QSB/libertica_release/libertica",
-        "C:/Settlers6/QSB/libertica_release/single",
+        "C:/Settlers6/QSB/libertica_release/single"
     ],
     "Lua.workspace.library": [
         "C:/Settlers6/QSB/libertica_release/libertica_api/en"
@@ -51,7 +51,7 @@ If you wish to locate the repository somewhere else, the paths must be adjusted.
 
 ### Config for repository
 
-If the repository is used directly, it is - minus `.git` - to be imported into the map. In that case the API documentation is also located inside the map.
+If the repository is used directly, the folder `libertica` is to be imported into the map. In that case the API documentation is also located inside the map.
 
 The contet of `settings.json` will look as follows:
 ```json
@@ -60,7 +60,7 @@ The contet of `settings.json` will look as follows:
     "Lua.workspace.ignoreDir": [
         "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica_api/de",
         "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica",
-        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/single",
+        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/single"
     ],
     "Lua.workspace.library": [
         "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica_api/en"
@@ -68,9 +68,28 @@ The contet of `settings.json` will look as follows:
 }
 ```
 
+### HE as library
+
+As a owner of the History Edition you are able to use the game itself as a lua library. This comes with the advantage of having the lua functions of the game also available in the auto completion. Keep in mind that this won't work for the C bindings (Logic, ect.).
+
+To configure the game as a lua library you have to add it to the configuration. Be careful, you might have to change the paths!
+```json
+{
+"Lua.workspace.library": [
+    "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica_api/en",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/base/shr/Script/Global",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/base/shr/Script/Local",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/base/shr/Script/Shared",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/extra1/shr/Script/Global",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/extra1/shr/Script/Local",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/extra1/shr/Script/Shared"
+]
+}
+```
+
 ## Project Structure
 
-I recommend the following project structure if working with the library and not with the single QSB file:
+I recommend the following project structure if working with the library and __not__ with the single file:
 
 ```
 Project
@@ -85,7 +104,6 @@ Project
     |- scripts
     |- localmapscript.lua
     |- mapscript.lua
-    |- questsystembehavior.lua
     |- ... other files
 ```
 

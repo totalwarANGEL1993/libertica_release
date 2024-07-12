@@ -15,6 +15,7 @@ Lib.NPC = Lib.NPC or {};
 ---
 --- #### Felder der Tabelle
 --- * Name              Skriptname der Entität (obligatorisch)
+--- * Active            NPC ist aktiv
 --- * Callback          Funktion, die bei der Aktivierung aufgerufen wird
 --- * Condition         Bedingung, die vor der Aktivierung überprüft wird
 --- * Type              Typ des NPCs (1, 2, 3, 4)
@@ -22,7 +23,14 @@ Lib.NPC = Lib.NPC or {};
 --- * WrongPlayerAction Nachricht für falsche Spieler
 --- * Hero              Name eines bestimmten Helden
 --- * WrongHeroAction   Nachricht für falsche Helden
---- * Active            NPC ist aktiv
+--- * Follow            NPC folgt Helden
+--- * FollowHero        NPC folgt diesem speziellen helden
+--- * FollowCallback    Funktion, die bei Erreichen des Ziels aufgerufen wird
+--- * FollowDestination Ort, zu dem der NPC folgt
+--- * FollowDistance    max. Entfernung bei der ein NPC folgt (Default: 2000)
+--- * FollowArriveArea  min. Entfernung zum Zielort (Default: 500)
+--- * FollowSpeed       Bewegungsgeschwindigkeit (Default: 1.0)
+--- * Arrived           NPC hat Position erreicht
 ---
 --- #### Beispiele
 --- ```lua
@@ -126,6 +134,13 @@ function NpcTalkedTo(_Data, _Hero, _PlayerID)
     return true;
 end
 API.NpcTalkedTo = NpcTalkedTo;
+
+--- Gibt zurück, ob ein NPC das Ziel erreicht hat.
+--- @param _Data table NPC-Daten
+--- @return boolean HasArrived NPC ist eingetroffen
+function NpcHasArrived(_Data)
+    return false;
+end
 
 
 

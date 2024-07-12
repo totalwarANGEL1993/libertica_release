@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/SetHealth");
+Lib.Register("comfort/SetHealth");
 
 function SetHealth(_Entity, _Health)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");

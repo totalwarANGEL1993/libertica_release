@@ -32,9 +32,9 @@ von Komponenten wählen.
 
 Um die vollständige Funktionalität zu garantieren, sollte Visual Studio Code als Editor verwendet werden. Ob die nachfolgend beschriebene Konfiguration auch in anderen Editoren vorgenommen werden kann, musst du selbst herausfinden. Für VSC gibt es das Plugin "Lua Language Server", das viele Comfort-Funktionen wie z.B. Auto-Vervollständigung oder Tooltips mit Funktionsdokumentationen anbietet.
 
-### Konfigurationsdatei für Einzeldatei
+### Konfigurationsdatei für Komplettpaket
 
-Wenn die Einzeldatei verwendet wird, dann sollte das Repository zentral auf dem Rechner abgelegt werden. Beispiel: `C:/Settlers6/QSB/libertica_release`
+Wenn das Komplettpaket verwendet wird, dann sollte das Repository zentral auf dem Rechner abgelegt werden. Beispiel: `C:/Settlers6/QSB/libertica_release`
 
 Es folgt die grundlegende Projektkonfiguration. Diese ist als `settings.json` im Ordner `.vscode` abzulegen.
 ```json
@@ -43,7 +43,7 @@ Es folgt die grundlegende Projektkonfiguration. Diese ist als `settings.json` im
     "Lua.workspace.ignoreDir": [
         "C:/Settlers6/QSB/libertica_release/libertica_api/en",
         "C:/Settlers6/QSB/libertica_release/libertica",
-        "C:/Settlers6/QSB/libertica_release/single",
+        "C:/Settlers6/QSB/libertica_release/single"
     ],
     "Lua.workspace.library": [
         "C:/Settlers6/QSB/libertica_release/libertica_api/de"
@@ -54,7 +54,7 @@ Wenn du das Repository in einem anderen Verzeichnis ablegts, müssen die Pfade a
 
 ### Konfigurationsdatei für Repository
 
-Wenn das Repository verwendet wird, dann kann der ganze Ordner (abzüglich `.git`) in die Map kopiert werden. Dann ist auch die API-Dokumentation bereits innerhalb der Map.
+Wenn das Repository verwendet wird, dann kann der Ordner `libertica` in die Map kopiert werden. Dann ist auch die API-Dokumentation bereits innerhalb der Map.
 
 In diesem Fall sieht die `settings.json` wie folgt aus:
 ```json
@@ -63,7 +63,7 @@ In diesem Fall sieht die `settings.json` wie folgt aus:
     "Lua.workspace.ignoreDir": [
         "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica_api/en",
         "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica",
-        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/single",
+        "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/single"
     ],
     "Lua.workspace.library": [
         "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica_api/de"
@@ -71,9 +71,28 @@ In diesem Fall sieht die `settings.json` wie folgt aus:
 }
 ```
 
+### HE als Bibliothek
+
+Für Besitzer der History Edition ist es zudem möglich, das Spiel selbst als Bibliothek anzugeben. Das hat den Vorteil, dass auch die Lua-Funktionen des Spiels in der Autovervollständigung auftauchen. Dies hat jedoch seine Grenzen, da die C-Bindungs (z.B. Logic) davon ausgenommen sind.
+
+Um das Spiel zur Bibliothek hinzuzufügen, muss es als Library konfiguriert werden. Achte darauf, dass die Pfade ggf. angepasst werden müssen!
+```json
+{
+"Lua.workspace.library": [
+    "nameofmap.s6xmap.unpacked/maps/externalmap/nameofmap/libertica_release/libertica_api/de",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/base/shr/Script/Global",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/base/shr/Script/Local",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/base/shr/Script/Shared",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/extra1/shr/Script/Global",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/extra1/shr/Script/Local",
+    "C:/Program Files (x86)/Steam/SteamApps/common/The Settlers - Rise of an Empire - History Edition/Data/extra1/shr/Script/Shared"
+]
+}
+```
+
 ## Projektstruktur
 
-Ich empfehle folgende Projektstruktur, falls mit dem Repository und nicht mit der Einzeldatei der QSB gearbeitet wird:
+Ich empfehle folgende Projektstruktur, falls mit dem Repository und __nicht__ mit dem Komplettpaket der QSB gearbeitet wird:
 
 ```
 Project
@@ -88,7 +107,6 @@ Project
     |- scripts
     |- localmapscript.lua
     |- mapscript.lua
-    |- questsystembehavior.lua
     |- ... other files
 ```
 Diese Struktur vereinfacht das Auslagern von Skripten. Die Skripte liegen im Ordner `scripts` und werden in den Hauptskripten nur geladen. Während der Entwicklung kann anstelle des Path in der Map der absolute Path im System angegeben werden.

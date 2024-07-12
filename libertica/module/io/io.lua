@@ -26,7 +26,8 @@ CONST_IO_LAST_HERO = 0;
 
 Lib.Require("comfort/GetClosestToTarget");
 Lib.Require("comfort/IsLocalScript");
-Lib.Require("comfort/global/ReplaceEntity");
+Lib.Require("comfort/IsHistoryEdition");
+Lib.Require("comfort/ReplaceEntity");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/faker/Technology");
@@ -69,6 +70,10 @@ function Lib.IO.Global:Initialize()
         --- * `ScriptName` - Scriptname of entity
         Report.ObjectDelete = CreateReport("Event_ObjectDelete");
 
+        Report.Internal_DebugEnableObject = CreateReport("Event_Internal_DebugEnableObject");
+        Report.Internal_DebugDisableObject = CreateReport("Event_Internal_DebugDisableObject");
+        Report.Internal_DebugInitObject = CreateReport("Event_Internal_DebugInitObject");
+
         Lib.IO.Shared:CreateTechnologies();
 
         self:OverrideObjectInteraction();
@@ -95,6 +100,23 @@ function Lib.IO.Global:OnReportReceived(_ID, ...)
         if arg[3] then
             self:ProcessChatInput(arg[1]);
         end
+    elseif _ID == Report.Internal_DebugEnableObject then
+        error(IsExisting(arg[1]), "object " ..arg[1].. " does not exist!");
+        InteractiveObjectActivate(arg[1], arg[2], arg[3]);
+    elseif _ID == Report.Internal_DebugDeableObject then
+        error(IsExisting(arg[1]), "object " ..arg[1].. " does not exist!");
+        InteractiveObjectDeactivate(arg[1], arg[2], arg[3]);
+    elseif _ID == Report.Internal_DebugInitObject then
+        error(IsExisting(arg[1]), "object " ..arg[1].. " does not exist!");
+        local Reward = (arg[2] ~= nil and {arg[2], arg[3]});
+        local Costs = (arg[4] ~= nil and {arg[4], arg[5], arg[6], arg[7]});
+        API.SetupObject({
+            Name = arg[1],
+            Costs = Costs,
+            Reward = Reward,
+            Waittime = 0,
+            State = 0
+        });
     end
 end
 
@@ -291,28 +313,30 @@ function Lib.IO.Global:OverrideObjectInteraction()
 end
 
 function Lib.IO.Global:ProcessChatInput(_Text)
-    local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
-    for i= 1, #Commands, 1 do
-        if Commands[i][1] == "enableobject" then
-            local State = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
-            local PlayerID = (Commands[i][4] and tonumber(Commands[i][4])) or nil;
-            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
-            ---@diagnostic disable-next-line: param-type-mismatch
-            InteractiveObjectActivate(Commands[i][2], State, PlayerID);
-            log("activated object " ..Commands[i][2].. ".");
-        elseif Commands[i][1] == "disableobject" then
-            local PlayerID = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
-            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
-            InteractiveObjectDeactivate(Commands[i][2], PlayerID);
-            log("deactivated object " ..Commands[i][2].. ".");
-        elseif Commands[i][1] == "initobject" then
-            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
-            API.SetupObject({
-                Name     = Commands[i][2],
-                Waittime = 0,
-                State    = 0
-            });
-            log("quick initalization of object " ..Commands[i][2].. ".");
+    if IsHistoryEdition() then
+        local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
+        for i= 1, #Commands, 1 do
+            if Commands[i][1] == "enableobject" then
+                local State = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
+                local PlayerID = (Commands[i][4] and tonumber(Commands[i][4])) or nil;
+                error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+                ---@diagnostic disable-next-line: param-type-mismatch
+                InteractiveObjectActivate(Commands[i][2], State, PlayerID);
+                log("activated object " ..Commands[i][2].. ".");
+            elseif Commands[i][1] == "disableobject" then
+                local PlayerID = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
+                error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+                InteractiveObjectDeactivate(Commands[i][2], PlayerID);
+                log("deactivated object " ..Commands[i][2].. ".");
+            elseif Commands[i][1] == "initobject" then
+                error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+                API.SetupObject({
+                    Name     = Commands[i][2],
+                    Waittime = 0,
+                    State    = 0
+                });
+                log("quick initalization of object " ..Commands[i][2].. ".");
+            end
         end
     end
 end
@@ -372,6 +396,10 @@ function Lib.IO.Local:Initialize()
         Report.ObjectInteraction = CreateReport("Event_ObjectInteraction");
         Report.ObjectReset = CreateReport("Event_ObjectReset");
         Report.ObjectDelete = CreateReport("Event_ObjectDelete");
+
+        Report.Internal_DebugEnableObject = CreateReport("Event_Internal_DebugEnableObject");
+        Report.Internal_DebugDisableObject = CreateReport("Event_Internal_DebugDisableObject");
+        Report.Internal_DebugInitObject = CreateReport("Event_Internal_DebugInitObject");
 
         Lib.IO.Shared:CreateTechnologies();
 

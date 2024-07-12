@@ -7,12 +7,18 @@
 --- Alle Texte eines Quest-Texte können auch String Tables sein. Das Format für
 --- diese Texte ist "FileName/StringName".
 ---
---- #### Debug-Befehle
---- * `stop <QuestName>`      - Unterbricht eine Quest
---- * `start <QuestName>`     - Startet eine Quest
---- * `win <QuestName>`       - Beendet eine Quest erfolgreich
---- * `fail <QuestName>`      - Beendet eine Quest mit einem Fehler
---- * `restart <QuestName>`   - Setzt eine Quest zurück und startet sie neu
+--- #### Debug-Funktionen
+--- * Debug_FailQuest(_Name) - lässt einen Quest fehlschlagen
+--- * Debug_WinQuest(_Name) - Gewinnt einen Quest
+--- * Debug_StartQuest(_Name) - Startet einen Quest
+--- * Debug_RestartQuest(_Name) - Setzt einen Quest zurück und startet ihn neu
+--- * Debug_StopQuest(_Name) - Unterbricht einen Quest
+--- * Debug_FindQuests(_Name) - Sucht mit Quests mit ähnlichen Namen
+--- * Debug_FailedQuests() - Listet fehlgeschlagene Quests auf
+--- * Debug_StoppedQuests() - Listet abgebrochene Quests auf
+--- * Debug_ActiveQuests() - Listet aktive Quests auf
+--- * Debug_WonQuests() - Listed gewonnene Quests auf
+--- * Debug_WaitingQuests() - Listet nicht ausgelöste Quests auf
 ---
 Lib.Quest = Lib.Quest or {};
 

@@ -1,7 +1,7 @@
 Lib.Require("comfort/GetSoldiersOfGroup");
 Lib.Require("comfort/GetPosition");
 Lib.Require("comfort/IsValidPosition");
-Lib.Register("comfort/global/SetPosition");
+Lib.Register("comfort/SetPosition");
 
 function SetPosition(_Entity, _Target)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");

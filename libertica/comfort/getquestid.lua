@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/GetQuestID");
+Lib.Register("comfort/GetQuestID");
 
 function GetQuestID(_Name)
     if type(_Name) == "number" then

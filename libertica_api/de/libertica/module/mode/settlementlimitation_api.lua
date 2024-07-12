@@ -1,22 +1,34 @@
 --- Implementiert härtere Baubeschwänkungen im Spiel.
 ---
---- Wird der Modus aktiviert, gelden die voreingestellten Standardregeln. Diese
+--- Wird der Modus aktiviert, gelten die voreingestellten Standardregeln. Diese
 --- können im begrenzten Ausmaß individualisiert werden.
 ---
 --- Standardregeln:
---- * Die Gebäudeanzahl im Heimatgebiet ist nicht beschränkt
---- * Stadtgebäude können nur auf dem Heimatgebiet gebaut werden
---- * In Territorien können nur 3 Gebäude gebaut werden. Dabei zählen Felder
----   und Bienenstöcke nicht als Gebäude.
+--- * Die Gebäudeanzahl im Heimatgebiet ist nicht beschränkt.
+--- * Stadtgebäude können nur auf dem Heimatgebiet gebaut werden.
+--- * In Territorien können nur 3 Gebäude gebaut werden. 
+--- * Wird der Außenposten ausgebaut, können dauerhaft 4 Gebäude gebaut werden.
 --- * Jeder Gebäudetyp kann nur 1 mal pro Territorium gebaut werden.
 --- * Territorien können einmalig für Gold verbessert werden. Verbessern eines
----   Territorium gewährt einen weiteren Gebäudeplatz.
+---   Territorium ermöglicht 2 Gebäude gleichen Typs zu bauen.
+--- * Bienenstöcke, Felder und Ziergebäude zählen nicht als Gebäude.
 ---
 Lib.SettlementLimitation = Lib.SettlementLimitation or {};
 
 --- Aktiviert/deaktiviert den Modus.
 --- @param _Flag boolean Modus ist aktiv
 function ActivateSettlementLimitation(_Flag)
+end
+
+--- Setzt den Titel, ab dem Territorien entwickelt werden können.
+--- @param _Title integer ID des Spielers
+function RequireTitleToDevelopTerritory(_Title)
+end
+
+--- Erlaubt oder verbietet das Entwickeln von Territorien
+--- @param _PlayerID integer ID des Spielers
+--- @param _Allowed boolean Entwickeln erlaubt
+function AllowDevelopTerritory(_PlayerID, _Allowed)
 end
 
 --- Setzt das allgemeine Gebäudelimit für den Spieler im Territorium.

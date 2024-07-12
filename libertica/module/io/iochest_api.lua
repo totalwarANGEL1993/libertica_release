@@ -64,3 +64,20 @@ function CreateRandomLuxuryChest(_Name)
 end
 API.CreateRandomLuxuryChest = CreateRandomLuxuryChest;
 
+
+
+function Debug_GoldChest(_Entity)
+    assert(IsLocalScript(), "Debug function must be used in local script!");
+    SendReportToGlobal(Report.Internal_DebugGoldChest, _Entity);
+end
+
+function Debug_GoodChest(_Entity)
+    assert(IsLocalScript(), "Debug function must be used in local script!");
+    SendReportToGlobal(Report.Internal_DebugResourceChest, _Entity);
+end
+
+function Debug_LuxuryChest(_Entity)
+    assert(IsLocalScript(), "Debug function must be used in local script!");
+    SendReportToGlobal(Report.Internal_DebugLuxuryChest, _Entity);
+end
+

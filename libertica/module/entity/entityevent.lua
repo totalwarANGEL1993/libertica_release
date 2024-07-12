@@ -87,7 +87,7 @@ function Lib.EntityEvent.Global:OnReportReceived(_ID, ...)
     if _ID == Report.LoadscreenClosed then
         self.LoadscreenClosed = true;
     elseif _ID == Report.EntityHurt then
-        self.AttackedEntities[arg[1]] = {arg[3], 100};
+        self.AttackedEntities[arg[3]] = {arg[1], 300};
     end
 end
 

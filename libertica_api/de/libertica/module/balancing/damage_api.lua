@@ -9,7 +9,7 @@
 --- * Nahe Mauerkatapulte schwächen sich gegenseitig (gilt nicht für KI)
 --- * Anpassen der Kampfkraft von Einheiten über Lua
 --- * Zusätzliche Rüstung für Einheiten vergeben
---- * Anpassen des Own Territoy bonus
+--- * Anpassen des Own Territoy Bonus
 --- * Anpassen des Height Modifier
 ---
 Lib.Damage = Lib.Damage or {};
@@ -18,8 +18,9 @@ Lib.Damage = Lib.Damage or {};
 ---
 --- Optional können Feindkategorien angegeben werden, für die der Schaden gilt.
 ---
---- Der angegebene Schaden ersetzt den Basischaden des Entitätstypen. Der
---- tatsächliche Schaden Ergibt sich aus Moral, Höhenbonus und Territorienbonus.
+--- Der angegebene Schaden zu einer Liste von Kategorien ersetzt den Basischaden
+--- des Entitätstypen. Der finale Schaden Ergibt sich aus Moral, Höhenbonus und 
+--- Territorienbonus.
 ---
 --- @param _Type integer Entitätstyp
 --- @param _Damage integer Höhe des Schaden
@@ -32,8 +33,9 @@ API.SetEntityTypeDamage = SetEntityTypeDamage;
 ---
 --- Optional können Feindkategorien angegeben werden, für die der Schaden gilt.
 ---
---- Der angegebene Schaden ersetzt den Basischaden der Entität. Der tatsächliche
---- Schaden Ergibt sich aus Moral, Höhenbonus und Territorienbonus.
+--- Der angegebene Schaden zu einer Liste von Kategorien ersetzt den Basischaden
+--- der Entität. Der finale Schaden Ergibt sich aus Moral, Höhenbonus und
+--- Territorienbonus.
 ---
 --- @param _Name string Scriptname der Entität
 --- @param _Damage integer Höhe des Schaden

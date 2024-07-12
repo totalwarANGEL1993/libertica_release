@@ -5,7 +5,7 @@ Lib = {
             "script/",
         },
 
-        Version = "LIB 1.0.0",
+        Version = "LIB 1.0.1",
         Root = "libertica",
         IsLocalEnv = GUI ~= nil,
         IsHistoryEdition = false,
@@ -551,7 +551,7 @@ function SerializeTable(_Table)
 end
 API.SerializeTable = SerializeTable;
 
-Lib.Register("comfort/global/CreateCartByGoodType");
+Lib.Register("comfort/CreateCartByGoodType");
 
 function CreateCartByGoodType(_PlayerID, _Position, _GoodType, _Orientation, _CartOverlay)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
@@ -584,7 +584,7 @@ function CreateCartByGoodType(_PlayerID, _Position, _GoodType, _Orientation, _Ca
 end
 API.CreateCartByGoodType = CreateCartByGoodType;
 
-Lib.Register("comfort/global/CreateEntityName");
+Lib.Register("comfort/CreateEntityName");
 
 CreateEntityName_Sequence_ID = 0;
 
@@ -605,7 +605,7 @@ function CreateEntityName(_EntityID)
 end
 API.CreateEntityName = CreateEntityName;
 
-Lib.Register("comfort/global/CreateStock");
+Lib.Register("comfort/CreateStock");
 
 function CreateStock(_PlayerID, _GoodType)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
@@ -622,7 +622,7 @@ function CreateStock(_PlayerID, _GoodType)
 end
 API.CreateStock = CreateStock;
 
-Lib.Register("comfort/global/GetQuestID");
+Lib.Register("comfort/GetQuestID");
 
 function GetQuestID(_Name)
     if type(_Name) == "number" then
@@ -639,7 +639,7 @@ function GetQuestID(_Name)
 end
 API.GetQuestID = GetQuestID;
 
-Lib.Register("comfort/global/GetRandomSettlerType");
+Lib.Register("comfort/GetRandomSettlerType");
 
 CONST_RANDOM_SETTLER_TYPES = {
     Male = {
@@ -672,6 +672,7 @@ CONST_RANDOM_SETTLER_TYPES = {
 }
 
 function GetRandomSettlerType()
+    assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
     local Gender = (math.random(1, 2) == 1 and "Male") or "Female";
     local Type   = math.random(1, #CONST_RANDOM_SETTLER_TYPES[Gender]);
     return CONST_RANDOM_SETTLER_TYPES[Gender][Type];
@@ -679,26 +680,28 @@ end
 API.GetRandomSettlerType = GetRandomSettlerType;
 
 function GetRandomMaleSettlerType()
+    assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
     local Type = math.random(1, #CONST_RANDOM_SETTLER_TYPES.Male);
     return CONST_RANDOM_SETTLER_TYPES.Male[Type];
 end
 API.GetRandomMaleSettlerType = GetRandomMaleSettlerType;
 
 function GetRandomFemaleSettlerType()
+    assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
     local Type = math.random(1, #CONST_RANDOM_SETTLER_TYPES.Female);
     return CONST_RANDOM_SETTLER_TYPES.Female[Type];
 end
 API.GetRandomFemaleSettlerType = GetRandomFemaleSettlerType;
 
-Lib.Require("comfort/global/GetQuestID");
-Lib.Register("comfort/global/IsValidQuest");
+Lib.Require("comfort/GetQuestID");
+Lib.Register("comfort/IsValidQuest");
 
 function IsValidQuest(_QuestID)
     return Quests[_QuestID] ~= nil or Quests[GetQuestID(_QuestID)] ~= nil;
 end
 API.IsValidQuest = IsValidQuest;
 
-Lib.Register("comfort/global/IsValidQuestName");
+Lib.Register("comfort/IsValidQuestName");
 
 CONST_REGEX_QUEST_NAME = "^[A-Za-z0-9_ @ÄÖÜäöüß]+$";
 
@@ -708,7 +711,7 @@ end
 API.IsValidQuestName = IsValidQuestName;
 
 Lib.Require("comfort/IsValidPosition");
-Lib.Register("comfort/global/LookAt");
+Lib.Register("comfort/LookAt");
 
 function LookAt(_Entity, _Target)
     local ID1 = GetID(_Entity);
@@ -742,7 +745,7 @@ function LookAt(_Entity, _Target)
 end
 API.LookAt = LookAt;
 
-Lib.Register("comfort/global/Move");
+Lib.Register("comfort/Move");
 
 function Move(_Entity, _Target, _IgnoreBlocking)
     local ID = GetID(_Entity);
@@ -781,7 +784,7 @@ function Move(_Entity, _Target, _IgnoreBlocking)
 end
 API.Move = Move;
 
-Lib.Register("comfort/global/ReplaceEntity");
+Lib.Register("comfort/ReplaceEntity");
 
 function ReplaceEntity(_Entity, _Type, _NewOwner)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
@@ -803,9 +806,9 @@ function ReplaceEntity(_Entity, _Type, _NewOwner)
 end
 API.ReplaceEntity = ReplaceEntity;
 
-Lib.Require("comfort/global/CreateStock");
-Lib.Require("comfort/global/CreateCartByGoodType");
-Lib.Register("comfort/global/SendCart");
+Lib.Require("comfort/CreateStock");
+Lib.Require("comfort/CreateCartByGoodType");
+Lib.Register("comfort/SendCart");
 
 function SendCart(_Position, _PlayerID, _GoodType, _Amount, _CartOverlay, _IgnoreReservation, _Overtake)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
@@ -827,7 +830,7 @@ function SendCart(_Position, _PlayerID, _GoodType, _Amount, _CartOverlay, _Ignor
 end
 API.SendCart = SendCart;
 
-Lib.Register("comfort/global/SetHealth");
+Lib.Register("comfort/SetHealth");
 
 function SetHealth(_Entity, _Health)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
@@ -852,7 +855,7 @@ API.SetHealth = SetHealth;
 Lib.Require("comfort/GetSoldiersOfGroup");
 Lib.Require("comfort/GetPosition");
 Lib.Require("comfort/IsValidPosition");
-Lib.Register("comfort/global/SetPosition");
+Lib.Register("comfort/SetPosition");
 
 function SetPosition(_Entity, _Target)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");
@@ -868,8 +871,6 @@ function SetPosition(_Entity, _Target)
     Logic.DEBUG_SetSettlerPosition(ID, Target.X, Target.Y);
 end
 API.SetPosition = SetPosition;
-
-Lib.Register("comfort/local/Test");
 
 Lib.Register("core/QSB");
 
@@ -8899,9 +8900,9 @@ Lib.Require("comfort/IsLocalScript");
 Lib.Require("comfort/ToBoolean");
 Lib.Require("comfort/GetHealth");
 Lib.Require("comfort/CopyTable");
-Lib.Require("comfort/global/GetQuestID");
-Lib.Require("comfort/global/IsValidQuest");
-Lib.Require("comfort/global/SendCart");
+Lib.Require("comfort/GetQuestID");
+Lib.Require("comfort/IsValidQuest");
+Lib.Require("comfort/SendCart");
 Lib.Require("core/feature/Core_Report");
 Lib.Register("core/feature/Core_Quest");
 
@@ -9634,8 +9635,42 @@ function Lib.Core.Save:SetupQuicksaveKeyCallback()
             if not Lib.Core.Save.HistoryEditionQuickSave and not arg[1] then
                 return;
             end
+            -- Close script console
+            if IsScriptConsoleShown() then
+                HideScriptConsole();
+            end
             -- Do quicksave
             KeyBindings_SaveGame_Orig_Core();
+        end
+
+        SaveDialog_SaveFile_Orig_Core = SaveDialog_SaveFile;
+        SaveDialog_SaveFile = function(...)
+            -- Close script console
+            if IsScriptConsoleShown() then
+                HideScriptConsole();
+            end
+            -- Do save
+            SaveDialog_SaveFile_Orig_Core();
+        end
+
+        self.Orig_GUI_Window_MainMenuSaveClicked = GUI_Window.MainMenuSaveClicked;
+        GUI_Window.MainMenuSaveClicked = function()
+            -- Close script console
+            if IsScriptConsoleShown() then
+                HideScriptConsole();
+            end
+            -- Do save
+            Lib.Core.Save.Orig_GUI_Window_MainMenuSaveClicked();
+        end
+
+        self.Orig_GUI_Window_MainMenuExit = GUI_Window.MainMenuExit;
+        GUI_Window.MainMenuExit = function()
+            -- Close script console
+            if IsScriptConsoleShown() then
+                HideScriptConsole();
+            end
+            -- Close game
+            Lib.Core.Save.Orig_GUI_Window_MainMenuExit();
         end
     end
 end
@@ -10786,10 +10821,11 @@ API.ShowTextInput = ShowTextInput;
 Lib.Core = Lib.Core or {};
 Lib.Core.Debug = {
     DisplayScriptErrors = false;
-    CheckAtRun          = false;
-    TraceQuests         = false;
-    DevelopingCheats    = false;
-    DevelopingShell     = false;
+    CheckAtRun = false;
+    TraceQuests = false;
+    DevelopingCheats = false;
+    DevelopingShell = false;
+    LoadscreenClosed = false;
 }
 
 Lib.Require("comfort/IsLocalScript");
@@ -10800,16 +10836,10 @@ Lib.Register("core/feature/Core_Debug");
 function Lib.Core.Debug:Initialize()
     Report.DebugChatConfirmed = CreateReport("Event_DebugChatConfirmed");
     Report.DebugConfigChanged = CreateReport("Event_DebugConfigChanged");
+    Report.DebugCallGlobal = CreateReport("Event_DebugCallGlobal");
 
     if IsLocalScript() then
         self:InitializeQsbDebugHotkeys();
-
-        CreateReportReceiver(
-            Report.ChatClosed,
-            function(...)
-                Lib.Core.Debug:ProcessDebugInput(...);
-            end
-        );
     end
 end
 
@@ -10821,6 +10851,21 @@ function Lib.Core.Debug:OnSaveGameLoaded()
 end
 
 function Lib.Core.Debug:OnReportReceived(_ID, ...)
+    if _ID == Report.LoadingFinished then
+        self.LoadscreenClosed = true;
+    elseif _ID == Report.ChatClosed then
+        if IsLocalScript() then
+            Lib.Core.Debug:ProcessDebugInput(...);
+        end
+    elseif _ID == Report.DebugCallGlobal then
+        if not IsLocalScript() then
+            self:CallFunctionFromString(...);
+        end
+    end
+end
+
+function Lib.Core.Debug:Test(_Text)
+    AddNote(_Text)
 end
 
 function Lib.Core.Debug:ActivateDebugMode(_DisplayScriptErrors, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests)
@@ -10906,12 +10951,48 @@ function Lib.Core.Debug:InitializeQsbDebugHotkeys()
     );
 end
 
+function Lib.Core.Debug:CallFunctionFromString(...)
+    local FunctionRef = nil;
+    local FunctionNameParts = string.slice(table.remove(arg, 1), "%.");
+    for i= 1, #FunctionNameParts do
+        local FunctionName = string.slice(FunctionNameParts[i], ":");
+        if #FunctionName > 1 then
+            if FunctionRef == nil then
+                FunctionRef = _G[FunctionName[1]][FunctionName[2]];
+                if FunctionRef then
+                    FunctionRef(_G[FunctionName[1]], unpack(arg));
+                end
+            else
+                FunctionRef = FunctionRef[FunctionName[1]][FunctionName[2]];
+                if FunctionRef then
+                    FunctionRef(_G[FunctionName[1]], unpack(arg));
+                end
+            end
+            return;
+        else
+            if FunctionRef == nil then
+                FunctionRef = _G[FunctionName[1]];
+            else
+                FunctionRef = FunctionRef[FunctionName[1]];
+            end
+        end
+    end
+    if FunctionRef then
+        FunctionRef(unpack(arg));
+    end
+end
+
 function Lib.Core.Debug:ProcessDebugShortcut(_Type, _Params)
     if self.DevelopingCheats then
         if _Type == "RestartMap" then
+            self:HideDebugInput();
             Framework.RestartMap();
         elseif _Type == "Terminal" then
-            ShowTextInput(GUI.GetPlayerID(), true);
+            if Framework.IsDevM() then
+                ShowTextInput(GUI.GetPlayerID(), true);
+            else
+                ToggleScriptConsole();
+            end
         end
     end
 end
@@ -11010,10 +11091,104 @@ end
 
 -- -------------------------------------------------------------------------- --
 
+function Debug_ShowVersion()
+    GUI.AddStaticNote("Version: " ..Lib.Loader.Version);
+end
+
+function Lib.Core.Debug:ToggleDebugInput()
+    if self.ConsoleIsVisible then
+        self:HideDebugInput();
+    else
+        self:ShowDebugInput();
+    end
+end
+
+function Lib.Core.Debug:ShowDebugInput()
+    local MotherPath = "/InGame/TempStuff/BGTopBar/temp";
+    local TopWidget = XGUIEng.GetWidgetPathByID(XGUIEng.GetTopPage());
+    if not self.LoadscreenClosed
+    or not self.DevelopingShell
+    or self.ConsoleIsVisible then
+        return;
+    end
+    Display.ToggleScriptConsole();
+    if TopWidget ~= MotherPath then
+        XGUIEng.PushPage(MotherPath, false);
+    end
+    XGUIEng.ShowWidget(MotherPath, 0);
+    RequestHiResDelay(0, function()
+        XGUIEng.ShowWidget(MotherPath, 1);
+        XGUIEng.ShowAllSubWidgets(MotherPath, 1);
+        XGUIEng.ShowWidget(MotherPath.. "/ShadowBottom", 0);
+        XGUIEng.ShowWidget(MotherPath.. "/ShadowTop", 0);
+        XGUIEng.ShowWidget(MotherPath.. "/BGTopBarRightBound", 0);
+        XGUIEng.SetWidgetLocalPosition(MotherPath, 0, 0);
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/1", 0, -22)
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/2", 295, -22)
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/3", 592, -22)
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/4", 889, -22)
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/5", 1184, -22)
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/6", 1483, -22);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6", 275, 300);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame", 275, 300);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Bottom", 275, 300);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Bottom/1", 275, 100);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Top", 275, 300);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Top/1", 275, 60);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6", 275, 60);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/DialogBG", 275, 60);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/DialogBG/1", 275, 60);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/DialogBG/1/1", 275, 60);
+        XGUIEng.SetWidgetLocalPosition(MotherPath, 0, -140);
+    end);
+
+    self.ConsoleIsVisible = true;
+end
+
+function Lib.Core.Debug:HideDebugInput()
+    local MotherPath = "/InGame/TempStuff/BGTopBar/temp";
+    if not self.ConsoleIsVisible then
+        return;
+    end
+    Display.ToggleScriptConsole();
+    XGUIEng.ShowWidget(MotherPath, 0);
+
+    self.ConsoleIsVisible = false;
+end
+
+-- -------------------------------------------------------------------------- --
+
 function ActivateDebugMode(_DisplayScriptErrors, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests)
     Lib.Core.Debug:ActivateDebugMode(_DisplayScriptErrors, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests);
 end
 API.ActivateDebugMode = ActivateDebugMode;
+
+function ShowScriptConsole()
+    Lib.Core.Debug:ShowDebugInput();
+end
+
+function HideScriptConsole()
+    Lib.Core.Debug:HideDebugInput();
+end
+
+function ToggleScriptConsole()
+    Lib.Core.Debug:ToggleDebugInput();
+end
+
+function IsScriptConsoleShown()
+    return Lib.Core.Debug.ConsoleIsVisible == true;
+end
+
+-- -------------------------------------------------------------------------- --
+
+function Debug_ShowVersion()
+    GUI.AddStaticNote("Version: " ..Lib.Loader.Version);
+end
+
+function Debug_Execute(_Function, ...)
+    error(type(_Function) == "string", "function must be a string!");
+    SendReportToGlobal(Report.DebugCallGlobal, _Function, unpack(arg));
+end
 
 
 Lib.Core = Lib.Core or {};
@@ -11481,6 +11656,145 @@ function ExecuteGlobal(_Command, ...)
         Lib.Core.Local:ExecuteGlobal(_Command, ...);
     end
 end
+
+Lib.Require("comfort/IsLocalScript");
+Lib.Register("module/diplomacy/Diplomacy_API");
+
+function SetDiplomacyStateForPlayer(_PlayerID, _State, ...)
+    local PlayerList = #{...} == 0 and {1,2,3,4,5,6,7,8} or {...};
+    error(not IsLocalScript(), "Can not be used in local script!");
+    Lib.Diplomacy.Global:SetDiplomacyStateForPlayer(_PlayerID, _State, PlayerList);
+end
+
+function SetDiplomacyStateForPlayers(_State, ...)
+    local PlayerList = {1,2,3,4,5,6,7,8};
+    error(not IsLocalScript(), "Can not be used in local script!");
+    for i= 1, #PlayerList do
+        Lib.Diplomacy.Global:SetDiplomacyStateForPlayer(PlayerList[i], _State, PlayerList);
+    end
+end
+
+function SaveDiplomacyStates()
+    error(not IsLocalScript(), "Can not be used in local script!");
+    Lib.Diplomacy.Global:SaveDiplomacy();
+end
+
+function ResetDiplomacyStates()
+    error(not IsLocalScript(), "Can not be used in local script!");
+    Lib.Diplomacy.Global:ResetDiplomacy();
+end
+
+Lib.Diplomacy = Lib.Diplomacy or {};
+Lib.Diplomacy.Name = "Diplomacy";
+Lib.Diplomacy.Global = {
+    DiplomacyBackup = {},
+};
+Lib.Diplomacy.Local  = {};
+
+Lib.Require("core/Core");
+Lib.Require("module/diplomacy/Diplomacy_API");
+Lib.Register("module/diplomacy/Diplomacy");
+
+-- -------------------------------------------------------------------------- --
+-- Global
+
+-- Global initalizer method
+function Lib.Diplomacy.Global:Initialize()
+    if not self.IsInstalled then
+        Report.DiplomacyChanged = CreateReport("Event_DiplomacyChanged");
+
+        self:OverwriteDiplomaticEntity();
+
+        -- Garbage collection
+        Lib.Diplomacy.Local = nil;
+    end
+    self.IsInstalled = true;
+end
+
+-- Global load game
+function Lib.Diplomacy.Global:OnSaveGameLoaded()
+end
+
+-- Global report listener
+function Lib.Diplomacy.Global:OnReportReceived(_ID, ...)
+    if _ID == Report.LoadingFinished then
+        self.LoadscreenClosed = true;
+    end
+end
+
+function Lib.Diplomacy.Global:SaveDiplomacy()
+    if #self.DiplomacyBackup == 0 then
+        for PlayerID1 = 1, 8 do
+            self.DiplomacyBackup[PlayerID1] = {};
+            for PlayerID2 = 1, 8 do
+                if PlayerID1 ~= PlayerID2 then
+                    self.DiplomacyBackup[PlayerID1][PlayerID2] = GetDiplomacyState(PlayerID1, PlayerID2);
+                end
+            end
+        end
+    end
+end
+
+function Lib.Diplomacy.Global:SetDiplomacyStateForPlayer(_PlayerID, _State, _PlayerList)
+    local State = _State or DiplomacyStates.Undecided;
+    self:SaveDiplomacy();
+    for i = 1, #_PlayerList do
+        if _PlayerID ~= _PlayerList[i] then
+            SetDiplomacyState(_PlayerID, _PlayerList[i], State);
+        end
+    end
+end
+
+function Lib.Diplomacy.Global:ResetDiplomacy()
+    if #self.DiplomacyBackup ~= 0 then
+        for PlayerID1 = 1, 8 do
+            for PlayerID2 = 1, 8 do
+                SetDiplomacyState(PlayerID1, PlayerID2, self.DiplomacyBackup[PlayerID1][PlayerID2]);
+            end
+        end
+        self.DiplomacyBackup = {};
+    end
+end
+
+function Lib.Diplomacy.Global:OverwriteDiplomaticEntity()
+    self.Orig_DiplomaticEntity.OnDiplomacyStatusChange = DiplomaticEntity.OnDiplomacyStatusChange;
+    DiplomaticEntity.OnDiplomacyStatusChange = function(_this, _relation, _diplomaticEntity, _oldState)
+        -- Send event
+        SendReport(Report.DiplomacyChanged, _this.ID, _diplomaticEntity.ID, _oldState, _relation.Status.State);
+        SendReportToLocal(Report.DiplomacyChanged, _this.ID, _diplomaticEntity.ID, _oldState, _relation.Status.State);
+        -- Call original
+        Lib.Diplomacy.Global.Orig_DiplomaticEntity.OnDiplomacyStatusChange(_this, _relation, _diplomaticEntity, _oldState);
+    end
+end
+
+-- -------------------------------------------------------------------------- --
+-- Local
+
+-- Local initalizer method
+function Lib.Diplomacy.Local:Initialize()
+    if not self.IsInstalled then
+        Report.DiplomacyChanged = CreateReport("Event_DiplomacyChanged");
+
+        -- Garbage collection
+        Lib.Diplomacy.Global = nil;
+    end
+    self.IsInstalled = true;
+end
+
+-- Local load game
+function Lib.Diplomacy.Local:OnSaveGameLoaded()
+end
+
+-- Local report listener
+function Lib.Diplomacy.Local:OnReportReceived(_ID, ...)
+    if _ID == Report.LoadingFinished then
+        self.LoadscreenClosed = true;
+    end
+end
+
+-- -------------------------------------------------------------------------- --
+
+RegisterModule(Lib.Diplomacy.Name);
 
 Lib.Require("comfort/IsLocalScript");
 Lib.Register("module/ui/UITools_API");
@@ -15163,7 +15477,7 @@ API.NpcCompose = NpcCompose;
 function NpcDispose(_Data)
     error(not IsLocalScript(), "NPC manipulated in local script.");
     error(IsExisting(_Data.Name), "Entity does not exist.");
-    error(Lib.NPC.Global:GetNpc(_Data.Name) == nil, "NPC must first be composed.");
+    error(Lib.NPC.Global:GetNpc(_Data.Name) ~= nil, "NPC must first be composed.");
     Lib.NPC.Global:DestroyNpc(_Data);
 end
 API.NpcDispose = NpcDispose;
@@ -15205,6 +15519,19 @@ function NpcTalkedTo(_Data, _Hero, _PlayerID)
 end
 API.NpcTalkedTo = NpcTalkedTo;
 
+function NpcHasArrived(_Data)
+    error(not IsLocalScript(), "NPC manipulated in local script.");
+    error(IsExisting(_Data.Name), "Entity does not exist.");
+
+    local NPC = Lib.NPC.Global:GetNpc(_Data.Name);
+    error(NPC ~= nil, "NPC was not found.");
+    if NPC.FollowDestination then
+        return NPC.Arrived == true;
+    end
+    return false;
+end
+API.NpcHasArrived = NpcHasArrived;
+
 Lib.NPC = Lib.NPC or {};
 Lib.NPC.Name = "NPC";
 Lib.NPC.Global = {
@@ -15217,7 +15544,7 @@ Lib.NPC.Text = {
     StartConversation = {
         de = "Gespräch beginnen",
         en = "Start conversation",
-        fr = "Commencer la conversation",
+        fr = "Conversation",
     }
 };
 
@@ -15226,7 +15553,8 @@ CONST_LAST_HERO_INTERACTED = 0;
 
 Lib.Require("comfort/GetDistance");
 Lib.Require("comfort/GetClosestToTarget");
-Lib.Require("comfort/global/LookAt");
+Lib.Require("comfort/LookAt");
+Lib.Require("comfort/Move");
 Lib.Require("core/Core");
 Lib.Require("module/entity/NPC_API");
 Lib.Require("module/entity/NPC_Behavior");
@@ -15238,11 +15566,6 @@ Lib.Register("module/entity/NPC");
 -- Global initalizer method
 function Lib.NPC.Global:Initialize()
     if not self.IsInstalled then
-        --- Someone talks to an NPC
-        ---
-        --- #### Parameters
-        --- * `NpcEntityID`  - ID of npc
-        --- * `HeroEntityID` - ID of hero
         Report.NpcInteraction = CreateReport("Event_NpcInteraction");
 
         self:OverrideQuestFunctions();
@@ -15254,6 +15577,7 @@ function Lib.NPC.Global:Initialize()
         end);
         RequestJob(function()
             Lib.NPC.Global:InteractableMarkerController();
+            Lib.NPC.Global:NpcFollowHeroController();
         end);
 
         -- Garbage collection
@@ -15288,6 +15612,7 @@ function Lib.NPC.Global:CreateNpc(_Data)
     self.NPC[_Data.Name] = {
         Name              = _Data.Name,
         Active            = true,
+        Arrived           = false,
         Type              = _Data.Type or 1,
         Player            = _Data.Player or {1, 2, 3, 4, 5, 6, 7, 8},
         WrongPlayerAction = _Data.WrongPlayerAction,
@@ -15296,6 +15621,13 @@ function Lib.NPC.Global:CreateNpc(_Data)
         Distance          = _Data.Distance or 350,
         Condition         = _Data.Condition,
         Callback          = _Data.Callback,
+        Follow            = _Data.Follow == true,
+        FollowHero        = _Data.FollowHero,
+        FollowCallback    = _Data.FollowCallback,
+        FollowDestination = _Data.FollowDestination,
+        FollowDistance    = _Data.FollowDistance or 2000,
+        FollowArriveArea  = _Data.FollowArriveArea or 500,
+        FollowSpeed       = _Data.FollowSpeed or 1.0,
         UseMarker         = self.UseMarker == true,
         MarkerID          = 0
     }
@@ -15353,10 +15685,17 @@ function Lib.NPC.Global:PerformNpcInteraction(_PlayerID)
         end
 
         if Data.Condition == nil or Data:Condition(_PlayerID, CONST_LAST_HERO_INTERACTED) then
-            Data.Active = false;
-            if Data.Callback then
-                Data:Callback(_PlayerID, CONST_LAST_HERO_INTERACTED);
+            if not Data.Follow then
+                Data.Active = false;
+                if Data.Callback then
+                    Data:Callback(_PlayerID, CONST_LAST_HERO_INTERACTED);
+                end
+            else
+                if Data.FollowCallback then
+                    Data:FollowCallback(_PlayerID, CONST_LAST_HERO_INTERACTED, false);
+                end
             end
+
         else
             Data.TalkedTo = 0;
         end
@@ -15526,10 +15865,24 @@ function Lib.NPC.Global:OverrideQuestFunctions()
     end
 end
 
-function Lib.NPC.Global:GetClosestKnight(_EntityID, _PlayerID)
+function Lib.NPC.Global:GetClosestKnight(_Entity, _PlayerID)
+    local EntityID = GetID(_Entity);
     local KnightIDs = {};
     Logic.GetKnights(_PlayerID, KnightIDs);
-    return GetClosestToTarget(_EntityID, KnightIDs);
+    return GetClosestToTarget(EntityID, KnightIDs);
+end
+
+function Lib.NPC.Global:GetClosestKnightAllPlayer(_Entity)
+    local ScriptName = Logic.GetEntityName(GetID(_Entity));
+    if self.NPC[ScriptName] then
+        local KnightIDs = {};
+        for _, PlayerID in pairs(self.NPC[ScriptName].Player) do
+            local PlayerKnightIDs = {};
+            Logic.GetKnights(PlayerID, KnightIDs);
+            KnightIDs = Array_Append(KnightIDs, PlayerKnightIDs);
+        end
+        return GetClosestToTarget(ScriptName, KnightIDs);
+    end
 end
 
 function Lib.NPC.Global:ToggleMarkerUsage(_Flag)
@@ -15607,18 +15960,54 @@ function Lib.NPC.Global:InteractionTriggerController()
 end
 
 function Lib.NPC.Global:InteractableMarkerController()
-    for k, v in pairs(self.NPC) do
-        if v.Active then
-            if  v.UseMarker and IsExisting(v.MarkerID)
-            and GetInteger(v.MarkerID, CONST_SCRIPTING_VALUES.Visible) == 801280 then
+    for k, Data in pairs(self.NPC) do
+        if Data.Active then
+            if  Data.UseMarker and IsExisting(Data.MarkerID)
+            and GetInteger(Data.MarkerID, CONST_SCRIPTING_VALUES.Visible) == 801280 then
                 self:HideMarker(k);
             else
                 self:ShowMarker(k);
             end
-            local x1,y1,z1 = Logic.EntityGetPos(v.MarkerID);
+            local x1,y1,z1 = Logic.EntityGetPos(Data.MarkerID);
             local x2,y2,z2 = Logic.EntityGetPos(GetID(k));
             if math.abs(x1-x2) > 20 or math.abs(y1-y2) > 20 then
-                Logic.DEBUG_SetPosition(v.MarkerID, x2, y2);
+                Logic.DEBUG_SetPosition(Data.MarkerID, x2, y2);
+            end
+        end
+    end
+end
+
+function Lib.NPC.Global:NpcFollowHeroController()
+    for _, Data in pairs(self.NPC) do
+        if Data.Active and Data.Follow and not Data.Arrived then
+            local EntityID = GetID(Data.Name);
+            local LeadingEntity = GetID(Data.FollowHero);
+            local FollowDistance = Data.FollowDistance;
+            local FollowDestination = Data.FollowDestination;
+            local FollowArriveArea = Data.FollowArriveArea;
+            local FollowSpeed = Data.FollowSpeed;
+
+            -- Get leader
+            if not LeadingEntity then
+                LeadingEntity = self:GetClosestKnightAllPlayer(EntityID);
+            end
+            -- Move NPC
+            if LeadingEntity and not Logic.IsEntityMoving(EntityID) then
+                if  GetDistance(EntityID, LeadingEntity) <= FollowDistance
+                and GetDistance(EntityID, LeadingEntity) > FollowArriveArea / 2 then
+                    Logic.SetSpeedFactor(EntityID, FollowSpeed);
+                    Move(EntityID, LeadingEntity);
+                end
+            end
+            -- Check arrival
+            if LeadingEntity and GetDistance(EntityID, FollowDestination) <= FollowArriveArea then
+                if not Logic.IsEntityMoving(EntityID) then
+                    Move(EntityID, FollowDestination);
+                    if Data.FollowCallback then
+                        local PlayerID = Logic.EntityGetPlayer(LeadingEntity);
+                        Data:FollowCallback(PlayerID, LeadingEntity, true);
+                    end
+                end
             end
         end
     end
@@ -15845,18 +16234,20 @@ function SoundRestore()
 end
 API.SoundRestore = SoundRestore;
 
-function PlayVoice(_File)
+function PlayVoice(_File, _Identifier)
+    _Identifier = _Identifier or "ImportantStuff";
     if GUI then
         StopVoice();
-        Sound.PlayVoice("ImportantStuff", _File);
+        Sound.PlayVoice(_Identifier, _File);
     end
-    ExecuteLocal([[PlayVoice("%s")]], _File);
+    ExecuteLocal([[PlayVoice("%s", "%s")]], _File, _Identifier);
 end
 API.PlayVoice = PlayVoice;
 
-function StopVoice()
+function StopVoice(_Identifier)
+    _Identifier = _Identifier or "ImportantStuff";
     if GUI then
-        Sound.StopVoice("ImportantStuff");
+        Sound.StopVoice(_Identifier);
     end
     ExecuteLocal("StopVoice()");
 end
@@ -19216,6 +19607,23 @@ InteractiveObjectDeactivate = function(_ScriptName, ...)
 end
 API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
 
+
+
+function Debug_EnableIO(_Entity, _State, _PlayerID)
+    assert(IsLocalScript(), "Debug function must be used in local script!");
+    SendReportToGlobal(Report.Internal_DebugEnableObject, _Entity, _State, _PlayerID);
+end
+
+function Debug_DisableIO(_Entity, _State, _PlayerID)
+    assert(IsLocalScript(), "Debug function must be used in local script!");
+    SendReportToGlobal(Report.Internal_DebugDisableObject, _Entity, _State, _PlayerID);
+end
+
+function Debug_InitIO(_Entity, _RewardType, _RewardAmount, _Cost1Type, _Cost1Amount, _Cost2Type, _Cost2Amount)
+    assert(IsLocalScript(), "Debug function must be used in local script!");
+    SendReportToGlobal(Report.Internal_DebugInitObject, _Entity, _RewardType, _RewardAmount, _Cost1Type, _Cost1Amount, _Cost2Type, _Cost2Amount);
+end
+
 Lib.IO = Lib.IO or {};
 Lib.IO.Name = "IO";
 Lib.IO.Global = {
@@ -19244,7 +19652,8 @@ CONST_IO_LAST_HERO = 0;
 
 Lib.Require("comfort/GetClosestToTarget");
 Lib.Require("comfort/IsLocalScript");
-Lib.Require("comfort/global/ReplaceEntity");
+Lib.Require("comfort/IsHistoryEdition");
+Lib.Require("comfort/ReplaceEntity");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/faker/Technology");
@@ -19287,6 +19696,10 @@ function Lib.IO.Global:Initialize()
         --- * `ScriptName` - Scriptname of entity
         Report.ObjectDelete = CreateReport("Event_ObjectDelete");
 
+        Report.Internal_DebugEnableObject = CreateReport("Event_Internal_DebugEnableObject");
+        Report.Internal_DebugDisableObject = CreateReport("Event_Internal_DebugDisableObject");
+        Report.Internal_DebugInitObject = CreateReport("Event_Internal_DebugInitObject");
+
         Lib.IO.Shared:CreateTechnologies();
 
         self:OverrideObjectInteraction();
@@ -19313,6 +19726,23 @@ function Lib.IO.Global:OnReportReceived(_ID, ...)
         if arg[3] then
             self:ProcessChatInput(arg[1]);
         end
+    elseif _ID == Report.Internal_DebugEnableObject then
+        error(IsExisting(arg[1]), "object " ..arg[1].. " does not exist!");
+        InteractiveObjectActivate(arg[1], arg[2], arg[3]);
+    elseif _ID == Report.Internal_DebugDeableObject then
+        error(IsExisting(arg[1]), "object " ..arg[1].. " does not exist!");
+        InteractiveObjectDeactivate(arg[1], arg[2], arg[3]);
+    elseif _ID == Report.Internal_DebugInitObject then
+        error(IsExisting(arg[1]), "object " ..arg[1].. " does not exist!");
+        local Reward = (arg[2] ~= nil and {arg[2], arg[3]});
+        local Costs = (arg[4] ~= nil and {arg[4], arg[5], arg[6], arg[7]});
+        API.SetupObject({
+            Name = arg[1],
+            Costs = Costs,
+            Reward = Reward,
+            Waittime = 0,
+            State = 0
+        });
     end
 end
 
@@ -19509,28 +19939,30 @@ function Lib.IO.Global:OverrideObjectInteraction()
 end
 
 function Lib.IO.Global:ProcessChatInput(_Text)
-    local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
-    for i= 1, #Commands, 1 do
-        if Commands[i][1] == "enableobject" then
-            local State = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
-            local PlayerID = (Commands[i][4] and tonumber(Commands[i][4])) or nil;
-            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
-            ---@diagnostic disable-next-line: param-type-mismatch
-            InteractiveObjectActivate(Commands[i][2], State, PlayerID);
-            log("activated object " ..Commands[i][2].. ".");
-        elseif Commands[i][1] == "disableobject" then
-            local PlayerID = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
-            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
-            InteractiveObjectDeactivate(Commands[i][2], PlayerID);
-            log("deactivated object " ..Commands[i][2].. ".");
-        elseif Commands[i][1] == "initobject" then
-            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
-            API.SetupObject({
-                Name     = Commands[i][2],
-                Waittime = 0,
-                State    = 0
-            });
-            log("quick initalization of object " ..Commands[i][2].. ".");
+    if IsHistoryEdition() then
+        local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
+        for i= 1, #Commands, 1 do
+            if Commands[i][1] == "enableobject" then
+                local State = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
+                local PlayerID = (Commands[i][4] and tonumber(Commands[i][4])) or nil;
+                error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+                ---@diagnostic disable-next-line: param-type-mismatch
+                InteractiveObjectActivate(Commands[i][2], State, PlayerID);
+                log("activated object " ..Commands[i][2].. ".");
+            elseif Commands[i][1] == "disableobject" then
+                local PlayerID = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
+                error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+                InteractiveObjectDeactivate(Commands[i][2], PlayerID);
+                log("deactivated object " ..Commands[i][2].. ".");
+            elseif Commands[i][1] == "initobject" then
+                error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+                API.SetupObject({
+                    Name     = Commands[i][2],
+                    Waittime = 0,
+                    State    = 0
+                });
+                log("quick initalization of object " ..Commands[i][2].. ".");
+            end
         end
     end
 end
@@ -19590,6 +20022,10 @@ function Lib.IO.Local:Initialize()
         Report.ObjectInteraction = CreateReport("Event_ObjectInteraction");
         Report.ObjectReset = CreateReport("Event_ObjectReset");
         Report.ObjectDelete = CreateReport("Event_ObjectDelete");
+
+        Report.Internal_DebugEnableObject = CreateReport("Event_Internal_DebugEnableObject");
+        Report.Internal_DebugDisableObject = CreateReport("Event_Internal_DebugDisableObject");
+        Report.Internal_DebugInitObject = CreateReport("Event_Internal_DebugInitObject");
 
         Lib.IO.Shared:CreateTechnologies();
 
@@ -20073,11 +20509,29 @@ function CreateRandomLuxuryChest(_Name)
 end
 API.CreateRandomLuxuryChest = CreateRandomLuxuryChest;
 
+
+
+function Debug_GoldChest(_Entity)
+    assert(IsLocalScript(), "Debug function must be used in local script!");
+    SendReportToGlobal(Report.Internal_DebugGoldChest, _Entity);
+end
+
+function Debug_GoodChest(_Entity)
+    assert(IsLocalScript(), "Debug function must be used in local script!");
+    SendReportToGlobal(Report.Internal_DebugResourceChest, _Entity);
+end
+
+function Debug_LuxuryChest(_Entity)
+    assert(IsLocalScript(), "Debug function must be used in local script!");
+    SendReportToGlobal(Report.Internal_DebugLuxuryChest, _Entity);
+end
+
 Lib.IOChest = Lib.IOChest or {};
 Lib.IOChest.Name = "IOChest";
 Lib.IOChest.Global = {};
 Lib.IOChest.Local = {};
 
+Lib.Require("comfort/IsHistoryEdition");
 Lib.Require("core/Core");
 Lib.Require("module/io/IO");
 Lib.Require("module/io/IOChest_API");
@@ -20096,6 +20550,10 @@ function Lib.IOChest.Global:Initialize()
         --- * `KnightID`   - ID of activating hero
         --- * `PlayerID`   - ID of activating player
         Report.InteractiveTreasureActivated = CreateReport("Event_InteractiveTreasureActivated");
+
+        Report.Internal_DebugGoldChest = CreateReport("Event_Internal_DebugGoldChest");
+        Report.Internal_DebugResourceChest = CreateReport("Event_Internal_DebugResourceChest");
+        Report.Internal_DebugLuxuryChest = CreateReport("Event_Internal_DebugLuxuryChest");
 
         -- Garbage collection
         Lib.IOChest.Local = nil;
@@ -20123,23 +20581,34 @@ function Lib.IOChest.Global:OnReportReceived(_ID, ...)
         if CONST_IO[arg[1]] and CONST_IO[arg[1]].IsInteractiveChest then
             -- Nothing to do?
         end
+    elseif _ID == Report.Internal_DebugGoldChest then
+        error(IsExisting(arg[1]), "entity " ..arg[1].. " does not exist!");
+        CreateRandomGoldChest(arg[1]);
+    elseif _ID == Report.Internal_DebugResourceChest then
+        error(IsExisting(arg[1]), "entity " ..arg[1].. " does not exist!");
+        CreateRandomResourceChest(arg[1]);
+    elseif _ID == Report.Internal_DebugLuxuryChest then
+        error(IsExisting(arg[1]), "entity " ..arg[1].. " does not exist!");
+        CreateRandomLuxuryChest(arg[1]);
     end
 end
 
 function Lib.IOChest.Global:ProcessChatInput(_Text)
-    local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
-    for i= 1, #Commands, 1 do
-        if Commands[i][1] == "spawncow" then
-            if not IsExisting(Commands[i][2]) then
-                CreateRandomGoldChest(Commands[i][2]);
-            end
-        elseif Commands[i][1] == "spawnsheep" then
-            if not IsExisting(Commands[i][2]) then
-                CreateRandomResourceChest(Commands[i][2]);
-            end
-        elseif Commands[i][1] == "luxurychest" then
-            if not IsExisting(Commands[i][2]) then
-                CreateRandomLuxuryChest(Commands[i][2]);
+    if IsHistoryEdition() then
+        local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
+        for i= 1, #Commands, 1 do
+            if Commands[i][1] == "goldchest" then
+                if not IsExisting(Commands[i][2]) then
+                    CreateRandomGoldChest(Commands[i][2]);
+                end
+            elseif Commands[i][1] == "goodchest" then
+                if not IsExisting(Commands[i][2]) then
+                    CreateRandomResourceChest(Commands[i][2]);
+                end
+            elseif Commands[i][1] == "luxurychest" then
+                if not IsExisting(Commands[i][2]) then
+                    CreateRandomLuxuryChest(Commands[i][2]);
+                end
             end
         end
     end
@@ -20259,6 +20728,10 @@ end
 function Lib.IOChest.Local:Initialize()
     if not self.IsInstalled then
         Report.InteractiveTreasureActivated = CreateReport("Event_InteractiveTreasureActivated");
+
+        Report.Internal_DebugGoldChest = CreateReport("Event_Internal_DebugGoldChest");
+        Report.Internal_DebugResourceChest = CreateReport("Event_Internal_DebugResourceChest");
+        Report.Internal_DebugLuxuryChest = CreateReport("Event_Internal_DebugLuxuryChest");
 
         self:CreateDefaultObjectNames();
 
@@ -20776,7 +21249,7 @@ function Lib.EntityEvent.Global:OnReportReceived(_ID, ...)
     if _ID == Report.LoadscreenClosed then
         self.LoadscreenClosed = true;
     elseif _ID == Report.EntityHurt then
-        self.AttackedEntities[arg[1]] = {arg[3], 100};
+        self.AttackedEntities[arg[3]] = {arg[1], 300};
     end
 end
 
@@ -22228,7 +22701,8 @@ end
 function Lib.Damage.Global:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
-        self:InitEntityBaseDamage();
+        self:InitEntityBaseDamageBsg();
+        self:InitEntityBaseDamageExt();
     elseif _ID == Report.EntityDestroyed then
         self.InvulnerableList[arg[1]] = nil;
     elseif _ID == Report.EntityHurt then
@@ -22240,7 +22714,7 @@ function Lib.Damage.Global:IsInvulnerable(_Entity)
     return self.InvulnerableList[GetID(_Entity)] ~= nil;
 end
 
-function Lib.Damage.Global:InitEntityBaseDamage()
+function Lib.Damage.Global:InitEntityBaseDamageBsg()
     SetEntityTypeDamage(Entities.U_MilitaryBow, 20);
     SetEntityTypeDamage(Entities.U_MilitaryBow, 5,
         EntityCategories.AttackableBuilding,
@@ -22336,7 +22810,9 @@ function Lib.Damage.Global:InitEntityBaseDamage()
     SetEntityTypeDamage(Entities.A_NA_Lion_Female, 40);
     SetEntityTypeDamage(Entities.A_NA_Lion_Male, 40);
     SetEntityTypeDamage(Entities.A_NE_PolarBear, 120);
+end
 
+function Lib.Damage.Global:InitEntityBaseDamageExt()
     if g_GameExtraNo == 0 then
         return;
     end
@@ -22405,7 +22881,7 @@ function Lib.Damage.Global:OnEntityHurtEntity(_EntityID1, _PlayerID1, _EntityID2
         return;
     end
 
-    local Damage = 1;
+    local Damage = 25;
 
     -- Player properties
     local TerritoryBonus = Logic.GetTerritoryBonus(AggressorID) * self.TerritoryBonus[_PlayerID1];
@@ -22417,8 +22893,8 @@ function Lib.Damage.Global:OnEntityHurtEntity(_EntityID1, _PlayerID1, _EntityID2
 
     -- Get attacker properties
     local MoralFactor  = Logic.GetPlayerMorale(_PlayerID1);
-    Damage = self:GetEntityTypeBaseDamage(EntityType1, EntityType2);
-    Damage = self:GetEntityNameBaseDamage(EntityName1, EntityType2);
+    Damage = self:GetEntityTypeBaseDamage(EntityType1, EntityType2) or Damage;
+    Damage = self:GetEntityNameBaseDamage(EntityName1, EntityType2) or Damage;
 
     -- Get defender properties
     local Armor = 0;
@@ -22460,7 +22936,6 @@ function Lib.Damage.Global:GetEntityTypeBaseDamage(_Type1, _Type2)
         end
         return self.EntityTypeDamage[_Type1][0] or 25;
     end
-    return 25;
 end
 
 -- Returns the base damage of the entity type depending on the target type.
@@ -22473,7 +22948,6 @@ function Lib.Damage.Global:GetEntityNameBaseDamage(_Name1, _Type2)
         end
         return self.EntityNameDamage[_Name1][0] or 25;
     end
-    return 25;
 end
 
 -- Returns a valid entity ID or 0. If entity is a leader the first soldier
@@ -22986,6 +23460,52 @@ function AddDisableDecisionCondition(_Function)
 end
 API.AddDisableDecisionCondition = AddDisableDecisionCondition;
 
+
+
+function Debug_FailQuest(_Name)
+    SendReportToGlobal(Report.Internal_DebugFailQuest, _Name);
+end
+
+function Debug_WinQuest(_Name)
+    SendReportToGlobal(Report.Internal_DebugWinQuest, _Name);
+end
+
+function Debug_StartQuest(_Name)
+    SendReportToGlobal(Report.Internal_DebugStartQuest, _Name);
+end
+
+function Debug_RestartQuest(_Name)
+    SendReportToGlobal(Report.Internal_DebugRestartQuest, _Name);
+end
+
+function Debug_StopQuest(_Name)
+    SendReportToGlobal(Report.Internal_DebugStopQuest, _Name);
+end
+
+function Debug_FindQuests(_Name)
+    SendReportToGlobal(Report.Internal_DebugListNamedQuests, _Name);
+end
+
+function Debug_FailedQuests()
+    SendReportToGlobal(Report.Internal_DebugListFailedQuests);
+end
+
+function Debug_StoppedQuests()
+    SendReportToGlobal(Report.Internal_DebugListStoppedQuests);
+end
+
+function Debug_ActiveQuests()
+    SendReportToGlobal(Report.Internal_DebugListActiveQuests);
+end
+
+function Debug_WonQuests()
+    SendReportToGlobal(Report.Internal_DebugListWonQuests);
+end
+
+function Debug_WaitingQuests()
+    SendReportToGlobal(Report.Internal_DebugListWaitingQuests);
+end
+
 ---@diagnostic disable: missing-return-value
 
 Lib.Quest = Lib.Quest or {};
@@ -23004,9 +23524,9 @@ SegmentResult = {
     Ignore  = 3,
 }
 
-Lib.Require("comfort/global/GetQuestID");
-Lib.Require("comfort/global/IsValidQuest");
-Lib.Require("comfort/global/IsValidQuestName");
+Lib.Require("comfort/GetQuestID");
+Lib.Require("comfort/IsValidQuest");
+Lib.Require("comfort/IsValidQuestName");
 Lib.Require("core/core");
 Lib.Require("module/quest/Quest_API");
 Lib.Require("module/quest/Quest_Behavior");
@@ -23018,6 +23538,19 @@ Lib.Register("module/quest/Quest");
 -- Global initalizer method
 function Lib.Quest.Global:Initialize()
     if not self.IsInstalled then
+        Report.Internal_DebugFailQuest = CreateReport("Event_Internal_DebugFailQuest");
+        Report.Internal_DebugWinQuest = CreateReport("Event_Internal_DebugWinQuest");
+        Report.Internal_DebugStartQuest = CreateReport("Event_Internal_DebugStartQuest");
+        Report.Internal_DebugRestart = CreateReport("Event_Internal_DebugRestart");
+        Report.Internal_DebugStopQuests = CreateReport("Event_Internal_DebugStopQuests");
+
+        Report.Internal_DebugListFailedQuests = CreateReport("Event_Internal_DebugListFailedQuests");
+        Report.Internal_DebugListWonQuests = CreateReport("Event_Internal_DebugListWonQuests");
+        Report.Internal_DebugListActiveQuests = CreateReport("Event_Internal_DebugListActiveQuests");
+        Report.Internal_DebugListStoppedQuests = CreateReport("Event_Internal_DebugListStoppedQuests");
+        Report.Internal_DebugListWaitingQuests = CreateReport("Event_Internal_DebugListWaitingQuests");
+        Report.Internal_DebugListNamedQuests = CreateReport("Event_Internal_DebugListNamedQuests");
+
         Quest_Loop = self.QuestLoop;
         self:OverrideKernelQuestApi();
 
@@ -23035,7 +23568,50 @@ end
 function Lib.Quest.Global:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
-    elseif _ID == Report.ChatClosed then
+
+    elseif _ID == Report.Internal_DebugFailQuest then
+        local FoundQuests = self:FindQuestsByExactName(arg[1], 1);
+        error(#FoundQuests == 1, "Unable to find quest containing '" ..arg[1].. "'");
+        FailQuest(FoundQuests[1].Identifier);
+        log("forced quest to fail: '" ..FoundQuests[1].Identifier.. "'");
+    elseif _ID == Report.Internal_DebugWinQuest then
+        local FoundQuests = self:FindQuestsByExactName(arg[1], 1);
+        error(#FoundQuests == 1, "Unable to find quest containing '" ..arg[1].. "'");
+        RestartQuest(FoundQuests[1].Identifier);
+        log("forced quest to restart: '" ..FoundQuests[1].Identifier.. "'");
+    elseif _ID == Report.Internal_DebugStartQuest then
+        local FoundQuests = self:FindQuestsByExactName(arg[1], 1);
+        error(#FoundQuests == 1, "Unable to find quest containing '" ..arg[1].. "'");
+        StartQuest(FoundQuests[1].Identifier);
+        log("forced quest to start: '" ..FoundQuests[1].Identifier.. "'");
+    elseif _ID == Report.Internal_DebugRestart then
+        local FoundQuests = self:FindQuestsByExactName(arg[1], 1);
+        error(#FoundQuests == 1, "Unable to find quest containing '" ..arg[1].. "'");
+        StopQuest(FoundQuests[1].Identifier);
+        log("forced quest to stop: '" ..FoundQuests[1].Identifier.. "'");
+    elseif _ID == Report.Internal_DebugStopQuests then
+        local FoundQuests = self:FindQuestsByExactName(arg[1], 1);
+        error(#FoundQuests == 1, "Unable to find quest containing '" ..arg[1].. "'");
+        WinQuest(FoundQuests[1].Identifier);
+        log("forced quest to succeed: '" ..FoundQuests[1].Identifier.. "'");
+    elseif _ID == Report.Internal_DebugListFailedQuests then
+        AddStaticNote(self:ListQuestsByResult(QuestResult.Failure, 15));
+        log(self:ListQuestsByResult(QuestResult.Failure));
+    elseif _ID == Report.Internal_DebugListWonQuests then
+        AddStaticNote(self:ListQuestsByResult(QuestResult.Success, 15));
+        log(self:ListQuestsByResult(QuestResult.Success));
+    elseif _ID == Report.Internal_DebugListActiveQuests then
+        AddStaticNote(self:ListQuestsByState(QuestState.Active, 15));
+        log(self:ListQuestsByState(QuestState.Active));
+    elseif _ID == Report.Internal_DebugListStoppedQuests then
+        AddStaticNote(self:ListQuestsByResult(QuestResult.Interrupted, 15));
+        log(self:ListQuestsByResult(QuestResult.Interrupted));
+    elseif _ID == Report.Internal_DebugListWaitingQuests then
+        AddStaticNote(self:ListQuestsByState(QuestState.NotTriggered, 15));
+        log(self:ListQuestsByState(QuestState.NotTriggered));
+    elseif _ID == Report.Internal_DebugListNamedQuests then
+        AddStaticNote(self:ListQuestsByName(arg[1], 15));
+        log(self:ListQuestsByName(arg[1]));
     end
 end
 
@@ -23564,7 +24140,7 @@ function Lib.Quest.Global:ListQuestsByName(_QuestName, _MaxResults)
 end
 
 function Lib.Quest.Global:ProcessChatInput(_Text, _PlayerID, _IsDebug)
-    if _IsDebug then
+    if _IsDebug and IsHistoryEdition() then
         local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
         for i= 1, #Commands, 1 do
             if Commands[i][1] == "fail"
@@ -23621,6 +24197,19 @@ end
 -- Local initalizer method
 function Lib.Quest.Local:Initialize()
     if not self.IsInstalled then
+        Report.Internal_DebugFailQuest = CreateReport("Event_Internal_DebugFailQuest");
+        Report.Internal_DebugWinQuest = CreateReport("Event_Internal_DebugWinQuest");
+        Report.Internal_DebugStartQuest = CreateReport("Event_Internal_DebugStartQuest");
+        Report.Internal_DebugRestart = CreateReport("Event_Internal_DebugRestart");
+        Report.Internal_DebugStopQuests = CreateReport("Event_Internal_DebugStopQuests");
+
+        Report.Internal_DebugListFailedQuests = CreateReport("Event_Internal_DebugListFailedQuests");
+        Report.Internal_DebugListWonQuests = CreateReport("Event_Internal_DebugListWonQuests");
+        Report.Internal_DebugListActiveQuests = CreateReport("Event_Internal_DebugListActiveQuests");
+        Report.Internal_DebugListStoppedQuests = CreateReport("Event_Internal_DebugListStoppedQuests");
+        Report.Internal_DebugListWaitingQuests = CreateReport("Event_Internal_DebugListWaitingQuests");
+        Report.Internal_DebugListNamedQuests = CreateReport("Event_Internal_DebugListNamedQuests");
+
         self:OverwriteQuestTexts();
 
         -- Garbage collection
@@ -23744,9 +24333,11 @@ function Lib.Quest.Local:OverwriteQuestTexts()
     --- @return string Name Name of string
     --- @return string? File Name of file
     GetTextOverride = function(_Quest)
-        assert(type(_Quest) == "table");
-
         local Result;
+        if not _Quest then
+            return;
+        end
+        assert(type( _Quest ) == "table");
         if _Quest.State == QuestState.Over then
             if _Quest.Result == QuestResult.Success then
                 local Text = _Quest.QuestSuccessMsg or "";
@@ -24434,7 +25025,7 @@ function B_Goal_DestroySoldiers:CustomFunction(_Quest)
                            ("Player " ..self.AttackedPlayer);
         Lib.Core.Quest:ChangeCustomQuestCaptionText(
             string.format(
-                Swift.Text:Localize(self.Text),
+                Lib.Core.Text:Localize(self.Text),
                 PlayerName, self.KillsNeeded
             ),
             _Quest
@@ -25306,8 +25897,8 @@ Lib.QuestBehavior.Local = {};
 --- @diagnostic disable: undefined-field
 
 Lib.Require("comfort/GetPlayerName");
-Lib.Require("comfort/global/GetRandomSettlerType");
-Lib.Require("comfort/global/LookAt");
+Lib.Require("comfort/GetRandomSettlerType");
+Lib.Require("comfort/LookAt");
 Lib.Require("comfort/ToBoolean");
 Lib.Require("core/core");
 Lib.Require("module/quest/Quest");
@@ -26141,8 +26732,8 @@ Lib.Warehouse.Text = {
 Lib.Require("comfort/GetSiegeengineTypeByCartType");
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("comfort/KeyOf");
-Lib.Require("comfort/global/ReplaceEntity");
-Lib.Require("comfort/global/SendCart");
+Lib.Require("comfort/ReplaceEntity");
+Lib.Require("comfort/SendCart");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/io/IO");
@@ -27039,7 +27630,7 @@ Lib.SettlementSurvival.Shared = {
     },
 };
 
-Lib.Require("comfort/global/SetHealth");
+Lib.Require("comfort/SetHealth");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIBuilding");
 Lib.Require("module/ui/UITools");
@@ -27921,7 +28512,7 @@ Lib.SettlementLimitation.Text = {
         DisabledDone = {
             de = "Wurde bereits entwickelt!",
             en = "Territory already developed!",
-            fr = "Territoire déjà aménagé !",
+            fr = "Territoire déjà aménagé!",
         }
     },
 
@@ -27943,6 +28534,27 @@ function ActivateSettlementLimitation(_Flag)
     this.Active = true;
     Lib.SettlementLimitation.ReleaseContext();
 end
+API.ActivateSettlementLimitation = ActivateSettlementLimitation;
+
+function RequireTitleToDevelopTerritory(_Title)
+    assert(not IsLocalScript(), "Can not be used in local script!");
+    ExecuteLocal([[
+        table.insert(NeedsAndRightsByKnightTitle[%d][4], 1, Technologies.R_RuralLogistics)
+        CreateTechnologyKnightTitleTable()
+    ]], _Title);
+    table.insert(NeedsAndRightsByKnightTitle[_Title][4], 1, Technologies.R_RuralLogistics);
+    CreateTechnologyKnightTitleTable()
+    for i= 1, 8 do
+        Logic.TechnologySetState(i, Technologies.R_RuralLogistics, 0);
+    end
+end
+API.RequireTitleToDevelopTerritory = RequireTitleToDevelopTerritory;
+
+function AllowDevelopTerritory(_PlayerID, _Allowed)
+    assert(not IsLocalScript(), "Can not be used in local script!");
+    Logic.TechnologySetState(_PlayerID, Technologies.R_RuralLogistics, (_Allowed and 3 or 1));
+end
+API.AllowDevelopTerritory = AllowDevelopTerritory;
 
 function SetTerritoryBuildingLimit(_PlayerID, _Territory, _Limit)
     local TerritoryID = GetTerritoryID(_Territory);
@@ -27953,6 +28565,7 @@ function SetTerritoryBuildingLimit(_PlayerID, _Territory, _Limit)
     this.TerritoryRestriction[_PlayerID][TerritoryID] = _Limit;
     Lib.SettlementLimitation.ReleaseContext();
 end
+API.SetTerritoryBuildingLimit = SetTerritoryBuildingLimit;
 
 function SetTerritoryBuildingTypeLimit(_PlayerID, _Territory, _Type, _Limit)
     local TerritoryID = GetTerritoryID(_Territory);
@@ -27966,6 +28579,7 @@ function SetTerritoryBuildingTypeLimit(_PlayerID, _Territory, _Type, _Limit)
     this.TerritoryTypeRestriction[_PlayerID][TerritoryID][_Type] = _Limit;
     Lib.SettlementLimitation.ReleaseContext();
 end
+API.SetTerritoryBuildingTypeLimit = SetTerritoryBuildingTypeLimit;
 
 function ClearTerritoryBuildingLimit(_PlayerID, _Territory)
     local TerritoryID = GetTerritoryID(_Territory);
@@ -27976,6 +28590,7 @@ function ClearTerritoryBuildingLimit(_PlayerID, _Territory)
     this.TerritoryRestriction[_PlayerID][TerritoryID] = nil;
     Lib.SettlementLimitation.ReleaseContext();
 end
+API.ClearTerritoryBuildingLimit = ClearTerritoryBuildingLimit;
 
 function ClearTerritoryBuildingTypeLimit(_PlayerID, _Territory, _Type)
     local TerritoryID = GetTerritoryID(_Territory);
@@ -27989,6 +28604,7 @@ function ClearTerritoryBuildingTypeLimit(_PlayerID, _Territory, _Type)
     this.TerritoryTypeRestriction[_PlayerID][TerritoryID][_Type] = nil;
     Lib.SettlementLimitation.ReleaseContext();
 end
+API.ClearTerritoryBuildingTypeLimit = ClearTerritoryBuildingTypeLimit;
 
 function SetTerritoryDevelopmentCost(_CostType1, _Amount1, _CostType2, _Amount2)
     if not IsLocalScript() then
@@ -28004,30 +28620,30 @@ function SetTerritoryDevelopmentCost(_CostType1, _Amount1, _CostType2, _Amount2)
     this.UpgradeTerritoryCosts = {_CostType1, _Amount1, _CostType2, _Amount2};
     Lib.SettlementLimitation.ReleaseContext();
 end
+API.SetTerritoryDevelopmentCost = SetTerritoryDevelopmentCost;
 
 Lib.SettlementLimitation = Lib.SettlementLimitation or {};
 Lib.SettlementLimitation.Name = "SettlementLimitation";
 Lib.SettlementLimitation.Global = {
     Active = false,
-
     TerritoryRestriction = {},
     TerritoryTypeRestriction = {},
     OutpostUpgradeBonus = {},
-
-    UpgradeTerritoryCosts = {Goods.G_Gold, 300},
-
-    CityBuildings = {},
-    OuterRimBuildings = {},
+    MultiConstructionBonus = {},
 };
 Lib.SettlementLimitation.Local  = {
     Active = false,
-
     TerritoryRestriction = {},
     TerritoryTypeRestriction = {},
     OutpostUpgradeBonus = {},
-
-    UpgradeTerritoryCosts = {Goods.G_Gold, 300},
-
+    MultiConstructionBonus = {},
+};
+Lib.SettlementLimitation.Shared = {
+    TechnologyConfig = {
+        -- Tech name, Description, Icon, Extra Number
+        {"R_RuralLogistics", {de = "Ländliche Logistik", en = "Rural Logistics", fr = "Logistique agricole",}, {3, 6, 0}, 0},
+    },
+    DevelopTerritoryCosts = {Goods.G_Gold, 500},
     CityBuildings = {},
     OuterRimBuildings = {},
 };
@@ -28035,6 +28651,8 @@ Lib.SettlementLimitation.Local  = {
 Lib.Require("comfort/GetTerritoryID");
 Lib.Require("core/Core");
 Lib.Require("module/city/Construction");
+Lib.Require("module/entity/EntityEvent");
+Lib.Require("module/faker/Technology");
 Lib.Require("module/ui/UIBuilding");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/mode/SettlementLimitation_API");
@@ -28049,17 +28667,17 @@ function Lib.SettlementLimitation.Global:Initialize()
     if not self.IsInstalled then
         Report.DevelopTerritory_Internal = CreateReport("DevelopTerritory_Internal");
 
-        self.CityBuildings = {Logic.GetEntityTypesInCategory(EntityCategories.CityBuilding)};
-        self.OuterRimBuildings = {Logic.GetEntityTypesInCategory(EntityCategories.OuterRimBuilding)};
-
         for PlayerID = 1, 8 do
             self.TerritoryRestriction[PlayerID] = {};
             self.TerritoryTypeRestriction[PlayerID] = {};
             self.OutpostUpgradeBonus[PlayerID] = {};
+            self.MultiConstructionBonus[PlayerID] = {};
         end
+        Lib.SettlementLimitation.Shared:CreateTechnologies();
+        Lib.SettlementLimitation.Shared:CreateTypeLists();
 
         -- Garbage collection
-        Lib.SettlementSurvival.Local = nil;
+        Lib.SettlementLimitation.Local = nil;
     end
     self.IsInstalled = true;
 end
@@ -28076,10 +28694,19 @@ function Lib.SettlementLimitation.Global:OnReportReceived(_ID, ...)
             self:InitDefaultRules(PlayerID);
             self:InitConstructionLimit(PlayerID);
         end
+    elseif _ID == Report.BuildingUpgraded then
+        local TerritoryID = GetTerritoryUnderEntity(arg[1]);
+        local Bonus = self:GetOutpostUpgradeBonusAmount(arg[2], TerritoryID);
+        if Bonus == 0 then
+            self:SetOutpostUpgradeBonusAmount(arg[2], TerritoryID, 1);
+        end
     elseif _ID == Report.DevelopTerritory_Internal then
-        local Costs = Lib.SettlementLimitation.Local.UpgradeTerritoryCosts;
-        AddGood(Costs[1], Costs[2], arg[1]);
-        self:SetOutpostUpgradeBonusAmount(arg[1], arg[2], arg[3]);
+        local Costs = Lib.SettlementLimitation.Shared.DevelopTerritoryCosts;
+        local Bonus = self:GetMultiConstructionBonusAmount(arg[1], arg[2]);
+        if Bonus == 0 then
+            AddGood(Costs[1], Costs[2], arg[1]);
+            self:SetMultiConstructionBonusAmount(arg[1], arg[2], arg[3]);
+        end
     end
 end
 
@@ -28087,11 +28714,11 @@ function Lib.SettlementLimitation.Global:InitDefaultRules(_PlayerID)
     local Territories = {Logic.GetTerritories()};
     for i = 1, #Territories do
         SetTerritoryBuildingLimit(_PlayerID, Territories[i], 3);
-        for j= 1, #self.CityBuildings do
-            SetTerritoryBuildingTypeLimit(_PlayerID, Territories[i], self.CityBuildings[j], 0);
+        for Type, _ in pairs(Lib.SettlementLimitation.Shared.CityBuildings) do
+            SetTerritoryBuildingTypeLimit(_PlayerID, Territories[i], Type, 0);
         end
-        for j= 1, #self.OuterRimBuildings do
-            SetTerritoryBuildingTypeLimit(_PlayerID, Territories[i], self.OuterRimBuildings[j], 1);
+        for Type, _ in pairs(Lib.SettlementLimitation.Shared.OuterRimBuildings) do
+            SetTerritoryBuildingTypeLimit(_PlayerID, Territories[i], Type, 1);
         end
     end
 end
@@ -28104,16 +28731,21 @@ function Lib.SettlementLimitation.Global:InitConstructionLimit(_PlayerID)
         local OutpostID = Logic.GetTerritoryAcquiringBuildingID(TerritoryID);
         if  Lib.SettlementLimitation.Global.Active
         and GetTerritoryUnderEntity(MainBuilding) ~= TerritoryID then
-            if  Lib.SettlementLimitation.Global.TerritoryRestriction[_PlayerID] then
-                local Limit = Lib.SettlementLimitation.Global.TerritoryRestriction[_PlayerID][TerritoryID];
-                if Lib.SettlementLimitation.Global.TerritoryRestriction[_PlayerID][0] then
+            if Lib.SettlementLimitation.Global.TerritoryRestriction[_PlayerID] then
+                local Limit = -1;
+                if Lib.SettlementLimitation.Global.TerritoryRestriction[_PlayerID][TerritoryID] then
+                    Limit = Lib.SettlementLimitation.Global.TerritoryRestriction[_PlayerID][TerritoryID];
+                end
+                if Limit == -1 and Lib.SettlementLimitation.Global.TerritoryRestriction[_PlayerID][0] then
                     Limit = Lib.SettlementLimitation.Global.TerritoryRestriction[_PlayerID][0];
                 end
                 local Bonus = Lib.SettlementLimitation.Global:GetOutpostUpgradeBonusAmount(_PlayerID, TerritoryID);
-                local Current = #{Logic.GetEntitiesOfCategoryInTerritory(TerritoryID, _PlayerID, EntityCategories.AttackableBuilding, 0)};
+                local Current = 0;
+                Current = Current + #{Logic.GetEntitiesOfCategoryInTerritory(TerritoryID, _PlayerID, EntityCategories.CityBuilding, 0)};
+                Current = Current + #{Logic.GetEntitiesOfCategoryInTerritory(TerritoryID, _PlayerID, EntityCategories.OuterRimBuilding, 0)};
                 Current = Current - ((OutpostID ~= 0 and 1) or 0);
                 if (Limit or -1) ~= -1 then
-                    return Current < (Limit + Bonus);
+                    return Current < ((Limit > 0 and Limit + Bonus) or Limit);
                 end
             end
         end
@@ -28126,17 +28758,18 @@ function Lib.SettlementLimitation.Global:InitConstructionLimit(_PlayerID)
         local TerritoryID = Logic.GetTerritoryAtPosition(_X, _Y);
         if  Lib.SettlementLimitation.Global.Active
         and GetTerritoryUnderEntity(MainBuilding) ~= TerritoryID then
-            if  Lib.SettlementLimitation.Global.TerritoryTypeRestriction[_PlayerID] then
+            if Lib.SettlementLimitation.Global.TerritoryTypeRestriction[_PlayerID] then
                 local Limit = -1;
                 if Lib.SettlementLimitation.Global.TerritoryTypeRestriction[_PlayerID][TerritoryID] then
                     Limit = Lib.SettlementLimitation.Global.TerritoryTypeRestriction[_PlayerID][TerritoryID][_Type] or -1;
                 end
-                if Lib.SettlementLimitation.Global.TerritoryTypeRestriction[_PlayerID][0] then
+                if Limit == -1 and Lib.SettlementLimitation.Global.TerritoryTypeRestriction[_PlayerID][0] then
                     Limit = Lib.SettlementLimitation.Global.TerritoryTypeRestriction[_PlayerID][0][_Type] or -1;
                 end
+                local Bonus = Lib.SettlementLimitation.Global:GetMultiConstructionBonusAmount(_PlayerID, TerritoryID);
                 local Current = #{Logic.GetEntitiesOfTypeInTerritory(TerritoryID, _PlayerID, _Type, 0)};
                 if (Limit or -1) ~= -1 then
-                    return Current < Limit;
+                    return Current < ((Limit > 0 and Limit + Bonus) or Limit);
                 end
             end
         end
@@ -28149,6 +28782,7 @@ end
 
 function Lib.SettlementLimitation.Global:ActivateSettlementLimitation(_Flag)
     self.Active = _Flag == true;
+
     ExecuteLocal(
         [[Lib.SettlementLimitation.Local.Active = %s == true]],
         tostring(_Flag == true)
@@ -28162,6 +28796,41 @@ function Lib.SettlementLimitation.Global:GetOutpostUpgradeBonusAmount(_PlayerID,
     return 0;
 end
 
+function Lib.SettlementLimitation.Global:SetOutpostUpgradeBonusAmount(_PlayerID, _ID, _Amount)
+    if self.OutpostUpgradeBonus[_PlayerID] then
+        local CurrentAmount = self.OutpostUpgradeBonus[_PlayerID][_ID] or 0;
+        self.OutpostUpgradeBonus[_PlayerID][_ID] = CurrentAmount + _Amount;
+
+        ExecuteLocal(
+            [[Lib.SettlementLimitation.Local.OutpostUpgradeBonus[%d][%d] = %d]],
+            _PlayerID,
+            _ID,
+            CurrentAmount + _Amount
+        );
+    end
+end
+
+function Lib.SettlementLimitation.Global:GetMultiConstructionBonusAmount(_PlayerID, _ID)
+    if self.MultiConstructionBonus[_PlayerID] then
+        return self.MultiConstructionBonus[_PlayerID][_ID] or 0;
+    end
+    return 0;
+end
+
+function Lib.SettlementLimitation.Global:SetMultiConstructionBonusAmount(_PlayerID, _ID, _Amount)
+    if self.MultiConstructionBonus[_PlayerID] then
+        local CurrentAmount = self.MultiConstructionBonus[_PlayerID][_ID] or 0;
+        self.MultiConstructionBonus[_PlayerID][_ID] = CurrentAmount + _Amount;
+
+        ExecuteLocal(
+            [[Lib.SettlementLimitation.Local.MultiConstructionBonus[%d][%d] = %d]],
+            _PlayerID,
+            _ID,
+            CurrentAmount + _Amount
+        );
+    end
+end
+
 -- -------------------------------------------------------------------------- --
 -- Local
 
@@ -28173,17 +28842,17 @@ function Lib.SettlementLimitation.Local:Initialize()
         self:AddOutpostDevelopButton();
         self:OverwritePlacementUpdate();
 
-        self.CityBuildings = {Logic.GetEntityTypesInCategory(EntityCategories.CityBuilding)};
-        self.OuterRimBuildings = {Logic.GetEntityTypesInCategory(EntityCategories.OuterRimBuilding)};
-
         for PlayerID = 1, 8 do
             self.TerritoryRestriction[PlayerID] = {};
             self.TerritoryTypeRestriction[PlayerID] = {};
             self.OutpostUpgradeBonus[PlayerID] = {};
+            self.MultiConstructionBonus[PlayerID] = {};
         end
+        Lib.SettlementLimitation.Shared:CreateTechnologies();
+        Lib.SettlementLimitation.Shared:CreateTypeLists();
 
         -- Garbage collection
-        Lib.SettlementSurvival.Global = nil;
+        Lib.SettlementLimitation.Global = nil;
     end
     self.IsInstalled = true;
 end
@@ -28203,7 +28872,7 @@ function Lib.SettlementLimitation.Local:AddOutpostDevelopButton()
     local Action = function(_WidgetID, _EntityID)
         local PlayerID = GUI.GetPlayerID();
         local TerritoryID = GetTerritoryUnderEntity(_EntityID);
-        local Costs = Lib.SettlementLimitation.Local.UpgradeTerritoryCosts;
+        local Costs = Lib.SettlementLimitation.Shared.DevelopTerritoryCosts;
         if  GetPlayerGoodsInSettlement(Costs[1], PlayerID, true) <= Costs[2] then
             Message(XGUIEng.GetStringTableText("Feedback_TextLines/TextLine_NotEnough_G_Gold"));
             return;
@@ -28215,16 +28884,20 @@ function Lib.SettlementLimitation.Local:AddOutpostDevelopButton()
         local PlayerID = GUI.GetPlayerID();
         local TerritoryID = GetTerritoryUnderEntity(_EntityID);
         local DisabledText;
+
         if Logic.GetUpgradeLevel(_EntityID) < 1 then
             DisabledText = Localize(Lib.SettlementLimitation.Text.DevelopTerritory.DisabledUpgrade);
-        elseif Lib.SettlementLimitation.Local.OutpostUpgradeBonus[PlayerID][TerritoryID] then
+        elseif Lib.SettlementLimitation.Local.MultiConstructionBonus[PlayerID][TerritoryID] then
             DisabledText = Localize(Lib.SettlementLimitation.Text.DevelopTerritory.DisabledDone);
+        elseif Logic.TechnologyGetState(PlayerID, Technologies.R_RuralLogistics) ~= TechnologyStates.Researched then
+            DisabledText = XGUIEng.GetStringTableText("UI_ButtonDisabled/PromoteKnight");
         end
+
         SetTooltipCosts(
             Localize(Lib.SettlementLimitation.Text.DevelopTerritory.Title),
             Localize(Lib.SettlementLimitation.Text.DevelopTerritory.Text),
             DisabledText,
-            Lib.SettlementLimitation.Local.UpgradeTerritoryCosts,
+            Lib.SettlementLimitation.Shared.DevelopTerritoryCosts,
             true
         )
     end
@@ -28232,9 +28905,10 @@ function Lib.SettlementLimitation.Local:AddOutpostDevelopButton()
     local Update = function(_WidgetID, _EntityID)
         local PlayerID = GUI.GetPlayerID();
         local TerritoryID = GetTerritoryUnderEntity(_EntityID);
-        SetIcon(_WidgetID, {1, 8});
+        SetIcon(_WidgetID, {4, 4});
         if Lib.SettlementLimitation.Local.Active then
-            if Lib.SettlementLimitation.Local.OutpostUpgradeBonus[PlayerID][TerritoryID]
+            if Lib.SettlementLimitation.Local.MultiConstructionBonus[PlayerID][TerritoryID]
+            or Logic.TechnologyGetState(PlayerID, Technologies.R_RuralLogistics) ~= TechnologyStates.Researched
             or Logic.GetUpgradeLevel(_EntityID) < 1 then
                 XGUIEng.DisableButton(_WidgetID, 1);
             else
@@ -28245,12 +28919,12 @@ function Lib.SettlementLimitation.Local:AddOutpostDevelopButton()
         end
     end
 
-    AddBuildingButtonByType(Entities.B_Outpost_ME, Action, Tooltip, Update);
-    AddBuildingButtonByType(Entities.B_Outpost_NA, Action, Tooltip, Update);
-    AddBuildingButtonByType(Entities.B_Outpost_NE, Action, Tooltip, Update);
-    AddBuildingButtonByType(Entities.B_Outpost_SE, Action, Tooltip, Update);
+    AddBuildingButtonByTypeAtPosition(Entities.B_Outpost_ME, 222, 62, Action, Tooltip, Update);
+    AddBuildingButtonByTypeAtPosition(Entities.B_Outpost_NA, 222, 62, Action, Tooltip, Update);
+    AddBuildingButtonByTypeAtPosition(Entities.B_Outpost_NE, 222, 62, Action, Tooltip, Update);
+    AddBuildingButtonByTypeAtPosition(Entities.B_Outpost_SE, 222, 62, Action, Tooltip, Update);
     if Entities.B_Outpost_AS then
-        AddBuildingButtonByType(Entities.B_Outpost_AS, Action, Tooltip, Update);
+        AddBuildingButtonByTypeAtPosition(Entities.B_Outpost_AS, 222, 62, Action, Tooltip, Update);
     end
 end
 
@@ -28262,6 +28936,8 @@ function Lib.SettlementLimitation.Local:OverwritePlacementUpdate()
             Lib.SettlementLimitation.Local.Orig_GUI_Construction_PlacementUpdate();
             return;
         end
+
+        local this = Lib.SettlementLimitation.Local;
 
         local PlayerID = GUI.GetPlayerID();
         local x,y = GUI.Debug_GetMapPositionUnderMouse();
@@ -28286,8 +28962,8 @@ function Lib.SettlementLimitation.Local:OverwritePlacementUpdate()
         local TerritoryName = GetTerritoryName(TerritoryID);
         local UpgradeCategory = Lib.Construction.Local.LastSelectedBuildingType;
         local _, BuildingType = Logic.GetBuildingTypesInUpgradeCategory(UpgradeCategory);
-        local RestrictionTerritoryString = self:GetRestrictionText(PlayerID, TerritoryID, BuildingType);
-        local RestrictionTypeString = self:GetRestrictionTypeText(PlayerID, TerritoryID, BuildingType);
+        local RestrictionTerritoryString = this:GetRestrictionText(PlayerID, TerritoryID, BuildingType);
+        local RestrictionTypeString = this:GetRestrictionTypeText(PlayerID, TerritoryID, BuildingType);
         local RestrictionString = "";
         if RestrictionTerritoryString == "" and RestrictionTypeString == "" then
             TerritoryName = "";
@@ -28306,42 +28982,45 @@ end
 
 function Lib.SettlementLimitation.Local:GetRestrictionText(_PlayerID, _TerritoryID, _Type)
     local MainBuilding = Logic.GetStoreHouse(_PlayerID);
-    if GetTerritoryUnderEntity(MainBuilding) == _TerritoryID 
+    if GetTerritoryUnderEntity(MainBuilding) == _TerritoryID
     or not Lib.SettlementLimitation.Local.Active then
         return "";
     end
 
-    local function getRestrictionText(playerID, territoryID, limit)
-        local OutpostID = Logic.GetTerritoryAcquiringBuildingID(territoryID);
-        local Current = #{Logic.GetEntitiesOfCategoryInTerritory(territoryID, playerID, EntityCategories.AttackableBuilding, 0)};
-        Current = Current - ((OutpostID ~= 0 and 1) or 0);
-        local Bonus = self:GetOutpostUpgradeBonusAmount(playerID, territoryID);
+    local getRestrictionText = function(playerID, territoryID, buildingLimit)
+        local this = Lib.SettlementLimitation.Local;
+        local Current = 0;
+        Current = Current + #{Logic.GetEntitiesOfCategoryInTerritory(territoryID, playerID, EntityCategories.CityBuilding, 0)};
+        Current = Current + #{Logic.GetEntitiesOfCategoryInTerritory(territoryID, playerID, EntityCategories.OuterRimBuilding, 0)};
+        local Bonus = this:GetOutpostUpgradeBonusAmount(playerID, territoryID);
+        local Limit = buildingLimit;
+        Limit = (Limit > 0 and Limit + Bonus) or Limit;
         local Text = string.format(
             "%s%s %d / %d{@color:255,255,255,255}{cr}",
-            (Current >= limit and "{@color:255,0,0,255}") or "{@color:255,255,255,255}",
+            (Current >= Limit and "{@color:255,0,0,255}") or "{@color:255,255,255,255}",
             Localize(Lib.SettlementLimitation.Text.BuildingLimit),
             Current,
-            limit + Bonus
+            Limit
         );
         return Text;
     end
 
-    local TerritoryRestriction = self.TerritoryRestriction[_PlayerID];
-    if TerritoryRestriction then
-        local SpecificLimit = TerritoryRestriction[_TerritoryID];
-        if SpecificLimit and SpecificLimit ~= -1 then
-            return getRestrictionText(_PlayerID, _TerritoryID, SpecificLimit);
-        end
+    if Lib.SettlementLimitation.Shared:IsCheckedType(_Type) then
+        local TerritoryRestriction = self.TerritoryRestriction[_PlayerID];
+        if TerritoryRestriction then
+            local SpecificLimit = TerritoryRestriction[_TerritoryID];
+            if SpecificLimit and SpecificLimit ~= -1 then
+                return getRestrictionText(_PlayerID, _TerritoryID, SpecificLimit);
+            end
 
-        local GeneralLimit = TerritoryRestriction[0]
-        if GeneralLimit and GeneralLimit ~= -1 then
-            return getRestrictionText(_PlayerID, _TerritoryID, GeneralLimit);
+            local GeneralLimit = TerritoryRestriction[0]
+            if GeneralLimit and GeneralLimit ~= -1 then
+                return getRestrictionText(_PlayerID, _TerritoryID, GeneralLimit);
+            end
         end
     end
-
     return "";
 end
-
 
 function Lib.SettlementLimitation.Local:GetRestrictionTypeText(_PlayerID, _TerritoryID, _Type)
     local MainBuilding = Logic.GetStoreHouse(_PlayerID);
@@ -28350,30 +29029,34 @@ function Lib.SettlementLimitation.Local:GetRestrictionTypeText(_PlayerID, _Terri
         return "";
     end
 
-    local function getRestrictionText(playerID, territoryID, entityType, typeRestriction)
+    local getRestrictionText = function (playerID, territoryID, entityType, typeRestriction)
+        local this = Lib.SettlementLimitation.Local;
         local TypeName = Logic.GetEntityTypeName(entityType);
         local Current = #{Logic.GetEntitiesOfTypeInTerritory(territoryID, playerID, entityType, 0)};
         local Limit = typeRestriction;
-        local Bonus = self:GetOutpostUpgradeBonusAmount(playerID, territoryID);
+        local Bonus = this:GetMultiConstructionBonusAmount(playerID, territoryID);
+        Limit = (Limit > 0 and Limit + Bonus) or Limit;
         local Text = string.format(
             "%s%s %d / %d{@color:255,255,255,255}{cr}",
             (Current >= Limit and "{@color:255,0,0,255}") or "{@color:255,255,255,255}",
             XGUIEng.GetStringTableText("Names/" .. TypeName),
             Current,
-            Limit + Bonus
+            Limit
         );
         return Text;
     end
 
-    local TypeRestriction = self.TerritoryTypeRestriction[_PlayerID];
-    if TypeRestriction then
-        local TerritoryRestriction = TypeRestriction[_TerritoryID];
-        if TerritoryRestriction and TerritoryRestriction[_Type] and TerritoryRestriction[_Type] ~= -1 then
-            return getRestrictionText(_PlayerID, _TerritoryID, _Type, TerritoryRestriction[_Type]);
-        end
-        local GeneralRestriction = TypeRestriction[0]
-        if GeneralRestriction and GeneralRestriction[_Type] and GeneralRestriction[_Type] ~= -1 then
-            return getRestrictionText(_PlayerID, _TerritoryID, _Type, GeneralRestriction[_Type]);
+    if Lib.SettlementLimitation.Shared:IsCheckedType(_Type) then
+        local TypeRestriction = self.TerritoryTypeRestriction[_PlayerID];
+        if TypeRestriction then
+            local TerritoryRestriction = TypeRestriction[_TerritoryID];
+            if TerritoryRestriction and TerritoryRestriction[_Type] and TerritoryRestriction[_Type] ~= -1 then
+                return getRestrictionText(_PlayerID, _TerritoryID, _Type, TerritoryRestriction[_Type]);
+            end
+            local GeneralRestriction = TypeRestriction[0]
+            if GeneralRestriction and GeneralRestriction[_Type] and GeneralRestriction[_Type] ~= -1 then
+                return getRestrictionText(_PlayerID, _TerritoryID, _Type, GeneralRestriction[_Type]);
+            end
         end
     end
 
@@ -28385,6 +29068,55 @@ function Lib.SettlementLimitation.Local:GetOutpostUpgradeBonusAmount(_PlayerID, 
         return self.OutpostUpgradeBonus[_PlayerID][_ID] or 0;
     end
     return 0;
+end
+
+function Lib.SettlementLimitation.Local:GetMultiConstructionBonusAmount(_PlayerID, _ID)
+    if self.MultiConstructionBonus[_PlayerID] then
+        return self.MultiConstructionBonus[_PlayerID][_ID] or 0;
+    end
+    return 0;
+end
+
+-- -------------------------------------------------------------------------- --
+-- Shared
+
+function Lib.SettlementLimitation.Shared:CreateTechnologies()
+    for i= 1, #self.TechnologyConfig do
+        if g_GameExtraNo >= self.TechnologyConfig[i][4] then
+            if not Technologies[self.TechnologyConfig[i][1]] then
+                AddCustomTechnology(self.TechnologyConfig[i][1], self.TechnologyConfig[i][2], self.TechnologyConfig[i][3]);
+                if not IsLocalScript() then
+                    for j= 1, 8 do
+                        Logic.TechnologySetState(j, Technologies[self.TechnologyConfig[i][1]], 3);
+                    end
+                end
+            end
+        end
+    end
+end
+
+function Lib.SettlementLimitation.Shared:CreateTypeLists()
+    self.CityBuildings = {};
+    self.OuterRimBuildings = {};
+
+    local CityBuildings = {Logic.GetEntityTypesInCategory(EntityCategories.CityBuilding)};
+    for _, Type in pairs(CityBuildings) do
+        self.CityBuildings[Type] = true;
+    end
+    local OuterRimBuildings = {Logic.GetEntityTypesInCategory(EntityCategories.OuterRimBuilding)};
+    for _, Type in pairs(OuterRimBuildings) do
+        self.OuterRimBuildings[Type] = true;
+    end
+end
+
+function Lib.SettlementLimitation.Shared:IsCheckedType(_Type)
+    if self.CityBuildings[_Type] then
+        return true;
+    end
+    if self.OuterRimBuildings[_Type] then
+        return true;
+    end
+    return false;
 end
 
 -- -------------------------------------------------------------------------- --
@@ -28714,6 +29446,7 @@ Lib.BriefingSystem.Local = {
         DoAlternateGraphics = true,
     },
     ParallaxWidgets = {
+        Pushed = {},
         -- Can not set UV coordinates for this... :(
         -- {"/EndScreen/EndScreen/BG", "/EndScreen/EndScreen"},
         {"/EndScreen/EndScreen/BackGround", "/EndScreen/EndScreen"},
@@ -28722,6 +29455,8 @@ Lib.BriefingSystem.Local = {
         {"/InGame/Root/EndScreen/BlackBG", "/InGame/Root/EndScreen"},
         {"/InGame/Root/EndScreen/BG", "/InGame/Root/EndScreen"},
         {"/InGame/Root/BlackStartScreen/BG", "/InGame/Root/BlackStartScreen"},
+        -- Can not set UV coordinates for this... :(
+        -- {"/InGame/Root/PresentationLoadingScreen/BG", "/InGame/Root/PresentationLoadingScreen"},
     },
     Briefing = {},
 };
@@ -28730,16 +29465,17 @@ CONST_BRIEFING = {
     TIMER_PER_CHAR = 0.175,
     CAMERA_ANGLEDEFAULT = 43,
     CAMERA_ROTATIONDEFAULT = -45,
-    CAMERA_ZOOMDEFAULT = 6500,
+    CAMERA_ZOOMDEFAULT = 7000,
     CAMERA_FOVDEFAULT = 42,
-    DLGCAMERA_ANGLEDEFAULT = 27,
+    DLGCAMERA_ANGLEDEFAULT = 36,
     DLGCAMERA_ROTATIONDEFAULT = -45,
-    DLGCAMERA_ZOOMDEFAULT = 1750,
+    DLGCAMERA_ZOOMDEFAULT = 2000,
     DLGCAMERA_FOVDEFAULT = 25,
 };
 
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");
+Lib.Require("module/settings/Sound");
 Lib.Require("module/ui/UIEffects");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/information/Requester");
@@ -28921,7 +29657,7 @@ function Lib.BriefingSystem.Global:CreateBriefingAddPage(_Briefing)
                     _Page.DisableSkipping = false;
                 end
                 _Page.Duration = _Page.Text:len() * CONST_BRIEFING.TIMER_PER_CHAR;
-                _Page.Duration = (_Page.Duration < 6 and 6) or _Page.Duration < 6;
+                _Page.Duration = (_Page.Duration < 6 and 6) or _Page.Duration;
             end
         end
 
@@ -29071,6 +29807,7 @@ function Lib.BriefingSystem.Global:TransformParallaxes(_PlayerID)
             local PageID = self:GetPageIDByName(_PlayerID, k);
             if PageID ~= 0 then
                 self.Briefing[_PlayerID][PageID].Parallax = {};
+                self.Briefing[_PlayerID][PageID].Parallax.Repeat = v.Repeat == true;
                 self.Briefing[_PlayerID][PageID].Parallax.Clear = v.Clear == true;
                 for i= 1, 4, 1 do
                     if v[i] then
@@ -29296,6 +30033,7 @@ function Lib.BriefingSystem.Local:EndBriefing(_PlayerID, _BriefingName)
         Camera.RTS_SetRotationAngle(Briefing.Backup.Camera[3]);
         Camera.RTS_SetZoomFactor(Briefing.Backup.Camera[4]);
     end
+    StopVoice("BriefingSpeech");
 
     self:DeactivateCinematicMode(_PlayerID);
     ActivateNormalInterface(_PlayerID);
@@ -29396,6 +30134,10 @@ function Lib.BriefingSystem.Local:DisplayPageText(_PlayerID, _PageID)
         end
         XGUIEng.SetText(TextWidget, Text);
     end
+    StopVoice("BriefingSpeech");
+    if Page.Speech then
+        PlayVoice(Page.Speech, "BriefingSpeech");
+    end
 end
 
 function Lib.BriefingSystem.Local:DisplayPageControls(_PlayerID, _PageID)
@@ -29473,7 +30215,12 @@ function Lib.BriefingSystem.Local:ControlParallaxes(_PlayerID)
         for Index, Data in pairs(self.Briefing[_PlayerID].ParallaxLayers) do
             local Widget = self.ParallaxWidgets[Index][1];
             local Size = {GUI.GetScreenSize()};
-            local Factor = math.min(math.lerp(Data.Started, CurrentTime, Data.Duration), 1);
+
+            local Factor = math.lerp(Data.Started, CurrentTime, Data.Duration);
+            if Factor > 1 and Data.Repeat then
+                self.Briefing[_PlayerID].ParallaxLayers[Index].Started = CurrentTime;
+                Factor = math.lerp(Data.Started, CurrentTime, Data.Duration);
+            end
             if Data.Interpolation then
                 Factor = math.min(Data:Interpolation(CurrentTime), 1);
             end
@@ -29525,9 +30272,9 @@ function Lib.BriefingSystem.Local:ControlParallaxes(_PlayerID)
                 u1 = u1 - (u1 * 0.125);
             end
 
-            XGUIEng.SetMaterialAlpha(Widget, 1, Alpha or 255);
-            XGUIEng.SetMaterialTexture(Widget, 1, Image);
-            XGUIEng.SetMaterialUV(Widget, 1, u0, v0, u1, v1);
+            XGUIEng.SetMaterialColor(Widget, 0, 255, 255, 255, Alpha or 255);
+            XGUIEng.SetMaterialTexture(Widget, 0, Image);
+            XGUIEng.SetMaterialUV(Widget, 0, u0, v0, u1, v1);
         end
     end
 end
@@ -29912,12 +30659,12 @@ function Lib.BriefingSystem.Local:OverrideThroneRoomFunctions()
         end
     end
 
-    GameCallback_Escape_Orig_BriefingSystem = GameCallback_Escape;
+    self.Orig_GameCallback_Escape = GameCallback_Escape;
     GameCallback_Escape = function()
         if Lib.BriefingSystem.Local.Briefing[GUI.GetPlayerID()] then
             return;
         end
-        GameCallback_Escape_Orig_BriefingSystem();
+        Lib.BriefingSystem.Local.Orig_GameCallback_Escape();
     end
 end
 
@@ -29932,19 +30679,28 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     end
     local ScreenX, ScreenY = GUI.GetScreenSize();
 
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
+
     -- Parallax
     function EndScreen_ExitGame() end
     function MissionFadeInEndScreen() end
     for i= 1, #self.ParallaxWidgets do
-        XGUIEng.ShowWidget(self.ParallaxWidgets[i][1], 1);
         XGUIEng.ShowWidget(self.ParallaxWidgets[i][2], 1);
-        XGUIEng.PushPage(self.ParallaxWidgets[i][2], false);
+        if not self.ParallaxWidgets.Pushed[self.ParallaxWidgets[i][2]] then
+            self.ParallaxWidgets.Pushed[self.ParallaxWidgets[i][2]] = true;
+            XGUIEng.PushPage(self.ParallaxWidgets[i][2], false);
+        end
+        XGUIEng.ShowWidget(self.ParallaxWidgets[i][1], 1);
 
-        XGUIEng.SetMaterialTexture(self.ParallaxWidgets[i][1], 1, "");
-        XGUIEng.SetMaterialColor(self.ParallaxWidgets[i][1], 1, 255, 255, 255, 0);
-        XGUIEng.SetMaterialUV(self.ParallaxWidgets[i][1], 1, 0, 0, 1, 1);
+        XGUIEng.SetMaterialTexture(self.ParallaxWidgets[i][1], 0, "");
+        XGUIEng.SetMaterialColor(self.ParallaxWidgets[i][1], 0, 255, 255, 255, 0);
+        XGUIEng.SetMaterialUV(self.ParallaxWidgets[i][1], 0, 0, 0, 1, 1);
     end
     XGUIEng.ShowWidget("/EndScreen/EndScreen/BG", 0);
+    XGUIEng.ShowWidget("/InGame/Root/PresentationLoadingScreen/Logo", 0);
 
     -- Throneroom Main
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 1);
@@ -30014,6 +30770,9 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     g_Fade.To = 0;
     SetFaderAlpha(0);
 
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
     if not self.LoadscreenClosed then
         XGUIEng.PushPage("/LoadScreen/LoadScreen", false);
     end
@@ -30024,6 +30783,11 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
         return;
     end
     self.CinematicActive = false;
+
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
 
     g_Fade.To = 0;
     SetFaderAlpha(0);
@@ -30046,6 +30810,8 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     end
 
     XGUIEng.ShowWidget("/EndScreen/EndScreen/BG", 1);
+    XGUIEng.ShowWidget("/InGame/Root/PresentationLoadingScreen/Logo", 1);
+    self.ParallaxWidgets.Pushed = {};
     for i= 1, #self.ParallaxWidgets do
         XGUIEng.ShowWidget(self.ParallaxWidgets[i][1], 0);
         XGUIEng.ShowWidget(self.ParallaxWidgets[i][2], 0);
@@ -30065,6 +30831,10 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_2_Dodge", 0);
 
     ResetRenderDistance();
+
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
 end
 
 -- -------------------------------------------------------------------------- --
@@ -30337,6 +31107,7 @@ Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIEffects");
 Lib.Require("module/ui/UITools");
+Lib.Require("module/settings/Sound");
 Lib.Require("module/information/Requester");
 Lib.Require("module/information/CutsceneSystem_Text");
 Lib.Require("module/information/CutsceneSystem_API");
@@ -30392,7 +31163,7 @@ function Lib.CutsceneSystem.Global:OnReportReceived(_ID, ...)
     elseif _ID == Report.CutsceneSkipButtonPressed then
         SendReportToLocal(Report.CutsceneSkipButtonPressed, arg[1]);
     elseif _ID == Report.CutscenePageShown then
-        SendReportToLocal(Report.CutscenePageShown, arg[1], arg[2], arg[3]);
+        self:DisplayPage(arg[1], arg[2], arg[3]);
     end
 end
 
@@ -30508,12 +31279,12 @@ function Lib.CutsceneSystem.Global:EndCutsceneFlight(_PlayerID, _PageID)
     SendReportToLocal(Report.CutsceneFlightEnded, _PlayerID, _PageID);
 end
 
-function Lib.CutsceneSystem.Global:DisplayPage(_PlayerID, _PageID)
+function Lib.CutsceneSystem.Global:DisplayPage(_PlayerID, _PageID, _Duration)
     if self.Cutscene[_PlayerID] == nil then
         return;
     end
-    -- Nothing to do in global script so just propagete to local
-    SendReportToLocal(Report.CutscenePageShown, _PlayerID, _PageID);
+    SendReportToGlobal(Report.CutscenePageShown, _PlayerID, _PageID, _Duration);
+    -- Nothing to do in global script
 end
 
 function Lib.CutsceneSystem.Global:GetCurrentCutscene(_PlayerID)
@@ -30619,6 +31390,7 @@ function Lib.CutsceneSystem.Local:EndCutscene(_PlayerID)
     if not Framework.IsNetworkGame() then
         Game.GameTimeSetFactor(_PlayerID, 1);
     end
+    StopVoice("CutsceneSpeech");
     self:DeactivateCinematicMode(_PlayerID);
     ActivateNormalInterface(_PlayerID);
     ActivateBorderScroll(_PlayerID);
@@ -30763,7 +31535,7 @@ end
 function Lib.CutsceneSystem.Local:DisplayPageText(_PlayerID, _PageID)
     local Page = self.Cutscene[_PlayerID][_PageID];
     local TextWidget = "/InGame/ThroneRoom/Main/MissionBriefing/Text";
-    XGUIEng.SetText(TextWidget, "Bockwurst");
+    XGUIEng.SetText(TextWidget, "");
     if Page.Text then
         local Text = ConvertPlaceholders(Localize(Page.Text));
         if Text:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
@@ -30776,6 +31548,10 @@ function Lib.CutsceneSystem.Local:DisplayPageText(_PlayerID, _PageID)
             Text = "{cr}{cr}{cr}" .. Text;
         end
         XGUIEng.SetText(TextWidget, Text);
+    end
+    StopVoice("CutsceneSpeech");
+    if Page.Speech then
+        PlayVoice(Page.Speech, "CutsceneSpeech");
     end
 end
 
@@ -30935,6 +31711,12 @@ function Lib.CutsceneSystem.Local:ActivateCinematicMode(_PlayerID)
     if not self.LoadscreenClosed then
         XGUIEng.PopPage();
     end
+
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
+
     local ScreenX, ScreenY = GUI.GetScreenSize();
 
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 1);
@@ -30996,6 +31778,9 @@ function Lib.CutsceneSystem.Local:ActivateCinematicMode(_PlayerID)
     g_Fade.To = 1;
     SetFaderAlpha(1);
 
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
     if not self.LoadscreenClosed then
         XGUIEng.PushPage("/LoadScreen/LoadScreen", false);
     end
@@ -31006,6 +31791,11 @@ function Lib.CutsceneSystem.Local:DeactivateCinematicMode(_PlayerID)
         return;
     end
     self.CinematicActive = false;
+
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
 
     g_Fade.To = 0;
     SetFaderAlpha(0);
@@ -31040,6 +31830,10 @@ function Lib.CutsceneSystem.Local:DeactivateCinematicMode(_PlayerID)
     XGUIEng.SetText("/InGame/ThroneRoom/Main/MissionBriefing/Objectives", " ");
 
     ResetRenderDistance();
+
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
 end
 
 -- -------------------------------------------------------------------------- --
@@ -31385,6 +32179,7 @@ Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIEffects");
 Lib.Require("module/ui/UITools");
+Lib.Require("module/settings/Sound");
 Lib.Require("module/information/Requester");
 Lib.Require("module/information/DialogSystem_Text");
 Lib.Require("module/information/DialogSystem_API");
@@ -31864,6 +32659,7 @@ function Lib.DialogSystem.Local:EndDialog(_PlayerID, _DialogName, _Dialog)
         Camera.RTS_SetRotationAngle(self.Dialog[_PlayerID].Backup.Camera[3]);
         Camera.RTS_SetZoomFactor(self.Dialog[_PlayerID].Backup.Camera[4]);
     end
+    StopVoice("DialogSpeech");
 
     self:DeactivateCinematicMode(_PlayerID);
     ActivateNormalInterface(_PlayerID);
@@ -32007,6 +32803,11 @@ function Lib.DialogSystem.Local:DisplayPageText(_PlayerID, _PageID)
     end
     XGUIEng.SetText(SubtitlesWidget.. "/VoiceText1", Text .. Extension);
     self:SetSubtitlesPosition(_PlayerID, _PageID);
+
+    StopVoice("DialogSpeech");
+    if Page and Page.Speech then
+        PlayVoice(Page.Speech, "DialogSpeech");
+    end
 end
 
 function Lib.DialogSystem.Local:SetSubtitlesPosition(_PlayerID, _PageID)
@@ -32224,6 +33025,11 @@ function Lib.DialogSystem.Local:ActivateCinematicMode(_PlayerID)
         XGUIEng.PopPage();
     end
 
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
+
     -- Show throneroom updater
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 1);
     XGUIEng.PushPage("/InGame/ThroneRoom/Main", false);
@@ -32273,8 +33079,9 @@ function Lib.DialogSystem.Local:ActivateCinematicMode(_PlayerID)
     g_Fade.To = 0;
     SetFaderAlpha(0);
 
-    -- Push loadscreen if previously visible
-    -- (This should never happen)
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
     if not self.LoadscreenClosed then
         XGUIEng.PushPage("/LoadScreen/LoadScreen", false);
     end
@@ -32286,6 +33093,11 @@ function Lib.DialogSystem.Local:DeactivateCinematicMode(_PlayerID)
         return;
     end
     self.CinematicActive = false;
+
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
 
     -- Reset ui state
     g_Fade.To = 0;
@@ -32323,6 +33135,10 @@ function Lib.DialogSystem.Local:DeactivateCinematicMode(_PlayerID)
 
     ResetRenderDistance();
     self:ResetSubtitlesPosition(_PlayerID);
+
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
 end
 
 -- -------------------------------------------------------------------------- --
@@ -32503,7 +33319,7 @@ Lib.LifestockSystem.Shared = {
     },
 };
 
-Lib.Require("comfort/global/SetHealth");
+Lib.Require("comfort/SetHealth");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIEffects");
 Lib.Require("module/ui/UITools");
@@ -41492,7 +42308,7 @@ function B_Goal_DestroySoldiers:CustomFunction(_Quest)
                            ("Player " ..self.AttackedPlayer);
         Lib.Core.Quest:ChangeCustomQuestCaptionText(
             string.format(
-                Swift.Text:Localize(self.Text),
+                Lib.Core.Text:Localize(self.Text),
                 PlayerName, self.KillsNeeded
             ),
             _Quest

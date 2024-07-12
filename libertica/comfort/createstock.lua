@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/CreateStock");
+Lib.Register("comfort/CreateStock");
 
 function CreateStock(_PlayerID, _GoodType)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");

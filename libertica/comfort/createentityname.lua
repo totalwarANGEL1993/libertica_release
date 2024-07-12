@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/CreateEntityName");
+Lib.Register("comfort/CreateEntityName");
 
 CreateEntityName_Sequence_ID = 0;
 

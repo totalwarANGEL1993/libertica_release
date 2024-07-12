@@ -164,12 +164,14 @@ API.SoundRestore = SoundRestore;
 
 --- Spielt eine Sounddatei als Stimme ab.
 --- @param _File string Pfad zum Sound
-function PlayVoice(_File)
+--- @param _Identifier? string Name der Sprachausgabe
+function PlayVoice(_File, _Identifier)
 end
 API.PlayVoice = PlayVoice;
 
 --- Stoppt eine abgespielte Stimme.
-function StopVoice()
+--- @param _Identifier? string Name der Sprachausgabe
+function StopVoice(_Identifier)
 end
 API.StopVoice = StopVoice;
 

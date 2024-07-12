@@ -17,7 +17,7 @@ API.NpcCompose = NpcCompose;
 function NpcDispose(_Data)
     error(not IsLocalScript(), "NPC manipulated in local script.");
     error(IsExisting(_Data.Name), "Entity does not exist.");
-    error(Lib.NPC.Global:GetNpc(_Data.Name) == nil, "NPC must first be composed.");
+    error(Lib.NPC.Global:GetNpc(_Data.Name) ~= nil, "NPC must first be composed.");
     Lib.NPC.Global:DestroyNpc(_Data);
 end
 API.NpcDispose = NpcDispose;
@@ -58,4 +58,17 @@ function NpcTalkedTo(_Data, _Hero, _PlayerID)
     return TalkedTo;
 end
 API.NpcTalkedTo = NpcTalkedTo;
+
+function NpcHasArrived(_Data)
+    error(not IsLocalScript(), "NPC manipulated in local script.");
+    error(IsExisting(_Data.Name), "Entity does not exist.");
+
+    local NPC = Lib.NPC.Global:GetNpc(_Data.Name);
+    error(NPC ~= nil, "NPC was not found.");
+    if NPC.FollowDestination then
+        return NPC.Arrived == true;
+    end
+    return false;
+end
+API.NpcHasArrived = NpcHasArrived;
 

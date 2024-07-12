@@ -81,6 +81,7 @@ API.AddCutscenePages = AddCutscenePages;
 --- * `Flight`          - Name of flight XML (without .cs)
 --- * `Title`           - Displayed page title
 --- * `Text`            - Displayed page text
+--- * `Speech`          - Path to voiceover (MP3 file)
 --- * `Action`          - Function called when page is displayed
 --- * `FarClipPlane`    - Render distance
 --- * `FadeIn`          - Duration of fadein from black

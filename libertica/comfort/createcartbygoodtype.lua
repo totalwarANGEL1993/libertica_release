@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/CreateCartByGoodType");
+Lib.Register("comfort/CreateCartByGoodType");
 
 function CreateCartByGoodType(_PlayerID, _Position, _GoodType, _Orientation, _CartOverlay)
     assert(Lib.Loader.IsLocalEnv == false, "Can only be used in global script.");

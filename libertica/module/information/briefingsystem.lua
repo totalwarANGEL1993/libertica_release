@@ -10,6 +10,7 @@ Lib.BriefingSystem.Local = {
         DoAlternateGraphics = true,
     },
     ParallaxWidgets = {
+        Pushed = {},
         -- Can not set UV coordinates for this... :(
         -- {"/EndScreen/EndScreen/BG", "/EndScreen/EndScreen"},
         {"/EndScreen/EndScreen/BackGround", "/EndScreen/EndScreen"},
@@ -18,6 +19,8 @@ Lib.BriefingSystem.Local = {
         {"/InGame/Root/EndScreen/BlackBG", "/InGame/Root/EndScreen"},
         {"/InGame/Root/EndScreen/BG", "/InGame/Root/EndScreen"},
         {"/InGame/Root/BlackStartScreen/BG", "/InGame/Root/BlackStartScreen"},
+        -- Can not set UV coordinates for this... :(
+        -- {"/InGame/Root/PresentationLoadingScreen/BG", "/InGame/Root/PresentationLoadingScreen"},
     },
     Briefing = {},
 };
@@ -26,16 +29,17 @@ CONST_BRIEFING = {
     TIMER_PER_CHAR = 0.175,
     CAMERA_ANGLEDEFAULT = 43,
     CAMERA_ROTATIONDEFAULT = -45,
-    CAMERA_ZOOMDEFAULT = 6500,
+    CAMERA_ZOOMDEFAULT = 7000,
     CAMERA_FOVDEFAULT = 42,
-    DLGCAMERA_ANGLEDEFAULT = 27,
+    DLGCAMERA_ANGLEDEFAULT = 36,
     DLGCAMERA_ROTATIONDEFAULT = -45,
-    DLGCAMERA_ZOOMDEFAULT = 1750,
+    DLGCAMERA_ZOOMDEFAULT = 2000,
     DLGCAMERA_FOVDEFAULT = 25,
 };
 
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");
+Lib.Require("module/settings/Sound");
 Lib.Require("module/ui/UIEffects");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/information/Requester");
@@ -217,7 +221,7 @@ function Lib.BriefingSystem.Global:CreateBriefingAddPage(_Briefing)
                     _Page.DisableSkipping = false;
                 end
                 _Page.Duration = _Page.Text:len() * CONST_BRIEFING.TIMER_PER_CHAR;
-                _Page.Duration = (_Page.Duration < 6 and 6) or _Page.Duration < 6;
+                _Page.Duration = (_Page.Duration < 6 and 6) or _Page.Duration;
             end
         end
 
@@ -367,6 +371,7 @@ function Lib.BriefingSystem.Global:TransformParallaxes(_PlayerID)
             local PageID = self:GetPageIDByName(_PlayerID, k);
             if PageID ~= 0 then
                 self.Briefing[_PlayerID][PageID].Parallax = {};
+                self.Briefing[_PlayerID][PageID].Parallax.Repeat = v.Repeat == true;
                 self.Briefing[_PlayerID][PageID].Parallax.Clear = v.Clear == true;
                 for i= 1, 4, 1 do
                     if v[i] then
@@ -592,6 +597,7 @@ function Lib.BriefingSystem.Local:EndBriefing(_PlayerID, _BriefingName)
         Camera.RTS_SetRotationAngle(Briefing.Backup.Camera[3]);
         Camera.RTS_SetZoomFactor(Briefing.Backup.Camera[4]);
     end
+    StopVoice("BriefingSpeech");
 
     self:DeactivateCinematicMode(_PlayerID);
     ActivateNormalInterface(_PlayerID);
@@ -692,6 +698,10 @@ function Lib.BriefingSystem.Local:DisplayPageText(_PlayerID, _PageID)
         end
         XGUIEng.SetText(TextWidget, Text);
     end
+    StopVoice("BriefingSpeech");
+    if Page.Speech then
+        PlayVoice(Page.Speech, "BriefingSpeech");
+    end
 end
 
 function Lib.BriefingSystem.Local:DisplayPageControls(_PlayerID, _PageID)
@@ -769,7 +779,12 @@ function Lib.BriefingSystem.Local:ControlParallaxes(_PlayerID)
         for Index, Data in pairs(self.Briefing[_PlayerID].ParallaxLayers) do
             local Widget = self.ParallaxWidgets[Index][1];
             local Size = {GUI.GetScreenSize()};
-            local Factor = math.min(math.lerp(Data.Started, CurrentTime, Data.Duration), 1);
+
+            local Factor = math.lerp(Data.Started, CurrentTime, Data.Duration);
+            if Factor > 1 and Data.Repeat then
+                self.Briefing[_PlayerID].ParallaxLayers[Index].Started = CurrentTime;
+                Factor = math.lerp(Data.Started, CurrentTime, Data.Duration);
+            end
             if Data.Interpolation then
                 Factor = math.min(Data:Interpolation(CurrentTime), 1);
             end
@@ -821,9 +836,9 @@ function Lib.BriefingSystem.Local:ControlParallaxes(_PlayerID)
                 u1 = u1 - (u1 * 0.125);
             end
 
-            XGUIEng.SetMaterialAlpha(Widget, 1, Alpha or 255);
-            XGUIEng.SetMaterialTexture(Widget, 1, Image);
-            XGUIEng.SetMaterialUV(Widget, 1, u0, v0, u1, v1);
+            XGUIEng.SetMaterialColor(Widget, 0, 255, 255, 255, Alpha or 255);
+            XGUIEng.SetMaterialTexture(Widget, 0, Image);
+            XGUIEng.SetMaterialUV(Widget, 0, u0, v0, u1, v1);
         end
     end
 end
@@ -1208,12 +1223,12 @@ function Lib.BriefingSystem.Local:OverrideThroneRoomFunctions()
         end
     end
 
-    GameCallback_Escape_Orig_BriefingSystem = GameCallback_Escape;
+    self.Orig_GameCallback_Escape = GameCallback_Escape;
     GameCallback_Escape = function()
         if Lib.BriefingSystem.Local.Briefing[GUI.GetPlayerID()] then
             return;
         end
-        GameCallback_Escape_Orig_BriefingSystem();
+        Lib.BriefingSystem.Local.Orig_GameCallback_Escape();
     end
 end
 
@@ -1228,19 +1243,28 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     end
     local ScreenX, ScreenY = GUI.GetScreenSize();
 
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
+
     -- Parallax
     function EndScreen_ExitGame() end
     function MissionFadeInEndScreen() end
     for i= 1, #self.ParallaxWidgets do
-        XGUIEng.ShowWidget(self.ParallaxWidgets[i][1], 1);
         XGUIEng.ShowWidget(self.ParallaxWidgets[i][2], 1);
-        XGUIEng.PushPage(self.ParallaxWidgets[i][2], false);
+        if not self.ParallaxWidgets.Pushed[self.ParallaxWidgets[i][2]] then
+            self.ParallaxWidgets.Pushed[self.ParallaxWidgets[i][2]] = true;
+            XGUIEng.PushPage(self.ParallaxWidgets[i][2], false);
+        end
+        XGUIEng.ShowWidget(self.ParallaxWidgets[i][1], 1);
 
-        XGUIEng.SetMaterialTexture(self.ParallaxWidgets[i][1], 1, "");
-        XGUIEng.SetMaterialColor(self.ParallaxWidgets[i][1], 1, 255, 255, 255, 0);
-        XGUIEng.SetMaterialUV(self.ParallaxWidgets[i][1], 1, 0, 0, 1, 1);
+        XGUIEng.SetMaterialTexture(self.ParallaxWidgets[i][1], 0, "");
+        XGUIEng.SetMaterialColor(self.ParallaxWidgets[i][1], 0, 255, 255, 255, 0);
+        XGUIEng.SetMaterialUV(self.ParallaxWidgets[i][1], 0, 0, 0, 1, 1);
     end
     XGUIEng.ShowWidget("/EndScreen/EndScreen/BG", 0);
+    XGUIEng.ShowWidget("/InGame/Root/PresentationLoadingScreen/Logo", 0);
 
     -- Throneroom Main
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 1);
@@ -1310,6 +1334,9 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     g_Fade.To = 0;
     SetFaderAlpha(0);
 
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
     if not self.LoadscreenClosed then
         XGUIEng.PushPage("/LoadScreen/LoadScreen", false);
     end
@@ -1320,6 +1347,11 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
         return;
     end
     self.CinematicActive = false;
+
+    local ConsoleWasVisible = IsScriptConsoleShown();
+    if ConsoleWasVisible then
+        HideScriptConsole();
+    end
 
     g_Fade.To = 0;
     SetFaderAlpha(0);
@@ -1342,6 +1374,8 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     end
 
     XGUIEng.ShowWidget("/EndScreen/EndScreen/BG", 1);
+    XGUIEng.ShowWidget("/InGame/Root/PresentationLoadingScreen/Logo", 1);
+    self.ParallaxWidgets.Pushed = {};
     for i= 1, #self.ParallaxWidgets do
         XGUIEng.ShowWidget(self.ParallaxWidgets[i][1], 0);
         XGUIEng.ShowWidget(self.ParallaxWidgets[i][2], 0);
@@ -1361,6 +1395,10 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_2_Dodge", 0);
 
     ResetRenderDistance();
+
+    if ConsoleWasVisible then
+        ShowScriptConsole();
+    end
 end
 
 -- -------------------------------------------------------------------------- --

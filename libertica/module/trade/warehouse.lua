@@ -33,8 +33,8 @@ Lib.Warehouse.Text = {
 Lib.Require("comfort/GetSiegeengineTypeByCartType");
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("comfort/KeyOf");
-Lib.Require("comfort/global/ReplaceEntity");
-Lib.Require("comfort/global/SendCart");
+Lib.Require("comfort/ReplaceEntity");
+Lib.Require("comfort/SendCart");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/io/IO");

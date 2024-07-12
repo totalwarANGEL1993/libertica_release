@@ -1,15 +1,15 @@
 --- Verbessert interaktive Objekte.
 ---
---- #### Debug-Befehle
---- * `enableobject <ScriptName>`  - Ein Objekt wird aktiviert
---- * `disableobject <ScriptName>` - Ein Objekt wird deaktiviert
---- * `initobject <ScriptName>`    - Das Objekt wird rudimentär aktiviert
----
 --- #### Reports
 --- * Report.ObjectClicked - Der Spieler hat auf die Interaktions-Schaltfläche geklickt.
 --- * Report.ObjectInteraction - Die Interaktion des Objekts war erfolgreich.
 --- * Report.ObjectReset - Die Interaktion wird vom Objekt gelöscht.
 --- * Report.ObjectDelete - Der Zustand eines Objekts wurde zurückgesetzt.
+---
+--- #### Debug-Funktionen
+--- * Debug_EnableIO(Entity, State, Player)  - Ein Objekt wird aktiviert
+--- * Debug_DisableIO(Entity, State, Player) - Ein Objekt wird deaktiviert
+--- * Debug_InitIO(Entity, RG, RA, CG1, CA1, CG2, CA2) - Ein Objekt wird rudimentär aktiviert
 ---
 Lib.IO = Lib.IO or {};
 
@@ -174,7 +174,7 @@ API.RequireTitleToBuildTradeposts = RequireTitleToBuildTradeposts;
 
 --- Aktiviert ein interaktives Objekt.
 --- @param _ScriptName string Skriptname der Entität
---- @param _State integer     Interaktionszustand
+--- @param _State? integer    Interaktionszustand
 --- @param ... integer        Liste der Spieler-IDs
 InteractiveObjectActivate = function(_ScriptName, _State, ...)
 end

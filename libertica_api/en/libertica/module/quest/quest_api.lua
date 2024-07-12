@@ -6,12 +6,18 @@
 --- All texts inside a quest can be pulled out of string tables. The format for
 --- those texts will be "FileName/StringName".
 ---
---- #### Debug commands
---- * `stop <QuestName>`      - Interrupts a quest
---- * `start <QuestName>`     - Triggers a quest
---- * `win <QuestName>`       - Ends a quest successfuly
---- * `fail <QuestName>`      - Ends a quest in failure
---- * `restart <QuestName>`   - Resets and triggers a quest
+--- #### Debug Functions
+--- * Debug_FailQuest(_Name) - Makes a quest fail
+--- * Debug_WinQuest(_Name) - Makes a quest succeed
+--- * Debug_StartQuest(_Name) - Starts a quest
+--- * Debug_RestartQuest(_Name) - Resets and restarts a quest
+--- * Debug_StopQuest(_Name) - Interrupts a quest
+--- * Debug_FindQuests(_Name) - Searches quests like the pattern
+--- * Debug_FailedQuests() - Lists quests that have failed
+--- * Debug_StoppedQuests() - Lists quests that are interrupted
+--- * Debug_ActiveQuests() - Lists quests that are active
+--- * Debug_WonQuests() - Lists quests that have succeeded
+--- * Debug_WaitingQuests() - Lists quests that are inactive
 ---
 Lib.Quest = Lib.Quest or {};
 

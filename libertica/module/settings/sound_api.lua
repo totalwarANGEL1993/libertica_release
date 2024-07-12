@@ -101,18 +101,20 @@ function SoundRestore()
 end
 API.SoundRestore = SoundRestore;
 
-function PlayVoice(_File)
+function PlayVoice(_File, _Identifier)
+    _Identifier = _Identifier or "ImportantStuff";
     if GUI then
         StopVoice();
-        Sound.PlayVoice("ImportantStuff", _File);
+        Sound.PlayVoice(_Identifier, _File);
     end
-    ExecuteLocal([[PlayVoice("%s")]], _File);
+    ExecuteLocal([[PlayVoice("%s", "%s")]], _File, _Identifier);
 end
 API.PlayVoice = PlayVoice;
 
-function StopVoice()
+function StopVoice(_Identifier)
+    _Identifier = _Identifier or "ImportantStuff";
     if GUI then
-        Sound.StopVoice("ImportantStuff");
+        Sound.StopVoice(_Identifier);
     end
     ExecuteLocal("StopVoice()");
 end

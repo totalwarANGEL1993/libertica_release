@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/Move");
+Lib.Register("comfort/Move");
 
 function Move(_Entity, _Target, _IgnoreBlocking)
     local ID = GetID(_Entity);

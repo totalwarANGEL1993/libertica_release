@@ -6,17 +6,30 @@
 --- Standard rules:
 --- * The number of buildings in the home territory is not limited
 --- * City buildings can only be built in the home territory
---- * In territories, only 3 buildings can be built. Fields and beehives
----   do not count as buildings.
+--- * In territories, only 3 buildings can be built.
+--- * When a outpost is upgraded the max amount of buildings is permemently
+---   increased  to 4.
 --- * Each building type can only be built once per territory.
 --- * Territories can be developed once by paying costs. Developing a territory
----   enables the construction of an additional building.
+---   enables the construction of two buildings of the same type.
+--- * Beehives, beautifications and fields do not count as buildings.
 ---
 Lib.SettlementLimitation = Lib.SettlementLimitation or {};
 
 --- Activates or deactivates the mode.
 --- @param _Flag boolean Indicates whether the mode is active
 function ActivateSettlementLimitation(_Flag)
+end
+
+--- Sets the title, required for developing territories.
+--- @param _Title integer Knight title
+function RequireTitleToDevelopTerritory(_Title)
+end
+
+--- Allows or forbids to develop territories.
+--- @param _PlayerID integer ID of player
+--- @param _Allowed boolean Developing allowed
+function AllowDevelopTerritory(_PlayerID, _Allowed)
 end
 
 --- Sets the general building limit for the player in the territory.

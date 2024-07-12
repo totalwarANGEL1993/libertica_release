@@ -1,10 +1,11 @@
 Lib.Core = Lib.Core or {};
 Lib.Core.Debug = {
     DisplayScriptErrors = false;
-    CheckAtRun          = false;
-    TraceQuests         = false;
-    DevelopingCheats    = false;
-    DevelopingShell     = false;
+    CheckAtRun = false;
+    TraceQuests = false;
+    DevelopingCheats = false;
+    DevelopingShell = false;
+    LoadscreenClosed = false;
 }
 
 Lib.Require("comfort/IsLocalScript");
@@ -15,16 +16,10 @@ Lib.Register("core/feature/Core_Debug");
 function Lib.Core.Debug:Initialize()
     Report.DebugChatConfirmed = CreateReport("Event_DebugChatConfirmed");
     Report.DebugConfigChanged = CreateReport("Event_DebugConfigChanged");
+    Report.DebugCallGlobal = CreateReport("Event_DebugCallGlobal");
 
     if IsLocalScript() then
         self:InitializeQsbDebugHotkeys();
-
-        CreateReportReceiver(
-            Report.ChatClosed,
-            function(...)
-                Lib.Core.Debug:ProcessDebugInput(...);
-            end
-        );
     end
 end
 
@@ -36,6 +31,21 @@ function Lib.Core.Debug:OnSaveGameLoaded()
 end
 
 function Lib.Core.Debug:OnReportReceived(_ID, ...)
+    if _ID == Report.LoadingFinished then
+        self.LoadscreenClosed = true;
+    elseif _ID == Report.ChatClosed then
+        if IsLocalScript() then
+            Lib.Core.Debug:ProcessDebugInput(...);
+        end
+    elseif _ID == Report.DebugCallGlobal then
+        if not IsLocalScript() then
+            self:CallFunctionFromString(...);
+        end
+    end
+end
+
+function Lib.Core.Debug:Test(_Text)
+    AddNote(_Text)
 end
 
 function Lib.Core.Debug:ActivateDebugMode(_DisplayScriptErrors, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests)
@@ -121,12 +131,48 @@ function Lib.Core.Debug:InitializeQsbDebugHotkeys()
     );
 end
 
+function Lib.Core.Debug:CallFunctionFromString(...)
+    local FunctionRef = nil;
+    local FunctionNameParts = string.slice(table.remove(arg, 1), "%.");
+    for i= 1, #FunctionNameParts do
+        local FunctionName = string.slice(FunctionNameParts[i], ":");
+        if #FunctionName > 1 then
+            if FunctionRef == nil then
+                FunctionRef = _G[FunctionName[1]][FunctionName[2]];
+                if FunctionRef then
+                    FunctionRef(_G[FunctionName[1]], unpack(arg));
+                end
+            else
+                FunctionRef = FunctionRef[FunctionName[1]][FunctionName[2]];
+                if FunctionRef then
+                    FunctionRef(_G[FunctionName[1]], unpack(arg));
+                end
+            end
+            return;
+        else
+            if FunctionRef == nil then
+                FunctionRef = _G[FunctionName[1]];
+            else
+                FunctionRef = FunctionRef[FunctionName[1]];
+            end
+        end
+    end
+    if FunctionRef then
+        FunctionRef(unpack(arg));
+    end
+end
+
 function Lib.Core.Debug:ProcessDebugShortcut(_Type, _Params)
     if self.DevelopingCheats then
         if _Type == "RestartMap" then
+            self:HideDebugInput();
             Framework.RestartMap();
         elseif _Type == "Terminal" then
-            ShowTextInput(GUI.GetPlayerID(), true);
+            if Framework.IsDevM() then
+                ShowTextInput(GUI.GetPlayerID(), true);
+            else
+                ToggleScriptConsole();
+            end
         end
     end
 end
@@ -225,8 +271,102 @@ end
 
 -- -------------------------------------------------------------------------- --
 
+function Debug_ShowVersion()
+    GUI.AddStaticNote("Version: " ..Lib.Loader.Version);
+end
+
+function Lib.Core.Debug:ToggleDebugInput()
+    if self.ConsoleIsVisible then
+        self:HideDebugInput();
+    else
+        self:ShowDebugInput();
+    end
+end
+
+function Lib.Core.Debug:ShowDebugInput()
+    local MotherPath = "/InGame/TempStuff/BGTopBar/temp";
+    local TopWidget = XGUIEng.GetWidgetPathByID(XGUIEng.GetTopPage());
+    if not self.LoadscreenClosed
+    or not self.DevelopingShell
+    or self.ConsoleIsVisible then
+        return;
+    end
+    Display.ToggleScriptConsole();
+    if TopWidget ~= MotherPath then
+        XGUIEng.PushPage(MotherPath, false);
+    end
+    XGUIEng.ShowWidget(MotherPath, 0);
+    RequestHiResDelay(0, function()
+        XGUIEng.ShowWidget(MotherPath, 1);
+        XGUIEng.ShowAllSubWidgets(MotherPath, 1);
+        XGUIEng.ShowWidget(MotherPath.. "/ShadowBottom", 0);
+        XGUIEng.ShowWidget(MotherPath.. "/ShadowTop", 0);
+        XGUIEng.ShowWidget(MotherPath.. "/BGTopBarRightBound", 0);
+        XGUIEng.SetWidgetLocalPosition(MotherPath, 0, 0);
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/1", 0, -22)
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/2", 295, -22)
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/3", 592, -22)
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/4", 889, -22)
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/5", 1184, -22)
+        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/6", 1483, -22);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6", 275, 300);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame", 275, 300);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Bottom", 275, 300);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Bottom/1", 275, 100);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Top", 275, 300);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Top/1", 275, 60);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6", 275, 60);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/DialogBG", 275, 60);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/DialogBG/1", 275, 60);
+        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/DialogBG/1/1", 275, 60);
+        XGUIEng.SetWidgetLocalPosition(MotherPath, 0, -140);
+    end);
+
+    self.ConsoleIsVisible = true;
+end
+
+function Lib.Core.Debug:HideDebugInput()
+    local MotherPath = "/InGame/TempStuff/BGTopBar/temp";
+    if not self.ConsoleIsVisible then
+        return;
+    end
+    Display.ToggleScriptConsole();
+    XGUIEng.ShowWidget(MotherPath, 0);
+
+    self.ConsoleIsVisible = false;
+end
+
+-- -------------------------------------------------------------------------- --
+
 function ActivateDebugMode(_DisplayScriptErrors, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests)
     Lib.Core.Debug:ActivateDebugMode(_DisplayScriptErrors, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests);
 end
 API.ActivateDebugMode = ActivateDebugMode;
+
+function ShowScriptConsole()
+    Lib.Core.Debug:ShowDebugInput();
+end
+
+function HideScriptConsole()
+    Lib.Core.Debug:HideDebugInput();
+end
+
+function ToggleScriptConsole()
+    Lib.Core.Debug:ToggleDebugInput();
+end
+
+function IsScriptConsoleShown()
+    return Lib.Core.Debug.ConsoleIsVisible == true;
+end
+
+-- -------------------------------------------------------------------------- --
+
+function Debug_ShowVersion()
+    GUI.AddStaticNote("Version: " ..Lib.Loader.Version);
+end
+
+function Debug_Execute(_Function, ...)
+    error(type(_Function) == "string", "function must be a string!");
+    SendReportToGlobal(Report.DebugCallGlobal, _Function, unpack(arg));
+end
 

@@ -45,3 +45,49 @@ function AddDisableDecisionCondition(_Function)
 end
 API.AddDisableDecisionCondition = AddDisableDecisionCondition;
 
+
+
+function Debug_FailQuest(_Name)
+    SendReportToGlobal(Report.Internal_DebugFailQuest, _Name);
+end
+
+function Debug_WinQuest(_Name)
+    SendReportToGlobal(Report.Internal_DebugWinQuest, _Name);
+end
+
+function Debug_StartQuest(_Name)
+    SendReportToGlobal(Report.Internal_DebugStartQuest, _Name);
+end
+
+function Debug_RestartQuest(_Name)
+    SendReportToGlobal(Report.Internal_DebugRestartQuest, _Name);
+end
+
+function Debug_StopQuest(_Name)
+    SendReportToGlobal(Report.Internal_DebugStopQuest, _Name);
+end
+
+function Debug_FindQuests(_Name)
+    SendReportToGlobal(Report.Internal_DebugListNamedQuests, _Name);
+end
+
+function Debug_FailedQuests()
+    SendReportToGlobal(Report.Internal_DebugListFailedQuests);
+end
+
+function Debug_StoppedQuests()
+    SendReportToGlobal(Report.Internal_DebugListStoppedQuests);
+end
+
+function Debug_ActiveQuests()
+    SendReportToGlobal(Report.Internal_DebugListActiveQuests);
+end
+
+function Debug_WonQuests()
+    SendReportToGlobal(Report.Internal_DebugListWonQuests);
+end
+
+function Debug_WaitingQuests()
+    SendReportToGlobal(Report.Internal_DebugListWaitingQuests);
+end
+

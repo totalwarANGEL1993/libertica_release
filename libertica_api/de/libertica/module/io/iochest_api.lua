@@ -1,12 +1,12 @@
 --- Offers easy to use treasure chests
 ---
---- #### Debug commands
---- * `goldchest <ScriptName>`   - Creates a random gold chest
---- * `goodchest <ScriptName>`   - Creates a random resource chest
---- * `luxurychest <ScriptName>` - Creates a random luxury chest
----
 --- #### Reports
 --- * `Report.InteractiveTreasureActivated` - Der Spieler hat einen Schatz aktivier.
+---
+--- #### Debug Functions
+--- * `Debug_GoldChest(Entity)   - Erzeugt eine Kiste mit zufälligem Gold
+--- * `Debug_GoodChest(Entity)   - Erzeugt eine Kiste mit zufälligem Rohstoff
+--- * `Debug_LuxuryChest(Entity) - Erzeugt eine Kiste mit zufälligem Luxusgut
 ---
 Lib.IOChest = Lib.IOChest or {};
 
