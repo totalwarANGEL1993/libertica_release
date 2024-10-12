@@ -27,6 +27,13 @@ Lib.Core.Text = {
         none    = "{@color:none}"
     },
 
+    Letters = {
+        [4] = "ABCDEFGHKLMNOPQRSTUVWXYZÄÖÜÁÂÃÅÇÈÉÊËÐÐÑÒÓÔÕÖØÙÚÛÜÝ",
+        [3] = "abcdeghkmnopqsuvwxyzäöüßIJÆÌÍÎÏÞàáâãåæçèéêëìíîïðñòóôõ÷øùúûüýþÿ",
+        [2] = "\"#+*~_\\§$%&=?@fijlft",
+        [1] = "!-/()?',.|[]{}",
+    },
+
     StringTables = {},
 
     Placeholders = {
@@ -203,6 +210,48 @@ end
 
 -- -------------------------------------------------------------------------- --
 
+function Lib.Core.Text:GetAmountOfLines(_Text, _LineLength)
+    local Lines = 0;
+    if type(_Text) == "string" then
+        local Text,cr = string.gsub(_Text, "{cr}", " ###CR### ");
+
+        local Words = {};
+        for Word in string.gmatch(Text, "%S+") do
+            table.insert(Words, Word)
+        end
+
+        local Counter = 0;
+        for _,Word in pairs(Words) do
+            if Word == "###CR###" then
+                Counter = 0;
+                Lines = Lines + 1;
+            else
+                for Char in string.gmatch(Word, ".") do
+                    local Size = self:GetLetterSize(Char);
+                    if Counter + Size <= _LineLength then
+                        Counter = Counter + Size;
+                    else
+                        Counter = 0;
+                        Lines = Lines + 1;
+                    end
+                end
+            end
+        end
+    end
+    return Lines;
+end
+
+function Lib.Core.Text:GetLetterSize(_Byte)
+    for Size, Letters in pairs(self.Letters) do
+        if string.find(Letters, _Byte) then
+            return Size;
+        end
+    end
+    return 2;
+end
+
+-- -------------------------------------------------------------------------- --
+
 function Localize(_Text)
     return Lib.Core.Text:Localize(_Text);
 end
@@ -284,5 +333,12 @@ function DefineLanguage(_Shortcut, _Name, _Fallback, _Index)
     ExecuteLocal([[
         table.insert(Lib.Core.Text.Languages, %d, {"%s", "%s", "%s"})
     ]], _Index, _Shortcut, _Name, _Fallback);
+end
+
+function CountTextLines(_Text, _LineLength)
+    assert(type(_Text) == "string");
+    assert(type(_LineLength) == "number");
+    assert(_LineLength > 0);
+    return Lib.Core.Text:GetAmountOfLines(_Text, _LineLength);
 end
 

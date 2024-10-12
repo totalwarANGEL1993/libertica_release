@@ -69,7 +69,6 @@ B_Goal_DiscoverPlayers = {
         { ParameterType.PlayerID, en = "Player 3", de = "Spieler 3", fr = "Joueur 3" },
         { ParameterType.PlayerID, en = "Player 4", de = "Spieler 4", fr = "Joueur 4" },
         { ParameterType.PlayerID, en = "Player 5", de = "Spieler 5", fr = "Joueur 5" },
-        { ParameterType.PlayerID, en = "Player 6", de = "Spieler 6", fr = "Joueur 6" },
     },
 }
 
@@ -130,7 +129,6 @@ B_Goal_DiscoverTerritories = {
         { ParameterType.TerritoryName, en = "Territory 3", de = "Territorium 3", fr = "Territoire 3" },
         { ParameterType.TerritoryName, en = "Territory 4", de = "Territorium 4", fr = "Territoire 4" },
         { ParameterType.TerritoryName, en = "Territory 5", de = "Territorium 5", fr = "Territoire 5" },
-        { ParameterType.TerritoryName, en = "Territory 6", de = "Territorium 6", fr = "Territoire 6" },
     },
 }
 
@@ -160,6 +158,99 @@ function B_Goal_DiscoverTerritories:GetMsgKey()
 end
 
 RegisterBehavior(B_Goal_DiscoverTerritories);
+
+-- -------------------------------------------------------------------------- --
+
+function Trigger_OnAtLeastXOfYQuestsSuccess(...)
+    return B_Trigger_OnAtLeastXOfYQuestsSuccess:new(...);
+end
+
+B_Trigger_OnAtLeastXOfYQuestsSuccess = {
+    Name = "Trigger_OnAtLeastXOfYQuestsSuccess",
+    Description = {
+        en = "Trigger: if at least X of Y given quests has been finished successfully.",
+        de = "Auslöser: wenn X von Y angegebener Quests erfolgreich abgeschlossen wurden.",
+        fr = "Déclencheur: lorsque X des Y quêtes indiquées ont été accomplies avec succès.",
+    },
+    Parameter = {
+        { ParameterType.Custom, en = "Least Amount", de = "Mindest Anzahl", fr = "Nombre minimum" },
+        { ParameterType.Custom, en = "Quest Amount", de = "Quest Anzahl",   fr = "Nombre de quêtes" },
+        { ParameterType.QuestName, en = "Quest name 1", de = "Questname 1", fr = "Nom de la quête 1" },
+        { ParameterType.QuestName, en = "Quest name 2", de = "Questname 2", fr = "Nom de la quête 2" },
+        { ParameterType.QuestName, en = "Quest name 3", de = "Questname 3", fr = "Nom de la quête 3" },
+        { ParameterType.QuestName, en = "Quest name 4", de = "Questname 4", fr = "Nom de la quête 4" },
+        { ParameterType.QuestName, en = "Quest name 5", de = "Questname 5", fr = "Nom de la quête 5" },
+    },
+}
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:GetTriggerTable()
+    return { Triggers.Custom2,{self, self.CustomFunction} }
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:AddParameter(_Index, _Parameter)
+    if (_Index == 0) then
+        self.LeastAmount = tonumber(_Parameter)
+    elseif (_Index == 1) then
+        self.QuestAmount = tonumber(_Parameter)
+    elseif (_Index == 2) then
+        self.QuestName1 = _Parameter
+    elseif (_Index == 3) then
+        self.QuestName2 = _Parameter
+    elseif (_Index == 4) then
+        self.QuestName3 = _Parameter
+    elseif (_Index == 5) then
+        self.QuestName4 = _Parameter
+    elseif (_Index == 6) then
+        self.QuestName5 = _Parameter
+    end
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:CustomFunction()
+    local least = 0
+    for i = 1, self.QuestAmount do
+        ---@diagnostic disable-next-line: param-type-mismatch
+        local QuestID = GetQuestID(self["QuestName"..i]);
+        if IsValidQuest(QuestID) then
+            if (Quests[QuestID].Result == QuestResult.Success) then
+                least = least + 1
+                if least >= self.LeastAmount then
+                    return true
+                end
+            end
+        end
+    end
+    return false
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:Debug(_Quest)
+    local leastAmount = self.LeastAmount
+    local questAmount = self.QuestAmount
+    if leastAmount <= 0 or leastAmount >5 then
+        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": LeastAmount is wrong")
+        return true
+    elseif questAmount <= 0 or questAmount > 5 then
+        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": QuestAmount is wrong")
+        return true
+    elseif leastAmount > questAmount then
+        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": LeastAmount is greater than QuestAmount")
+        return true
+    end
+    for i = 1, questAmount do
+        if not IsValidQuest(self["QuestName"..i]) then
+            debug(false, _Quest.Identifier.. ": " ..self.Name .. ": Quest ".. self["QuestName"..i] .. " not found")
+            return true
+        end
+    end
+    return false
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:GetCustomData(_Index)
+    if (_Index == 0) or (_Index == 1) then
+        return {"1", "2", "3", "4", "5"}
+    end
+end
+
+RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsSuccess)
 
 -- -------------------------------------------------------------------------- --
 

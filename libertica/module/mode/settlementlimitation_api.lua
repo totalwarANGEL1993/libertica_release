@@ -6,7 +6,7 @@ function ActivateSettlementLimitation(_Flag)
         ExecuteLocal("ActivateSettlementLimitation(%s)", tostring(_Flag == true));
     end
     Lib.SettlementLimitation.AquireContext();
-    this.Active = true;
+    this.Active = _Flag == true;
     Lib.SettlementLimitation.ReleaseContext();
 end
 API.ActivateSettlementLimitation = ActivateSettlementLimitation;

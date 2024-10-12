@@ -30,6 +30,24 @@ function AllowExtendedZoom(_Flag, _PlayerID)
 end
 API.AllowExtendedZoom = AllowExtendedZoom;
 
+--- Schaltet zwischem erweiterten und normalen Zoom um.
+--- @param _PlayerID integer ID des Spielers
+function ToggleExtendedZoom(_PlayerID)
+end
+API.ToggleExtendedZoom = ToggleExtendedZoom;
+
+--- Setzt das Zoom Limit für den normalen Zoom.
+--- @param _Limit number Zoom Limit (zwischen 0.1 und 0.87)
+function SetNormalZoomProps(_Limit)
+end
+API.SetNormalZoomProps = SetNormalZoomProps;
+
+--- Setzt das Zoom Limit für den erweiterten Zoom.
+--- @param _Limit number Zoom Limit (zwischen 0.1 und 0.87)
+function SetExtendedZoomProps(_Limit)
+end
+API.SetExtendedZoomProps = SetExtendedZoomProps;
+
 --- Fokussiert eine Kamera auf den Ritter des Spielers, sperrt die Kamera jedoch nicht.
 --- @param _PlayerID integer ID des Spielers
 --- @param _Rotation number Drehwinkel

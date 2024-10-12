@@ -223,7 +223,8 @@ function Goal_Claim(_Territory)
 end
 
 ---
---- Requires the contractor to possess a certain number of territories. The player's home territory is included!
+--- Requires the contractor to possess a certain number of territories. The 
+--- player's home territory is included!
 ---
 --- @param _Amount integer Number of territories
 ---
@@ -231,8 +232,9 @@ function Goal_ClaimXTerritories(_Amount)
 end
 
 ---
---- Requires the contractor to create a certain number of entities of a specific type on the territory.
---- This behavior is suitable for tasks like "Build X grain farms on Territory >".
+--- Requires the contractor to create a certain number of entities of a 
+--- specific type on the territory. This behavior is suitable for tasks like 
+--- "Build X grain farms on Territory >".
 ---
 --- @param _Type      string Type of the entity
 --- @param _Amount    integer Number of entities
@@ -261,7 +263,8 @@ function Goal_GoodAmount(_Type, _Amount, _Relation)
 end
 
 ---
---- Ensures the settlers of the player do not go on strike due to a specific need.
+--- Ensures the settlers of the player do not go on strike due to a specific 
+--- need.
 ---
 --- <u>Needs</u>
 --- <ul>
@@ -279,7 +282,8 @@ function Goal_SatisfyNeed(_PlayerID, _Need)
 end
 
 ---
---- Requires the specified player to have a certain number of settlers in the city.
+--- Requires the specified player to have a certain number of settlers in 
+--- the city.
 ---
 --- @param _Amount   integer Number of settlers
 --- @param _PlayerID integer ID of the player (Default: 1)
@@ -304,7 +308,8 @@ end
 --- <li>< - Less than the number</li>
 --- </ul>
 ---
---- This behavior can be used to count the number of enemy soldiers or the number of soldiers of the player.
+--- This behavior can be used to count the number of enemy soldiers or the 
+--- number of soldiers of the player.
 ---
 --- @param _PlayerID integer ID of the player
 --- @param _Relation string Quantity relation
@@ -359,11 +364,15 @@ function Goal_KnightTitle(_Title)
 end
 
 ---
---- Requires the specified player to celebrate at least a certain number of festivals.
+--- Requires the specified player to celebrate at least a certain number of 
+--- festivals.
 ---
---- A festival is considered achieved once the mead barrels appear on the market. These mead barrels only appear in the normal course of the game through a festival!
+--- A festival is considered achieved once the mead barrels appear on the 
+--- market. These mead barrels only appear in the normal course of the game 
+--- through a festival!
 ---
---- <b>Attention</b>: If a player possesses mead barrels for another reason, this behavior will no longer work correctly!
+--- <b>Attention</b>: If a player possesses mead barrels for another reason, 
+--- this behavior will no longer work correctly!
 ---
 --- @param _PlayerID integer ID of the player
 --- @param _Amount   integer Number of festivals
@@ -380,7 +389,8 @@ function Goal_Capture(_ScriptName)
 end
 
 ---
---- Requires the contractor to capture a number of units of a certain type from a player.
+--- Requires the contractor to capture a number of units of a certain type 
+--- from a player.
 ---
 --- @param _Type      string Type to capture
 --- @param _Amount    integer Number of units
@@ -392,7 +402,8 @@ end
 ---
 --- Requires the contractor to protect the specified entity.
 ---
---- If a cart is destroyed or brought into an enemy warehouse/castle, the goal fails.
+--- If a cart is destroyed or brought into an enemy warehouse/castle, the 
+--- goal fails.
 ---
 --- @param _ScriptName string Entity to protect
 ---
@@ -412,7 +423,8 @@ end
 ---
 --- Requires a specific amount of resources to be reached in a mine.
 ---
---- This behavior is especially suitable for use as a hidden quest to trigger a reaction, for example, when a mine is empty.
+--- This behavior is especially suitable for use as a hidden quest to trigger 
+--- a reaction, for example, when a mine is empty.
 ---
 --- <u>Relations</u>
 --- <ul>
@@ -442,7 +454,8 @@ end
 ---
 --- The quest state never changes.
 ---
---- If there is a time limit on the quest, this behavior will not fail but will be automatically completed.
+--- If there is a time limit on the quest, this behavior will not fail but 
+--- will be automatically completed.
 ---
 function Goal_NoChange()
 end
@@ -457,17 +470,22 @@ end
 --- <li>nothing: State undefined</li>
 --- </ul>
 ---
---- Instead of a string, a function reference can be passed when used in the script. In this case, all other parameters are passed directly to the function.
+--- Instead of a string, a function reference can be passed when used in 
+--- the script. In this case, all other parameters are passed directly to 
+--- the function.
 ---
---- @param _FunctionName string Name of the function
+--- @param _FunctionName any Name of the function
+--- @param ... any Optional parameters
 ---
-function Goal_MapScriptFunction(_FunctionName)
+function Goal_MapScriptFunction(_FunctionName, ...)
 end
 
 ---
 --- A custom variable must have a specific value.
 ---
---- Custom variables can only contain numbers. Before a variable can be queried in a goal, it must have been initialized with Reprisal_CustomVariables or Reward_CutsomVariables.
+--- Custom variables can only contain numbers. Before a variable can be 
+--- queried in a goal, it must have been initialized with 
+--- Reprisal_CustomVariables or Reward_CutsomVariables.
 ---
 --- <p>Comparison operators</p>
 --- <ul>
@@ -697,9 +715,10 @@ end
 --- -- equivalent to: ReplaceEntity("block", Entities.XD_ScriptEntity);</pre>
 --- <b>Attention:</b> Not available via the assistant!
 ---
---- @param _Function string Name of the function or function reference
+--- @param _Function string any of the function or function reference
+--- @param ... any Optional parameters
 ---
-function Reprisal_MapScriptFunction(_Function)
+function Reprisal_MapScriptFunction(_Function, ...)
 end
 
 ---
@@ -1208,9 +1227,10 @@ end
 --- -- corresponds to: ReplaceEntity("block", Entities.XD_ScriptEntity);</pre>
 --- <b>Attention:</b> Not available via the assistant!
 ---
---- @param _FunctionName string Name of the function or function reference
+--- @param _FunctionName any Name of the function or function reference
+--- @param ... any Optional parameters
 ---
-function Reward_MapScriptFunction(_FunctionName)
+function Reward_MapScriptFunction(_FunctionName, ...)
 end
 
 ---
@@ -1451,20 +1471,6 @@ function Trigger_OnAtLeastOneQuestSuccess(_QuestName1, _QuestName2)
 end
 
 ---
---- Starts the quest once at least X of Y quests succeed.
----
---- @param _MinAmount   integer Minimum to fulfill (max. 5)
---- @param _QuestAmount integer Number of quests checked (max. 5 and >= _MinAmount)
---- @param _Quest1      string Name of the 1st quest
---- @param _Quest2      string Name of the 2nd quest
---- @param _Quest3      string Name of the 3rd quest
---- @param _Quest4      string Name of the 4th quest
---- @param _Quest5      string Name of the 5th quest
----
-function Trigger_OnAtLeastXOfYQuestsSuccess(_MinAmount, _QuestAmount, _Quest1, _Quest2, _Quest3, _Quest4, _Quest5)
-end
-
----
 --- Executes a function in the script as a trigger.
 ---
 --- The function must return either true or false.
@@ -1472,9 +1478,10 @@ end
 --- Script Only: If a function reference (string) is passed instead of a function name,
 --- all subsequent parameters are passed to the function.
 ---
---- @param _FunctionName string Name of the function
+--- @param _FunctionName any Name of the function
+--- @param ... any Optional parameters
 ---
-function Trigger_MapScriptFunction(_FunctionName)
+function Trigger_MapScriptFunction(_FunctionName, ...)
 end
 
 ---

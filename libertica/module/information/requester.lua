@@ -437,21 +437,8 @@ function Lib.Requester.Local:UpdateToggleWhisperTarget()
 end
 
 function Lib.Requester.Local:ShouldShowSlider(_Text)
-    local stringlen = string.len(_Text);
-    local iterator  = 1;
-    local carreturn = 0;
-    while (true)
-    do
-        local s,e = string.find(_Text, "{cr}", iterator);
-        if not e then
-            break;
-        end
-        if e-iterator <= 58 then
-            stringlen = stringlen + 58-(e-iterator);
-        end
-        iterator = e+1;
-    end
-    if (stringlen + (carreturn*55)) > 1000 then
+    local Lines = CountTextLines(_Text, 170);
+    if Lines > 20 then
         XGUIEng.ShowWidget("/InGame/Root/Normal/ChatOptions/ChatLogSlider",1);
     end
 end

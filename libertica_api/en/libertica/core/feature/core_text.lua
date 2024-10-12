@@ -81,3 +81,20 @@ API.GetStringText = GetStringText;
 function DefineLanguage(_Shortcut, _Name, _Fallback, _Index)
 end
 
+--- Returns the estimated amount of lines required to print the text.
+--- 
+--- #### Categories:
+--- * Length 4: ABCDEFGHKLMNOPQRSTUVWXYZÄÖÜÁÂÃÅÇÈÉÊËÐÐÑÒÓÔÕÖØÙÚÛÜÝ
+--- * Length 3: abcdeghkmnopqsuvwxyzäöüßIJÆÌÍÎÏÞàáâãåæçèéêëìíîïðñòóôõ÷øùúûüýþÿ
+--- * Length 2: \"#+*~_\\§$%&=?@fijlft
+--- * Length 1: !-/()?',.|[]{}
+--- 
+--- All not defined characters will have a estimate of 2.
+--- 
+--- @param _Text string Text
+--- @param _LineLength integer Line length
+--- @return integer Amount Amount of lines
+function CountTextLines(_Text, _LineLength)
+    return 0;
+end
+

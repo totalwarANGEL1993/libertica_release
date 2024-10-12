@@ -69,6 +69,35 @@ function AllowExtendedZoom(_Flag, _PlayerID)
 end
 API.AllowExtendedZoom = AllowExtendedZoom;
 
+function ToggleExtendedZoom(_PlayerID)
+    if not GUI then
+        ExecuteLocal([[ToggleExtendedZoom(%d)]], _PlayerID);
+        return;
+    end
+    Lib.Camera.Local:ToggleExtendedZoom(_PlayerID)
+end
+API.ToggleExtendedZoom = ToggleExtendedZoom;
+
+function SetNormalZoomProps(_Limit)
+    if not GUI then
+        ExecuteLocal([[SetNormalZoomProps(%f)]], _Limit);
+        return;
+    end
+    assert(type(_Limit) == "number", "Limit is wrong!");
+    Lib.Camera.Local:SetNormalZoomProps(_Limit);
+end
+API.SetNormalZoomProps = SetNormalZoomProps;
+
+function SetExtendedZoomProps(_Limit)
+    if not GUI then
+        ExecuteLocal([[SetExtendedZoomProps(%f)]], _Limit);
+        return;
+    end
+    assert(type(_Limit) == "number", "Limit is wrong!");
+    Lib.Camera.Local:SetExtendedZoomProps(_Limit);
+end
+API.SetExtendedZoomProps = SetExtendedZoomProps;
+
 function FocusCameraOnKnight(_PlayerID, _Rotation, _ZoomFactor)
     FocusCameraOnEntity(Logic.GetKnightID(_PlayerID), _Rotation, _ZoomFactor)
 end

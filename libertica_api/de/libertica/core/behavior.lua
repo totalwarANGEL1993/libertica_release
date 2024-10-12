@@ -497,9 +497,10 @@ end
 --- übergeben werden. In diesem Fall werden alle weiteren Parameter direkt an
 --- die Funktion weitergereicht.
 ---
---- @param _FunctionName string Name der Funktion
+--- @param _FunctionName any Name der Funktion
+--- @param ... any Optional parameters
 ---
-function Goal_MapScriptFunction(_FunctionName)
+function Goal_MapScriptFunction(_FunctionName, ...)
 end
 
 ---
@@ -750,9 +751,10 @@ end
 --- -- entspricht: ReplaceEntity("block", Entities.XD_ScriptEntity);</pre>
 --- <b>Achtung:</b> Nicht über den Assistenten verfügbar!
 ---
---- @param _Function string Name der Funktion oder Funktionsreferenz
+--- @param _Function string any der Funktion oder Funktionsreferenz
+--- @param ... any Optional parameters
 ---
-function Reprisal_MapScriptFunction(_Function)
+function Reprisal_MapScriptFunction(_Function, ...)
 end
 
 ---
@@ -1265,9 +1267,10 @@ end
 --- -- entspricht: ReplaceEntity("block", Entities.XD_ScriptEntity);</pre>
 --- <b>Achtung:</b> Nicht über den Assistenten verfügbar!
 ---
---- @param _FunctionName string Name der Funktion oder Funktionsreferenz
+--- @param _FunctionName any Name der Funktion oder Funktionsreferenz
+--- @param ... any Optional parameters
 ---
-function Reward_MapScriptFunction(_FunctionName)
+function Reward_MapScriptFunction(_FunctionName, ...)
 end
 
 ---
@@ -1520,20 +1523,6 @@ function Trigger_OnAtLeastOneQuestSuccess(_QuestName1, _QuestName2)
 end
 
 ---
---- Startet den Quest, sobald mindestens X von Y Quests erfolgreich sind.
----
---- @param _MinAmount   integer Mindestens zu erfüllen (max. 5)
---- @param _QuestAmount integer Anzahl geprüfter Quests (max. 5 und >= _MinAmount)
---- @param _Quest1      string Name des 1. Quest
---- @param _Quest2      string Name des 2. Quest
---- @param _Quest3      string Name des 3. Quest
---- @param _Quest4      string Name des 4. Quest
---- @param _Quest5      string Name des 5. Quest
----
-function Trigger_OnAtLeastXOfYQuestsSuccess(_MinAmount, _QuestAmount, _Quest1, _Quest2, _Quest3, _Quest4, _Quest5)
-end
-
----
 --- Führt eine Funktion im Skript als Trigger aus.
 ---
 --- Die Funktion muss entweder true or false zurückgeben.
@@ -1541,9 +1530,10 @@ end
 --- Nur Skipt: Wird statt einem Funktionsnamen (String) eine Funktionsreferenz
 --- übergeben, werden alle weiteren Parameter an die Funktion weitergereicht.
 ---
---- @param _FunctionName string Name der Funktion
+--- @param _FunctionName any Name der Funktion
+--- @param ... any Optional parameters
 ---
-function Trigger_MapScriptFunction(_FunctionName)
+function Trigger_MapScriptFunction(_FunctionName, ...)
 end
 
 ---

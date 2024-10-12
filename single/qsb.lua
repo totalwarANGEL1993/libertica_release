@@ -5,7 +5,7 @@ Lib = {
             "script/",
         },
 
-        Version = "LIB 1.0.1",
+        Version = "LIB 1.0.2",
         Root = "libertica",
         IsLocalEnv = GUI ~= nil,
         IsHistoryEdition = false,
@@ -8151,99 +8151,6 @@ RegisterBehavior(B_Trigger_OnAtLeastOneQuestSuccess);
 
 -- -------------------------------------------------------------------------- --
 
-function Trigger_OnAtLeastXOfYQuestsSuccess(...)
-    return B_Trigger_OnAtLeastXOfYQuestsSuccess:new(...);
-end
-
-B_Trigger_OnAtLeastXOfYQuestsSuccess = {
-    Name = "Trigger_OnAtLeastXOfYQuestsSuccess",
-    Description = {
-        en = "Trigger: if at least X of Y given quests has been finished successfully.",
-        de = "Auslöser: wenn X von Y angegebener Quests erfolgreich abgeschlossen wurden.",
-        fr = "Déclencheur: lorsque X des Y quêtes indiquées ont été accomplies avec succès.",
-    },
-    Parameter = {
-        { ParameterType.Custom, en = "Least Amount", de = "Mindest Anzahl", fr = "Nombre minimum" },
-        { ParameterType.Custom, en = "Quest Amount", de = "Quest Anzahl",   fr = "Nombre de quêtes" },
-        { ParameterType.QuestName, en = "Quest name 1", de = "Questname 1", fr = "Nom de la quête 1" },
-        { ParameterType.QuestName, en = "Quest name 2", de = "Questname 2", fr = "Nom de la quête 2" },
-        { ParameterType.QuestName, en = "Quest name 3", de = "Questname 3", fr = "Nom de la quête 3" },
-        { ParameterType.QuestName, en = "Quest name 4", de = "Questname 4", fr = "Nom de la quête 4" },
-        { ParameterType.QuestName, en = "Quest name 5", de = "Questname 5", fr = "Nom de la quête 5" },
-    },
-}
-
-function B_Trigger_OnAtLeastXOfYQuestsSuccess:GetTriggerTable()
-    return { Triggers.Custom2,{self, self.CustomFunction} }
-end
-
-function B_Trigger_OnAtLeastXOfYQuestsSuccess:AddParameter(_Index, _Parameter)
-    if (_Index == 0) then
-        self.LeastAmount = tonumber(_Parameter)
-    elseif (_Index == 1) then
-        self.QuestAmount = tonumber(_Parameter)
-    elseif (_Index == 2) then
-        self.QuestName1 = _Parameter
-    elseif (_Index == 3) then
-        self.QuestName2 = _Parameter
-    elseif (_Index == 4) then
-        self.QuestName3 = _Parameter
-    elseif (_Index == 5) then
-        self.QuestName4 = _Parameter
-    elseif (_Index == 6) then
-        self.QuestName5 = _Parameter
-    end
-end
-
-function B_Trigger_OnAtLeastXOfYQuestsSuccess:CustomFunction()
-    local least = 0
-    for i = 1, self.QuestAmount do
-        ---@diagnostic disable-next-line: param-type-mismatch
-        local QuestID = GetQuestID(self["QuestName"..i]);
-        if IsValidQuest(QuestID) then
-            if (Quests[QuestID].Result == QuestResult.Success) then
-                least = least + 1
-                if least >= self.LeastAmount then
-                    return true
-                end
-            end
-        end
-    end
-    return false
-end
-
-function B_Trigger_OnAtLeastXOfYQuestsSuccess:Debug(_Quest)
-    local leastAmount = self.LeastAmount
-    local questAmount = self.QuestAmount
-    if leastAmount <= 0 or leastAmount >5 then
-        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": LeastAmount is wrong")
-        return true
-    elseif questAmount <= 0 or questAmount > 5 then
-        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": QuestAmount is wrong")
-        return true
-    elseif leastAmount > questAmount then
-        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": LeastAmount is greater than QuestAmount")
-        return true
-    end
-    for i = 1, questAmount do
-        if not IsValidQuest(self["QuestName"..i]) then
-            debug(false, _Quest.Identifier.. ": " ..self.Name .. ": Quest ".. self["QuestName"..i] .. " not found")
-            return true
-        end
-    end
-    return false
-end
-
-function B_Trigger_OnAtLeastXOfYQuestsSuccess:GetCustomData(_Index)
-    if (_Index == 0) or (_Index == 1) then
-        return {"1", "2", "3", "4", "5"}
-    end
-end
-
-RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsSuccess)
-
--- -------------------------------------------------------------------------- --
-
 function Trigger_MapScriptFunction(...)
     return B_Trigger_MapScriptFunction:new(...);
 end
@@ -9738,6 +9645,13 @@ Lib.Core.Text = {
         none    = "{@color:none}"
     },
 
+    Letters = {
+        [4] = "ABCDEFGHKLMNOPQRSTUVWXYZÄÖÜÁÂÃÅÇÈÉÊËÐÐÑÒÓÔÕÖØÙÚÛÜÝ",
+        [3] = "abcdeghkmnopqsuvwxyzäöüßIJÆÌÍÎÏÞàáâãåæçèéêëìíîïðñòóôõ÷øùúûüýþÿ",
+        [2] = "\"#+*~_\\§$%&=?@fijlft",
+        [1] = "!-/()?',.|[]{}",
+    },
+
     StringTables = {},
 
     Placeholders = {
@@ -9914,6 +9828,48 @@ end
 
 -- -------------------------------------------------------------------------- --
 
+function Lib.Core.Text:GetAmountOfLines(_Text, _LineLength)
+    local Lines = 0;
+    if type(_Text) == "string" then
+        local Text,cr = string.gsub(_Text, "{cr}", " ###CR### ");
+
+        local Words = {};
+        for Word in string.gmatch(Text, "%S+") do
+            table.insert(Words, Word)
+        end
+
+        local Counter = 0;
+        for _,Word in pairs(Words) do
+            if Word == "###CR###" then
+                Counter = 0;
+                Lines = Lines + 1;
+            else
+                for Char in string.gmatch(Word, ".") do
+                    local Size = self:GetLetterSize(Char);
+                    if Counter + Size <= _LineLength then
+                        Counter = Counter + Size;
+                    else
+                        Counter = 0;
+                        Lines = Lines + 1;
+                    end
+                end
+            end
+        end
+    end
+    return Lines;
+end
+
+function Lib.Core.Text:GetLetterSize(_Byte)
+    for Size, Letters in pairs(self.Letters) do
+        if string.find(Letters, _Byte) then
+            return Size;
+        end
+    end
+    return 2;
+end
+
+-- -------------------------------------------------------------------------- --
+
 function Localize(_Text)
     return Lib.Core.Text:Localize(_Text);
 end
@@ -9995,6 +9951,13 @@ function DefineLanguage(_Shortcut, _Name, _Fallback, _Index)
     ExecuteLocal([[
         table.insert(Lib.Core.Text.Languages, %d, {"%s", "%s", "%s"})
     ]], _Index, _Shortcut, _Name, _Fallback);
+end
+
+function CountTextLines(_Text, _LineLength)
+    assert(type(_Text) == "string");
+    assert(type(_LineLength) == "number");
+    assert(_LineLength > 0);
+    return Lib.Core.Text:GetAmountOfLines(_Text, _LineLength);
 end
 
 Lib.Core = Lib.Core or {};
@@ -12786,6 +12749,35 @@ function AllowExtendedZoom(_Flag, _PlayerID)
 end
 API.AllowExtendedZoom = AllowExtendedZoom;
 
+function ToggleExtendedZoom(_PlayerID)
+    if not GUI then
+        ExecuteLocal([[ToggleExtendedZoom(%d)]], _PlayerID);
+        return;
+    end
+    Lib.Camera.Local:ToggleExtendedZoom(_PlayerID)
+end
+API.ToggleExtendedZoom = ToggleExtendedZoom;
+
+function SetNormalZoomProps(_Limit)
+    if not GUI then
+        ExecuteLocal([[SetNormalZoomProps(%f)]], _Limit);
+        return;
+    end
+    assert(type(_Limit) == "number", "Limit is wrong!");
+    Lib.Camera.Local:SetNormalZoomProps(_Limit);
+end
+API.SetNormalZoomProps = SetNormalZoomProps;
+
+function SetExtendedZoomProps(_Limit)
+    if not GUI then
+        ExecuteLocal([[SetExtendedZoomProps(%f)]], _Limit);
+        return;
+    end
+    assert(type(_Limit) == "number", "Limit is wrong!");
+    Lib.Camera.Local:SetExtendedZoomProps(_Limit);
+end
+API.SetExtendedZoomProps = SetExtendedZoomProps;
+
 function FocusCameraOnKnight(_PlayerID, _Rotation, _ZoomFactor)
     FocusCameraOnEntity(Logic.GetKnightID(_PlayerID), _Rotation, _ZoomFactor)
 end
@@ -12813,6 +12805,15 @@ Lib.Camera.Local  = {
     BorderScrollDeactivated = false,
     ExtendedZoomHotKeyID = 0,
     ExtendedZoomAllowed = true,
+
+    CameraExtendedZoom = {
+        [1] = {0.870001, 0.870000, 0.099999},
+        [2] = {0.870001, 0.870000, 0.099999},
+    },
+    CameraNormalZoom = {
+        [1] = {0.50001, 0.50000, 0.099999},
+        [2] = {0.50001, 0.50000, 0.099999},
+    },
 };
 
 CONST_FARCLIPPLANE = 45000;
@@ -13001,9 +13002,9 @@ function Lib.Camera.Local:ActivateExtendedZoom(_PlayerID)
         SendReportToGlobal(Report.ExtendedZoomDeactivated, _PlayerID);
     end
     self.ExtendedZoomActive = true;
-    Camera.RTS_SetZoomFactorMax(0.870001);
-    Camera.RTS_SetZoomFactor(0.870000);
-    Camera.RTS_SetZoomFactorMin(0.099999);
+    Camera.RTS_SetZoomFactor(self.CameraExtendedZoom[1][2]);
+    Camera.RTS_SetZoomFactorMax(self.CameraExtendedZoom[1][1]);
+    Camera.RTS_SetZoomFactorMin(self.CameraExtendedZoom[1][3]);
     SendReportToGlobal(Report.ExtendedZoomDeactivated, _PlayerID);
 end
 
@@ -13015,9 +13016,25 @@ function Lib.Camera.Local:DeactivateExtendedZoom(_PlayerID)
         SendReportToGlobal(Report.ExtendedZoomActivated, _PlayerID);
     end
     self.ExtendedZoomActive = false;
-    Camera.RTS_SetZoomFactor(0.500000);
-    Camera.RTS_SetZoomFactorMax(0.500001);
-    Camera.RTS_SetZoomFactorMin(0.099999);
+    Camera.RTS_SetZoomFactor(self.CameraNormalZoom[1][2]);
+    Camera.RTS_SetZoomFactorMax(self.CameraNormalZoom[1][1]);
+    Camera.RTS_SetZoomFactorMin(self.CameraNormalZoom[1][3]);
+end
+
+function Lib.Camera.Local:SetNormalZoomProps(_Limit)
+    local min, cur, max = 0.099999, _Limit, _Limit + 0.000001;
+    if max > self.CameraNormalZoom[2][1] then
+        max = self.CameraNormalZoom[2][1];
+    end
+    self.CameraNormalZoom[1] = {max, cur, min}
+end
+
+function Lib.Camera.Local:SetExtendedZoomProps(_Limit)
+    local min, cur, max = 0.099999, _Limit, _Limit + 0.000001;
+    if max > self.CameraExtendedZoom[2][1] then
+        max = self.CameraExtendedZoom[2][1];
+    end
+    self.CameraExtendedZoom[1] = {max, cur, min}
 end
 
 -- -------------------------------------------------------------------------- --
@@ -16921,21 +16938,8 @@ function Lib.Requester.Local:UpdateToggleWhisperTarget()
 end
 
 function Lib.Requester.Local:ShouldShowSlider(_Text)
-    local stringlen = string.len(_Text);
-    local iterator  = 1;
-    local carreturn = 0;
-    while (true)
-    do
-        local s,e = string.find(_Text, "{cr}", iterator);
-        if not e then
-            break;
-        end
-        if e-iterator <= 58 then
-            stringlen = stringlen + 58-(e-iterator);
-        end
-        iterator = e+1;
-    end
-    if (stringlen + (carreturn*55)) > 1000 then
+    local Lines = CountTextLines(_Text, 170);
+    if Lines > 20 then
         XGUIEng.ShowWidget("/InGame/Root/Normal/ChatOptions/ChatLogSlider",1);
     end
 end
@@ -23103,7 +23107,6 @@ B_Goal_DiscoverPlayers = {
         { ParameterType.PlayerID, en = "Player 3", de = "Spieler 3", fr = "Joueur 3" },
         { ParameterType.PlayerID, en = "Player 4", de = "Spieler 4", fr = "Joueur 4" },
         { ParameterType.PlayerID, en = "Player 5", de = "Spieler 5", fr = "Joueur 5" },
-        { ParameterType.PlayerID, en = "Player 6", de = "Spieler 6", fr = "Joueur 6" },
     },
 }
 
@@ -23164,7 +23167,6 @@ B_Goal_DiscoverTerritories = {
         { ParameterType.TerritoryName, en = "Territory 3", de = "Territorium 3", fr = "Territoire 3" },
         { ParameterType.TerritoryName, en = "Territory 4", de = "Territorium 4", fr = "Territoire 4" },
         { ParameterType.TerritoryName, en = "Territory 5", de = "Territorium 5", fr = "Territoire 5" },
-        { ParameterType.TerritoryName, en = "Territory 6", de = "Territorium 6", fr = "Territoire 6" },
     },
 }
 
@@ -23194,6 +23196,99 @@ function B_Goal_DiscoverTerritories:GetMsgKey()
 end
 
 RegisterBehavior(B_Goal_DiscoverTerritories);
+
+-- -------------------------------------------------------------------------- --
+
+function Trigger_OnAtLeastXOfYQuestsSuccess(...)
+    return B_Trigger_OnAtLeastXOfYQuestsSuccess:new(...);
+end
+
+B_Trigger_OnAtLeastXOfYQuestsSuccess = {
+    Name = "Trigger_OnAtLeastXOfYQuestsSuccess",
+    Description = {
+        en = "Trigger: if at least X of Y given quests has been finished successfully.",
+        de = "Auslöser: wenn X von Y angegebener Quests erfolgreich abgeschlossen wurden.",
+        fr = "Déclencheur: lorsque X des Y quêtes indiquées ont été accomplies avec succès.",
+    },
+    Parameter = {
+        { ParameterType.Custom, en = "Least Amount", de = "Mindest Anzahl", fr = "Nombre minimum" },
+        { ParameterType.Custom, en = "Quest Amount", de = "Quest Anzahl",   fr = "Nombre de quêtes" },
+        { ParameterType.QuestName, en = "Quest name 1", de = "Questname 1", fr = "Nom de la quête 1" },
+        { ParameterType.QuestName, en = "Quest name 2", de = "Questname 2", fr = "Nom de la quête 2" },
+        { ParameterType.QuestName, en = "Quest name 3", de = "Questname 3", fr = "Nom de la quête 3" },
+        { ParameterType.QuestName, en = "Quest name 4", de = "Questname 4", fr = "Nom de la quête 4" },
+        { ParameterType.QuestName, en = "Quest name 5", de = "Questname 5", fr = "Nom de la quête 5" },
+    },
+}
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:GetTriggerTable()
+    return { Triggers.Custom2,{self, self.CustomFunction} }
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:AddParameter(_Index, _Parameter)
+    if (_Index == 0) then
+        self.LeastAmount = tonumber(_Parameter)
+    elseif (_Index == 1) then
+        self.QuestAmount = tonumber(_Parameter)
+    elseif (_Index == 2) then
+        self.QuestName1 = _Parameter
+    elseif (_Index == 3) then
+        self.QuestName2 = _Parameter
+    elseif (_Index == 4) then
+        self.QuestName3 = _Parameter
+    elseif (_Index == 5) then
+        self.QuestName4 = _Parameter
+    elseif (_Index == 6) then
+        self.QuestName5 = _Parameter
+    end
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:CustomFunction()
+    local least = 0
+    for i = 1, self.QuestAmount do
+        ---@diagnostic disable-next-line: param-type-mismatch
+        local QuestID = GetQuestID(self["QuestName"..i]);
+        if IsValidQuest(QuestID) then
+            if (Quests[QuestID].Result == QuestResult.Success) then
+                least = least + 1
+                if least >= self.LeastAmount then
+                    return true
+                end
+            end
+        end
+    end
+    return false
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:Debug(_Quest)
+    local leastAmount = self.LeastAmount
+    local questAmount = self.QuestAmount
+    if leastAmount <= 0 or leastAmount >5 then
+        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": LeastAmount is wrong")
+        return true
+    elseif questAmount <= 0 or questAmount > 5 then
+        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": QuestAmount is wrong")
+        return true
+    elseif leastAmount > questAmount then
+        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": LeastAmount is greater than QuestAmount")
+        return true
+    end
+    for i = 1, questAmount do
+        if not IsValidQuest(self["QuestName"..i]) then
+            debug(false, _Quest.Identifier.. ": " ..self.Name .. ": Quest ".. self["QuestName"..i] .. " not found")
+            return true
+        end
+    end
+    return false
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:GetCustomData(_Index)
+    if (_Index == 0) or (_Index == 1) then
+        return {"1", "2", "3", "4", "5"}
+    end
+end
+
+RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsSuccess)
 
 -- -------------------------------------------------------------------------- --
 
@@ -28531,7 +28626,7 @@ function ActivateSettlementLimitation(_Flag)
         ExecuteLocal("ActivateSettlementLimitation(%s)", tostring(_Flag == true));
     end
     Lib.SettlementLimitation.AquireContext();
-    this.Active = true;
+    this.Active = _Flag == true;
     Lib.SettlementLimitation.ReleaseContext();
 end
 API.ActivateSettlementLimitation = ActivateSettlementLimitation;
@@ -28628,14 +28723,14 @@ Lib.SettlementLimitation.Global = {
     Active = false,
     TerritoryRestriction = {},
     TerritoryTypeRestriction = {},
-    OutpostUpgradeBonus = {},
+    AdditionalBuildingBonus = {},
     MultiConstructionBonus = {},
 };
 Lib.SettlementLimitation.Local  = {
     Active = false,
     TerritoryRestriction = {},
     TerritoryTypeRestriction = {},
-    OutpostUpgradeBonus = {},
+    AdditionalBuildingBonus = {},
     MultiConstructionBonus = {},
 };
 Lib.SettlementLimitation.Shared = {
@@ -28670,7 +28765,7 @@ function Lib.SettlementLimitation.Global:Initialize()
         for PlayerID = 1, 8 do
             self.TerritoryRestriction[PlayerID] = {};
             self.TerritoryTypeRestriction[PlayerID] = {};
-            self.OutpostUpgradeBonus[PlayerID] = {};
+            self.AdditionalBuildingBonus[PlayerID] = {};
             self.MultiConstructionBonus[PlayerID] = {};
         end
         Lib.SettlementLimitation.Shared:CreateTechnologies();
@@ -28695,17 +28790,17 @@ function Lib.SettlementLimitation.Global:OnReportReceived(_ID, ...)
             self:InitConstructionLimit(PlayerID);
         end
     elseif _ID == Report.BuildingUpgraded then
-        local TerritoryID = GetTerritoryUnderEntity(arg[1]);
-        local Bonus = self:GetOutpostUpgradeBonusAmount(arg[2], TerritoryID);
-        if Bonus == 0 then
-            self:SetOutpostUpgradeBonusAmount(arg[2], TerritoryID, 1);
-        end
-    elseif _ID == Report.DevelopTerritory_Internal then
         local Costs = Lib.SettlementLimitation.Shared.DevelopTerritoryCosts;
-        local Bonus = self:GetMultiConstructionBonusAmount(arg[1], arg[2]);
+        local TerritoryID = GetTerritoryUnderEntity(arg[1]);
+        local Bonus = self:GetMultiConstructionBonusAmount(arg[2], TerritoryID);
         if Bonus == 0 then
             AddGood(Costs[1], Costs[2], arg[1]);
-            self:SetMultiConstructionBonusAmount(arg[1], arg[2], arg[3]);
+            self:SetMultiConstructionBonusAmount(arg[2], TerritoryID, 1);
+        end
+    elseif _ID == Report.DevelopTerritory_Internal then
+        local Bonus = self:GetAdditionalBuildingBonusAmount(arg[1], arg[2]);
+        if Bonus == 0 then
+            self:SetAdditionalBuildingBonusAmount(arg[1], arg[2], 1);
         end
     end
 end
@@ -28739,7 +28834,7 @@ function Lib.SettlementLimitation.Global:InitConstructionLimit(_PlayerID)
                 if Limit == -1 and Lib.SettlementLimitation.Global.TerritoryRestriction[_PlayerID][0] then
                     Limit = Lib.SettlementLimitation.Global.TerritoryRestriction[_PlayerID][0];
                 end
-                local Bonus = Lib.SettlementLimitation.Global:GetOutpostUpgradeBonusAmount(_PlayerID, TerritoryID);
+                local Bonus = Lib.SettlementLimitation.Global:GetAdditionalBuildingBonusAmount(_PlayerID, TerritoryID);
                 local Current = 0;
                 Current = Current + #{Logic.GetEntitiesOfCategoryInTerritory(TerritoryID, _PlayerID, EntityCategories.CityBuilding, 0)};
                 Current = Current + #{Logic.GetEntitiesOfCategoryInTerritory(TerritoryID, _PlayerID, EntityCategories.OuterRimBuilding, 0)};
@@ -28789,20 +28884,20 @@ function Lib.SettlementLimitation.Global:ActivateSettlementLimitation(_Flag)
     );
 end
 
-function Lib.SettlementLimitation.Global:GetOutpostUpgradeBonusAmount(_PlayerID, _ID)
-    if self.OutpostUpgradeBonus[_PlayerID] then
-        return self.OutpostUpgradeBonus[_PlayerID][_ID] or 0;
+function Lib.SettlementLimitation.Global:GetAdditionalBuildingBonusAmount(_PlayerID, _ID)
+    if self.AdditionalBuildingBonus[_PlayerID] then
+        return self.AdditionalBuildingBonus[_PlayerID][_ID] or 0;
     end
     return 0;
 end
 
-function Lib.SettlementLimitation.Global:SetOutpostUpgradeBonusAmount(_PlayerID, _ID, _Amount)
-    if self.OutpostUpgradeBonus[_PlayerID] then
-        local CurrentAmount = self.OutpostUpgradeBonus[_PlayerID][_ID] or 0;
-        self.OutpostUpgradeBonus[_PlayerID][_ID] = CurrentAmount + _Amount;
+function Lib.SettlementLimitation.Global:SetAdditionalBuildingBonusAmount(_PlayerID, _ID, _Amount)
+    if self.AdditionalBuildingBonus[_PlayerID] then
+        local CurrentAmount = self.AdditionalBuildingBonus[_PlayerID][_ID] or 0;
+        self.AdditionalBuildingBonus[_PlayerID][_ID] = CurrentAmount + _Amount;
 
         ExecuteLocal(
-            [[Lib.SettlementLimitation.Local.OutpostUpgradeBonus[%d][%d] = %d]],
+            [[Lib.SettlementLimitation.Local.AdditionalBuildingBonus[%d][%d] = %d]],
             _PlayerID,
             _ID,
             CurrentAmount + _Amount
@@ -28845,7 +28940,7 @@ function Lib.SettlementLimitation.Local:Initialize()
         for PlayerID = 1, 8 do
             self.TerritoryRestriction[PlayerID] = {};
             self.TerritoryTypeRestriction[PlayerID] = {};
-            self.OutpostUpgradeBonus[PlayerID] = {};
+            self.AdditionalBuildingBonus[PlayerID] = {};
             self.MultiConstructionBonus[PlayerID] = {};
         end
         Lib.SettlementLimitation.Shared:CreateTechnologies();
@@ -28877,7 +28972,7 @@ function Lib.SettlementLimitation.Local:AddOutpostDevelopButton()
             Message(XGUIEng.GetStringTableText("Feedback_TextLines/TextLine_NotEnough_G_Gold"));
             return;
         end
-        SendReportToGlobal(Report.DevelopTerritory_Internal, PlayerID, TerritoryID, 1);
+        SendReportToGlobal(Report.DevelopTerritory_Internal, PlayerID, TerritoryID);
     end
 
     local Tooltip = function(_WidgetID, _EntityID)
@@ -28992,7 +29087,7 @@ function Lib.SettlementLimitation.Local:GetRestrictionText(_PlayerID, _Territory
         local Current = 0;
         Current = Current + #{Logic.GetEntitiesOfCategoryInTerritory(territoryID, playerID, EntityCategories.CityBuilding, 0)};
         Current = Current + #{Logic.GetEntitiesOfCategoryInTerritory(territoryID, playerID, EntityCategories.OuterRimBuilding, 0)};
-        local Bonus = this:GetOutpostUpgradeBonusAmount(playerID, territoryID);
+        local Bonus = this:GetAdditionalBuildingBonusAmount(playerID, territoryID);
         local Limit = buildingLimit;
         Limit = (Limit > 0 and Limit + Bonus) or Limit;
         local Text = string.format(
@@ -29063,9 +29158,9 @@ function Lib.SettlementLimitation.Local:GetRestrictionTypeText(_PlayerID, _Terri
     return "";
 end
 
-function Lib.SettlementLimitation.Local:GetOutpostUpgradeBonusAmount(_PlayerID, _ID)
-    if self.OutpostUpgradeBonus[_PlayerID] then
-        return self.OutpostUpgradeBonus[_PlayerID][_ID] or 0;
+function Lib.SettlementLimitation.Local:GetAdditionalBuildingBonusAmount(_PlayerID, _ID)
+    if self.AdditionalBuildingBonus[_PlayerID] then
+        return self.AdditionalBuildingBonus[_PlayerID][_ID] or 0;
     end
     return 0;
 end
@@ -29465,11 +29560,11 @@ CONST_BRIEFING = {
     TIMER_PER_CHAR = 0.175,
     CAMERA_ANGLEDEFAULT = 43,
     CAMERA_ROTATIONDEFAULT = -45,
-    CAMERA_ZOOMDEFAULT = 7000,
+    CAMERA_ZOOMDEFAULT = 9000,
     CAMERA_FOVDEFAULT = 42,
     DLGCAMERA_ANGLEDEFAULT = 36,
     DLGCAMERA_ROTATIONDEFAULT = -45,
-    DLGCAMERA_ZOOMDEFAULT = 2000,
+    DLGCAMERA_ZOOMDEFAULT = 3500,
     DLGCAMERA_FOVDEFAULT = 25,
 };
 
@@ -30007,6 +30102,7 @@ function Lib.BriefingSystem.Local:StartBriefing(_PlayerID, _BriefingName, _Brief
     local SpeedFactor = Game.GameTimeGetFactor(_PlayerID);
     self.Briefing[_PlayerID].Backup = {
         Camera = {PosX, PosY, Rotation, ZoomFactor},
+        Throneroom = {0, 0},
         Speed  = SpeedFactor,
     };
 
@@ -30032,6 +30128,9 @@ function Lib.BriefingSystem.Local:EndBriefing(_PlayerID, _BriefingName)
         Camera.RTS_SetLookAtPosition(Briefing.Backup.Camera[1], Briefing.Backup.Camera[2]);
         Camera.RTS_SetRotationAngle(Briefing.Backup.Camera[3]);
         Camera.RTS_SetZoomFactor(Briefing.Backup.Camera[4]);
+    else
+        Throneroom = self.Briefing[_PlayerID].Throneroom;
+        Camera.RTS_SetLookAtPosition(Throneroom[1], Throneroom[2]);
     end
     StopVoice("BriefingSpeech");
 
@@ -30368,6 +30467,7 @@ function Lib.BriefingSystem.Local:ThroneRoomCameraControl(_PlayerID, _Page)
         Camera.ThroneRoom_SetPosition(PX, PY, PZ);
         Camera.ThroneRoom_SetLookAt(LX, LY, LZ);
         Camera.ThroneRoom_SetFOV(FOV);
+        self.Briefing[_PlayerID].Throneroom = {LX, LY};
 
         -- Parallax
         self:ControlParallaxes(_PlayerID);
@@ -40971,99 +41071,6 @@ RegisterBehavior(B_Trigger_OnAtLeastOneQuestSuccess);
 
 -- -------------------------------------------------------------------------- --
 
-function Trigger_OnAtLeastXOfYQuestsSuccess(...)
-    return B_Trigger_OnAtLeastXOfYQuestsSuccess:new(...);
-end
-
-B_Trigger_OnAtLeastXOfYQuestsSuccess = {
-    Name = "Trigger_OnAtLeastXOfYQuestsSuccess",
-    Description = {
-        en = "Trigger: if at least X of Y given quests has been finished successfully.",
-        de = "Auslöser: wenn X von Y angegebener Quests erfolgreich abgeschlossen wurden.",
-        fr = "Déclencheur: lorsque X des Y quêtes indiquées ont été accomplies avec succès.",
-    },
-    Parameter = {
-        { ParameterType.Custom, en = "Least Amount", de = "Mindest Anzahl", fr = "Nombre minimum" },
-        { ParameterType.Custom, en = "Quest Amount", de = "Quest Anzahl",   fr = "Nombre de quêtes" },
-        { ParameterType.QuestName, en = "Quest name 1", de = "Questname 1", fr = "Nom de la quête 1" },
-        { ParameterType.QuestName, en = "Quest name 2", de = "Questname 2", fr = "Nom de la quête 2" },
-        { ParameterType.QuestName, en = "Quest name 3", de = "Questname 3", fr = "Nom de la quête 3" },
-        { ParameterType.QuestName, en = "Quest name 4", de = "Questname 4", fr = "Nom de la quête 4" },
-        { ParameterType.QuestName, en = "Quest name 5", de = "Questname 5", fr = "Nom de la quête 5" },
-    },
-}
-
-function B_Trigger_OnAtLeastXOfYQuestsSuccess:GetTriggerTable()
-    return { Triggers.Custom2,{self, self.CustomFunction} }
-end
-
-function B_Trigger_OnAtLeastXOfYQuestsSuccess:AddParameter(_Index, _Parameter)
-    if (_Index == 0) then
-        self.LeastAmount = tonumber(_Parameter)
-    elseif (_Index == 1) then
-        self.QuestAmount = tonumber(_Parameter)
-    elseif (_Index == 2) then
-        self.QuestName1 = _Parameter
-    elseif (_Index == 3) then
-        self.QuestName2 = _Parameter
-    elseif (_Index == 4) then
-        self.QuestName3 = _Parameter
-    elseif (_Index == 5) then
-        self.QuestName4 = _Parameter
-    elseif (_Index == 6) then
-        self.QuestName5 = _Parameter
-    end
-end
-
-function B_Trigger_OnAtLeastXOfYQuestsSuccess:CustomFunction()
-    local least = 0
-    for i = 1, self.QuestAmount do
-        ---@diagnostic disable-next-line: param-type-mismatch
-        local QuestID = GetQuestID(self["QuestName"..i]);
-        if IsValidQuest(QuestID) then
-            if (Quests[QuestID].Result == QuestResult.Success) then
-                least = least + 1
-                if least >= self.LeastAmount then
-                    return true
-                end
-            end
-        end
-    end
-    return false
-end
-
-function B_Trigger_OnAtLeastXOfYQuestsSuccess:Debug(_Quest)
-    local leastAmount = self.LeastAmount
-    local questAmount = self.QuestAmount
-    if leastAmount <= 0 or leastAmount >5 then
-        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": LeastAmount is wrong")
-        return true
-    elseif questAmount <= 0 or questAmount > 5 then
-        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": QuestAmount is wrong")
-        return true
-    elseif leastAmount > questAmount then
-        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": LeastAmount is greater than QuestAmount")
-        return true
-    end
-    for i = 1, questAmount do
-        if not IsValidQuest(self["QuestName"..i]) then
-            debug(false, _Quest.Identifier.. ": " ..self.Name .. ": Quest ".. self["QuestName"..i] .. " not found")
-            return true
-        end
-    end
-    return false
-end
-
-function B_Trigger_OnAtLeastXOfYQuestsSuccess:GetCustomData(_Index)
-    if (_Index == 0) or (_Index == 1) then
-        return {"1", "2", "3", "4", "5"}
-    end
-end
-
-RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsSuccess)
-
--- -------------------------------------------------------------------------- --
-
 function Trigger_MapScriptFunction(...)
     return B_Trigger_MapScriptFunction:new(...);
 end
@@ -41346,7 +41353,6 @@ B_Goal_DiscoverPlayers = {
         { ParameterType.PlayerID, en = "Player 3", de = "Spieler 3", fr = "Joueur 3" },
         { ParameterType.PlayerID, en = "Player 4", de = "Spieler 4", fr = "Joueur 4" },
         { ParameterType.PlayerID, en = "Player 5", de = "Spieler 5", fr = "Joueur 5" },
-        { ParameterType.PlayerID, en = "Player 6", de = "Spieler 6", fr = "Joueur 6" },
     },
 }
 
@@ -41407,7 +41413,6 @@ B_Goal_DiscoverTerritories = {
         { ParameterType.TerritoryName, en = "Territory 3", de = "Territorium 3", fr = "Territoire 3" },
         { ParameterType.TerritoryName, en = "Territory 4", de = "Territorium 4", fr = "Territoire 4" },
         { ParameterType.TerritoryName, en = "Territory 5", de = "Territorium 5", fr = "Territoire 5" },
-        { ParameterType.TerritoryName, en = "Territory 6", de = "Territorium 6", fr = "Territoire 6" },
     },
 }
 
@@ -41437,6 +41442,99 @@ function B_Goal_DiscoverTerritories:GetMsgKey()
 end
 
 RegisterBehavior(B_Goal_DiscoverTerritories);
+
+-- -------------------------------------------------------------------------- --
+
+function Trigger_OnAtLeastXOfYQuestsSuccess(...)
+    return B_Trigger_OnAtLeastXOfYQuestsSuccess:new(...);
+end
+
+B_Trigger_OnAtLeastXOfYQuestsSuccess = {
+    Name = "Trigger_OnAtLeastXOfYQuestsSuccess",
+    Description = {
+        en = "Trigger: if at least X of Y given quests has been finished successfully.",
+        de = "Auslöser: wenn X von Y angegebener Quests erfolgreich abgeschlossen wurden.",
+        fr = "Déclencheur: lorsque X des Y quêtes indiquées ont été accomplies avec succès.",
+    },
+    Parameter = {
+        { ParameterType.Custom, en = "Least Amount", de = "Mindest Anzahl", fr = "Nombre minimum" },
+        { ParameterType.Custom, en = "Quest Amount", de = "Quest Anzahl",   fr = "Nombre de quêtes" },
+        { ParameterType.QuestName, en = "Quest name 1", de = "Questname 1", fr = "Nom de la quête 1" },
+        { ParameterType.QuestName, en = "Quest name 2", de = "Questname 2", fr = "Nom de la quête 2" },
+        { ParameterType.QuestName, en = "Quest name 3", de = "Questname 3", fr = "Nom de la quête 3" },
+        { ParameterType.QuestName, en = "Quest name 4", de = "Questname 4", fr = "Nom de la quête 4" },
+        { ParameterType.QuestName, en = "Quest name 5", de = "Questname 5", fr = "Nom de la quête 5" },
+    },
+}
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:GetTriggerTable()
+    return { Triggers.Custom2,{self, self.CustomFunction} }
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:AddParameter(_Index, _Parameter)
+    if (_Index == 0) then
+        self.LeastAmount = tonumber(_Parameter)
+    elseif (_Index == 1) then
+        self.QuestAmount = tonumber(_Parameter)
+    elseif (_Index == 2) then
+        self.QuestName1 = _Parameter
+    elseif (_Index == 3) then
+        self.QuestName2 = _Parameter
+    elseif (_Index == 4) then
+        self.QuestName3 = _Parameter
+    elseif (_Index == 5) then
+        self.QuestName4 = _Parameter
+    elseif (_Index == 6) then
+        self.QuestName5 = _Parameter
+    end
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:CustomFunction()
+    local least = 0
+    for i = 1, self.QuestAmount do
+        ---@diagnostic disable-next-line: param-type-mismatch
+        local QuestID = GetQuestID(self["QuestName"..i]);
+        if IsValidQuest(QuestID) then
+            if (Quests[QuestID].Result == QuestResult.Success) then
+                least = least + 1
+                if least >= self.LeastAmount then
+                    return true
+                end
+            end
+        end
+    end
+    return false
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:Debug(_Quest)
+    local leastAmount = self.LeastAmount
+    local questAmount = self.QuestAmount
+    if leastAmount <= 0 or leastAmount >5 then
+        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": LeastAmount is wrong")
+        return true
+    elseif questAmount <= 0 or questAmount > 5 then
+        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": QuestAmount is wrong")
+        return true
+    elseif leastAmount > questAmount then
+        debug(false, _Quest.Identifier.. ": " ..self.Name .. ": LeastAmount is greater than QuestAmount")
+        return true
+    end
+    for i = 1, questAmount do
+        if not IsValidQuest(self["QuestName"..i]) then
+            debug(false, _Quest.Identifier.. ": " ..self.Name .. ": Quest ".. self["QuestName"..i] .. " not found")
+            return true
+        end
+    end
+    return false
+end
+
+function B_Trigger_OnAtLeastXOfYQuestsSuccess:GetCustomData(_Index)
+    if (_Index == 0) or (_Index == 1) then
+        return {"1", "2", "3", "4", "5"}
+    end
+end
+
+RegisterBehavior(B_Trigger_OnAtLeastXOfYQuestsSuccess)
 
 -- -------------------------------------------------------------------------- --
 

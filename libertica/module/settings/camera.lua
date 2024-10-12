@@ -7,6 +7,15 @@ Lib.Camera.Local  = {
     BorderScrollDeactivated = false,
     ExtendedZoomHotKeyID = 0,
     ExtendedZoomAllowed = true,
+
+    CameraExtendedZoom = {
+        [1] = {0.870001, 0.870000, 0.099999},
+        [2] = {0.870001, 0.870000, 0.099999},
+    },
+    CameraNormalZoom = {
+        [1] = {0.50001, 0.50000, 0.099999},
+        [2] = {0.50001, 0.50000, 0.099999},
+    },
 };
 
 CONST_FARCLIPPLANE = 45000;
@@ -195,9 +204,9 @@ function Lib.Camera.Local:ActivateExtendedZoom(_PlayerID)
         SendReportToGlobal(Report.ExtendedZoomDeactivated, _PlayerID);
     end
     self.ExtendedZoomActive = true;
-    Camera.RTS_SetZoomFactorMax(0.870001);
-    Camera.RTS_SetZoomFactor(0.870000);
-    Camera.RTS_SetZoomFactorMin(0.099999);
+    Camera.RTS_SetZoomFactor(self.CameraExtendedZoom[1][2]);
+    Camera.RTS_SetZoomFactorMax(self.CameraExtendedZoom[1][1]);
+    Camera.RTS_SetZoomFactorMin(self.CameraExtendedZoom[1][3]);
     SendReportToGlobal(Report.ExtendedZoomDeactivated, _PlayerID);
 end
 
@@ -209,9 +218,25 @@ function Lib.Camera.Local:DeactivateExtendedZoom(_PlayerID)
         SendReportToGlobal(Report.ExtendedZoomActivated, _PlayerID);
     end
     self.ExtendedZoomActive = false;
-    Camera.RTS_SetZoomFactor(0.500000);
-    Camera.RTS_SetZoomFactorMax(0.500001);
-    Camera.RTS_SetZoomFactorMin(0.099999);
+    Camera.RTS_SetZoomFactor(self.CameraNormalZoom[1][2]);
+    Camera.RTS_SetZoomFactorMax(self.CameraNormalZoom[1][1]);
+    Camera.RTS_SetZoomFactorMin(self.CameraNormalZoom[1][3]);
+end
+
+function Lib.Camera.Local:SetNormalZoomProps(_Limit)
+    local min, cur, max = 0.099999, _Limit, _Limit + 0.000001;
+    if max > self.CameraNormalZoom[2][1] then
+        max = self.CameraNormalZoom[2][1];
+    end
+    self.CameraNormalZoom[1] = {max, cur, min}
+end
+
+function Lib.Camera.Local:SetExtendedZoomProps(_Limit)
+    local min, cur, max = 0.099999, _Limit, _Limit + 0.000001;
+    if max > self.CameraExtendedZoom[2][1] then
+        max = self.CameraExtendedZoom[2][1];
+    end
+    self.CameraExtendedZoom[1] = {max, cur, min}
 end
 
 -- -------------------------------------------------------------------------- --

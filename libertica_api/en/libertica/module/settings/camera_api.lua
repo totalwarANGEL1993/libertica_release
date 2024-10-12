@@ -32,6 +32,24 @@ function AllowExtendedZoom(_Flag, _PlayerID)
 end
 API.AllowExtendedZoom = AllowExtendedZoom;
 
+--- Toggles between extended and normal zoom.
+--- @param _PlayerID integer ID of player
+function ToggleExtendedZoom(_PlayerID)
+end
+API.ToggleExtendedZoom = ToggleExtendedZoom;
+
+--- Changes the limit for the normal zoom.
+--- @param _Limit number Zoom limit (between 0.1 and 0.87)
+function SetNormalZoomProps(_Limit)
+end
+API.SetNormalZoomProps = SetNormalZoomProps;
+
+--- Changes the limit for the extended zoom.
+--- @param _Limit number Zoom limit (between 0.1 and 0.87)
+function SetExtendedZoomProps(_Limit)
+end
+API.SetExtendedZoomProps = SetExtendedZoomProps;
+
 --- Focuses a camera on the players knight but does not lock the camera.
 --- @param _PlayerID integer ID of player
 --- @param _Rotation number Rotation angle

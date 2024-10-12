@@ -80,3 +80,21 @@ API.GetStringText = GetStringText;
 --- @param _Index? integer  Listenposition
 function DefineLanguage(_Shortcut, _Name, _Fallback, _Index)
 end
+
+--- Gibt die geschätzte Anzahl Zeilen zurück, die zur Anzeige benötigt wird.
+--- 
+--- #### Einordnung:
+--- * Länge 4: ABCDEFGHKLMNOPQRSTUVWXYZÄÖÜÁÂÃÅÇÈÉÊËÐÐÑÒÓÔÕÖØÙÚÛÜÝ
+--- * Länge 3: abcdeghkmnopqsuvwxyzäöüßIJÆÌÍÎÏÞàáâãåæçèéêëìíîïðñòóôõ÷øùúûüýþÿ
+--- * Länge 2: \"#+*~_\\§$%&=?@fijlft
+--- * Länge 1: !-/()?',.|[]{}
+--- 
+--- Alle nicht gelisteten Zeichen werden mit Länge 2 geschätzt.
+--- 
+--- @param _Text string Text
+--- @param _LineLength integer Zeilenlänge
+--- @return integer Anzahl Anzahl an Zeilen
+function CountTextLines(_Text, _LineLength)
+    return 0;
+end
+
