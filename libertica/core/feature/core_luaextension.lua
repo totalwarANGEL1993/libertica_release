@@ -267,8 +267,18 @@ function Lib.Core.LuaExtension:OverrideMath()
         return (f > 1 and 1) or f;
     end
 
+    math.cerp = function(s, c, e)
+        local f = (c - s) / e;
+        local t = f * f * (3 - 2 * f);
+        return (t > 1 and 1) or t;
+    end
+
     math.qmod = function(a, b)
         return a - math.floor(a/b)*b;
+    end
+
+    math.factorial = function(n)
+        return (n == 0 and 1) or n * math.factorial(n - 1);
     end
 end
 

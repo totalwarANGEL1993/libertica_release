@@ -27,6 +27,7 @@ Lib.Require("core/feature/Core_Text");
 Lib.Require("core/feature/Core_Job");
 Lib.Require("core/feature/Core_Save");
 Lib.Require("core/feature/Core_Quest");
+Lib.Require("core/feature/Core_Player");
 
 Lib.Require("core/Core_Behavior");
 Lib.Register("core/Core");
@@ -94,6 +95,7 @@ function Lib.Core.Global:Initialize()
         Lib.Core.Chat:Initialize();
         Lib.Core.Debug:Initialize();
         Lib.Core.Bugfix:Initialize();
+        Lib.Core.Player:Initialize();
 
         -- Load user files
         if Mission_LoadFiles then
@@ -146,6 +148,7 @@ function Lib.Core.Global:OnSaveGameLoaded()
     Lib.Core.Chat:OnSaveGameLoaded();
     Lib.Core.Debug:OnSaveGameLoaded();
     Lib.Core.Bugfix:OnSaveGameLoaded();
+    Lib.Core.Player:OnSaveGameLoaded();
 
     -- Restore modules
     for i= 1, #Lib.Core.ModuleList do
@@ -184,6 +187,7 @@ function Lib.Core.Global:InitReportListener()
         Lib.Core.Chat:OnReportReceived(_ID, ...);
         Lib.Core.Debug:OnReportReceived(_ID, ...);
         Lib.Core.Bugfix:OnReportReceived(_ID, ...);
+        Lib.Core.Player:OnReportReceived(_ID, ...);
 
         -- Loadscreen
         if _ID == Report.LoadingFinished then
@@ -266,6 +270,7 @@ function Lib.Core.Local:Initialize()
         Lib.Core.Chat:Initialize();
         Lib.Core.Debug:Initialize();
         Lib.Core.Bugfix:Initialize();
+        Lib.Core.Player:Initialize();
 
         -- Load user files
         if Mission_LoadFiles then
@@ -316,6 +321,7 @@ function Lib.Core.Local:OnSaveGameLoaded()
     Lib.Core.Chat:OnSaveGameLoaded();
     Lib.Core.Debug:OnSaveGameLoaded();
     Lib.Core.Bugfix:OnSaveGameLoaded();
+    Lib.Core.Player:OnSaveGameLoaded();
 
     -- Restore modules
     for i= 1, #Lib.Core.ModuleList do
@@ -350,6 +356,7 @@ function Lib.Core.Local:InitReportListener()
         Lib.Core.Chat:OnReportReceived(_ID, ...);
         Lib.Core.Debug:OnReportReceived(_ID, ...);
         Lib.Core.Bugfix:OnReportReceived(_ID, ...);
+        Lib.Core.Player:OnReportReceived(_ID, ...);
 
         -- Loadscreen
         if _ID == Report.LoadingFinished then
@@ -438,6 +445,23 @@ function Lib.Core.Local:InitLoadscreenHandler()
         EndJob(Lib.Core.Local.LoadscreenWatchJobID);
         SendReportToGlobal(Report.LoadingFinished, GUI.GetPlayerID());
     end
+end
+
+function Lib.Core.Local:Preload_ViewWholeMap()
+    local WorldX, WorldY = Logic.WorldGetSize();
+    Display.SetFarClipPlaneMinAndMax(0, 0);
+    Camera.SwitchCameraBehaviour(0);
+    Camera.RTS_ToggleMapMode(1);
+    Camera.RTS_SetMapModeFOV(90);
+    Camera.RTS_SetMapModeZoomDistance(100000);
+    Camera.RTS_SetMapModeZoomAngle(90);
+    Camera.RTS_SetLookAtPosition(WorldX * 0.5, WorldY * 0.5);
+    Display.SetRenderFogOfWar(0);
+end
+
+function Lib.Core.Local:Preload_ResetView()
+    Camera.RTS_ToggleMapMode(0);
+    Display.SetRenderFogOfWar(1);
 end
 
 -- -------------------------------------------------------------------------- --

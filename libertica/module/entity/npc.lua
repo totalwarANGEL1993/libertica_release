@@ -270,37 +270,43 @@ function Lib.NPC.Global:OverrideQuestFunctions()
 
     QuestTemplate.RemoveQuestMarkers_Orig_NPC = QuestTemplate.RemoveQuestMarkers;
     --- @diagnostic disable-next-line: duplicate-set-field
-    QuestTemplate.RemoveQuestMarkers = function(self)
-        for i=1, self.Objectives[0] do
-            if self.Objectives[i].Type == Objective.Distance then
-                if self.Objectives[i].Data[1] ~= -65565 then
-                    QuestTemplate.RemoveQuestMarkers_Orig_NPC(self);
+    QuestTemplate.RemoveQuestMarkers = function(this)
+        for i=1, this.Objectives[0] do
+            if this.Objectives[i].Type == Objective.Distance then
+                if this.Objectives[i].Data[1] ~= -65565 then
+                    QuestTemplate.RemoveQuestMarkers_Orig_NPC(this);
                 else
-                    if self.Objectives[i].Data[4] then
-                        NpcDispose(self.Objectives[i].Data[4].NpcInstance);
-                        self.Objectives[i].Data[4].NpcInstance = nil;
+                    if this.Objectives[i].Data[4].NpcInstance then
+                        NpcDispose(this.Objectives[i].Data[4].NpcInstance);
+                        this.Objectives[i].Data[4].NpcInstance = nil;
                     end
                 end
             else
-                QuestTemplate.RemoveQuestMarkers_Orig_NPC(self);
+                QuestTemplate.RemoveQuestMarkers_Orig_NPC(this);
             end
         end
     end
 
     QuestTemplate.ShowQuestMarkers_Orig_NPC = QuestTemplate.ShowQuestMarkers;
     --- @diagnostic disable-next-line: duplicate-set-field
-    QuestTemplate.ShowQuestMarkers = function(self)
-        for i=1, self.Objectives[0] do
-            if self.Objectives[i].Type == Objective.Distance then
-                if self.Objectives[i].Data[1] ~= -65565 then
-                    QuestTemplate.ShowQuestMarkers_Orig_NPC(self);
+    QuestTemplate.ShowQuestMarkers = function(this)
+        for i=1, this.Objectives[0] do
+            if this.Objectives[i].Type == Objective.Distance then
+                if this.Objectives[i].Data[1] ~= -65565 then
+                    QuestTemplate.ShowQuestMarkers_Orig_NPC(this);
                 else
-                    if not self.Objectives[i].Data[4].NpcInstance then
-                        self.Objectives[i].Data[4].NpcInstance = NpcCompose {
-                            Name   = self.Objectives[i].Data[3],
-                            Hero   = self.Objectives[i].Data[2],
-                            Player = self.ReceivingPlayer,
-                        }
+                    local Hero = this.Objectives[i].Data[2];
+                    local Npc = this.Objectives[i].Data[3];
+                    if  this.Objectives[i].Data[4].NpcInstance
+                    and this.Objectives[i].Data[4].NpcInstance.Active == false then
+                        this.Objectives[i].Data[4].NpcInstance = nil;
+                    end
+                    if not this.Objectives[i].Data[4].NpcInstance then
+                        this.Objectives[i].Data[4].NpcInstance = NpcCompose {
+                            Name   = Npc,
+                            Hero   = Hero,
+                            Player = this.ReceivingPlayer,
+                        };
                     end
                 end
             end
@@ -309,7 +315,7 @@ function Lib.NPC.Global:OverrideQuestFunctions()
 
     QuestTemplate.IsObjectiveCompleted_Orig_NPC = QuestTemplate.IsObjectiveCompleted;
     --- @diagnostic disable-next-line: duplicate-set-field
-    QuestTemplate.IsObjectiveCompleted = function(self, objective)
+    QuestTemplate.IsObjectiveCompleted = function(this, objective)
         local objectiveType = objective.Type;
         local data = objective.Data;
         if objective.Completed ~= nil then
@@ -317,15 +323,15 @@ function Lib.NPC.Global:OverrideQuestFunctions()
         end
 
         if objectiveType ~= Objective.Distance then
-            return self:IsObjectiveCompleted_Orig_NPC(objective);
+            return this:IsObjectiveCompleted_Orig_NPC(objective);
         else
             if data[1] == -65565 then
                 error(IsExisting(data[3]), data[3].. " is dead! :(");
-                if NpcTalkedTo(data[4].NpcInstance, data[2], self.ReceivingPlayer) then
+                if data[4].NpcInstance and NpcTalkedTo(data[4].NpcInstance, data[2], this.ReceivingPlayer) then
                     objective.Completed = true;
                 end
             else
-                return self:IsObjectiveCompleted_Orig_NPC(objective);
+                return this:IsObjectiveCompleted_Orig_NPC(objective);
             end
         end
     end

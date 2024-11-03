@@ -25,10 +25,10 @@ end
 --- genommen, dann muss erneut geschickt werden. Optional kann dem Spieler
 --- auch erlaubt werden, den Karren zurückzuerobern.
 ---
---- @param _GoodType      string Typ der Ware
---- @param _GoodAmount    integer Menga der Ware
---- @param _OtherTarget   integer Anderes Ziel als Auftraggeber
---- @param _IgnoreCapture boolean Wagen kann zurückerobert werden
+--- @param _GoodType       string Typ der Ware
+--- @param _GoodAmount     integer Menga der Ware
+--- @param _OtherTarget?   integer Anderes Ziel als Auftraggeber
+--- @param _IgnoreCapture? boolean Wagen kann zurückerobert werden
 ---
 function Goal_Deliver(_GoodType, _GoodAmount, _OtherTarget, _IgnoreCapture)
 end
@@ -46,7 +46,7 @@ end
 --- @param _Relation string Größer-Kleiner-Relation
 --- @param _State    string Diplomatiestatus
 ---
-function Goal_Deliver(_PlayerID, _Relation, _State)
+function Goal_Diplomacy(_PlayerID, _Relation, _State)
 end
 
 ---

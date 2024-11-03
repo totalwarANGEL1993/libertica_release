@@ -20,6 +20,7 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- * `EnableSky`               - Display the sky during the briefing                   
 --- * `EnableFoW`               - Displays the fog of war during the briefing           
 --- * `EnableBorderPins`        - Displays the border pins during the briefing          
+--- * `PreloadAssets`           - Allows to use a wide vision area in briefings
 ---
 --- *-> Example #1*
 ---
@@ -29,9 +30,9 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- when using the notation. To create a animation the page musn't have a
 --- position. Otherwise defaults will be used.
 ---
---- The animation frames should be provided as a table. Frames are linearly 
---- interpolated if there are at least 2 entries, and cubically interpolated 
---- if there are at least 4 entries.
+--- The animation frames should be provided as a table. The camera path will be 
+--- calculated using Bézir Curves. This means 2 frames will result in a line,
+--- 3 make it a parable and 4 or more result in a curve.
 ---
 --- *-> Example #2*
 ---
@@ -98,8 +99,8 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- Briefing.PageAnimation = {
 ---     ["Page1"] = {
 ---         Clear = true,
----         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
----              {GetFrameVector("pos3", 500, "pos4", 1000)}},
+---         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
+---              {GetFrameVector("pos3", 500, "pos4", -3000)}},
 ---     },
 --- };
 --- ```
@@ -109,10 +110,10 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- Briefing.PageAnimation = {
 ---     ["Page1"] = {
 ---         Repeat = true,
----         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
----              {GetFrameVector("pos3", 500, "pos4", 1000)},
----              {GetFrameVector("pos7", 500, "pos8", 1000)},
----              {GetFrameVector("pos5", 500, "pos6", 1000)}},
+---         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
+---              {GetFrameVector("pos3", 500, "pos4", -3000)},
+---              {GetFrameVector("pos7", 500, "pos8", -3000)},
+---              {GetFrameVector("pos5", 500, "pos6", -3000)}},
 ---     },
 --- };
 --- ```
@@ -187,7 +188,7 @@ API.IsBriefingActive = IsBriefingActive;
 
 --- Creates a point from a position.
 --- @param _Entity any      Target entity
---- @param _ZOffset integer Z-Offset
+--- @param _ZOffset integer Z-Offset (< 0 -> Z overwrite)
 --- @return number X X-Koordinate
 --- @return number Y Y-Koordinate
 --- @return number Z Z-Koordinate
@@ -197,9 +198,9 @@ end
 
 --- Creates an vector from 2 positions.
 --- @param _Entity1 any      Target position entity
---- @param _ZOffset1 integer Z-Offset of position
+--- @param _ZOffset1 integer Z-Offset of position (< 0 -> Z overwrite)
 --- @param _Entity2 any      Target lookat entity
---- @param _ZOffset2 integer Z-Offset of lookat
+--- @param _ZOffset2 integer Z-Offset of lookat (< 0 -> Z overwrite)
 --- @return number X1        X-Coordinate Position
 --- @return number Y1        Y-Coordinate Position
 --- @return number Z1        Z-Coordinate Position
@@ -244,6 +245,7 @@ API.AddBriefingPages = AddBriefingPages;
 --- * `BarOpacity`      - Opacity of bars
 --- * `BigBars`         - Use big bars
 --- * `FlyTo`           - Table with second set of camera configuration were camera flys to
+--- * `Performance`     - (Optional) Lower graphic settings for this page
 --- * `MC`              - Table with choices to branch of in dialogs
 ---
 --- *-> Example #1*
@@ -351,18 +353,18 @@ end
 --- Creates a page in a simplified manner.
 ---
 --- The function can create a automatic page name based of the page index. A
---- name can be an optional parameter at the start.
+--- name can be an optional parameter at the start. The page won't turn until
+--- the player presses the skip button.
 ---
 --- #### Settings
 --- The function expects the following parameters:
 --- 
---- * `Name`           - (Optional) Name of page
---- * `Title`          - Displayed page title
---- * `Text`           - Displayed page text
---- * `DialogCamera`   - Use closeup camera
---- * `Position`       - (Optional) Scriptname of focused entity
---- * `Action`         - (Optional) Action when page is shown
---- * `EnableSkipping` - (Optional) Allow/Forbid skipping page
+--- * `Name`            - (Optional) Name of page
+--- * `Title`           - Displayed page title
+--- * `Text`            - Displayed page text
+--- * `DialogCamera`    - Use closeup camera
+--- * `Position`        - (Optional) Scriptname of focused entity
+--- * `Action`          - (Optional) Action when page is shown
 ---
 --- #### Examples
 ---
@@ -375,8 +377,6 @@ end
 --- ASP("Title", "Some important text.", true, "Marcus");
 --- -- Call action
 --- ASP("Title", "Some important text.", true, "Marcus", MyFunction);
---- -- Allow/forbid skipping
---- ASP("Title", "Some important text.", true, "HQ", nil, true);
 --- ```
 ---
 --- @param ... any List of page parameters

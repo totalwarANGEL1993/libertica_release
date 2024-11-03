@@ -52,18 +52,16 @@ end
 API.IsEntityInSelection = IsEntitySelected;
 
 function GetSelectedEntity(_PlayerID)
-    local SelectedEntity = 0;
     Lib.EntitySelection.AquireContext();
-    SelectedEntities = this.SelectedEntities[_PlayerID][1];
+    SelectedEntity = this.SelectedEntities[_PlayerID][1];
     Lib.EntitySelection.ReleaseContext();
-    return SelectedEntity;
+    return SelectedEntity or 0;
 end
 API.GetSelectedEntity = GetSelectedEntity;
 
 function GetSelectedEntities(_PlayerID)
-    local SelectedEntities = {};
     Lib.EntitySelection.AquireContext();
-    SelectedEntities = this.SelectedEntities[_PlayerID];
+    local SelectedEntities = this.SelectedEntities[_PlayerID];
     Lib.EntitySelection.ReleaseContext();
     return SelectedEntities;
 end

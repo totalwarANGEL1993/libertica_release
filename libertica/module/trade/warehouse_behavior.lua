@@ -1,4 +1,4 @@
-Lib.Register("module/quest/Warehouse_Behavior");
+Lib.Register("module/trade/Warehouse_Behavior");
 
 B_Reward_TradePost.DEBUG_Orig_Warehouse = B_Reward_TradePost.DEBUG;
 --- @diagnostic disable-next-line: duplicate-set-field

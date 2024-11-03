@@ -156,3 +156,23 @@ function PlagueSetDeathChance(_Chance)
 end
 API.PlagueSetDeathChance = PlagueSetDeathChance;
 
+function PredatorBlockClaimActivate(_Flag)
+    Lib.SettlementSurvival.Global.Misc.PredatorBlockClaim = _Flag == true;
+end
+API.PredatorBlockClaimActivate = PredatorBlockClaimActivate;
+
+function BanditsBlockClaimActivate(_Flag)
+    Lib.SettlementSurvival.Global.Misc.BanditsBlockClaim = _Flag == true;
+end
+API.BanditsBlockClaimActivate = BanditsBlockClaimActivate;
+
+function ClothesForOuterRimActivate(_Flag)
+    Lib.SettlementSurvival.Global.Misc.ClothesForOuterRim = _Flag == true;
+    ExecuteLocal(
+        [[Lib.SettlementSurvival.Local.Misc.ClothesForOuterRim = %s]],
+        tostring(_Flag == true)
+    );
+    Lib.SettlementSurvival.Global:UpdateClothesStateForOuterRim();
+end
+API.ClothesForOuterRimActivate = ClothesForOuterRimActivate;
+

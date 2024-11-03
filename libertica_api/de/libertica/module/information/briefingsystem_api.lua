@@ -19,7 +19,8 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- * `EnableGlobalImmortality` - Während Einleitungen sind alle Entitäten unverwundbar        
 --- * `EnableSky`               - Zeigt den Himmel während der Einleitung an                   
 --- * `EnableFoW`               - Zeigt den Nebel des Krieges während der Einleitung an           
---- * `EnableBorderPins`        - Zeigt die Randnadeln während der Einleitung an          
+--- * `EnableBorderPins`        - Zeigt die Randnadeln während der Einleitung an     
+--- * `PreloadAssets`           - Erlaubt weites Sichtfeld in Briefings     
 ---
 --- *-> Beispiel #1*
 ---
@@ -29,8 +30,9 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- bei Verwendung der Notation. Um eine Animation zu erstellen, darf die Seite keine
 --- Position haben. Andernfalls werden Standardwerte verwendet.
 ---
---- Die Animationsrahmen sollten als Tabelle bereitgestellt werden. Rahmen werden linear interpoliert,
---- wenn es mindestens 2 Einträge gibt, und kubisch interpoliert, wenn es mindestens 4 Einträge gibt.
+--- Die Frames der Animation sollten als Tabelle bereitgestellt werden. Der Weg
+--- der Kamera wird über Bézirkurven bestimmt. Das bedeutet 2 Frames werden zu
+--- einer geraden, 3 erzeugen eine Parabel und ab 4 Frames entsteht eine Kurve.
 ---
 --- *-> Beispiel #2*
 ---
@@ -97,8 +99,8 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- Briefing.PageAnimation = {
 ---     ["Seite1"] = {
 ---         Clear = true,
----         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
----              {GetFrameVector("pos3", 500, "pos4", 1000)}},
+---         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
+---              {GetFrameVector("pos3", 500, "pos4", -3000)}},
 ---     },
 --- };
 --- ```
@@ -108,10 +110,10 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- Briefing.PageAnimation = {
 ---     ["Seite1"] = {
 ---         Repeat = true,
----         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
----              {GetFrameVector("pos3", 500, "pos4", 1000)},
----              {GetFrameVector("pos7", 500, "pos8", 1000)},
----              {GetFrameVector("pos5", 500, "pos6", 1000)}},
+---         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
+---              {GetFrameVector("pos3", 500, "pos4", -3000)},
+---              {GetFrameVector("pos7", 500, "pos8", -3000)},
+---              {GetFrameVector("pos5", 500, "pos6", -3000)}},
 ---     },
 --- };
 --- ```
@@ -186,7 +188,7 @@ API.IsBriefingActive = IsBriefingActive;
 
 --- Erstellt einen Punkt aus einer Position.
 --- @param _Entity any      Zielentität
---- @param _ZOffset integer Z-Offset
+--- @param _ZOffset integer Z-Offset (< 0 -> Z überschreiben)
 --- @return number X X-Koordinate
 --- @return number Y Y-Koordinate
 --- @return number Z Z-Koordinate
@@ -196,9 +198,9 @@ end
 
 --- Erstellt einen Vektor aus 2 Positionen.
 --- @param _Entity1 any      Zielpositions-Entität
---- @param _ZOffset1 integer Z-Offset der Position
+--- @param _ZOffset1 integer Z-Offset der Position (< 0 -> Z überschreiben)
 --- @param _Entity2 any      Ziel-LookAt-Entität
---- @param _ZOffset2 integer Z-Offset von LookAt
+--- @param _ZOffset2 integer Z-Offset von LookAt (< 0 -> Z überschreiben)
 --- @return number X1        X-Koordinate Position
 --- @return number Y1        Y-Koordinate Position
 --- @return number Z1        Z-Koordinate Position
@@ -243,6 +245,7 @@ API.AddBriefingPages = AddBriefingPages;
 --- * `BarOpacity`      - Deckkraft der Balken
 --- * `BigBars`         - Verwende große Balken
 --- * `FlyTo`           - Tabelle mit zweitem Satz von Kamerakonfigurationen, wobei die Kamera zufliegt
+--- * `Performance`     - (Optional) Grafiksettings für diese Seite herabsetzen
 --- * `MC`              - Tabelle mit Auswahlmöglichkeiten zum Abzweigen in Dialogen
 ---
 --- *-> Beispiel #1*
@@ -348,19 +351,20 @@ end
 
 --- Erstellt eine Seite auf vereinfachte Weise.
 ---
---- Die Funktion kann einen automatischen Seitennamen basierend auf dem Seitenindex erstellen. Ein
---- Name kann ein optionales Parameter am Anfang sein.
+--- Die Funktion kann einen automatischen Seitennamen basierend auf dem 
+--- Seitenindex erstellen. Ein Name kann ein optionales Parameter am 
+--- Anfang sein. Die Seite wird nicht weiter springen, bis der Skip-Button 
+--- geklicht wird.
 ---
 --- #### Einstellungen
 --- Die Funktion erwartet die folgenden Parameter:
 --- 
---- * `Name`           - (Optional) Name der Seite
---- * `Title`          - Angezeigter Seitentitel
---- * `Text`           - Angezeigter Seitentext
---- * `DialogCamera`   - Verwendung der Nahaufnahmekamera
---- * `Position`       - (Optional) Skriptname der fokussierten Entität
---- * `Action`         - (Optional) Aktion, wenn die Seite angezeigt wird
---- * `EnableSkipping` - (Optional) Erlauben/Verbieten des Überspringens der Seite
+--- * `Name`            - (Optional) Name der Seite
+--- * `Title`           - Angezeigter Seitentitel
+--- * `Text`            - Angezeigter Seitentext
+--- * `DialogCamera`    - Verwendung der Nahaufnahmekamera
+--- * `Position`        - (Optional) Skriptname der fokussierten Entität
+--- * `Action`          - (Optional) Aktion, wenn die Seite angezeigt wird
 ---
 --- #### Beispiele
 ---
@@ -373,8 +377,6 @@ end
 --- ASP("Titel", "Einige wichtige Texte.", true, "Marcus");
 --- -- Aktion aufrufen
 --- ASP("Titel", "Einige wichtige Texte.", true, "Marcus", MyFunction);
---- -- Überspringen erlauben/verbieten
---- ASP("Titel", "Einige wichtige Texte.", true, "HQ", nil, true);
 --- ```
 ---
 --- @param ... any Liste der Seitendaten

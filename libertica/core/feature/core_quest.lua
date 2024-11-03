@@ -273,13 +273,13 @@ API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
 
 function Lib.Core.Quest:OverrideQuestSystemGlobal()
     QuestTemplate.Trigger_Orig_QSB_Core = QuestTemplate.Trigger
-    QuestTemplate.Trigger = function(_Quest)
-        QuestTemplate.Trigger_Orig_QSB_Core(_Quest);
-        local QuestID = GetQuestID(_Quest.Identifier);
-        for i=1,_Quest.Objectives[0] do
-            if _Quest.Objectives[i].Type == Objective.Custom2 and _Quest.Objectives[i].Data[1].SetDescriptionOverwrite then
-                local Desc = _Quest.Objectives[i].Data[1]:SetDescriptionOverwrite(_Quest);
-                Lib.Core.Quest:ChangeCustomQuestCaptionText(Desc, _Quest);
+    QuestTemplate.Trigger = function(this)
+        QuestTemplate.Trigger_Orig_QSB_Core(this);
+        local QuestID = GetQuestID(this.Identifier);
+        for i=1,this.Objectives[0] do
+            if this.Objectives[i].Type == Objective.Custom2 and this.Objectives[i].Data[1].SetDescriptionOverwrite then
+                local Desc = this.Objectives[i].Data[1]:SetDescriptionOverwrite(this);
+                Lib.Core.Quest:ChangeCustomQuestCaptionText(Desc, this);
                 break;
             end
         end
@@ -288,18 +288,21 @@ function Lib.Core.Quest:OverrideQuestSystemGlobal()
     end
 
     QuestTemplate.Interrupt_Orig_QSB_Core = QuestTemplate.Interrupt;
-    QuestTemplate.Interrupt = function(_Quest)
-        _Quest:Interrupt_Orig_QSB_Core();
+    QuestTemplate.Interrupt = function(this)
+        this.State = QuestState.Over;
+        this.Result = QuestResult.Interrupted;
+        this:RemoveQuestMarkers();
+        Logic.ExecuteInLuaLocalState("LocalScriptCallback_OnQuestStatusChanged("..this.Index..")");
 
-        local QuestID = GetQuestID(_Quest.Identifier);
-        for i=1, _Quest.Objectives[0] do
-            if _Quest.Objectives[i].Type == Objective.Custom2 and _Quest.Objectives[i].Data[1].Interrupt then
-                _Quest.Objectives[i].Data[1]:Interrupt(_Quest, i);
+        local QuestID = GetQuestID(this.Identifier);
+        for i=1, this.Objectives[0] do
+            if this.Objectives[i].Type == Objective.Custom2 and this.Objectives[i].Data[1].Interrupt then
+                this.Objectives[i].Data[1]:Interrupt(this, i);
             end
         end
-        for i=1, _Quest.Triggers[0] do
-            if _Quest.Triggers[i].Type == Triggers.Custom2 and _Quest.Triggers[i].Data[1].Interrupt then
-                _Quest.Triggers[i].Data[1]:Interrupt(_Quest, i);
+        for i=1, this.Triggers[0] do
+            if this.Triggers[i].Type == Triggers.Custom2 and this.Triggers[i].Data[1].Interrupt then
+                this.Triggers[i].Data[1]:Interrupt(this, i);
             end
         end
         SendReport(Report.QuestInterrupt, QuestID);
@@ -307,17 +310,24 @@ function Lib.Core.Quest:OverrideQuestSystemGlobal()
     end
 
     QuestTemplate.Fail_Orig_QSB_Core = QuestTemplate.Fail;
-    QuestTemplate.Fail = function(_Quest)
-        _Quest:Fail_Orig_QSB_Core();
-        local QuestID = GetQuestID(_Quest.Identifier);
+    QuestTemplate.Fail = function(this)
+        this.State = QuestState.Over;
+        this.Result = QuestResult.Failure;
+        this:RemoveQuestMarkers();
+        Logic.ExecuteInLuaLocalState("LocalScriptCallback_OnQuestStatusChanged("..this.Index..")");
+
+        local QuestID = GetQuestID(this.Identifier);
         SendReport(Report.QuestFailure, QuestID);
         SendReportToLocal(Report.QuestFailure, QuestID);
     end
 
-    QuestTemplate.Success_Orig_QSB_Core = QuestTemplate.Success;
-    QuestTemplate.Success = function(_Quest)
-        _Quest:Success_Orig_QSB_Core();
-        local QuestID = GetQuestID(_Quest.Identifier);
+    QuestTemplate.Success = function(this)
+        this.State = QuestState.Over;
+        this.Result = QuestResult.Success;
+        this:RemoveQuestMarkers();
+        Logic.ExecuteInLuaLocalState("LocalScriptCallback_OnQuestStatusChanged("..this.Index..")");
+
+        local QuestID = GetQuestID(this.Identifier);
         SendReport(Report.QuestSuccess, QuestID);
         SendReportToLocal(Report.QuestSuccess, QuestID);
     end

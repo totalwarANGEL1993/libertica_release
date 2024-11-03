@@ -2,6 +2,7 @@ Lib.Construction = Lib.Construction or {};
 Lib.Construction.Name = "Construction";
 Lib.Construction.Global = {
     Construction = {
+        ForceBallistaDistance = false,
         Restriction = {
             Index = 0,
             BuildingCustomRule = {},
@@ -34,6 +35,7 @@ Lib.Construction.Global = {
 };
 Lib.Construction.Local  = {
     Construction = {
+        ForceBallistaDistance = false,
         Restriction = {
             BuildingCustomRule = {},
             BuildingTerritoryBlacklist = {},
@@ -62,7 +64,7 @@ Lib.Construction.Local  = {
             BuildingTerritoryWhitelist = {},
             BuildingAreaWhitelist = {},
         }
-    },
+    }
 };
 
 Lib.Require("comfort/GetCategoriesOfType");
@@ -572,7 +574,7 @@ function Lib.Construction.Local:OverridePlacementUpdate()
     self.Orig_GameCallBack_GUI_ConstructWallSegmentCountChanged = GameCallBack_GUI_ConstructWallSegmentCountChanged;
     GameCallBack_GUI_ConstructWallSegmentCountChanged = function(_SegmentType, _TurretType)
         self.Orig_GameCallBack_GUI_ConstructWallSegmentCountChanged(_SegmentType, _TurretType);
-        Lib.Construction.Local:CancleConstructWallState(GUI.GetPlayerID(), _SegmentType, _TurretType);
+        Lib.Construction.Local:CancleConstructWallSegmentState(GUI.GetPlayerID(), _SegmentType, _TurretType);
     end
 
     self.Orig_GameCallBack_GUI_BuildRoadCostChanged = GameCallBack_GUI_BuildRoadCostChanged;
@@ -584,8 +586,8 @@ function Lib.Construction.Local:OverridePlacementUpdate()
     self.Orig_PlacementUpdate = GUI_Construction.PlacementUpdate;
     --- @diagnostic disable-next-line: duplicate-set-field
     GUI_Construction.PlacementUpdate = function()
-        Lib.Construction.Local:CancleWallGatesToCloseToEachother(GUI.GetPlayerID());
         Lib.Construction.Local.Orig_PlacementUpdate();
+        Lib.Construction.Local:CancleConstructWallGateState(GUI.GetPlayerID());
     end
 
     self.Orig_UpgradeTurretClicked = GUI_BuildingButtons.UpgradeTurretClicked;
@@ -603,107 +605,121 @@ function Lib.Construction.Local:OverridePlacementUpdate()
 end
 
 function Lib.Construction.Local:AreOtherBallistasToCloseToPosition(_PlayerID, _x, _y, _AreaSize)
-    local nSite, SiteID = Logic.GetPlayerEntitiesInArea(_PlayerID, Entities.U_MilitaryBallista_BuildingSite, _x, _y, _AreaSize, 1);
-    local nBallista, BallistaID = Logic.GetPlayerEntitiesInArea(_PlayerID, Entities.U_MilitaryBallista, _x, _y, _AreaSize, 1);
-    return nSite > 0 or nBallista > 0;
+    if self.Construction.ForceBallistaDistance then
+        local nSite, SiteID = Logic.GetPlayerEntitiesInArea(_PlayerID, Entities.U_MilitaryBallista_BuildingSite, _x, _y, _AreaSize, 1);
+        local nBallista, BallistaID = Logic.GetPlayerEntitiesInArea(_PlayerID, Entities.U_MilitaryBallista, _x, _y, _AreaSize, 1);
+        return (nSite + nBallista) > 0;
+    end
+    return false;
 end
 
-function Lib.Construction.Local:CancleConstructWallState(_PlayerID, _SegmentType, _TurretType)
+function Lib.Construction.Local:CancleConstructWallSegmentState(_PlayerID, _SegmentType, _TurretType)
     local GuiState = GUI.GetCurrentStateID();
-    if g_Construction.CurrentPlacementType ~= 1 then
+    if g_Construction.CurrentPlacementType == 3 then
         local Costs = {Logic.GetCostForWall(_SegmentType, _TurretType, StartTurretX, StartTurretY, EndTurretX, EndTurretY)}
         if GuiState == 2 and Costs[1] and Costs[2] > 0 then
-            local x,y = GUI.Debug_GetMapPositionUnderMouse();
-            local Territory = Logic.GetTerritoryAtPosition(x or 1, y or 1);
-            local UpgradeCategory = self.LastSelectedBuildingType;
-            local n, Type = Logic.GetBuildingTypesInUpgradeCategory(UpgradeCategory);
-            local IsWallType = Logic.IsEntityTypeInCategory(Type, EntityCategories.Wall) == 1;
+            local x, y = GUI.Debug_GetMapPositionUnderMouse();
+            Lib.Construction.Local:CancleConstructWallState(_PlayerID, self.LastSelectedBuildingType, x, y);
+        end
+    end
+end
 
-            -- Cancel build walls if not whitelisted for territory
-            local TerritoryWhitelist = self.Construction.Restriction.WallTerritoryWhitelist[_PlayerID];
-            if IsWallType and #TerritoryWhitelist > 0 then
-                for k,v in pairs(TerritoryWhitelist) do
-                    if v.Type == true then
-                        if  string.find(Logic.GetEntityTypeName(Type), "B_Wall")
-                        and v.Territory == Territory then
-                            return;
-                        end
-                    else
-                        if  (Type == Entities.B_PalisadeSegment or Type == Entities.B_PalisadeGate)
-                        and v.Territory == Territory then
-                            return;
-                        end
-                    end
-                end
-                self:CancelState(g_Construction.CurrentPlacementType);
-            end
-            -- Cancel build walls if not whitelisted for area
-            local AreaWhitelist = self.Construction.Restriction.WallAreaWhitelist[_PlayerID];
-            if IsWallType and #AreaWhitelist > 0 then
-                for k,v in pairs(TerritoryWhitelist) do
-                    if v.Type == true then
-                        if  string.find(Logic.GetEntityTypeName(Type), "B_Wall")
-                        and v.Center and GetDistance({X= x, Y= y}, v.Center) <= v.Area then
-                            return;
-                        end
-                    else
-                        if  (Type == Entities.B_PalisadeSegment or Type == Entities.B_PalisadeGate)
-                        and v.Center and GetDistance({X= x, Y= y}, v.Center) <= v.Area then
-                            return;
-                        end
-                    end
-                end
-                self:CancelState(g_Construction.CurrentPlacementType);
-            end
+function Lib.Construction.Local:CancleConstructWallGateState(_PlayerID)
+    local GuiState = GUI.GetCurrentStateID();
+    if g_Construction.CurrentPlacementType == 4 then
+        if GuiState == 3 then
+            local x, y = GUI.Debug_GetMapPositionUnderMouse();
+            Lib.Construction.Local:CancleConstructWallState(_PlayerID, self.LastSelectedBuildingType, x, y);
+        end
+    end
+end
 
-            -- Cancel build walls if blacklisted for territory
-            local TerritoryBlacklist = self.Construction.Restriction.WallTerritoryBlacklist[_PlayerID];
-            if IsWallType then
-                for k,v in pairs(TerritoryBlacklist) do
-                    if v.Type == true then
-                        if  string.find(Logic.GetEntityTypeName(Type), "B_Wall")
-                        and v.Territory == Territory then
-                            self:CancelState(g_Construction.CurrentPlacementType);
-                            return;
-                        end
-                    else
-                        if  (Type == Entities.B_PalisadeSegment or Type == Entities.B_PalisadeGate)
-                        and v.Territory == Territory then
-                            self:CancelState(g_Construction.CurrentPlacementType);
-                            return;
-                        end
-                    end
-                end
-            end
-            -- Cancel build walls if blacklisted for area
-            local AreaBlacklist = self.Construction.Restriction.WallAreaBlacklist[_PlayerID];
-            if IsWallType then
-                for k,v in pairs(AreaBlacklist) do
-                    if v.Type == true then
-                        if  string.find(Logic.GetEntityTypeName(Type), "B_Wall")
-                        and v.Center and GetDistance({X= x, Y= y}, v.Center) <= v.Area then
-                            self:CancelState(g_Construction.CurrentPlacementType);
-                            return;
-                        end
-                    else
-                        if  (Type == Entities.B_PalisadeSegment or Type == Entities.B_PalisadeGate)
-                        and v.Center and GetDistance({X= x, Y= y}, v.Center) <= v.Area then
-                            self:CancelState(g_Construction.CurrentPlacementType);
-                            return;
-                        end
-                    end
-                end
-            end
+function Lib.Construction.Local:CancleConstructWallState(_PlayerID, _Type, _X, _Y)
+    local Territory = Logic.GetTerritoryAtPosition(_X or 1, _Y or 1);
 
-            -- Cancel build walls by custom function
-            local CustomRule = self.Construction.Restriction.WallCustomRule[_PlayerID];
-            for k,v in pairs(CustomRule) do
-                local IsWall = string.find(Logic.GetEntityTypeName(Type), "B_Wall") ~= nil;
-                if _G[v.Function] and not _G[v.Function](_PlayerID, IsWall, x, y, unpack(v.Arguments)) then
+    -- Cancel build walls if not whitelisted for territory
+    local TerritoryWhitelist = self.Construction.Restriction.WallTerritoryWhitelist[_PlayerID];
+    if #TerritoryWhitelist > 0 then
+        for k,v in pairs(TerritoryWhitelist) do
+            if v.Type == true then
+                if  string.find(Logic.GetEntityTypeName(_Type), "B_Wall")
+                and v.Territory == Territory then
+                    return;
+                end
+            else
+                if  (_Type == Entities.B_PalisadeSegment or _Type == Entities.B_PalisadeGate)
+                and v.Territory == Territory then
+                    return;
+                end
+            end
+        end
+        self:CancelState(g_Construction.CurrentPlacementType);
+    end
+    -- Cancel build walls if not whitelisted for area
+    local AreaWhitelist = self.Construction.Restriction.WallAreaWhitelist[_PlayerID];
+    if #AreaWhitelist > 0 then
+        for k,v in pairs(TerritoryWhitelist) do
+            if v.Type == true then
+                if  string.find(Logic.GetEntityTypeName(_Type), "B_Wall")
+                and v.Center and GetDistance({X= _X, Y= _Y}, v.Center) <= v.Area then
+                    return;
+                end
+            else
+                if  (_Type == Entities.B_PalisadeSegment or _Type == Entities.B_PalisadeGate)
+                and v.Center and GetDistance({X= _X, Y= _Y}, v.Center) <= v.Area then
+                    return;
+                end
+            end
+        end
+        self:CancelState(g_Construction.CurrentPlacementType);
+    end
+
+    -- Cancel build walls if blacklisted for territory
+    local TerritoryBlacklist = self.Construction.Restriction.WallTerritoryBlacklist[_PlayerID];
+    if true then
+        for k,v in pairs(TerritoryBlacklist) do
+            if v.Type == true then
+                if  string.find(Logic.GetEntityTypeName(_Type), "B_Wall")
+                and v.Territory == Territory then
+                    self:CancelState(g_Construction.CurrentPlacementType);
+                    return;
+                end
+            else
+                if  (_Type == Entities.B_PalisadeSegment or _Type == Entities.B_PalisadeGate)
+                and v.Territory == Territory then
                     self:CancelState(g_Construction.CurrentPlacementType);
                     return;
                 end
             end
+        end
+    end
+    -- Cancel build walls if blacklisted for area
+    local AreaBlacklist = self.Construction.Restriction.WallAreaBlacklist[_PlayerID];
+    if true then
+        for k,v in pairs(AreaBlacklist) do
+            if v.Type == true then
+                if  string.find(Logic.GetEntityTypeName(_Type), "B_Wall")
+                and v.Center and GetDistance({X= _X, Y= _Y}, v.Center) <= v.Area then
+                    self:CancelState(g_Construction.CurrentPlacementType);
+                    return;
+                end
+            else
+                if  (_Type == Entities.B_PalisadeSegment or _Type == Entities.B_PalisadeGate)
+                and v.Center and GetDistance({X= _X, Y= _Y}, v.Center) <= v.Area then
+                    self:CancelState(g_Construction.CurrentPlacementType);
+                    return;
+                end
+            end
+        end
+    end
+
+    -- Cancel build walls by custom function
+    local CustomRule = self.Construction.Restriction.WallCustomRule[_PlayerID];
+    for k,v in pairs(CustomRule) do
+        local IsWall = string.find(Logic.GetEntityTypeName(_Type), "B_Wall") ~= nil;
+        if _G[v.Function] and not _G[v.Function](_PlayerID, IsWall, _X, _Y, unpack(v.Arguments)) then
+            self:CancelState(g_Construction.CurrentPlacementType);
+            return;
         end
     end
 end
@@ -765,20 +781,6 @@ function Lib.Construction.Local:CancleConstructRoad(_PlayerID, _Length)
                     return;
                 end
             end
-        end
-    end
-end
-
-function Lib.Construction.Local:CancleWallGatesToCloseToEachother(_PlayerID)
-    local GuiState = GUI.GetCurrentStateID();
-    if GuiState == 3 then
-        local UpCat = Lib.Construction.Local.LastSelectedBuildingType;
-        local _, Type = Logic.GetBuildingTypesInUpgradeCategory(UpCat);
-        local AreaSize = (Type == Entities.B_PalisadeGate and 1200) or 2350;
-        local x,y = GUI.Debug_GetMapPositionUnderMouse();
-        local n, ID = Logic.GetPlayerEntitiesInArea(_PlayerID, Type, x, y, AreaSize, 1);
-        if n > 0 then
-            self:CancelState(-1);
         end
     end
 end

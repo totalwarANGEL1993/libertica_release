@@ -268,6 +268,9 @@ function AddNote(_Text)
         Logic.DEBUG_AddNote(_Text);
         return;
     end
+    if _Text:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
+        _Text = GetStringText(_Text);
+    end
     GUI.AddNote(_Text);
 end
 API.Note = AddNote;
@@ -277,6 +280,9 @@ function AddStaticNote(_Text)
     if not IsLocalScript() then
         ExecuteLocal([[GUI.AddStaticNote("%s")]], _Text);
         return;
+    end
+    if _Text:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
+        _Text = GetStringText(_Text);
     end
     GUI.AddStaticNote(_Text);
 end
@@ -288,7 +294,9 @@ function AddMessage(_Text, _Sound)
         ExecuteLocal([[AddMessage("%s", "%s")]], _Text, _Sound or "");
         return;
     end
-    _Text = ConvertPlaceholders(Localize(_Text));
+    if _Text:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
+        _Text = GetStringText(_Text);
+    end
     Message(_Text, (_Sound and _Sound ~= "" and _Sound:gsub("/", "\\")) or nil);
 end
 

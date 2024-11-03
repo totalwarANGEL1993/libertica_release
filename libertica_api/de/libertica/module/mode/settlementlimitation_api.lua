@@ -7,10 +7,9 @@
 --- * Die Gebäudeanzahl im Heimatgebiet ist nicht beschränkt.
 --- * Stadtgebäude können nur auf dem Heimatgebiet gebaut werden.
 --- * In Territorien können nur 3 Gebäude gebaut werden. 
---- * Wird der Außenposten ausgebaut, können dauerhaft 4 Gebäude gebaut werden.
 --- * Jeder Gebäudetyp kann nur 1 mal pro Territorium gebaut werden.
---- * Territorien können einmalig für Gold verbessert werden. Verbessern eines
----   Territorium ermöglicht 2 Gebäude gleichen Typs zu bauen.
+--- * Wird der Außenposten ausgebaut, kann ein Gebäudetyp dauerhaft doppelt
+---   im Territorium platziert werden.
 --- * Bienenstöcke, Felder und Ziergebäude zählen nicht als Gebäude.
 ---
 Lib.SettlementLimitation = Lib.SettlementLimitation or {};
@@ -19,6 +18,19 @@ Lib.SettlementLimitation = Lib.SettlementLimitation or {};
 --- @param _Flag boolean Modus ist aktiv
 function ActivateSettlementLimitation(_Flag)
 end
+
+--- Aktiviert oder deaktviert die Unterhaltskosten für Mauern.
+--- @param _Flag boolean Mauern kosten Gold
+function UseWallUpkeepCosts(_Flag)
+end
+API.UseWallUpkeepCosts = UseWallUpkeepCosts;
+
+--- Aktiviert oder deaktviert den Verfall von Mauern bei nicht aufgebrachten
+--- Unterhaltskosten. Unterhalt muss aktiv sein.
+--- @param _Flag boolean Mauern verfallen
+function UseWallDeteriation(_Flag)
+end
+API.UseWallDeteriation = UseWallDeteriation;
 
 --- Setzt den Titel, ab dem Territorien entwickelt werden können.
 --- @param _Title integer ID des Spielers

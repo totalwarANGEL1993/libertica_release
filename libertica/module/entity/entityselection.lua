@@ -89,7 +89,7 @@ function Lib.EntitySelection.Global:OnReportReceived(_ID, ...)
         DestroyEntity(arg[1]);
     elseif _ID == Report.SelectionChanged then
         local PlayerID = table.remove(arg, 1);
-        Lib.EntitySelection.Global.SelectedEntities[PlayerID] = arg;
+        Lib.EntitySelection.Global.SelectedEntities[PlayerID] = {unpack(arg)};
     end
 end
 

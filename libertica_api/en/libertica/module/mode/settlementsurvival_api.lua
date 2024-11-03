@@ -196,6 +196,24 @@ function PlagueSetDeathChance(_Chance)
 end
 API.PlagueSetDeathChance = PlagueSetDeathChance;
 
+--- Enables or disables the check for hostile predators in a territory.
+--- @param _Flag boolean Condition active
+function PredatorBlockClaimActivate(_Flag)
+end
+API.PredatorBlockClaimActivate = PredatorBlockClaimActivate;
+
+--- Enables or disables the check for hostile bandits in a territory.
+--- @param _Flag boolean Condition active
+function BanditsBlockClaimActivate(_Flag)
+end
+API.BanditsBlockClaimActivate = BanditsBlockClaimActivate;
+
+--- Enables or disables clothes need for outer rim buildings.
+--- @param _Flag boolean Need active
+function ClothesForOuterRimActivate(_Flag)
+end
+API.ClothesForOuterRimActivate = ClothesForOuterRimActivate;
+
 
 
 --- An animal has died from illness.

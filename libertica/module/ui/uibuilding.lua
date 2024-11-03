@@ -530,7 +530,7 @@ function Lib.UIBuilding.Local:OverrideUpgradeBuilding()
             Sound.FXPlay2DSound("ui\\menu_click");
             GUI.CancelBuildingUpgrade(EntityID);
             XGUIEng.ShowAllSubWidgets("/InGame/Root/Normal/BuildingButtons", 1);
-            SendReportToGlobal(Report.CancelUpgradeClickede, EntityID, GUI.GetPlayerID());
+            SendReportToGlobal(Report.CancelUpgradeClicked, EntityID, GUI.GetPlayerID());
             return;
         end
         local Costs = GUI_BuildingButtons.GetUpgradeCosts();

@@ -172,23 +172,27 @@ function Lib.Quest.Global:GetCheckQuestSegmentsInlineGoal()
             if not SegmentQuest then
                 return false;
             end
-            -- Not expectec result of segment fails quest
-            if SegmentQuest.State == QuestState.Over and SegmentQuest.Result ~= QuestResult.Interrupted then
-                if SegmentList[i].Result == SegmentResult.Success and SegmentQuest.Result ~= QuestResult.Success then
+            -- Not expected result of segment fails quest
+            if  SegmentQuest.State == QuestState.Over
+            and SegmentQuest.Result ~= QuestResult.Interrupted then
+                if  SegmentQuest.Outcome == SegmentResult.Success
+                and SegmentQuest.Result ~= QuestResult.Success then
                     Lib.Quest.Global:AbortAllQuestSegments(_QuestName);
                     return false;
                 end
-                if SegmentList[i].Result == SegmentResult.Failure and SegmentQuest.Result ~= QuestResult.Failure then
+                if  SegmentQuest.Outcome == SegmentResult.Failure
+                and SegmentQuest.Result ~= QuestResult.Failure then
                     Lib.Quest.Global:AbortAllQuestSegments(_QuestName);
                     return false;
                 end
             end
-            -- Check if segment is concluded
-            if SegmentQuest.State ~= QuestState.Over then
+            -- Check if segment is still running
+            if  SegmentQuest.Outcome ~= SegmentResult.Ignore
+            and SegmentQuest.State ~= QuestState.Over then
                 AllSegmentsConcluded = false;
             end
         end
-        -- Success after all segments have been completed
+        -- Success after all segments have been completed or are ignored
         if AllSegmentsConcluded then
             return true;
         end
@@ -198,7 +202,8 @@ end
 function Lib.Quest.Global:AbortAllQuestSegments(_QuestName)
     for i= 1, #self.SegmentsOfQuest[_QuestName], 1 do
         local SegmentName = self.SegmentsOfQuest[_QuestName][i].Name;
-        if IsValidQuest(_QuestName) and Quests[GetQuestID(SegmentName)].State ~= QuestState.Over then
+        local SegmentQuest = Quests[GetQuestID(SegmentName)];
+        if  SegmentQuest and SegmentQuest.State ~= QuestState.Over then
             StopQuest(SegmentName, true);
         end
     end
@@ -303,7 +308,6 @@ end
 -- lock the game if fully relying on this trigger without thinking! This is
 -- only here to ensure functionality in case of errors and NOT to support the
 -- sloth of mappers!
--- Also this technically is a bugfix but can not be put into the kernel.
 function Lib.Quest.Global:GetFreeSpaceInlineTrigger()
     return {
         Triggers.Custom2, {
@@ -312,7 +316,8 @@ function Lib.Quest.Global:GetFreeSpaceInlineTrigger()
                 local VisbleQuests = 0;
                 if Quests[0] > 0 then
                     for i= 1, Quests[0], 1 do
-                        if Quests[i].State == QuestState.Active and Quests[i].Visible == true then
+                        if  Quests[i].State == QuestState.Active
+                        and Quests[i].Visible == true then
                             VisbleQuests = VisbleQuests +1;
                         end
                     end
@@ -326,19 +331,8 @@ end
 -- -------------------------------------------------------------------------- --
 
 function Lib.Quest.Global:OverrideKernelQuestApi()
-    FailQuest_Orig_ModuleQuest = FailQuest;
-    FailQuest = function(_QuestName, _NoMessage)
-        -- Fail segments of quest fist
-        if Lib.Quest.Global.SegmentsOfQuest[_QuestName] then
-            for k, v in pairs(Lib.Quest.Global.SegmentsOfQuest[_QuestName]) do
-                if IsValidQuest(v.Name) and Quests[GetQuestID(v.Name)].State ~= QuestState.Over then
-                    FailQuest_Orig_ModuleQuest(v.Name, true);
-                end
-            end
-        end
-        -- Proceed with failing
-        FailQuest_Orig_ModuleQuest(_QuestName, _NoMessage);
-    end
+    -- FIX: FailQuest wpn't be overwritten, because failing all segments
+    -- automatically might break quests.
 
     RestartQuest_Orig_ModuleQuest = RestartQuest;
     RestartQuest = function(_QuestName, _NoMessage)
@@ -355,26 +349,16 @@ function Lib.Quest.Global:OverrideKernelQuestApi()
         RestartQuest_Orig_ModuleQuest(_QuestName, _NoMessage);
     end
 
-    StartQuest_Orig_ModuleQuest = StartQuest;
-    StartQuest = function(_QuestName, _NoMessage)
-        -- Start segments of quest first
-        if Lib.Quest.Global.SegmentsOfQuest[_QuestName] then
-            for k, v in pairs(Lib.Quest.Global.SegmentsOfQuest[_QuestName]) do
-                if IsValidQuest(v.Name) and Quests[GetQuestID(v.Name)].State ~= QuestState.Over then
-                    StartQuest_Orig_ModuleQuest(v.Name, true);
-                end
-            end
-        end
-        -- Proceed with starting
-        StartQuest_Orig_ModuleQuest(_QuestName, _NoMessage);
-    end
+    -- FIX: StartQuest won't be overwritten, because all segments are
+    -- triggered automatically if no other triggers are present.
 
     StopQuest_Orig_ModuleQuest = StopQuest;
     StopQuest = function(_QuestName, _NoMessage)
         -- Stop segments of quest first
         if Lib.Quest.Global.SegmentsOfQuest[_QuestName] then
             for k, v in pairs(Lib.Quest.Global.SegmentsOfQuest[_QuestName]) do
-                if IsValidQuest(v.Name) and Quests[GetQuestID(v.Name)].State ~= QuestState.Over then
+                local Quest = Quests[GetQuestID(v.Name)];
+                if Quest and Quest.State ~= QuestState.Over then
                     StopQuest_Orig_ModuleQuest(v.Name, true);
                 end
             end
@@ -383,19 +367,8 @@ function Lib.Quest.Global:OverrideKernelQuestApi()
         StopQuest_Orig_ModuleQuest(_QuestName, _NoMessage);
     end
 
-    WinQuest_Orig_ModuleQuest = WinQuest;
-    WinQuest = function(_QuestName, _NoMessage)
-        -- Stop segments of quest first
-        if Lib.Quest.Global.SegmentsOfQuest[_QuestName] then
-            for k, v in pairs(Lib.Quest.Global.SegmentsOfQuest[_QuestName]) do
-                if IsValidQuest(v.Name) and Quests[GetQuestID(v.Name)].State ~= QuestState.Over then
-                    StopQuest_Orig_ModuleQuest(v.Name, true);
-                end
-            end
-        end
-        -- Proceed with winning
-        WinQuest_Orig_ModuleQuest(_QuestName, _NoMessage);
-    end
+    -- FIX: WinQuest wpn't be overwritten, because winning all segments
+    -- automatically might break quests.
 end
 
 -- -------------------------------------------------------------------------- --

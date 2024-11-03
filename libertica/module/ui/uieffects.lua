@@ -496,7 +496,6 @@ function Lib.UIEffects.Local:InterfaceActivateImageBackground(_PlayerID, _Graphi
     if _PlayerID ~= GUI.GetPlayerID() or self.PauseScreenShown then
         return;
     end
-    self.PauseScreenShown = true;
 
     XGUIEng.PushPage("/InGame/Root/Normal/PauseScreen", false);
     XGUIEng.ShowWidget("/InGame/Root/Normal/PauseScreen", 1);
@@ -513,13 +512,13 @@ function Lib.UIEffects.Local:InterfaceActivateImageBackground(_PlayerID, _Graphi
     XGUIEng.SetMaterialColor("/InGame/Root/Normal/PauseScreen", 0, _R, _G, _B, _A);
     SendReportToGlobal(Report.ImageScreenShown, _PlayerID);
     SendReport(Report.ImageScreenShown, _PlayerID);
+    self.PauseScreenShown = true;
 end
 
 function Lib.UIEffects.Local:InterfaceDeactivateImageBackground(_PlayerID)
     if _PlayerID ~= GUI.GetPlayerID() or not self.PauseScreenShown then
         return;
     end
-    self.PauseScreenShown = false;
 
     XGUIEng.ShowWidget("/InGame/Root/Normal/PauseScreen", 0);
     XGUIEng.SetMaterialTexture("/InGame/Root/Normal/PauseScreen", 0, "");
@@ -527,13 +526,13 @@ function Lib.UIEffects.Local:InterfaceDeactivateImageBackground(_PlayerID)
     XGUIEng.PopPage();
     SendReportToGlobal(Report.ImageScreenHidden, _PlayerID);
     SendReport(Report.ImageScreenHidden, _PlayerID);
+    self.PauseScreenShown = false;
 end
 
 function Lib.UIEffects.Local:InterfaceDeactivateNormalInterface(_PlayerID)
     if GUI.GetPlayerID() ~= _PlayerID or self.NormalModeHidden then
         return;
     end
-    self.NormalModeHidden = true;
 
     XGUIEng.PushPage("/InGame/Root/Normal/NotesWindow", false);
     XGUIEng.ShowWidget("/InGame/Root/3dOnScreenDisplay", 0);
@@ -572,13 +571,13 @@ function Lib.UIEffects.Local:InterfaceDeactivateNormalInterface(_PlayerID)
 
     SendReportToGlobal(Report.GameInterfaceHidden, GUI.GetPlayerID());
     SendReport(Report.GameInterfaceHidden, GUI.GetPlayerID());
+    self.NormalModeHidden = true;
 end
 
 function Lib.UIEffects.Local:InterfaceActivateNormalInterface(_PlayerID)
     if GUI.GetPlayerID() ~= _PlayerID or not self.NormalModeHidden then
         return;
     end
-    self.NormalModeHidden = false;
 
     XGUIEng.ShowWidget("/InGame/Root/Normal", 1);
     XGUIEng.ShowWidget("/InGame/Root/3dOnScreenDisplay", 1);
@@ -625,6 +624,7 @@ function Lib.UIEffects.Local:InterfaceActivateNormalInterface(_PlayerID)
 
     SendReportToGlobal(Report.GameInterfaceShown, GUI.GetPlayerID());
     SendReport(Report.GameInterfaceShown, GUI.GetPlayerID());
+    self.NormalModeHidden = false;
 end
 
 -- -------------------------------------------------------------------------- --

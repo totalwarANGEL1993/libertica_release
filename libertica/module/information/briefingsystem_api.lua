@@ -60,13 +60,16 @@ API.IsBriefingActive = IsBriefingActive;
 
 function GetFramePosition(_Entity, _ZOffset)
     local x,y,z = Logic.EntityGetPos(GetID(_Entity));
-    return x, y, z + (_ZOffset or 0);
+    local zNew = (_ZOffset < 0 and math.abs(_ZOffset)) or (z + (_ZOffset or 0));
+    return x, y, zNew;
 end
 
 function GetFrameVector(_Entity1, _ZOffset1, _Entity2, _ZOffset2)
     local x1,y1,z1 = Logic.EntityGetPos(GetID(_Entity1));
     local x2,y2,z2 = Logic.EntityGetPos(GetID(_Entity2));
-    return x1, y1, z1 + (_ZOffset1 or 0), x2, y2, z2 + (_ZOffset2 or 0);
+    local z1New = (_ZOffset1 < 0 and math.abs(_ZOffset1)) or (z1 + (_ZOffset1 or 0));
+    local z2New = (_ZOffset2 < 0 and math.abs(_ZOffset2)) or (z2 + (_ZOffset2 or 0));
+    return x1, y1, z1New, x2, y2, z2New;
 end
 
 function AddBriefingPages(_Briefing)
@@ -95,7 +98,6 @@ function AddBriefingPages(_Briefing)
         local Name, Title,Text, Position;
         local DialogCam = false;
         local Action = function() end;
-        local NoSkipping = false;
 
         -- Set page parameters
         if (#arg == 3 and type(arg[1]) == "string")
@@ -112,9 +114,6 @@ function AddBriefingPages(_Briefing)
         end
         if #arg > 0 then
             Action = table.remove(arg, 1);
-        end
-        if #arg > 0 then
-            NoSkipping = not table.remove(arg, 1);
         end
 
         -- Calculate camera rotation
@@ -133,7 +132,8 @@ function AddBriefingPages(_Briefing)
             Text            = Text,
             Action          = Action,
             Position        = Position,
-            DisableSkipping = NoSkipping,
+            DisableSkipping = false,
+            Duration        = -1,
             DialogCamera    = DialogCam,
             Rotation        = Rotation,
         };

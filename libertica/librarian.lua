@@ -5,7 +5,7 @@ Lib = {
             "script/",
         },
 
-        Version = "LIB 1.0.2",
+        Version = "LIB 1.0.3",
         Root = "libertica",
         IsLocalEnv = GUI ~= nil,
         IsHistoryEdition = false,

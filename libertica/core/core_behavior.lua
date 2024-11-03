@@ -3269,6 +3269,7 @@ function B_Reprisal_QuestForceInterrupt:GetCustomData( _Index )
     end
     return Data
 end
+
 function B_Reprisal_QuestForceInterrupt:CustomFunction(_Quest)
     if (GetQuestID(self.QuestName) ~= nil) then
 

@@ -3,14 +3,18 @@
 --- #### Besondere Regeln
 --- Die folgenden Regeln sind immer aktiv und können nicht deaktiviert werden:
 ---
---- * Tore können nicht direkt nebeneinander platziert werden. Es muss mindestens ein
----   Mauersegment dazwischen sein.
 --- * Ballisten können nicht direkt nebeneinander platziert werden und benötigen immer ein vollständiges
 ---   Mauersegment zwischen ihnen (oder mehrere, die gleich lang sind).
 ---
 Lib.Construction = Lib.Construction or {};
 
 
+
+--- Aktiviert oder deaktiviert die erzwungene Distanz zwischen Mauerkatapulten.
+--- @param _Flag boolean Beschränkung ist aktiv
+function UseForceBallistaDistance(_Flag)
+end
+API.UseForceBallistaDistance = UseForceBallistaDistance;
 
 --- Definiert eine benutzerdefinierte Regel für den Bau von Gebäuden.
 ---

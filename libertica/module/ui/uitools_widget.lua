@@ -6,7 +6,10 @@ Lib.UITools.Widget = {
 };
 
 function Lib.UITools.Widget:DisplayInterfaceButton(_Widget, _Hide)
-    self.HiddenWidgets[_Widget] = _Hide == true;
+    self.HiddenWidgets[_Widget] = nil;
+    if _Hide == true then
+        self.HiddenWidgets[_Widget] = true;
+    end
     XGUIEng.ShowWidget(_Widget, (_Hide == true and 0) or 1);
 end
 
@@ -20,7 +23,7 @@ function Lib.UITools.Widget:OverrideMissionGoodCounter()
     StartMissionGoodOrEntityCounter = function(_Icon, _AmountToReach)
         local IconWidget = "/InGame/Root/Normal/MissionGoodOrEntityCounter/Icon";
         local CounterWidget = "/InGame/Root/Normal/MissionGoodOrEntityCounter";
-        if type(_Icon[3]) == "string" or _Icon[3] > 2 then
+        if type(_Icon[3]) == "string" or (_Icon[3] or 0) > 2 then
             Lib.UITools.Widget:SetIcon(IconWidget, _Icon, 64, _Icon[3]);
         else
             SetIcon(IconWidget, _Icon);
@@ -82,7 +85,6 @@ function Lib.UITools.Widget:TooltipNormal(_title, _text, _disabledText)
     if _text and _text:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
         _text = XGUIEng.GetStringTableText(_text);
     end
-    _disabledText = _disabledText or "";
     if _disabledText and _disabledText:find("^[A-Za-z0-9_]+/[A-Za-z0-9_]+$") then
         _disabledText = XGUIEng.GetStringTableText(_disabledText);
     end

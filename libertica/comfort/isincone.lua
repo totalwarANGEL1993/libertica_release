@@ -1,17 +1,16 @@
 Lib.Require("comfort/GetAngleBetween");
+Lib.Require("comfort/GetDistance");
 Lib.Register("comfort/IsInCone");
 
-function IsInCone(_Position, _Center, _MiddleAlpha, _BetaAvaiable)
-	local a = GetAngleBetween(_Center, _Position);
-	local lb = _MiddleAlpha - _BetaAvaiable;
-	local hb = _MiddleAlpha + _BetaAvaiable;
-	if a >= lb and a <= hb then
-		return true;
-	end
-	if (a + 180) % 360 >= (lb + 180) % 360 and (a + 180) % 360 <= (hb + 180) % 360 then
-		return true;
+function IsInCone(_Target, _Center, _Length, _Rotation, _Width)
+    local Distance = GetDistance(_Center, _Target)
+    if Distance > _Length then
+        return false;
     end
-    return false;
+    local a = GetAngleBetween(_Center, _Target);
+    local lb = _Rotation - _Width;
+    local hb = _Rotation + _Width;
+    return a >= lb and a <= hb;
 end
 API.IsInCone = IsInCone;
 

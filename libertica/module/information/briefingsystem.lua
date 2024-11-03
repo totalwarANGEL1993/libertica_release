@@ -128,23 +128,23 @@ function Lib.BriefingSystem.Global:BriefingExecutionController()
 end
 
 function Lib.BriefingSystem.Global:CreateBriefingGetPage(_Briefing)
-    _Briefing.GetPage = function(self, _NameOrID)
+    _Briefing.GetPage = _Briefing.GetPage or function(this, _NameOrID)
         local ID = Lib.BriefingSystem.Global:GetPageIDByName(_Briefing.PlayerID, _NameOrID);
         return Lib.BriefingSystem.Global.Briefing[_Briefing.PlayerID][ID];
     end
 end
 
 function Lib.BriefingSystem.Global:CreateBriefingAddPage(_Briefing)
-    _Briefing.AddPage = function(self, _Page)
+    _Briefing.AddPage = _Briefing.AddPage or function(this, _Page)
         -- Briefing length
-        self.Length = (self.Length or 0) +1;
+        this.Length = (this.Length or 0) +1;
         -- Animations
         _Briefing.PageAnimation = _Briefing.PageAnimation or {};
         -- Parallaxes
         _Briefing.PageParallax = _Briefing.PageParallax or {};
 
         -- Set page name
-        local Identifier = "Page" ..(#self +1);
+        local Identifier = "Page" ..(#this +1);
         if _Page.Name then
             Identifier = _Page.Name;
         else
@@ -188,15 +188,15 @@ function Lib.BriefingSystem.Global:CreateBriefingAddPage(_Briefing)
             -- Optional fly to
             local Position2, Rotation2, Zoom2, Angle2;
             if _Page.FlyTo then
-                Position2 = _Page.FlyTo.Position or Position2;
-                Rotation2 = _Page.FlyTo.Rotation or Rotation2;
-                Zoom2     = _Page.FlyTo.Zoom or Zoom2;
-                Angle2    = _Page.FlyTo.Angle or Angle2;
+                Position2 = _Page.FlyTo.Position or _Page.Position;
+                Rotation2 = _Page.FlyTo.Rotation or _Page.Rotation;
+                Zoom2     = _Page.FlyTo.Zoom or _Page.Zoom;
+                Angle2    = _Page.FlyTo.Angle or _Page.Angle;
             end
             -- Create the animation
             _Briefing.PageAnimation[Identifier] = {
                 Clear = true,
-                {_Page.Duration or 1,
+                {math.abs(_Page.Duration or 1),
                  _Page.Position, _Page.Rotation, _Page.Zoom, _Page.Angle,
                  Position2, Rotation2, Zoom2, Angle2}
             };
@@ -226,24 +226,24 @@ function Lib.BriefingSystem.Global:CreateBriefingAddPage(_Briefing)
         end
 
         -- Multiple choice selection
-        _Page.GetSelected = function(self)
+        _Page.GetSelected = function(_Data)
             return 0;
         end
         -- Return page
-        table.insert(self, _Page);
+        table.insert(this, _Page);
         return _Page;
     end
 end
 
 function Lib.BriefingSystem.Global:CreateBriefingAddMCPage(_Briefing)
-    _Briefing.AddMCPage = function(self, _Page)
+    _Briefing.AddMCPage = _Briefing.AddMCPage or function(this, _Page)
         -- Create base page
-        local Page = self:AddPage(_Page);
+        local Page = this:AddPage(_Page);
 
         -- Multiple choice selection
-        Page.GetSelected = function(self)
-            if self.MC then
-                return self.MC.Selected;
+        Page.GetSelected = function(_Data)
+            if _Data.MC then
+                return _Data.MC.Selected;
             end
             return 0;
         end
@@ -264,12 +264,12 @@ function Lib.BriefingSystem.Global:CreateBriefingAddMCPage(_Briefing)
 end
 
 function Lib.BriefingSystem.Global:CreateBriefingAddRedirect(_Briefing)
-    _Briefing.AddRedirect = function(self, _Target)
+    _Briefing.AddRedirect = _Briefing.AddRedirect or function(this, _Target)
         -- Dialog length
-        self.Length = (self.Length or 0) +1;
+        this.Length = (this.Length or 0) +1;
         -- Return page
         local Page = (_Target == nil and -1) or _Target;
-        table.insert(self, Page);
+        table.insert(this, Page);
         return Page;
     end
 end
@@ -319,7 +319,6 @@ function Lib.BriefingSystem.Global:NextBriefing(_PlayerID)
         -- This is an exception from the rule that the global event is send
         -- before the local event! For timing reasons...
         SendReportToLocal(Report.BriefingStarted, _PlayerID, Briefing.Name, Briefing);
-        SendReport(Report.BriefingStarted, _PlayerID, Briefing.Name);
     end
 end
 
@@ -334,9 +333,8 @@ function Lib.BriefingSystem.Global:TransformAnimations(_PlayerID)
                 for i= 1, #v, 1 do
                     local Entry = {};
                     Entry.Interpolation = v[i].Interpolation;
-                    Entry.Modulation = v[i].Modulation or ((#v[i] >= 4 and 1.25) or 1);
                     Entry.Duration = v[i][1] or (2 * 60);
-                    if v[i][4] and type(v[i][4]) ~= "table" then
+                    if v[i][2] and type(v[i][4]) ~= "table" then
                         Entry.Start = {
                             Position = (type(v[i][2]) ~= "table" and {v[i][2],0}) or v[i][2],
                             Rotation = v[i][3] or CONST_BRIEFING.CAMERA_ROTATIONDEFAULT,
@@ -378,7 +376,6 @@ function Lib.BriefingSystem.Global:TransformParallaxes(_PlayerID)
                         local Entry = {};
                         Entry.Image = v[i][1];
                         Entry.Interpolation = v[i].Interpolation;
-                        Entry.Modulation = v[i].Modulation or 1;
                         Entry.Duration = v[i][2] or (2 * 60);
                         Entry.AnimData = {};
                         for j= 3, #v[i] do
@@ -580,8 +577,16 @@ function Lib.BriefingSystem.Local:StartBriefing(_PlayerID, _BriefingName, _Brief
 
     if not Framework.IsNetworkGame() then
         Game.GameTimeSetFactor(_PlayerID, 1);
+        if _Briefing.PreloadAssets then
+            ActivateColoredScreen(_PlayerID, 0, 0, 0, 255);
+            Lib.Core.Local:Preload_ViewWholeMap();
+        end
     end
-    self:ActivateCinematicMode(_PlayerID);
+
+    SendReportToGlobal(Report.BriefingStarted, _PlayerID, _Briefing.Name);
+    RequestHiResDelay(1, function()
+        self:ActivateCinematicMode(_PlayerID);
+    end);
 end
 
 function Lib.BriefingSystem.Local:EndBriefing(_PlayerID, _BriefingName)
@@ -590,6 +595,10 @@ function Lib.BriefingSystem.Local:EndBriefing(_PlayerID, _BriefingName)
     end
 
     local Briefing = self.Briefing[_PlayerID];
+
+    if not Framework.IsNetworkGame() and Briefing.PreloadAssets then
+        Lib.Core.Local:Preload_ResetView();
+    end
     if Briefing.RestoreGameSpeed and not Framework.IsNetworkGame() then
         Game.GameTimeSetFactor(_PlayerID, Briefing.Backup.Speed);
     end
@@ -624,6 +633,7 @@ function Lib.BriefingSystem.Local:DisplayPage(_PlayerID, _PageID)
     if type(self.Briefing[_PlayerID][_PageID]) == "table" then
         self.Briefing[_PlayerID][_PageID].Started = Logic.GetTime();
         self:SetPageFarClipPlane(_PlayerID, _PageID);
+        self:SetRender(_PlayerID, _PageID);
         self:DisplayPageBars(_PlayerID, _PageID);
         self:DisplayPageTitle(_PlayerID, _PageID);
         self:DisplayPageText(_PlayerID, _PageID);
@@ -643,6 +653,47 @@ function Lib.BriefingSystem.Local:SetPageFarClipPlane(_PlayerID, _PageID)
     if Page.FarClipPlane then
         SetRenderDistance(Page.FarClipPlane);
     end
+end
+
+function Lib.BriefingSystem.Local:SetRender(_PlayerID, _PageID)
+    local Page = self.Briefing[_PlayerID][_PageID];
+    if Page.Performance then
+        self:SetPerformanceMode();
+    else
+        self:SetQualityMode();
+    end
+end
+
+function Lib.BriefingSystem.Local:SetPerformanceMode()
+    Display.SetUserOptionAnimationQuality(0);
+    Display.SetUserOptionAnisotropy(0);
+    Display.SetUserOptionReflections(0);
+    Display.SetUserOptionTerrainQuality(0);
+    Display.SetRenderObjectsAlphaBlendPass(0);
+    Display.SetRenderParticles(0);
+    Display.SetRenderUseBatching(0);
+    Display.SetRenderUpdateMorphAnim(0);
+    Display.SetRenderUpdateParticles(0);
+    Display.SetEffectOption("DoNotUseRimLight", 1);
+    Display.SetEffectOption("SimpleWater", 1);
+end
+
+function Lib.BriefingSystem.Local:SetQualityMode()
+    local AnimationQuality = Display.GetUserOptionMaxAnimationQuality();
+    local FilterQuality = Display.GetUserOptionMaxAnisotropy();
+    local ReflectionQuality = Display.GetUserOptionMaxReflections();
+    local TerrainQuality = Display.GetUserOptionMaxTerrainQuality();
+    Display.SetUserOptionAnimationQuality(AnimationQuality);
+    Display.SetUserOptionAnisotropy(FilterQuality);
+    Display.SetUserOptionReflections(ReflectionQuality);
+    Display.SetUserOptionTerrainQuality(TerrainQuality);
+    Display.SetRenderObjectsAlphaBlendPass(1);
+    Display.SetRenderParticles(1);
+    Display.SetRenderUseBatching(1);
+    Display.SetRenderUpdateMorphAnim(1);
+    Display.SetRenderUpdateParticles(1);
+    Display.SetEffectOption("DoNotUseRimLight", 0);
+    Display.SetEffectOption("SimpleWater", 0);
 end
 
 function Lib.BriefingSystem.Local:DisplayPageBars(_PlayerID, _PageID)
@@ -794,8 +845,6 @@ function Lib.BriefingSystem.Local:ControlParallaxes(_PlayerID)
             end
             if type(Data.Modulation) == "function" then
                 Factor = Data:Modulation(CurrentTime, Factor);
-            elseif type(Data.Modulation) == "number" then
-                Factor = self:ModulateInterpolationFactor(Factor, Data.Modulation);
             end
             Factor = math.min(math.max(Factor, 0), 1);
 
@@ -810,27 +859,13 @@ function Lib.BriefingSystem.Local:ControlParallaxes(_PlayerID)
 
             local u0,v0,u1,v1,Alpha = 0, 0, 1, 1, 255;
             if Data.AnimData then
-                local FrameCount = #Data.AnimData;
                 if Data.AnimData[3] and type(Data.AnimData[3]) ~= "table" then
                     u0,v0,u1,v1,Alpha = unpack(Data.AnimData);
                 else
-                    if #Data.AnimData >= 4 then
-                        local FirstFrame = math.floor(Factor * (FrameCount - 3)) + 1;
-                        FirstFrame = math.min(FirstFrame, FrameCount - 3);
-                        u0,v0,u1,v1,Alpha = self:CubicParallaxInterpolation(
-                            Data.AnimData[FirstFrame],
-                            Data.AnimData[FirstFrame +1],
-                            Data.AnimData[FirstFrame +2],
-                            Data.AnimData[FirstFrame +3],
-                            Factor
-                        );
-                    elseif #Data.AnimData >= 2 then
-                        local FirstFrame = math.floor(Factor * (FrameCount - 1)) + 1;
-                        FirstFrame = math.min(FirstFrame, FrameCount - 1);
-                        u0,v0,u1,v1,Alpha = self:LinearParallaxInterpolation(
-                            Data.AnimData[FirstFrame],
-                            Data.AnimData[FirstFrame +1],
-                            Factor
+                    if #Data.AnimData >= 2 then
+                        u0,v0,u1,v1,Alpha = self:BezierCurveParallax(
+                            Factor,
+                            unpack(Data.AnimData)
                         );
                     end
                 end
@@ -901,27 +936,11 @@ function Lib.BriefingSystem.Local:ThroneRoomCameraControl(_PlayerID, _Page)
         local PX, PY, PZ, LX, LY, LZ = 0, 0, 0, 0, 0, 0;
         local CurrentAnimation = self.Briefing[_PlayerID].CurrentAnimation;
         if CurrentAnimation and CurrentAnimation.AnimFrames then
-            if #CurrentAnimation.AnimFrames >= 4 then
-                local Factor = self:GetInterpolationFactor(_PlayerID);
-                local FrameCount = #CurrentAnimation.AnimFrames;
-                local FirstFrame = math.floor(Factor * (FrameCount - 3)) + 1;
-                FirstFrame = math.min(FirstFrame, #CurrentAnimation.AnimFrames - 3);
-                PX, PY, PZ, LX, LY, LZ = self:CubicInterpolation(
-                    CurrentAnimation.AnimFrames[FirstFrame],
-                    CurrentAnimation.AnimFrames[FirstFrame +1],
-                    CurrentAnimation.AnimFrames[FirstFrame +2],
-                    CurrentAnimation.AnimFrames[FirstFrame +3],
-                    Factor
-                );
-            elseif #CurrentAnimation.AnimFrames >= 2 then
-                local Factor = self:GetInterpolationFactor(_PlayerID);
-                local FrameCount = #CurrentAnimation.AnimFrames;
-                local FirstFrame = math.floor(Factor * (FrameCount - 1)) + 1;
-                FirstFrame = math.min(FirstFrame, #CurrentAnimation.AnimFrames - 1);
-                PX, PY, PZ, LX, LY, LZ = self:LinearInterpolation(
-                    CurrentAnimation.AnimFrames[FirstFrame],
-                    CurrentAnimation.AnimFrames[FirstFrame +1],
-                    Factor
+            if #CurrentAnimation.AnimFrames >= 2 then
+                local Factor = self:GetInterpolationFactor(_PlayerID, true);
+                PX, PY, PZ, LX, LY, LZ = self:BezierCurve(
+                    Factor,
+                    unpack(CurrentAnimation.AnimFrames)
                 );
             else
                 PX, PY, PZ, LX, LY, LZ = unpack(CurrentAnimation.AnimFrames[1]);
@@ -1041,7 +1060,7 @@ function Lib.BriefingSystem.Local:ConvertPosition(_Table)
     return x, y, z;
 end
 
-function Lib.BriefingSystem.Local:GetInterpolationFactor(_PlayerID)
+function Lib.BriefingSystem.Local:GetInterpolationFactor(_PlayerID, _Modulate)
     if self.Briefing[_PlayerID].CurrentAnimation then
         local CurrentTime = XGUIEng.GetSystemTime();
         local Data = self.Briefing[_PlayerID].CurrentAnimation;
@@ -1057,71 +1076,53 @@ function Lib.BriefingSystem.Local:GetInterpolationFactor(_PlayerID)
         end
         if type(Data.Modulation) == "function" then
             Factor = Data:Modulation(CurrentTime, Factor);
-        elseif type(Data.Modulation) == "number" then
-            Factor = self:ModulateInterpolationFactor(Factor, Data.Modulation);
+        elseif _Modulate then
+            Factor = self:ModulateInterpolationFactor(Factor);
         end
         return math.min(math.max(Factor, 0), 1);
     end
     return 1;
 end
 
-function Lib.BriefingSystem.Local:ModulateInterpolationFactor(_Factor, _Modulation)
-    local m = _Modulation or 1;
-    -- Smoothstep function
-    local f = _Factor ^ m / ((_Factor ^ m) + ((1 - _Factor) ^ m));
-    return math.min(math.max(f, 0), 1);
+function Lib.BriefingSystem.Local:ModulateInterpolationFactor(_Factor)
+    return (1 / (0.97 + math.exp(-8 * (_Factor - 0.5)))) - 0.01;
 end
 
-function Lib.BriefingSystem.Local:LinearInterpolation(_Pos1, _Pos2, _Factor)
-    local Position = {
-        PX = (1 - _Factor) * _Pos1[1] + _Factor * _Pos2[1],
-        PY = (1 - _Factor) * _Pos1[2] + _Factor * _Pos2[2],
-        PZ = (1 - _Factor) * _Pos1[3] + _Factor * _Pos2[3]
-    }
-    local LookAt = {
-        LX = (1 - _Factor) * _Pos1[4] + _Factor * _Pos2[4],
-        LY = (1 - _Factor) * _Pos1[5] + _Factor * _Pos2[5],
-        LZ = (1 - _Factor) * _Pos1[6] + _Factor * _Pos2[6]
-    }
-    return Position.PX, Position.PY, Position.PZ, LookAt.LX, LookAt.LY, LookAt.LZ
+function Lib.BriefingSystem.Local:BernsteinPolynome(n, i, t)
+    return (math.factorial(n) / (math.factorial(i) * math.factorial(n - i))) * (t ^ i) * ((1 - t) ^ (n - i));
 end
 
-function Lib.BriefingSystem.Local:LinearParallaxInterpolation(_UV1, _UV2, _Factor)
+function Lib.BriefingSystem.Local:BezierCurve(_Factor, ...)
     _Factor = math.max(0, math.min(1, _Factor));
-    local UV = {
-        U0 = (1 - _Factor) * _UV1[1] + _Factor * _UV2[1],
-        V0 = (1 - _Factor) * _UV1[2] + _Factor * _UV2[2],
-        U1 = (1 - _Factor) * _UV1[3] + _Factor * _UV2[3],
-        V1 = (1 - _Factor) * _UV1[4] + _Factor * _UV2[4],
-        A  = (1 - _Factor) * _UV1[5] + _Factor * _UV2[5]
-    }
-    return UV.U0, UV.V0, UV.U1, UV.V1, UV.A;
+    local Points = {...};
+    local n = #Points;
+    local PX, PY, PZ, LX, LY, LZ = 0, 0, 0, 0, 0, 0;
+    for i = 1, n do
+        local f = self:BernsteinPolynome(n - 1, i - 1, _Factor);
+        PX = PX + Points[i][1] * f;
+        PY = PY + Points[i][2] * f;
+        PZ = PZ + Points[i][3] * f;
+        LX = LX + Points[i][4] * f;
+        LY = LY + Points[i][5] * f;
+        LZ = LZ + Points[i][6] * f;
+    end
+    return PX, PY, PZ, LX, LY, LZ;
 end
 
-function Lib.BriefingSystem.Local:CubicInterpolation(_Pos1, _Pos2, _Pos3, _Pos4, _Factor)
-    local Position = {
-        PX = 0.5 * (2 * _Pos2[1] + (_Pos3[1] - _Pos1[1]) * _Factor + (2 * _Pos1[1] - 5 * _Pos2[1] + 4 * _Pos3[1] - _Pos4[1]) * (_Factor^2) + (3 * (_Pos2[1] - _Pos3[1]) + _Pos4[1] - _Pos1[1]) * (_Factor^3)),
-        PY = 0.5 * (2 * _Pos2[2] + (_Pos3[2] - _Pos1[2]) * _Factor + (2 * _Pos1[2] - 5 * _Pos2[2] + 4 * _Pos3[2] - _Pos4[2]) * (_Factor^2) + (3 * (_Pos2[2] - _Pos3[2]) + _Pos4[2] - _Pos1[2]) * (_Factor^3)),
-        PZ = 0.5 * (2 * _Pos2[3] + (_Pos3[3] - _Pos1[3]) * _Factor + (2 * _Pos1[3] - 5 * _Pos2[3] + 4 * _Pos3[3] - _Pos4[3]) * (_Factor^2) + (3 * (_Pos2[3] - _Pos3[3]) + _Pos4[3] - _Pos1[3]) * (_Factor^3))
-    }
-    local LookAt = {
-        LX = 0.5 * (2 * _Pos2[1] + (_Pos3[4] - _Pos1[4]) * _Factor + (2 * _Pos1[4] - 5 * _Pos2[4] + 4 * _Pos3[4] - _Pos4[4]) * (_Factor^2) + (3 * (_Pos2[4] - _Pos3[4]) + _Pos4[4] - _Pos1[4]) * (_Factor^3)),
-        LY = 0.5 * (2 * _Pos2[5] + (_Pos3[5] - _Pos1[5]) * _Factor + (2 * _Pos1[5] - 5 * _Pos2[5] + 4 * _Pos3[5] - _Pos4[5]) * (_Factor^2) + (3 * (_Pos2[5] - _Pos3[5]) + _Pos4[5] - _Pos1[5]) * (_Factor^3)),
-        LZ = 0.5 * (2 * _Pos2[6] + (_Pos3[6] - _Pos1[6]) * _Factor + (2 * _Pos1[6] - 5 * _Pos2[6] + 4 * _Pos3[6] - _Pos4[6]) * (_Factor^2) + (3 * (_Pos2[6] - _Pos3[6]) + _Pos4[6] - _Pos1[6]) * (_Factor^3))
-    }
-    return Position.PX, Position.PY, Position.PZ, LookAt.LX, LookAt.LY, LookAt.LZ;
-end
-
-function Lib.BriefingSystem.Local:CubicParallaxInterpolation(_UV1, _UV2, _UV3, _UV4, _Factor)
+function Lib.BriefingSystem.Local:BezierCurveParallax(_Factor, ...)
     _Factor = math.max(0, math.min(1, _Factor));
-    local UV = {
-        U0 = 0.5 * ((2 * _UV2[1]) + (_UV3[1] - _UV1[1]) * _Factor + (2 * _UV1[1] - 5 * _UV2[1] + 4 * _UV3[1] - _UV4[1]) * (_Factor^2) + (3 * (_UV2[1] - _UV3[1]) + _UV4[1] - _UV1[1]) * (_Factor^3)),
-        V0 = 0.5 * ((2 * _UV2[2]) + (_UV3[2] - _UV1[2]) * _Factor + (2 * _UV1[2] - 5 * _UV2[2] + 4 * _UV3[2] - _UV4[2]) * (_Factor^2) + (3 * (_UV2[2] - _UV3[2]) + _UV4[2] - _UV1[2]) * (_Factor^3)),
-        U1 = 0.5 * ((2 * _UV2[3]) + (_UV3[3] - _UV1[3]) * _Factor + (2 * _UV1[3] - 5 * _UV2[3] + 4 * _UV3[3] - _UV4[3]) * (_Factor^2) + (3 * (_UV2[3] - _UV3[3]) + _UV4[3] - _UV1[3]) * (_Factor^3)),
-        V1 = 0.5 * ((2 * _UV2[4]) + (_UV3[4] - _UV1[4]) * _Factor + (2 * _UV1[4] - 5 * _UV2[4] + 4 * _UV3[4] - _UV4[4]) * (_Factor^2) + (3 * (_UV2[4] - _UV3[4]) + _UV4[4] - _UV1[4]) * (_Factor^3)),
-        A  = 0.5 * ((2 * _UV2[5]) + (_UV3[5] - _UV1[5]) * _Factor + (2 * _UV1[5] - 5 * _UV2[5] + 4 * _UV3[5] - _UV4[5]) * (_Factor^2) + (3 * (_UV2[5] - _UV3[5]) + _UV4[5] - _UV1[5]) * (_Factor^3))
-    }
-    return UV.U0, UV.V0, UV.U1, UV.V1, UV.A;
+    local Points = {...};
+    local n = #Points;
+    local U0, V0, U1, V1, A = 0, 0, 0, 0, 0;
+    for i = 1, n do
+        local f = self:BernsteinPolynome(n - 1, i - 1, _Factor);
+        U0 = U0 + Points[i][1] * f;
+        V0 = V0 + Points[i][2] * f;
+        U1 = U1 + Points[i][3] * f;
+        V1 = V1 + Points[i][4] * f;
+        A  = A  + Points[i][5] * f;
+    end
+    return U0, V0, U1, V1, A;
 end
 
 function Lib.BriefingSystem.Local:GetCameraProperties(_PlayerID, _FOV)
@@ -1241,7 +1242,6 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     if self.CinematicActive or GUI.GetPlayerID() ~= _PlayerID then
         return;
     end
-    self.CinematicActive = true;
 
     if not self.LoadscreenClosed then
         XGUIEng.PopPage();
@@ -1336,6 +1336,8 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     Camera.SwitchCameraBehaviour(5);
 
     InitializeFader();
+    -- FIX: Push text widgets over the fader
+    XGUIEng.PushPage("/InGame/ThroneRoom/Main/MissionBriefing", false);
     g_Fade.To = 0;
     SetFaderAlpha(0);
 
@@ -1345,13 +1347,16 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     if not self.LoadscreenClosed then
         XGUIEng.PushPage("/LoadScreen/LoadScreen", false);
     end
+    if self.Briefing[_PlayerID].PreloadAssets then
+        DeactivateColoredScreen(_PlayerID);
+    end
+    self.CinematicActive = true;
 end
 
 function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     if not self.CinematicActive or GUI.GetPlayerID() ~= _PlayerID then
         return;
     end
-    self.CinematicActive = false;
 
     local ConsoleWasVisible = IsScriptConsoleShown();
     if ConsoleWasVisible then
@@ -1393,6 +1398,7 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     XGUIEng.PopPage();
     XGUIEng.PopPage();
     XGUIEng.PopPage();
+    XGUIEng.PopPage();
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_2", 0);
@@ -1400,10 +1406,12 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_2_Dodge", 0);
 
     ResetRenderDistance();
+    self:SetQualityMode();
 
     if ConsoleWasVisible then
         ShowScriptConsole();
     end
+    self.CinematicActive = false;
 end
 
 -- -------------------------------------------------------------------------- --

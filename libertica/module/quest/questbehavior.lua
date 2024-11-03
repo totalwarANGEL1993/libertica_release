@@ -8,7 +8,6 @@ Lib.QuestBehavior.Local = {};
 
 --- @diagnostic disable: undefined-field
 
-Lib.Require("comfort/GetPlayerName");
 Lib.Require("comfort/GetRandomSettlerType");
 Lib.Require("comfort/LookAt");
 Lib.Require("comfort/ToBoolean");

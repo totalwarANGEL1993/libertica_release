@@ -7,11 +7,9 @@
 --- * The number of buildings in the home territory is not limited
 --- * City buildings can only be built in the home territory
 --- * In territories, only 3 buildings can be built.
---- * When a outpost is upgraded the max amount of buildings is permemently
----   increased  to 4.
 --- * Each building type can only be built once per territory.
---- * Territories can be developed once by paying costs. Developing a territory
----   enables the construction of two buildings of the same type.
+--- * When a outpost is upgraded, one building type can be placed twice
+---   on the territory.
 --- * Beehives, beautifications and fields do not count as buildings.
 ---
 Lib.SettlementLimitation = Lib.SettlementLimitation or {};
@@ -20,6 +18,19 @@ Lib.SettlementLimitation = Lib.SettlementLimitation or {};
 --- @param _Flag boolean Indicates whether the mode is active
 function ActivateSettlementLimitation(_Flag)
 end
+
+--- Activates or deactivates the upkeep for walls.
+--- @param _Flag boolean Walls will cost money
+function UseWallUpkeepCosts(_Flag)
+end
+API.UseWallUpkeepCosts = UseWallUpkeepCosts;
+
+--- Activates or deactivates the deteriation of walls if upkeep is not payed.
+--- Rampart upkeep must be active!
+--- @param _Flag boolean Walls deteriate
+function UseWallDeteriation(_Flag)
+end
+API.UseWallDeteriation = UseWallDeteriation;
 
 --- Sets the title, required for developing territories.
 --- @param _Title integer Knight title

@@ -3,11 +3,10 @@
 
 Lib.Promotion = Lib.Promotion or {};
 Lib.Promotion.Name = "Promotion";
-Lib.Promotion.Global = {
-    TechnologiesToResearch = {},
-};
+Lib.Promotion.Global = {};
 Lib.Promotion.Local = {};
 Lib.Promotion.Shared = {
+    TechnologiesToResearch = {},
     TechnologyConfig = {
         -- Tech name, Description, Icon, Extra Number
         {"R_MilitarySword", "UI_ObjectNames/BuySwordfighters", {9, 7, 0}, 0},
@@ -38,10 +37,11 @@ function Lib.Promotion.Global:Initialize()
 
         Lib.Promotion.Shared:CreateTechnologies();
         Lib.Promotion.Shared:UpdateInvisibleTechnologies();
+        Lib.Promotion.Shared:InitRelatedTechnologies();
+        Lib.Promotion.Shared:OverwriteTitleTechnologyUpdate();
 
         self:OverrideKnightTitleChanged();
         self:OverwriteConsumedGoods();
-        self:InitRelatedTechnologies();
 
         -- Garbage collection
         Lib.Promotion.Local = nil;
@@ -100,24 +100,13 @@ function Lib.Promotion.Global:OverwriteConsumedGoods()
     end
 end
 
-function Lib.Promotion.Global:InitRelatedTechnologies()
-    self.TechnologiesToResearch[Technologies.R_MilitaryBow] = {
-        Technologies.R_BarracksArchers,
-        Technologies.R_BowMaker,
-    }
-    self.TechnologiesToResearch[Technologies.R_MilitarySword] = {
-        Technologies.R_Barracks,
-        Technologies.R_SwordSmith,
-    }
-end
-
 -- Unlocks technologies mapped to a technology researched by the new knight
 -- title if they are still prohibited.
 function Lib.Promotion.Global:UnlockRelatedTechnologies(_PlayerID, _TitleID)
     if NeedsAndRightsByKnightTitle[_TitleID] then
         for k,v in pairs(NeedsAndRightsByKnightTitle[_TitleID][4]) do
-            if self.TechnologiesToResearch[v] then
-                for _,Technology in pairs(self.TechnologiesToResearch[v]) do
+            if Lib.Promotion.Shared.TechnologiesToResearch[v] then
+                for _,Technology in pairs(Lib.Promotion.Shared.TechnologiesToResearch[v]) do
                     if Logic.TechnologyGetState(_PlayerID, Technology) == 0
                     or Logic.TechnologyGetState(_PlayerID, Technology) == 2 then
                         Logic.TechnologySetState(_PlayerID, Technology, 3);
@@ -139,6 +128,8 @@ function Lib.Promotion.Local:Initialize()
 
         Lib.Promotion.Shared:CreateTechnologies();
         Lib.Promotion.Shared:UpdateInvisibleTechnologies();
+        Lib.Promotion.Shared:InitRelatedTechnologies();
+        Lib.Promotion.Shared:OverwriteTitleTechnologyUpdate();
 
         self:InitTexturePositions();
         self:OverwriteUpdateRequirements();
@@ -685,6 +676,41 @@ function Lib.Promotion.Shared:UpdateInvisibleTechnologies()
     if g_GameExtraNo > 0 and Technologies.R_CallGeologist then
         TechnologiesNotShownForKnightTitle[Technologies.R_CallGeologist] = true;
     end
+end
+
+function Lib.Promotion.Shared:OverwriteTitleTechnologyUpdate()
+    CreateTechnologyKnightTitleTable = function()
+        KnightTitleNeededForTechnology = {};
+        for KnightTitle = 0, #NeedsAndRightsByKnightTitle do
+            local TechnologyTable = NeedsAndRightsByKnightTitle[KnightTitle][4];
+            if TechnologyTable ~= nil then
+                for i=1, #TechnologyTable do
+                    local TechnologyType = TechnologyTable[i];
+                    KnightTitleNeededForTechnology[TechnologyType] = KnightTitle;
+
+                    -- Set required title for the relatives of the technology
+                    local Relatives = Lib.Promotion.Shared.TechnologiesToResearch;
+                    if Relatives[TechnologyType] then
+                        for j= 1, #Relatives[TechnologyType] do
+                            RelativeType = Relatives[TechnologyType][j];
+                            KnightTitleNeededForTechnology[RelativeType] = KnightTitle;
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+function Lib.Promotion.Shared:InitRelatedTechnologies()
+    self.TechnologiesToResearch[Technologies.R_MilitaryBow] = {
+        Technologies.R_BarracksArchers,
+        Technologies.R_BowMaker,
+    };
+    self.TechnologiesToResearch[Technologies.R_MilitarySword] = {
+        Technologies.R_Barracks,
+        Technologies.R_SwordSmith,
+    };
 end
 
 function Lib.Promotion.Shared:CreateTechnologies()

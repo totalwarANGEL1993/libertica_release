@@ -24,10 +24,10 @@ end
 --- another target player. If a cart is captured, it must be sent again.
 --- Optionally, the player may be allowed to recapture the cart.
 ---
---- @param _GoodType      string Type of good
---- @param _GoodAmount    integer Amount of goods
---- @param _OtherTarget   integer Another target as contractor
---- @param _IgnoreCapture boolean Cart can be recaptured
+--- @param _GoodType       string Type of good
+--- @param _GoodAmount     integer Amount of goods
+--- @param _OtherTarget?   integer Another target as contractor
+--- @param _IgnoreCapture? boolean Cart can be recaptured
 ---
 function Goal_Deliver(_GoodType, _GoodAmount, _OtherTarget, _IgnoreCapture)
 end
@@ -41,7 +41,7 @@ end
 --- @param _Relation string Greater-Less relation
 --- @param _State    string Diplomatic status
 ---
-function Goal_Deliver(_PlayerID, _Relation, _State)
+function Goal_Diplomacy(_PlayerID, _Relation, _State)
 end
 
 ---

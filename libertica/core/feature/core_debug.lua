@@ -41,6 +41,10 @@ function Lib.Core.Debug:OnReportReceived(_ID, ...)
         if not IsLocalScript() then
             self:CallFunctionFromString(...);
         end
+    -- elseif _ID == Report.EscapePressed then
+    --     if IsLocalScript() and Framework.IsDevM() then
+    --         ToggleScriptConsole();
+    --     end
     end
 end
 
@@ -168,11 +172,7 @@ function Lib.Core.Debug:ProcessDebugShortcut(_Type, _Params)
             self:HideDebugInput();
             Framework.RestartMap();
         elseif _Type == "Terminal" then
-            if Framework.IsDevM() then
-                ShowTextInput(GUI.GetPlayerID(), true);
-            else
-                ToggleScriptConsole();
-            end
+            ShowTextInput(GUI.GetPlayerID(), true);
         end
     end
 end
@@ -326,6 +326,10 @@ function Lib.Core.Debug:ShowDebugInput()
 end
 
 function Lib.Core.Debug:HideDebugInput()
+    local ChatPath = "/InGame/Root/Normal/ChatInput";
+    if XGUIEng.IsWidgetShown(ChatPath) == 1 then
+        return;
+    end
     local MotherPath = "/InGame/TempStuff/BGTopBar/temp";
     if not self.ConsoleIsVisible then
         return;

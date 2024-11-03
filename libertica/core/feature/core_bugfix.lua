@@ -67,22 +67,19 @@ end
 -- Delivery checkpoint
 
 function Lib.Core.Bugfix:FixMerchantArrivedCheckpoints()
-    QuestTemplate.IsMerchantArrived = function(self, objective)
-        local data = objective.Data;
-        local merchantID = data[3];
-
-        if merchantID ~= nil then
-            if merchantID == 1 then
-                local newID = data[5].ID;
+    QuestTemplate.IsMerchantArrived = function(this, objective)
+        if objective.Data[3] ~= nil then
+            if objective.Data[3] == 1 then
+                local newID = objective.Data[5].ID;
                 if newID ~= nil then
-                    data[3] = newID;
+                    objective.Data[3] = newID;
                     DeleteQuestMerchantWithID(newID);
                     if MapCallback_DeliverCartSpawned then
-                        MapCallback_DeliverCartSpawned(self, newID, data[1]);
+                        MapCallback_DeliverCartSpawned(this, newID, objective.Data[1]);
                     end
                 end
-            elseif Logic.IsEntityDestroyed(merchantID) then
-                DeleteQuestMerchantWithID(merchantID);
+            elseif Logic.IsEntityDestroyed(objective.Data[3]) then
+                DeleteQuestMerchantWithID(objective.Data[3]);
                 objective.Data[3] = nil;
                 objective.Data[5].ID = nil;
             else
@@ -91,12 +88,12 @@ function Lib.Core.Bugfix:FixMerchantArrivedCheckpoints()
                         return false;
                     end
                     local x, y = Logic.GetBuildingApproachPosition(_ID)
-                    return GetDistance(merchantID, {X = x, Y = y}) < 1000;
+                    return GetDistance(objective.Data[3], {X = x, Y = y}) <= 1000;
                 end
 
-                local playerID = data[6] or self.SendingPlaye;
-                return isNearEntrance(Logic.GetStoreHouse(playerID)) or
-                       isNearEntrance(Logic.GetStoreHouse(playerID)) or
+                local playerID = objective.Data[6] or this.SendingPlayer;
+                return isNearEntrance(Logic.GetHeadquarters(playerID)) or
+                       isNearEntrance(Logic.GetMarketplace(playerID)) or
                        isNearEntrance(Logic.GetStoreHouse(playerID));
             end
         end
@@ -126,7 +123,8 @@ function Lib.Core.Bugfix:FixInteractiveObjectClicked()
         local canNotBuyString = XGUIEng.GetStringTableText("Feedback_TextLines/TextLine_NotEnough_Resources");
 
         local isAffordable = function(costType, amount)
-            if Logic.GetGoodCategoryForGoodType(costType) ~= GoodCategories.GC_Resource then
+            if  Logic.GetGoodCategoryForGoodType(costType) ~= GoodCategories.GC_Resource
+            and Logic.GetGoodCategoryForGoodType(costType) ~= GoodCategories.GC_Gold then
                 error("Only resources can be used as costs for objects!");
                 return false;
             end
@@ -235,40 +233,25 @@ end
 -- -------------------------------------------------------------------------- --
 -- House menu
 
-if EntityCategories then
-    Lib.Core.Bugfix.HouseMenuWidgetToCategory = {
-        ["B_Castle_ME"]     = EntityCategories.Headquarters,
-        ["B_Cathedral"]     = EntityCategories.Cathedrals,
-        ["B_Cathedral_Big"] = EntityCategories.Cathedrals,
-        ["B_Outpost_ME"]    = EntityCategories.Outpost,
-    };
-end
-
 function Lib.Core.Bugfix:FixClimateZoneForHouseMenu()
     HouseMenuGetNextBuildingID = function(WidgetName)
         local playerID = GUI.GetPlayerID();
-        local category = Lib.Core.Bugfix.HouseMenuWidgetToCategory[WidgetName];
-        local buildingsList;
+        local buildingsList = {Logic.GetBuildingsByPlayer(playerID)};
 
         WidgetName = GetClimateEntityName(WidgetName);
+        local TrimedWidgetName = string.gsub(WidgetName, "_%w%w?%w?$", "");
         if HouseMenu.Widget.CurrentBuilding ~= WidgetName then
             HouseMenu.Widget.CurrentBuilding = WidgetName;
             HouseMenu.Widget.CurrentBuildingNumber = 0;
         end
 
-        if category then
-            buildingsList = {Logic.GetPlayerEntitiesInCategory(playerID, category)};
-        else
-            buildingsList = {Logic.GetBuildingsByPlayer(playerID)};
-        end
-
         local foundNumber = 0;
         local higherBuildingFound = false;
-
         for i = 1, #buildingsList do
             local entityType = Logic.GetEntityType(buildingsList[i]);
             local entityName = Logic.GetEntityTypeName(entityType);
-            if category or entityName == WidgetName then
+            local trimedEntityName = string.gsub(entityName, "_%w%w?%w?$", "");
+            if trimedEntityName == TrimedWidgetName then
                 foundNumber = i;
                 if foundNumber > HouseMenu.Widget.CurrentBuildingNumber then
                     HouseMenu.Widget.CurrentBuildingNumber = foundNumber;
@@ -278,18 +261,20 @@ function Lib.Core.Bugfix:FixClimateZoneForHouseMenu()
             end
         end
 
-        if foundNumber ~= 0 and not higherBuildingFound then
+        if foundNumber == 0 then
+            return nil;
+        end
+        if not higherBuildingFound then
             for i = 1, #buildingsList do
                 local entityType = Logic.GetEntityType(buildingsList[i]);
                 local entityName = Logic.GetEntityTypeName(entityType);
-                if category or entityName == WidgetName then
+                if entityName == WidgetName then
                     HouseMenu.Widget.CurrentBuildingNumber = i;
                     break;
                 end
             end
-            return buildingsList[HouseMenu.Widget.CurrentBuildingNumber];
         end
-        return nil;
+        return buildingsList[HouseMenu.Widget.CurrentBuildingNumber];
     end
 
     HouseMenuSetIconsPart = function(_Part, _HighlightBool)
@@ -299,22 +284,17 @@ function Lib.Core.Bugfix:FixClimateZoneForHouseMenu()
 
         for i = 1, #houseMenuButtons do
             local widgetName = XGUIEng.GetWidgetNameByID(houseMenuButtons[i]);
-            local category = Lib.Core.Bugfix.HouseMenuWidgetToCategory[widgetName];
+            local trimedWidgetName = string.gsub(widgetName, "_%w%w?%w?$", "");
             local button = _Part .. "/" .. widgetName .. "/Button";
-            local climateWidgetName = GetClimateEntityName(widgetName);
             SetIcon(button, g_TexturePositions.Entities[Entities[widgetName]]);
 
             local count = 0;
-            if category then
-                buildings = {Logic.GetPlayerEntitiesInCategory(playerID, category)};
-                count = #buildings;
-            else
-                for j = 1, #buildings do
-                    local entityType = Logic.GetEntityType(buildings[j]);
-					local entityName = Logic.GetEntityTypeName(entityType);
-                    if entityName == climateWidgetName then
-                        count = count + 1;
-                    end
+            for j = 1, #buildings do
+                local entityType = Logic.GetEntityType(buildings[j]);
+                local entityName = Logic.GetEntityTypeName(entityType);
+                local trimedEntityName = string.gsub(entityName, "_%w%w?%w?$", "");
+                if trimedWidgetName == trimedEntityName then
+                    count = count + 1;
                 end
             end
 

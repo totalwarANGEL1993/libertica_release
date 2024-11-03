@@ -1,11 +1,5 @@
 --- Offers tools for different modifications of the 2D interface.
 ---
---- The following player related can be changed:
---- * Player color
---- * Player name
---- * Player portrait
---- * Territory name
----
 --- The following menu related can be changed:
 --- * Show/Hide minimap
 --- * Show/Hide toggle minimap
@@ -157,55 +151,6 @@ API.RemoveShortcutDescription = RemoveShortcutDescription;
 function SpeedLimitActivate(_Flag)
 end
 API.SpeedLimitActivate = SpeedLimitActivate;
-
---- Returns the name of the territory.
---- @param _TerritoryID number ID of territory
---- @return string Name Name of territory
-function GetTerritoryName(_TerritoryID)
-    return "";
-end
-API.GetTerritoryName = GetTerritoryName;
-
---- Returns the name of the player.
---- @param _PlayerID number ID of player
---- @return string Name Name of player
-function GetPlayerName(_PlayerID)
-    return "";
-end
-API.GetPlayerName = GetPlayerName;
-
----Changes the name of a player.
----@param _PlayerID number ID of player
----@param _Name string Player name
-function SetPlayerName(_PlayerID, _Name)
-end
-API.SetPlayerName = SetPlayerName;
-
---- Changes the color of a player.
---- @param _PlayerID number ID of player
---- @param _Color any Name or ID of color
---- @param _Logo? number ID of logo
---- @param _Pattern? number ID of pattern
-function SetPlayerColor(_PlayerID, _Color, _Logo, _Pattern)
-end
-API.SetPlayerColor = SetPlayerColor;
-
---- Changes the portrait of a player.
----
---- #### Examples
---- ```lua
---- -- Example #1: Set model by player hero
---- SetPlayerPortrait(2);
---- -- Example #2: Set model by type of entity
---- SetPlayerPortrait(2, "amma");
---- -- Example #3: Set model name directly
---- SetPlayerPortrait(2, "H_NPC_Monk_AS");
---- ```
---- @param _PlayerID number  ID of player
---- @param _Portrait? string Name of model
-function SetPlayerPortrait(_PlayerID, _Portrait)
-end
-API.SetPlayerPortrait = SetPlayerPortrait;
 
 
 --- A human player has placed a building.

@@ -656,14 +656,15 @@ function B_Goal_DestroySoldiers:CustomFunction(_Quest)
             _Quest
         );
     end
-    local Kills = 0;
-    if Lib.QuestBehavior then
-        Kills = Lib.QuestBehavior.Global:GetEnemySoldierKillsOfPlayer(
-            self.AttackingPlayer,
-            self.AttackedPlayer
-        );
+
+    local KillsCurrent = GetEnemySoldierKillsOfPlayer(
+        self.AttackingPlayer,
+        self.AttackedPlayer
+    );
+    if not self.KillstStart then
+        self.KillstStart = KillsCurrent;
     end
-    if self.KillsNeeded <= Kills then
+    if self.KillsNeeded <= KillsCurrent - self.KillstStart then
         return true;
     end
 end
@@ -679,6 +680,10 @@ function B_Goal_DestroySoldiers:Debug(_Quest)
         error(_Quest.Identifier.. ": " ..self.Name .. ": Amount negative")
         return true
     end
+end
+
+function B_Goal_DestroySoldiers:Reset()
+    self.KillstStart = nil;
 end
 
 function B_Goal_DestroySoldiers:GetIcon()

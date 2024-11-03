@@ -6,7 +6,6 @@ Lib.UITools.Local = {};
 CONST_PLAYER_NAMES = {};
 
 Lib.Require("core/Core");
-Lib.Require("module/ui/UITools_Player");
 Lib.Require("module/ui/UITools_Shortcut");
 Lib.Require("module/ui/UITools_Widget");
 Lib.Require("module/ui/UITools_Speed");
@@ -27,7 +26,6 @@ function Lib.UITools.Global:Initialize()
 
         -- Garbage collection
         Lib.UITools.Local = nil;
-        Lib.UITools.Player = nil;
         Lib.UITools.Shortcut = nil;
         Lib.UITools.Speed = nil;
         Lib.UITools.Widget = nil;
