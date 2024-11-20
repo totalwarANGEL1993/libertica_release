@@ -153,10 +153,18 @@ function SpeedLimitActivate(_Flag)
     if IsLocalScript() or Framework.IsNetworkGame() then
         return;
     end
-    return ExecuteLocal(
+    ExecuteLocal(
         "Lib.UITools.Speed:ActivateSpeedLimit(%s)",
         tostring(_Flag)
     );
 end
 API.SpeedLimitActivate = SpeedLimitActivate;
+
+function SpeedLimitSetLimit(_Limit)
+    if IsLocalScript() or Framework.IsNetworkGame() then
+        return;
+    end
+    ExecuteLocal("Lib.UITools.Speed:SetSpeedLimit(%f)",_Limit);
+end
+API.SpeedLimitSetLimit = SpeedLimitSetLimit;
 

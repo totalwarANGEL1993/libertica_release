@@ -18,7 +18,8 @@ Lib.CutsceneSystem = Lib.CutsceneSystem or {};
 --- * `EnableGlobalImmortality` - Während der Zwischensequenz sind alle Entitäten unverwundbar        
 --- * `EnableSky`               - Anzeigen des Himmels während der Zwischensequenz                   
 --- * `EnableFoW`               - Anzeigen des Nebels des Krieges während der Zwischensequenz           
---- * `EnableBorderPins`        - Anzeigen der Grenzstifte während der Zwischensequenz 
+--- * `EnableBorderPins`        - Anzeigen der Grenzstifte während der Zwischensequenz
+--- * `HideNotes`               - Nachrichten nicht anzeigen
 ---
 --- #### Beispiel
 ---

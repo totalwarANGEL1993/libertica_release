@@ -25,6 +25,9 @@ function StartDialog(_Dialog, _Name, _PlayerID)
     if _Dialog.EnableFoW == nil then
         _Dialog.EnableFoW = false;
     end
+    if _Dialog.HideNotes == nil then
+        _Dialog.HideNotes = false;
+    end
     if _Dialog.EnableGlobalImmortality == nil then
         _Dialog.EnableGlobalImmortality = true;
     end

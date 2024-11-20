@@ -21,6 +21,7 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- * `EnableFoW`               - Displays the fog of war during the briefing           
 --- * `EnableBorderPins`        - Displays the border pins during the briefing          
 --- * `PreloadAssets`           - Allows to use a wide vision area in briefings
+--- * `HideNotes`               - Do not show notes
 ---
 --- *-> Example #1*
 ---
