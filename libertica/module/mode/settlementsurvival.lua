@@ -46,13 +46,13 @@ Lib.SettlementSurvival.Local  = {
 Lib.SettlementSurvival.Shared = {
     AnimalPlague = {
         InfectionChance = 4,
-        InfectionTimer = 60,
-        DeathChance = 12,
-        DeathTimer = 30,
+        InfectionTimer = 90,
+        DeathChance = 9,
+        DeathTimer = 90,
     },
     ColdWeather = {
         ConsumptionFactor = 0.01,
-        ConsumptionTimer = 30,
+        ConsumptionTimer = 90,
         Temperature = 5,
         InfectionChance = 12,
     },
@@ -411,15 +411,24 @@ function Lib.SettlementSurvival.Global:ControlBuildingsDuringColdWeather(_Turn)
                     end
                     -- Subtract firewood
                     local WoodCost = Lib.SettlementSurvival.Shared.ColdWeather.ConsumptionFactor * EmployedSettlers;
+                    local WoodCostPayed = 0;
                     local WoodAmount = GetPlayerResources(Goods.G_Wood, PlayerID);
                     self.ColdWeather[PlayerID].Consumption = self.ColdWeather[PlayerID].Consumption + WoodCost;
                     if self.ColdWeather[PlayerID].Consumption > 1 then
-                        local WoodCostFloored = math.floor(WoodCost);
+                        local WoodCostFloored = math.floor(self.ColdWeather[PlayerID].Consumption);
                         AddGood(Goods.G_Wood, (-1) * math.min(WoodCostFloored, WoodAmount), PlayerID);
                         self.ColdWeather[PlayerID].Consumption = self.ColdWeather[PlayerID].Consumption - WoodCostFloored;
+                        WoodCostPayed = WoodCostFloored;
+                        ExecuteLocal(
+                            [[if GUI.GetPlayerID() == %d then
+                                  GUI_FeedbackWidgets.GoldAdd(%d, nil, {14, 5, 0}, {1, 9, 0})
+                              end]],
+                            PlayerID,
+                            (-1) * WoodCostFloored
+                        );
                     end
                     -- Enforce punishment
-                    if WoodCost > WoodAmount then
+                    if WoodCostPayed > WoodAmount then
                         local InfectionChance = Lib.SettlementSurvival.Shared.ColdWeather.InfectionChance;
                         for i= 1, #BuildingList do
                             if math.random(1, 100) <= InfectionChance then
