@@ -18,9 +18,10 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- * `RestoreGameSpeed`        - Spielgeschwindigkeit wird am Ende der Einleitung gespeichert und wiederhergestellt      
 --- * `EnableGlobalImmortality` - Während Einleitungen sind alle Entitäten unverwundbar        
 --- * `EnableSky`               - Zeigt den Himmel während der Einleitung an                   
---- * `EnableFoW`               - Zeigt den Nebel des Krieges während der Einleitung an           
+--- * `EnableFoW`               - Zeigt den Nebel des Krieges während der Einleitung an 
 --- * `EnableBorderPins`        - Zeigt die Randnadeln während der Einleitung an     
---- * `PreloadAssets`           - Erlaubt weites Sichtfeld in Briefings     
+--- * `PreloadAssets`           - Erlaubt weites Sichtfeld in Briefings
+--- * `HideNotes`               - Nachrichten nicht anzeigen
 ---
 --- *-> Beispiel #1*
 ---

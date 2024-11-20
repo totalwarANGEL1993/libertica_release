@@ -4,7 +4,7 @@ Lib.Core.Text = {}
 
 --- Lokalisiert den übergebenen Text oder die Tabelle.
 --- @param _Text any Text zur Lokalisierung
---- @return string Lokalisierter Text
+--- @return any Lokalisierter Text
 function Localize(_Text)
     return "";
 end

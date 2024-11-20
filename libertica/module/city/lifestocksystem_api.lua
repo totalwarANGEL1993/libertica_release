@@ -68,7 +68,7 @@ API.RequireTitleToBreedCattle = RequireTitleToBreedCattle;
 function RequireTitleToBreedSheep(_Title)
     assert(not IsLocalScript(), "Can not be used in local script!");
     ExecuteLocal([[
-        table.insert(NeedsAndRightsByKnightTitle[%d][4], 1, Technologies.R_Cattle)
+        table.insert(NeedsAndRightsByKnightTitle[%d][4], 1, Technologies.R_Sheep)
         CreateTechnologyKnightTitleTable()
     ]], _Title);
     table.insert(NeedsAndRightsByKnightTitle[_Title][4], 1, Technologies.R_Sheep);

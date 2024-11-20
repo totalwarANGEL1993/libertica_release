@@ -285,6 +285,7 @@ function Lib.BriefingSystem.Global:StartBriefing(_Name, _PlayerID, _Data)
 end
 
 function Lib.BriefingSystem.Global:EndBriefing(_PlayerID)
+    collectgarbage("collect");
     Logic.SetGlobalInvulnerability(0);
     local Briefing = self.Briefing[_PlayerID];
     SendReport(Report.BriefingEnded, _PlayerID, Briefing.Name);
@@ -550,8 +551,6 @@ function Lib.BriefingSystem.Local:OnReportReceived(_ID, ...)
         self:EndBriefing(arg[1], arg[2]);
     elseif _ID == Report.BriefingPageShown then
         self:DisplayPage(arg[1], arg[2]);
-    elseif _ID == Report.BriefingSkipButtonPressed then
-        self:SkipButtonPressed(arg[1]);
     end
 end
 
@@ -590,6 +589,7 @@ function Lib.BriefingSystem.Local:StartBriefing(_PlayerID, _BriefingName, _Brief
 end
 
 function Lib.BriefingSystem.Local:EndBriefing(_PlayerID, _BriefingName)
+    collectgarbage("collect");
     if GUI.GetPlayerID() ~= _PlayerID then
         return;
     end
@@ -670,10 +670,8 @@ function Lib.BriefingSystem.Local:SetPerformanceMode()
     Display.SetUserOptionReflections(0);
     Display.SetUserOptionTerrainQuality(0);
     Display.SetRenderObjectsAlphaBlendPass(0);
-    Display.SetRenderParticles(0);
     Display.SetRenderUseBatching(0);
     Display.SetRenderUpdateMorphAnim(0);
-    Display.SetRenderUpdateParticles(0);
     Display.SetEffectOption("DoNotUseRimLight", 1);
     Display.SetEffectOption("SimpleWater", 1);
 end
@@ -688,10 +686,8 @@ function Lib.BriefingSystem.Local:SetQualityMode()
     Display.SetUserOptionReflections(ReflectionQuality);
     Display.SetUserOptionTerrainQuality(TerrainQuality);
     Display.SetRenderObjectsAlphaBlendPass(1);
-    Display.SetRenderParticles(1);
     Display.SetRenderUseBatching(1);
     Display.SetRenderUpdateMorphAnim(1);
-    Display.SetRenderUpdateParticles(1);
     Display.SetEffectOption("DoNotUseRimLight", 0);
     Display.SetEffectOption("SimpleWater", 0);
 end
@@ -1160,12 +1156,15 @@ function Lib.BriefingSystem.Local:GetCameraProperties(_PlayerID, _FOV)
     return lookAtX, lookAtY, lookAtZ, positionX, positionY, positionZ, _FOV;
 end
 
-function Lib.BriefingSystem.Local:SkipButtonPressed(_PlayerID, _Page)
+function Lib.BriefingSystem.Local:SkipButtonPressed(_PlayerID)
     if not self.Briefing[_PlayerID] then
         return;
     end
     if (self.Briefing[_PlayerID].LastSkipButtonPressed + 500) < Logic.GetTimeMs() then
         self.Briefing[_PlayerID].LastSkipButtonPressed = Logic.GetTimeMs();
+
+        SendReportToGlobal(Report.BriefingSkipButtonPressed, _PlayerID);
+        SendReport(Report.BriefingSkipButtonPressed, _PlayerID);
     end
 end
 
@@ -1199,7 +1198,6 @@ function Lib.BriefingSystem.Local:OverrideThroneRoomFunctions()
     GameCallback_Camera_ThroneRoomLeftClick = function(_PlayerID)
         Lib.BriefingSystem.Local.Orig_GameCallback_Camera_ThroneRoomLeftClick(_PlayerID);
         if _PlayerID == GUI.GetPlayerID() then
-            -- Must trigger in global script for all players.
             SendReportToGlobal(Report.BriefingLeftClick, _PlayerID);
             SendReport(Report.BriefingLeftClick, _PlayerID);
         end
@@ -1209,9 +1207,7 @@ function Lib.BriefingSystem.Local:OverrideThroneRoomFunctions()
     GameCallback_Camera_SkipButtonPressed = function(_PlayerID)
         Lib.BriefingSystem.Local.Orig_GameCallback_Camera_SkipButtonPressed(_PlayerID);
         if _PlayerID == GUI.GetPlayerID() then
-            -- Must trigger in global script for all players.
-            SendReportToGlobal(Report.BriefingSkipButtonPressed, _PlayerID);
-            SendReport(Report.BriefingSkipButtonPressed, _PlayerID);
+            Lib.BriefingSystem.Local:SkipButtonPressed(_PlayerID);
         end
     end
 
@@ -1273,21 +1269,19 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
 
     -- Throneroom Main
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 1);
-    XGUIEng.PushPage("/InGame/ThroneRoom/KnightInfo", false);
     XGUIEng.PushPage("/InGame/ThroneRoomBars", false);
     XGUIEng.PushPage("/InGame/ThroneRoomBars_2", false);
     XGUIEng.PushPage("/InGame/ThroneRoom/Main", false);
     XGUIEng.PushPage("/InGame/ThroneRoomBars_Dodge", false);
     XGUIEng.PushPage("/InGame/ThroneRoomBars_2_Dodge", false);
-    XGUIEng.PushPage("/InGame/ThroneRoom/KnightInfo/LeftFrame", false);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/Skip", 1);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/StartButton", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogTopChooseKnight", 1);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogTopChooseKnight/Frame", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogTopChooseKnight/DialogBG", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogTopChooseKnight/FrameEdges", 0);
-    XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogBottomRight3pcs", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/KnightInfoButton", 0);
+    XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogBottomRight3pcs", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/BackButton", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/Briefing", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/TitleContainer", 0);
@@ -1306,12 +1300,9 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     XGUIEng.SetWidgetScreenPosition("/InGame/ThroneRoom/Main/DialogTopChooseKnight/ChooseYourKnight", x, 65 * (ScreenY/1080));
     XGUIEng.SetWidgetPositionAndSize("/InGame/ThroneRoom/KnightInfo/Objectives", 2, 0, 2000, 20);
 
-    -- Briefing messages
-    XGUIEng.ShowAllSubWidgets("/InGame/ThroneRoom/KnightInfo", 0);
-    XGUIEng.ShowWidget("/InGame/ThroneRoom/KnightInfo/Text", 1);
-    XGUIEng.ShowWidget("/InGame/ThroneRoom/KnightInfo/BG", 0);
-    XGUIEng.SetText("/InGame/ThroneRoom/KnightInfo/Text", " ");
-    XGUIEng.SetWidgetPositionAndSize("/InGame/ThroneRoom/KnightInfo/Text", 200, 300, 1000, 10);
+    if self.Briefing[_PlayerID].HideNotes then
+        XGUIEng.ShowWidget("/InGame/Root/Normal/NotesWindow", 0);
+    end
 
     self.SelectionBackup = {GUI.GetSelectedEntities()};
     GUI.ClearSelection();
@@ -1397,13 +1388,15 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     XGUIEng.PopPage();
     XGUIEng.PopPage();
     XGUIEng.PopPage();
-    XGUIEng.PopPage();
-    XGUIEng.PopPage();
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_2", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_Dodge", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_2_Dodge", 0);
+
+    if self.Briefing[_PlayerID].HideNotes then
+        XGUIEng.ShowWidget("/InGame/Root/Normal/NotesWindow", 1);
+    end
 
     ResetRenderDistance();
     self:SetQualityMode();

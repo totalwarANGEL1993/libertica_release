@@ -53,7 +53,7 @@ function warn(_Condition, _Text, ...)
         if GUI then
             GUI.AddNote(Text);
         else
-            Logic.DEBUG_Addnote(Text);
+            Logic.DEBUG_AddNote(Text);
         end
         return Text;
     end
@@ -62,7 +62,7 @@ end
 function error(_Condition, _Text, ...)
     if not _Condition then
         local Text = log(_Text, unpack(arg));
-        return assert(_Condition, Text);
+        return assert(false, Text);
     end
 end
 
@@ -72,7 +72,7 @@ function debug(_Condition, _Text, ...)
         if GUI then
             GUI.AddNote(Text);
         else
-            Logic.DEBUG_Addnote(Text);
+            Logic.DEBUG_AddNote(Text);
         end
     end
 end
@@ -381,10 +381,10 @@ end
 
 function Lib.Core.Local:ExecuteGlobal(_Command, ...)
     local CommandString = _Command;
-    assert(
-        not (IsHistoryEdition() and IsMultiplayer()),
-        "Script command is not allowed in history edition multiplayer."
-    );
+    if IsHistoryEdition() and IsMultiplayer() then
+        warn(false, "Script command is not allowed in history edition multiplayer.");
+        return;
+    end
     if arg and #arg > 0 then
         CommandString = CommandString:format(unpack(arg));
     end

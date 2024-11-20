@@ -9,8 +9,8 @@ Lib.Camera.Local  = {
     ExtendedZoomAllowed = true,
 
     CameraExtendedZoom = {
-        [1] = {0.870001, 0.870000, 0.099999},
-        [2] = {0.870001, 0.870000, 0.099999},
+        [1] = {0.650001, 0.650000, 0.099999},
+        [2] = {0.650001, 0.650000, 0.099999},
     },
     CameraNormalZoom = {
         [1] = {0.50001, 0.50000, 0.099999},
@@ -21,6 +21,7 @@ Lib.Camera.Local  = {
 CONST_FARCLIPPLANE = 45000;
 CONST_FARCLIPPLANE_DEFAULT = 0;
 
+Lib.Require("comfort/GetPosition");
 Lib.Require("core/Core");
 Lib.Require("module/settings/Camera_API");
 Lib.Require("module/settings/Camera_Text");
@@ -86,8 +87,6 @@ function Lib.Camera.Local:Initialize()
         Report.ExtendedZoomActivated = CreateReport("Event_ExtendedZoomActivated");
 
         self:ResetRenderDistance();
-        self:DescribeExtendedZoomShortcut();
-        self:InitExtendedZoomHotkey();
 
         -- Garbage collection
         Lib.Camera.Global = nil;
@@ -107,7 +106,6 @@ function Lib.Camera.Local:OnReportReceived(_ID, ...)
         if self.ExtendedZoomActive then
             self:ActivateExtendedZoom(GUI.GetPlayerID());
         end
-        self:InitExtendedZoomHotkey();
         self:ResetRenderDistance();
     end
 end
@@ -161,31 +159,6 @@ function Lib.Camera.Local:SetCameraToEntity(_Entity, _Rotation, _ZoomFactor)
     Camera.RTS_SetZoomFactor(zoomFactor);
 end
 
-function Lib.Camera.Local:DescribeExtendedZoomShortcut()
-    self:RemoveExtendedZoomShortcut();
-    if self.ExtendedZoomHotKeyID == 0 then
-        self.ExtendedZoomHotKeyID = AddShortcutDescription(
-            Localize(Lib.Camera.Text.Shortcut.Hotkey),
-            Localize(Lib.Camera.Text.Shortcut.Description)
-        );
-    end
-end
-
-function Lib.Camera.Local:RemoveExtendedZoomShortcut()
-    if self.ExtendedZoomHotKeyID ~= 0 then
-        RemoveShortcutDescription(self.ExtendedZoomHotKeyID);
-        self.ExtendedZoomHotKeyID = 0;
-    end
-end
-
-function Lib.Camera.Local:InitExtendedZoomHotkey()
-    Input.KeyBindDown(
-        Keys.ModifierControl + Keys.ModifierShift + Keys.K,
-        "Lib.Camera.Local:ToggleExtendedZoom(GUI.GetPlayerID())",
-        2
-    );
-end
-
 function Lib.Camera.Local:ToggleExtendedZoom(_PlayerID)
     if self.ExtendedZoomAllowed then
         if self.ExtendedZoomActive then
@@ -197,7 +170,7 @@ function Lib.Camera.Local:ToggleExtendedZoom(_PlayerID)
 end
 
 function Lib.Camera.Local:ActivateExtendedZoom(_PlayerID)
-    if _PlayerID~= -1 and _PlayerID ~= GUI.GetPlayerID() then
+    if _PlayerID ~= -1 and _PlayerID ~= GUI.GetPlayerID() then
         return;
     end
     if not self.ExtendedZoomActive then
@@ -211,7 +184,7 @@ function Lib.Camera.Local:ActivateExtendedZoom(_PlayerID)
 end
 
 function Lib.Camera.Local:DeactivateExtendedZoom(_PlayerID)
-    if _PlayerID~= -1 and _PlayerID ~= GUI.GetPlayerID() then
+    if _PlayerID ~= -1 and _PlayerID ~= GUI.GetPlayerID() then
         return;
     end
     if self.ExtendedZoomActive then

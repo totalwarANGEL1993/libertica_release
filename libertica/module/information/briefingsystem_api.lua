@@ -25,6 +25,9 @@ function StartBriefing(_Briefing, _Name, _PlayerID)
     if _Briefing.EnableFoW == nil then
         _Briefing.EnableFoW = false;
     end
+    if _Briefing.HideNotes == nil then
+        _Briefing.HideNotes = false;
+    end
     if _Briefing.EnableGlobalImmortality == nil then
         _Briefing.EnableGlobalImmortality = true;
     end
