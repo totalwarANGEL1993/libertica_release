@@ -98,6 +98,7 @@ function Lib.Core.Save:SetupQuicksaveKeyCallback()
         end
 
         self.Orig_GUI_Window_MainMenuSaveClicked = GUI_Window.MainMenuSaveClicked;
+        --- @diagnostic disable-next-line: duplicate-set-field
         GUI_Window.MainMenuSaveClicked = function()
             -- Close script console
             if IsScriptConsoleShown() then
@@ -108,6 +109,7 @@ function Lib.Core.Save:SetupQuicksaveKeyCallback()
         end
 
         self.Orig_GUI_Window_MainMenuExit = GUI_Window.MainMenuExit;
+        --- @diagnostic disable-next-line: duplicate-set-field
         GUI_Window.MainMenuExit = function()
             -- Close script console
             if IsScriptConsoleShown() then
@@ -120,11 +122,15 @@ function Lib.Core.Save:SetupQuicksaveKeyCallback()
 end
 
 function Lib.Core.Save:DisableSaving(_Flag)
-    self.SavingDisabled = _Flag == true;
-    if not IsLocalScript() then
-        ExecuteLocal([[Lib.Core.Save:DisableSaving(%s)]],tostring(_Flag));
-    else
-        self:UpdateSaveButtons();
+    local Flag = _Flag == true;
+    if not Framework.IsNetworkGame() then
+        self.SavingDisabled = Flag;
+        if not IsLocalScript() then
+            ExecuteLocal([[Lib.Core.Save:DisableSaving(%s)]], tostring(Flag));
+        else
+            ExecuteGlobal([[Lib.Core.Save.SavingDisabled = %s]], tostring(Flag));
+            self:UpdateSaveButtons();
+        end
     end
 end
 
@@ -137,11 +143,15 @@ function Lib.Core.Save:UpdateSaveButtons()
 end
 
 function Lib.Core.Save:DisableLoading(_Flag)
-    self.LoadingDisabled = _Flag == true;
-    if not IsLocalScript() then
-        ExecuteLocal([[Lib.Core.Save:DisableLoading(%s)]],tostring(_Flag));
-    else
-        self:UpdateLoadButtons();
+    local Flag = _Flag == true;
+    if not Framework.IsNetworkGame() then
+        self.LoadingDisabled = Flag;
+        if not IsLocalScript() then
+            ExecuteLocal([[Lib.Core.Save:DisableLoading(%s)]],tostring(_Flag));
+        else
+            ExecuteGlobal([[Lib.Core.Save.LoadingDisabled = %s]],tostring(_Flag));
+            self:UpdateLoadButtons();
+        end
     end
 end
 

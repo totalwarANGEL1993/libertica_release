@@ -106,6 +106,7 @@ function Lib.Warehouse.Global:CreateWarehouse(_Data)
     local Warehouse = {
         ScriptName      = _Data.ScriptName,
         BuildingName    = _Data.ScriptName.. "_Post",
+        Spawnpoint      = _Data.ScriptName.. "_Spawn",
         Costs           = _Data.Costs,
         Offers          = {};
     }
@@ -278,15 +279,26 @@ end
 function Lib.Warehouse.Global:PerformTrade(_PlayerID, _ScriptName, _Inflation, _OfferIndex, _OfferGood, _GoodAmount, _PaymentGood, _BasePrice)
     local BuildingID = GetID(_ScriptName.. "_Post");
     local Amount = _GoodAmount or 1;
+    -- Get spawn position
+    local SpawnPoint = _ScriptName.. "_Spawn";
+    if not IsExisting(SpawnPoint) then
+        SpawnPoint = _ScriptName.. "_Post";
+    end
+    local SpawnPointID = GetID(SpawnPoint);
+    local x,y,z = Logic.EntityGetPos(SpawnPointID);
+    if Logic.IsBuilding(SpawnPointID) == 1 then
+        x,y = Logic.GetBuildingApproachPosition(SpawnPointID);
+    end
     -- Send good type
     if KeyOf(_OfferGood, Goods) ~= nil then
-        SendCart(_ScriptName.. "_Post", _PlayerID, _OfferGood, Amount);
+        SendCart(SpawnPoint, _PlayerID, _OfferGood, Amount);
     -- Create units
     elseif KeyOf(_OfferGood, Entities) ~= nil then
-        if Logic.IsEntityTypeInCategory(_OfferGood, EntityCategories.Military) == 1 then
-            local x,y = Logic.GetBuildingApproachPosition(GetID(_ScriptName.. "_Post"));
-            local Orientation = Logic.GetEntityOrientation(GetID(_ScriptName.. "_Post")) - 90;
+        if  Logic.IsEntityTypeInCategory(_OfferGood, EntityCategories.HeavyWeapon) == 0
+        and Logic.IsEntityTypeInCategory(_OfferGood, EntityCategories.Military) == 1 then
+            local Orientation = Logic.GetEntityOrientation(SpawnPointID) - 90;
             local ID  = Logic.CreateBattalionOnUnblockedLand(_OfferGood, x, y, Orientation, _PlayerID);
+            x,y = Logic.GetBuildingApproachPosition(BuildingID);
             Logic.MoveSettler(ID, x, y, -1);
         else
             if Logic.IsEntityTypeInCategory(_OfferGood, EntityCategories.CattlePasture) == 1
@@ -294,7 +306,15 @@ function Lib.Warehouse.Global:PerformTrade(_PlayerID, _ScriptName, _Inflation, _
                 Amount = 5;
             end
             for i= 1, Amount do
-                ExecuteLocal([[GUI.CreateEntityAtBuilding(%d, %d, 0)]], BuildingID, _OfferGood);
+                local ID = Logic.CreateEntityOnUnblockedLand(
+                    _OfferGood,
+                    math.random(x -200, x +200),
+                    math.random(y -200, y +200),
+                    Logic.GetEntityOrientation(SpawnPointID) - 90,
+                    _PlayerID
+                );
+                x,y = Logic.GetBuildingApproachPosition(BuildingID);
+                Logic.MoveSettler(ID, x, y, -1);
             end
         end
     end

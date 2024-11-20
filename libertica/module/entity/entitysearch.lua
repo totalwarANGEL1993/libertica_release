@@ -12,6 +12,7 @@ Lib.EntitySearch.Shared  = {
     },
 };
 
+Lib.Require("comfort/GetPosition");
 Lib.Require("comfort/GetDistance");
 Lib.Require("core/Core");
 Lib.Require("module/entity/EntitySearch_API");

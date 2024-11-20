@@ -243,7 +243,7 @@ end
 
 function Lib.Core.Text:GetLetterSize(_Byte)
     for Size, Letters in pairs(self.Letters) do
-        if string.find(Letters, _Byte) then
+        if string.find(Letters, _Byte, nil, true) then
             return Size;
         end
     end

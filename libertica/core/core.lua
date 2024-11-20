@@ -381,10 +381,10 @@ end
 
 function Lib.Core.Local:ExecuteGlobal(_Command, ...)
     local CommandString = _Command;
-    assert(
-        not (IsHistoryEdition() and IsMultiplayer()),
-        "Script command is not allowed in history edition multiplayer."
-    );
+    if IsHistoryEdition() and IsMultiplayer() then
+        warn(false, "Script command is not allowed in history edition multiplayer.");
+        return;
+    end
     if arg and #arg > 0 then
         CommandString = CommandString:format(unpack(arg));
     end

@@ -1,15 +1,15 @@
 Lib.Register("comfort/GetSiegeengineTypeByCartType");
 
-if Entities then
-    CONST_CART_TO_ENGINE = {
-        [Entities.U_BatteringRamCart] = Entities.U_MilitaryBatteringRam,
-        [Entities.U_CatapultCart] = Entities.U_MilitaryCatapult,
-        [Entities.U_SiegeTowerCart] = Entities.U_MilitarySiegeTower,
-        -- TODO: Add CP types
-    };
-end
+CONST_CART_TO_ENGINE = {
+    ["U_BatteringRamCart"] = "U_MilitaryBatteringRam",
+    ["U_CatapultCart"] = "U_MilitaryCatapult",
+    ["U_SiegeTowerCart"] = "U_MilitarySiegeTower",
+    -- TODO: Add CP types
+};
 
 function GetSiegeengineTypeByCartType(_Type)
-    return CONST_CART_TO_ENGINE[_Type];
+    local CartType = Logic.GetEntityTypeName(_Type);
+    local EngineType = CONST_CART_TO_ENGINE[CartType];
+    return Entities[EngineType] or 0;
 end
 
