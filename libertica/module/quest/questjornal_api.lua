@@ -98,7 +98,3 @@ function RemoveJournalEntryFromQuest(_ID, _Quest)
     end
 end
 
-function GetEnemySoldierKillsOfPlayer(_PlayerID1, _PlayerID2)
-    return Lib.QuestBehavior.Global:GetEnemySoldierKillsOfPlayer(_PlayerID1, _PlayerID2);
-end
-

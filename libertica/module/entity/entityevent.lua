@@ -35,7 +35,8 @@ Lib.EntityEvent.Global = {
 
     -- Those are "fluctuating" spawner entities that are keep appearing
     -- and disappearing depending of if they have resources spawned. They
-    -- change their ID every time they do it. So scriptnames are a nono.
+    -- will be created anew each time the resource respanws without their
+    -- old script name. So scriptnames are a nono.
     DynamicSpawnerTypes = {
         "S_AxisDeer_AS",
         "S_Deer_ME",

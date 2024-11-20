@@ -1,29 +1,34 @@
 Lib.SettlementSurvival = Lib.SettlementSurvival or {};
 Lib.SettlementSurvival.Name = "SettlementSurvival";
 Lib.SettlementSurvival.Global = {
+    IsActive = false,
     AnimalPlague = {
-        AnimalsBecomeSick = false,
         IsActive = false,
         AffectAI = false,
     },
     Famine = {
-        IsActive = false,
+        IsActive = true,
         AffectAI = false,
     },
     ColdWeather = {
-        IsActive = false,
+        IsActive = true,
         AffectAI = false,
     },
     HotWeather = {
-        IsActive = false,
+        IsActive = true,
         AffectAI = false,
     },
     Negligence = {
-        IsActive = false,
+        IsActive = true,
         AffectAI = false,
     },
     Plague = {
-        IsActive = false,
+        IsActive = true,
+        AffectAI = false,
+    },
+    Consume = {
+        BuildingData = {},
+        IsActive = true,
         AffectAI = false,
     },
     Misc = {
@@ -33,52 +38,58 @@ Lib.SettlementSurvival.Global = {
     },
 
     SuspendedSettlers = {},
-    SettlerLives = {},
 };
 Lib.SettlementSurvival.Local  = {
+    IsActive = true,
+    Consume = {
+        IsActive = true,
+        AffectAI = false,
+    },
     Misc = {
         ClothesForOuterRim = false,
     },
 
     SuspendedSettlers = {},
-    SettlerLives = {},
 };
 Lib.SettlementSurvival.Shared = {
     AnimalPlague = {
         InfectionChance = 4,
-        InfectionTimer = 60,
-        DeathChance = 12,
-        DeathTimer = 30,
+        InfectionTimer = 90,
+        DeathChance = 4,
+        DeathTimer = 180,
     },
     ColdWeather = {
-        ConsumptionFactor = 0.01,
+        ConsumptionFactor = 0.075,
         ConsumptionTimer = 30,
         Temperature = 5,
         InfectionChance = 12,
     },
     HotWeather = {
         IgnitionChance = 5,
-        IgnitionTimer = 30,
+        IgnitionTimer = 90,
         Temperature = 30,
     },
     Famine = {
-        DeathChance = 4,
+        DeathChance = 6,
         DeathTimer = 30,
     },
     Negligence = {
-        InfectionChance = 4,
+        InfectionChance = 6,
         InfectionTimer = 90,
     },
     Plague = {
         DeathChance = 9,
-        DeathTimer = 30,
+        DeathTimer = 90,
+    },
+    Consume = {
+        FoodFactor = 0.0012,
+        ClothesFactor = 0.0006,
+        BeerFactor = 0.0012,
+        HygieneFactor = 0.0006,
+        Progression = 35000,
     },
     SuspendedSettlers = {
         MourningTime = 5*60,
-    },
-    SettlerLives = {
-        PerMonth = 2,
-        Max = 9,
     },
 };
 
@@ -128,6 +139,7 @@ function Lib.SettlementSurvival.Global:Initialize()
             self.Famine[PlayerID] = {};
             self.Negligence[PlayerID] = {};
             self.Plague[PlayerID] = {};
+            self.Consume[PlayerID] = {Buildings = {}};
             self.SuspendedSettlers[PlayerID] = {};
         end
 
@@ -136,6 +148,7 @@ function Lib.SettlementSurvival.Global:Initialize()
             function()
                 local Turn = Logic.GetCurrentTurn();
                 Lib.SettlementSurvival.Global:ResumeSettlersAfterMourning(Turn);
+                Lib.SettlementSurvival.Global:ControlSettlersBaseConsumption(Turn);
                 Lib.SettlementSurvival.Global:ControlSettlersBecomeIllDueToNegligence(Turn);
                 Lib.SettlementSurvival.Global:ControlBuildingsDuringHotWeather(Turn);
                 Lib.SettlementSurvival.Global:ControlBuildingsDuringColdWeather(Turn);
@@ -227,12 +240,179 @@ end
 
 -- -------------------------------------------------------------------------- --
 
+-- Makes all buildings consume a base amount of their needed goods and resets
+-- the state changes effects after end of work cycles. Satisfaction of a need
+-- drops only if no other need is critical. This must be done due to settlers
+-- are unable to fulfill more than one need at a time.
+-- If buildings are far away from the players storehouse satisfaction will
+-- decline slower so that they can work longer. This is to not punish the
+-- player to hard for larger distances.
+function Lib.SettlementSurvival.Global:ControlSettlersBaseConsumption(_Turn)
+    local PlayerID = _Turn % 10;
+    if self.IsActive and self.Consume.IsActive and PlayerID >= 1 and PlayerID <= 8 then
+        if self.Consume.AffectAI or Logic.PlayerGetIsHumanFlag(PlayerID) then
+            -- Get all buildings
+            local OuterRim = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.OuterRimBuilding)};
+            local City = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.CityBuilding)};
+            local BuildingList = Array_Append(OuterRim, City);
+            -- Calculate building consumption
+            for i= 1, #BuildingList do
+                local BuildingID = BuildingList[i];
+                if not self.Consume[PlayerID].Buildings[BuildingID] then
+                    self.Consume[PlayerID].Buildings[BuildingID] = {0.8, 0.8, 0.8, 0.8};
+                end
+                local IsStopped = Logic.IsBuildingStopped(BuildingID) == true;
+                local IsOuterRim = Logic.IsEntityInCategory(BuildingID, EntityCategories.OuterRimBuilding) == 1;
+                local AttachedSettlersAmount = self:GetEffectiveWorkerInBuilding(BuildingID);
+                local DistanceFactor = self:CalculateDistanceFactor(BuildingID);
+                -- Consume food
+                if Logic.IsNeedActive(BuildingID, Needs.Nutrition) then
+                    local Factor = Lib.SettlementSurvival.Shared.Consume.FoodFactor;
+                    Factor = (IsStopped and Factor * 0.50) or Factor;
+                    Factor = (IsOuterRim and Factor * 0.50) or Factor;
+                    Factor = Factor * DistanceFactor;
+                    local Contentment = self.Consume[PlayerID].Buildings[BuildingID][1];
+                    local ConsumeFactor = Factor * AttachedSettlersAmount;
+                    if self:IsAnyOtherNeedCritical(BuildingID, Needs.Nutrition) then
+                        ConsumeFactor = 0;
+                    end
+                    local Consume = math.max(Contentment - ConsumeFactor, 0);
+                    local NeedState = Logic.GetNeedState(BuildingID, Needs.Nutrition);
+                    if (NeedState - Consume > 0.1) then
+                        Consume = (NeedState > 0.8 and NeedState) or 0.8;
+                    end
+                    self.Consume[PlayerID].Buildings[BuildingID][1] = Consume;
+                    Logic.SetNeedState(BuildingID, Needs.Nutrition, Consume);
+                end
+                -- Consume clothes
+                if Logic.IsNeedActive(BuildingID, Needs.Clothes) then
+                    local Factor = Lib.SettlementSurvival.Shared.Consume.ClothesFactor;
+                    Factor = (IsStopped and Factor * 0.50) or Factor;
+                    Factor = (IsOuterRim and Factor * 0.25) or Factor;
+                    Factor = Factor * DistanceFactor;
+                    local Contentment = self.Consume[PlayerID].Buildings[BuildingID][2];
+                    local ConsumeFactor = Factor * AttachedSettlersAmount;
+                    if self:IsAnyOtherNeedCritical(BuildingID, Needs.Clothes) then
+                        ConsumeFactor = 0;
+                    end
+                    local Consume = math.max(Contentment - ConsumeFactor, 0);
+                    local NeedState = Logic.GetNeedState(BuildingID, Needs.Clothes);
+                    if NeedState - Consume > 0.1 then
+                        Consume = (NeedState > 0.8 and NeedState) or 0.8;
+                    end
+                    self.Consume[PlayerID].Buildings[BuildingID][2] = Consume;
+                    Logic.SetNeedState(BuildingID, Needs.Clothes, Consume);
+                end
+                -- Consume hygiene
+                if Logic.IsNeedActive(BuildingID, Needs.Hygiene) then
+                    local Factor = Lib.SettlementSurvival.Shared.Consume.HygieneFactor;
+                    Factor = (IsStopped and Factor * 0.50) or Factor;
+                    Factor = (IsOuterRim and Factor * 0.25) or Factor;
+                    Factor = Factor * DistanceFactor;
+                    local Contentment = self.Consume[PlayerID].Buildings[BuildingID][3];
+                    local ConsumeFactor = Factor * AttachedSettlersAmount;
+                    if self:IsAnyOtherNeedCritical(BuildingID, Needs.Hygiene) then
+                        ConsumeFactor = 0;
+                    end
+                    local Consume = math.max(Contentment - ConsumeFactor, 0);
+                    local NeedState = Logic.GetNeedState(BuildingID, Needs.Hygiene);
+                    if NeedState - Consume > 0.1 then
+                        Consume = (NeedState > 0.8 and NeedState) or 0.8;
+                    end
+                    self.Consume[PlayerID].Buildings[BuildingID][3] = Consume;
+                    Logic.SetNeedState(BuildingID, Needs.Hygiene, Consume);
+                end
+                -- Consume beer
+                if Logic.IsNeedActive(BuildingID, Needs.Entertainment) then
+                    local Factor = Lib.SettlementSurvival.Shared.Consume.BeerFactor;
+                    Factor = (IsStopped and Factor * 0.50) or Factor;
+                    Factor = (IsOuterRim and Factor * 0.25) or Factor;
+                    Factor = Factor * DistanceFactor;
+                    local Contentment = self.Consume[PlayerID].Buildings[BuildingID][4];
+                    local ConsumeFactor = Factor * AttachedSettlersAmount;
+                    if self:IsAnyOtherNeedCritical(BuildingID, Needs.Entertainment) then
+                        ConsumeFactor = 0;
+                    end
+                    local Consume = math.max(Contentment - ConsumeFactor, 0);
+                    local NeedState = Logic.GetNeedState(BuildingID, Needs.Entertainment);
+                    if NeedState - Consume > 0.1 then
+                        Consume = (NeedState > 0.8 and NeedState) or 0.8;
+                    end
+                    self.Consume[PlayerID].Buildings[BuildingID][4] = Consume;
+                    Logic.SetNeedState(BuildingID, Needs.Entertainment, Consume);
+                end
+                -- Save distance
+                if not self.Consume[PlayerID].Buildings[BuildingID].Factor then
+                    self.Consume[PlayerID].Buildings[BuildingID].Factor = DistanceFactor;
+                end
+            end
+        end
+    end
+end
+
+-- Checks if any other need than the passed one is critical.
+function Lib.SettlementSurvival.Global:IsAnyOtherNeedCritical(_BuildingID, _Need)
+    local NeedState, NeedCritical;
+    -- Check sickness
+    NeedState = Logic.GetNeedState(_BuildingID, Needs.Medicine);
+    NeedCritical = Logic.GetNeedCriticalThreshold(_BuildingID, Needs.Medicine);
+    if _Need ~= Needs.Medicine and NeedState <= NeedCritical then
+        return true;
+    end
+    -- Check food
+    NeedState = Logic.GetNeedState(_BuildingID, Needs.Nutrition);
+    NeedCritical = Logic.GetNeedCriticalThreshold(_BuildingID, Needs.Nutrition);
+    if _Need ~= Needs.Nutrition and NeedState <= NeedCritical then
+        return true;
+    end
+    -- Check clothes
+    NeedState = Logic.GetNeedState(_BuildingID, Needs.Clothes);
+    NeedCritical = Logic.GetNeedCriticalThreshold(_BuildingID, Needs.Clothes);
+    if _Need ~= Needs.Clothes and NeedState <= NeedCritical then
+        return true;
+    end
+    -- Check hygiene
+    NeedState = Logic.GetNeedState(_BuildingID, Needs.Hygiene);
+    NeedCritical = Logic.GetNeedCriticalThreshold(_BuildingID, Needs.Hygiene);
+    if _Need ~= Needs.Hygiene and NeedState <= NeedCritical then
+        return true;
+    end
+    -- Check entertainment
+    NeedState = Logic.GetNeedState(_BuildingID, Needs.Entertainment);
+    NeedCritical = Logic.GetNeedCriticalThreshold(_BuildingID, Needs.Entertainment);
+    if _Need ~= Needs.Entertainment and NeedState <= NeedCritical then
+        return true;
+    end
+    -- Nothing critical
+    return false;
+end
+
+function Lib.SettlementSurvival.Global:CalculateDistanceFactor(_BuildingID)
+    local PlayerID = Logic.EntityGetPlayer(_BuildingID);
+    local StorehouseID = Logic.GetStoreHouse(PlayerID);
+    if StorehouseID == 0 then
+        return 1;
+    end
+    if  self.Consume[PlayerID].Buildings[_BuildingID]
+    and self.Consume[PlayerID].Buildings[_BuildingID].Factor then
+        return self.Consume[PlayerID].Buildings[_BuildingID].Factor;
+    end
+    local Distance = GetDistance(_BuildingID, StorehouseID);
+    local Progression = Lib.SettlementSurvival.Shared.Consume.Progression;
+    if Distance > Progression then
+        return 2 ^ (((-1) * (Distance - Progression)) / Progression);
+    end
+    return 1;
+end
+
+-- -------------------------------------------------------------------------- --
+
 -- Makes infected animals succum to their sickness if not treated. As an
 -- intended exploit only animals in a pasture can die.
 function Lib.SettlementSurvival.Global:ControlAnimalsSuccumToPlague(_Turn)
     local CurrentTime = math.floor(Logic.GetTime());
     local PlayerID = _Turn % 10;
-    if self.AnimalPlague.IsActive and PlayerID >= 1 and PlayerID <= 8 then
+    if self.IsActive and self.AnimalPlague.IsActive and PlayerID >= 1 and PlayerID <= 8 then
         if self.AnimalPlague.AffectAI or Logic.PlayerGetIsHumanFlag(PlayerID) then
             -- Get animals
             local SheepList = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.SheepPasture)};
@@ -260,7 +440,7 @@ function Lib.SettlementSurvival.Global:ControlAnimalsSuccumToPlague(_Turn)
             if CurrentTime % DeathTime == 0 then
                 for AnimalID,_ in pairs(self.AnimalPlague[PlayerID]) do
                     local Chance = Lib.SettlementSurvival.Shared.AnimalPlague.DeathChance;
-                    if GetPlayerResources(Goods.G_Herb, PlayerID) > 10 then
+                    if GetPlayerResources(Goods.G_Herb, PlayerID) > 0 then
                         AddGood(Goods.G_Herb, -1, PlayerID);
                         Chance = Chance / 2;
                     end
@@ -314,23 +494,22 @@ end
 function Lib.SettlementSurvival.Global:ControlAnimalInfections(_Turn)
     local CurrentTime = math.floor(Logic.GetTime())
     local PlayerID = _Turn % 10;
-    if self.AnimalPlague.AnimalsBecomeSick then
-        if self.AnimalPlague.IsActive and PlayerID >= 1 and PlayerID <= 8 then
-            if self.AnimalPlague.AffectAI or Logic.PlayerGetIsHumanFlag(PlayerID) then
-                local InfectionTimer = Lib.SettlementSurvival.Shared.AnimalPlague.InfectionTimer;
-                if CurrentTime % InfectionTimer == 0 then
-                    -- Get animals
-                    local SheepList = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.SheepPasture)};
-                    local CowList = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.CattlePasture)};
-                    local AnimalList = Array_Append(SheepList, CowList);
-                    -- Infect animals
-                    local Chance = Lib.SettlementSurvival.Shared.AnimalPlague.InfectionChance;
-                    for i= #AnimalList, 1, -1 do
-                        if  Logic.IsFarmAnimalInPasture(AnimalList[i])
-                        and not Logic.IsFarmAnimalIll(AnimalList[i]) then
-                            if math.random(1, 100) <= Chance then
-                                Logic.MakeFarmAnimalIll(AnimalList[i]);
-                            end
+    if self.IsActive and self.AnimalPlague.IsActive and PlayerID >= 1 and PlayerID <= 8 then
+        if self.AnimalPlague.AffectAI or Logic.PlayerGetIsHumanFlag(PlayerID) then
+            local InfectionTimer = Lib.SettlementSurvival.Shared.AnimalPlague.InfectionTimer;
+            if CurrentTime % InfectionTimer == 0 then
+                -- Get animals
+                local SheepList = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.SheepPasture)};
+                local CowList = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.CattlePasture)};
+                local AnimalList = Array_Append(SheepList, CowList);
+                -- Infect animals
+                local Chance = Lib.SettlementSurvival.Shared.AnimalPlague.InfectionChance;
+                for i= #AnimalList, 1, -1 do
+                    if  Logic.IsFarmAnimalInPasture(AnimalList[i])
+                    and Logic.TechnologyGetState(PlayerID, Technologies.R_Medicine) == 3
+                    and not Logic.IsFarmAnimalIll(AnimalList[i]) then
+                        if math.random(1, 100) <= Chance then
+                            Logic.MakeFarmAnimalIll(AnimalList[i]);
                         end
                     end
                 end
@@ -346,7 +525,7 @@ end
 function Lib.SettlementSurvival.Global:ControlBuildingsDuringHotWeather(_Turn)
     local CurrentTime = math.floor(Logic.GetTime());
     local PlayerID = _Turn % 10;
-    if self.HotWeather.IsActive and PlayerID >= 1 and PlayerID <= 8 then
+    if self.IsActive and self.HotWeather.IsActive and PlayerID >= 1 and PlayerID <= 8 then
         if self.HotWeather.AffectAI or Logic.PlayerGetIsHumanFlag(PlayerID) then
             if Logic.GetCurrentTemperature() >= Lib.SettlementSurvival.Shared.HotWeather.Temperature then
                 local FireFrequency = Lib.SettlementSurvival.Shared.HotWeather.IgnitionTimer;
@@ -360,8 +539,11 @@ function Lib.SettlementSurvival.Global:ControlBuildingsDuringHotWeather(_Turn)
                         if  Logic.IsConstructionComplete(BuildingList[i]) == 1
                         and GetHealth(BuildingList[i]) >= 100
                         and not Logic.IsBurning(BuildingList[i]) then
-                            local IgnitionChance = Lib.SettlementSurvival.Shared.HotWeather.IgnitionChance;
-                            if math.random(1, 100) <= IgnitionChance then
+                            local IgnitionChance = Lib.SettlementSurvival.Shared.HotWeather.IgnitionChance * 10;
+                            if self:IsWaterSupplierNear(PlayerID, BuildingList[i], 2500) then
+                                IgnitionChance = 1;
+                            end
+                            if IgnitionChance > 0 and math.random(1, 1000) <= IgnitionChance then
                                 Logic.DEBUG_SetBuildingOnFire(BuildingList[i], 10);
                                 AnyIgnited = true;
                             end
@@ -376,6 +558,14 @@ function Lib.SettlementSurvival.Global:ControlBuildingsDuringHotWeather(_Turn)
     end
 end
 
+function Lib.SettlementSurvival.Global:IsWaterSupplierNear(_PlayerID, _BuildingID, _Area)
+    local x, y, z = Logic.EntityGetPos(_BuildingID);
+    if Logic.IsPlayerEntityOfCategoryInArea(_PlayerID, x, y, _Area, "G_Water_Supplier") == 1 then
+        return true;
+    end
+    return false;
+end
+
 -- -------------------------------------------------------------------------- --
 
 -- When it is cold outside (usually 5°C or less), wood will be consumed by all
@@ -384,7 +574,7 @@ end
 function Lib.SettlementSurvival.Global:ControlBuildingsDuringColdWeather(_Turn)
     local CurrentTime = math.floor(Logic.GetTime());
     local PlayerID = _Turn % 10;
-    if self.ColdWeather.IsActive and PlayerID >= 1 and PlayerID <= 8 then
+    if self.IsActive and self.ColdWeather.IsActive and PlayerID >= 1 and PlayerID <= 8 then
         if self.ColdWeather.AffectAI or Logic.PlayerGetIsHumanFlag(PlayerID) then
             if Logic.GetCurrentTemperature() <= Lib.SettlementSurvival.Shared.ColdWeather.Temperature then
                 local FirewoodFrequency = Lib.SettlementSurvival.Shared.ColdWeather.ConsumptionTimer;
@@ -396,14 +586,9 @@ function Lib.SettlementSurvival.Global:ControlBuildingsDuringColdWeather(_Turn)
                     local BuildingList = Array_Append(OuterRim, City);
                     for i= 1, #BuildingList do
                         if Logic.IsConstructionComplete(BuildingList[i]) == 1 then
-                            local AttachedSettlersAmount = 0;
-                            for _, SettlerID in pairs({Logic.GetWorkersAndSpousesForBuilding(BuildingList[i])}) do
-                                if not self:IsSettlerSuspended(SettlerID) then
-                                    AttachedSettlersAmount = AttachedSettlersAmount +1
-                                end
-                            end
-                            if  Logic.IsNeedActive(BuildingList[i], Needs.Clothes)
-                            and Logic.GetNeedState(BuildingList[i], Needs.Clothes) > 0.5 then
+                            local AttachedSettlersAmount = self:GetEffectiveWorkerInBuilding(BuildingList[i]);
+                            if not Logic.IsNeedActive(BuildingList[i], Needs.Clothes)
+                            or Logic.GetNeedState(BuildingList[i], Needs.Clothes) >= 0.4 then
                                 AttachedSettlersAmount = AttachedSettlersAmount * 0.5;
                             end
                             EmployedSettlers = EmployedSettlers + AttachedSettlersAmount;
@@ -411,19 +596,30 @@ function Lib.SettlementSurvival.Global:ControlBuildingsDuringColdWeather(_Turn)
                     end
                     -- Subtract firewood
                     local WoodCost = Lib.SettlementSurvival.Shared.ColdWeather.ConsumptionFactor * EmployedSettlers;
+                    local WoodCostPayed = 0;
                     local WoodAmount = GetPlayerResources(Goods.G_Wood, PlayerID);
                     self.ColdWeather[PlayerID].Consumption = self.ColdWeather[PlayerID].Consumption + WoodCost;
-                    if self.ColdWeather[PlayerID].Consumption > 1 then
-                        local WoodCostFloored = math.floor(WoodCost);
+                    if self.ColdWeather[PlayerID].Consumption >= 1 then
+                        local WoodCostFloored = math.floor(self.ColdWeather[PlayerID].Consumption);
                         AddGood(Goods.G_Wood, (-1) * math.min(WoodCostFloored, WoodAmount), PlayerID);
                         self.ColdWeather[PlayerID].Consumption = self.ColdWeather[PlayerID].Consumption - WoodCostFloored;
+                        WoodCostPayed = WoodCostFloored;
+                        ExecuteLocal(
+                            [[if GUI.GetPlayerID() == %d then
+                                  GUI_FeedbackWidgets.GoldAdd(%d, nil, {14, 5, 0}, {1, 9, 0})
+                              end]],
+                            PlayerID,
+                            (-1) * WoodCostFloored
+                        );
                     end
                     -- Enforce punishment
-                    if WoodCost > WoodAmount then
+                    if WoodCostPayed > WoodAmount then
                         local InfectionChance = Lib.SettlementSurvival.Shared.ColdWeather.InfectionChance;
-                        for i= 1, #BuildingList do
-                            if math.random(1, 100) <= InfectionChance then
-                                Logic.MakeBuildingIll(BuildingList[i]);
+                        if Logic.TechnologyGetState(PlayerID, Technologies.R_Medicine) == 3 then
+                            for i= 1, #BuildingList do
+                                if math.random(1, 100) <= InfectionChance then
+                                    Logic.MakeBuildingIll(BuildingList[i]);
+                                end
                             end
                         end
                         self:Print(PlayerID, Lib.SettlementSurvival.Text.Alarms.SettlerTemperature);
@@ -441,7 +637,7 @@ end
 function Lib.SettlementSurvival.Global:ControlSettlersBecomeIllDueToNegligence(_Turn)
     local CurrentTime = math.floor(Logic.GetTime());
     local PlayerID = _Turn % 10;
-    if  self.Negligence.IsActive and PlayerID >= 1 and PlayerID <= 8 then
+    if self.IsActive and self.Negligence.IsActive and PlayerID >= 1 and PlayerID <= 8 then
         if self.Negligence.AffectAI or Logic.PlayerGetIsHumanFlag(PlayerID) then
             -- Get settlers
             local SpouseList = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.Spouse)};
@@ -458,6 +654,7 @@ function Lib.SettlementSurvival.Global:ControlSettlersBecomeIllDueToNegligence(_
                 end
             end
             -- Unregister settlers
+            --- @diagnostic disable-next-line: param-type-mismatch
             for SettlerID,v in pairs(self.Negligence[PlayerID]) do
                 if  not self:IsSettlerBored(SettlerID) and not self:IsSettlerDirty(SettlerID) then
                     self.Negligence[PlayerID][SettlerID] = nil;
@@ -467,11 +664,13 @@ function Lib.SettlementSurvival.Global:ControlSettlersBecomeIllDueToNegligence(_
             local InfectionTimer = Lib.SettlementSurvival.Shared.Negligence.InfectionTimer;
             local ShowMessage = false;
             if CurrentTime % InfectionTimer == 0 then
+                --- @diagnostic disable-next-line: param-type-mismatch
                 for SettlerID,v in pairs(self.Negligence[PlayerID]) do
                     if v[1] + InfectionTimer < CurrentTime then
                         local Chance = Lib.SettlementSurvival.Shared.AnimalPlague.InfectionChance;
                         if math.random(1, 100) <= Chance then
-                            if  not self:IsSettlerCarryingHygiene(SettlerID)
+                            if  Logic.TechnologyGetState(PlayerID, Technologies.R_Medicine) == 3
+                            and not self:IsSettlerCarryingHygiene(SettlerID)
                             and not self:IsSettlerCarryingBeer(SettlerID)
                             and not self:IsSettlerSuspended(SettlerID)
                             and self:IsSettlerStriking(SettlerID) then
@@ -521,7 +720,7 @@ end
 function Lib.SettlementSurvival.Global:ControlSettlersSuccumToFamine(_Turn)
     local CurrentTime = math.floor(Logic.GetTime());
     local PlayerID = _Turn % 10;
-    if  self.Famine.IsActive and PlayerID >= 1 and PlayerID <= 8 then
+    if self.IsActive and self.Famine.IsActive and PlayerID >= 1 and PlayerID <= 8 then
         if self.Famine.AffectAI or Logic.PlayerGetIsHumanFlag(PlayerID) then
             -- Get settlers
             local SpouseList = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.Spouse)};
@@ -536,6 +735,7 @@ function Lib.SettlementSurvival.Global:ControlSettlersSuccumToFamine(_Turn)
                 end
             end
             -- Unregister settlers who recovered
+            --- @diagnostic disable-next-line: param-type-mismatch
             for SettlerID,v in pairs(self.Famine[PlayerID]) do
                 if not IsExisting(SettlerID) or not self:IsSettlerHungry(SettlerID) then
                     self.Famine[PlayerID][SettlerID] = nil;
@@ -545,15 +745,16 @@ function Lib.SettlementSurvival.Global:ControlSettlersSuccumToFamine(_Turn)
             local DeathTime = Lib.SettlementSurvival.Shared.Famine.DeathTimer;
             local ShowMessage = false;
             if CurrentTime % DeathTime == 0 then
+                --- @diagnostic disable-next-line: param-type-mismatch
                 for SettlerID,v in pairs(self.Famine[PlayerID]) do
                     if  not self:IsSettlerCarryingFood(SettlerID)
                     and not self:IsSettlerSuspended(SettlerID)
                     and self:IsSettlerStriking(SettlerID) then
                         local Chance = Lib.SettlementSurvival.Shared.Famine.DeathChance;
                         if Chance >= 1 and math.random(1, 100) <= math.ceil(Chance) then
+                            self:SuspendSettler(SettlerID, true);
                             SendReport(Report.SettlerDiedFromStarvation, SettlerID);
                             SendReportToLocal(Report.SettlerDiedFromStarvation, SettlerID);
-                            self:SuspendSettler(SettlerID, true);
                             ShowMessage = true;
                         end
                     end
@@ -585,7 +786,7 @@ end
 function Lib.SettlementSurvival.Global:ControlSettlersSuccumToPlague(_Turn)
     local CurrentTime = math.floor(Logic.GetTime());
     local PlayerID = _Turn % 10;
-    if  self.Plague.IsActive and PlayerID >= 1 and PlayerID <= 8 then
+    if self.IsActive and self.Plague.IsActive and PlayerID >= 1 and PlayerID <= 8 then
         if self.Plague.AffectAI or Logic.PlayerGetIsHumanFlag(PlayerID) then
             -- Get settlers
             local SpouseList = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.Spouse)};
@@ -601,6 +802,7 @@ function Lib.SettlementSurvival.Global:ControlSettlersSuccumToPlague(_Turn)
                 end
             end
             -- Unregister settlers who recovered
+            --- @diagnostic disable-next-line: param-type-mismatch
             for SettlerID,v in pairs(self.Plague[PlayerID]) do
                 if not IsExisting(SettlerID) or not Logic.IsIll(SettlerID) then
                     self.Plague[PlayerID][SettlerID] = nil;
@@ -610,19 +812,21 @@ function Lib.SettlementSurvival.Global:ControlSettlersSuccumToPlague(_Turn)
             local DeathTime = Lib.SettlementSurvival.Shared.Plague.DeathTimer;
             local ShowMessage = false;
             if CurrentTime % DeathTime == 0 then
+                --- @diagnostic disable-next-line: param-type-mismatch
                 for SettlerID,v in pairs(self.Plague[PlayerID]) do
                     if  not self:IsSettlerCarryingMedicine(SettlerID)
                     and not self:IsSettlerSuspended(SettlerID)
                     and self:IsSettlerStriking(SettlerID) then
                         local Chance = Lib.SettlementSurvival.Shared.Plague.DeathChance;
-                        if GetPlayerResources(Goods.G_Herb, PlayerID) > 10 then
-                            AddGood(Goods.G_Herb, -1, PlayerID);
-                            Chance = Chance / 2;
-                        end
+                        -- Deactivated: Makes it to easy
+                        -- if GetPlayerResources(Goods.G_Herb, PlayerID) > 10 then
+                        --     AddGood(Goods.G_Herb, -1, PlayerID);
+                        --     Chance = Chance / 2;
+                        -- end
                         if Chance >= 1 and math.random(1, 100) <= math.ceil(Chance) then
+                            self:SuspendSettler(SettlerID, true);
                             SendReport(Report.SettlerDiedFromIllness, SettlerID);
                             SendReportToLocal(Report.SettlerDiedFromIllness, SettlerID);
-                            self:SuspendSettler(SettlerID, true);
                             ShowMessage = true;
                         end
                     end
@@ -672,7 +876,7 @@ function Lib.SettlementSurvival.Global:SuspendSettler(_Entity, _Mourn)
         local AttachedSettlers = {Logic.GetWorkersAndSpousesForBuilding(BuildingID)};
         local AnyNotSuspended = false;
         for i= 1, #AttachedSettlers do
-            if not self:IsSettlerSuspended(_Entity) then
+            if AttachedSettlers[i] > 0 and not self:IsSettlerSuspended(AttachedSettlers[i]) then
                 AnyNotSuspended = true;
                 break;
             end
@@ -708,11 +912,23 @@ function Lib.SettlementSurvival.Global:HasSuspendedInhabitants(_Entity)
     local BuildingID = GetID(_Entity)
     local AttachedSettlers = {Logic.GetWorkersAndSpousesForBuilding(BuildingID)};
     for i= 1, #AttachedSettlers do
-        if self:IsSettlerSuspended(AttachedSettlers[i]) then
+        if AttachedSettlers[i] > 0 and self:IsSettlerSuspended(AttachedSettlers[i]) then
             return true;
         end
     end
     return false;
+end
+
+function Lib.SettlementSurvival.Global:GetEffectiveWorkerInBuilding(_Entity)
+    local WorkerCount = 0;
+    local BuildingID = GetID(_Entity);
+    local Slots = Logic.GetUpgradeLevel(BuildingID) +1;
+    for _, SettlerID in pairs({Logic.GetWorkersForBuilding(BuildingID)}) do
+        if SettlerID > 0 and not self:IsSettlerSuspended(SettlerID) then
+            WorkerCount = WorkerCount +1;
+        end
+    end
+    return math.min(WorkerCount, Slots);
 end
 
 -- Restores tasklist and position of fake dead settlers.
@@ -827,6 +1043,8 @@ function Lib.SettlementSurvival.Global:UpdateClothesStateForOuterRim()
     end
 end
 
+-- -------------------------------------------------------------------------- --
+
 function Lib.SettlementSurvival.Global:Print(_PlayerID, _Text)
     local Text = ConvertPlaceholders(Localize(_Text));
     ExecuteLocal([[
@@ -856,6 +1074,7 @@ function Lib.SettlementSurvival.Local:Initialize()
         self:OverwriteGameCallbacks();
         self:OverwriteJumpToWorker();
         self:OverwriteUpgradeButton();
+        self:OverwriteUpdateNeeds();
 
         for PlayerID = 1,8 do
             self.SuspendedSettlers[PlayerID] = {};
@@ -951,7 +1170,7 @@ function Lib.SettlementSurvival.Local:HasSuspendedInhabitants(_Entity)
     local BuildingID = GetID(_Entity);
     local AttachedSettlers = {Logic.GetWorkersAndSpousesForBuilding(BuildingID)};
     for i= 1, #AttachedSettlers do
-        if self:IsSettlerSuspended(AttachedSettlers[i]) then
+        if AttachedSettlers[i] > 0 and self:IsSettlerSuspended(AttachedSettlers[i]) then
             return true;
         end
     end
@@ -1017,6 +1236,69 @@ function Lib.SettlementSurvival.Local:OverwriteUpgradeButton()
     end
 end
 
+function Lib.SettlementSurvival.Local:OverwriteUpdateNeeds()
+    --- @diagnostic disable-next-line: duplicate-set-field
+    GUI_BuildingInfo.NeedUpdate = function()
+        local CurrentWidgetID = XGUIEng.GetCurrentWidgetID();
+        local CurrentWidgetName = XGUIEng.GetWidgetNameByID(CurrentWidgetID);
+        local MotherWidgetID = XGUIEng.GetWidgetsMotherID(CurrentWidgetID);
+        local MotherWidgetName = XGUIEng.GetWidgetNameByID(MotherWidgetID);
+        local NeedsName;
+        if MotherWidgetName == "Decoration" then
+            NeedsName = "Wealth";
+        elseif MotherWidgetName == "Cleanliness" then
+            NeedsName = "Hygiene";
+        else
+            NeedsName = MotherWidgetName;
+        end
+        local Need = Needs[NeedsName];
+        local BuildingID = GetBuildingIDAlsoWhenWorkerIsSelected();
+        if Logic.IsNeedActive(BuildingID, Need) == true then
+            local IsNeedCritical = Logic.IsNeedCritical(BuildingID, Need);
+            local IsNeedAttention = Logic.IsNeedAttention(BuildingID, Need);
+            local HasFoundNoGoodForNeed = Logic.GetFoundNoGoodForNeed(BuildingID, Need);
+            if IsNeedCritical == true and HasFoundNoGoodForNeed == true then
+                XGUIEng.SetMaterialColor(CurrentWidgetID,0,240,10,10,255);
+            elseif IsNeedAttention == true and HasFoundNoGoodForNeed == true then
+                XGUIEng.SetMaterialColor(CurrentWidgetID,0,255,220,20,255);
+            else
+                XGUIEng.SetMaterialColor(CurrentWidgetID,0,255,255,255,255);
+            end
+            if CurrentWidgetName == "Bar" then
+                local State = Logic.GetNeedState(BuildingID, Need);
+                local AttentionThreshold   = Logic.GetNeedAttentionThreshold(BuildingID, Need);
+                local CriticalThreshold = Logic.GetNeedCriticalThreshold(BuildingID, Need);
+                local Maximum = 0.8;
+                local CurrentState = State;
+                if not Lib.SettlementSurvival.Local.IsActive
+                or not Lib.SettlementSurvival.Local.Consume.IsActive then
+                    if Logic.IsEntityInCategory(BuildingID, EntityCategories.OuterRimBuilding) == 1 then
+                        Maximum = Maximum - CriticalThreshold;
+                        CurrentState = CurrentState - CriticalThreshold;
+                    end
+                else
+                    if Logic.IsEntityInCategory(BuildingID, EntityCategories.OuterRimBuilding) == 1 then
+                        Maximum = Maximum - (CriticalThreshold * 0.65);
+                        CurrentState = CurrentState - (CriticalThreshold * 0.65);
+                    end
+                end
+                XGUIEng.SetProgressBarValues(CurrentWidgetID,CurrentState,Maximum);
+                local ValueWidget = XGUIEng.GetWidgetPathByID(XGUIEng.GetWidgetsMotherID(CurrentWidgetID)) .. "/Value";
+                if Debug_EnableDebugOutput then
+                    local Value = Round(State* 10);
+                    local ThresholdValue = Round(AttentionThreshold*10);
+                    local CriticalValue = Round(CriticalThreshold*10);
+                    XGUIEng.SetText(ValueWidget, "{center}" .. Value .. "/" ..ThresholdValue .. "/" .. CriticalValue);
+                else
+                    XGUIEng.SetText(ValueWidget, "");
+                end
+            end
+        else
+            XGUIEng.SetMaterialColor(CurrentWidgetID,0,255,255,255,50);
+        end
+    end
+end
+
 function Lib.SettlementSurvival.Local:OverrideSelectionChanged()
     self.Orig_GameCallback_GUI_SelectionChanged = GameCallback_GUI_SelectionChanged;
     GameCallback_GUI_SelectionChanged = function(_Source)
@@ -1027,11 +1309,26 @@ end
 
 function Lib.SettlementSurvival.Local:OnBuildingSelected()
     local EntityID = GUI.GetSelectedEntity();
-    if Logic.IsEntityInCategory(EntityID, EntityCategories.OuterRimBuilding) == 1 then
-        if self.Misc.ClothesForOuterRim then
-            XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomRight/Selection/Needs/Clothes", 1);
-        else
-            XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomRight/Selection/Needs/Clothes", 0);
+    if self.IsActive then
+        -- Buildings
+        if Logic.IsEntityInCategory(EntityID, EntityCategories.OuterRimBuilding) == 1 then
+            if self.Misc.ClothesForOuterRim then
+                XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomRight/Selection/Needs/Clothes", 1);
+            else
+                XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomRight/Selection/Needs/Clothes", 0);
+            end
+        end
+        -- Settlers
+        if Logic.IsEntityInCategory(EntityID, EntityCategories.Spouse) == 1
+        or Logic.IsEntityInCategory(EntityID, EntityCategories.Worker) == 1 then
+            local BuildingID = Logic.GetSettlersWorkBuilding(EntityID);
+            if Logic.IsEntityInCategory(BuildingID, EntityCategories.OuterRimBuilding) == 1 then
+                if self.Misc.ClothesForOuterRim then
+                    XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomRight/Selection/Needs/Clothes", 1);
+                else
+                    XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomRight/Selection/Needs/Clothes", 0);
+                end
+            end
         end
     end
 end

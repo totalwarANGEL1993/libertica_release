@@ -171,7 +171,10 @@ function Lib.Core.Debug:ProcessDebugShortcut(_Type, _Params)
         if _Type == "RestartMap" then
             self:HideDebugInput();
             Framework.RestartMap();
-        elseif _Type == "Terminal" then
+        end
+    end
+    if self.DevelopingShell then
+        if _Type == "Terminal" then
             ShowTextInput(GUI.GetPlayerID(), true);
         end
     end

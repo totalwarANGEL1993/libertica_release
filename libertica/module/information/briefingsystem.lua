@@ -285,6 +285,7 @@ function Lib.BriefingSystem.Global:StartBriefing(_Name, _PlayerID, _Data)
 end
 
 function Lib.BriefingSystem.Global:EndBriefing(_PlayerID)
+    collectgarbage("collect");
     Logic.SetGlobalInvulnerability(0);
     local Briefing = self.Briefing[_PlayerID];
     SendReport(Report.BriefingEnded, _PlayerID, Briefing.Name);
@@ -324,14 +325,16 @@ end
 
 function Lib.BriefingSystem.Global:TransformAnimations(_PlayerID)
     if self.Briefing[_PlayerID].PageAnimation then
-        for k, v in pairs(self.Briefing[_PlayerID].PageAnimation) do
-            local PageID = self:GetPageIDByName(_PlayerID, k);
+        for Name, v in pairs(self.Briefing[_PlayerID].PageAnimation) do
+            local PageID = self:GetPageIDByName(_PlayerID, Name);
             if PageID ~= 0 then
                 self.Briefing[_PlayerID][PageID].Animations = {};
                 self.Briefing[_PlayerID][PageID].Animations.Repeat = v.Repeat == true;
                 self.Briefing[_PlayerID][PageID].Animations.Clear = v.Clear == true;
                 for i= 1, #v, 1 do
                     local Entry = {};
+                    Entry.Source = Name;
+                    Entry.Local = v.Local == true;
                     Entry.Interpolation = v[i].Interpolation;
                     Entry.Duration = v[i][1] or (2 * 60);
                     if v[i][2] and type(v[i][4]) ~= "table" then
@@ -365,8 +368,8 @@ end
 
 function Lib.BriefingSystem.Global:TransformParallaxes(_PlayerID)
     if self.Briefing[_PlayerID].PageParallax then
-        for k, v in pairs(self.Briefing[_PlayerID].PageParallax) do
-            local PageID = self:GetPageIDByName(_PlayerID, k);
+        for Name, v in pairs(self.Briefing[_PlayerID].PageParallax) do
+            local PageID = self:GetPageIDByName(_PlayerID, Name);
             if PageID ~= 0 then
                 self.Briefing[_PlayerID][PageID].Parallax = {};
                 self.Briefing[_PlayerID][PageID].Parallax.Repeat = v.Repeat == true;
@@ -374,6 +377,8 @@ function Lib.BriefingSystem.Global:TransformParallaxes(_PlayerID)
                 for i= 1, 4, 1 do
                     if v[i] then
                         local Entry = {};
+                        Entry.Source = Name;
+                        Entry.Local = v.Local == true;
                         Entry.Image = v[i][1];
                         Entry.Interpolation = v[i].Interpolation;
                         Entry.Duration = v[i][2] or (2 * 60);
@@ -550,8 +555,6 @@ function Lib.BriefingSystem.Local:OnReportReceived(_ID, ...)
         self:EndBriefing(arg[1], arg[2]);
     elseif _ID == Report.BriefingPageShown then
         self:DisplayPage(arg[1], arg[2]);
-    elseif _ID == Report.BriefingSkipButtonPressed then
-        self:SkipButtonPressed(arg[1]);
     end
 end
 
@@ -590,6 +593,7 @@ function Lib.BriefingSystem.Local:StartBriefing(_PlayerID, _BriefingName, _Brief
 end
 
 function Lib.BriefingSystem.Local:EndBriefing(_PlayerID, _BriefingName)
+    collectgarbage("collect");
     if GUI.GetPlayerID() ~= _PlayerID then
         return;
     end
@@ -670,10 +674,8 @@ function Lib.BriefingSystem.Local:SetPerformanceMode()
     Display.SetUserOptionReflections(0);
     Display.SetUserOptionTerrainQuality(0);
     Display.SetRenderObjectsAlphaBlendPass(0);
-    Display.SetRenderParticles(0);
     Display.SetRenderUseBatching(0);
     Display.SetRenderUpdateMorphAnim(0);
-    Display.SetRenderUpdateParticles(0);
     Display.SetEffectOption("DoNotUseRimLight", 1);
     Display.SetEffectOption("SimpleWater", 1);
 end
@@ -688,10 +690,8 @@ function Lib.BriefingSystem.Local:SetQualityMode()
     Display.SetUserOptionReflections(ReflectionQuality);
     Display.SetUserOptionTerrainQuality(TerrainQuality);
     Display.SetRenderObjectsAlphaBlendPass(1);
-    Display.SetRenderParticles(1);
     Display.SetRenderUseBatching(1);
     Display.SetRenderUpdateMorphAnim(1);
-    Display.SetRenderUpdateParticles(1);
     Display.SetEffectOption("DoNotUseRimLight", 0);
     Display.SetEffectOption("SimpleWater", 0);
 end
@@ -776,13 +776,46 @@ end
 function Lib.BriefingSystem.Local:DisplayPageAnimation(_PlayerID, _PageID)
     local Page = self.Briefing[_PlayerID][_PageID];
     if Page.Animations then
+        local Postponed = {};
+        -- Clear animations
         if Page.Animations.Clear then
             self.Briefing[_PlayerID].CurrentAnimation = nil;
             self.Briefing[_PlayerID].AnimationQueue = {};
+        -- Postpone animations and clear
+        elseif Page.Animations.Postpone then
+            if self.Briefing[_PlayerID].CurrentAnimation then
+                local Animation = table.copy(self.Briefing[_PlayerID].CurrentAnimation);
+                local Factor = self:GetInterpolationFactor(_PlayerID, true);
+                Animation.Completion = Factor;
+                table.insert(Postponed, Animation);
+            end
+            for i= 1, #self.Briefing[_PlayerID].AnimationQueue do
+                local Animation = table.copy(self.Briefing[_PlayerID].AnimationQueue[i]);
+                table.insert(Postponed, Animation);
+            end
+            self.Briefing[_PlayerID].CurrentAnimation = nil;
+            self.Briefing[_PlayerID].AnimationQueue = {};
         end
-        for i= 1, #Page.Animations, 1 do
+        -- Fill animation queue
+        for i= 1, #Page.Animations do
             local Animation = table.copy(Page.Animations[i]);
             table.insert(self.Briefing[_PlayerID].AnimationQueue, Animation);
+        end
+        for i= 1, #Postponed do
+            table.insert(self.Briefing[_PlayerID].AnimationQueue, Postponed[i]);
+        end
+        -- Remove page local animations
+        if self.Briefing[_PlayerID].CurrentAnimation then
+            local Animation = self.Briefing[_PlayerID].CurrentAnimation;
+            if Animation.Local and Page.Name ~= Animation.Source then
+                self.Briefing[_PlayerID].CurrentAnimation = nil;
+            end
+        end
+        for i= #self.Briefing[_PlayerID].AnimationQueue, 1, -1 do
+            local Animation = self.Briefing[_PlayerID].AnimationQueue[i];
+            if Animation.Local and Page.Name ~= Animation.Source then
+                table.remove(self.Briefing[_PlayerID].AnimationQueue, i);
+            end
         end
     end
 end
@@ -938,6 +971,9 @@ function Lib.BriefingSystem.Local:ThroneRoomCameraControl(_PlayerID, _Page)
         if CurrentAnimation and CurrentAnimation.AnimFrames then
             if #CurrentAnimation.AnimFrames >= 2 then
                 local Factor = self:GetInterpolationFactor(_PlayerID, true);
+                if CurrentAnimation.Completion then
+                    Factor = math.max(Factor, CurrentAnimation.Completion);
+                end
                 PX, PY, PZ, LX, LY, LZ = self:BezierCurve(
                     Factor,
                     unpack(CurrentAnimation.AnimFrames)
@@ -1160,12 +1196,15 @@ function Lib.BriefingSystem.Local:GetCameraProperties(_PlayerID, _FOV)
     return lookAtX, lookAtY, lookAtZ, positionX, positionY, positionZ, _FOV;
 end
 
-function Lib.BriefingSystem.Local:SkipButtonPressed(_PlayerID, _Page)
+function Lib.BriefingSystem.Local:SkipButtonPressed(_PlayerID)
     if not self.Briefing[_PlayerID] then
         return;
     end
     if (self.Briefing[_PlayerID].LastSkipButtonPressed + 500) < Logic.GetTimeMs() then
         self.Briefing[_PlayerID].LastSkipButtonPressed = Logic.GetTimeMs();
+
+        SendReportToGlobal(Report.BriefingSkipButtonPressed, _PlayerID);
+        SendReport(Report.BriefingSkipButtonPressed, _PlayerID);
     end
 end
 
@@ -1199,7 +1238,6 @@ function Lib.BriefingSystem.Local:OverrideThroneRoomFunctions()
     GameCallback_Camera_ThroneRoomLeftClick = function(_PlayerID)
         Lib.BriefingSystem.Local.Orig_GameCallback_Camera_ThroneRoomLeftClick(_PlayerID);
         if _PlayerID == GUI.GetPlayerID() then
-            -- Must trigger in global script for all players.
             SendReportToGlobal(Report.BriefingLeftClick, _PlayerID);
             SendReport(Report.BriefingLeftClick, _PlayerID);
         end
@@ -1209,9 +1247,7 @@ function Lib.BriefingSystem.Local:OverrideThroneRoomFunctions()
     GameCallback_Camera_SkipButtonPressed = function(_PlayerID)
         Lib.BriefingSystem.Local.Orig_GameCallback_Camera_SkipButtonPressed(_PlayerID);
         if _PlayerID == GUI.GetPlayerID() then
-            -- Must trigger in global script for all players.
-            SendReportToGlobal(Report.BriefingSkipButtonPressed, _PlayerID);
-            SendReport(Report.BriefingSkipButtonPressed, _PlayerID);
+            Lib.BriefingSystem.Local:SkipButtonPressed(_PlayerID);
         end
     end
 
@@ -1273,21 +1309,19 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
 
     -- Throneroom Main
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 1);
-    XGUIEng.PushPage("/InGame/ThroneRoom/KnightInfo", false);
     XGUIEng.PushPage("/InGame/ThroneRoomBars", false);
     XGUIEng.PushPage("/InGame/ThroneRoomBars_2", false);
     XGUIEng.PushPage("/InGame/ThroneRoom/Main", false);
     XGUIEng.PushPage("/InGame/ThroneRoomBars_Dodge", false);
     XGUIEng.PushPage("/InGame/ThroneRoomBars_2_Dodge", false);
-    XGUIEng.PushPage("/InGame/ThroneRoom/KnightInfo/LeftFrame", false);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/Skip", 1);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/StartButton", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogTopChooseKnight", 1);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogTopChooseKnight/Frame", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogTopChooseKnight/DialogBG", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogTopChooseKnight/FrameEdges", 0);
-    XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogBottomRight3pcs", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/KnightInfoButton", 0);
+    XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/DialogBottomRight3pcs", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/BackButton", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/Briefing", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoom/Main/TitleContainer", 0);
@@ -1306,12 +1340,9 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     XGUIEng.SetWidgetScreenPosition("/InGame/ThroneRoom/Main/DialogTopChooseKnight/ChooseYourKnight", x, 65 * (ScreenY/1080));
     XGUIEng.SetWidgetPositionAndSize("/InGame/ThroneRoom/KnightInfo/Objectives", 2, 0, 2000, 20);
 
-    -- Briefing messages
-    XGUIEng.ShowAllSubWidgets("/InGame/ThroneRoom/KnightInfo", 0);
-    XGUIEng.ShowWidget("/InGame/ThroneRoom/KnightInfo/Text", 1);
-    XGUIEng.ShowWidget("/InGame/ThroneRoom/KnightInfo/BG", 0);
-    XGUIEng.SetText("/InGame/ThroneRoom/KnightInfo/Text", " ");
-    XGUIEng.SetWidgetPositionAndSize("/InGame/ThroneRoom/KnightInfo/Text", 200, 300, 1000, 10);
+    if self.Briefing[_PlayerID].HideNotes then
+        XGUIEng.ShowWidget("/InGame/Root/Normal/NotesWindow", 0);
+    end
 
     self.SelectionBackup = {GUI.GetSelectedEntities()};
     GUI.ClearSelection();
@@ -1397,13 +1428,15 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     XGUIEng.PopPage();
     XGUIEng.PopPage();
     XGUIEng.PopPage();
-    XGUIEng.PopPage();
-    XGUIEng.PopPage();
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_2", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_Dodge", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_2_Dodge", 0);
+
+    if self.Briefing[_PlayerID].HideNotes then
+        XGUIEng.ShowWidget("/InGame/Root/Normal/NotesWindow", 1);
+    end
 
     ResetRenderDistance();
     self:SetQualityMode();

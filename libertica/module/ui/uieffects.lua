@@ -537,7 +537,7 @@ function Lib.UIEffects.Local:InterfaceDeactivateNormalInterface(_PlayerID)
     XGUIEng.PushPage("/InGame/Root/Normal/NotesWindow", false);
     XGUIEng.ShowWidget("/InGame/Root/3dOnScreenDisplay", 0);
     XGUIEng.ShowWidget("/InGame/Root/Normal", 1);
-    XGUIEng.ShowWidget("/InGame/Root/Normal/TextMessages", 1);
+    XGUIEng.ShowWidget("/InGame/Root/Normal/TextMessages", 0);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomLeft/Message/MessagePortrait/SpeechStartAgainOrStop", 0);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomRight", 0);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopRight", 0);
@@ -586,6 +586,7 @@ function Lib.UIEffects.Local:InterfaceActivateNormalInterface(_PlayerID)
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopRight", 1);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopLeft", 1);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopLeft/TopBar", 1);
+    XGUIEng.ShowWidget("/InGame/Root/Normal/TextMessages", 1);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopLeft/TopBar/UpdateFunction", 1);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomLeft/Message/MessagePortrait/Buttons", 1);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopLeft/QuestLogButton", 1);

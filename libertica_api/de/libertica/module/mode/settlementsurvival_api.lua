@@ -28,6 +28,12 @@
 ---
 Lib.SettlementSurvival = Lib.SettlementSurvival or {};
 
+--- Aktiviert/deaktiviert den Modus.
+--- @param _Flag boolean Modus aktiv
+function SettlementSurvivalActivate(_Flag)
+end
+API.SettlementSurvivalActivate = SettlementSurvivalActivate;
+
 --- Aktiviert oder deaktiviert das Sterben von Tieren an Krankheiten.
 --- @param _Flag boolean Funktion ist aktiv
 function AnimalPlagueActivate(_Flag)
@@ -39,12 +45,6 @@ API.AnimalPlagueActivate = AnimalPlagueActivate;
 function AnimalPlagueActivateForAI(_Flag)
 end
 API.AnimalPlagueActivateForAI = AnimalPlagueActivateForAI;
-
---- Aktiviert oder deaktiviert das automatische Erkranken von Tieren.
---- @param _Flag boolean Funktion ist aktiv
-function AnimalInfectionActivateAutomatic(_Flag)
-end
-API.AnimalInfectionActivateAutomatic = AnimalInfectionActivateAutomatic;
 
 --- Ändert das Intervall zwischen den Toden von kranken Tieren.
 --- @param _Interval integer Neues Intervall
@@ -215,6 +215,18 @@ API.BanditsBlockClaimActivate = BanditsBlockClaimActivate;
 function ClothesForOuterRimActivate(_Flag)
 end
 API.ClothesForOuterRimActivate = ClothesForOuterRimActivate;
+
+--- Aktiviert oder deaktiviert ob Gebäude einen Grundbedarf haben.
+--- @param _Flag boolean Grundbedarf aktiv
+function BaseConsumptionActivate(_Flag)
+end
+API.BaseConsumptionActivate = BaseConsumptionActivate;
+
+--- Aktiviert oder deaktiviert ob auch Gebäude der KI einen Grundbedarf haben.
+--- @param _Flag boolean Grundbedarf aktiv
+function BaseConsumptionActivateForAI(_Flag)
+end
+API.BaseConsumptionActivateForAI = BaseConsumptionActivateForAI;
 
 
 
