@@ -216,6 +216,18 @@ function ClothesForOuterRimActivate(_Flag)
 end
 API.ClothesForOuterRimActivate = ClothesForOuterRimActivate;
 
+--- Aktiviert oder deaktiviert ob Gebäude einen Grundbedarf haben.
+--- @param _Flag boolean Grundbedarf aktiv
+function BaseConsumptionActivate(_Flag)
+end
+API.BaseConsumptionActivate = BaseConsumptionActivate;
+
+--- Aktiviert oder deaktiviert ob auch Gebäude der KI einen Grundbedarf haben.
+--- @param _Flag boolean Grundbedarf aktiv
+function BaseConsumptionActivateForAI(_Flag)
+end
+API.BaseConsumptionActivateForAI = BaseConsumptionActivateForAI;
+
 
 
 --- Ein Tier ist an Krankheit gestorben.

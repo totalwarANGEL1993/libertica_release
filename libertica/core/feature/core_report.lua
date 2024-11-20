@@ -22,8 +22,7 @@ Lib.Register("core/feature/Core_Report");
 function Lib.Core.Report:Initialize()
     if not IsLocalScript() then
         self:OverrideSoldierPayment();
-
-        Lib.Core.Report:CreateScriptCommand("Cmd_SendReportToGlobal", function(_ID, ...)
+        self:CreateScriptCommand("Cmd_SendReportToGlobal", function(_ID, ...)
             SendReport(_ID, ...);
         end);
     end

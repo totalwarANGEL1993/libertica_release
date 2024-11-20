@@ -214,6 +214,18 @@ function ClothesForOuterRimActivate(_Flag)
 end
 API.ClothesForOuterRimActivate = ClothesForOuterRimActivate;
 
+--- Enables or disables if buildings have a base consumltion.
+--- @param _Flag boolean Consumption active
+function BaseConsumptionActivate(_Flag)
+end
+API.BaseConsumptionActivate = BaseConsumptionActivate;
+
+--- Enables or disables if buildings of the AI also have base consumption.
+--- @param _Flag boolean Consumption active
+function BaseConsumptionActivateForAI(_Flag)
+end
+API.BaseConsumptionActivateForAI = BaseConsumptionActivateForAI;
+
 
 
 --- An animal has died from illness.
