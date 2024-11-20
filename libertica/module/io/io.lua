@@ -145,11 +145,11 @@ function Lib.IO.Global:OnObjectInteraction(_ScriptName, _KnightID, _PlayerID)
 end
 
 function Lib.IO.Global:CreateObject(_Description)
-    local ID = GetID(_Description.Name);
+    local ID = GetID(_Description.ScriptName);
     if ID == 0 then
         return;
     end
-    self:DestroyObject(_Description.Name);
+    self:DestroyObject(_Description.ScriptName);
 
     local TypeName = Logic.GetEntityTypeName(Logic.GetEntityType(ID));
     if TypeName and not TypeName:find("^I_X_") then
@@ -162,11 +162,11 @@ function Lib.IO.Global:CreateObject(_Description)
     _Description.State = _Description.State or 0;
     _Description.Waittime = _Description.Waittime or 5;
     _Description.Distance = _Description.Distance or 1000;
-    CONST_IO[_Description.Name] = _Description;
+    CONST_IO[_Description.ScriptName] = _Description;
     ExecuteLocal(
         [[CONST_IO["%s"] = %s]],
-        _Description.Name,
-        table.tostring(CONST_IO[_Description.Name])
+        _Description.ScriptName,
+        table.tostring(CONST_IO[_Description.ScriptName])
     );
     self:SetupObject(_Description);
     return _Description;
@@ -195,7 +195,7 @@ end
 function Lib.IO.Global:CreateSlaveObject(_Object)
     local Name;
     for k, v in pairs(CONST_IO_SLAVE_TO_MASTER) do
-        if v == _Object.Name and IsExisting(k) then
+        if v == _Object.ScriptName and IsExisting(k) then
             Name = k;
         end
     end
@@ -206,12 +206,12 @@ function Lib.IO.Global:CreateSlaveObject(_Object)
 
     local SlaveID = GetID(Name);
     if not IsExisting(Name) then
-        local x,y,z = Logic.EntityGetPos(GetID(_Object.Name));
+        local x,y,z = Logic.EntityGetPos(GetID(_Object.ScriptName));
         SlaveID = Logic.CreateEntity(Entities.I_X_DragonBoatWreckage, x, y, 0, 0);
         Logic.SetModel(SlaveID, Models.Effects_E_Mosquitos);
         Logic.SetEntityName(SlaveID, Name);
-        CONST_IO_SLAVE_TO_MASTER[Name] = _Object.Name;
-        ExecuteLocal([[CONST_IO_SLAVE_TO_MASTER["%s"] = "%s"]], Name, _Object.Name);
+        CONST_IO_SLAVE_TO_MASTER[Name] = _Object.ScriptName;
+        ExecuteLocal([[CONST_IO_SLAVE_TO_MASTER["%s"] = "%s"]], Name, _Object.ScriptName);
         _Object.Slave = Name;
     end
     CONST_IO_SLAVE_STATE[Name] = 1;
@@ -219,7 +219,7 @@ function Lib.IO.Global:CreateSlaveObject(_Object)
 end
 
 function Lib.IO.Global:SetupObject(_Object)
-    local ID = GetID((_Object.Slave and _Object.Slave) or _Object.Name);
+    local ID = GetID((_Object.Slave and _Object.Slave) or _Object.ScriptName);
     Logic.InteractiveObjectClearCosts(ID);
     Logic.InteractiveObjectClearRewards(ID);
     Logic.InteractiveObjectSetInteractionDistance(ID, _Object.Distance);

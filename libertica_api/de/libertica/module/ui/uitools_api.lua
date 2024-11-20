@@ -50,6 +50,7 @@ Lib.UITools = Lib.UITools or {};
 --- @param _Name? string Optionale Symboldatei
 function ChangeIcon(_WidgetID, _Coordinates, _Size, _Name)
 end
+API.InterfaceSetIcon = ChangeIcon;
 API.SetIcon = ChangeIcon;
 
 --- Ändert die Beschreibung eines Buttons oder Symbols.
@@ -58,6 +59,7 @@ API.SetIcon = ChangeIcon;
 --- @param _DisabledText any? Text oder lokalisierte Tabelle
 function SetTooltipNormal(_Title, _Text, _DisabledText)
 end
+API.InterfaceSetTooltipNormal = SetTooltipNormal;
 API.SetTooltipNormal = SetTooltipNormal;
 
 --- Ändert die Beschreibung eines Buttons oder Symbols mit zusätzlichen Kosten.
@@ -68,66 +70,77 @@ API.SetTooltipNormal = SetTooltipNormal;
 --- @param _InSettlement boolean? Prüft alle Quellen in der Siedlung
 function SetTooltipCosts(_Title, _Text, _DisabledText, _Costs, _InSettlement)
 end
+API.InterfaceSetTooltipCosts = SetTooltipCosts;
 API.SetTooltipCosts = SetTooltipCosts;
 
 --- Ändert die Sichtbarkeit der Minikarte.
 --- @param _Flag boolean Widget ist versteckt
 function HideMinimap(_Flag)
 end
+API.InterfaceHideMinimap = HideMinimap;
 API.HideMinimap = HideMinimap;
 
 --- Ändert die Sichtbarkeit des Minikarten-Buttons.
 --- @param _Flag boolean Widget ist versteckt
 function HideToggleMinimap(_Flag)
 end
+API.InterfaceHideToggleMinimap = HideToggleMinimap;
 API.HideToggleMinimap = HideToggleMinimap;
 
 --- Ändert die Sichtbarkeit des Diplomatiemenü-Buttons.
 --- @param _Flag boolean Widget ist versteckt
 function HideDiplomacyMenu(_Flag)
 end
+API.InterfaceHideDiplomacyMenu = HideDiplomacyMenu;
 API.HideDiplomacyMenu = HideDiplomacyMenu;
 
 --- Ändert die Sichtbarkeit des Produktionsmenü-Buttons.
 --- @param _Flag boolean Widget ist versteckt
 function HideProductionMenu(_Flag)
 end
+API.InterfaceHideProductionMenu = HideProductionMenu;
 API.HideProductionMenu = HideProductionMenu;
 
 --- Ändert die Sichtbarkeit des Wettermenü-Buttons.
 --- @param _Flag boolean Widget ist versteckt
 function HideWeatherMenu(_Flag)
 end
+API.InterfaceHideWeatherMenu = HideWeatherMenu;
 API.HideWeatherMenu = HideWeatherMenu;
 
 --- Ändert die Sichtbarkeit des Gebietsbeanspruchungsbuttons.
 --- @param _Flag boolean Widget ist versteckt
 function HideBuyTerritory(_Flag)
 end
+API.InterfaceHideBuyTerritory = HideBuyTerritory;
 API.HideBuyTerritory = HideBuyTerritory;
 
 --- Ändert die Sichtbarkeit des Ritterfähigkeiten-Buttons.
 --- @param _Flag boolean Widget ist versteckt
 function HideKnightAbility(_Flag)
 end
+API.InterfaceHideKnightAbility = HideKnightAbility;
 API.HideKnightAbility = HideKnightAbility;
 
 --- Ändert die Sichtbarkeit des Ritterauswahl-Buttons.
 --- @param _Flag boolean Widget ist versteckt
 function HideKnightButton(_Flag)
 end
+API.InterfaceHideKnightButton = HideKnightButton;
 API.HideKnightButton = HideKnightButton;
 
 --- Ändert die Sichtbarkeit des militärische Auswahl-Buttons.
 --- @param _Flag boolean Widget ist versteckt
 function HideSelectionButton(_Flag)
 end
+API.InterfaceHideSelectionButton = HideSelectionButton;
 API.HideSelectionButton = HideSelectionButton;
 
 --- Ändert die Sichtbarkeit des Baumenu.
 --- @param _Flag boolean Widget ist versteckt
 function HideBuildMenu(_Flag)
 end
+API.InterfaceHideBuildMenu = HideBuildMenu;
 API.HideBuildMenu = HideBuildMenu;
 
 --- Fügt eine neue Tastaturkürzel-Beschreibung hinzu.
@@ -149,6 +162,7 @@ API.RemoveShortcutDescription = RemoveShortcutDescription;
 --- @param _Flag boolean Zwangsgeschwindigkeit aktiv
 function SpeedLimitActivate(_Flag)
 end
+API.SetSpeedLimit = SpeedLimitSetLimit;
 API.SpeedLimitActivate = SpeedLimitActivate;
 
 

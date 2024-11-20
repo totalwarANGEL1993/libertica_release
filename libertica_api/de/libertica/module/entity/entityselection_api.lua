@@ -36,31 +36,6 @@ function DisableReleaseSoldiers(_Flag)
 end
 API.DisableReleaseSoldiers = DisableReleaseSoldiers;
 
---- Gibt zurück, ob die Einheit derzeit ausgewählt ist.
---- @param _Entity any        Zu prüfende Einheit
---- @param _PlayerID integer? Spieler-ID zur Überprüfung
---- @return boolean Ausgewählte Einheit ist ausgewählt
-function IsEntitySelected(_Entity, _PlayerID)
-    return false;
-end
-API.IsEntityInSelection = IsEntitySelected;
-
---- Gibt die erste ausgewählte Einheit zurück.
---- @param _PlayerID integer ID des Spielers
---- @return integer Einheit Erste ausgewählte Einheit
-function GetSelectedEntity(_PlayerID)
-    return 0;
-end
-API.GetSelectedEntity = GetSelectedEntity;
-
---- Gibt alle ausgewählten Einheiten des Spielers zurück.
---- @param _PlayerID integer ID des Spielers
---- @return table Liste Ausgewählte Einheiten des Spielers
-function GetSelectedEntities(_PlayerID)
-    return {};
-end
-API.GetSelectedEntities = GetSelectedEntities;
-
 
 
 --- Eine Einheit wurde entlassen.
@@ -68,13 +43,6 @@ API.GetSelectedEntities = GetSelectedEntities;
 --- #### Parameter
 --- * `EntityID` - ID der Einheit
 Report.ExpelSettler = anyInteger;
-
---- Die Auswahl von Einheiten eines Spielers hat sich geändert.
----
---- #### Parameter
---- * `PlayerID` - ID des Spielers
---- * `...`      - Liste von Einheiten
-Report.SelectionChanged = anyInteger;
 
 --- Ein Trebuchet wird zum Anhalten gezwungen.
 ---

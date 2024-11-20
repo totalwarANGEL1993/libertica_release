@@ -10,7 +10,7 @@ Lib.IOMine = Lib.IOMine or {};
 --- Erstellt eine vergrabene Eisenerzmine.
 ---
 --- #### Parameter
---- * `Scriptname`            - Skriptname der Position
+--- * `ScriptName`            - Skriptname der Position
 --- * `Title`                 - (Optional) Tooltip-Titel
 --- * `Text`                  - (Optional) Tooltip-Text
 --- * `Costs`                 - (Optional) Baukosten
@@ -28,7 +28,7 @@ API.CreateIOIronMine = CreateIOIronMine;
 --- Erstellt eine vergrabene Steingrube.
 ---
 --- #### Parameter
---- * `Scriptname`            - Skriptname der Position
+--- * `ScriptName`            - Skriptname der Position
 --- * `Title`                 - (Optional) Tooltip-Titel
 --- * `Text`                  - (Optional) Tooltip-Text
 --- * `Costs`                 - (Optional) Baukosten

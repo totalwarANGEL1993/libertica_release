@@ -63,6 +63,8 @@ function Lib.Core.Debug:ActivateDebugMode(_DisplayScriptErrors, _CheckAtRun, _De
     self.DevelopingShell     = _DevelopingShell == true;
     self.TraceQuests         = _TraceQuests == true;
 
+    g_DisplayScriptErrors = _DisplayScriptErrors == true;
+
     SendReport(
         Report.DebugConfigChanged,
         self.DisplayScriptErrors,
@@ -89,12 +91,24 @@ function Lib.Core.Debug:ActivateDebugMode(_DisplayScriptErrors, _CheckAtRun, _De
                 Lib.Core.Debug.TraceQuests
             );
             Lib.Core.Debug:InitializeDebugWidgets();
+
+            g_DisplayScriptErrors = Lib.Core.Debug.DisplayScriptErrors;
         ]],
         tostring(self.DisplayScriptErrors),
         tostring(self.CheckAtRun),
         tostring(self.DevelopingCheats),
         tostring(self.DevelopingShell),
         tostring(self.TraceQuests)
+    );
+end
+
+function Lib.Core.Debug:LegacyToggleDisplayScriptErrors(_Active)
+    self:ActivateDebugMode(
+        _Active == true,
+        self.CheckAtRun,
+        self.DevelopingCheats,
+        self.DevelopingShell,
+        self.TraceQuests
     );
 end
 
@@ -171,7 +185,10 @@ function Lib.Core.Debug:ProcessDebugShortcut(_Type, _Params)
         if _Type == "RestartMap" then
             self:HideDebugInput();
             Framework.RestartMap();
-        elseif _Type == "Terminal" then
+        end
+    end
+    if self.DevelopingShell then
+        if _Type == "Terminal" then
             ShowTextInput(GUI.GetPlayerID(), true);
         end
     end
@@ -271,10 +288,6 @@ end
 
 -- -------------------------------------------------------------------------- --
 
-function Debug_ShowVersion()
-    GUI.AddStaticNote("Version: " ..Lib.Loader.Version);
-end
-
 function Lib.Core.Debug:ToggleDebugInput()
     if self.ConsoleIsVisible then
         self:HideDebugInput();
@@ -346,6 +359,11 @@ function ActivateDebugMode(_DisplayScriptErrors, _CheckAtRun, _DevelopingCheats,
     Lib.Core.Debug:ActivateDebugMode(_DisplayScriptErrors, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests);
 end
 API.ActivateDebugMode = ActivateDebugMode;
+
+function ToggleDisplayScriptErrors(_active)
+    Lib.Core.Debug:LegacyToggleDisplayScriptErrors(_active);
+end
+API.ToggleDisplayScriptErrors = ToggleDisplayScriptErrors;
 
 function ShowScriptConsole()
     Lib.Core.Debug:ShowDebugInput();

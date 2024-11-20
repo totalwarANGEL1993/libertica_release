@@ -19,7 +19,8 @@ Lib.DialogSystem = Lib.DialogSystem or {};
 --- * `EnableGlobalImmortality` - Während der Dialoge sind alle Einheiten unverwundbar        
 --- * `EnableSky`               - Anzeige des Himmels während des Dialogs                   
 --- * `EnableFoW`               - Anzeige des Nebels des Krieges während des Dialogs           
---- * `EnableBorderPins`        - Anzeige der Grenznadeln während des Dialogs 
+--- * `EnableBorderPins`        - Anzeige der Grenznadeln während des Dialogs
+--- * `HideNotes`               - Nachrichten nicht anzeigen
 ---
 --- #### Beispiel
 ---

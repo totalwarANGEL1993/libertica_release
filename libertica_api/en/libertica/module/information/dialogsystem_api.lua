@@ -19,7 +19,8 @@ Lib.DialogSystem = Lib.DialogSystem or {};
 --- * `EnableGlobalImmortality` - During dialogs all entities are invulnerable        
 --- * `EnableSky`               - Display the sky during the dialog                   
 --- * `EnableFoW`               - Displays the fog of war during the dialog           
---- * `EnableBorderPins`        - Displays the border pins during the dialog 
+--- * `EnableBorderPins`        - Displays the border pins during the dialog
+--- * `HideNotes`               - Do not show notes
 ---
 --- #### Example
 ---

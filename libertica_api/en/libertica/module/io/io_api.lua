@@ -22,7 +22,7 @@ Lib.IO = Lib.IO or {};
 --- keys are optional.
 ---
 --- #### Fields of table
---- * Name                   - Scriptname of object
+--- * ScriptName             - Scriptname of object
 --- * Texture                - (Optional) table with coordinates
 ---   - Game icons: {x, y, ExtraNumber}
 ---   - Custom icons: {x, y, FileNamePrefix}

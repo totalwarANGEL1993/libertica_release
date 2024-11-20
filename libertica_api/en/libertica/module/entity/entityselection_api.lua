@@ -36,31 +36,6 @@ function DisableReleaseSoldiers(_Flag)
 end
 API.DisableReleaseSoldiers = DisableReleaseSoldiers;
 
---- Returns true if the entity is currently selected.
---- @param _Entity any        Entity to check
---- @param _PlayerID integer? PlayerID to check
---- @return boolean Selected Entity is selectec
-function IsEntitySelected(_Entity, _PlayerID)
-    return false;
-end
-API.IsEntityInSelection = IsEntitySelected;
-
---- Returns the first selected entity.
---- @param _PlayerID integer ID of player
---- @return integer Entity First selected entity
-function GetSelectedEntity(_PlayerID)
-    return 0;
-end
-API.GetSelectedEntity = GetSelectedEntity;
-
---- Returns all selected entities of the player.
---- @param _PlayerID integer ID of player
---- @return table List Entities selected by the player
-function GetSelectedEntities(_PlayerID)
-    return {};
-end
-API.GetSelectedEntities = GetSelectedEntities;
-
 
 
 --- A entity has been expelled.
@@ -68,13 +43,6 @@ API.GetSelectedEntities = GetSelectedEntities;
 --- #### Parameters
 --- * `EntityID` - ID of entity
 Report.ExpelSettler = anyInteger;
-
---- The selection of entities of a player has changed.
----
---- #### Parameters
---- * `PlayerID` - ID of player
---- * `...`      - List of entities
-Report.SelectionChanged = anyInteger;
 
 --- A trebuchet is forced to stop.
 ---

@@ -51,6 +51,7 @@ Lib.UITools = Lib.UITools or {};
 --- @param _Name? string Optional icon file
 function ChangeIcon(_WidgetID, _Coordinates, _Size, _Name)
 end
+API.InterfaceSetIcon = ChangeIcon;
 API.SetIcon = ChangeIcon;
 
 --- Changes the description of a button or icon.
@@ -59,6 +60,7 @@ API.SetIcon = ChangeIcon;
 --- @param _DisabledText any? Text or localized table
 function SetTooltipNormal(_Title, _Text, _DisabledText)
 end
+API.InterfaceSetTooltipNormal = SetTooltipNormal;
 API.SetTooltipNormal = SetTooltipNormal;
 
 --- Changes the description of a button or icon with additional costs.
@@ -69,66 +71,77 @@ API.SetTooltipNormal = SetTooltipNormal;
 --- @param _InSettlement boolean? Check all sources in settlement
 function SetTooltipCosts(_Title, _Text, _DisabledText, _Costs, _InSettlement)
 end
+API.InterfaceSetTooltipCosts = SetTooltipCosts;
 API.SetTooltipCosts = SetTooltipCosts;
 
 --- Changes the visibility of the minimap.
 --- @param _Flag boolean Widget is hidden
 function HideMinimap(_Flag)
 end
+API.InterfaceHideMinimap = HideMinimap;
 API.HideMinimap = HideMinimap;
 
 --- Changes the visibility of the minimap button.
 --- @param _Flag boolean Widget is hidden
 function HideToggleMinimap(_Flag)
 end
+API.InterfaceHideToggleMinimap = HideToggleMinimap;
 API.HideToggleMinimap = HideToggleMinimap;
 
 --- Changes the visibility of the diplomacy menu button.
 --- @param _Flag boolean Widget is hidden
 function HideDiplomacyMenu(_Flag)
 end
+API.InterfaceHideDiplomacyMenu = HideDiplomacyMenu;
 API.HideDiplomacyMenu = HideDiplomacyMenu;
 
 --- Changes the visibility of the produktion menu button.
 --- @param _Flag boolean Widget is hidden
 function HideProductionMenu(_Flag)
 end
+API.InterfaceHideProductionMenu = HideProductionMenu;
 API.HideProductionMenu = HideProductionMenu;
 
 --- Changes the visibility of the weather menu button.
 --- @param _Flag boolean Widget is hidden
 function HideWeatherMenu(_Flag)
 end
+API.InterfaceHideWeatherMenu = HideWeatherMenu;
 API.HideWeatherMenu = HideWeatherMenu;
 
 --- Changes the visibility of the territory button.
 --- @param _Flag boolean Widget is hidden
 function HideBuyTerritory(_Flag)
 end
+API.InterfaceHideBuyTerritory = HideBuyTerritory;
 API.HideBuyTerritory = HideBuyTerritory;
 
 --- Changes the visibility of the knight ability button.
 --- @param _Flag boolean Widget is hidden
 function HideKnightAbility(_Flag)
 end
+API.InterfaceHideKnightAbility = HideKnightAbility;
 API.HideKnightAbility = HideKnightAbility;
 
 --- Changes the visibility of the knight selection button.
 --- @param _Flag boolean Widget is hidden
 function HideKnightButton(_Flag)
 end
+API.InterfaceHideKnightButton = HideKnightButton;
 API.HideKnightButton = HideKnightButton;
 
 --- Changes the visibility of the select military button.
 --- @param _Flag boolean Widget is hidden
 function HideSelectionButton(_Flag)
 end
+API.InterfaceHideSelectionButton = HideSelectionButton;
 API.HideSelectionButton = HideSelectionButton;
 
 --- Changes the visibility of the build menu.
 --- @param _Flag boolean Widget is hidden
 function HideBuildMenu(_Flag)
 end
+API.InterfaceHideBuildMenu = HideBuildMenu;
 API.HideBuildMenu = HideBuildMenu;
 
 --- Adds a new shortcut description.
@@ -150,6 +163,7 @@ API.RemoveShortcutDescription = RemoveShortcutDescription;
 --- @param _Flag boolean Is active
 function SpeedLimitActivate(_Flag)
 end
+API.SetSpeedLimit = SpeedLimitSetLimit;
 API.SpeedLimitActivate = SpeedLimitActivate;
 
 

@@ -145,7 +145,7 @@ function Lib.IOChest.Global:CreateRandomChest(_Name, _Good, _Min, _Max, _DirectP
         end,
         Action                  = function(_Data, _KnightID, _PlayerID)
             if not _Data.DoNotChangeModel then
-                Logic.SetModel(GetID(_Data.Name), Models.Doodads_D_X_ChestOpenEmpty);
+                Logic.SetModel(GetID(_Data.ScriptName), Models.Doodads_D_X_ChestOpenEmpty);
             end
             if _Data.DirectReward then
                 AddGood(_Data.DirectReward[1], _Data.DirectReward[2], _PlayerID);
@@ -154,8 +154,8 @@ function Lib.IOChest.Global:CreateRandomChest(_Name, _Good, _Min, _Max, _DirectP
                 _Data.ActivationAction(_Data, _KnightID, _PlayerID);
             end
 
-            SendReport(Report.InteractiveTreasureActivated, _Data.Name, _KnightID, _PlayerID);
-            SendReportToLocal(Report.InteractiveTreasureActivated, _Data.Name, _KnightID, _PlayerID);
+            SendReport(Report.InteractiveTreasureActivated, _Data.ScriptName, _KnightID, _PlayerID);
+            SendReportToLocal(Report.InteractiveTreasureActivated, _Data.ScriptName, _KnightID, _PlayerID);
         end,
     };
 end

@@ -75,8 +75,8 @@ function Lib.NPC.Global:OnReportReceived(_ID, ...)
 end
 
 function Lib.NPC.Global:CreateNpc(_Data)
-    self.NPC[_Data.Name] = {
-        Name              = _Data.Name,
+    self.NPC[_Data.ScriptName] = {
+        ScriptName        = _Data.ScriptName,
         Active            = true,
         Arrived           = false,
         Type              = _Data.Type or 1,
@@ -98,14 +98,14 @@ function Lib.NPC.Global:CreateNpc(_Data)
         MarkerID          = 0
     }
     self:UpdateNpc(_Data);
-    return self.NPC[_Data.Name];
+    return self.NPC[_Data.ScriptName];
 end
 
 function Lib.NPC.Global:DestroyNpc(_Data)
     _Data.Active = false;
     self:UpdateNpc(_Data);
-    self:DestroyMarker(_Data.Name);
-    self.NPC[_Data.Name] = nil;
+    self:DestroyMarker(_Data.ScriptName);
+    self.NPC[_Data.ScriptName] = nil;
 end
 
 function Lib.NPC.Global:GetNpc(_ScriptName)
@@ -113,23 +113,23 @@ function Lib.NPC.Global:GetNpc(_ScriptName)
 end
 
 function Lib.NPC.Global:UpdateNpc(_Data)
-    if not IsExisting(_Data.Name) then
+    if not IsExisting(_Data.ScriptName) then
         return;
     end
-    if not self.NPC[_Data.Name] then
-        local EntityID = GetID(_Data.Name);
+    if not self.NPC[_Data.ScriptName] then
+        local EntityID = GetID(_Data.ScriptName);
         Logic.SetOnScreenInformation(EntityID, 0);
         return;
     end
     for k, v in pairs(_Data) do
-        self.NPC[_Data.Name][k] = v;
+        self.NPC[_Data.ScriptName][k] = v;
     end
-    self:CreateMarker(_Data.Name);
-    if self.NPC[_Data.Name].Active then
-        local EntityID = GetID(_Data.Name);
-        Logic.SetOnScreenInformation(EntityID, self.NPC[_Data.Name].Type);
+    self:CreateMarker(_Data.ScriptName);
+    if self.NPC[_Data.ScriptName].Active then
+        local EntityID = GetID(_Data.ScriptName);
+        Logic.SetOnScreenInformation(EntityID, self.NPC[_Data.ScriptName].Type);
     else
-        local EntityID = GetID(_Data.Name);
+        local EntityID = GetID(_Data.ScriptName);
         Logic.SetOnScreenInformation(EntityID, 0);
     end
 end
@@ -452,7 +452,7 @@ end
 function Lib.NPC.Global:NpcFollowHeroController()
     for _, Data in pairs(self.NPC) do
         if Data.Active and Data.Follow and not Data.Arrived then
-            local EntityID = GetID(Data.Name);
+            local EntityID = GetID(Data.ScriptName);
             local LeadingEntity = GetID(Data.FollowHero);
             local FollowDistance = Data.FollowDistance;
             local FollowDestination = Data.FollowDestination;

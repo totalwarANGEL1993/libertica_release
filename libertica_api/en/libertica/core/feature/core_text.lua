@@ -4,7 +4,7 @@ Lib.Core.Text = {}
 
 --- Localizes the passed text or table. 
 --- @param _Text any Text to localize
---- @return string Localized Localized text
+--- @return any Localized Localized text
 function Localize(_Text)
     return "";
 end
@@ -46,11 +46,26 @@ API.StaticNote = AddStaticNote;
 --- @param _Sound? string Sound to play
 function AddMessage(_Text, _Sound)
 end
+API.Message = AddMessage;
 
 ---Removes all text from the debug text window.
 function ClearNotes()
 end
 API.ClearNotes = ClearNotes;
+
+--- Replaces a name with the given text.
+--- @param _Name string Name to replace
+--- @param _Replacement any Replacement value
+function AddNamePlaceholder(_Name, _Replacement)
+end
+API.AddNamePlaceholder = AddNamePlaceholder;
+
+--- Replaces a entity type witht the given text.
+--- @param _Type integer Entity type to replace
+--- @param _Replacement any Replacement value
+function AddEntityTypePlaceholder(_Type, _Replacement)
+end
+API.AddEntityTypePlaceholder = AddEntityTypePlaceholder;
 
 --- Saves a string text overwrite at the key.
 --- @param _Key string Key of entry

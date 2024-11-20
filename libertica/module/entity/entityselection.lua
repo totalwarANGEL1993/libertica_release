@@ -2,10 +2,8 @@ Lib.EntitySelection = Lib.EntitySelection or {};
 Lib.EntitySelection.Name = "EntitySelection";
 Lib.EntitySelection.Global = {
     TrebuchetIDToCart = {},
-    SelectedEntities = {},
 };
 Lib.EntitySelection.Local  = {
-    SelectedEntities = {},
     TrebuchetDisassemble = false,
     TrebuchetErect = false,
     ThiefRelease = false,
@@ -13,8 +11,7 @@ Lib.EntitySelection.Local  = {
     MilitaryRelease = true,
 };
 
-Lib.Require("comfort/IsHistoryEdition");
-Lib.Require("comfort/IsMultiplayer");
+Lib.Require("comfort/GetPosition");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/entity/EntitySelection_API");
@@ -27,43 +24,10 @@ Lib.Register("module/entity/EntitySelection");
 -- Global initalizer method
 function Lib.EntitySelection.Global:Initialize()
     if not self.IsInstalled then
-        --- A entity has been expelled.
-        ---
-        --- #### Parameters
-        --- * `EntityID` - ID of entity
         Report.ExpelSettler = CreateReport("Event_ExpelSettler");
-
-        --- The selection of entities of a player has changed.
-        ---
-        --- #### Parameters
-        --- * `PlayerID` - ID of player
-        --- * `...`      - List of entities
-        Report.SelectionChanged = CreateReport("Event_SelectionChanged");
-
-        --- A trebuchet is forced to stop.
-        ---
-        --- #### Parameters
-        --- * `EntityID` - ID of entity
-        --- * `TaskList` - ID of Tasklist
         Report.ForceTrebuchetTasklist = CreateReport("Event_ForceTrebuchetTasklist");
-
-        --- A trebuchet is build from a siege engine cart.
-        --- (Currently not used)
-        ---
-        --- #### Parameters
-        --- * `EntityID` - ID of entity
         Report.ErectTrebuchet = CreateReport("Event_ErectTrebuchet");
-
-        --- A trebuchet is broken down to a siege engine cart.
-        --- (Currently not used)
-        ---
-        --- #### Parameters
-        --- * `EntityID` - ID of entity
         Report.DisambleTrebuchet = CreateReport("Event_DisambleTrebuchet");
-
-        for i= 1, 8 do
-            self.SelectedEntities[i] = {};
-        end
 
         -- Garbage collection
         Lib.EntitySelection.Local = nil;
@@ -87,9 +51,6 @@ function Lib.EntitySelection.Global:OnReportReceived(_ID, ...)
         Lib.EntitySelection.Global:MilitaryDisambleTrebuchet(arg[1]);
     elseif _ID == Report.ExpelSettler then
         DestroyEntity(arg[1]);
-    elseif _ID == Report.SelectionChanged then
-        local PlayerID = table.remove(arg, 1);
-        Lib.EntitySelection.Global.SelectedEntities[PlayerID] = {unpack(arg)};
     end
 end
 
@@ -163,28 +124,19 @@ end
 function Lib.EntitySelection.Local:Initialize()
     if not self.IsInstalled then
         Report.ExpelSettler = CreateReport("Event_ExpelSettler");
-        Report.SelectionChanged = CreateReport("Event_SelectionChanged");
         Report.ForceTrebuchetTasklist = CreateReport("Event_ForceTrebuchetTasklist");
         Report.ErectTrebuchet = CreateReport("Event_ErectTrebuchet");
         Report.DisambleTrebuchet = CreateReport("Event_DisambleTrebuchet");
 
-        -- Deactivated because the synch method for the HE is... meh...
-        if not (IsHistoryEdition() and IsMultiplayer()) then
-            self:OverrideSelection();
-            self:OverwriteMilitaryCommands();
-            self:OverwriteMilitaryErect();
-            self:OverwriteMilitaryDisamble();
-            self:OverwriteMultiselectIcon();
-            self:OverwriteMilitaryDismount();
-            self:OverwriteThiefDeliver();
-            self:OverwriteSelectKnight();
-            self:OverwriteSelectAllUnits();
-            self:OverwriteNamesAndDescription();
-        end
-
-        for i= 1, 8 do
-            self.SelectedEntities[i] = {};
-        end
+        self:OverwriteMilitaryCommands();
+        self:OverwriteMilitaryErect();
+        self:OverwriteMilitaryDisamble();
+        self:OverwriteMultiselectIcon();
+        self:OverwriteMilitaryDismount();
+        self:OverwriteThiefDeliver();
+        self:OverwriteSelectKnight();
+        self:OverwriteSelectAllUnits();
+        self:OverwriteNamesAndDescription();
 
         -- Garbage collection
         Lib.EntitySelection.Global = nil;
@@ -200,14 +152,6 @@ end
 function Lib.EntitySelection.Local:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
-    end
-end
-
-function Lib.EntitySelection.Local:OverrideSelection()
-    self.Orig_GameCallback_GUI_SelectionChanged = GameCallback_GUI_SelectionChanged;
-    GameCallback_GUI_SelectionChanged = function(_Source)
-        Lib.EntitySelection.Local.Orig_GameCallback_GUI_SelectionChanged(_Source);
-        Lib.EntitySelection.Local:OnSelectionCanged(_Source);
     end
 end
 
@@ -342,15 +286,8 @@ function Lib.EntitySelection.Local:OverwriteMilitaryDisamble()
 end
 
 function Lib.EntitySelection.Local:OnSelectionCanged(_Source)
-    local PlayerID = GUI.GetPlayerID();
     local EntityID = GUI.GetSelectedEntity();
     local EntityType = Logic.GetEntityType(EntityID);
-
-    local SelectedEntities = {GUI.GetSelectedEntities()};
-    self.SelectedEntities[PlayerID] = SelectedEntities;
-
-    SendReportToGlobal(Report.SelectionChanged, PlayerID, unpack(SelectedEntities));
-    SendReport(Report.SelectionChanged, PlayerID, unpack(SelectedEntities));
 
     if EntityID ~= nil then
         if EntityType == Entities.U_SiegeEngineCart then

@@ -10,6 +10,7 @@ Lib.Core.ScriptingValue = {
             Visible     = -50,
             Selectable  = -50,
             NPC         = 6,
+			Model 		= -74,
         },
         HistoryEdition = {
             Destination = {X = 17, Y= 18},
@@ -19,6 +20,7 @@ Lib.Core.ScriptingValue = {
             Visible     = -47,
             Selectable  = -47,
             NPC         = 6,
+			Model 		= -71,
         }
     }
 }
@@ -160,53 +162,69 @@ function GetEntityDestination(_Entity)
     local Y = GetFloat(_Entity, CONST_SCRIPTING_VALUES.Destination.Y);
     return {X = X, Y = Y, Z = 0};
 end
+API.GetEntityDestination = GetEntityDestination;
 
 function GetEntityHealth(_Entity)
     assert(IsExisting(_Entity), "Entity does not exist.");
     return GetInteger(_Entity, CONST_SCRIPTING_VALUES.Health);
 end
+API.GetEntityHealth = GetEntityHealth;
 
 function SetEntityHealth(_Entity, _Health)
     assert(IsExisting(_Entity), "Entity does not exist.");
     SetInteger(_Entity, CONST_SCRIPTING_VALUES.Health, _Health);
 end
+API.SetEntityHealth = SetEntityHealth;
 
 function GetEntityNpc(_Entity)
     assert(IsExisting(_Entity), "Entity does not exist.");
     return GetInteger(_Entity, CONST_SCRIPTING_VALUES.NPC) > 0;
 end
+API.GetEntityNpc = GetEntityNpc;
 
 function GetEntityPlayer(_Entity)
     assert(IsExisting(_Entity), "Entity does not exist.");
     return GetInteger(_Entity, CONST_SCRIPTING_VALUES.Player);
 end
+API.GetEntityPlayer = GetEntityPlayer;
 
 function SetEntityPlayer(_Entity, _Player)
     assert(IsExisting(_Entity), "Entity does not exist.");
     SetInteger(_Entity, CONST_SCRIPTING_VALUES.Player, _Player);
 end
+API.SetEntityPlayer = SetEntityPlayer;
 
 function GetEntityScaling(_Entity)
     assert(IsExisting(_Entity), "Entity does not exist.");
     return GetFloat(_Entity, CONST_SCRIPTING_VALUES.Size);
 end
+API.GetEntityScaling = GetEntityScaling;
 
-function GetEntityScaling(_Entity, _Scaling)
+function SetEntityScaling(_Entity, _Scaling)
     assert(IsExisting(_Entity), "Entity does not exist.");
     SetFloat(_Entity, CONST_SCRIPTING_VALUES.Size, _Scaling);
 end
+API.SetEntityScaling = SetEntityScaling;
+
+function GetEntityModel(_Entity)
+    assert(IsExisting(_Entity), "Entity does not exist.");
+    return GetInteger(_Entity, CONST_SCRIPTING_VALUES.Model);
+end
+API.GetEntityModel = GetEntityModel;
 
 function IsEntityInvisible(_Entity)
     assert(IsExisting(_Entity), "Entity does not exist.");
     -- 801280 would be visible
     return GetInteger(_Entity, CONST_SCRIPTING_VALUES.Visible) == 793088;
 end
+API.IsEntityInvisible = IsEntityInvisible;
 
 function IsEntityInaccessible(_Entity)
     assert(IsExisting(_Entity), "Entity does not exist.");
     -- 801280 would be selectable
     return IsEntityInvisible(_Entity) or GetInteger(_Entity, CONST_SCRIPTING_VALUES.Visible) == 799232;
 end
+API.IsEntityInaccessible = IsEntityInaccessible;
 
 function GetInteger(_Entity, _SV)
     assert(IsExisting(_Entity), "Entity does not exist.");

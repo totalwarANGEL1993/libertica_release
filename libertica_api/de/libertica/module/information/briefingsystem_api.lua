@@ -18,9 +18,10 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- * `RestoreGameSpeed`        - Spielgeschwindigkeit wird am Ende der Einleitung gespeichert und wiederhergestellt      
 --- * `EnableGlobalImmortality` - Während Einleitungen sind alle Entitäten unverwundbar        
 --- * `EnableSky`               - Zeigt den Himmel während der Einleitung an                   
---- * `EnableFoW`               - Zeigt den Nebel des Krieges während der Einleitung an           
+--- * `EnableFoW`               - Zeigt den Nebel des Krieges während der Einleitung an 
 --- * `EnableBorderPins`        - Zeigt die Randnadeln während der Einleitung an     
---- * `PreloadAssets`           - Erlaubt weites Sichtfeld in Briefings     
+--- * `PreloadAssets`           - Erlaubt weites Sichtfeld in Briefings
+--- * `HideNotes`               - Nachrichten nicht anzeigen
 ---
 --- *-> Beispiel #1*
 ---
@@ -40,6 +41,13 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 ---
 --- *-> Beispiel #4*
 ---
+--- Die aktuelle Animation kann auch zwischengespeichert werden, um für eine
+--- Page eine neue Animation zu starten, nach deren Abschluss die vorherige
+--- fortgeführt wird. Die Animation kann ebenfalls so eingestellt werden, dass
+--- sie nur für ihre Aktuelle Page gültig ist und danach gelöscht wird.
+---
+--- *-> Beispiel #5*
+---
 --- #### Parallax
 --- Im Kontext eines Videospiels sind Parallaxen scrollbare Hintergründe. Dies
 --- Technik wurde von Side-Scrollers verwendet. Während einer Einleitungsseite bis zu 4 Ebenen
@@ -54,11 +62,11 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- Die Rahmen werden linear interpoliert, wenn es mindestens 2 Einträge gibt und
 --- kubisch interpoliert, wenn es mindestens 4 Einträge gibt.
 ---
---- *-> Beispiel #5*
----
 --- *-> Beispiel #6*
 ---
 --- *-> Beispiel #7*
+---
+--- *-> Beispiel #8*
 ---
 --- #### Beispiele
 ---
@@ -118,7 +126,21 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- };
 --- ```
 ---
---- * Beispiel #5: Notation von Parallaxen
+--- * Beispiel #5: Animationen zwischenschieben
+--- ```lua
+--- Briefing.PageAnimation = {
+---     ["Seite1"] = {
+---         Postpone = true,
+---         Local = true,
+---         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
+---              {GetFrameVector("pos3", 500, "pos4", -3000)},
+---              {GetFrameVector("pos7", 500, "pos8", -3000)},
+---              {GetFrameVector("pos5", 500, "pos6", -3000)}},
+---     },
+--- };
+--- ```
+---
+--- * Beispiel #6: Notation von Parallaxen
 --- ```lua
 --- Briefing.PageParallax = {
 ---     ["Seite1"] = {
@@ -140,7 +162,7 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- };
 --- ```
 ---
---- * Beispiel #6: Parallaxen ersetzen
+--- * Beispiel #7: Parallaxen ersetzen
 --- ```lua
 --- Briefing.PageParallax = {
 ---     ["Seite1"] = {
@@ -152,7 +174,7 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- };
 --- ```
 ---
---- * Beispiel #7: Endlos wiederholte Parallaxe
+--- * Beispiel #8: Endlos wiederholte Parallaxe
 --- ```lua
 --- Briefing.PageParallax = {
 ---     ["Seite1"] = {

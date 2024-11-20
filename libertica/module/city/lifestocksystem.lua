@@ -107,9 +107,9 @@ function Lib.LifestockSystem.Global:Initialize()
         self.Text.SheepStarved = Localize(Lib.LifestockSystem.Text.SheepStarved);
 
         -- Change base prices
-        MerchantSystem.BasePricesOrigModuleLifestockBreeding                = {};
-        MerchantSystem.BasePricesOrigModuleLifestockBreeding[Goods.G_Sheep] = MerchantSystem.BasePrices[Goods.G_Sheep];
-        MerchantSystem.BasePricesOrigModuleLifestockBreeding[Goods.G_Cow]   = MerchantSystem.BasePrices[Goods.G_Cow];
+        MerchantSystem.BasePricesOrigLifestockSystem                = {};
+        MerchantSystem.BasePricesOrigLifestockSystem[Goods.G_Sheep] = MerchantSystem.BasePrices[Goods.G_Sheep];
+        MerchantSystem.BasePricesOrigLifestockSystem[Goods.G_Cow]   = MerchantSystem.BasePrices[Goods.G_Cow];
 
         MerchantSystem.BasePrices[Goods.G_Sheep] = self.SheepBasePrice;
         MerchantSystem.BasePrices[Goods.G_Cow]   = self.CattleBasePrice;
@@ -145,7 +145,11 @@ function Lib.LifestockSystem.Global:OnReportReceived(_ID, ...)
 end
 
 function Lib.LifestockSystem.Global:BuyAnimal(_Index, _PlayerID, _BuildingID)
-    local AnimalType = (_Index == "Cattle" and Entities.A_X_Cow01) or Entities.A_X_Sheep01;
+    local AnimalType = Entities.A_X_Cow01;
+    if _Index == "Sheep" then
+        local Suffix = math.floor(Logic.GetTime() % 2) +1;
+        AnimalType = Entities["A_X_Sheep0" ..Suffix];
+    end
     local GrainCost = self[_Index.. "GrainCost"];
     if GetPlayerResources(Goods.G_Grain, _PlayerID) < GrainCost then
         return;
@@ -165,7 +169,7 @@ function Lib.LifestockSystem.Global:ControlFeeding()
             local CattleList = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.CattlePasture)};
             if CattleTimer > 0 then
                 local FeedingTime = math.max(CattleTimer * (1 - (0.03 * #CattleList)), 15);
-                if #CattleList > 0 and Logic.GetTime() % math.floor(FeedingTime) == 0 then
+                if #CattleList > 0 and math.floor(Logic.GetTime()) % math.floor(FeedingTime) == 0 then
                     local Upkeep = self.CattleGrainUpkeep;
                     local GrainAmount = GetPlayerResources(Goods.G_Grain, PlayerID);
                     if GrainAmount < Upkeep then
@@ -198,7 +202,7 @@ function Lib.LifestockSystem.Global:ControlFeeding()
             local SheepList = {Logic.GetPlayerEntitiesInCategory(PlayerID, EntityCategories.SheepPasture)};
             if SheepTimer > 0 then
                 local FeedingTime = math.max(SheepTimer * (1 - (0.03 * #SheepList)), 15);
-                if #SheepList > 0 and Logic.GetTime() % math.floor(FeedingTime) == 0 then
+                if #SheepList > 0 and math.floor(Logic.GetTime()) % math.floor(FeedingTime) == 0 then
                     local Upkeep = self.SheepGrainUpkeep;
                     local GrainAmount = GetPlayerResources(Goods.G_Grain, PlayerID);
                     if GrainAmount < Upkeep then
@@ -230,7 +234,7 @@ function Lib.LifestockSystem.Global:ControlFeeding()
 end
 
 function Lib.LifestockSystem.Global:ControlDecay()
-    if Logic.GetTime() % 10 == 0 then
+    if math.floor(Logic.GetTime()) % 10 == 0 then
         -- Cattle
         local CattleCorpses = Logic.GetEntitiesOfType(Entities.R_DeadCow);
         for k,v in pairs(CattleCorpses) do
@@ -275,9 +279,9 @@ function Lib.LifestockSystem.Local:Initialize()
         self.Text.SheepDisabled = XGUIEng.GetStringTableText("UI_ButtonDisabled/PromoteKnight");
 
         -- Change base prices
-        MerchantSystem.BasePricesOrigModuleLifestockBreeding                = {};
-        MerchantSystem.BasePricesOrigModuleLifestockBreeding[Goods.G_Sheep] = MerchantSystem.BasePrices[Goods.G_Sheep];
-        MerchantSystem.BasePricesOrigModuleLifestockBreeding[Goods.G_Cow]   = MerchantSystem.BasePrices[Goods.G_Cow];
+        MerchantSystem.BasePricesOrigLifestockSystem                = {};
+        MerchantSystem.BasePricesOrigLifestockSystem[Goods.G_Sheep] = MerchantSystem.BasePrices[Goods.G_Sheep];
+        MerchantSystem.BasePricesOrigLifestockSystem[Goods.G_Cow]   = MerchantSystem.BasePrices[Goods.G_Cow];
 
         MerchantSystem.BasePrices[Goods.G_Sheep] = self.SheepBasePrice;
         MerchantSystem.BasePrices[Goods.G_Cow]   = self.CattleBasePrice;
@@ -365,7 +369,8 @@ function Lib.LifestockSystem.Local:BuyAnimalUpdate(_Index, _WidgetID, _EntityID)
 end
 
 function Lib.LifestockSystem.Local:InitBuyCowButton()
-    local Position = {XGUIEng.GetWidgetLocalPosition("/InGame/Root/Normal/BuildingButtons/BuyCatapultCart")};
+    local Widget = "/InGame/Root/Normal/BuildingButtons/BuyCatapultCart";
+    local Position = {XGUIEng.GetWidgetLocalPosition(Widget)};
     AddBuildingButtonByTypeAtPosition(
         Entities.B_CattlePasture,
         Position[1], Position[2],
@@ -382,7 +387,8 @@ function Lib.LifestockSystem.Local:InitBuyCowButton()
 end
 
 function Lib.LifestockSystem.Local:InitBuySheepButton()
-    local Position = {XGUIEng.GetWidgetLocalPosition("/InGame/Root/Normal/BuildingButtons/BuyCatapultCart")};
+    local Widget = "/InGame/Root/Normal/BuildingButtons/BuyCatapultCart";
+    local Position = {XGUIEng.GetWidgetLocalPosition(Widget)};
     AddBuildingButtonByTypeAtPosition(
         Entities.B_SheepPasture,
         Position[1], Position[2],

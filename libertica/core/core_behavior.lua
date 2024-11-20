@@ -1,3 +1,4 @@
+Lib.Require("comfort/GetPosition");
 Lib.Register("core/Core_Behavior");
 
 function Reward_DEBUG(_Assertions, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests)
@@ -2153,7 +2154,7 @@ function B_Goal_CustomVariables:Debug(_Quest)
     local results    = {true, false, nil}
 
     if not ObtainCustomVariable("BehaviorVariable_" ..self.VariableName) then
-        warn(false, _Quest.Identifier.. ": " ..self.Name..": variable '"..self.VariableName.."' do not exist!");
+        warn(false, _Quest.Identifier.. ": " ..self.Name..": variable '"..self.VariableName.."' does not exist!");
     end
     if not table.contains(relations, self.Relation) then
         debug(false, _Quest.Identifier.. ": " ..self.Name..": '"..self.Relation.."' is an invalid relation!");
@@ -2629,7 +2630,7 @@ function B_Reprisal_InteractiveObjectDeactivate:CustomFunction(_Quest)
 end
 
 function B_Reprisal_InteractiveObjectDeactivate:Debug(_Quest)
-    if not Logic.IsInteractiveObject(GetID(self.ScriptName)) then
+    if not Logic.IsInteractiveObject(GetID(self.ScriptName)) and not self.WarningPrinted then
         warn(false, _Quest.Identifier.. ": " ..self.Name..": '" ..self.ScriptName.. "' is not a interactive object!");
         self.WarningPrinted = true;
     end
@@ -2689,7 +2690,7 @@ function B_Reprisal_InteractiveObjectActivate:GetCustomData( _Index )
 end
 
 function B_Reprisal_InteractiveObjectActivate:Debug(_Quest)
-    if not Logic.IsInteractiveObject(GetID(self.ScriptName)) then
+    if not Logic.IsInteractiveObject(GetID(self.ScriptName)) and not self.WarningPrinted then
         warn(false, _Quest.Identifier.. ": " ..self.Name..": '" ..self.ScriptName.. "' is not a interactive object!");
         self.WarningPrinted = true;
     end
@@ -2826,7 +2827,7 @@ function B_Reprisal_DestroyEntity:CustomFunction(_Quest)
 end
 
 function B_Reprisal_DestroyEntity:Debug(_Quest)
-    if not IsExisting(self.ScriptName) then
+    if not IsExisting(self.ScriptName) and not self.WarningPrinted then
         warn(false, _Quest.Identifier .. ": " ..self.Name..": '" ..self.ScriptName.. "' is already destroyed!");
         self.WarningPrinted = true;
     end
@@ -2996,7 +2997,7 @@ function B_Reprisal_ReplaceEntity:Debug(_Quest)
         return true;
     end
 
-    if not IsExisting(self.ScriptName) then
+    if not IsExisting(self.ScriptName) and not self.WarningPrinted then
         self.WarningPrinted = true;
         warn(false, _Quest.Identifier.. ": " ..self.Name..": '" ..self.ScriptName.. "' does not exist!");
     end

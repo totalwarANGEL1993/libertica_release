@@ -78,3 +78,45 @@ end
 --- @param _Amount2? integer (optional) Amount 2
 function SetTerritoryDevelopmentCost(_CostType1, _Amount1, _CostType2, _Amount2)
 end
+
+--- Adds a territory to the build blacklist of the type.
+--- @param _Type integer Building type
+--- @param _Territory integer Territory ID
+function AddToBuildingTerritoryBlacklist(_Type, _Territory)
+end
+API.AddToBuildingTerritoryBlacklist = AddToBuildingTerritoryBlacklist;
+
+--- Adds a territory to the build whitelist of the type.
+--- @param _Type integer Building type
+--- @param _Territory integer Territory ID
+function AddToBuildingTerritoryWhitelist(_Type, _Territory)
+end
+API.AddToBuildingTerritoryWhitelist = AddToBuildingTerritoryWhitelist;
+
+--- Removes a territory from the build blacklist of the type.
+--- @param _Type integer Building type
+--- @param _Territory integer Territory ID
+function RemoveFromBuildingTerritoryBlacklist(_Type, _Territory)
+end
+API.RemoveFromBuildingTerritoryBlacklist = RemoveFromBuildingTerritoryBlacklist;
+
+--- Removes a territory from the build whitelist of the type.
+--- @param _Type integer Building type
+--- @param _Territory integer Territory ID
+function RemoveFromBuildingTerritoryWhitelist(_Type, _Territory)
+end
+API.RemoveFromBuildingTerritoryWhitelist = RemoveFromBuildingTerritoryWhitelist;
+
+--- Activates or deactivates the limitation of outpost a player can have.
+--- @param _Flag boolean Outpost limit active
+function ActivateOutpostLimit(_Flag)
+end
+API.ActivateOutpostLimit = ActivateOutpostLimit;
+
+--- Changes the outpost limit for the castle upgrade level.
+--- @param _UpgradeLevel integer Castle upgrade level
+--- @param _Limit integer Limit of outposts
+function SetOutpostLimit(_UpgradeLevel, _Limit)
+end
+API.SetOutpostLimit = SetOutpostLimit;
+

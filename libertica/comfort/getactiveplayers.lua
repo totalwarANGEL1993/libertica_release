@@ -2,11 +2,11 @@ Lib.Register("comfort/GetActivePlayers");
 
 function GetActivePlayers()
     local PlayerList = {};
-    for i= 1, 8 do
-        if Network.IsNetworkSlotIDUsed(i) then
-            local PlayerID = Logic.GetSlotPlayerID(i);
-            if Logic.PlayerGetIsHumanFlag(PlayerID) and Logic.PlayerGetGameState(PlayerID) ~= 0 then
-                table.insert(PlayerList, PlayerID);
+    for PlayerID = 1, 8 do
+        if Network.IsNetworkSlotIDUsed(PlayerID) then
+            local SlotPlayerID = Logic.GetSlotPlayerID(PlayerID);
+            if Logic.PlayerGetIsHumanFlag(SlotPlayerID) and Logic.PlayerGetGameState(SlotPlayerID) ~= 0 then
+                table.insert(PlayerList, SlotPlayerID);
             end
         end
     end

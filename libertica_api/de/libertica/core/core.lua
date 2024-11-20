@@ -33,21 +33,25 @@ end
 --- Initialisiert die Bibliothek.
 function PrepareLibrary()
 end
+API.PrepareLibrary = PrepareLibrary;
 
 --- Registriert ein Modul in der Modulliste.
 --- @param _Name string Name des Modul
 function RegisterModule(_Name)
 end
+API.RegisterModule = RegisterModule;
 
 --- Führt dynamischen Code im lokalen Skript aus.
 --- @param _Command string Lua String
 --- @param ... unknown Ersetzungsparameter
 function ExecuteLocal(_Command, ...)
 end
+API.ExecuteLocal = ExecuteLocal;
 
 --- Führt dynamischen Code im globalen Skript aus.
 --- @param _Command string Lua String
 --- @param ... unknown Ersetzungsparameter
 function ExecuteGlobal(_Command, ...)
 end
+API.ExecuteGlobal = ExecuteGlobal;
 

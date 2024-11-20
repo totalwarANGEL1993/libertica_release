@@ -461,34 +461,34 @@ function Lib.UIEffects.Local:OverrideInterfaceUpdateForCinematicMode()
 end
 
 function Lib.UIEffects.Local:OverrideInterfaceThroneroomForCinematicMode()
-    GameCallback_Camera_StartButtonPressed = function(_PlayerID)
+    GameCallback_Lib_Camera_StartButtonPressed = function(_PlayerID)
     end
     OnStartButtonPressed = function()
-        GameCallback_Camera_StartButtonPressed(GUI.GetPlayerID());
+        GameCallback_Lib_Camera_StartButtonPressed(GUI.GetPlayerID());
     end
 
-    GameCallback_Camera_BackButtonPressed = function(_PlayerID)
+    GameCallback_Lib_Camera_BackButtonPressed = function(_PlayerID)
     end
     OnBackButtonPressed = function()
-        GameCallback_Camera_BackButtonPressed(GUI.GetPlayerID());
+        GameCallback_Lib_Camera_BackButtonPressed(GUI.GetPlayerID());
     end
 
-    GameCallback_Camera_SkipButtonPressed = function(_PlayerID)
+    GameCallback_Lib_Camera_SkipButtonPressed = function(_PlayerID)
     end
     OnSkipButtonPressed = function()
-        GameCallback_Camera_SkipButtonPressed(GUI.GetPlayerID());
+        GameCallback_Lib_Camera_SkipButtonPressed(GUI.GetPlayerID());
     end
 
-    GameCallback_Camera_ThroneRoomLeftClick = function(_PlayerID)
+    GameCallback_Lib_Camera_ThroneRoomLeftClick = function(_PlayerID)
     end
     ThroneRoomLeftClick = function()
-        GameCallback_Camera_ThroneRoomLeftClick(GUI.GetPlayerID());
+        GameCallback_Lib_Camera_ThroneRoomLeftClick(GUI.GetPlayerID());
     end
 
-    GameCallback_Camera_ThroneroomCameraControl = function(_PlayerID)
+    GameCallback_Lib_Camera_ThroneroomCameraControl = function(_PlayerID)
     end
     ThroneRoomCameraControl = function()
-        GameCallback_Camera_ThroneroomCameraControl(GUI.GetPlayerID());
+        GameCallback_Lib_Camera_ThroneroomCameraControl(GUI.GetPlayerID());
     end
 end
 
@@ -537,7 +537,7 @@ function Lib.UIEffects.Local:InterfaceDeactivateNormalInterface(_PlayerID)
     XGUIEng.PushPage("/InGame/Root/Normal/NotesWindow", false);
     XGUIEng.ShowWidget("/InGame/Root/3dOnScreenDisplay", 0);
     XGUIEng.ShowWidget("/InGame/Root/Normal", 1);
-    XGUIEng.ShowWidget("/InGame/Root/Normal/TextMessages", 1);
+    XGUIEng.ShowWidget("/InGame/Root/Normal/TextMessages", 0);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomLeft/Message/MessagePortrait/SpeechStartAgainOrStop", 0);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomRight", 0);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopRight", 0);
@@ -586,6 +586,7 @@ function Lib.UIEffects.Local:InterfaceActivateNormalInterface(_PlayerID)
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopRight", 1);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopLeft", 1);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopLeft/TopBar", 1);
+    XGUIEng.ShowWidget("/InGame/Root/Normal/TextMessages", 1);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopLeft/TopBar/UpdateFunction", 1);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignBottomLeft/Message/MessagePortrait/Buttons", 1);
     XGUIEng.ShowWidget("/InGame/Root/Normal/AlignTopLeft/QuestLogButton", 1);

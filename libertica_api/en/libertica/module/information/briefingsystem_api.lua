@@ -21,6 +21,7 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- * `EnableFoW`               - Displays the fog of war during the briefing           
 --- * `EnableBorderPins`        - Displays the border pins during the briefing          
 --- * `PreloadAssets`           - Allows to use a wide vision area in briefings
+--- * `HideNotes`               - Do not show notes
 ---
 --- *-> Example #1*
 ---
@@ -40,6 +41,12 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 ---
 --- *-> Example #4*
 ---
+--- The current animation can also be cached to start a new animation for a 
+--- page, after which the previous one continues. The animation can also be 
+--- set to only be valid for its current page and then deleted.
+---
+--- *-> Example #5*
+---
 --- #### Parallax
 --- In the context of a video game parallaxes are scrollable backgrounds. This
 --- technique was used by side scrollers. During a briefing page up to 4 layers
@@ -54,11 +61,11 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- The frames are linearly interpolated, if there are at least 2 entries and
 --- interpolated cubically if there are at least 4 entries.
 ---
---- *-> Example #5*
----
 --- *-> Example #6*
 ---
 --- *-> Example #7*
+---
+--- *-> Example #8*
 ---
 --- #### Examples
 ---
@@ -118,7 +125,21 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- };
 --- ```
 ---
---- * Example #5: Notation of paralaxes
+--- * Example #5: Inject animations
+--- ```lua
+--- Briefing.PageAnimation = {
+---     ["Seite1"] = {
+---         Postpone = true,
+---         Local = true,
+---         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
+---              {GetFrameVector("pos3", 500, "pos4", -3000)},
+---              {GetFrameVector("pos7", 500, "pos8", -3000)},
+---              {GetFrameVector("pos5", 500, "pos6", -3000)}},
+---     },
+--- };
+--- ```
+---
+--- * Example #6: Notation of paralaxes
 --- ```lua
 --- Briefing.PageParallax = {
 ---     ["Page1"] = {
@@ -140,7 +161,7 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- };
 --- ```
 ---
---- * Example #6: Replace parallaxes
+--- * Example #7: Replace parallaxes
 --- ```lua
 --- Briefing.PageParallax = {
 ---     ["Page1"] = {
@@ -152,7 +173,7 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- };
 --- ```
 ---
---- * Example #7: Endlessly repeating parallaxes
+--- * Example #8: Endlessly repeating parallaxes
 --- ```lua
 --- Briefing.PageParallax = {
 ---     ["Seite1"] = {

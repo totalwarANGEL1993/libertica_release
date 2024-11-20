@@ -25,6 +25,9 @@ function StartCutscene(_Cutscene, _Name, _PlayerID)
     if _Cutscene.EnableFoW == nil then
         _Cutscene.EnableFoW = false;
     end
+    if _Cutscene.HideNotes == nil then
+        _Cutscene.HideNotes = false;
+    end
     if _Cutscene.EnableGlobalImmortality == nil then
         _Cutscene.EnableGlobalImmortality = true;
     end

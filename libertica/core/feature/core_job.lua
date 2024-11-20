@@ -84,6 +84,7 @@ function RequestJobByEventType(_EventType, _Function, ...)
     assert(type(Function) == "function", "Function does not exist!");
     return Lib.Core.Job:CreateEventJob(_EventType, _Function, ...);
 end
+API.RequestJobByEventType = RequestJobByEventType;
 API.StartJobByEventType = RequestJobByEventType;
 
 function RequestJob(_Function, ...)
@@ -91,6 +92,7 @@ function RequestJob(_Function, ...)
     assert(type(Function) == "function", "Function does not exist!");
     return RequestJobByEventType(Events.LOGIC_EVENT_EVERY_SECOND, Function, ...);
 end
+API.RequestJob = RequestJob;
 API.StartJob = RequestJob;
 StartSimpleJob = RequestJob;
 StartSimpleJobEx = RequestJob;
@@ -100,6 +102,7 @@ function RequestHiResJob(_Function, ...)
     assert(type(Function) == "function", "Function does not exist!");
     return RequestJobByEventType(Events.LOGIC_EVENT_EVERY_TURN, Function, ...);
 end
+API.RequestHiResJob = RequestHiResJob;
 API.StartHiResJob = RequestHiResJob;
 StartSimpleHiResJob = RequestHiResJob;
 StartSimpleHiResJobEx = RequestHiResJob;
@@ -120,6 +123,7 @@ function RequestDelay(_Waittime, _Function, ...)
         {...}
     );
 end
+API.RequestDelay = RequestDelay;
 API.StartDelay = RequestDelay;
 
 function RequestHiResDelay(_Waittime, _Function, ...)
@@ -138,6 +142,7 @@ function RequestHiResDelay(_Waittime, _Function, ...)
         {...}
     );
 end
+API.RequestHiResDelay = RequestHiResDelay;
 API.StartHiResDelay = RequestHiResDelay;
 
 function RequestRealTimeDelay(_Waittime, _Function, ...)
@@ -156,6 +161,7 @@ function RequestRealTimeDelay(_Waittime, _Function, ...)
         {...}
     );
 end
+API.RequestRealTimeDelay = RequestRealTimeDelay;
 API.StartRealTimeDelay = RequestRealTimeDelay;
 
 function StopJob(_JobID)
@@ -166,6 +172,7 @@ function StopJob(_JobID)
     end
     EndJob(_JobID);
 end
+API.StopJob = StopJob;
 API.EndJob = StopJob;
 
 function IsJobRunning(_JobID)
@@ -174,6 +181,7 @@ function IsJobRunning(_JobID)
     end
     return JobIsRunning(_JobID);
 end
+API.IsJobRunning = IsJobRunning;
 API.JobIsRunning = IsJobRunning;
 
 function ResumeJob(_JobID)
@@ -201,5 +209,6 @@ API.YieldJob = YieldJob;
 function GetSecondsRealTime()
     return Lib.Core.Job.SecondsSinceGameStart;
 end
+API.RealTimeGetSecondsPassedSinceGameStart = GetSecondsRealTime;
 API.GetSecondsRealTime = GetSecondsRealTime;
 

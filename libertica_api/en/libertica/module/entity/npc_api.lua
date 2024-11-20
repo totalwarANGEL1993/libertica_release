@@ -14,7 +14,7 @@ Lib.NPC = Lib.NPC or {};
 --- Adds an NPC to an entity.
 ---
 --- #### Fields of table
---- * Name              Script name of entity (mandatory)
+--- * ScriptName        Script name of entity (mandatory)
 --- * Active            NPC is active
 --- * Callback          Function called at activation
 --- * Condition         Condition checked before activation
@@ -36,10 +36,10 @@ Lib.NPC = Lib.NPC or {};
 --- ```lua
 --- -- Example #1: Creates a simple NPC
 --- MyNpc = NpcCompose {
----     Name     = "HansWurst",
----     Callback = function(_Data)
+---     ScriptName = "HansWurst",
+---     Callback   = function(_Data)
 ---         local HeroID = CONST_LAST_HERO_INTERACTED;
----         local NpcID = GetID(_Data.Name);
+---         local NpcID = GetID(_Data.ScriptName);
 ---     end
 --- }
 --- ```
@@ -47,15 +47,15 @@ Lib.NPC = Lib.NPC or {};
 --- ```lua
 --- -- Example #2: Creates a NPC with conditions
 --- MyNpc = NpcCompose {
----     Name      = "HansWurst",
----     Condition = function(_Data)
----         local NpcID = GetID(_Data.Name);
+---     ScriptName = "HansWurst",
+---     Condition  = function(_Data)
+---         local NpcID = GetID(_Data.ScriptName);
 ---         -- prüfe irgend was
 ---         return MyConditon == true;
 ---     end
 ---     Callback  = function(_Data)
 ---         local HeroID = CONST_LAST_HERO_INTERACTED;
----         local NpcID = GetID(_Data.Name);
+---         local NpcID = GetID(_Data.ScriptName);
 ---     end
 --- }
 ---```
@@ -63,14 +63,14 @@ Lib.NPC = Lib.NPC or {};
 --- ```lua
 --- -- Example #3: Limit players for activation
 --- MyNpc = NpcCompose {
----     Name              = "HansWurst",
+---     ScriptName        = "HansWurst",
 ---     Player            = {1, 2},
 ---     WrongPlayerAction = function(_Data)
 ---         AddNote("I will not talk to you!");
 ---     end,
 ---     Callback          = function(_Data)
 ---         local HeroID = CONST_LAST_HERO_INTERACTED;
----         local NpcID = GetID(_Data.Name);
+---         local NpcID = GetID(_Data.ScriptName);
 ---     end
 --- }
 ---```
@@ -91,7 +91,7 @@ API.NpcDispose = NpcDispose;
 --- Updates the NPC with the data table.
 ---
 --- #### Fields of table
---- * Name              Script name of entity (mandatory)
+--- * ScriptName        Script name of entity (mandatory)
 --- * Callback          Function called at activation
 --- * Condition         Condition checked before activation
 --- * Type              Type of NPC (1, 2, 3, 4)

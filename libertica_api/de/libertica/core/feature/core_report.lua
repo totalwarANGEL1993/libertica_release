@@ -16,6 +16,18 @@ function SendReport(_ID, ...)
 end
 API.SendScriptEvent = SendReport;
 
+--- Gibt den Spieler zurück, der den aktuellen Report gesendet hat.
+--- 
+--- Wird diese Funktion außerhalb der Behandlung eines Reports aufgerufen oder
+--- tritt ein anderer Fehler auf, wird 0 zurückgegeben.
+--- 
+--- @return integer PlayerID ID des Ursprungsspielers
+function GetReportSender()
+    return 0;
+end
+API.GetReportSender = GetReportSender;
+API.GetReportSourcePlayerID = GetReportSender;
+
 --- Sendet einen Bericht mit optionalen Parametern an das globale Skript.
 ---
 --- Dies wird immer eine Broadcast sein!

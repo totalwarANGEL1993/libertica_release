@@ -131,7 +131,76 @@ function DropBuildingButtonFromEntity(_ScriptName, _ID)
 end
 API.DropBuildingButtonFromEntity = DropBuildingButtonFromEntity;
 
+--- Aktiviert den Rückbau von Stadt- und Sammlergebäuden.
+function ActivateDowngradeBuilding()
+end
+API.ActivateDowngradeBuilding = ActivateDowngradeBuilding;
 
+--- Deaktiviert den Rückbau von Stadt- und Sammlergebäuden.
+function DeactivateDowngradeBuilding()
+end
+API.DeactivateDowngradeBuilding = DeactivateDowngradeBuilding;
+
+--- Setzt die Kosten für den Rückbau für alle Spieler.
+--- @param _MoneyCost integer Rückbaukosten
+function SetDowngradeBuildingCost(_MoneyCost)
+end
+API.SetDowngradeCosts = SetDowngradeBuildingCost;
+API.SetDowngradeBuildingCost = SetDowngradeBuildingCost;
+
+--- Aktiviert das Reservieren von Waren am Gebäude.
+function ActivateSingleReserveBuilding()
+end
+API.ActivateSingleReserveBuilding = ActivateSingleReserveBuilding;
+
+--- Deaktiviert das Reservieren von Waren am Gebäude.
+function DeactivateSingleReserveBuilding()
+end
+API.DeactivateSingleReserveBuilding = DeactivateSingleReserveBuilding;
+
+--- Aktiviert das Stoppen von einzelnen Gebäuden. 
+function ActivateSingleStopBuilding()
+end
+API.ActivateSingleStopBuilding = ActivateSingleStopBuilding;
+
+--- Deaktiviert das Stoppen von einzelnen Gebäuden.
+function DeactivateSingleStopBuilding()
+end
+API.DeactivateSingleStopBuilding = DeactivateSingleStopBuilding;
+
+
+
+--- Der Spieler hat ein Gebäude zurückgebaut.
+--- 
+--- #### Parameter
+--- * `EntityID` - ID des Gebäudes
+Report.DowngradeBuilding = anyInteger;
+
+--- Der Spieler hat eine Ware gesperrt.
+--- 
+--- #### Parameter
+--- * `PlayerID` - ID des Spielers
+--- * `GoodType` - Typ der Ware
+Report.LockGoodType = anyInteger;
+
+--- Der Spieler hat eine Wahre freigegeben.
+--- 
+--- #### Parameter
+--- * `PlayerID` - ID des Spielers
+--- * `GoodType` - Typ der Ware
+Report.UnlockGoodType = anyInteger;
+
+--- Der Spieler hat die Produktion im Gebäude fortgeführt.
+--- 
+--- #### Parameter
+--- * `EntityID` - ID des Gebäudes
+Report.ResumeBuilding = anyInteger;
+
+--- Der Spieler hat die Produktion im Gebäude angehalten.
+--- 
+--- #### Parameter
+--- * `EntityID` - ID des Gebäudes
+Report.YieldBuilding = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Upgrade abbrechen" geklickt.
 --- 

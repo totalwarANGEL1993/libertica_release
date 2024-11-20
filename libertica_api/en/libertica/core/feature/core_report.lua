@@ -16,6 +16,18 @@ function SendReport(_ID, ...)
 end
 API.SendScriptEvent = SendReport;
 
+--- Returns the player who has send the report.
+--- 
+--- If this function is called out of report context or if another error has
+--- occured, it will return 0 instead.
+--- 
+--- @return integer PlayerID ID of source player
+function GetReportSender()
+    return 0;
+end
+API.GetReportSender = GetReportSender;
+API.GetReportSourcePlayerID = GetReportSender;
+
 --- Sends a report with optional parameter to the global script.
 ---
 --- This will always be a broadcast!

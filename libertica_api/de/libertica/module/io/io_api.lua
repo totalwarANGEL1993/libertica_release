@@ -21,7 +21,7 @@ Lib.IO = Lib.IO or {};
 --- Ein Objekt wird durch eine Tabelle beschrieben und (fast) alle Schlüssel sind optional.
 ---
 --- #### Felder der Tabelle
---- * Name                   - Skriptname des Objekts
+--- * ScriptName             - Skriptname des Objekts
 --- * Texture                - (Optional) Tabelle mit Koordinaten
 ---   - Spielicons: {x, y, ExtraNumber}
 ---   - Benutzerdefinierte Icons: {x, y, FileNamePrefix}

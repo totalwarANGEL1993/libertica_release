@@ -4,10 +4,10 @@ function GetQuestID(_Name)
     if type(_Name) == "number" then
         return _Name;
     end
-    for k, v in pairs(Quests) do
-        if v and k > 0 then
-            if v.Identifier == _Name then
-                return k;
+    for Index, Quest in pairs(Quests) do
+        if Quest and Index > 0 then
+            if Quest.Identifier == _Name then
+                return Index;
             end
         end
     end

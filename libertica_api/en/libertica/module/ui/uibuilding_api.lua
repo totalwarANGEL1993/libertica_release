@@ -131,7 +131,76 @@ function DropBuildingButtonFromEntity(_ScriptName, _ID)
 end
 API.DropBuildingButtonFromEntity = DropBuildingButtonFromEntity;
 
+--- Activates the downgrade option for city and gatherer buildings.
+function ActivateDowngradeBuilding()
+end
+API.ActivateDowngradeBuilding = ActivateDowngradeBuilding;
 
+--- Dectivates the downgrade option for city and gatherer buildings.
+function DeactivateDowngradeBuilding()
+end
+API.DeactivateDowngradeBuilding = DeactivateDowngradeBuilding;
+
+--- Sets the costs for downgrading a building for all players.
+--- @param _MoneyCost integer Downgrade costs
+function SetDowngradeBuildingCost(_MoneyCost)
+end
+API.SetDowngradeCosts = SetDowngradeBuildingCost;
+API.SetDowngradeBuildingCost = SetDowngradeBuildingCost;
+
+--- Activates the reservation of goods direcrly at the building.
+function ActivateSingleReserveBuilding()
+end
+API.ActivateSingleReserveBuilding = ActivateSingleReserveBuilding;
+
+--- Deactivates the reservation of goods direcrly at the building.
+function DeactivateSingleReserveBuilding()
+end
+API.DeactivateSingleReserveBuilding = DeactivateSingleReserveBuilding;
+
+--- Activates the pausing of individual buildings.
+function ActivateSingleStopBuilding()
+end
+API.ActivateSingleStopBuilding = ActivateSingleStopBuilding;
+
+--- Deactivates the pausing of individual buildings.
+function DeactivateSingleStopBuilding()
+end
+API.DeactivateSingleStopBuilding = DeactivateSingleStopBuilding;
+
+
+
+--- The player has downgraded a building.
+--- 
+--- #### Parameter
+--- * `EntityID` - ID of building
+Report.DowngradeBuilding = anyInteger;
+
+--- The player has locked a good type.
+--- 
+--- #### Parameter
+--- * `PlayerID` - ID of player
+--- * `GoodType` - Type of good
+Report.LockGoodType = anyInteger;
+
+--- The player has unlocked a good type.
+--- 
+--- #### Parameter
+--- * `PlayerID` - ID of player
+--- * `GoodType` - Type of good
+Report.UnlockGoodType = anyInteger;
+
+--- The player has resumed the production in a building.
+--- 
+--- #### Parameter
+--- * `EntityID` - ID of building
+Report.ResumeBuilding = anyInteger;
+
+--- The player has paused the production in a building.
+--- 
+--- #### Parameter
+--- * `EntityID` - ID of building
+Report.YieldBuilding = anyInteger;
 
 --- The player clicked the cancel upgrade button.
 --- 

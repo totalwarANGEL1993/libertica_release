@@ -18,6 +18,7 @@ Lib.Core.ScriptingValue = {}
 function GetEntityDestination(_Entity)
     return {};
 end
+API.GetEntityDestination = GetEntityDestination;
 
 --- Gibt die Gesundheit der Entität zurück.
 --- @param _Entity any ID oder Skriptname
@@ -25,12 +26,14 @@ end
 function GetEntityHealth(_Entity)
     return 0;
 end
+API.GetEntityHealth = GetEntityHealth;
 
 --- Setzt die Gesundheit der Entität, ohne Prüfung auf plausibelität.
 --- @param _Entity any ID oder Skriptname
 --- @param _Health integer Gesundheit der Entität
 function SetEntityHealth(_Entity, _Health)
 end
+API.SetEntityHealth = SetEntityHealth;
 
 --- Gibt zurück, ob die Entität ein NPC ist.
 --- @param _Entity any ID oder Skriptname
@@ -38,6 +41,7 @@ end
 function GetEntityNpc(_Entity)
     return true;
 end
+API.GetEntityNpc = GetEntityNpc;
 
 --- Gibt den Besitzer der Entität zurück.
 --- @param _Entity any ID oder Skriptname
@@ -45,12 +49,14 @@ end
 function GetEntityPlayer(_Entity)
     return 0;
 end
+API.GetEntityPlayer = GetEntityPlayer;
 
 --- Setzt den Eigentümer der Entität, ohne Prüfung auf plausibelität.
 --- @param _Entity any ID oder Skriptname
 --- @param _Player integer Player ID des Spielers
 function SetEntityPlayer(_Entity, _Player)
 end
+API.SetEntityPlayer = SetEntityPlayer;
 
 --- Gibt die Skalierung der Entität zurück.
 --- @param _Entity any
@@ -58,12 +64,22 @@ end
 function GetEntityScaling(_Entity)
     return 0;
 end
+API.GetEntityScaling = GetEntityScaling;
 
 --- Setzt die Skalierung der Entität.
 --- @param _Entity any ID oder Skriptname
 --- @param _Scaling number Skalierung der Entität
-function GetEntityScaling(_Entity, _Scaling)
+function SetEntityScaling(_Entity, _Scaling)
 end
+API.SetEntityScaling = SetEntityScaling;
+
+--- Gibt das aktuell genutzte Model der Entität zurück.
+--- @param _Entity any ID oder Skriptname
+--- @return integer Model Model der Entität
+function GetEntityModel(_Entity)
+    return 0;
+end
+API.GetEntityModel = GetEntityModel;
 
 --- Gibt zurück, ob die Entität unsichtbar ist,
 --- @param _Entity any ID oder Skriptname
@@ -71,6 +87,7 @@ end
 function IsEntityInvisible(_Entity)
     return true;
 end
+API.IsEntityInvisible = IsEntityInvisible;
 
 --- Gibt zurück, ob die Entität nicht auswählbar ist.
 --- @param _Entity any ID oder Skriptname
@@ -78,6 +95,7 @@ end
 function IsEntityInaccessible(_Entity)
     return true;
 end
+API.IsEntityInaccessible = IsEntityInaccessible;
 
 --- Gibt den Wert des Index als Ganzzahl zurück.
 --- @param _Entity any ID oder Skriptname

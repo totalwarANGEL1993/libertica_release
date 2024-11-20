@@ -19,7 +19,8 @@ Lib.CutsceneSystem = Lib.CutsceneSystem or {};
 --- * `EnableGlobalImmortality` - During cutscenes all entities are invulnerable        
 --- * `EnableSky`               - Display the sky during the cutscene                   
 --- * `EnableFoW`               - Displays the fog of war during the cutscene           
---- * `EnableBorderPins`        - Displays the border pins during the cutscene 
+--- * `EnableBorderPins`        - Displays the border pins during the cutscene
+--- * `HideNotes`               - Do not show notes
 ---
 --- #### Example
 ---

@@ -2,7 +2,7 @@
 --- @param _SlotID integer ID of slot
 --- @return integer ID Player at slot
 function GetPlayerAtSlot(_SlotID)
-    return 0;
+    return -1;
 end
 API.GetSlotPlayerID = GetPlayerAtSlot;
 

@@ -23,7 +23,7 @@ function Move(_Entity, _Target, _IgnoreBlocking)
         Logic.MoveSettler(ID, Target.X, Target.Y);
     end
 
-    StartSimpleJobEx(function(_ID, _Target)
+    StartSimpleJobEx(function(_ID)
         if not IsExisting(_ID) then
             return true;
         end
@@ -35,5 +35,6 @@ function Move(_Entity, _Target, _IgnoreBlocking)
         end
     end, ID, Target);
 end
+API.MoveEntity = Move;
 API.Move = Move;
 

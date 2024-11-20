@@ -25,26 +25,31 @@ function DeactivateBorderScroll(_Position, _PlayerID)
 end
 API.DeactivateBorderScroll = DeactivateBorderScroll;
 
---- Allows/Prohibits the extended zoom for one or for all players.
---- @param _Flag boolean Extended zoom allowed
+--- Activates the extended zoom for one or for all players.
 --- @param _PlayerID integer? ID of player
-function AllowExtendedZoom(_Flag, _PlayerID)
+function ActivateExtendedZoom(_PlayerID)
 end
-API.AllowExtendedZoom = AllowExtendedZoom;
+API.ActivateExtendedZoom = ActivateExtendedZoom;
 
---- Toggles between extended and normal zoom.
---- @param _PlayerID integer ID of player
-function ToggleExtendedZoom(_PlayerID)
+--- Deactivates the extended zoom for one or for all players.
+--- @param _PlayerID integer? ID of player
+function DeactivateExtendedZoom(_PlayerID)
 end
-API.ToggleExtendedZoom = ToggleExtendedZoom;
+API.DeactivateExtendedZoom = DeactivateExtendedZoom;
 
 --- Changes the limit for the normal zoom.
+--- 
+--- The default value is set to 0.5.
+--- 
 --- @param _Limit number Zoom limit (between 0.1 and 0.87)
 function SetNormalZoomProps(_Limit)
 end
 API.SetNormalZoomProps = SetNormalZoomProps;
 
 --- Changes the limit for the extended zoom.
+--- 
+--- The default value is set to 0.65.
+--- 
 --- @param _Limit number Zoom limit (between 0.1 and 0.87)
 function SetExtendedZoomProps(_Limit)
 end

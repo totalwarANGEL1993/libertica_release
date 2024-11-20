@@ -5,7 +5,7 @@ function CreateIOIronMine(_Data)
     local Costs = {Goods.G_Gold, 500, Goods.G_Wood, 20};
     CheckIOMineParameter(_Data);
     Lib.IOMine.Global:CreateIOMine(
-        _Data.Scriptname,
+        _Data.ScriptName,
         Entities.R_IronMine,
         _Data.Title,
         _Data.Text,
@@ -23,7 +23,7 @@ function CreateIOStoneMine(_Data)
     local Costs = {Goods.G_Gold, 500, Goods.G_Wood, 20};
     CheckIOMineParameter(_Data);
     Lib.IOMine.Global:CreateIOMine(
-        _Data.Scriptname,
+        _Data.ScriptName,
         Entities.R_StoneMine,
         _Data.Title,
         _Data.Text,
@@ -40,32 +40,23 @@ API.CreateIOStoneMine = CreateIOStoneMine;
 function CheckIOMineParameter(_Data)
     error(not IsLocalScript(), "Must be used in global script!");
     error(IsExisting(_Data.Scriptname),
-          "API.CreateIOIronMine: Scriptname '%s' does not exist!",
+          "Scriptname '%s' does not exist!",
           tostring(_Data.Scriptname));
-    local Costs = {Goods.G_Gold, 500, Goods.G_Wood, 20};
-    if _Data.Costs then
-        if _Data.Costs[1] then
-            error(
-                GetNameOfKeyInTable(Goods, _Data.Costs[1]),
-                "API.CreateIOIronMine: First cost type '%s' is wrong!",
-                tostring(_Data.Costs[1])
-            );
-            error(
-                _Data.Costs[2] and (type(_Data.Costs[2]) == "number" or _Data.Costs[2] < 1),
-                "API.CreateIOIronMine: First cost amount must be above 0!"
-            );
-        end
-        if _Data.Costs[3] then
-            error(
-                GetNameOfKeyInTable(Goods, _Data.Costs[3]),
-                "API.CreateIOIronMine: First cost type '%s' is wrong!",
-                tostring(_Data.Costs[3])
-            );
-            error(
-                _Data.Costs[4] and (type(_Data.Costs[4]) == "number" or _Data.Costs[4] < 1),
-                "API.CreateIOIronMine: First cost amount must be above 0!"
-            );
-        end
+
+    if not _Data.Costs then
+        return;
     end
+    error(not _Data.Costs[1] or GetNameOfKeyInTable(Goods, _Data.Costs[1]),
+          "First cost type '%s' is wrong!",
+          tostring(_Data.Costs[1]));
+    error(not _Data.Costs[2] or (type(_Data.Costs[2]) == "number" and _Data.Costs[2] > 0),
+          "First cost amount must be above 0!",
+          tostring(_Data.Costs[1]));
+    error(not _Data.Costs[3] or GetNameOfKeyInTable(Goods, _Data.Costs[3]),
+          "Second cost type '%s' is wrong!",
+          tostring(_Data.Costs[3]));
+    error(not _Data.Costs[4] or (type(_Data.Costs[4]) == "number" and _Data.Costs[4] > 0),
+          "Second cost amount must be above 0!",
+          tostring(_Data.Costs[4]));
 end
 

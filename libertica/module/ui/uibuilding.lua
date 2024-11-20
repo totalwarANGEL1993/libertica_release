@@ -58,6 +58,8 @@ Lib.UIBuilding.Local = {
 
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIBuilding_API");
+Lib.Require("module/ui/UIBuilding_Text");
+Lib.Require("module/ui/UIBuilding_Buttons");
 Lib.Register("module/ui/UIBuilding");
 
 -- -------------------------------------------------------------------------- --
@@ -66,39 +68,15 @@ Lib.Register("module/ui/UIBuilding");
 -- Global initalizer method
 function Lib.UIBuilding.Global:Initialize()
     if not self.IsInstalled then
-        --- The player clicked the cancel upgrade button.
-        --- 
-        --- #### Parameter
-        --- * `EntityID` - ID of building
-        --- * `PlayerID` - ID of owner
         Report.CancelUpgradeClicked = CreateReport("Event_CancelUpgradeClicked");
-
-        --- The player clicked the start upgrade button.
-        --- 
-        --- #### Parameter
-        --- * `EntityID` - ID of building
-        --- * `PlayerID` - ID of owner
         Report.StartUpgradeClicked = CreateReport("Event_StartUpgradeClicked");
-
-        --- The player clicked the start festival button.
-        --- 
-        --- #### Parameter
-        --- * `PlayerID` - ID of player
-        --- * `Type`     - Type of festival
         Report.FestivalClicked = CreateReport("Event_FestivalClicked");
-
-        --- The player clicked the start sermon button.
-        --- 
-        --- #### Parameter
-        --- * `PlayerID` - ID of player
         Report.SermonClicked = CreateReport("Event_SermonClicked");
-
-        --- The player clicked the start theatre play button.
-        --- 
-        --- #### Parameter
-        --- * `EntityID` - ID of building
-        --- * `PlayerID` - ID of owner
         Report.TheatrePlayClicked = CreateReport("Event_TheatrePlayClicked");
+
+        self.ExtraButton.Downgrade:InitEvents();
+        self.ExtraButton.SingleReserve:InitEvents();
+        self.ExtraButton.SingleStop:InitEvents();
     end
     self.IsInstalled = true;
 end
@@ -112,16 +90,19 @@ function Lib.UIBuilding.Global:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
     elseif _ID == Report.StartUpgradeClicked then
-        SendReportToLocal(_ID, unpack(arg));
+        SendReportToLocal(_ID, ...);
     elseif _ID == Report.CancelUpgradeClicked then
-        SendReportToLocal(_ID, unpack(arg));
+        SendReportToLocal(_ID, ...);
     elseif _ID == Report.FestivalClicked then
-        SendReportToLocal(_ID, unpack(arg));
+        SendReportToLocal(_ID, ...);
     elseif _ID == Report.SermonClicked then
-        SendReportToLocal(_ID, unpack(arg));
+        SendReportToLocal(_ID, ...);
     elseif _ID == Report.TheatrePlayClicked then
-        SendReportToLocal(_ID, unpack(arg));
+        SendReportToLocal(_ID, ...);
     end
+    self.ExtraButton.Downgrade:ExtraButtonOnReportReceived(_ID, ...);
+    self.ExtraButton.SingleReserve:ExtraButtonOnReportReceived(_ID, ...);
+    self.ExtraButton.SingleStop:ExtraButtonOnReportReceived(_ID, ...);
 end
 
 -- -------------------------------------------------------------------------- --
@@ -147,6 +128,10 @@ function Lib.UIBuilding.Local:Initialize()
         self:OverrideUpgradeTurret();
         self:OverrideUpgradeBuilding();
         self:OverrideStartSermon();
+
+        self.ExtraButton.Downgrade:InitEvents();
+        self.ExtraButton.SingleReserve:InitEvents();
+        self.ExtraButton.SingleStop:InitEvents();
     end
     self.IsInstalled = true;
 end
@@ -160,6 +145,9 @@ function Lib.UIBuilding.Local:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
     end
+    self.ExtraButton.Downgrade:ExtraButtonOnReportReceived(_ID, ...);
+    self.ExtraButton.SingleReserve:ExtraButtonOnReportReceived(_ID, ...);
+    self.ExtraButton.SingleStop:ExtraButtonOnReportReceived(_ID, ...);
 end
 
 -- -------------------------------------------------------------------------- --

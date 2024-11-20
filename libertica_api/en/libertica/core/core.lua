@@ -33,21 +33,25 @@ end
 --- Initializes the whole library.
 function PrepareLibrary()
 end
+API.PrepareLibrary = PrepareLibrary;
 
 --- Register a module in the module list.
 --- @param _Name string Name of module
 function RegisterModule(_Name)
 end
+API.RegisterModule = RegisterModule;
 
 --- Executes dynamic lua in the local script.
 --- @param _Command string Lua string
 --- @param ... unknown Replacement values
 function ExecuteLocal(_Command, ...)
 end
+API.ExecuteLocal = ExecuteLocal;
 
 --- Executes dynamic lua in the global script.
 --- @param _Command string Lua string
 --- @param ... unknown Replacement values
 function ExecuteGlobal(_Command, ...)
 end
+API.ExecuteGlobal = ExecuteGlobal;
 

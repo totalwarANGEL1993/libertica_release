@@ -10,6 +10,7 @@ Lib.Core.Job = {}
 function RequestJobByEventType(_EventType, _Function, ...)
     return 0;
 end
+API.RequestJobByEventType = RequestJobByEventType;
 API.StartJobByEventType = RequestJobByEventType;
 
 --- Fordert einen Job an, der jede Sekunde ausgelöst wird.
@@ -19,6 +20,7 @@ API.StartJobByEventType = RequestJobByEventType;
 function RequestJob(_Function, ...)
     return 0;
 end
+API.RequestJob = RequestJob;
 API.StartJob = RequestJob;
 StartSimpleJob = RequestJob;
 StartSimpleJobEx = RequestJob;
@@ -30,6 +32,7 @@ StartSimpleJobEx = RequestJob;
 function RequestHiResJob(_Function, ...)
     return 0;
 end
+API.RequestHiResJob = RequestHiResJob;
 API.StartHiResJob = RequestHiResJob;
 StartSimpleHiResJob = RequestHiResJob;
 StartSimpleHiResJobEx = RequestHiResJob;
@@ -42,6 +45,7 @@ StartSimpleHiResJobEx = RequestHiResJob;
 function RequestDelay(_Waittime, _Function, ...)
     return 0;
 end
+API.RequestDelay = RequestDelay;
 API.StartDelay = RequestDelay;
 
 --- Fordert eine verzögerte Aktion an, verzögert um Runden.
@@ -52,6 +56,7 @@ API.StartDelay = RequestDelay;
 function RequestHiResDelay(_Waittime, _Function, ...)
     return 0;
 end
+API.RequestHiResDelay = RequestHiResDelay;
 API.StartHiResDelay = RequestHiResDelay;
 
 --- Fordert eine verzögerte Aktion an, verzögert um Echtzeit-Sekunden.
@@ -62,12 +67,14 @@ API.StartHiResDelay = RequestHiResDelay;
 function RequestRealTimeDelay(_Waittime, _Function, ...)
     return 0;
 end
+API.RequestRealTimeDelay = RequestRealTimeDelay;
 API.StartRealTimeDelay = RequestRealTimeDelay;
 
 --- Beendet einen Job. Der Job kann nicht reaktiviert werden.
 --- @param _JobID integer ID des Jobs
 function StopJob(_JobID)
 end
+API.StopJob = StopJob;
 API.EndJob = StopJob;
 
 --- Gibt zurück, ob der Job ausgeführt wird.
@@ -76,6 +83,7 @@ API.EndJob = StopJob;
 function IsJobRunning(_JobID)
     return true;
 end
+API.IsJobRunning = IsJobRunning;
 API.JobIsRunning = IsJobRunning;
 
 --- Setzt einen pausierten Job fort.
@@ -95,5 +103,6 @@ API.YieldJob = YieldJob;
 function GetSecondsRealTime()
     return 0;
 end
+API.RealTimeGetSecondsPassedSinceGameStart = GetSecondsRealTime;
 API.GetSecondsRealTime = GetSecondsRealTime;
 

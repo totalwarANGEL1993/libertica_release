@@ -24,6 +24,7 @@ CONST_DIALOG = {
     DLGCAMERA_FOVDEFAULT = 25,
 }
 
+Lib.Require("comfort/GetPosition");
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIEffects");
@@ -847,9 +848,9 @@ end
 function Lib.DialogSystem.Local:OverrideThroneRoomFunctions()
     -- We only need this to update the sound provider list box for the multiple
     -- choice options. We do not even use the throneroom camera.
-    self.Orig_GameCallback_Camera_ThroneroomCameraControl = GameCallback_Camera_ThroneroomCameraControl;
-    GameCallback_Camera_ThroneroomCameraControl = function(_PlayerID)
-        Lib.DialogSystem.Local.Orig_GameCallback_Camera_ThroneroomCameraControl(_PlayerID);
+    self.Orig_GameCallback_Lib_Camera_ThroneroomCameraControl = GameCallback_Lib_Camera_ThroneroomCameraControl;
+    GameCallback_Lib_Camera_ThroneroomCameraControl = function(_PlayerID)
+        Lib.DialogSystem.Local.Orig_GameCallback_Lib_Camera_ThroneroomCameraControl(_PlayerID);
         if _PlayerID == GUI.GetPlayerID() then
             local Dialog = Lib.DialogSystem.Local:GetCurrentDialog(_PlayerID);
             if Dialog ~= nil then
@@ -899,6 +900,10 @@ function Lib.DialogSystem.Local:ActivateCinematicMode(_PlayerID)
     XGUIEng.SetText("/InGame/ThroneRoom/Main/MissionDialog/Text", " ");
     XGUIEng.SetText("/InGame/ThroneRoom/Main/MissionDialog/Title", " ");
     XGUIEng.SetText("/InGame/ThroneRoom/Main/MissionDialog/Objectives", " ");
+
+    if self.Dialog[_PlayerID].HideNotes then
+        XGUIEng.ShowWidget("/InGame/Root/Normal/NotesWindow", 0);
+    end
 
     -- Change ui state for cinematic
     self.SelectionBackup = {GUI.GetSelectedEntities()};
@@ -981,6 +986,10 @@ function Lib.DialogSystem.Local:DeactivateCinematicMode(_PlayerID)
     -- Reset the throneroom
     XGUIEng.PopPage();
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 0);
+
+    if self.Dialog[_PlayerID].HideNotes then
+        XGUIEng.ShowWidget("/InGame/Root/Normal/NotesWindow", 1);
+    end
 
     ResetRenderDistance();
     self:ResetSubtitlesPosition(_PlayerID);

@@ -16,12 +16,6 @@ Lib.Register("module/io/IOMine");
 -- Global initalizer method
 function Lib.IOMine.Global:Initialize()
     if not self.IsInstalled then
-        --- A resource source was constructed.
-        ---
-        --- #### Parameter
-        --- - `ScriptName` - Scriptname of mine
-        --- * `KnightID`   - ID of activating hero
-        --- * `PlayerID`   - ID of activating player
         Report.InteractiveMineErected = CreateReport("Event_InteractiveMineErected");
 
         -- Garbage collection
@@ -88,11 +82,11 @@ function Lib.IOMine.Global:CreateIOMine(
             return true;
         end,
         Action               = function(_Data, _KnightID, _PlayerID)
-            local ID = ReplaceEntity(_Data.Name, _Data.Type);
+            local ID = ReplaceEntity(_Data.ScriptName, _Data.Type);
             SetResourceAmount(ID, _Data.ResourceAmount, _Data.RefillAmount);
             DestroyEntity(_Data.InvisibleBlocker);
-            SendReport(Report.InteractiveMineErected, _Data.Name, _KnightID, _PlayerID);
-            SendReportToLocal(Report.InteractiveMineErected, _Data.Name, _KnightID, _PlayerID);
+            SendReport(Report.InteractiveMineErected, _Data.ScriptName, _KnightID, _PlayerID);
+            SendReportToLocal(Report.InteractiveMineErected, _Data.ScriptName, _KnightID, _PlayerID);
             if _Data.AdditionalAction then
                 _Data.AdditionalAction(_Data, _KnightID, _PlayerID);
             end

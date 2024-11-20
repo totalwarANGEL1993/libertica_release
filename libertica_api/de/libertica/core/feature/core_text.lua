@@ -4,7 +4,7 @@ Lib.Core.Text = {}
 
 --- Lokalisiert den übergebenen Text oder die Tabelle.
 --- @param _Text any Text zur Lokalisierung
---- @return string Lokalisierter Text
+--- @return any Lokalisierter Text
 function Localize(_Text)
     return "";
 end
@@ -46,11 +46,26 @@ API.StaticNote = AddStaticNote;
 --- @param _Sound? string Sound zum Abspielen
 function AddMessage(_Text, _Sound)
 end
+API.Message = AddMessage;
 
 --- Entfernt alle Texte aus dem Debug-Textfenster.
 function ClearNotes()
 end
 API.ClearNotes = ClearNotes;
+
+--- Ersetzt einen Namen mit dem Text.
+--- @param _Name string Name zum Ersetzen
+--- @param _Replacement any Wert der eingefügt wird
+function AddNamePlaceholder(_Name, _Replacement)
+end
+API.AddNamePlaceholder = AddNamePlaceholder;
+
+--- Ersetzt einen Entity Type mit dem Text.
+--- @param _Type integer Entity Type zum Ersetzen
+--- @param _Replacement any Wert der eingefügt wird
+function AddEntityTypePlaceholder(_Type, _Replacement)
+end
+API.AddEntityTypePlaceholder = AddEntityTypePlaceholder;
 
 --- Speichert eine Zeichenfolgenüberschreibung unter dem Schlüssel.
 --- @param _Key string Schlüssel des Eintrags

@@ -135,6 +135,7 @@ function Lib.CutsceneSystem.Global:StartCutscene(_Name, _PlayerID, _Data)
 end
 
 function Lib.CutsceneSystem.Global:EndCutscene(_PlayerID)
+    collectgarbage("collect");
     Logic.SetGlobalInvulnerability(0);
     SendReportToLocal(Report.CutsceneEnded, _PlayerID);
     if self.Cutscene[_PlayerID].Finished then
@@ -292,6 +293,7 @@ function Lib.CutsceneSystem.Local:StartCutscene(_PlayerID, _CutsceneName, _Cutsc
 end
 
 function Lib.CutsceneSystem.Local:EndCutscene(_PlayerID)
+    collectgarbage("collect");
     if GUI.GetPlayerID() ~= _PlayerID then
         return;
     end
@@ -580,17 +582,17 @@ function Lib.CutsceneSystem.Local:GetPageIDByName(_PlayerID, _Name)
 end
 
 function Lib.CutsceneSystem.Local:OverrideThroneRoomFunctions()
-    self.Orig_GameCallback_Camera_SkipButtonPressed = GameCallback_Camera_SkipButtonPressed;
-    GameCallback_Camera_SkipButtonPressed = function(_PlayerID)
-        Lib.CutsceneSystem.Local.Orig_GameCallback_Camera_SkipButtonPressed(_PlayerID);
+    self.Orig_GameCallback_Lib_Camera_SkipButtonPressed = GameCallback_Lib_Camera_SkipButtonPressed;
+    GameCallback_Lib_Camera_SkipButtonPressed = function(_PlayerID)
+        Lib.CutsceneSystem.Local.Orig_GameCallback_Lib_Camera_SkipButtonPressed(_PlayerID);
         if _PlayerID == GUI.GetPlayerID() then
             SendReportToGlobal(Report.CutsceneSkipButtonPressed, _PlayerID);
         end
     end
 
-    self.Orig_GameCallback_Camera_ThroneroomCameraControl = GameCallback_Camera_ThroneroomCameraControl;
-    GameCallback_Camera_ThroneroomCameraControl = function(_PlayerID)
-        Lib.CutsceneSystem.Local.Orig_GameCallback_Camera_ThroneroomCameraControl(_PlayerID);
+    self.Orig_GameCallback_Lib_Camera_ThroneroomCameraControl = GameCallback_Lib_Camera_ThroneroomCameraControl;
+    GameCallback_Lib_Camera_ThroneroomCameraControl = function(_PlayerID)
+        Lib.CutsceneSystem.Local.Orig_GameCallback_Lib_Camera_ThroneroomCameraControl(_PlayerID);
         if _PlayerID == GUI.GetPlayerID() then
             local Cutscene = Lib.CutsceneSystem.Local:GetCurrentCutscene(_PlayerID);
             if Cutscene ~= nil then
@@ -660,6 +662,10 @@ function Lib.CutsceneSystem.Local:ActivateCinematicMode(_PlayerID)
     -- Title and back button position
     local x,y = XGUIEng.GetWidgetScreenPosition("/InGame/ThroneRoom/Main/DialogTopChooseKnight/ChooseYourKnight");
     XGUIEng.SetWidgetScreenPosition("/InGame/ThroneRoom/Main/DialogTopChooseKnight/ChooseYourKnight", x, 65 * (ScreenY/1080));
+
+    if self.Cutscene[_PlayerID].HideNotes then
+        XGUIEng.ShowWidget("/InGame/Root/Normal/NotesWindow", 0);
+    end
 
     self.SelectionBackup = {GUI.GetSelectedEntities()};
     GUI.ClearSelection();
@@ -737,6 +743,10 @@ function Lib.CutsceneSystem.Local:DeactivateCinematicMode(_PlayerID)
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_Dodge", 0);
     XGUIEng.ShowWidget("/InGame/ThroneRoomBars_2_Dodge", 0);
     XGUIEng.SetText("/InGame/ThroneRoom/Main/MissionBriefing/Objectives", " ");
+
+    if self.Cutscene[_PlayerID].HideNotes then
+        XGUIEng.ShowWidget("/InGame/Root/Normal/NotesWindow", 1);
+    end
 
     ResetRenderDistance();
 

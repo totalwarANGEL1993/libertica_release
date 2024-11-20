@@ -5,7 +5,9 @@ Lib.Core.Report = {
     ScriptEventListener = {},
 
     ScriptCommandRegister = {},
-    ScriptCommandSequence = 0,
+    ScriptCommandSequence = 2,
+
+    OriginPlayer = 0,
 };
 
 Report = Report or {};
@@ -21,11 +23,15 @@ Lib.Register("core/feature/Core_Report");
 
 function Lib.Core.Report:Initialize()
     if not IsLocalScript() then
-        self:OverrideSoldierPayment();
-
-        Lib.Core.Report:CreateScriptCommand("Cmd_SendReportToGlobal", function(_ID, ...)
-            SendReport(_ID, ...);
+        self:OverrideSoldierPaymentGlobal();
+        self:CreateScriptCommand("Cmd_SendReportToGlobal", function(_Params)
+            local ID = table.remove(_Params, 1);
+            if ID then
+                SendReport(ID, unpack(_Params));
+            end
         end);
+    else
+        self:OverrideSoldierPaymentLocal();
     end
 end
 
@@ -35,13 +41,38 @@ end
 function Lib.Core.Report:OnReportReceived(_ID, ...)
 end
 
-function Lib.Core.Report:OverrideSoldierPayment()
+function Lib.Core.Report:OverrideSoldierPaymentGlobal()
     GameCallback_SetSoldierPaymentLevel_Orig_Libertica = GameCallback_SetSoldierPaymentLevel;
     GameCallback_SetSoldierPaymentLevel = function(_PlayerID, _Level)
         if _Level <= 2 then
             return GameCallback_SetSoldierPaymentLevel_Orig_Libertica(_PlayerID, _Level);
         end
-        Lib.Core.Event:ProcessScriptCommand(_PlayerID, _Level);
+        Lib.Core.Report:ProcessScriptCommand(_PlayerID, _Level);
+    end
+end
+
+function Lib.Core.Report:OverrideSoldierPaymentLocal()
+    --- @diagnostic disable-next-line: duplicate-set-field
+    GUI_BuildingInfo.PaymentLevelSliderChanged = function()
+        local CurrentWidgetID = XGUIEng.GetCurrentWidgetID();
+        local PlayerID = GUI.GetPlayerID();
+        local PaymentLevel = PlayerSoldierPaymentLevel[PlayerID];
+        local PaymentSliderLevel = XGUIEng.SliderGetValueAbs(CurrentWidgetID);
+        if PaymentSliderLevel <= 2 and PaymentLevel ~= PaymentSliderLevel then
+            GUI.SetSoldierPaymentLevel(PaymentSliderLevel);
+        end
+    end
+
+    --- @diagnostic disable-next-line: duplicate-set-field
+    GUI_BuildingInfo.PaymentLevelSliderUpdate = function()
+        local WidgetPath = "/InGame/Root/Normal/AlignBottomRight/Selection/Castle/Treasury/Payment/PaymentSlider";
+        local WidgetID = XGUIEng.GetWidgetID(WidgetPath);
+        local PlayerID = GUI.GetPlayerID();
+        local PaymentLevel = PlayerSoldierPaymentLevel[PlayerID];
+        local PaymentSliderLevel = XGUIEng.SliderGetValueAbs(WidgetID);
+        if PaymentSliderLevel <= 2 and PaymentLevel ~= PaymentSliderLevel then
+            XGUIEng.SliderSetValueAbs(WidgetID, PaymentLevel);
+        end
     end
 end
 
@@ -51,7 +82,13 @@ function Lib.Core.Report:ProcessScriptCommand(_PlayerID, _ID)
     assert(_ID and self.ScriptCommandRegister[_ID], "Commands is invalid.");
     local PlayerName = Logic.GetPlayerName(_PlayerID +4);
     local Parameters = self:DecodeScriptCommandParameters(PlayerName);
-    self.ScriptCommandRegister[_ID][2](unpack(Parameters));
+    self.OriginPlayer = _PlayerID;
+    self.ScriptCommandRegister[_ID][2](Parameters);
+    self.OriginPlayer = 0;
+end
+
+function Lib.Core.Report:GetReportSourcePlayerID()
+    return self.OriginPlayer;
 end
 
 function Lib.Core.Report:CreateScriptCommand(_Name, _Function)
@@ -151,15 +188,16 @@ function Lib.Core.Report:CreateReport(_Name)
 end
 
 function Lib.Core.Report:SendReport(_ID, ...)
+    local arg = {...};
     assert(self.ScriptEventRegister[_ID] ~= nil, "Report type does not exist.");
     ---@diagnostic disable-next-line: undefined-global
     if GameCallback_Lib_OnEventReceived then
-        GameCallback_Lib_OnEventReceived(_ID, ...);
+        GameCallback_Lib_OnEventReceived(_ID, unpack(arg));
     end
     if self.ScriptEventListener[_ID] then
         for k, v in pairs(self.ScriptEventListener[_ID]) do
             if tonumber(k) then
-                v(...);
+                v(unpack(arg));
             end
         end
     end
@@ -171,7 +209,7 @@ function Lib.Core.Report:CreateReportReceiver(_EventID, _Function)
     local Data = self.ScriptEventListener[_EventID];
     self.ScriptEventListener[_EventID].SequenceID = Data.SequenceID +1;
     self.ScriptEventListener[_EventID][Data.SequenceID] = _Function;
-    return Data.IDSequence;
+    return Data.SequenceID;
 end
 
 function Lib.Core.Report:RemoveReportReceiver(_EventID, _ID)
@@ -187,9 +225,16 @@ end
 API.CreateScriptEvent = CreateReport;
 
 function SendReport(_ID, ...)
-    Lib.Core.Report:SendReport(_ID, ...);
+    local arg = {...};
+    Lib.Core.Report:SendReport(_ID, unpack(arg));
 end
 API.SendScriptEvent = SendReport;
+
+function GetReportSender()
+    return Lib.Core.Report:GetReportSourcePlayerID();
+end
+API.GetReportSender = GetReportSender;
+API.GetReportSourcePlayerID = GetReportSender;
 
 function SendReportToGlobal(_ID, ...)
     assert(IsLocalScript(), "Was called from global script.");

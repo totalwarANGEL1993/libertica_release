@@ -10,7 +10,7 @@ Lib.IOMine = Lib.IOMine or {};
 --- Creates a buried iron mine.
 ---
 --- #### Parameter
---- * `Scriptname`            - Scriptname of position
+--- * `ScriptName`            - Scriptname of position
 --- * `Title`                 - (Optional) Tooltip title
 --- * `Text`                  - (Optional) Tooltip text
 --- * `Costs`                 - (Optional) Construction costs
@@ -28,7 +28,7 @@ API.CreateIOIronMine = CreateIOIronMine;
 --- Creates a buried stone mine.
 ---
 --- #### Parameter
---- * `Scriptname`            - Scriptname of position
+--- * `ScriptName`            - Scriptname of position
 --- * `Title`                 - (Optional) Tooltip title
 --- * `Text`                  - (Optional) Tooltip text
 --- * `Costs`                 - (Optional) Construction costs

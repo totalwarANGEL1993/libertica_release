@@ -30,7 +30,15 @@ Lib.Warehouse.Text = {
     },
 };
 
+WarehouseOfferType = {
+    Entertainer = 1,
+    Mercenary = 2,
+    Lifestock = 3,
+    HeavyWeapon = 4,
+};
+
 Lib.Require("comfort/GetSiegeengineTypeByCartType");
+Lib.Require("comfort/GetBattalionSizeBySoldierType");
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("comfort/KeyOf");
 Lib.Require("comfort/ReplaceEntity");
@@ -106,6 +114,7 @@ function Lib.Warehouse.Global:CreateWarehouse(_Data)
     local Warehouse = {
         ScriptName      = _Data.ScriptName,
         BuildingName    = _Data.ScriptName.. "_Post",
+        Spawnpoint      = _Data.ScriptName.. "_Spawn",
         Costs           = _Data.Costs,
         Offers          = {};
     }
@@ -169,11 +178,14 @@ function Lib.Warehouse.Global:CreateOffer(_Name, _Amount, _GoodType, _GoodAmount
         and Logic.IsEntityTypeInCategory(_GoodType, EntityCategories.Military) == 0 then
             Amount = 1;
         end
+        -- Get type
+        local OfferType = self:GetOfferType(_GoodType);
         -- Insert offer
         self.OfferSequence = self.OfferSequence + 1;
         local ID = self.OfferSequence;
         table.insert(self.Warehouses[Index].Offers, {
             ID = ID,
+            OfferType = OfferType,
             BuyLock = false,
             Active = true,
             Current = Amount,
@@ -275,26 +287,63 @@ function Lib.Warehouse.Global:CalculateInflation(_PlayerID, _GoodType)
     return Factor;
 end
 
+function Lib.Warehouse.Global:GetOfferType(_Offer)
+    local OfferType = WarehouseOfferType.Entertainer;
+    if Logic.IsEntityTypeInCategory(_Offer, EntityCategories.Soldier) == 1 then
+        OfferType = WarehouseOfferType.Mercenary;
+    elseif Logic.IsEntityTypeInCategory(_Offer, EntityCategories.CattlePasture) == 1 then
+        OfferType = WarehouseOfferType.Lifestock;
+    elseif Logic.IsEntityTypeInCategory(_Offer, EntityCategories.SheepPasture) == 1 then
+        OfferType = WarehouseOfferType.Lifestock;
+    elseif Logic.IsEntityTypeInCategory(_Offer, EntityCategories.HeavyWeapon) == 1 then
+        OfferType = WarehouseOfferType.HeavyWeapon;
+    end
+    return OfferType;
+end
+
 function Lib.Warehouse.Global:PerformTrade(_PlayerID, _ScriptName, _Inflation, _OfferIndex, _OfferGood, _GoodAmount, _PaymentGood, _BasePrice)
     local BuildingID = GetID(_ScriptName.. "_Post");
     local Amount = _GoodAmount or 1;
+    -- Get spawn position
+    local SpawnPoint = _ScriptName.. "_Spawn";
+    if not IsExisting(SpawnPoint) then
+        SpawnPoint = _ScriptName.. "_Post";
+    end
+    local SpawnPointID = GetID(SpawnPoint);
+    local x,y,z = Logic.EntityGetPos(SpawnPointID);
+    if Logic.IsBuilding(SpawnPointID) == 1 then
+        x,y = Logic.GetBuildingApproachPosition(SpawnPointID);
+    end
     -- Send good type
     if KeyOf(_OfferGood, Goods) ~= nil then
-        SendCart(_ScriptName.. "_Post", _PlayerID, _OfferGood, Amount);
+        SendCart(SpawnPoint, _PlayerID, _OfferGood, Amount);
     -- Create units
     elseif KeyOf(_OfferGood, Entities) ~= nil then
-        if Logic.IsEntityTypeInCategory(_OfferGood, EntityCategories.Military) == 1 then
-            local x,y = Logic.GetBuildingApproachPosition(GetID(_ScriptName.. "_Post"));
-            local Orientation = Logic.GetEntityOrientation(GetID(_ScriptName.. "_Post")) - 90;
-            local ID  = Logic.CreateBattalionOnUnblockedLand(_OfferGood, x, y, Orientation, _PlayerID);
-            Logic.MoveSettler(ID, x, y, -1);
+        if  Logic.IsEntityTypeInCategory(_OfferGood, EntityCategories.HeavyWeapon) == 0
+        and Logic.IsEntityTypeInCategory(_OfferGood, EntityCategories.Military) == 1 then
+            local MilitaryLimit = Logic.GetCurrentSoldierLimit(_PlayerID);
+            local MilitaryUsage = Logic.GetCurrentSoldierCount(_PlayerID);
+            if GetBattalionSizeBySoldierType(_OfferGood) <= MilitaryLimit - MilitaryUsage then
+                local Orientation = Logic.GetEntityOrientation(SpawnPointID) - 90;
+                local ID  = Logic.CreateBattalionOnUnblockedLand(_OfferGood, x, y, Orientation, _PlayerID);
+                x,y = Logic.GetBuildingApproachPosition(BuildingID);
+                Logic.MoveSettler(ID, x, y, -1);
+            end
         else
             if Logic.IsEntityTypeInCategory(_OfferGood, EntityCategories.CattlePasture) == 1
             or Logic.IsEntityTypeInCategory(_OfferGood, EntityCategories.SheepPasture) == 1 then
                 Amount = 5;
             end
             for i= 1, Amount do
-                ExecuteLocal([[GUI.CreateEntityAtBuilding(%d, %d, 0)]], BuildingID, _OfferGood);
+                local ID = Logic.CreateEntityOnUnblockedLand(
+                    _OfferGood,
+                    math.random(x -200, x +200),
+                    math.random(y -200, y +200),
+                    Logic.GetEntityOrientation(SpawnPointID) - 90,
+                    _PlayerID
+                );
+                x,y = Logic.GetBuildingApproachPosition(BuildingID);
+                Logic.MoveSettler(ID, x, y, -1);
             end
         end
     end
@@ -473,6 +522,20 @@ function Lib.Warehouse.Local:GetActivOffers(_Name, _VisibleOnly)
     return Offers;
 end
 
+function Lib.Warehouse.Local:GetOfferType(_Offer)
+    local OfferType = WarehouseOfferType.Entertainer;
+    if Logic.IsEntityTypeInCategory(_Offer, EntityCategories.Soldier) == 1 then
+        OfferType = WarehouseOfferType.Mercenary;
+    elseif Logic.IsEntityTypeInCategory(_Offer, EntityCategories.CattlePasture) == 1 then
+        OfferType = WarehouseOfferType.Lifestock;
+    elseif Logic.IsEntityTypeInCategory(_Offer, EntityCategories.SheepPasture) == 1 then
+        OfferType = WarehouseOfferType.Lifestock;
+    elseif Logic.IsEntityTypeInCategory(_Offer, EntityCategories.HeavyWeapon) == 1 then
+        OfferType = WarehouseOfferType.HeavyWeapon;
+    end
+    return OfferType;
+end
+
 -- -------------------------------------------------------------------------- --
 
 function Lib.Warehouse.Local:InitTradeButtons(_ScriptName)
@@ -545,6 +608,15 @@ function Lib.Warehouse.Local:WarehouseButtonAction(_ButtonIndex, _WidgetID, _Ent
     if GetPlayerGoodsInSettlement(Data.PaymentType, PlayerID) < Price then
         return;
     end
+    -- Check limit
+    if Data.OfferType == WarehouseOfferType.Mercenary then
+        local MilitaryLimit = Logic.GetCurrentSoldierLimit(PlayerID);
+        local MilitaryUsage = Logic.GetCurrentSoldierCount(PlayerID);
+        if GetBattalionSizeBySoldierType(Data.GoodType) > MilitaryLimit - MilitaryUsage then
+            AddMessage("Feedback_TextLines/TextLine_SoldierLimitReached");
+            return;
+        end
+    end
     -- Prevent click spam
     self.Warehouses[Index].Offers[OfferIndex].BuyLock = true;
     -- Send repot to global
@@ -595,16 +667,16 @@ function Lib.Warehouse.Local:WarehouseButtonTooltip(_ButtonIndex, _WidgetID, _En
     else
         OfferName = GetStringText("UI_ObjectNames/HireEntertainer");
         OfferDescription = GetStringText("UI_ObjectDescription/HireEntertainer");
-        if Logic.IsEntityTypeInCategory(Data.GoodType, EntityCategories.Soldier) == 1 then
+        if Data.OfferType == WarehouseOfferType.Mercenary then
             OfferName = GetStringText("UI_ObjectNames/HireMercenaries");
             OfferDescription = GetStringText("UI_ObjectDescription/HireMercenaries");
-        elseif Logic.IsEntityTypeInCategory(Data.GoodType, EntityCategories.CattlePasture) == 1 then
+        elseif Data.OfferType == WarehouseOfferType.Lifestock then
             OfferName = GetStringText("UI_ObjectNames/G_Cow");
-            OfferDescription = GetStringText("UI_ObjectDescription/G_Sheep");
-        elseif Logic.IsEntityTypeInCategory(Data.GoodType, EntityCategories.SheepPasture) == 1 then
+            OfferDescription = GetStringText("UI_ObjectDescription/G_Cow");
+        elseif Data.OfferType == WarehouseOfferType.Lifestock then
             OfferName = GetStringText("UI_ObjectNames/G_Sheep");
             OfferDescription = GetStringText("UI_ObjectDescription/G_Sheep");
-        elseif Logic.IsEntityTypeInCategory(Data.GoodType, EntityCategories.HeavyWeapon) == 1 then
+        elseif Data.OfferType == WarehouseOfferType.HeavyWeapon then
             OfferName = GetStringText("Names/" ..EntityTypeName);
             local EngineType = GetSiegeengineTypeByCartType(Data.GoodType);
             local EngineTypeName = Logic.GetEntityTypeName(EngineType);

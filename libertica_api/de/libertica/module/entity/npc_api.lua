@@ -14,7 +14,7 @@ Lib.NPC = Lib.NPC or {};
 --- Fügt einer Entität einen NPC hinzu.
 ---
 --- #### Felder der Tabelle
---- * Name              Skriptname der Entität (obligatorisch)
+--- * ScriptName        Skriptname der Entität (obligatorisch)
 --- * Active            NPC ist aktiv
 --- * Callback          Funktion, die bei der Aktivierung aufgerufen wird
 --- * Condition         Bedingung, die vor der Aktivierung überprüft wird
@@ -36,10 +36,10 @@ Lib.NPC = Lib.NPC or {};
 --- ```lua
 --- -- Beispiel #1: Erstellt einen einfachen NPC
 --- MyNpc = NpcCompose {
----     Name     = "HansWurst",
----     Callback = function(_Data)
+---     ScriptName = "HansWurst",
+---     Callback   = function(_Data)
 ---         local HeroID = CONST_LAST_HERO_INTERACTED;
----         local NpcID = GetID(_Data.Name);
+---         local NpcID = GetID(_Data.ScriptName);
 ---     end
 --- }
 --- ```
@@ -47,15 +47,15 @@ Lib.NPC = Lib.NPC or {};
 --- ```lua
 --- -- Beispiel #2: Erstellt einen NPC mit Bedingungen
 --- MyNpc = NpcCompose {
----     Name      = "HansWurst",
----     Condition = function(_Data)
----         local NpcID = GetID(_Data.Name);
+---     ScriptName = "HansWurst",
+---     Condition  = function(_Data)
+---         local NpcID = GetID(_Data.ScriptName);
 ---         -- prüfe irgend etwas
 ---         return MyConditon == true;
 ---     end
 ---     Callback  = function(_Data)
 ---         local HeroID = CONST_LAST_HERO_INTERACTED;
----         local NpcID = GetID(_Data.Name);
+---         local NpcID = GetID(_Data.ScriptName);
 ---     end
 --- }
 ---```
@@ -63,14 +63,14 @@ Lib.NPC = Lib.NPC or {};
 --- ```lua
 --- -- Beispiel #3: Begrenzt Spieler für die Aktivierung
 --- MyNpc = NpcCompose {
----     Name              = "HansWurst",
+---     ScriptName        = "HansWurst",
 ---     Player            = {1, 2},
 ---     WrongPlayerAction = function(_Data)
 ---         AddNote("Ich werde nicht mit dir sprechen!");
 ---     end,
 ---     Callback          = function(_Data)
 ---         local HeroID = CONST_LAST_HERO_INTERACTED;
----         local NpcID = GetID(_Data.Name);
+---         local NpcID = GetID(_Data.ScriptName);
 ---     end
 --- }
 ---```
@@ -91,7 +91,7 @@ API.NpcDispose = NpcDispose;
 --- Aktualisiert den NPC mit der Datentabelle.
 ---
 --- #### Felder der Tabelle
---- * Name              Skriptname der Entität (obligatorisch)
+--- * ScriptName        Skriptname der Entität (obligatorisch)
 --- * Callback          Funktion, die bei der Aktivierung aufgerufen wird
 --- * Condition         Bedingung, die vor der Aktivierung überprüft wird
 --- * Type              Typ des NPCs (1, 2, 3, 4)

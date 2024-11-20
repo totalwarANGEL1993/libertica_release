@@ -4,4 +4,5 @@
 function GetCategoriesOfEntity(_Entity)
     return {};
 end
+API.GetCategoriesOfEntity = GetCategoriesOfEntity;
 

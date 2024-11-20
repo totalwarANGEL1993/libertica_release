@@ -11,8 +11,8 @@ function SetPosition(_Entity, _Target)
     end
     local Target = GetPosition(_Target);
     assert(IsValidPosition(Target), "Invalid position.");
-    for k,v in pairs(GetSoldiersOfGroup(ID)) do
-        SetPosition(v, _Target);
+    for _, SoldierID in pairs(GetSoldiersOfGroup(ID)) do
+        SetPosition(SoldierID, _Target);
     end
     Logic.DEBUG_SetSettlerPosition(ID, Target.X, Target.Y);
 end

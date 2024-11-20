@@ -70,3 +70,74 @@ function DropBuildingButtonFromEntity(_ScriptName, _ID)
 end
 API.DropBuildingButtonFromEntity = DropBuildingButtonFromEntity;
 
+function ActivateDowngradeBuilding()
+    error(not IsLocalScript(), "Can only be used in global script!");
+    ExecuteLocal([[Lib.UIBuilding.Local.ExtraButton.Downgrade:Activate()]]);
+end
+API.ActivateDowngradeBuilding = ActivateDowngradeBuilding;
+
+function DeactivateDowngradeBuilding()
+    error(not IsLocalScript(), "Can only be used in global script!");
+    ExecuteLocal([[Lib.UIBuilding.Local.ExtraButton.Downgrade:Deactivate()]]);
+end
+API.DeactivateDowngradeBuilding = DeactivateDowngradeBuilding;
+
+function SetDowngradeBuildingCost(_MoneyCost)
+    error(not IsLocalScript(), "Can only be used in global script!");
+    error(type(_MoneyCost) == "number", "Costs must be a number!");
+    ExecuteLocal([[Lib.UIBuilding.Local.ExtraButton.Downgrade:SetCost(%d)]], _MoneyCost or 0)
+end
+API.SetDowngradeCosts = SetDowngradeBuildingCost;
+API.SetDowngradeBuildingCost = SetDowngradeBuildingCost;
+
+function ActivateSingleReserveBuilding()
+    error(not IsLocalScript(), "Can only be used in global script!");
+    ExecuteLocal([[Lib.UIBuilding.Local.ExtraButton.SingleReserve:Activate()]]);
+end
+API.ActivateSingleReserveBuilding = ActivateSingleReserveBuilding;
+
+function DeactivateSingleReserveBuilding()
+    error(not IsLocalScript(), "Can only be used in global script!");
+    ExecuteLocal([[Lib.UIBuilding.Local.ExtraButton.SingleReserve:Deactivate()]]);
+end
+API.DeactivateSingleReserveBuilding = DeactivateSingleReserveBuilding;
+
+function ActivateSingleStopBuilding()
+    error(not IsLocalScript(), "Can only be used in global script!");
+    ExecuteLocal([[Lib.UIBuilding.Local.ExtraButton.SingleStop:Activate()]]);
+end
+API.ActivateSingleStopBuilding = ActivateSingleStopBuilding;
+
+function DeactivateSingleStopBuilding()
+    error(not IsLocalScript(), "Can only be used in global script!");
+    ExecuteLocal([[Lib.UIBuilding.Local.ExtraButton.SingleStop:Deactivate()]]);
+end
+API.DeactivateSingleStopBuilding = DeactivateSingleStopBuilding;
+
+
+
+
+API.UseDowngrade = function(_Flag)
+    if _Flag then
+        ActivateDowngradeBuilding();
+        return;
+    end
+    DeactivateDowngradeBuilding();
+end
+
+API.UseSingleReserve = function(_Flag)
+    if _Flag then
+        ActivateSingleReserveBuilding();
+        return;
+    end
+    DeactivateSingleReserveBuilding();
+end
+
+API.UseSingleStop = function(_Flag)
+    if _Flag then
+        ActivateSingleStopBuilding();
+        return;
+    end
+    DeactivateSingleStopBuilding();
+end
+

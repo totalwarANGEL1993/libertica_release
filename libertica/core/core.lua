@@ -14,6 +14,7 @@ CONST_CURRENT_MODULE_CONTEXT = {};
 Lib.Require("comfort/IsHistoryEdition");
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("comfort/IsLocalScript");
+Lib.Require("comfort/HexToColorString");
 
 Lib.Require("core/QSB");
 
@@ -53,7 +54,7 @@ function warn(_Condition, _Text, ...)
         if GUI then
             GUI.AddNote(Text);
         else
-            Logic.DEBUG_Addnote(Text);
+            Logic.DEBUG_AddNote(Text);
         end
         return Text;
     end
@@ -62,7 +63,7 @@ end
 function error(_Condition, _Text, ...)
     if not _Condition then
         local Text = log(_Text, unpack(arg));
-        return assert(_Condition, Text);
+        return assert(false, Text);
     end
 end
 
@@ -72,7 +73,7 @@ function debug(_Condition, _Text, ...)
         if GUI then
             GUI.AddNote(Text);
         else
-            Logic.DEBUG_Addnote(Text);
+            Logic.DEBUG_AddNote(Text);
         end
     end
 end
@@ -177,31 +178,33 @@ end
 
 function Lib.Core.Global:InitReportListener()
     GameCallback_Lib_OnEventReceived = function(_ID, ...)
-        Lib.Core.LuaExtension:OnReportReceived(_ID, ...);
-        Lib.Core.Report:OnReportReceived(_ID, ...);
-        Lib.Core.Text:OnReportReceived(_ID, ...);
-        Lib.Core.Job:OnReportReceived(_ID, ...);
-        Lib.Core.ScriptingValue:OnReportReceived(_ID, ...);
-        Lib.Core.Save:OnReportReceived(_ID, ...);
-        Lib.Core.Quest:OnReportReceived(_ID, ...);
-        Lib.Core.Chat:OnReportReceived(_ID, ...);
-        Lib.Core.Debug:OnReportReceived(_ID, ...);
-        Lib.Core.Bugfix:OnReportReceived(_ID, ...);
-        Lib.Core.Player:OnReportReceived(_ID, ...);
+        local arg = {...};
+
+        Lib.Core.LuaExtension:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Report:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Text:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Job:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.ScriptingValue:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Save:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Quest:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Chat:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Debug:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Bugfix:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Player:OnReportReceived(_ID, unpack(arg));
 
         -- Loadscreen
         if _ID == Report.LoadingFinished then
-            SendReportToLocal(Report.LoadingFinished, ...);
+            SendReportToLocal(Report.LoadingFinished, unpack(arg));
         end
         -- Escape
         if _ID == Report.EscapePressed then
-            SendReportToLocal(Report.EscapePressed, ...);
+            SendReportToLocal(Report.EscapePressed, unpack(arg));
         end
 
         for i= 1, #Lib.Core.ModuleList do
             local Name = Lib.Core.ModuleList[i];
             if Lib[Name].Global and Lib[Name].Global.OnReportReceived then
-                Lib[Name].Global:OnReportReceived(_ID, ...);
+                Lib[Name].Global:OnReportReceived(_ID, unpack(arg));
             end
         end
 
@@ -346,17 +349,18 @@ end
 
 function Lib.Core.Local:InitReportListener()
     GameCallback_Lib_OnEventReceived = function(_ID, ...)
-        Lib.Core.LuaExtension:OnReportReceived(_ID, ...);
-        Lib.Core.Report:OnReportReceived(_ID, ...);
-        Lib.Core.Text:OnReportReceived(_ID, ...);
-        Lib.Core.Job:OnReportReceived(_ID, ...);
-        Lib.Core.ScriptingValue:OnReportReceived(_ID, ...);
-        Lib.Core.Save:OnReportReceived(_ID, ...);
-        Lib.Core.Quest:OnReportReceived(_ID, ...);
-        Lib.Core.Chat:OnReportReceived(_ID, ...);
-        Lib.Core.Debug:OnReportReceived(_ID, ...);
-        Lib.Core.Bugfix:OnReportReceived(_ID, ...);
-        Lib.Core.Player:OnReportReceived(_ID, ...);
+        local arg = {...};
+        Lib.Core.LuaExtension:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Report:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Text:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Job:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.ScriptingValue:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Save:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Quest:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Chat:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Debug:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Bugfix:OnReportReceived(_ID, unpack(arg));
+        Lib.Core.Player:OnReportReceived(_ID, unpack(arg));
 
         -- Loadscreen
         if _ID == Report.LoadingFinished then
@@ -366,7 +370,7 @@ function Lib.Core.Local:InitReportListener()
         for i= 1, #Lib.Core.ModuleList do
             local Name = Lib.Core.ModuleList[i];
             if Lib[Name].Local and Lib[Name].Local.OnReportReceived then
-                Lib[Name].Local:OnReportReceived(_ID, ...);
+                Lib[Name].Local:OnReportReceived(_ID, unpack(arg));
             end
         end
 
@@ -381,10 +385,10 @@ end
 
 function Lib.Core.Local:ExecuteGlobal(_Command, ...)
     local CommandString = _Command;
-    assert(
-        not (IsHistoryEdition() and IsMultiplayer()),
-        "Script command is not allowed in history edition multiplayer."
-    );
+    if IsHistoryEdition() and IsMultiplayer() then
+        warn(false, "Script command is not allowed in history edition multiplayer.");
+        return;
+    end
     if arg and #arg > 0 then
         CommandString = CommandString:format(unpack(arg));
     end
@@ -466,26 +470,36 @@ end
 
 -- -------------------------------------------------------------------------- --
 
+function API.SetLogLevel(_ScreenLogLevel, _FileLogLevel)
+    -- Legacy support...
+    -- Log levels do not exist anymore.
+end
+API.SetLoggingLevel = API.SetLogLevel
+
 function PrepareLibrary()
     assert(not IsLocalScript(), "Must be called from global script!");
     Lib.Core.Global:Initialize();
     ExecuteLocal("Lib.Core.Local:Initialize()");
 end
+API.PrepareLibrary = PrepareLibrary;
 
 function RegisterModule(_Name)
     assert(Lib[_Name], "Module '" .._Name.. "' does not exist!");
     table.insert(Lib.Core.ModuleList, _Name);
 end
+API.RegisterModule = RegisterModule;
 
 function ExecuteLocal(_Command, ...)
     if not IsLocalScript() then
         Lib.Core.Global:ExecuteLocal(_Command, ...);
     end
 end
+API.ExecuteLocal = ExecuteLocal;
 
 function ExecuteGlobal(_Command, ...)
     if IsLocalScript() then
         Lib.Core.Local:ExecuteGlobal(_Command, ...);
     end
 end
+API.ExecuteGlobal = ExecuteGlobal;
 

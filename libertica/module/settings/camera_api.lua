@@ -50,33 +50,25 @@ function DeactivateBorderScroll(_Position, _PlayerID)
 end
 API.DeactivateBorderScroll = DeactivateBorderScroll;
 
-function AllowExtendedZoom(_Flag, _PlayerID)
+function ActivateExtendedZoom(_PlayerID)
     _PlayerID = _PlayerID or -1;
     if not GUI then
-        ExecuteLocal([[API.AllowExtendedZoom(%s, %d)]], tostring(_Flag == true), _PlayerID);
+        ExecuteLocal([[API.ActivateExtendedZoom(%s, %d)]], _PlayerID);
         return;
     end
-    if _PlayerID ~= -1 and GUI.GetPlayerID() ~= _PlayerID then
-        return;
-    end
-    Lib.Camera.Local.ExtendedZoomAllowed = _Flag == true;
-    if _Flag == true then
-        Lib.Camera.Local:DescribeExtendedZoomShortcut();
-    else
-        Lib.Camera.Local:RemoveExtendedZoomShortcut();
-        Lib.Camera.Local:DeactivateExtendedZoom(_PlayerID);
-    end
+    Lib.Camera.Local:ActivateExtendedZoom(_PlayerID);
 end
-API.AllowExtendedZoom = AllowExtendedZoom;
+API.ActivateExtendedZoom = ActivateExtendedZoom;
 
-function ToggleExtendedZoom(_PlayerID)
+function DeactivateExtendedZoom(_PlayerID)
+    _PlayerID = _PlayerID or -1;
     if not GUI then
-        ExecuteLocal([[ToggleExtendedZoom(%d)]], _PlayerID);
+        ExecuteLocal([[API.DeactivateExtendedZoom(%s, %d)]], _PlayerID);
         return;
     end
-    Lib.Camera.Local:ToggleExtendedZoom(_PlayerID)
+    Lib.Camera.Local:DeactivateExtendedZoom(_PlayerID);
 end
-API.ToggleExtendedZoom = ToggleExtendedZoom;
+API.DeactivateExtendedZoom = DeactivateExtendedZoom;
 
 function SetNormalZoomProps(_Limit)
     if not GUI then
