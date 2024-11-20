@@ -28,6 +28,12 @@
 ---
 Lib.SettlementSurvival = Lib.SettlementSurvival or {};
 
+--- Activates or deactivates the mode.
+--- @param _Flag boolean Indicates whether the mode is active
+function SettlementSurvivalActivate(_Flag)
+end
+API.SettlementSurvivalActivate = SettlementSurvivalActivate;
+
 --- Enables or disables animals dying from disease.
 --- @param _Flag boolean Feature is active
 function AnimalPlagueActivate(_Flag)
@@ -39,12 +45,6 @@ API.AnimalPlagueActivate = AnimalPlagueActivate;
 function AnimalPlagueActivateForAI(_Flag)
 end
 API.AnimalPlagueActivateForAI = AnimalPlagueActivateForAI;
-
---- Enables or disables animals becoming automatically sick.
---- @param _Flag boolean Feature is active
-function AnimalInfectionActivateAutomatic(_Flag)
-end
-API.AnimalInfectionActivateAutomatic = AnimalInfectionActivateAutomatic;
 
 --- Changes the interval between deaths of sick animals.
 --- @param _Interval integer New interval time
@@ -213,6 +213,18 @@ API.BanditsBlockClaimActivate = BanditsBlockClaimActivate;
 function ClothesForOuterRimActivate(_Flag)
 end
 API.ClothesForOuterRimActivate = ClothesForOuterRimActivate;
+
+--- Enables or disables if buildings have a base consumltion.
+--- @param _Flag boolean Consumption active
+function BaseConsumptionActivate(_Flag)
+end
+API.BaseConsumptionActivate = BaseConsumptionActivate;
+
+--- Enables or disables if buildings of the AI also have base consumption.
+--- @param _Flag boolean Consumption active
+function BaseConsumptionActivateForAI(_Flag)
+end
+API.BaseConsumptionActivateForAI = BaseConsumptionActivateForAI;
 
 
 
