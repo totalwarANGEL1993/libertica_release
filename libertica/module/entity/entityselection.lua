@@ -13,6 +13,7 @@ Lib.EntitySelection.Local  = {
     MilitaryRelease = true,
 };
 
+Lib.Require("comfort/GetPosition");
 Lib.Require("comfort/IsHistoryEdition");
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");

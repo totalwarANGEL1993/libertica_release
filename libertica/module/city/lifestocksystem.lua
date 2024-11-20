@@ -365,7 +365,8 @@ function Lib.LifestockSystem.Local:BuyAnimalUpdate(_Index, _WidgetID, _EntityID)
 end
 
 function Lib.LifestockSystem.Local:InitBuyCowButton()
-    local Position = {XGUIEng.GetWidgetLocalPosition("/InGame/Root/Normal/BuildingButtons/BuyCatapultCart")};
+    local Widget = "/InGame/Root/Normal/BuildingButtons/BuyCatapultCart";
+    local Position = {XGUIEng.GetWidgetLocalPosition(Widget)};
     AddBuildingButtonByTypeAtPosition(
         Entities.B_CattlePasture,
         Position[1], Position[2],
@@ -382,7 +383,8 @@ function Lib.LifestockSystem.Local:InitBuyCowButton()
 end
 
 function Lib.LifestockSystem.Local:InitBuySheepButton()
-    local Position = {XGUIEng.GetWidgetLocalPosition("/InGame/Root/Normal/BuildingButtons/BuyCatapultCart")};
+    local Widget = "/InGame/Root/Normal/BuildingButtons/BuyCatapultCart";
+    local Position = {XGUIEng.GetWidgetLocalPosition(Widget)};
     AddBuildingButtonByTypeAtPosition(
         Entities.B_SheepPasture,
         Position[1], Position[2],

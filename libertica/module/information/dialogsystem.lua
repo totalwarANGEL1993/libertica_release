@@ -24,6 +24,7 @@ CONST_DIALOG = {
     DLGCAMERA_FOVDEFAULT = 25,
 }
 
+Lib.Require("comfort/GetPosition");
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UIEffects");
