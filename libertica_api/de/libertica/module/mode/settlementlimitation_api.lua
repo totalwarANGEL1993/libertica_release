@@ -79,3 +79,44 @@ end
 function SetTerritoryDevelopmentCost(_CostType1, _Amount1, _CostType2, _Amount2)
 end
 
+--- Fügt ein Territorium zu der Blacklist des Typ hinzu.
+--- @param _Type integer Typ des Gebäude
+--- @param _Territory integer ID des Territorium
+function AddToBuildingTerritoryBlacklist(_Type, _Territory)
+end
+API.AddToBuildingTerritoryBlacklist = AddToBuildingTerritoryBlacklist;
+
+--- Fügt ein Territorium zu der Whitelist des Typ hinzu.
+--- @param _Type integer Typ des Gebäude
+--- @param _Territory integer ID des Territorium
+function AddToBuildingTerritoryWhitelist(_Type, _Territory)
+end
+API.AddToBuildingTerritoryWhitelist = AddToBuildingTerritoryWhitelist;
+
+--- Entfernt ein Territorium von der Blacklist des Typ.
+--- @param _Type integer Typ des Gebäude
+--- @param _Territory integer ID des Territorium
+function RemoveFromBuildingTerritoryBlacklist(_Type, _Territory)
+end
+API.RemoveFromBuildingTerritoryBlacklist = RemoveFromBuildingTerritoryBlacklist;
+
+--- Entfernt ein Territorium von der Whitelist des Typ.
+--- @param _Type integer Typ des Gebäude
+--- @param _Territory integer ID des Territorium
+function RemoveFromBuildingTerritoryWhitelist(_Type, _Territory)
+end
+API.RemoveFromBuildingTerritoryWhitelist = RemoveFromBuildingTerritoryWhitelist;
+
+--- Aktiviert oder deaktiviert die Limitierung der Außenposten.
+--- @param _Flag boolean Limitierung ist aktiv
+function ActivateOutpostLimit(_Flag)
+end
+API.ActivateOutpostLimit = ActivateOutpostLimit;
+
+--- Ändert die Limitierung der Außenposten für die Burgausbaustufe.
+--- @param _UpgradeLevel integer Ausbaustufe der Burg
+--- @param _Limit integer Limitierung der Außenposten
+function SetOutpostLimit(_UpgradeLevel, _Limit)
+end
+API.SetOutpostLimit = SetOutpostLimit;
+

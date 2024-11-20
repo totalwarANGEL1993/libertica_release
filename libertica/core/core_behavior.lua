@@ -1,3 +1,4 @@
+Lib.Require("comfort/GetPosition");
 Lib.Register("core/Core_Behavior");
 
 function Reward_DEBUG(_Assertions, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests)
