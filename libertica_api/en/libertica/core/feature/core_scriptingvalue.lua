@@ -8,7 +8,6 @@
 --- * `CONST_SCRIPTING_VALUES.Size` - Scaling of entity
 --- * `CONST_SCRIPTING_VALUES.Visible` - Is entity visible (= 801280)
 --- * `CONST_SCRIPTING_VALUES.NPC` - Type of npc (> 0)
-Lib.Core.ScriptingValue = {}
 
 
 

@@ -1,5 +1,4 @@
---- 
-Lib.Camera = Lib.Camera or {};
+--- Funktionen zur Manipulation der RTS-Kamera.
 
 --- Ändert die maximale Darstellungsreichweite, bis etwas abgeschnitten wird.
 --- @param _View number Maximale Darstellungsreichweite
@@ -39,7 +38,6 @@ API.DeactivateExtendedZoom = DeactivateExtendedZoom;
 --- 
 --- Der voreingestellte Wert beträgt 0.5.
 --- 
---- 
 --- @param _Limit number Zoom Limit (zwischen 0.1 und 0.87)
 function SetNormalZoomProps(_Limit)
 end
@@ -48,7 +46,6 @@ API.SetNormalZoomProps = SetNormalZoomProps;
 --- Setzt das Zoom Limit für den erweiterten Zoom.
 --- 
 --- Der voreingestellte Wert beträgt 0.65.
---- 
 --- 
 --- @param _Limit number Zoom Limit (zwischen 0.1 und 0.87)
 function SetExtendedZoomProps(_Limit)
@@ -71,28 +68,30 @@ function FocusCameraOnEntity(_Entity, _Rotation, _ZoomFactor)
 end
 API.FocusCameraOnEntity = FocusCameraOnEntity;
 
+
+
 --- Der Bildlauf am Rand des Bildschirms ist für einen Spieler deaktiviert.
 ---
---- #### Parameter
---- - `PlayerID` - ID des Spielers
---- - `Position` - ID der Entität, auf die die Kamera fixiert ist
+--- #### Parameters:
+--- * `PlayerID` - ID des Spielers
+--- * `Position` - ID der Entität, auf die die Kamera fixiert ist
 Report.BorderScrollLocked = anyInteger;
 
 --- Der Bildlauf am Rand des Bildschirms ist für einen Spieler aktiviert.
 ---
---- #### Parameter
---- - `PlayerID` - ID des Spielers
+--- #### Parameters:
+--- * `PlayerID` - ID des Spielers
 Report.BorderScrollReset = anyInteger;
 
 --- Die erweiterte Zoomentfernung ist für den Spieler deaktiviert.
 --- 
---- #### Parameter
---- - `PlayerID` - ID des Spielers
+--- #### Parameters:
+--- * `PlayerID` - ID des Spielers
 Report.ExtendedZoomDeactivated = anyInteger;
 
 --- Die erweiterte Zoomentfernung ist für den Spieler aktiviert.
 --- 
---- #### Parameter
---- - `PlayerID` - ID des Spielers
+--- #### Parameters:
+--- * `PlayerID` - ID des Spielers
 Report.ExtendedZoomActivated = anyInteger;
 

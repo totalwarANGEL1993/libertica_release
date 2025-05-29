@@ -9,13 +9,6 @@
 --- #### Adds pseudo technologies:
 --- * `Technologies.R_Cattle` - Allows to breed cows
 --- * `Technologies.R_Sheep`  - Allows to breed sheeps
----
---- #### Reports
---- * `Report.BreedAnimalClicked` - The player has clicked the buy animal button.
---- * `Report.CattleBought` - The player has bought a cow.
---- * `Report.SheepBought` - The player has bought a sheep.
---- * `Report.CattleStarved` - A cow has starved.
---- * `Report.SheepStarved` - A sheep has starved.
 --- 
 Lib.LifestockSystem = Lib.LifestockSystem or {};
 
@@ -75,15 +68,15 @@ API.RequireTitleToBreedSheep = RequireTitleToBreedSheep;
 
 --- The player has clicked the buy animal button.
 --- 
---- #### Parameters
---- * `Index   `   - "Cattle" or "Sheep"
+--- #### Parameters:s
+--- * `Index`      - "Cattle" or "Sheep"
 --- * `PlayerID`   - ID of player
 --- * `EntityID`   - ID of pasture
 Report.BreedAnimalClicked = anyInteger;
 
 --- The player has bought a cow.
 --- 
---- #### Parameters
+--- #### Parameters:s
 --- * `PlayerID`   - ID of player
 --- * `EntityID`   - ID of created cow
 --- * `BuildingID` - ID of pasture
@@ -91,7 +84,7 @@ Report.CattleBought = anyInteger;
 
 --- The player has bought a sheep.
 --- 
---- #### Parameters
+--- #### Parameters:s
 --- * `PlayerID`   - ID of player
 --- * `EntityID`   - ID of created sheep
 --- * `BuildingID` - ID of pasture
@@ -99,14 +92,14 @@ Report.SheepBought = anyInteger;
 
 --- A cow has starved.
 --- 
---- #### Parameters
+--- #### Parameters:s
 --- * `PlayerID`   - ID of player
 --- * `EntityID`   - ID of created cow
 Report.CattleStarved = anyInteger;
 
 --- A sheep has starved.
 --- 
---- #### Parameters
+--- #### Parameters:s
 --- * `PlayerID`   - ID of player
 --- * `EntityID`   - ID of created cow
 Report.SheepStarved = anyInteger;

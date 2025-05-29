@@ -1,22 +1,12 @@
 --- Adds features for entity selection.
 ---
 --- Features:
---- * Fire soldiers
---- * Fire war machines
---- * Fire thieves
---- * Obtain selection from global script
---- * Fixes trebuchet selection
+--- <li>Fire soldiers</li>
+--- <li>Fire war machines</li>
+--- <li>Fire thieves</li>
+--- <li>Obtain selection from global script</li>
+--- <li>Fixes trebuchet selection</li>
 ---
---- #### Reports
---- * `Report.ExpelSettler` - A unit has been expelled.
---- * `Report.SelectionChanged` - Die Auswahl von Einheiten eines Spielers hat sich geändert.
---- * `Report.ForceTrebuchetTasklis`t - Ein Trebuchet wird zum Anhalten gezwungen.
---- * `Report.ErectTrebuche`t - Ein Trebuchet wird aus einem Belagerungsmaschinenwagen gebaut.
---- * `Report.DisambleTrebuchet` -Ein Trebuchet wird zu einem Belagerungsmaschinenwagen abgebaut.
----
-Lib.EntitySelection = Lib.EntitySelection or {};
-
-
 
 --- Deacivates (and reactivates) firing thieves.
 --- @param _Flag boolean Deactivate release thieves
@@ -40,13 +30,13 @@ API.DisableReleaseSoldiers = DisableReleaseSoldiers;
 
 --- A entity has been expelled.
 ---
---- #### Parameters
+--- #### Parameters:s
 --- * `EntityID` - ID of entity
 Report.ExpelSettler = anyInteger;
 
 --- A trebuchet is forced to stop.
 ---
---- #### Parameters
+--- #### Parameters:s
 --- * `EntityID` - ID of entity
 --- * `TaskList` - ID of Tasklist
 Report.ForceTrebuchetTasklist = anyInteger;
@@ -54,14 +44,14 @@ Report.ForceTrebuchetTasklist = anyInteger;
 --- A trebuchet is build from a siege engine cart.
 --- (Currently not used)
 ---
---- #### Parameters
+--- #### Parameters:s
 --- * `EntityID` - ID of entity
 Report.ErectTrebuchet = anyInteger;
 
 --- A trebuchet is broken down to a siege engine cart.
 --- (Currently not used)
 ---
---- #### Parameters
+--- #### Parameters:s
 --- * `EntityID` - ID of entity
 Report.DisambleTrebuchet = anyInteger;
 

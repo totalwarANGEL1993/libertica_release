@@ -1,0 +1,601 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><strong>module.mode.settlementlimitation_api</strong></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.mode.settlementlimitation_api</code></h1>
+<p>Implementiert härtere Baubeschwänkungen im Spiel.</p>
+<p>
+<p> Wird der Modus aktiviert, gelten die voreingestellten Standardregeln. Diese
+ können im begrenzten Ausmaß individualisiert werden.
+<p> Standardregeln:
+ <li>Die Gebäudeanzahl im Heimatgebiet ist nicht beschränkt.</li>
+ <li>Stadtgebäude können nur auf dem Heimatgebiet gebaut werden.</li>
+ <li>In Territorien können nur 3 Gebäude gebaut werden. </li>
+ <li>Jeder Gebäudetyp kann nur 1 mal pro Territorium gebaut werden.</li>
+ <li>Wird der Außenposten ausgebaut, kann ein Gebäudetyp dauerhaft doppelt im Territorium platziert werden.</li>
+ <li>Bienenstöcke, Felder und Ziergebäude zählen nicht als Gebäude.</li>
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#ActivateSettlementLimitation">ActivateSettlementLimitation (_Flag)</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#UseWallUpkeepCosts">UseWallUpkeepCosts (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktviert die Unterhaltskosten für Mauern.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#UseWallDeteriation">UseWallDeteriation (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktviert den Verfall von Mauern bei nicht aufgebrachten
+ Unterhaltskosten.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RequireTitleToDevelopTerritory">RequireTitleToDevelopTerritory (_Title)</a></td>
+	<td class="summary">Setzt den Titel, ab dem Territorien entwickelt werden können.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AllowDevelopTerritory">AllowDevelopTerritory (_PlayerID, _Allowed)</a></td>
+	<td class="summary">Erlaubt oder verbietet das Entwickeln von Territorien</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetTerritoryBuildingLimit">SetTerritoryBuildingLimit (_PlayerID, _Territory, _Limit)</a></td>
+	<td class="summary">Setzt das allgemeine Gebäudelimit für den Spieler im Territorium.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetTerritoryBuildingTypeLimit">SetTerritoryBuildingTypeLimit (_PlayerID, _Territory, _Type, _Limit)</a></td>
+	<td class="summary">Setzt das spezifische Limit des Gebäudetypen für den Spieler im Territorium.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ClearTerritoryBuildingLimit">ClearTerritoryBuildingLimit (_PlayerID, _Territory)</a></td>
+	<td class="summary">Setzt das allgemeine Gebäudelimit zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ClearTerritoryBuildingTypeLimit">ClearTerritoryBuildingTypeLimit (_PlayerID, _Territory, _Type)</a></td>
+	<td class="summary">Setzt das spezifische Limit des Gebäudetypen zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetTerritoryDevelopmentCost">SetTerritoryDevelopmentCost (_CostType1, _Amount1, _CostType2, _Amount2)</a></td>
+	<td class="summary">Ändert die Kosten für die Territoriumsentwicklung.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddToBuildingTerritoryBlacklist">AddToBuildingTerritoryBlacklist (_Type, _Territory)</a></td>
+	<td class="summary">Fügt ein Territorium zu der Blacklist des Typ hinzu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddToBuildingTerritoryWhitelist">AddToBuildingTerritoryWhitelist (_Type, _Territory)</a></td>
+	<td class="summary">Fügt ein Territorium zu der Whitelist des Typ hinzu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RemoveFromBuildingTerritoryBlacklist">RemoveFromBuildingTerritoryBlacklist (_Type, _Territory)</a></td>
+	<td class="summary">Entfernt ein Territorium von der Blacklist des Typ.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RemoveFromBuildingTerritoryWhitelist">RemoveFromBuildingTerritoryWhitelist (_Type, _Territory)</a></td>
+	<td class="summary">Entfernt ein Territorium von der Whitelist des Typ.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ActivateOutpostLimit">ActivateOutpostLimit (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert die Limitierung der Außenposten.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetOutpostLimit">SetOutpostLimit (_UpgradeLevel, _Limit)</a></td>
+	<td class="summary">Ändert die Limitierung der Außenposten für die Burgausbaustufe.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "ActivateSettlementLimitation"></a>
+    <strong>ActivateSettlementLimitation (_Flag)</strong>
+    </dt>
+    <dd>
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Modus ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "UseWallUpkeepCosts"></a>
+    <strong>UseWallUpkeepCosts (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktviert die Unterhaltskosten für Mauern.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Mauern kosten Gold
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "UseWallDeteriation"></a>
+    <strong>UseWallDeteriation (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktviert den Verfall von Mauern bei nicht aufgebrachten
+ Unterhaltskosten.  Unterhalt muss aktiv sein.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Mauern verfallen
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RequireTitleToDevelopTerritory"></a>
+    <strong>RequireTitleToDevelopTerritory (_Title)</strong>
+    </dt>
+    <dd>
+    Setzt den Titel, ab dem Territorien entwickelt werden können.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Title</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AllowDevelopTerritory"></a>
+    <strong>AllowDevelopTerritory (_PlayerID, _Allowed)</strong>
+    </dt>
+    <dd>
+    Erlaubt oder verbietet das Entwickeln von Territorien
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Allowed</span> <b>boolean</b> Entwickeln erlaubt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetTerritoryBuildingLimit"></a>
+    <strong>SetTerritoryBuildingLimit (_PlayerID, _Territory, _Limit)</strong>
+    </dt>
+    <dd>
+    Setzt das allgemeine Gebäudelimit für den Spieler im Territorium.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Territory</span> <b>any</b> Name oder ID des Territoriums
+        </li>
+        <li><span class="parameter">_Limit</span> <b>integer</b> Allgemeines Limit
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetTerritoryBuildingTypeLimit"></a>
+    <strong>SetTerritoryBuildingTypeLimit (_PlayerID, _Territory, _Type, _Limit)</strong>
+    </dt>
+    <dd>
+    Setzt das spezifische Limit des Gebäudetypen für den Spieler im Territorium.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Territory</span> <b>any</b> Name oder ID des Territoriums
+        </li>
+        <li><span class="parameter">_Type</span> <b>integer</b> Typ des Gebäudes
+        </li>
+        <li><span class="parameter">_Limit</span> <b>integer</b> Spezifisches Limit
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ClearTerritoryBuildingLimit"></a>
+    <strong>ClearTerritoryBuildingLimit (_PlayerID, _Territory)</strong>
+    </dt>
+    <dd>
+    Setzt das allgemeine Gebäudelimit zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Territory</span> <b>any</b> Name oder ID des Territoriums
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ClearTerritoryBuildingTypeLimit"></a>
+    <strong>ClearTerritoryBuildingTypeLimit (_PlayerID, _Territory, _Type)</strong>
+    </dt>
+    <dd>
+    Setzt das spezifische Limit des Gebäudetypen zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Territory</span> <b>any</b> Name oder ID des Territoriums
+        </li>
+        <li><span class="parameter">_Type</span> <b>integer</b> Typ des Gebäudes
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetTerritoryDevelopmentCost"></a>
+    <strong>SetTerritoryDevelopmentCost (_CostType1, _Amount1, _CostType2, _Amount2)</strong>
+    </dt>
+    <dd>
+    Ändert die Kosten für die Territoriumsentwicklung.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_CostType1</span> <b>integer</b> Rohstoff 1
+        </li>
+        <li><span class="parameter">_Amount1</span> <b>integer</b> Menge 1
+        </li>
+        <li><span class="parameter">_CostType2</span> (optional) <b>integer</b> (optional) Rohstoff 2
+        </li>
+        <li><span class="parameter">_Amount2</span> (optional) <b>integer</b> (optional) Menge 2
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddToBuildingTerritoryBlacklist"></a>
+    <strong>AddToBuildingTerritoryBlacklist (_Type, _Territory)</strong>
+    </dt>
+    <dd>
+    Fügt ein Territorium zu der Blacklist des Typ hinzu.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Type</span> <b>integer</b> Typ des Gebäude
+        </li>
+        <li><span class="parameter">_Territory</span> <b>integer</b> ID des Territorium
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddToBuildingTerritoryWhitelist"></a>
+    <strong>AddToBuildingTerritoryWhitelist (_Type, _Territory)</strong>
+    </dt>
+    <dd>
+    Fügt ein Territorium zu der Whitelist des Typ hinzu.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Type</span> <b>integer</b> Typ des Gebäude
+        </li>
+        <li><span class="parameter">_Territory</span> <b>integer</b> ID des Territorium
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RemoveFromBuildingTerritoryBlacklist"></a>
+    <strong>RemoveFromBuildingTerritoryBlacklist (_Type, _Territory)</strong>
+    </dt>
+    <dd>
+    Entfernt ein Territorium von der Blacklist des Typ.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Type</span> <b>integer</b> Typ des Gebäude
+        </li>
+        <li><span class="parameter">_Territory</span> <b>integer</b> ID des Territorium
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RemoveFromBuildingTerritoryWhitelist"></a>
+    <strong>RemoveFromBuildingTerritoryWhitelist (_Type, _Territory)</strong>
+    </dt>
+    <dd>
+    Entfernt ein Territorium von der Whitelist des Typ.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Type</span> <b>integer</b> Typ des Gebäude
+        </li>
+        <li><span class="parameter">_Territory</span> <b>integer</b> ID des Territorium
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ActivateOutpostLimit"></a>
+    <strong>ActivateOutpostLimit (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert die Limitierung der Außenposten.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Limitierung ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetOutpostLimit"></a>
+    <strong>SetOutpostLimit (_UpgradeLevel, _Limit)</strong>
+    </dt>
+    <dd>
+    Ändert die Limitierung der Außenposten für die Burgausbaustufe.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_UpgradeLevel</span> <b>integer</b> Ausbaustufe der Burg
+        </li>
+        <li><span class="parameter">_Limit</span> <b>integer</b> Limitierung der Außenposten
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

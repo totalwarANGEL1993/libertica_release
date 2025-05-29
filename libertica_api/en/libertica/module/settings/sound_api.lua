@@ -1,12 +1,24 @@
 --- This module enables to controll the sound.
 ---
 --- #### Features
---- - Start/stop music playlists
---- - Start/stop voice playback
---- - Start/stop sound effecs
---- - Change sound configuration
+--- <li>Start/stop music playlists</li>
+--- <li>Start/stop voice playback</li>
+--- <li>Start/stop sound effecs</li>
+--- <li>Change sound configuration</li>
+--- 
+--- #### Playlist structure
+--- ```xml
+--- &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+--- &lt;PlayList&gt;
+---  &lt;PlayListEntry&gt;
+---    &lt;FileName&gt;Music\some_music_file.mp3&lt;/FileName&gt;
+---    &lt;Type&gt;Loop&lt;/Type&gt;
+---    &lt;Chance&gt;10&lt;/Chance&gt; &lt;!-- optional --&gt;
+---  &lt;/PlayListEntry&gt;
+---  &lt;!-- Add entries here --&gt;
+--- &lt;/PlayList&gt;
+--- xml```
 ---
-Lib.Sound = Lib.Sound or {};
 
 
 
@@ -30,27 +42,9 @@ Lib.Sound = Lib.Sound or {};
 --- |-- ...
 --- ```
 ---
---- #### Example structure of playlist:
---- ```xml
---- <?xml version="1.0" encoding="utf-8"?>
---- <PlayList>
----  <PlayListEntry>
----    <FileName>Music\some_music_file.mp3</FileName>
----    <Type>Loop</Type>
----  </PlayListEntry>
----  <!-- Add entries here -->
---- </PlayList>
---- ```
----
 --- Playlist entries can be looped by using `Loop` as type or be played once
 --- with `Normal` as type.
----
---- Also a propability can be used. This indicates the probability of a track
---- being played.
 --- 
---- ```xml
---- <Chance>10</Chance>
---- ```
 --- @param _Playlist string Name of playlist
 --- @param _PlayerID integer ID of player
 function StartEventPlaylist(_Playlist, _PlayerID)

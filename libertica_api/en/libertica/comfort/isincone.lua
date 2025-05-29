@@ -1,4 +1,6 @@
 --- Returns if the position is inside a cone.
+
+--- Returns if the position is inside a cone.
 --- @param _Position table Position to check
 --- @param _Center table Position of cone center
 --- @param _MiddleAlpha number Middle Alpha

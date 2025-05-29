@@ -1,9 +1,4 @@
 --- This module contains the core components of the library.
----
---- #### Debug Functions
---- * Debug_ShowVersion() - Displays the current version
---- * Debug_Execute(_Function, ...) - Calls a function in the global script
-Lib.Core = Lib.Core or {};
 
 --- Writes a message to the log.
 --- @param _Text string Message text

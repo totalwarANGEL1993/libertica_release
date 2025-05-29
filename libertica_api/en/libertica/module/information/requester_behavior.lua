@@ -1,3 +1,5 @@
+--- Offers behaviors for decision dialogs.
+
 --- Displays a simple decision box in a invisible quest.
 ---
 --- Note: This behavior is a very dangerous legacy behavior. It can neither be

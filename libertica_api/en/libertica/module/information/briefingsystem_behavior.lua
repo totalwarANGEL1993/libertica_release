@@ -1,3 +1,5 @@
+--- Offers behaviors for briefings.
+
 --- Calls a mapscript function assuming it beeing a briefing.
 ---
 --- Every briefing needs a unique name!

@@ -1,15 +1,12 @@
---- Allows to define briefings
+--- Allows to define briefings.
 ---
 --- The apex for scripting dialogs and simple camera animations. A versatile
 --- tool to script the plot of the map.
 ---
-Lib.BriefingSystem = Lib.BriefingSystem or {};
 
 
 
 --- Starts a briefing.
----
---- #### Settings
 ---
 --- Possible fields for the briefing table:
 --- * `Starting`                - Function called when briefing is started              
@@ -23,7 +20,7 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- * `PreloadAssets`           - Allows to use a wide vision area in briefings
 --- * `HideNotes`               - Do not show notes
 ---
---- *-> Example #1*
+--- *→ Example #1*
 ---
 --- #### Animations
 --- The camera settings can be separated from the text of the page. Not only
@@ -35,17 +32,17 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- calculated using Bézir Curves. This means 2 frames will result in a line,
 --- 3 make it a parable and 4 or more result in a curve.
 ---
---- *-> Example #2*
+--- *→ Example #2*
 ---
---- *-> Example #3*
+--- *→ Example #3*
 ---
---- *-> Example #4*
+--- *→ Example #4*
 ---
 --- The current animation can also be cached to start a new animation for a 
 --- page, after which the previous one continues. The animation can also be 
 --- set to only be valid for its current page and then deleted.
 ---
---- *-> Example #5*
+--- *→ Example #5*
 ---
 --- #### Parallax
 --- In the context of a video game parallaxes are scrollable backgrounds. This
@@ -61,11 +58,11 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- The frames are linearly interpolated, if there are at least 2 entries and
 --- interpolated cubically if there are at least 4 entries.
 ---
---- *-> Example #6*
+--- *→ Example #6*
 ---
---- *-> Example #7*
+--- *→ Example #7*
 ---
---- *-> Example #8*
+--- *→ Example #8*
 ---
 --- #### Examples
 ---
@@ -209,7 +206,7 @@ API.IsBriefingActive = IsBriefingActive;
 
 --- Creates a point from a position.
 --- @param _Entity any      Target entity
---- @param _ZOffset integer Z-Offset (< 0 -> Z overwrite)
+--- @param _ZOffset integer Z-Offset (< 0 → Z overwrite)
 --- @return number X X-Koordinate
 --- @return number Y Y-Koordinate
 --- @return number Z Z-Koordinate
@@ -219,9 +216,9 @@ end
 
 --- Creates an vector from 2 positions.
 --- @param _Entity1 any      Target position entity
---- @param _ZOffset1 integer Z-Offset of position (< 0 -> Z overwrite)
+--- @param _ZOffset1 integer Z-Offset of position (< 0 → Z overwrite)
 --- @param _Entity2 any      Target lookat entity
---- @param _ZOffset2 integer Z-Offset of lookat (< 0 -> Z overwrite)
+--- @param _ZOffset2 integer Z-Offset of lookat (< 0 → Z overwrite)
 --- @return number X1        X-Coordinate Position
 --- @return number Y1        Y-Coordinate Position
 --- @return number Z1        Z-Coordinate Position
@@ -245,7 +242,6 @@ API.AddBriefingPages = AddBriefingPages;
 
 --- Creates a page.
 ---
---- #### Briefing Page
 --- Possible fields for the page:
 ---
 --- * `Title`           - Displayed page title
@@ -269,7 +265,7 @@ API.AddBriefingPages = AddBriefingPages;
 --- * `Performance`     - (Optional) Lower graphic settings for this page
 --- * `MC`              - Table with choices to branch of in dialogs
 ---
---- *-> Example #1*
+--- *→ Example #1*
 ---
 --- #### Flow control
 --- In a briefing the player can be forced to make a choice that will have
@@ -278,35 +274,35 @@ API.AddBriefingPages = AddBriefingPages;
 --- be provided for more control over the flow. Such funktions must return a
 --- page name.
 ---
---- *-> Example #2*
+--- *→ Example #2*
 ---
 --- Additionally each funktion can be marked to be removed when used
 --- and not shown again when reentering the page.
 ---
---- *-> Example #3*
+--- *→ Example #3*
 ---
 --- Also pages can be hidden by providing a function to check conditions.
 ---
---- *-> Example #4*
+--- *→ Example #4*
 ---
 --- If a briefing is branched it must be manually ended after a branch is done
 --- or it just simply shows the next page. To end a briefing, an empty page
 --- must be added.
 ---
---- *-> Example #5*
+--- *→ Example #5*
 ---
 --- Alternativly the briefing can continue at a different page. This allows to
 --- create repeating structures within a briefing.
 ---
---- *-> Example #6*
+--- *→ Example #6*
 ---
 --- To obtain selected answers at a later point the selection can be saved in a
 --- global variable either in a option callback or in the finished function. The
 --- number returned is the ID of the answer.
 ---
---- *-> Example #7*
+--- *→ Example #7*
 ---
---- #### Examples
+--- #### Example:
 ---
 --- * Example #1: A simple page
 --- ```lua
@@ -377,7 +373,6 @@ end
 --- name can be an optional parameter at the start. The page won't turn until
 --- the player presses the skip button.
 ---
---- #### Settings
 --- The function expects the following parameters:
 --- 
 --- * `Name`            - (Optional) Name of page
@@ -387,7 +382,7 @@ end
 --- * `Position`        - (Optional) Scriptname of focused entity
 --- * `Action`          - (Optional) Action when page is shown
 ---
---- #### Examples
+--- #### Example:
 ---
 --- ```lua
 --- -- Long shot

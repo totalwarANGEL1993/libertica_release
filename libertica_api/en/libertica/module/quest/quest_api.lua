@@ -6,19 +6,6 @@
 --- All texts inside a quest can be pulled out of string tables. The format for
 --- those texts will be "FileName/StringName".
 ---
---- #### Debug Functions
---- * Debug_FailQuest(_Name) - Makes a quest fail
---- * Debug_WinQuest(_Name) - Makes a quest succeed
---- * Debug_StartQuest(_Name) - Starts a quest
---- * Debug_RestartQuest(_Name) - Resets and restarts a quest
---- * Debug_StopQuest(_Name) - Interrupts a quest
---- * Debug_FindQuests(_Name) - Searches quests like the pattern
---- * Debug_FailedQuests() - Lists quests that have failed
---- * Debug_StoppedQuests() - Lists quests that are interrupted
---- * Debug_ActiveQuests() - Lists quests that are active
---- * Debug_WonQuests() - Lists quests that have succeeded
---- * Debug_WaitingQuests() - Lists quests that are inactive
----
 Lib.Quest = Lib.Quest or {};
 
 
@@ -26,20 +13,20 @@ Lib.Quest = Lib.Quest or {};
 --- Creates a normal quest.
 ---
 --- #### Fields of table
---- * Name:        A unique name for the quest
---- * Sender:      Quest giver player ID
---- * Receiver:    Quest receiver player ID
---- * Suggestion:  Proposal quest of the text
---- * Success:     Success text of the quest
---- * Failure:     Failure text of the quest
---- * Description: Custom quest description
---- * Time:        Time until automatic failure
---- * Loop:        Loop function
---- * Callback:    Callback function
+--- * `Name`        - A unique name for the quest
+--- * `Sender`      - Quest giver player ID
+--- * `Receiver`    - Quest receiver player ID
+--- * `Suggestion`  - Proposal quest of the text
+--- * `Success`     - Success text of the quest
+--- * `Failure`     - Failure text of the quest
+--- * `Description` - Custom quest description
+--- * `Time`        - Time until automatic failure
+--- * `Loop`        - Loop function
+--- * `Callback`    - Callback function
 --- 
---- #### Examples
+--- #### Example:
+--- Create a simple quest.
 --- ```lua
---- -- Create a simple quest
 --- SetupQuest {
 ---     Name        = "SomeQuestName",
 ---     Suggestion  = "We need to find the cloister.",
@@ -50,6 +37,7 @@ Lib.Quest = Lib.Quest or {};
 ---     Trigger_Time(0),
 --- }
 --- ```
+--- 
 --- @param _Data table Quest data
 --- @return string Name Name of quest
 --- @return number Amount Quest amount
@@ -77,9 +65,9 @@ API.CreateQuest = SetupQuest;
 --- Segments do not need a trigger because they are all automatically started.
 --- Additional triggers can be added (e.g. triggering on other segment).
 ---
---- #### Examples
+--- #### Example:
+--- Create a nested quest.
 --- ```lua
---- -- Create a nested quest
 --- SetupNestedQuest {
 ---     Name        = "MainQuest",
 ---     Segments    = {

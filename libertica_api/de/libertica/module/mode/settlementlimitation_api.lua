@@ -4,13 +4,12 @@
 --- können im begrenzten Ausmaß individualisiert werden.
 ---
 --- Standardregeln:
---- * Die Gebäudeanzahl im Heimatgebiet ist nicht beschränkt.
---- * Stadtgebäude können nur auf dem Heimatgebiet gebaut werden.
---- * In Territorien können nur 3 Gebäude gebaut werden. 
---- * Jeder Gebäudetyp kann nur 1 mal pro Territorium gebaut werden.
---- * Wird der Außenposten ausgebaut, kann ein Gebäudetyp dauerhaft doppelt
----   im Territorium platziert werden.
---- * Bienenstöcke, Felder und Ziergebäude zählen nicht als Gebäude.
+--- <li>Die Gebäudeanzahl im Heimatgebiet ist nicht beschränkt.</li>
+--- <li>Stadtgebäude können nur auf dem Heimatgebiet gebaut werden.</li>
+--- <li>In Territorien können nur 3 Gebäude gebaut werden. </li>
+--- <li>Jeder Gebäudetyp kann nur 1 mal pro Territorium gebaut werden.</li>
+--- <li>Wird der Außenposten ausgebaut, kann ein Gebäudetyp dauerhaft doppelt im Territorium platziert werden.</li>
+--- <li>Bienenstöcke, Felder und Ziergebäude zählen nicht als Gebäude.</li>
 ---
 Lib.SettlementLimitation = Lib.SettlementLimitation or {};
 

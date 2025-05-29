@@ -1,6 +1,4 @@
 --- Ermöglicht das Hinzufügen von Notizen zu einer Quest.
---- 
-Lib.QuestJournal = Lib.QuestJournal or {};
 
 
 

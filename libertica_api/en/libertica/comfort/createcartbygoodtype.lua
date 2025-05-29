@@ -1,4 +1,6 @@
 --- Creates a cart matching the transport good.
+
+--- Creates a cart matching the transport good.
 --- @param _PlayerID integer ID of player
 --- @param _Position any ID or script name
 --- @param _GoodType integer Type of good

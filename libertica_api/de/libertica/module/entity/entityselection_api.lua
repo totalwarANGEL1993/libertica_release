@@ -1,20 +1,11 @@
 --- Fügt Funktionen zur Auswahl von Einheiten hinzu.
 ---
 --- Funktionen:
---- * Soldaten entlassen
---- * Kriegsmaschinen entlassen
---- * Diebe entlassen
---- * Auswahl von globalen Skripten abrufen
---- * Behebt die Auswahl von Triböcken
----
---- #### Reports
---- * `Report.ExpelSettler` - Eine Einheit wurde entlassen.
---- * `Report.SelectionChanged` - The selection has changed.
---- * `Report.ForceTrebuchetTasklis`t - A trebuchet was forced to stop.
---- * `Report.ErectTrebuche`t - A trebuchet has been erected.
---- * `Report.DisambleTrebuchet` - A trebuchet has been dismantled.
----
-Lib.EntitySelection = Lib.EntitySelection or {};
+--- <li>Soldaten entlassen</li>
+--- <li>Kriegsmaschinen entlassen</li>
+--- <li>Diebe entlassen</li>
+--- <li>Auswahl von globalen Skripten abrufen</li>
+--- <li>Behebt die Auswahl von Triböcken</li>
 
 
 
@@ -40,13 +31,13 @@ API.DisableReleaseSoldiers = DisableReleaseSoldiers;
 
 --- Eine Einheit wurde entlassen.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `EntityID` - ID der Einheit
 Report.ExpelSettler = anyInteger;
 
 --- Ein Trebuchet wird zum Anhalten gezwungen.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `EntityID` - ID der Einheit
 --- * `TaskList` - ID der Taskliste
 Report.ForceTrebuchetTasklist = anyInteger;
@@ -54,14 +45,14 @@ Report.ForceTrebuchetTasklist = anyInteger;
 --- Ein Trebuchet wird aus einem Belagerungsmaschinenwagen gebaut.
 --- (Derzeit nicht verwendet)
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `EntityID` - ID der Einheit
 Report.ErectTrebuchet = anyInteger;
 
 --- Ein Trebuchet wird zu einem Belagerungsmaschinenwagen abgebaut.
 --- (Derzeit nicht verwendet)
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `EntityID` - ID der Einheit
 Report.DisambleTrebuchet = anyInteger;
 

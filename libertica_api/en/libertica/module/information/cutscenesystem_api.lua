@@ -1,18 +1,13 @@
 --- Allows to define cutscenes
 ---
---- **Deprecated! This module exists only for backwards compability.**
----
 --- Cutscenes are XML defined camera movemehts that can be played by the
 --- game engine. Cutscenes feature smooth camera animations.
 ---
-Lib.CutsceneSystem = Lib.CutsceneSystem or {};
 
 
 
 --- Starts a cutscene.
 ---
---- #### Settings
---- 
 --- Possible fields for the cutscene table:
 --- * `Starting`                - Function called when cutscene is started              
 --- * `Finished`                - Function called when cutscene is finished                 
@@ -22,7 +17,7 @@ Lib.CutsceneSystem = Lib.CutsceneSystem or {};
 --- * `EnableBorderPins`        - Displays the border pins during the cutscene
 --- * `HideNotes`               - Do not show notes
 ---
---- #### Example
+--- #### Example:
 ---
 --- ```lua
 --- function Cutscene1(_Name, _PlayerID)

@@ -1,13 +1,4 @@
 --- Adds different effects for the user interface.
----
---- #### Reports
---- `Report.CinematicActivated` - A cinematic event has concluded for the player.
---- `Report.GameInterfaceShown` - The normal interface is shown for the player.
---- `Report.GameInterfaceHidden` - The normal interface is hidden from the player.
---- `Report.ImageScreenShown` - The fullscreen image background is shown for the player.
---- `Report.ImageScreenHidden` - The fullscreen image background is hidden from the player.
----
-Lib.UIEffects = Lib.UIEffects or {};
 
 
 
@@ -103,18 +94,18 @@ API.IsCinematicEventActive = IsCinematicEventActive;
 --- is atomaticaly trunk to 1 space (by the game engine).
 ---
 --- #### Fields of table
---- * Text         - Text to display
---- * Name         - (Optional) Name for event
---- * PlayerID     - (Optional) Player text is shown
---- * Callback     - (Optional) Callback function
---- * TargetEntity - (Optional) Entity camera is focused on
---- * CharSpeed    - (Optional) Factor of typing speed (default: 1.0)
---- * Waittime     - (Optional) Initial waittime before typing
---- * Opacity      - (Optional) Opacity of background (default: 1.0)
---- * Color        - (Optional) Background color (default: {R= 0, G= 0, B= 0})
---- * Image        - (Optional) Background image (needs to be 16:9 ratio)
+--- * `Text`         - Text to display
+--- * `Name`         - (Optional) Name for event
+--- * `PlayerID`     - (Optional) Player text is shown
+--- * `Callback`     - (Optional) Callback function
+--- * `TargetEntity` - (Optional) Entity camera is focused on
+--- * `CharSpeed`    - (Optional) Factor of typing speed (default: 1.0)
+--- * `Waittime`     - (Optional) Initial waittime before typing
+--- * `Opacity`      - (Optional) Opacity of background (default: 1.0)
+--- * `Color`        - (Optional) Background color (default: {R= 0, G= 0, B= 0})
+--- * `Image`        - (Optional) Background image (needs to be 16:9 ratio)
 ---
---- #### Examples
+--- #### Example:
 --- ```lua
 --- local EventName = StartTypewriter {
 ---     PlayerID = 1,
@@ -138,39 +129,39 @@ API.StartTypewriter = StartTypewriter;
 
 --- A cinematic event has started for the player.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `EventID`  - ID of cinematic event
 --- * `PlayerID` - ID of receiving Player
 Report.CinematicActivated = anyInteger;
 
 --- A cinematic event has concluded for the player.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `EventID`  - ID of cinematic event
 --- * `PlayerID` - ID of receiving Player
 Report.CinematicConcluded = anyInteger;
 
 --- The normal interface is shown for the player.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID of receiving Player
 Report.GameInterfaceShown = anyInteger;
 
 --- The normal interface is hidden from the player.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID of receiving Player
 Report.GameInterfaceHidden = anyInteger;
 
 --- The fullscreen image background is shown for the player.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID of receiving Player
 Report.ImageScreenShown = anyInteger;
 
 --- The fullscreen image background is hidden from the player.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID of receiving Player
 Report.ImageScreenHidden = anyInteger;
 

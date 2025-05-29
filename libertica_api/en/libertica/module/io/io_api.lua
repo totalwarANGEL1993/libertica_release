@@ -1,16 +1,5 @@
 --- Improves on interactive objects.
 ---
---- #### Reports
---- * Report.ObjectClicked - The player has clicked the interaction button.
---- * Report.ObjectInteraction - The interaction with the object was successfull.
---- * Report.ObjectReset - The interaction is deleted from the object.
---- * Report.ObjectDelete - The objects state has been reset.
----
---- #### Debug Functions
---- * Debug_EnableIO(Entity, State, Player)  - A object is activated
---- * Debug_DisableIO(Entity, State, Player) - A object is deactivated
---- * Debug_InitIO(Entity, RG, RA, CG1, CA1, CG2, CA2) - A object is initialized
----
 Lib.IO = Lib.IO or {};
 
 
@@ -22,33 +11,26 @@ Lib.IO = Lib.IO or {};
 --- keys are optional.
 ---
 --- #### Fields of table
---- * ScriptName             - Scriptname of object
---- * Texture                - (Optional) table with coordinates
----   - Game icons: {x, y, ExtraNumber}
----   - Custom icons: {x, y, FileNamePrefix}
---- * Title                  - (Optional) Title of tooltip
---- * Text                   - (Optional) Text of tooltip
---- * Distance               - (Optional) Activation distance
---- * Player                 - (optional) List of players
---- * Waittime               - (optional) Activation waittime
---- * Replacement            - (Optional) Type to replace with
---- * Costs                  - (Optional) Activation cost table
----   - Format: {Type, Amount, Type, Amount}
---- * Reward                 - (Optional) Activation reward table
----   - Format: {Type, Amount}
---- * State                  - (Optional) Actvation behavior
----   - 0: Hero only
----   - 1: Automatic
----   - 2: Never
---- * Condition              - (Optional) Activation condition function
---- * ConditionInfo          - (Optional) Condition failure text
---- * Action                 - (Optional) Activation callback function
---- * RewardResourceCartType - (Optional) Type of reward resource cart
---- * RewardGoldCartType     - (Optional) Type of reward gold cart
---- * CostResourceCartType   - (Optional) Type of cost resource cart
---- * CostGoldCartType       - (Optional) Type of cost gold cart
+--- * `ScriptName`             - Scriptname of object
+--- * `Texture`                - (Optional) table with coordinates
+--- * `Title`                  - (Optional) Title of tooltip
+--- * `Text`                   - (Optional) Text of tooltip
+--- * `Distance`               - (Optional) Activation distance
+--- * `Player`                 - (optional) List of players
+--- * `Waittime`               - (optional) Activation waittime
+--- * `Replacement`            - (Optional) Type to replace with
+--- * `Costs`                  - (Optional) Activation cost table
+--- * `Reward`                 - (Optional) Activation reward table
+--- * `State`                  - (Optional) Actvation behavior
+--- * `Condition`              - (Optional) Activation condition function
+--- * `ConditionInfo`          - (Optional) Condition failure text
+--- * `Action`                 - (Optional) Activation callback function
+--- * `RewardResourceCartType` - (Optional) Type of reward resource cart
+--- * `RewardGoldCartType`     - (Optional) Type of reward gold cart
+--- * `CostResourceCartType`   - (Optional) Type of cost resource cart
+--- * `CostGoldCartType`       - (Optional) Type of cost gold cart
 ---
---- #### Examples
+--- #### Example:
 --- ```lua
 --- -- Create a simple object
 --- SetupObject {
@@ -79,7 +61,7 @@ API.ResetObject = ResetObject;
 
 --- Changes the name of the object in the 2D interface.
 --- 
---- #### Exsamples
+--- #### Exsample:
 --- ```lua
 --- InteractiveObjectAddCustomName("D_X_HabourCrane", {
 ---     de = "Hafenkran",
@@ -87,15 +69,15 @@ API.ResetObject = ResetObject;
 --- });
 --- ```
 ---
---- @param _Key string        Key to add
---- @param _Text string|table Text or replacement text
+--- @param _Key string Key to add
+--- @param _Text any   Text or replacement text
 function InteractiveObjectAddCustomName(_Key, _Text)
 end
 API.InteractiveObjectSetQuestName = InteractiveObjectAddCustomName;
 
 --- Removes the changes to the object name.
 --- 
---- #### Exsample
+--- #### Exsampl:
 --- ```lua
 --- InteractiveObjectDeleteCustomName("D_X_HabourCrane");
 --- ```
@@ -192,7 +174,7 @@ API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
 
 --- The player clicked the interaction button.
 --- 
---- #### Parameters
+--- #### Parameters:s
 --- * `ScriptName` - Scriptname of entity
 --- * `KnightID`   - ID of activating hero
 --- * `PlayerID`   - ID of activating player
@@ -201,7 +183,7 @@ Report.ObjectClicked = anyInteger;
 --- The interaction with the object was successfull.
 --- If the object has costs the activation concludes when the costs arrive.
 --- 
---- #### Parameters
+--- #### Parameters:s
 --- * `ScriptName` - Scriptname of entity
 --- * `KnightID`   - ID of activating hero
 --- * `PlayerID`   - ID of activating player
@@ -209,13 +191,13 @@ Report.ObjectInteraction = anyInteger;
 
 --- The interaction is deleted from the object.
 ---
---- #### Parameters
+--- #### Parameters:s
 --- * `ScriptName` - Scriptname of entity
 Report.ObjectReset = anyInteger;
 
 --- The state of an object has been reset.
 ---
---- #### Parameters
+--- #### Parameters:s
 --- * `ScriptName` - Scriptname of entity
 Report.ObjectDelete = anyInteger;
 

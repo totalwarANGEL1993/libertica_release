@@ -1,15 +1,12 @@
---- Ermöglicht das Definieren von Einleitungen
+--- Ermöglicht das Definieren von Einleitungen.
 ---
 --- Der Höhepunkt für die Skripting-Dialoge und einfachen Kameraanimationen. Ein vielseitiges
 --- Werkzeug, um die Handlung der Karte zu skripten.
 ---
-Lib.BriefingSystem = Lib.BriefingSystem or {};
 
 
 
 --- Startet eine Einleitung.
----
---- #### Einstellungen
 ---
 --- Mögliche Felder für die Einleitungstabelle:
 --- * `Starting`                - Funktion, die beim Starten der Einleitung aufgerufen wird              
@@ -23,7 +20,7 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- * `PreloadAssets`           - Erlaubt weites Sichtfeld in Briefings
 --- * `HideNotes`               - Nachrichten nicht anzeigen
 ---
---- *-> Beispiel #1*
+--- *→ Beispiel #1*
 ---
 --- #### Animationen
 --- Die Kameraeinstellungen können vom Text der Seite getrennt werden. Dies ermöglicht nicht nur
@@ -35,18 +32,18 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- der Kamera wird über Bézirkurven bestimmt. Das bedeutet 2 Frames werden zu
 --- einer geraden, 3 erzeugen eine Parabel und ab 4 Frames entsteht eine Kurve.
 ---
---- *-> Beispiel #2*
+--- *→ Beispiel #2*
 ---
---- *-> Beispiel #3*
+--- *→ Beispiel #3*
 ---
---- *-> Beispiel #4*
+--- *→ Beispiel #4*
 ---
 --- Die aktuelle Animation kann auch zwischengespeichert werden, um für eine
 --- Page eine neue Animation zu starten, nach deren Abschluss die vorherige
 --- fortgeführt wird. Die Animation kann ebenfalls so eingestellt werden, dass
 --- sie nur für ihre Aktuelle Page gültig ist und danach gelöscht wird.
 ---
---- *-> Beispiel #5*
+--- *→ Beispiel #5*
 ---
 --- #### Parallax
 --- Im Kontext eines Videospiels sind Parallaxen scrollbare Hintergründe. Dies
@@ -62,13 +59,13 @@ Lib.BriefingSystem = Lib.BriefingSystem or {};
 --- Die Rahmen werden linear interpoliert, wenn es mindestens 2 Einträge gibt und
 --- kubisch interpoliert, wenn es mindestens 4 Einträge gibt.
 ---
---- *-> Beispiel #6*
+--- *→ Beispiel #6*
 ---
---- *-> Beispiel #7*
+--- *→ Beispiel #7*
 ---
---- *-> Beispiel #8*
+--- *→ Beispiel #8*
 ---
---- #### Beispiele
+--- #### Example:
 ---
 --- * Beispiel #1: Grundlegende Struktur
 --- ```lua
@@ -210,7 +207,7 @@ API.IsBriefingActive = IsBriefingActive;
 
 --- Erstellt einen Punkt aus einer Position.
 --- @param _Entity any      Zielentität
---- @param _ZOffset integer Z-Offset (< 0 -> Z überschreiben)
+--- @param _ZOffset integer Z-Offset (< 0 → Z überschreiben)
 --- @return number X X-Koordinate
 --- @return number Y Y-Koordinate
 --- @return number Z Z-Koordinate
@@ -220,9 +217,9 @@ end
 
 --- Erstellt einen Vektor aus 2 Positionen.
 --- @param _Entity1 any      Zielpositions-Entität
---- @param _ZOffset1 integer Z-Offset der Position (< 0 -> Z überschreiben)
+--- @param _ZOffset1 integer Z-Offset der Position (< 0 → Z überschreiben)
 --- @param _Entity2 any      Ziel-LookAt-Entität
---- @param _ZOffset2 integer Z-Offset von LookAt (< 0 -> Z überschreiben)
+--- @param _ZOffset2 integer Z-Offset von LookAt (< 0 → Z überschreiben)
 --- @return number X1        X-Koordinate Position
 --- @return number Y1        Y-Koordinate Position
 --- @return number Z1        Z-Koordinate Position
@@ -246,7 +243,6 @@ API.AddBriefingPages = AddBriefingPages;
 
 --- Erstellt eine Seite.
 ---
---- #### Einleitungsseite
 --- Mögliche Felder für die Seite:
 ---
 --- * `Title`           - Angezeigter Seitentitel
@@ -270,7 +266,7 @@ API.AddBriefingPages = AddBriefingPages;
 --- * `Performance`     - (Optional) Grafiksettings für diese Seite herabsetzen
 --- * `MC`              - Tabelle mit Auswahlmöglichkeiten zum Abzweigen in Dialogen
 ---
---- *-> Beispiel #1*
+--- *→ Beispiel #1*
 ---
 --- #### Flusskontrolle
 --- In einer Einleitung kann der Spieler gezwungen werden, eine Wahl zu treffen, die
@@ -279,34 +275,34 @@ API.AddBriefingPages = AddBriefingPages;
 --- für mehr Kontrolle über den Ablauf bereitgestellt werden. Solche Funktionen müssen zurückgeben
 --- ein Seitenname.
 ---
---- *-> Beispiel #2*
+--- *→ Beispiel #2*
 ---
 --- Zusätzlich kann jede Funktion markiert werden, um entfernt zu werden, wenn sie verwendet wird,
 --- und nicht wieder angezeigt zu werden, wenn die Seite erneut betreten wird.
 ---
---- *-> Beispiel #3*
+--- *→ Beispiel #3*
 ---
 --- Auch Seiten können ausgeblendet werden, indem eine Funktion zum Überprüfen von Bedingungen bereitgestellt wird.
 ---
---- *-> Beispiel #4*
+--- *→ Beispiel #4*
 ---
 --- Wenn eine Einleitung verzweigt ist, muss sie manuell beendet werden, nachdem eine Verzweigung erfolgt ist
 --- oder es zeigt einfach die nächste Seite an. Um eine Einleitung zu beenden, muss eine leere Seite hinzugefügt werden.
 ---
---- *-> Beispiel #5*
+--- *→ Beispiel #5*
 ---
 --- Alternativ kann die Einleitung an einer anderen Seite fortgesetzt werden. Dies ermöglicht es, zu erstellen
 --- sich wiederholende Strukturen innerhalb einer Einleitung.
 ---
---- *-> Beispiel #6*
+--- *→ Beispiel #6*
 ---
 --- Um ausgewählte Antworten zu einem späteren Zeitpunkt zu erhalten, kann die Auswahl in einem
 --- globalen Variablen entweder in einem Optionsrückruf oder in der fertigen Funktion gespeichert werden. Die
 --- Die zurückgegebene Nummer ist die ID der Antwort.
 ---
---- *-> Beispiel #7*
+--- *→ Beispiel #7*
 ---
---- #### Beispiele
+--- #### Example:
 ---
 --- * Beispiel #1: Eine einfache Seite
 --- ```lua
@@ -378,7 +374,6 @@ end
 --- Anfang sein. Die Seite wird nicht weiter springen, bis der Skip-Button 
 --- geklicht wird.
 ---
---- #### Einstellungen
 --- Die Funktion erwartet die folgenden Parameter:
 --- 
 --- * `Name`            - (Optional) Name der Seite
@@ -388,7 +383,7 @@ end
 --- * `Position`        - (Optional) Skriptname der fokussierten Entität
 --- * `Action`          - (Optional) Aktion, wenn die Seite angezeigt wird
 ---
---- #### Beispiele
+--- #### Example:
 ---
 --- ```lua
 --- -- Totale Ansicht

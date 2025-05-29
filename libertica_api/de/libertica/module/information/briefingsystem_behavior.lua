@@ -1,3 +1,5 @@
+--- Stellt Behavior für Briefings bereit.
+
 --- Ruft eine Mapskriptfunktion auf und nimmt an, dass es sich um eine Einleitung handelt.
 ---
 --- Jede Einleitung benötigt einen eindeutigen Namen!

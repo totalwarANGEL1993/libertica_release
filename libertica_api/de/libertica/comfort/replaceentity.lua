@@ -1,4 +1,6 @@
 --- Ersetzt eine Entität mit einer neuen des angegebenen Typ.
+
+--- Ersetzt eine Entität mit einer neuen des angegebenen Typ.
 --- @param _Entity any        ID oder Skriptname
 --- @param _Type integer      Typ des Ersatz
 --- @param _NewOwner? integer Spieler-ID des Besitzers

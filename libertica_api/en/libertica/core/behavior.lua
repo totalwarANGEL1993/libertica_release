@@ -1,3 +1,5 @@
+--- Behavior of the core module.
+
 --- Enables debug mode.
 ---
 --- @param _Assertions boolean Enable assertions
@@ -59,7 +61,7 @@ end
 ---
 --- If a player's units have been on the territory before, it is already discovered, and the goal is immediately fulfilled.
 ---
---- @param _Territory string|integer Name or ID of the territory
+--- @param _Territory any Name or ID of the territory
 ---
 function Goal_DiscoverTerritory(_Territory)
 end
@@ -192,8 +194,8 @@ end
 ---
 --- Connects two points on the game world with a road.
 ---
---- @param _Position1 string|integer First endpoint of the road
---- @param _Position2 string|integer Second endpoint of the road
+--- @param _Position1 any First endpoint of the road
+--- @param _Position2 any Second endpoint of the road
 --- @param _OnlyRoads boolean Whether to accept only roads
 ---
 function Goal_BuildRoad(_Position1, _Position2, _OnlyRoads)
@@ -208,8 +210,8 @@ end
 --- <b>Caution:</b> During monsoon, this goal may mistakenly be considered achieved if the path is blocked by water!
 ---
 --- @param _PlayerID  integer The PlayerID to be blocked
---- @param _Position1 string|integer First position
---- @param _Position2 string|integer Second position
+--- @param _Position1 any First position
+--- @param _Position2 any Second position
 ---
 function Goal_BuildWall(_PlayerID, _Position1, _Position2)
 end
@@ -238,7 +240,7 @@ end
 ---
 --- @param _Type      string Type of the entity
 --- @param _Amount    integer Number of entities
---- @param _Territory string|integer Territory
+--- @param _Territory any Territory
 ---
 function Goal_Create(_Type, _Amount, _Territory)
 end
@@ -502,49 +504,6 @@ end
 --- @param _Value    any Value or another custom variable with value
 ---
 function Goal_CustomVariables(_Name, _Relation, _Value)
-end
-
----
---- The player can achieve better diplomacy with another player by regularly paying tribute.
----
---- The time to pay the tribute must always be less than the repetition period.
----
---- <b>Note</b>: The longer the player delays paying the tribute, the more the start of the next period will be delayed.
----
---- @param _GoldAmount string Amount of gold
---- @param _Period     integer Payment period in seconds
---- @param _Time       integer Time limit in seconds
---- @param _StartMsg   string Proposal message
---- @param _SuccessMsg string Success message
---- @param _FailureMsg string Failure message
---- @param _Restart    boolean Restart if not paid
----
-function Goal_TributeDiplomacy(_GoldAmount, _Period, _Time, _StartMsg, _SuccessMsg, _FailureMsg, _Restart)
-end
-
----
---- Allows the player to "rent" a territory.
----
---- If the player destroys the outpost, the quest fails and the territory is transferred to the lessor. If the player does not pay the rent, ownership will transfer to the lessor.
----
---- The time to pay the tribute must always be less than the repetition period.
----
---- <b>Note</b>: The longer the player delays paying the tribute, the more the start of the next period will be delayed.
----
---- @param _Territory  string Name of the territory
---- @param _PlayerID   integer PlayerID of the payment requester
---- @param _GoodType   string Type of tribute goods
---- @param _Cost       integer Amount of goods
---- @param _Period     integer Payment period in seconds
---- @param _Time       integer Time limit in seconds
---- @param _StartMsg   string Proposal message
---- @param _SuccessMsg string Success message
---- @param _FailMsg    string Failure message
---- @param _HowOften   integer Number of payments (0 = endless)
---- @param _OtherOwner boolean Quest ends with conquest by others
---- @param _Abort      boolean Abort if not paid
----
-function Goal_TributeClaim(_Territory, _PlayerID, _GoodType, _Cost, _Period, _Time, _StartMsg, _SuccessMsg, _FailMsg, _HowOften, _OtherOwner, _Abort)
 end
 
 ---

@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/GetRandomSettlerType");
+--- These functions return randomized settler types.
 
 --- Returns a random residential settler type.
 --- @return integer Type Random type

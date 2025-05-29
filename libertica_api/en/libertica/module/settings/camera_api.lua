@@ -1,7 +1,4 @@
---- 
-Lib.Camera = Lib.Camera or {};
-
-local anyInteger = math.random(1, 2);
+--- Functions to manipulate the RTS camera.
 
 --- Changes the max rendering distance until something is clipped.
 --- @param _View number Max randering distance
@@ -71,27 +68,29 @@ function FocusCameraOnEntity(_Entity, _Rotation, _ZoomFactor)
 end
 API.FocusCameraOnEntity = FocusCameraOnEntity;
 
+
+
 --- Scrolling at the edge of the screen is deactivated for a player.
 ---
---- #### Parameter
---- - `PlayerID` - ID of Player
---- - `Position` - ID of Entity camera is fixed on
+--- #### Parameters:
+--- * `PlayerID` - ID of Player
+--- * `Position` - ID of Entity camera is fixed on
 Report.BorderScrollLocked = anyInteger;
 
 --- Scrolling at the edge of the screen is activated for a player.
 ---
---- #### Parameter
---- - `PlayerID` - ID of Player
+--- #### Parameters:
+--- * `PlayerID` - ID of Player
 Report.BorderScrollReset = anyInteger;
 
 --- Extended zoom distance is deactivated for the player.
 --- 
---- #### Parameter
---- - `PlayerID` - ID of Player
+--- #### Parameters:
+--- * `PlayerID` - ID of Player
 Report.ExtendedZoomDeactivated = anyInteger;
 
 --- Extended zoom distance is activated for the player.
 --- 
---- #### Parameter
---- - `PlayerID` - ID of Player
+--- #### Parameters:
+--- * `PlayerID` - ID of Player
 Report.ExtendedZoomActivated = anyInteger;

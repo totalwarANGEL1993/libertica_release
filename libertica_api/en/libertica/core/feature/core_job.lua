@@ -1,6 +1,5 @@
 --- Allows to start jobs of different event types and controlling them. Also 
 --- simple delays are provided.
-Lib.Core.Job = {}
 
 --- Requests a job of the passed event type.
 --- @param _EventType integer Type of job

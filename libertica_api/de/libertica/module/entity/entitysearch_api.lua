@@ -1,6 +1,4 @@
 --- Fügt Suchfunktionen zu Entitäten hinzu.
----
-Lib.EntityEvent = Lib.EntityEvent or {};
 
 
 
@@ -85,7 +83,7 @@ API.DropSearchFilter = DropSearchFilter;
 --- zur Ergebnismenge gehört oder nicht. Um die Filterung durchzuführen, wird
 --- der Name angegeben unter dem die Funktion gespeichert wurde.
 ---
---- #### Beispiel:
+--- #### Example:
 --- Dieser Filter akzeptiert alle Entitäten von Spieler 1.
 --- ```lua
 --- -- Filter erzeugen
@@ -98,6 +96,7 @@ API.DropSearchFilter = DropSearchFilter;
 --- -- Filter ausführen
 --- local Results = CommenceEntitySearch("MyFilter");
 --- ```
+--- 
 --- @param _Filter any
 --- @return table Results Liste mit Entitäten
 function CommenceEntitySearch(_Filter)

@@ -8,15 +8,6 @@
 --- #### Pseudo-Technologien:
 --- * `Technologies.R_Cattle` - Ermöglicht die Zucht von Kühen
 --- * `Technologies.R_Sheep`  - Ermöglicht die Zucht von Schafen
----
---- #### Reports
---- * `Report.BreedAnimalClicked` - Der Spieler hat auf die Schaltfläche zum Kauf eines Tieres geklickt.
---- * `Report.CattleBought` - Der Spieler hat eine Kuh gekauft.
---- * `Report.SheepBought` - Der Spieler hat ein Schaf gekauft.
---- * `Report.CattleStarved` - Eine Kuh ist verhungert.
---- * `Report.SheepStarved` - Ein Schaf ist verhungert.
---- 
-Lib.LifestockSystem = Lib.LifestockSystem or {};
 
 
 
@@ -74,7 +65,7 @@ API.RequireTitleToBreedSheep = RequireTitleToBreedSheep;
 
 --- Der Spieler hat auf die Schaltfläche zum Kauf eines Tieres geklickt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `Index   `   - "Cattle" oder "Sheep"
 --- * `PlayerID`   - ID des Spielers
 --- * `EntityID`   - ID der Weide
@@ -82,7 +73,7 @@ Report.BreedAnimalClicked = anyInteger;
 
 --- Der Spieler hat eine Kuh gekauft.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID`   - ID des Spielers
 --- * `EntityID`   - ID der erstellten Kuh
 --- * `BuildingID` - ID der Weide
@@ -90,7 +81,7 @@ Report.CattleBought = anyInteger;
 
 --- Der Spieler hat ein Schaf gekauft.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID`   - ID des Spielers
 --- * `EntityID`   - ID des erstellten Schafs
 --- * `BuildingID` - ID der Weide
@@ -98,14 +89,14 @@ Report.SheepBought = anyInteger;
 
 --- Eine Kuh ist verhungert.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID`   - ID des Spielers
 --- * `EntityID`   - ID der erstellten Kuh
 Report.CattleStarved = anyInteger;
 
 --- Ein Schaf ist verhungert.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID`   - ID des Spielers
 --- * `EntityID`   - ID des erstellten Schafs
 Report.SheepStarved = anyInteger;

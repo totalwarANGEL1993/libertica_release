@@ -1,4 +1,6 @@
 --- Converts a hexdecimal string into color values.
+
+--- Converts a hexdecimal string into color values.
 --- @param _Hex string Hexdecimal color string
 --- @return integer Red Red 
 --- @return integer Green Green 

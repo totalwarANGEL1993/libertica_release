@@ -1,0 +1,814 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><strong>module.ui.uibuilding_api</strong></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.ui.uibuilding_api</code></h1>
+<p>Ermöglicht das Hinzufügen von bis zu 6 zusätzlichen Schaltflächen in Gebäudemenüs.</p>
+<p></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#AddBuildingButtonAtPosition">AddBuildingButtonAtPosition (_X, _Y, _Action, _Tooltip, _Update)</a></td>
+	<td class="summary">Erstellt eine Gebäudeschaltfläche an der Menüposition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddBuildingButton">AddBuildingButton (_Action, _Tooltip, _Update)</a></td>
+	<td class="summary">Erstellt eine Gebäudeschaltfläche.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddBuildingButtonByTypeAtPosition">AddBuildingButtonByTypeAtPosition (_Type, _X, _Y, _Action, _Tooltip, _Update)</a></td>
+	<td class="summary">Erstellt eine Gebäudeschaltfläche an der Menüposition für einen Entitätstyp.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddBuildingButtonByType">AddBuildingButtonByType (_Type, _Action, _Tooltip, _Update)</a></td>
+	<td class="summary">Erstellt eine Gebäudeschaltfläche für einen Entitätstyp.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddBuildingButtonByEntityAtPosition">AddBuildingButtonByEntityAtPosition (_ScriptName, _X, _Y, _Action, _Tooltip, _Update)</a></td>
+	<td class="summary">Erstellt eine Gebäudeschaltfläche an der Menüposition für eine bestimmte Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddBuildingButtonByEntity">AddBuildingButtonByEntity (_ScriptName, _Action, _Tooltip, _Update)</a></td>
+	<td class="summary">Erstellt eine Gebäudeschaltfläche für eine bestimmte Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DropBuildingButton">DropBuildingButton (_ID)</a></td>
+	<td class="summary">Entfernt eine Gebäudeschaltfläche.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DropBuildingButtonFromType">DropBuildingButtonFromType (_Type, _ID)</a></td>
+	<td class="summary">Entfernt eine Gebäudeschaltfläche für den Entitätstyp.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DropBuildingButtonFromEntity">DropBuildingButtonFromEntity (_ScriptName, _ID)</a></td>
+	<td class="summary">Entfernt eine Gebäudeschaltfläche für eine bestimmte Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ActivateDowngradeBuilding">ActivateDowngradeBuilding ()</a></td>
+	<td class="summary">Aktiviert den Rückbau von Stadt- und Sammlergebäuden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DeactivateDowngradeBuilding">DeactivateDowngradeBuilding ()</a></td>
+	<td class="summary">Deaktiviert den Rückbau von Stadt- und Sammlergebäuden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetDowngradeBuildingCost">SetDowngradeBuildingCost (_MoneyCost)</a></td>
+	<td class="summary">Setzt die Kosten für den Rückbau für alle Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ActivateSingleReserveBuilding">ActivateSingleReserveBuilding ()</a></td>
+	<td class="summary">Aktiviert das Reservieren von Waren am Gebäude.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DeactivateSingleReserveBuilding">DeactivateSingleReserveBuilding ()</a></td>
+	<td class="summary">Deaktiviert das Reservieren von Waren am Gebäude.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ActivateSingleStopBuilding">ActivateSingleStopBuilding ()</a></td>
+	<td class="summary">Aktiviert das Stoppen von einzelnen Gebäuden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DeactivateSingleStopBuilding">DeactivateSingleStopBuilding ()</a></td>
+	<td class="summary">Deaktiviert das Stoppen von einzelnen Gebäuden.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Report.DowngradeBuilding">Report.DowngradeBuilding</a></td>
+	<td class="summary">Der Spieler hat ein Gebäude zurückgebaut.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.LockGoodType">Report.LockGoodType</a></td>
+	<td class="summary">Der Spieler hat eine Ware gesperrt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.UnlockGoodType">Report.UnlockGoodType</a></td>
+	<td class="summary">Der Spieler hat eine Wahre freigegeben.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.ResumeBuilding">Report.ResumeBuilding</a></td>
+	<td class="summary">Der Spieler hat die Produktion im Gebäude fortgeführt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.YieldBuilding">Report.YieldBuilding</a></td>
+	<td class="summary">Der Spieler hat die Produktion im Gebäude angehalten.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.CancelUpgradeClicked">Report.CancelUpgradeClicked</a></td>
+	<td class="summary">Der Spieler hat auf die Schaltfläche "Upgrade abbrechen" geklickt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.StartUpgradeClicked">Report.StartUpgradeClicked</a></td>
+	<td class="summary">Der Spieler hat auf die Schaltfläche "Upgrade starten" geklickt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.FestivalClicked">Report.FestivalClicked</a></td>
+	<td class="summary">Der Spieler hat auf die Schaltfläche "Festival starten" geklickt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.SermonClicked">Report.SermonClicked</a></td>
+	<td class="summary">Der Spieler hat auf die Schaltfläche "Predigt starten" geklickt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.TheatrePlayClicked">Report.TheatrePlayClicked</a></td>
+	<td class="summary">Der Spieler hat auf die Schaltfläche "Theaterstück starten" geklickt.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "AddBuildingButtonAtPosition"></a>
+    <strong>AddBuildingButtonAtPosition (_X, _Y, _Action, _Tooltip, _Update)</strong>
+    </dt>
+    <dd>
+    Erstellt eine Gebäudeschaltfläche an der Menüposition.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_X</span> <b>integer</b> X-Position für Schaltfläche
+        </li>
+        <li><span class="parameter">_Y</span> <b>integer</b> X-Position für Schaltfläche
+        </li>
+        <li><span class="parameter">_Action</span> <b>function</b> Steuerung der Schaltflächenaktion
+        </li>
+        <li><span class="parameter">_Tooltip</span> <b>function</b> Steuerung des Schaltflächentooltips
+        </li>
+        <li><span class="parameter">_Update</span> <b>function</b> Steuerung des Schaltflächenupdates
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID der Schaltfläche
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddBuildingButton"></a>
+    <strong>AddBuildingButton (_Action, _Tooltip, _Update)</strong>
+    </dt>
+    <dd>
+    Erstellt eine Gebäudeschaltfläche.
+<p> <h3>Example:</h3> Eine einfache Schaltfläche.
+ <pre><code class="language-lua"> SpecialButtonID = AddBuildingButton(
+     -- Aktion
+     function(_WidgetID, _BuildingID)
+         GUI.AddNote("Etwas passiert!");
+     end,
+     -- Tooltip
+     function(_WidgetID, _BuildingID)
+         -- Ein Kostentooltip MUSS verwendet werden.
+         SetTooltipCosts("Beschreibung", "Dies ist die Beschreibung!");
+     end,
+     -- Update
+     function(_WidgetID, _BuildingID)
+         -- Deaktivieren, wenn im Bau
+         if Logic.IsConstructionComplete(_BuildingID) == 0 then
+             XGUIEng.ShowWidget(_WidgetID, 0);
+             return;
+         end
+         -- Deaktivieren, wenn ein Upgrade durchgeführt wird
+         if Logic.IsBuildingBeingUpgraded(_BuildingID) then
+             XGUIEng.DisableButton(_WidgetID, 1);
+         end
+         SetIcon(_WidgetID, {1, 1});
+     end
+ );</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Action</span> <b>function</b> Steuerung der Schaltflächenaktion
+        </li>
+        <li><span class="parameter">_Tooltip</span> <b>function</b> Steuerung des Schaltflächentooltips
+        </li>
+        <li><span class="parameter">_Update</span> <b>function</b> Steuerung des Schaltflächenupdates
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID der Schaltfläche
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddBuildingButtonByTypeAtPosition"></a>
+    <strong>AddBuildingButtonByTypeAtPosition (_Type, _X, _Y, _Action, _Tooltip, _Update)</strong>
+    </dt>
+    <dd>
+    Erstellt eine Gebäudeschaltfläche an der Menüposition für einen Entitätstyp.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Type</span> <b>integer</b> Typ der Entität
+        </li>
+        <li><span class="parameter">_X</span> <b>integer</b> X-Position für Schaltfläche
+        </li>
+        <li><span class="parameter">_Y</span> <b>integer</b> Y-Position für Schaltfläche
+        </li>
+        <li><span class="parameter">_Action</span> <b>function</b> Steuerung der Schaltflächenaktion
+        </li>
+        <li><span class="parameter">_Tooltip</span> <b>function</b> Steuerung des Schaltflächentooltips
+        </li>
+        <li><span class="parameter">_Update</span> <b>function</b> Steuerung des Schaltflächenupdates
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID der Schaltfläche
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddBuildingButtonByType"></a>
+    <strong>AddBuildingButtonByType (_Type, _Action, _Tooltip, _Update)</strong>
+    </dt>
+    <dd>
+    Erstellt eine Gebäudeschaltfläche für einen Entitätstyp.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Type</span> <b>integer</b> Typ der Entität
+        </li>
+        <li><span class="parameter">_Action</span> <b>function</b> Steuerung der Schaltflächenaktion
+        </li>
+        <li><span class="parameter">_Tooltip</span> <b>function</b> Steuerung des Schaltflächentooltips
+        </li>
+        <li><span class="parameter">_Update</span> <b>function</b> Steuerung des Schaltflächenupdates
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID der Schaltfläche
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddBuildingButtonByEntityAtPosition"></a>
+    <strong>AddBuildingButtonByEntityAtPosition (_ScriptName, _X, _Y, _Action, _Tooltip, _Update)</strong>
+    </dt>
+    <dd>
+    Erstellt eine Gebäudeschaltfläche an der Menüposition für eine bestimmte Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_X</span> <b>integer</b> X-Position für Schaltfläche
+        </li>
+        <li><span class="parameter">_Y</span> <b>integer</b> X-Position für Schaltfläche
+        </li>
+        <li><span class="parameter">_Action</span> <b>function</b> Steuerung der Schaltflächenaktion
+        </li>
+        <li><span class="parameter">_Tooltip</span> <b>function</b> Steuerung des Schaltflächentooltips
+        </li>
+        <li><span class="parameter">_Update</span> <b>function</b> Steuerung des Schaltflächenupdates
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID der Schaltfläche
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddBuildingButtonByEntity"></a>
+    <strong>AddBuildingButtonByEntity (_ScriptName, _Action, _Tooltip, _Update)</strong>
+    </dt>
+    <dd>
+    Erstellt eine Gebäudeschaltfläche für eine bestimmte Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Action</span> <b>function</b> Steuerung der Schaltflächenaktion
+        </li>
+        <li><span class="parameter">_Tooltip</span> <b>function</b> Steuerung des Schaltflächentooltips
+        </li>
+        <li><span class="parameter">_Update</span> <b>function</b> Steuerung des Schaltflächenupdates
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID der Schaltfläche
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DropBuildingButton"></a>
+    <strong>DropBuildingButton (_ID)</strong>
+    </dt>
+    <dd>
+    Entfernt eine Gebäudeschaltfläche.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ID</span> <b>integer</b> ID der Schaltfläche
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DropBuildingButtonFromType"></a>
+    <strong>DropBuildingButtonFromType (_Type, _ID)</strong>
+    </dt>
+    <dd>
+    Entfernt eine Gebäudeschaltfläche für den Entitätstyp.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Type</span> <b>integer</b> Typ der Entität
+        </li>
+        <li><span class="parameter">_ID</span> <b>integer</b> ID der Schaltfläche
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DropBuildingButtonFromEntity"></a>
+    <strong>DropBuildingButtonFromEntity (_ScriptName, _ID)</strong>
+    </dt>
+    <dd>
+    Entfernt eine Gebäudeschaltfläche für eine bestimmte Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_ID</span> <b>integer</b> ID der Schaltfläche
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ActivateDowngradeBuilding"></a>
+    <strong>ActivateDowngradeBuilding ()</strong>
+    </dt>
+    <dd>
+    Aktiviert den Rückbau von Stadt- und Sammlergebäuden.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DeactivateDowngradeBuilding"></a>
+    <strong>DeactivateDowngradeBuilding ()</strong>
+    </dt>
+    <dd>
+    Deaktiviert den Rückbau von Stadt- und Sammlergebäuden.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetDowngradeBuildingCost"></a>
+    <strong>SetDowngradeBuildingCost (_MoneyCost)</strong>
+    </dt>
+    <dd>
+    Setzt die Kosten für den Rückbau für alle Spieler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_MoneyCost</span> <b>integer</b> Rückbaukosten
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ActivateSingleReserveBuilding"></a>
+    <strong>ActivateSingleReserveBuilding ()</strong>
+    </dt>
+    <dd>
+    Aktiviert das Reservieren von Waren am Gebäude.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DeactivateSingleReserveBuilding"></a>
+    <strong>DeactivateSingleReserveBuilding ()</strong>
+    </dt>
+    <dd>
+    Deaktiviert das Reservieren von Waren am Gebäude.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ActivateSingleStopBuilding"></a>
+    <strong>ActivateSingleStopBuilding ()</strong>
+    </dt>
+    <dd>
+    Aktiviert das Stoppen von einzelnen Gebäuden.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DeactivateSingleStopBuilding"></a>
+    <strong>DeactivateSingleStopBuilding ()</strong>
+    </dt>
+    <dd>
+    Deaktiviert das Stoppen von einzelnen Gebäuden.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Report.DowngradeBuilding"></a>
+    <strong>Report.DowngradeBuilding</strong>
+    </dt>
+    <dd>
+    Der Spieler hat ein Gebäude zurückgebaut.
+
+ <h3>Parameters:</h3><li><code>EntityID</code> - ID des Gebäudes</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.LockGoodType"></a>
+    <strong>Report.LockGoodType</strong>
+    </dt>
+    <dd>
+    Der Spieler hat eine Ware gesperrt.
+
+ <h3>Parameters:</h3><li><code>PlayerID</code> - ID des Spielers</li><li><code>GoodType</code> - Typ der Ware</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.UnlockGoodType"></a>
+    <strong>Report.UnlockGoodType</strong>
+    </dt>
+    <dd>
+    Der Spieler hat eine Wahre freigegeben.
+
+ <h3>Parameters:</h3><li><code>PlayerID</code> - ID des Spielers</li><li><code>GoodType</code> - Typ der Ware</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.ResumeBuilding"></a>
+    <strong>Report.ResumeBuilding</strong>
+    </dt>
+    <dd>
+    Der Spieler hat die Produktion im Gebäude fortgeführt.
+
+ <h3>Parameters:</h3><li><code>EntityID</code> - ID des Gebäudes</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.YieldBuilding"></a>
+    <strong>Report.YieldBuilding</strong>
+    </dt>
+    <dd>
+    Der Spieler hat die Produktion im Gebäude angehalten.
+
+ <h3>Parameters:</h3><li><code>EntityID</code> - ID des Gebäudes</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.CancelUpgradeClicked"></a>
+    <strong>Report.CancelUpgradeClicked</strong>
+    </dt>
+    <dd>
+    Der Spieler hat auf die Schaltfläche "Upgrade abbrechen" geklickt.
+
+ <h3>Parameters:</h3><li><code>EntityID</code> - ID des Gebäudes</li><li><code>PlayerID</code> - ID des Besitzers</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.StartUpgradeClicked"></a>
+    <strong>Report.StartUpgradeClicked</strong>
+    </dt>
+    <dd>
+    Der Spieler hat auf die Schaltfläche "Upgrade starten" geklickt.
+
+ <h3>Parameters:</h3><li><code>EntityID</code> - ID des Gebäudes</li><li><code>PlayerID</code> - ID des Besitzers</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.FestivalClicked"></a>
+    <strong>Report.FestivalClicked</strong>
+    </dt>
+    <dd>
+    Der Spieler hat auf die Schaltfläche "Festival starten" geklickt.
+
+ <h3>Parameters:</h3><li><code>PlayerID</code> - ID des Spielers</li><li><code>Type</code>     - Festivaltyp</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.SermonClicked"></a>
+    <strong>Report.SermonClicked</strong>
+    </dt>
+    <dd>
+    Der Spieler hat auf die Schaltfläche "Predigt starten" geklickt.
+
+ <h3>Parameters:</h3><li><code>PlayerID</code> - ID des Spielers</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.TheatrePlayClicked"></a>
+    <strong>Report.TheatrePlayClicked</strong>
+    </dt>
+    <dd>
+    Der Spieler hat auf die Schaltfläche "Theaterstück starten" geklickt.
+
+ <h3>Parameters:</h3><li><code>EntityID</code> - ID des Gebäudes</li><li><code>PlayerID</code> - ID des Besitzers</li>
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

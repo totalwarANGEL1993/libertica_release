@@ -1,21 +1,16 @@
 --- Bietet Werkzeuge für verschiedene Modifikationen der 2D-Benutzeroberfläche.
 ---
 --- Die folgenden menübezogenen Elemente können geändert werden:
---- * Anzeigen/Verstecken der Minikarte
---- * Anzeigen/Verstecken der Umschalt-Minikarte
---- * Anzeigen/Verstecken des Diplomatiemenüs
---- * Anzeigen/Verstecken des Produktionsmenüs
---- * Anzeigen/Verstecken des Wettermenüs
---- * Anzeigen/Verstecken des Baumenüs
---- * Anzeigen/Verstecken des Gebietsbeanspruchungsbuttons
---- * Anzeigen/Verstecken des Heldenfähigkeitenbuttons
---- * Anzeigen/Verstecken des Helden auswählen-Buttons
---- * Anzeigen/Verstecken des Einheiten auswählen-Buttons
----
---- #### Reports
---- `Report.BuildingPlaced` - Ein menschlicher Spieler hat ein Gebäude platziert.
----
-Lib.UITools = Lib.UITools or {};
+--- <li>Anzeigen/Verstecken der Minikarte</li>
+--- <li>Anzeigen/Verstecken der Umschalt-Minikarte</li>
+--- <li>Anzeigen/Verstecken des Diplomatiemenüs</li>
+--- <li>Anzeigen/Verstecken des Produktionsmenüs</li>
+--- <li>Anzeigen/Verstecken des Wettermenüs</li>
+--- <li>Anzeigen/Verstecken des Baumenüs</li>
+--- <li>Anzeigen/Verstecken des Gebietsbeanspruchungsbuttons</li>
+--- <li>Anzeigen/Verstecken des Heldenfähigkeitenbuttons</li>
+--- <li>Anzeigen/Verstecken des Helden auswählen-Buttons</li>
+--- <li>Anzeigen/Verstecken des Einheiten auswählen-Buttons</li>
 
 
 
@@ -30,7 +25,7 @@ Lib.UITools = Lib.UITools or {};
 --- * 64:  [filename]big.png
 --- * 128: [filename]verybig.png
 ---
---- #### Beispiele
+--- #### Example:
 --- ```lua
 --- -- Beispiel #1: Verwendung einer Ingame-Grafik
 --- ChangeIcon(AnyWidgetID, {1, 1, 1});
@@ -168,7 +163,7 @@ API.SpeedLimitActivate = SpeedLimitActivate;
 
 --- Ein menschlicher Spieler hat ein Gebäude platziert.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID des Spielers
 --- * `EntityID` - ID der Baustelle
 Report.BuildingPlaced = anyInteger;

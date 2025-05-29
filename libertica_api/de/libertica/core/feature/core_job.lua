@@ -1,6 +1,5 @@
 --- Ermöglicht das Starten von Jobs verschiedener Ereignistypen und deren 
 --- Steuerung. Auch einfache Verzögerungen werden bereitgestellt.
-Lib.Core.Job = {}
 
 --- Fordert einen Job des übergebenen Ereignistyps an.
 --- @param _EventType integer Typ des Jobs

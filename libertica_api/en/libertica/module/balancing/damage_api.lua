@@ -5,12 +5,12 @@
 --- internally and should no longer be used!
 ---
 --- Functions:
---- * Better balancing for archers
---- * Close Wall catapults weaken each other (only for humans)
---- * Adjusting unit combat strength via Lua
---- * Granting additional armor to units
---- * Adjusting the Own Territory bonus
---- * Adjusting the Height Modifier
+--- <li>Better balancing for archers</li>
+--- <li>Close Wall catapults weaken each other (only for humans)</li>
+--- <li>Adjusting unit combat strength via Lua</li>
+--- <li>Granting additional armor to units</li>
+--- <li>Adjusting the Own Territory bonus</li>
+--- <li>Adjusting the Height Modifier</li>
 ---
 Lib.Damage = Lib.Damage or {};
 

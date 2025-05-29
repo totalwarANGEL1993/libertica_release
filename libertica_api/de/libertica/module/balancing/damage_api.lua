@@ -5,12 +5,12 @@
 --- stattdessen intern benutzt und darf nicht mehr verwendet werden!
 ---
 --- Funktionen:
---- * Besseres Balancing für Bogenschützen
---- * Nahe Mauerkatapulte schwächen sich gegenseitig (gilt nicht für KI)
---- * Anpassen der Kampfkraft von Einheiten über Lua
---- * Zusätzliche Rüstung für Einheiten vergeben
---- * Anpassen des Own Territoy Bonus
---- * Anpassen des Height Modifier
+--- <li>Besseres Balancing für Bogenschützen</li>
+--- <li>Nahe Mauerkatapulte schwächen sich gegenseitig (gilt nicht für KI)</li>
+--- <li>Anpassen der Kampfkraft von Einheiten über Lua</li>
+--- <li>Zusätzliche Rüstung für Einheiten vergeben</li>
+--- <li>Anpassen des Own Territoy Bonus</li>
+--- <li>Anpassen des Height Modifier</li>
 ---
 Lib.Damage = Lib.Damage or {};
 

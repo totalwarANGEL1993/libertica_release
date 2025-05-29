@@ -4,9 +4,6 @@
 --- talk to them. Much like interactive objects an action can be called
 --- and some other adjustments can be made.
 ---
---- #### Reports
---- * `Report.NpcInteraction` - Someone talks to an NPC.
----
 Lib.NPC = Lib.NPC or {};
 
 
@@ -14,27 +11,28 @@ Lib.NPC = Lib.NPC or {};
 --- Adds an NPC to an entity.
 ---
 --- #### Fields of table
---- * ScriptName        Script name of entity (mandatory)
---- * Active            NPC is active
---- * Callback          Function called at activation
---- * Condition         Condition checked before activation
---- * Type              Type of NPC (1, 2, 3, 4)
---- * Player            Players allowed to talk
---- * WrongPlayerAction Message for wrong players
---- * Hero              Name of specific hero
---- * WrongHeroAction   Message for wrong heroes
---- * Follow            NPC follows heroes
---- * FollowHero        NPC is following specific hero
---- * FollowCallback    Function called on arrival
---- * FollowDestination Location the NPC moves to
---- * FollowDistance    max. distance to the hero (Default: 2000)
---- * FollowArriveArea  min. distance to location (Default: 500)
---- * FollowSpeed       Moving speed factor (Default: 1.0)
---- * Arrived           NPC has arrived at location
+--- 
+--- * `ScriptName`        - Script name of entity (mandatory)
+--- * `Active`            - NPC is active
+--- * `Callback`          - Function called at activation
+--- * `Condition`         - Condition checked before activation
+--- * `Type`              - Type of NPC (1, 2, 3, 4)
+--- * `Player`            - Players allowed to talk
+--- * `WrongPlayerAction` - Message for wrong players
+--- * `Hero`              - Name of specific hero
+--- * `WrongHeroAction`   - Message for wrong heroes
+--- * `Follow`            - NPC follows heroes
+--- * `FollowHero`        - NPC is following specific hero
+--- * `FollowCallback`    - Function called on arrival
+--- * `FollowDestination` - Location the NPC moves to
+--- * `FollowDistance`    - max. distance to the hero (Default: 2000)
+--- * `FollowArriveArea`  - min. distance to location (Default: 500)
+--- * `FollowSpeed`       - Moving speed factor (Default: 1.0)
+--- * `Arrived`           - NPC has arrived at location
 ---
---- #### Examples
+--- #### Example:
+--- Creates a simple NPC.
 --- ```lua
---- -- Example #1: Creates a simple NPC
 --- MyNpc = NpcCompose {
 ---     ScriptName = "HansWurst",
 ---     Callback   = function(_Data)
@@ -44,8 +42,9 @@ Lib.NPC = Lib.NPC or {};
 --- }
 --- ```
 ---
+--- #### Example:
+--- Creates a NPC with conditions.
 --- ```lua
---- -- Example #2: Creates a NPC with conditions
 --- MyNpc = NpcCompose {
 ---     ScriptName = "HansWurst",
 ---     Condition  = function(_Data)
@@ -60,8 +59,9 @@ Lib.NPC = Lib.NPC or {};
 --- }
 ---```
 ---
+--- #### Example:
+--- Limit players for activation.
 --- ```lua
---- -- Example #3: Limit players for activation
 --- MyNpc = NpcCompose {
 ---     ScriptName        = "HansWurst",
 ---     Player            = {1, 2},
@@ -91,19 +91,19 @@ API.NpcDispose = NpcDispose;
 --- Updates the NPC with the data table.
 ---
 --- #### Fields of table
---- * ScriptName        Script name of entity (mandatory)
---- * Callback          Function called at activation
---- * Condition         Condition checked before activation
---- * Type              Type of NPC (1, 2, 3, 4)
---- * Player            Players allowed to talk
---- * WrongPlayerAction Message for wrong players
---- * Hero              Name of specific hero
---- * WrongHeroAction   Message for wrong heroes
---- * Active            NPC is active
+--- * `ScriptName`        - Script name of entity (mandatory)
+--- * `Callback`          - Function called at activation
+--- * `Condition`         - Condition checked before activation
+--- * `Type`              - Type of NPC (1, 2, 3, 4)
+--- * `Player`            - Players allowed to talk
+--- * `WrongPlayerAction` - Message for wrong players
+--- * `Hero`              - Name of specific hero
+--- * `WrongHeroAction`   - Message for wrong heroes
+--- * `Active`            - NPC is active
 ---
---- #### Examples
+--- #### Example:
+--- Reset NPC and change action.
 --- ```lua
---- -- Example #1: Reset NPC and change action
 --- MyNpc.Active = true;
 --- MyNpc.TalkedTo = 0;
 --- MyNpc.Callback = function(_Data)
@@ -146,7 +146,7 @@ end
 
 --- Someone talks to an NPC.
 ---
---- #### Parameters
+--- #### Parameters:s
 --- * `NpcEntityID`  - ID of npc
 --- * `HeroEntityID` - ID of hero
 Report.NpcInteraction = anyInteger;

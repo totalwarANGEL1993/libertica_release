@@ -1,4 +1,6 @@
 --- Replaces an entity with another with the given type.
+
+--- Replaces an entity with another with the given type.
 --- @param _Entity any        ID or name of entity
 --- @param _Type integer      Type of entity
 --- @param _NewOwner? integer PlayerID of owner

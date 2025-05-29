@@ -1,0 +1,631 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><strong>core.feature.core_scriptingvalue</strong></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>core.feature.core_scriptingvalue</code></h1>
+<p>Bietet Zugriff auf Skriptwerte - ungeschützter Zugriff auf den RAM.</p>
+<p>
+<p> <h3>Bekannte Index:</h3><li><code>CONST_SCRIPTING_VALUES.Destination.X</code> - X-Koordinate des Bewegungsziels</li><li><code>CONST_SCRIPTING_VALUES.Destination.Y</code> - Y-Koordinate des Bewegungsziels</li><li><code>CONST_SCRIPTING_VALUES.Health</code> - Gesundheit der Entität</li><li><code>CONST_SCRIPTING_VALUES.Player</code> - Spieler-ID der Entität</li><li><code>CONST_SCRIPTING_VALUES.Size</code> - Skalierung der Entität</li><li><code>CONST_SCRIPTING_VALUES.Visible</code> - Ist die Entität sichtbar (= 801280)</li><li><code>CONST_SCRIPTING_VALUES.NPC</code> - Art des NPCs (> 0)</p></li>
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityDestination">GetEntityDestination (_Entity)</a></td>
+	<td class="summary">Gibt das aktuelle Bewegungsziel der Entität zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityHealth">GetEntityHealth (_Entity)</a></td>
+	<td class="summary">Gibt die Gesundheit der Entität zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetEntityHealth">SetEntityHealth (_Entity, _Health)</a></td>
+	<td class="summary">Setzt die Gesundheit der Entität, ohne Prüfung auf plausibelität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityNpc">GetEntityNpc (_Entity)</a></td>
+	<td class="summary">Gibt zurück, ob die Entität ein NPC ist.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityPlayer">GetEntityPlayer (_Entity)</a></td>
+	<td class="summary">Gibt den Besitzer der Entität zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetEntityPlayer">SetEntityPlayer (_Entity, _Player)</a></td>
+	<td class="summary">Setzt den Eigentümer der Entität, ohne Prüfung auf plausibelität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityScaling">GetEntityScaling (_Entity)</a></td>
+	<td class="summary">Gibt die Skalierung der Entität zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetEntityScaling">SetEntityScaling (_Entity, _Scaling)</a></td>
+	<td class="summary">Setzt die Skalierung der Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityModel">GetEntityModel (_Entity)</a></td>
+	<td class="summary">Gibt das aktuell genutzte Model der Entität zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#IsEntityInvisible">IsEntityInvisible (_Entity)</a></td>
+	<td class="summary">Gibt zurück, ob die Entität unsichtbar ist,</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#IsEntityInaccessible">IsEntityInaccessible (_Entity)</a></td>
+	<td class="summary">Gibt zurück, ob die Entität nicht auswählbar ist.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetInteger">GetInteger (_Entity, _SV)</a></td>
+	<td class="summary">Gibt den Wert des Index als Ganzzahl zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetFloat">GetFloat (_Entity, _SV)</a></td>
+	<td class="summary">Gibt den Wert des Index als Gleitkommazahl zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetInteger">SetInteger (_Entity, _SV, _Value)</a></td>
+	<td class="summary">Legt einen Ganzzahlwert am Index fest.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetFloat">SetFloat (_Entity, _SV, _Value)</a></td>
+	<td class="summary">Legt einen Gleitkommawert am Index fest.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ConvertIntegerToFloat">ConvertIntegerToFloat (_Value)</a></td>
+	<td class="summary">Konvertiert den Gleitkommawert in die Ganzzahldarstellung um.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ConvertFloatToInteger">ConvertFloatToInteger (_Value)</a></td>
+	<td class="summary">Konvertiert den Ganzzahlwert in die Gleitkommadarstellung um.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "GetEntityDestination"></a>
+    <strong>GetEntityDestination (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt das aktuelle Bewegungsziel der Entität zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>table</b> Position Bewegungsziel der Entität
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityHealth"></a>
+    <strong>GetEntityHealth (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt die Gesundheit der Entität zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Health Gesundheit der Entität
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetEntityHealth"></a>
+    <strong>SetEntityHealth (_Entity, _Health)</strong>
+    </dt>
+    <dd>
+    Setzt die Gesundheit der Entität, ohne Prüfung auf plausibelität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_Health</span> <b>integer</b> Gesundheit der Entität
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityNpc"></a>
+    <strong>GetEntityNpc (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt zurück, ob die Entität ein NPC ist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Active Entität ist NPC
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityPlayer"></a>
+    <strong>GetEntityPlayer (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt den Besitzer der Entität zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Player ID des Spielers
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetEntityPlayer"></a>
+    <strong>SetEntityPlayer (_Entity, _Player)</strong>
+    </dt>
+    <dd>
+    Setzt den Eigentümer der Entität, ohne Prüfung auf plausibelität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_Player</span> <b>integer</b> Player ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityScaling"></a>
+    <strong>GetEntityScaling (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt die Skalierung der Entität zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b>         </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>number</b> Scaling Skalierung der Entität
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetEntityScaling"></a>
+    <strong>SetEntityScaling (_Entity, _Scaling)</strong>
+    </dt>
+    <dd>
+    Setzt die Skalierung der Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_Scaling</span> <b>number</b> Skalierung der Entität
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityModel"></a>
+    <strong>GetEntityModel (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt das aktuell genutzte Model der Entität zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Model Model der Entität
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "IsEntityInvisible"></a>
+    <strong>IsEntityInvisible (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt zurück, ob die Entität unsichtbar ist,
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Visible Entity ist unsichtbar
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "IsEntityInaccessible"></a>
+    <strong>IsEntityInaccessible (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt zurück, ob die Entität nicht auswählbar ist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Visible Entity nicht auswählbar
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetInteger"></a>
+    <strong>GetInteger (_Entity, _SV)</strong>
+    </dt>
+    <dd>
+    Gibt den Wert des Index als Ganzzahl zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_SV</span> <b>integer</b> Index des Skriptwerts
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Wert Wert am Index
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetFloat"></a>
+    <strong>GetFloat (_Entity, _SV)</strong>
+    </dt>
+    <dd>
+    Gibt den Wert des Index als Gleitkommazahl zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_SV</span> <b>integer</b> Index des Skriptwerts
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>number</b> Wert Wert am Index
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetInteger"></a>
+    <strong>SetInteger (_Entity, _SV, _Value)</strong>
+    </dt>
+    <dd>
+    Legt einen Ganzzahlwert am Index fest.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_SV</span> <b>integer</b> Index des Skriptwerts
+        </li>
+        <li><span class="parameter">_Value</span> <b>integer</b> Zu setzender Wert
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetFloat"></a>
+    <strong>SetFloat (_Entity, _SV, _Value)</strong>
+    </dt>
+    <dd>
+    Legt einen Gleitkommawert am Index fest.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_SV</span> <b>integer</b> Index des Skriptwerts
+        </li>
+        <li><span class="parameter">_Value</span> <b>number</b> Zu setzender Wert
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ConvertIntegerToFloat"></a>
+    <strong>ConvertIntegerToFloat (_Value)</strong>
+    </dt>
+    <dd>
+    Konvertiert den Gleitkommawert in die Ganzzahldarstellung um.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Value</span> <b>number</b> Ganzzahliger Wert
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>number</b> Wert Gleitkommawert
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ConvertFloatToInteger"></a>
+    <strong>ConvertFloatToInteger (_Value)</strong>
+    </dt>
+    <dd>
+    Konvertiert den Ganzzahlwert in die Gleitkommadarstellung um.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Value</span> <b>number</b> Gleitkommawert
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Wert Ganzzahliger Wert
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

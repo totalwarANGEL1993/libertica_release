@@ -1,4 +1,6 @@
 --- Move an entity to a position and let it look at another.
+
+--- Move an entity to a position and let it look at another.
 --- @param _Entity any Entity to move
 --- @param _Target any Position to move to
 --- @param _LookAt any Looking target

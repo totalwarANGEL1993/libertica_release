@@ -1,3 +1,5 @@
+--- Behavior for NPCs.
+
 --- Talk to a NPC character.
 ---
 --- @param _NpcName   string Script name of npc

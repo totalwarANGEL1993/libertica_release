@@ -1,0 +1,1028 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><strong>module.mode.settlementsurvival_api</strong></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.mode.settlementsurvival_api</code></h1>
+<p>Implementiert Überlebensaspekte von Siedlungen im Spiel.</p>
+<p>
+<p> Siedler (und Nutztiere) können nun an verschiedenen Ursachen erkranken und
+ möglicherweise sterben. Wenn ein Siedler stirbt, bleibt er weiterhin mit dem
+ Gebäude verbunden, sodass kein anderer Siedler ihn ersetzen kann. Nach
+ einiger Zeit wird ein neuer Siedler eintreffen. Außerdem ist das Bedürfnis
+ nach Kleidung auch für Sammler aktiv.
+<p> Dinge, die Gebäude entzünden:
+ <li>Hohe Temperatur</li>
+<p> Dinge, die Siedler krank machen:
+ <li>Unzureichende Hygiene</li>
+ <li>Unzureichende Unterhaltung</li>
+ <li>Unzureichendes Brennholz</li>
+<p> Dinge, die Siedler töten:
+ <li>Krankheit (5%ige Chance pro Periode)</li>
+ <li>Hunger (5%ige Chance pro Periode)</li>
+<p> Dinge, die Tiere töten:
+ <li>Krankheit (5%ige Chance pro Periode)</li></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#SettlementSurvivalActivate">SettlementSurvivalActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert/deaktiviert den Modus.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AnimalPlagueActivate">AnimalPlagueActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert das Sterben von Tieren an Krankheiten.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AnimalPlagueActivateForAI">AnimalPlagueActivateForAI (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert das Sterben von Tieren an Krankheiten für KI-Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AnimalPlagueSetDeathInterval">AnimalPlagueSetDeathInterval (_Interval)</a></td>
+	<td class="summary">Ändert das Intervall zwischen den Toden von kranken Tieren.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AnimalPlagueSetDeathChance">AnimalPlagueSetDeathChance (_Chance)</a></td>
+	<td class="summary">Ändert die Sterbewahrscheinlichkeit für kranke Tiere.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AnimalPlagueSetInfectionInterval">AnimalPlagueSetInfectionInterval (_Interval)</a></td>
+	<td class="summary">Ändert das Intervall zwischen Infektionen bei Tieren.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AnimalPlagueSetInfectionChance">AnimalPlagueSetInfectionChance (_Chance)</a></td>
+	<td class="summary">Ändert die Infektionswahrscheinlichkeit für Tiere.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HotWeatherActivate">HotWeatherActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert Stadtbrände.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HotWeatherActivateForAI">HotWeatherActivateForAI (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert Stadtbrände für KI-Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HotWeatherSetTemperature">HotWeatherSetTemperature (_Temperature)</a></td>
+	<td class="summary">Legt die Temperatur fest, bei der Gebäude Feuer fangen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HotWeatherSetIgnitionChance">HotWeatherSetIgnitionChance (_Chance)</a></td>
+	<td class="summary">Ändert die Chance, dass Gebäude Feuer fangen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ColdWeatherActivate">ColdWeatherActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert den Bedarf an Brennholz.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ColdWeatherActivateForAI">ColdWeatherActivateForAI (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert den Bedarf an Brennholz für KI-Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ColdWeatherSetTemperature">ColdWeatherSetTemperature (_Temperature)</a></td>
+	<td class="summary">Legt die Temperatur fest, ab der das Wetter als unangenehm gilt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ColdWeatherSetConsumptionInterval">ColdWeatherSetConsumptionInterval (_Interval)</a></td>
+	<td class="summary">Ändert das Intervall zwischen zwei Brennholzverbrauchsvorgängen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ColdWeatherSetInfectionChance">ColdWeatherSetInfectionChance (_Chance)</a></td>
+	<td class="summary">Ändert die Infektionswahrscheinlichkeit aufgrund kalten Wetters.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FamineActivate">FamineActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert das Verhungern von Siedlern.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FamineActivateForAI">FamineActivateForAI (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert das Verhungern von Siedlern für KI-Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FamineSetDeathInterval">FamineSetDeathInterval (_Interval)</a></td>
+	<td class="summary">Ändert das Intervall zwischen den Toden aufgrund von Verhungern.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FamineSetDeathChance">FamineSetDeathChance (_Chance)</a></td>
+	<td class="summary">Ändert die Sterbewahrscheinlichkeit für verhungernde Siedler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NegligenceActivate">NegligenceActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert das Krankwerden von Siedlern durch Vernachlässigung.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NegligenceActivateForAI">NegligenceActivateForAI (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert das Krankwerden von Siedlern durch Vernachlässigung für KI-Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NegligenceSetInfectionInterval">NegligenceSetInfectionInterval (_Interval)</a></td>
+	<td class="summary">Ändert das Intervall zwischen Infektionen aufgrund von Vernachlässigung.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NegligenceSetInfectionChance">NegligenceSetInfectionChance (_Chance)</a></td>
+	<td class="summary">Ändert die Infektionswahrscheinlichkeit aufgrund von Vernachlässigung.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PlagueActivate">PlagueActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert das Sterben von Siedlern an Krankheiten.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PlagueActivateForAI">PlagueActivateForAI (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert das Sterben von Siedlern an Krankheiten für KI-Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PlagueSetDeathInterval">PlagueSetDeathInterval (_Interval)</a></td>
+	<td class="summary">Ändert das Intervall zwischen den Toden von kranken Siedlern.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PlagueSetDeathChance">PlagueSetDeathChance (_Chance)</a></td>
+	<td class="summary">Ändert die Sterbewahrscheinlichkeit für kranke Siedler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PredatorBlockClaimActivate">PredatorBlockClaimActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert ob auf feindliche Raubtiere im Territorium
+ geprüft wird.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BanditsBlockClaimActivate">BanditsBlockClaimActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert ob auf feindliche Banditen im Territorium
+ geprüft wird.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ClothesForOuterRimActivate">ClothesForOuterRimActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert ob Kleidung von Sammlern verlangt wird.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BaseConsumptionActivate">BaseConsumptionActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert ob Gebäude einen Grundbedarf haben.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BaseConsumptionActivateForAI">BaseConsumptionActivateForAI (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert ob auch Gebäude der KI einen Grundbedarf haben.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Report.AnimalDiedFromIllness">Report.AnimalDiedFromIllness</a></td>
+	<td class="summary">Ein Tier ist an Krankheit gestorben.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.SettlerDiedFromStarvation">Report.SettlerDiedFromStarvation</a></td>
+	<td class="summary">Ein Siedler ist verhungert.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.SettlerDiedFromIllness">Report.SettlerDiedFromIllness</a></td>
+	<td class="summary">Ein Siedler ist an Krankheit gestorben.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "SettlementSurvivalActivate"></a>
+    <strong>SettlementSurvivalActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert/deaktiviert den Modus.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Modus aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AnimalPlagueActivate"></a>
+    <strong>AnimalPlagueActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert das Sterben von Tieren an Krankheiten.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AnimalPlagueActivateForAI"></a>
+    <strong>AnimalPlagueActivateForAI (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert das Sterben von Tieren an Krankheiten für KI-Spieler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AnimalPlagueSetDeathInterval"></a>
+    <strong>AnimalPlagueSetDeathInterval (_Interval)</strong>
+    </dt>
+    <dd>
+    Ändert das Intervall zwischen den Toden von kranken Tieren.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Interval</span> <b>integer</b> Neues Intervall
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AnimalPlagueSetDeathChance"></a>
+    <strong>AnimalPlagueSetDeathChance (_Chance)</strong>
+    </dt>
+    <dd>
+    Ändert die Sterbewahrscheinlichkeit für kranke Tiere.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Chance</span> <b>integer</b> Wahrscheinlichkeit (zwischen 1 und 100)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AnimalPlagueSetInfectionInterval"></a>
+    <strong>AnimalPlagueSetInfectionInterval (_Interval)</strong>
+    </dt>
+    <dd>
+    Ändert das Intervall zwischen Infektionen bei Tieren.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Interval</span> <b>integer</b> Neues Intervall
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AnimalPlagueSetInfectionChance"></a>
+    <strong>AnimalPlagueSetInfectionChance (_Chance)</strong>
+    </dt>
+    <dd>
+    Ändert die Infektionswahrscheinlichkeit für Tiere.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Chance</span> <b>integer</b> Wahrscheinlichkeit (zwischen 1 und 100)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HotWeatherActivate"></a>
+    <strong>HotWeatherActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert Stadtbrände.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HotWeatherActivateForAI"></a>
+    <strong>HotWeatherActivateForAI (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert Stadtbrände für KI-Spieler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HotWeatherSetTemperature"></a>
+    <strong>HotWeatherSetTemperature (_Temperature)</strong>
+    </dt>
+    <dd>
+    Legt die Temperatur fest, bei der Gebäude Feuer fangen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Temperature</span> <b>integer</b> Start kalter Temperaturen
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HotWeatherSetIgnitionChance"></a>
+    <strong>HotWeatherSetIgnitionChance (_Chance)</strong>
+    </dt>
+    <dd>
+    Ändert die Chance, dass Gebäude Feuer fangen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Chance</span> <b>integer</b> Wahrscheinlichkeit (zwischen 1 und 100)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ColdWeatherActivate"></a>
+    <strong>ColdWeatherActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert den Bedarf an Brennholz.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ColdWeatherActivateForAI"></a>
+    <strong>ColdWeatherActivateForAI (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert den Bedarf an Brennholz für KI-Spieler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ColdWeatherSetTemperature"></a>
+    <strong>ColdWeatherSetTemperature (_Temperature)</strong>
+    </dt>
+    <dd>
+    Legt die Temperatur fest, ab der das Wetter als unangenehm gilt.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Temperature</span> <b>integer</b> Start kalter Temperaturen
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ColdWeatherSetConsumptionInterval"></a>
+    <strong>ColdWeatherSetConsumptionInterval (_Interval)</strong>
+    </dt>
+    <dd>
+    Ändert das Intervall zwischen zwei Brennholzverbrauchsvorgängen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Interval</span> <b>integer</b> Neues Intervall
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ColdWeatherSetInfectionChance"></a>
+    <strong>ColdWeatherSetInfectionChance (_Chance)</strong>
+    </dt>
+    <dd>
+    Ändert die Infektionswahrscheinlichkeit aufgrund kalten Wetters.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Chance</span> <b>integer</b> Wahrscheinlichkeit (zwischen 1 und 100)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FamineActivate"></a>
+    <strong>FamineActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert das Verhungern von Siedlern.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FamineActivateForAI"></a>
+    <strong>FamineActivateForAI (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert das Verhungern von Siedlern für KI-Spieler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FamineSetDeathInterval"></a>
+    <strong>FamineSetDeathInterval (_Interval)</strong>
+    </dt>
+    <dd>
+    Ändert das Intervall zwischen den Toden aufgrund von Verhungern.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Interval</span> <b>integer</b> Neues Intervall
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FamineSetDeathChance"></a>
+    <strong>FamineSetDeathChance (_Chance)</strong>
+    </dt>
+    <dd>
+    Ändert die Sterbewahrscheinlichkeit für verhungernde Siedler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Chance</span> <b>integer</b> Wahrscheinlichkeit (zwischen 1 und 100)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NegligenceActivate"></a>
+    <strong>NegligenceActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert das Krankwerden von Siedlern durch Vernachlässigung.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NegligenceActivateForAI"></a>
+    <strong>NegligenceActivateForAI (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert das Krankwerden von Siedlern durch Vernachlässigung für KI-Spieler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NegligenceSetInfectionInterval"></a>
+    <strong>NegligenceSetInfectionInterval (_Interval)</strong>
+    </dt>
+    <dd>
+    Ändert das Intervall zwischen Infektionen aufgrund von Vernachlässigung.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Interval</span> <b>integer</b> Neues Intervall
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NegligenceSetInfectionChance"></a>
+    <strong>NegligenceSetInfectionChance (_Chance)</strong>
+    </dt>
+    <dd>
+    Ändert die Infektionswahrscheinlichkeit aufgrund von Vernachlässigung.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Chance</span> <b>integer</b> Wahrscheinlichkeit (zwischen 1 und 100)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PlagueActivate"></a>
+    <strong>PlagueActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert das Sterben von Siedlern an Krankheiten.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PlagueActivateForAI"></a>
+    <strong>PlagueActivateForAI (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert das Sterben von Siedlern an Krankheiten für KI-Spieler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Funktion ist aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PlagueSetDeathInterval"></a>
+    <strong>PlagueSetDeathInterval (_Interval)</strong>
+    </dt>
+    <dd>
+    Ändert das Intervall zwischen den Toden von kranken Siedlern.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Interval</span> <b>integer</b> Neues Intervall
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PlagueSetDeathChance"></a>
+    <strong>PlagueSetDeathChance (_Chance)</strong>
+    </dt>
+    <dd>
+    Ändert die Sterbewahrscheinlichkeit für kranke Siedler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Chance</span> <b>integer</b> Wahrscheinlichkeit (zwischen 1 und 100)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PredatorBlockClaimActivate"></a>
+    <strong>PredatorBlockClaimActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert ob auf feindliche Raubtiere im Territorium
+ geprüft wird.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Bedingung aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BanditsBlockClaimActivate"></a>
+    <strong>BanditsBlockClaimActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert ob auf feindliche Banditen im Territorium
+ geprüft wird.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Bedingung aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ClothesForOuterRimActivate"></a>
+    <strong>ClothesForOuterRimActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert ob Kleidung von Sammlern verlangt wird.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Bedürfnis aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BaseConsumptionActivate"></a>
+    <strong>BaseConsumptionActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert ob Gebäude einen Grundbedarf haben.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Grundbedarf aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BaseConsumptionActivateForAI"></a>
+    <strong>BaseConsumptionActivateForAI (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert ob auch Gebäude der KI einen Grundbedarf haben.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Grundbedarf aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Report.AnimalDiedFromIllness"></a>
+    <strong>Report.AnimalDiedFromIllness</strong>
+    </dt>
+    <dd>
+    Ein Tier ist an Krankheit gestorben.
+<p> <h3>Parameters:</h3><li><code>EntityID</code> - ID des Tieres</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.SettlerDiedFromStarvation"></a>
+    <strong>Report.SettlerDiedFromStarvation</strong>
+    </dt>
+    <dd>
+    Ein Siedler ist verhungert.
+<p> <h3>Parameters:</h3><li><code>EntityID</code> - ID des Siedlers</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.SettlerDiedFromIllness"></a>
+    <strong>Report.SettlerDiedFromIllness</strong>
+    </dt>
+    <dd>
+    Ein Siedler ist an Krankheit gestorben.
+<p> <h3>Parameters:</h3><li><code>EntityID</code> - ID des Siedlers</li>
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

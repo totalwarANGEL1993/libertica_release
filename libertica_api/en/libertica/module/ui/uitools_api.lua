@@ -1,21 +1,16 @@
 --- Offers tools for different modifications of the 2D interface.
 ---
 --- The following menu related can be changed:
---- * Show/Hide minimap
---- * Show/Hide toggle minimap
---- * Show/Hide Diplomacy menu
---- * Show/Hide Production menu
---- * Show/Hide Weather menu
---- * Show/Hide Construction menu
---- * Show/Hide Claim territory button
---- * Show/Hide Hero ability button
---- * Show/Hide Select hero button
---- * Show/Hide Select units button
----
---- #### Reports
---- `Report.BuildingPlaced` - A human player has placed a building.
----
-Lib.UITools = Lib.UITools or {};
+--- <li>Show/Hide minimap</li>
+--- <li>Show/Hide toggle minimap</li>
+--- <li>Show/Hide Diplomacy menu</li>
+--- <li>Show/Hide Production menu</li>
+--- <li>Show/Hide Weather menu</li>
+--- <li>Show/Hide Construction menu</li>
+--- <li>Show/Hide Claim territory button</li>
+--- <li>Show/Hide Hero ability button</li>
+--- <li>Show/Hide Select hero button</li>
+--- <li>Show/Hide Select units button</li>
 
 
 
@@ -31,7 +26,7 @@ Lib.UITools = Lib.UITools or {};
 --- * 64:  [filename]big.png
 --- * 128: [filename]verybig.png
 ---
---- #### Examples
+--- #### Example:
 --- ```lua
 --- -- Example #1: Use a ingame graphic
 --- ChangeIcon(AnyWidgetID, {1, 1, 1});
@@ -169,7 +164,7 @@ API.SpeedLimitActivate = SpeedLimitActivate;
 
 --- A human player has placed a building.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID of player
 --- * `EntityID` - ID of eneity
 Report.BuildingPlaced = anyInteger;

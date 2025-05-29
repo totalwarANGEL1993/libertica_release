@@ -7,24 +7,19 @@
 --- for gatherers.
 ---
 --- Things that ignite buildings:
---- * Hot temperature
+--- <li>Hot temperature</li>
 ---
 --- Things that makes settlers sick:
---- * Having not enough hygiene
---- * Having not enough entertainment
---- * Having not enough firewood
+--- <li>Having not enough hygiene</li>
+--- <li>Having not enough entertainment</li>
+--- <li>Having not enough firewood</li>
 ---
 --- Things that kills settlers:
---- * being sick (5% chance each period)
---- * being hungry (5% chance each period)
+--- <li>being sick (5% chance each period)</li>
+--- <li>being hungry (5% chance each period)</li>
 ---
 --- Things that kills animals:
---- * being sick (5% chance each period)
----
---- #### Reports
---- * `Report.AnimalDiedFromIllness` - A animal has died from illness.
---- * `Report.SettlerDiedFromStarvation` - A settler died from starvation.
---- * `Report.SettlerDiedFromIllness` - A settler has died from illness.
+--- <li>being sick (5% chance each period)</li>
 ---
 Lib.SettlementSurvival = Lib.SettlementSurvival or {};
 
@@ -230,19 +225,19 @@ API.BaseConsumptionActivateForAI = BaseConsumptionActivateForAI;
 
 --- An animal has died from illness.
 ---
---- #### Parameters
---- `EntityID` - ID of animal
+--- #### Parameters:s
+--- * `EntityID` - ID of animal
 Report.AnimalDiedFromIllness = anyInteger;
 
 --- A settler has starved to death.
 ---
---- #### Parameters
---- `EntityID` - ID of settler
+--- #### Parameters:s
+--- * `EntityID` - ID of settler
 Report.SettlerDiedFromStarvation = anyInteger;
 
 --- A settler has died from illness.
 ---
---- #### Parameters
---- `EntityID` - ID of settler
+--- #### Parameters:s
+--- * `EntityID` - ID of settler
 Report.SettlerDiedFromIllness = anyInteger;
 

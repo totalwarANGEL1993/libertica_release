@@ -1,10 +1,10 @@
 --- Ermöglicht das Ändern der Beförderungsanforderungen.
 --- 
 --- Einige Technologien sind jetzt in der nächsten Titelrechtsliste versteckt:
---- - Technologies.R_Barracks
---- - Technologies.R_SwordSmith
---- - Technologies.R_BarracksArchers
---- - Technologies.R_BowMaker
+--- <li>Technologies.R_Barracks</li>
+--- <li>Technologies.R_SwordSmith</li>
+--- <li>Technologies.R_BarracksArchers</li>
+--- <li>Technologies.R_BowMaker</li>
 ---
 --- Um die Technologien für Schwertkämpfer und Bogenschützen zu ersetzen,
 --- wurden 2 neue Technologien eingeführt. Sie können nicht verwendet werden, 
@@ -13,17 +13,16 @@
 --- die alten Technologien nicht zu den Rechten hinzugefügt werden. Wenn die
 --- Technologien verboten sind, werden sie nicht freigeschaltet.
 ---
---- ##### Technologies.R_MilitarySword
+--- #### Technologies.R_MilitarySword
 --- Diese Technologie soll dem Spieler zeigen, dass er in der Lage sein wird, 
 --- Schwertkämpfer zu rekrutieren.
 ---
 --- Entsperrt: Technologies.R_Barracks und Technologies.R_SwordSmith
 ---
---- ##### Technologies.R_MilitaryBow
+--- #### Technologies.R_MilitaryBow
 --- Diese Technologie soll dem Spieler zeigen, dass er in der Lage sein wird, 
 --- Bogenschützen zu rekrutieren.
 ---
 --- Entsperrt: Technologies.R_BarracksArchers und Technologies.R_BowMaker
 ---
-Lib.Promotion = Lib.Promotion or {};
 

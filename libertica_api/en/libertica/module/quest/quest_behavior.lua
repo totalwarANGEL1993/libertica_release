@@ -1,3 +1,5 @@
+--- Adds behavior for managing quests.
+
 --- The quest must succeeed.
 --- 
 --- @param _QuestName string Name of quest

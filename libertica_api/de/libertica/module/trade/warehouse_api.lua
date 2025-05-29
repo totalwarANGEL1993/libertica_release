@@ -3,12 +3,6 @@
 --- Lager sind modifizierte Handelsposten, an denen der Spieler Waren ohne
 --- Beteiligung eines KI-Spielers kaufen kann. Es können jedoch keine Waren an das Lager verkauft werden. Die Bezahlung
 --- kann auf jeden beliebigen Ressourcentyp eingestellt werden.
----
---- #### Reports
---- * `Report.WarehouseOfferClicked` - Der Spieler hat auf ein Angebot geklickt.
---- * `Report.WarehouseOfferBought` - Der Spieler hat ein Angebot gekauft.
----
-Lib.Warehouse = Lib.Warehouse or {};
 
 
 
@@ -110,7 +104,7 @@ API.SetWarehouseInflation = SetWarehouseInflation;
 --- @return table Offer Daten des Angebots
 --- @return integer Index Index im Array
 function GetWarehouseOfferByID(_Name, _ID)
-    return 0;
+    return {},0;
 end
 API.GetWarehouseOfferByID = GetWarehouseOfferByID;
 
@@ -127,7 +121,7 @@ API.GetActivWarehouseOffers = GetActivWarehouseOffers;
 
 --- Der Spieler hat auf ein Angebot geklickt.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID`      - ID des Spielers
 --- * `ScriptName`    - Skriptname des Lagers
 --- * `Inflation`     - Berechnete Inflation
@@ -140,7 +134,7 @@ Report.WarehouseOfferClicked = anyInteger;
 
 --- Der Spieler hat ein Angebot gekauft.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID`      - ID des Spielers
 --- * `ScriptName`    - Skriptname des Lagers
 --- * `OfferGood`     - Gekaufter Gut- oder Entitätstyp

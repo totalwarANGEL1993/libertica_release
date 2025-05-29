@@ -1,4 +1,6 @@
---- Gibt zurück, ob ein Entity im Sichtfeld eines anderen liegt
+--- Gibt zurück, ob ein Entity im Sichtfeld eines anderen liegt.
+
+--- Gibt zurück, ob ein Entity im Sichtfeld eines anderen liegt.
 --- @param _Target any      Scriptname oder ID des Ziels
 --- @param _Viewer any      Scriptname oder ID des Viewer
 --- @param _Length integer  Länge des Kegels

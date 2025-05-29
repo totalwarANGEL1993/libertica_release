@@ -1,14 +1,13 @@
 --- Implementiert verschiedene Fehlerkorrekturen.
 ---
---- * Luxusgüter können in Dorflagern gelagert werden
---- * Soldaten respawning für ME-Kaserne ist aktiv
---- * Füge Burg und Lagerhaus als Lieferkontrollpunkte hinzu
---- * IO-Interaktionsprüfungen für beide Güter, wenn sie verfügbar sind
---- * Das Zerstören aller Einheiten zählt jetzt nicht mehr Standorte und spezielle Entitäten
---- * Der große Dom zeigt den richtigen Namen in der Auswahl an
---- * Das Hausmenü ist für Gebäude anderer Klimazonen behoben
---- * Fähigkeitshinweise werden nur ausgelöst, wenn der Spieler einen Ritter und ein Lagerhaus hat
---- * Gelöschte Lagerfeuer stürzen das Spiel nicht mehr ab
+--- <li>Luxusgüter können in Dorflagern gelagert werden</li>
+--- <li>Soldaten respawning für ME-Kaserne ist aktiv</li>
+--- <li>Füge Burg und Lagerhaus als Lieferkontrollpunkte hinzu</li>
+--- <li>IO-Interaktionsprüfungen für beide Güter, wenn sie verfügbar sind</li>
+--- <li>Das Zerstören aller Einheiten zählt jetzt nicht mehr Standorte und spezielle Entitäten</li>
+--- <li>Der große Dom zeigt den richtigen Namen in der Auswahl an</li>
+--- <li>Das Hausmenü ist für Gebäude anderer Klimazonen angepasst</li>
+--- <li>Fähigkeitshinweise werden nur ausgelöst, wenn der Spieler einen Ritter und ein Lagerhaus hat</li>
+--- <li>Gelöschte Lagerfeuer von Banditen verusrachen keine Spielabstürze mehr</li>
 ---
-Lib.Core.Bugfix = {};
 

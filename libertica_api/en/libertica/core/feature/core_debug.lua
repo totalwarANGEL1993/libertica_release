@@ -1,5 +1,4 @@
 --- Allows to use differend debug options of the game.
-Lib.Core.Debug = {}
 
 --- Activates the debug mode of the game.
 --- @param _DisplayScriptErrors boolean Show script errors

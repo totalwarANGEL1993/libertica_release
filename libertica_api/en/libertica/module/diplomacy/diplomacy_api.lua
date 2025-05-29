@@ -1,5 +1,4 @@
 --- Provides some diplomacy functions.
-Lib.Diplomacy = Lib.Diplomacy or {};
 
 --- Changes the diplomacy between the player and the listed players.
 ---
@@ -38,7 +37,7 @@ end
 
 --- The diplomatic relations between two players changed.
 ---
---- #### Parameters
+--- #### Parameters:s
 --- * `PlayerID1` - Frist player ID
 --- * `PlayerID2` - Second player ID
 --- * `OldState`  - Previous diplomatic state

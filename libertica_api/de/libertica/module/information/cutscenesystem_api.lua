@@ -1,16 +1,11 @@
 --- Ermöglicht das Definieren von Zwischensequenzen.
 ---
---- **Veraltet! Das Modul ist nur für Rückwärtskompatibelität integriert.**
----
 --- Zwischensequenzen sind XML-definierte Kamerabewegungen, die von der
 --- Spiel-Engine wiedergegeben werden können. Zwischensequenzen zeichnen sich
 --- durch flüssige Kamerabewegungen aus.
 ---
-Lib.CutsceneSystem = Lib.CutsceneSystem or {};
 
 --- Startet eine Zwischensequenz.
----
---- #### Einstellungen
 ---
 --- Mögliche Felder für die Zwischensequenz-Tabelle:
 --- * `Starting`                - Funktion, die beim Starten der Zwischensequenz aufgerufen wird              
@@ -21,7 +16,7 @@ Lib.CutsceneSystem = Lib.CutsceneSystem or {};
 --- * `EnableBorderPins`        - Anzeigen der Grenzstifte während der Zwischensequenz
 --- * `HideNotes`               - Nachrichten nicht anzeigen
 ---
---- #### Beispiel
+--- #### Example:
 ---
 --- ```lua
 --- function Cutscene1(_Name, _PlayerID)
@@ -91,7 +86,7 @@ API.AddCutscenePages = AddCutscenePages;
 --- * `BarOpacity`      - Deckkraft der Leisten
 --- * `BigBars`         - Verwendung großer Leisten
 ---
---- #### Beispiel
+--- #### Example:
 ---
 --- ```lua
 --- AP {

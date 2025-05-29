@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><strong>module.entity.npc_api</strong></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.entity.npc_api</code></h1>
+<p>Ermöglicht es, Siedler wie interaktive Objekte zu verwenden.</p>
+<p>
+<p> NPCs sind Charaktere, die vom Spieler mit einem Helden aktiviert werden und
+ daher mit ihnen sprechen. Ganz wie interaktive Objekte kann eine Aktion
+ aufgerufen werden und einige andere Anpassungen können vorgenommen werden.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#NpcCompose">NpcCompose (_Data)</a></td>
+	<td class="summary">Fügt einer Entität einen NPC hinzu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NpcDispose">NpcDispose (_Data)</a></td>
+	<td class="summary">Entfernt den NPC, löscht aber nicht die Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NpcUpdate">NpcUpdate (_Data)</a></td>
+	<td class="summary">Aktualisiert den NPC mit der Datentabelle.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NpcIsActive">NpcIsActive (_Data)</a></td>
+	<td class="summary">Überprüft, ob der NPC aktiv ist.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NpcTalkedTo">NpcTalkedTo (_Data, _Hero, _PlayerID)</a></td>
+	<td class="summary">Gibt zurück, ob ein NPC gesprochen hat.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NpcHasArrived">NpcHasArrived (_Data)</a></td>
+	<td class="summary">Gibt zurück, ob ein NPC das Ziel erreicht hat.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Report.NpcInteraction">Report.NpcInteraction</a></td>
+	<td class="summary">Jemand spricht mit einem NPC.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "NpcCompose"></a>
+    <strong>NpcCompose (_Data)</strong>
+    </dt>
+    <dd>
+    Fügt einer Entität einen NPC hinzu.
+<p> <h3>Felder der Tabelle</h3><li><code>ScriptName</code>        - Skriptname der Entität (obligatorisch)</li><li><code>Active</code>            - NPC ist aktiv</li><li><code>Callback</code>          - Funktion, die bei der Aktivierung aufgerufen wird</li><li><code>Condition</code>         - Bedingung, die vor der Aktivierung überprüft wird</li><li><code>Type</code>              - Typ des NPCs (1, 2, 3, 4)</li><li><code>Player</code>            - Spieler, die sprechen dürfen</li><li><code>WrongPlayerAction</code> - Nachricht für falsche Spieler</li><li><code>Hero</code>              - Name eines bestimmten Helden</li><li><code>WrongHeroAction</code>   - Nachricht für falsche Helden</li><li><code>Follow</code>            - NPC folgt Helden</li><li><code>FollowHero</code>        - NPC folgt diesem speziellen helden</li><li><code>FollowCallback</code>    - Funktion, die bei Erreichen des Ziels aufgerufen wird</li><li><code>FollowDestination</code> - Ort, zu dem der NPC folgt</li><li><code>FollowDistance</code>    - max. Entfernung bei der ein NPC folgt (Default: 2000)</li><li><code>FollowArriveArea</code>  - min. Entfernung zum Zielort (Default: 500)</li><li><code>FollowSpeed</code>       - Bewegungsgeschwindigkeit (Default: 1.0)</li><li><code>Arrived</code>           - NPC hat Position erreicht</li><p> <h3>Example:</h3> Erstellt einen einfachen NPC.
+ <pre><code class="language-lua"> MyNpc = NpcCompose {
+     ScriptName = "HansWurst",
+     Callback   = function(_Data)
+         local HeroID = CONST_LAST_HERO_INTERACTED;
+         local NpcID = GetID(_Data.ScriptName);
+     end
+ }</code></pre><p> <h3>Example:</h3> Erstellt einen NPC mit Bedingungen.
+ <pre><code class="language-lua"> MyNpc = NpcCompose {
+     ScriptName = "HansWurst",
+     Condition  = function(_Data)
+         local NpcID = GetID(_Data.ScriptName);
+         -- prüfe irgend etwas
+         return MyConditon == true;
+     end
+     Callback  = function(_Data)
+         local HeroID = CONST_LAST_HERO_INTERACTED;
+         local NpcID = GetID(_Data.ScriptName);
+     end
+ }</code></pre><p> <h3>Example:</h3> Begrenzt Spieler für die Aktivierung.
+ <pre><code class="language-lua"> MyNpc = NpcCompose {
+     ScriptName        = "HansWurst",
+     Player            = {1, 2},
+     WrongPlayerAction = function(_Data)
+         AddNote("Ich werde nicht mit dir sprechen!");
+     end,
+     Callback          = function(_Data)
+         local HeroID = CONST_LAST_HERO_INTERACTED;
+         local NpcID = GetID(_Data.ScriptName);
+     end
+ }</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Data</span> <b>table</b> NPC-Daten
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>table</b> NPC NPC-Daten
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NpcDispose"></a>
+    <strong>NpcDispose (_Data)</strong>
+    </dt>
+    <dd>
+    Entfernt den NPC, löscht aber nicht die Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Data</span> <b>table</b> NPC-Daten
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NpcUpdate"></a>
+    <strong>NpcUpdate (_Data)</strong>
+    </dt>
+    <dd>
+    Aktualisiert den NPC mit der Datentabelle.
+<p> <h3>Felder der Tabelle</h3><li><code>ScriptName</code>        - Skriptname der Entität (obligatorisch)</li><li><code>Callback</code>          - Funktion, die bei der Aktivierung aufgerufen wird</li><li><code>Condition</code>         - Bedingung, die vor der Aktivierung überprüft wird</li><li><code>Type</code>              - Typ des NPCs (1, 2, 3, 4)</li><li><code>Player</code>            - Spieler, die sprechen dürfen</li><li><code>WrongPlayerAction</code> - Nachricht für falsche Spieler</li><li><code>Hero</code>              - Name eines bestimmten Helden</li><li><code>WrongHeroAction</code>   - Nachricht für falsche Helden</li><li><code>Active</code>            - NPC ist aktiv</li><p> <h3>Example:</h3> Setzt NPC zurück und ändert Aktion.
+ <pre><code class="language-lua"> MyNpc.Active = true;
+ MyNpc.TalkedTo = 0;
+ MyNpc.Callback = function(_Data)
+     -- mach was hier
+ end;
+ NpcUpdate(MyNpc);</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Data</span> <b>table</b> NPC-Daten
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NpcIsActive"></a>
+    <strong>NpcIsActive (_Data)</strong>
+    </dt>
+    <dd>
+    Überprüft, ob der NPC aktiv ist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Data</span> <b>table</b> NPC-Daten
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Active NPC ist aktiv
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NpcTalkedTo"></a>
+    <strong>NpcTalkedTo (_Data, _Hero, _PlayerID)</strong>
+    </dt>
+    <dd>
+    Gibt zurück, ob ein NPC gesprochen hat.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Data</span> <b>table</b> NPC-Daten
+        </li>
+        <li><span class="parameter">_Hero</span> <b>string</b> Skriptname des Helden
+        </li>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> HasTalked NPC hat gesprochen
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NpcHasArrived"></a>
+    <strong>NpcHasArrived (_Data)</strong>
+    </dt>
+    <dd>
+    Gibt zurück, ob ein NPC das Ziel erreicht hat.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Data</span> <b>table</b> NPC-Daten
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> HasArrived NPC ist eingetroffen
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Report.NpcInteraction"></a>
+    <strong>Report.NpcInteraction</strong>
+    </dt>
+    <dd>
+    Jemand spricht mit einem NPC.
+<p> <h3>Parameters:</h3><li><code>NpcEntityID</code>  - ID des NPCs</li><li><code>HeroEntityID</code> - ID des Helden</li>
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -1,3 +1,5 @@
+--- Stellt Behavior für Entscheidungsfragen bereit.
+
 --- Zeight eine einfache Entscheidungsbox an.
 ---
 --- Info: Dieses Behavior ist ein sehr gefährliches Legacy Behavior. Es kann

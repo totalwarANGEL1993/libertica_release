@@ -1,6 +1,4 @@
 --- Adds search functions reguarding entities.
----
-Lib.EntityEvent = Lib.EntityEvent or {};
 
 
 
@@ -98,6 +96,7 @@ API.DropSearchFilter = DropSearchFilter;
 --- -- execute filter
 --- local Results = CommenceEntitySearch("MyFilter");
 --- ```
+--- 
 --- @param _Filter string Name of filter
 --- @return table Results List of entities
 function CommenceEntitySearch(_Filter)

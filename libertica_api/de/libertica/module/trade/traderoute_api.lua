@@ -1,28 +1,15 @@
-Lib.Require("comfort/IsLocalScript");
-Lib.Register("module/trade/TradeRoute_API");
-
 --- Ermöglicht die Einrichtung eines KI-Spielers als Hafen realistischer.
 --- 
 --- #### Was ein Hafen tut
---- * Schiffe fahren zum Hafen und liefern Waren von einer Handelsroute
----   (Schiffe bewegen sich schneller als gewöhnlich)
---- * Ein Hafen kann von mehreren Handelswegen bedient werden
---- * Bei der Ankunft fügt das Schiff seine Waren zu den bestehenden Angeboten hinzu
---- * Wenn die Angebotsmenge 4 übersteigt, werden die ältesten Angebote entfernt
----   (Wenn Angebote ausverkauft sind, werden sie entfernt)
---- * Wenn die KI zerstört wird, werden alle Schiffe und Routen gelöscht
+--- <li>Schiffe fahren zum Hafen und liefern Waren von einer Handelsroute (Schiffe bewegen sich schneller als gewöhnlich)</li>
+--- <li>Ein Hafen kann von mehreren Handelswegen bedient werden</li>
+--- <li>Bei der Ankunft fügt das Schiff seine Waren zu den bestehenden Angeboten hinzu</li>
+--- <li>Wenn die Angebotsmenge 4 übersteigt, werden die ältesten Angebote entfernt (Wenn Angebote ausverkauft sind, werden sie entfernt)</li>
+--- <li>Wenn die KI zerstört wird, werden alle Schiffe und Routen gelöscht</li>
 --- 
 --- #### Was ein Hafen nicht tut
---- * Keine automatischen Diplomatieänderungen, wenn ein Schiff ankommt
---- * Spamming des Spielers mit Informationsnachrichten
----
---- #### Berichte
---- * `Report.TradeShipSpawned` - Ein Handelsschiff wurde erzeugt
---- * `Report.TradeShipArrived` - Ein Handelsschiff ist in einem Hafen angekommen
---- * `Report.TradeShipLeft` - Ein Handelsschiff hat einen Hafen verlassen
---- * `Report.TradeShipDespawned` - Ein Handelsschiff wurde entfernt
----
-Lib.TradeRoute = Lib.TradeRoute or {};
+--- <li>Keine automatischen Diplomatieänderungen, wenn ein Schiff ankommt</li>
+--- <li>Spamming des Spielers mit Informationsnachrichten</li>
 
 
 
@@ -50,7 +37,7 @@ API.DisposeHarbor = DisposeHarbor;
 --- * `Duration` - Ankerzeit des Schiffes in Sekunden
 --- * `Interval` - Zeit zwischen Schiffsbesuchen
 --- 
---- #### Beispiel:
+--- #### Example:
 --- ```lua
 --- AddTradeRoute(
 ---     2,
@@ -84,7 +71,7 @@ API.AddTradeRoute = AddTradeRoute;
 
 --- Ändert die Angebote einer bestehenden Handelsroute.
 --- 
---- #### Beispiel:
+--- #### Example:
 --- ```lua
 --- ChangeTradeRouteGoods(
 ---     2,
@@ -120,7 +107,7 @@ API.RemoveTradeRoute = RemoveTradeRoute;
 --- oder nicht (Bekannt). Außerdem kann der fahrende Händler nur eine Route
 --- haben und wird Standardnachrichten zum verbleib des Schiffs senden.
 --- 
---- #### Felder der Handelsroute:
+--- #### Aufbau Handelsroute:
 --- * `PlayerID` - ID des Spielers
 --- * `Path` - Liste der Wegpunkte
 --- * `Offers` - Liste der Angebote (Format: {_Type, _Amount})
@@ -129,7 +116,7 @@ API.RemoveTradeRoute = RemoveTradeRoute;
 --- * `Interval` - Zeit zwischen Schiffsbesuchen
 --- * `Message` - Benachrichtungungen über Schiff ein-/ausschalten
 --- 
---- #### Beispiel:
+--- #### Example:
 --- ```lua
 --- InitTravelingSalesman{
 ---     PlayerID   = 2,
@@ -183,7 +170,7 @@ API.ChangeTravelingSalesmanGoods = ChangeTravelingSalesmanGoods;
 
 --- Ein Schiff wurde am Anfang des Weges der Handelsroute erzeugt.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_PlayerID` - PlayerID des Hafens
 --- * `_RouteName` - Kennung der Route
 --- * `_ShipID` - ID des Schiffes
@@ -191,7 +178,7 @@ Report.TradeShipSpawned = anyInteger;
 
 --- Ein Schiff ist in einem Hafen angekommen.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_PlayerID` - PlayerID des Hafens
 --- * `_RouteName` - Kennung der Route
 --- * `_ShipID` - ID des Schiffes
@@ -199,7 +186,7 @@ Report.TradeShipArrived = anyInteger;
 
 --- Ein Schiff hat einen Hafen verlassen.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_PlayerID` - PlayerID des Hafens
 --- * `_RouteName` - Kennung der Route
 --- * `_ShipID` - ID des Schiffes
@@ -207,7 +194,7 @@ Report.TradeShipLeft = anyInteger;
 
 --- Ein Schiff wurde am Ende des Weges der Handelsroute entfernt.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_PlayerID` - PlayerID des Hafens
 --- * `_RouteName` - Kennung der Route
 --- * `_ShipID` - ID des Schiffes

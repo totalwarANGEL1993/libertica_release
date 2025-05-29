@@ -1,5 +1,4 @@
 --- Adds additional functionality to control access to loading and saving.
-Lib.Core.Save = {};
 
 --- Deactivates the autosave of the History Edition.
 --- @param _Flag boolean Auto save is disabled

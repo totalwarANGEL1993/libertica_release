@@ -1,6 +1,4 @@
 --- Allows to add notes to a quest.
---- 
-Lib.QuestJornal = Lib.QuestJornal or {};
 
 
 

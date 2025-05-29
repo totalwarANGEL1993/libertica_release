@@ -1,4 +1,6 @@
 --- Konvertiert die Hexadezimaldarstellung in Farbwerte.
+
+--- Konvertiert die Hexadezimaldarstellung in Farbwerte.
 --- @param _Hex string Hexadezimaldarstellung
 --- @return integer Red Rot 
 --- @return integer Green Grün 

@@ -1,4 +1,6 @@
 --- Bewegt eine Entität zu einer Position relativ zur Zielposition.
+
+--- Bewegt eine Entität zu einer Position relativ zur Zielposition.
 --- @param _Entity any Zu bewegende Entität
 --- @param _Target any Zielposition
 --- @param _Distance integer Entfernung zum Ziel

@@ -1,0 +1,607 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><strong>module.ui.uieffects_api</strong></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.ui.uieffects_api</code></h1>
+<p>Fügt verschiedene Effekte für das Interface hinzu.</p>
+<p></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#ActivateColoredScreen">ActivateColoredScreen (_PlayerID)</a></td>
+	<td class="summary">Ermöglicht das Anzeigen eines schwarzen Hintergrunds hinter der Benutzeroberfläche und über der Spielwelt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DeactivateColoredScreen">DeactivateColoredScreen (_PlayerID)</a></td>
+	<td class="summary">Versteckt den schwarzen Bildschirm.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ActivateImageScreen">ActivateImageScreen (_PlayerID, _Image, _Red, _Green, _Blue, _Alpha)</a></td>
+	<td class="summary">Zeigt eine Vollbildgrafik über der Spielwelt und unterhalb der Benutzeroberfläche an.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DeactivateImageScreen">DeactivateImageScreen (_PlayerID)</a></td>
+	<td class="summary">Versteckt das Vollbildbild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ActivateNormalInterface">ActivateNormalInterface (_PlayerID)</a></td>
+	<td class="summary">Zeigt die normale Benutzeroberfläche des Spiels an.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DeactivateNormalInterface">DeactivateNormalInterface (_PlayerID)</a></td>
+	<td class="summary">Versteckt die normale Benutzeroberfläche des Spiels.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#StartCinematicEvent">StartCinematicEvent (_Name, _PlayerID)</a></td>
+	<td class="summary">Propagiert den Beginn eines Kinoveranstaltung.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FinishCinematicEvent">FinishCinematicEvent (_Name, _PlayerID)</a></td>
+	<td class="summary">Propagiert das Ende einer Kinoveranstaltung.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetCinematicEvent">GetCinematicEvent (_Identifier, _PlayerID)</a></td>
+	<td class="summary">Gibt den Zustand des Kinoevent zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#IsCinematicEventActive">IsCinematicEventActive (_PlayerID)</a></td>
+	<td class="summary">Prüft ob gerade ein Kinoevent für den Spieler aktiv ist.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#StartTypewriter">StartTypewriter (_Data)</a></td>
+	<td class="summary">Zeigt einen Text byte für byte an.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Report.CinematicActivated">Report.CinematicActivated</a></td>
+	<td class="summary">Ein Kinoevent, empfangen von einem bestimmten Spieler, startet.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.CinematicConcluded">Report.CinematicConcluded</a></td>
+	<td class="summary">Ein Kinoevent, empfangen von einem bestimmten Spieler, endet.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.GameInterfaceShown">Report.GameInterfaceShown</a></td>
+	<td class="summary">Die normale Oberfläche wird dem Spieler angezeigt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.GameInterfaceHidden">Report.GameInterfaceHidden</a></td>
+	<td class="summary">Die normale Oberfläche wird vor dem Spieler versteckt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.ImageScreenShown">Report.ImageScreenShown</a></td>
+	<td class="summary">Der Vollbildhintergrund wird dem Spieler angezeigt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.ImageScreenHidden">Report.ImageScreenHidden</a></td>
+	<td class="summary">Der Vollbildhintergrund wird vor dem Spieler versteckt.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "ActivateColoredScreen"></a>
+    <strong>ActivateColoredScreen (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Ermöglicht das Anzeigen eines schwarzen Hintergrunds hinter der Benutzeroberfläche und über der Spielwelt.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DeactivateColoredScreen"></a>
+    <strong>DeactivateColoredScreen (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Versteckt den schwarzen Bildschirm.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ActivateImageScreen"></a>
+    <strong>ActivateImageScreen (_PlayerID, _Image, _Red, _Green, _Blue, _Alpha)</strong>
+    </dt>
+    <dd>
+    Zeigt eine Vollbildgrafik über der Spielwelt und unterhalb der Benutzeroberfläche an.
+<p> Die Grafik muss im 16:9-Format geliefert werden. Für 4:3-Auflösungen wird die Grafik
+ links und rechts zentriert, um das Format anzupassen.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Image</span> <b>string</b>     Pfad zur Grafik
+        </li>
+        <li><span class="parameter">_Red</span>
+         integer?     (Optional) Rotwert (Standard: 255)
+        </li>
+        <li><span class="parameter">_Green</span>
+         integer?   (Optional) Grünwert (Standard: 255)
+        </li>
+        <li><span class="parameter">_Blue</span>
+         integer?    (Optional) Blauwert (Standard: 255)
+        </li>
+        <li><span class="parameter">_Alpha</span>
+         integer?   (Optional) Alphawert (Standard: 255)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DeactivateImageScreen"></a>
+    <strong>DeactivateImageScreen (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Versteckt das Vollbildbild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ActivateNormalInterface"></a>
+    <strong>ActivateNormalInterface (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Zeigt die normale Benutzeroberfläche des Spiels an.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DeactivateNormalInterface"></a>
+    <strong>DeactivateNormalInterface (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Versteckt die normale Benutzeroberfläche des Spiels.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "StartCinematicEvent"></a>
+    <strong>StartCinematicEvent (_Name, _PlayerID)</strong>
+    </dt>
+    <dd>
+    Propagiert den Beginn eines Kinoveranstaltung.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Name</span> <b>string</b>  Bezeichner
+        </li>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FinishCinematicEvent"></a>
+    <strong>FinishCinematicEvent (_Name, _PlayerID)</strong>
+    </dt>
+    <dd>
+    Propagiert das Ende einer Kinoveranstaltung.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Name</span> <b>string</b>  Bezeichner
+        </li>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetCinematicEvent"></a>
+    <strong>GetCinematicEvent (_Identifier, _PlayerID)</strong>
+    </dt>
+    <dd>
+    Gibt den Zustand des Kinoevent zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Identifier</span> <b>any</b> Bezeichner oder ID
+        </li>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> State Zustand des Kinoevent
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "IsCinematicEventActive"></a>
+    <strong>IsCinematicEventActive (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Prüft ob gerade ein Kinoevent für den Spieler aktiv ist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Active Kinoevent ist aktiv
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "StartTypewriter"></a>
+    <strong>StartTypewriter (_Data)</strong>
+    </dt>
+    <dd>
+    Zeigt einen Text byte für byte an.
+<p> Wenn bei Spielstart verwendet, beginnt der Text nach dem Laden der Karte. Wenn ein anderes
+ Kinoevent läuft, wartet der Typewriter auf Abschluss.
+<p> Kontrollzeichen wie {cr} werden als ein Token ausgewertet und als atomares Token behandelt
+ und sofort angezeigt. Mehr als 1 Leerzeichen hintereinander werden automatisch auf 1 Leerzeichen
+ abgeschnitten (durch den Spiel-Engine).
+<p> <h3>Felder der Tabelle</h3><li><code>Text</code>         - Anzuzeigender Text</li><li><code>Name</code>         - (Optional) Name für das Ereignis</li><li><code>PlayerID</code>     - (Optional) Spieler, dessen Text angezeigt wird</li><li><code>Callback</code>     - (Optional) Rückruffunktion</li><li><code>TargetEntity</code> - (Optional) Entität, auf die die Kamera fokussiert ist</li><li><code>CharSpeed</code>    - (Optional) Faktor der Schreibgeschwindigkeit (Standard: 1.0)</li><li><code>Waittime</code>     - (Optional) Anfangswartezeit vor dem Schreiben</li><li><code>Opacity</code>      - (Optional) Deckkraft des Hintergrunds (Standard: 1.0)</li><li><code>Color</code>        - (Optional) Hintergrundfarbe (Standard: {R= 0, G= 0, B= 0})</li><li><code>Image</code>        - (Optional) Hintergrundbild (muss im 16:9-Format sein)</li><p> <h3>Example:</h3> <pre><code class="language-lua"> local EventName = StartTypewriter {
+     PlayerID = 1,
+     Text     = "Lorem ipsum dolor sit amet, consetetur "..
+                "sadipscing elitr, sed diam nonumy eirmod "..
+                "tempor invidunt ut labore et dolore magna "..
+                "aliquyam erat, sed diam voluptua.",
+     Callback = function(_Data)
+     end
+ };</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Data</span> <b>table</b> Daten-Tabelle
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string? EventName Name des Ereignisses
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Report.CinematicActivated"></a>
+    <strong>Report.CinematicActivated</strong>
+    </dt>
+    <dd>
+    Ein Kinoevent, empfangen von einem bestimmten Spieler, startet.
+<p> <h3>Parameters:</h3><li><code>EventID</code>  - ID des Kinoevent</li><li><code>PlayerID</code> - ID des Empfängers</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.CinematicConcluded"></a>
+    <strong>Report.CinematicConcluded</strong>
+    </dt>
+    <dd>
+    Ein Kinoevent, empfangen von einem bestimmten Spieler, endet.
+
+ <h3>Parameters:</h3><li><code>EventID</code>  - ID des Kinoevent</li><li><code>PlayerID</code> - ID des Empfängers</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.GameInterfaceShown"></a>
+    <strong>Report.GameInterfaceShown</strong>
+    </dt>
+    <dd>
+    Die normale Oberfläche wird dem Spieler angezeigt.
+<p> <h3>Parameters:</h3><li><code>PlayerID</code> - ID des Spielers</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.GameInterfaceHidden"></a>
+    <strong>Report.GameInterfaceHidden</strong>
+    </dt>
+    <dd>
+    Die normale Oberfläche wird vor dem Spieler versteckt.
+
+ <h3>Parameters:</h3><li><code>PlayerID</code> - ID des Spielers</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.ImageScreenShown"></a>
+    <strong>Report.ImageScreenShown</strong>
+    </dt>
+    <dd>
+    Der Vollbildhintergrund wird dem Spieler angezeigt.
+<p> <h3>Parameters:</h3><li><code>PlayerID</code> - ID des Spielers</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.ImageScreenHidden"></a>
+    <strong>Report.ImageScreenHidden</strong>
+    </dt>
+    <dd>
+    Der Vollbildhintergrund wird vor dem Spieler versteckt.
+
+ <h3>Parameters:</h3><li><code>PlayerID</code> - ID des Spielers</li>
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

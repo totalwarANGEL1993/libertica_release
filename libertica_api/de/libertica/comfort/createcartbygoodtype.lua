@@ -1,4 +1,6 @@
 --- Erzeugt einen passenden Karren zum Warentyp.
+
+--- Erzeugt einen passenden Karren zum Warentyp.
 --- @param _PlayerID integer Spieler-ID des Besitzers
 --- @param _Position any Position
 --- @param _GoodType integer Typ der Ware

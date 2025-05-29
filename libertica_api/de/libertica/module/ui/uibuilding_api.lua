@@ -1,13 +1,4 @@
 --- Ermöglicht das Hinzufügen von bis zu 6 zusätzlichen Schaltflächen in Gebäudemenüs.
----
---- #### Reports
---- * `Report.CancelUpgradeClicked` - Ein Ausbau wurde abgebrochen
---- * `Report.StartUpgradeClicked` - Ein Ausbau wurde gestartet
---- * `Report.FestivalClicked` - Der Button "Fest feiern" wurde geklickt
---- * `Report.SermonClicked` - Der Button "Predigt abhalten" wurde geklickt
---- * `Report.TheatrePlayClicked` - Der Button "Vorführung beginnen" wurde geklickt
----
-Lib.UIBuilding = Lib.UIBuilding or {};
 
 
 
@@ -25,9 +16,9 @@ API.AddBuildingButtonAtPosition = AddBuildingButtonAtPosition;
 
 --- Erstellt eine Gebäudeschaltfläche.
 ---
---- #### Beispiele
+--- #### Example:
+--- Eine einfache Schaltfläche.
 --- ```lua
---- -- Beispiel #1: Eine einfache Schaltfläche
 --- SpecialButtonID = AddBuildingButton(
 ---     -- Aktion
 ---     function(_WidgetID, _BuildingID)
@@ -172,66 +163,66 @@ API.DeactivateSingleStopBuilding = DeactivateSingleStopBuilding;
 
 --- Der Spieler hat ein Gebäude zurückgebaut.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `EntityID` - ID des Gebäudes
 Report.DowngradeBuilding = anyInteger;
 
 --- Der Spieler hat eine Ware gesperrt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID des Spielers
 --- * `GoodType` - Typ der Ware
 Report.LockGoodType = anyInteger;
 
 --- Der Spieler hat eine Wahre freigegeben.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID des Spielers
 --- * `GoodType` - Typ der Ware
 Report.UnlockGoodType = anyInteger;
 
 --- Der Spieler hat die Produktion im Gebäude fortgeführt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `EntityID` - ID des Gebäudes
 Report.ResumeBuilding = anyInteger;
 
 --- Der Spieler hat die Produktion im Gebäude angehalten.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `EntityID` - ID des Gebäudes
 Report.YieldBuilding = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Upgrade abbrechen" geklickt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `EntityID` - ID des Gebäudes
 --- * `PlayerID` - ID des Besitzers
 Report.CancelUpgradeClicked = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Upgrade starten" geklickt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `EntityID` - ID des Gebäudes
 --- * `PlayerID` - ID des Besitzers
 Report.StartUpgradeClicked = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Festival starten" geklickt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID des Spielers
 --- * `Type`     - Festivaltyp
 Report.FestivalClicked = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Predigt starten" geklickt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID des Spielers
 Report.SermonClicked = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Theaterstück starten" geklickt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `EntityID` - ID des Gebäudes
 --- * `PlayerID` - ID des Besitzers
 Report.TheatrePlayClicked = anyInteger;

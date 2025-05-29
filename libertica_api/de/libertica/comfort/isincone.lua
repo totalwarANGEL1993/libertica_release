@@ -1,4 +1,6 @@
 --- Gibt zurück, ob die Position innerhalb eines Kegels ist.
+
+--- Gibt zurück, ob die Position innerhalb eines Kegels ist.
 --- @param _Position table Zu prüfende Position
 --- @param _Center table Zentrum des Kegels
 --- @param _MiddleAlpha number Middle Alpha

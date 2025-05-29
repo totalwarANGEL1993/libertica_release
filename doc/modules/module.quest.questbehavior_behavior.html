@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><strong>module.quest.questbehavior_behavior</strong></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.quest.questbehavior_behavior</code></h1>
+<p>Fügt einige weitere Standard-Behavior hinzu.</p>
+<p></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Goal_MoveToPosition">Goal_MoveToPosition (_ScriptName, _Target, _Distance, _UseMarker)</a></td>
+	<td class="summary">Eine Entität muss zu einer Position bewegt werden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Goal_AmmunitionAmount">Goal_AmmunitionAmount (_ScriptName, _Relation, _Amount)</a></td>
+	<td class="summary">Eine Kriegsmaschine muss eine bestimmte Menge Munition haben.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Goal_CityReputation">Goal_CityReputation (_Reputation)</a></td>
+	<td class="summary">Es muss ein bestimmter Ruf der Stadt erreicht werden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Goal_DestroySpawnedEntities">Goal_DestroySpawnedEntities (_SpawnPoint, _Amount, _Prefixed)</a></td>
+	<td class="summary">Gespawnte Feinde oder Raubtiere müssen beseitigt werden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Goal_StealGold">Goal_StealGold (_Amount, _PlayerID, _CheatEarnings, _ShowProgress)</a></td>
+	<td class="summary">Es muss eine bestimmte Menge Gold durch Diebstahl verdient werden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Goal_StealFromBuilding">Goal_StealFromBuilding (_ScriptName, _CheatEarnings)</a></td>
+	<td class="summary">Ein Gebäude muss von einem Dieb bestohlen werden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Goal_SpyOnBuilding">Goal_SpyOnBuilding (_ScriptName, _CheatEarnings, _DeleteThief)</a></td>
+	<td class="summary">Ein Gebäude muss mit einem Dieb infiltirert werden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Goal_DestroySoldiers">Goal_DestroySoldiers (_AttackerPlayerID, _AttackedPlayerID, _Amount)</a></td>
+	<td class="summary">Ein Spieler muss Soldaten eines anderen Spielers besiegen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reprisal_SetPosition">Reprisal_SetPosition (_ScriptName, _Target, _LookAt, _Distance)</a></td>
+	<td class="summary">Versetzt die Entität auf die Position einer anderen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reprisal_ChangePlayer">Reprisal_ChangePlayer (_ScriptName, _PlayerID)</a></td>
+	<td class="summary">Ändert den Besitzer der Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reprisal_SetVisible">Reprisal_SetVisible (_ScriptName, _Visible)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit der Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reprisal_SetVulnerability">Reprisal_SetVulnerability (_ScriptName, _Vulnerable)</a></td>
+	<td class="summary">Andert den Verwundbarkeitsstatus der Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reprisal_SetModel">Reprisal_SetModel (_ScriptName, _Model)</a></td>
+	<td class="summary">Ändert das Model der Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reward_SetPosition">Reward_SetPosition (_ScriptName, _Target, _LookAt, _Distance)</a></td>
+	<td class="summary">Versetzt eine Entität auf die Position einer anderen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reward_ChangePlayer">Reward_ChangePlayer (_ScriptName, _PlayerID)</a></td>
+	<td class="summary">Ändert den Besitzer einer Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reward_MoveToPosition">Reward_MoveToPosition (_ScriptName, _Destination, _Distance, _Angle)</a></td>
+	<td class="summary">Bewegt eine Entität zu einer anderen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reward_VictoryWithParty">Reward_VictoryWithParty ()</a></td>
+	<td class="summary">Lässt den Empfänger das Spiel gewinnen und Erzeugt eine Siegesfeier auf
+ dem Marktplatz.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reward_SetVisible">Reward_SetVisible (_ScriptName, _Visible)</a></td>
+	<td class="summary">Andert die Sichtbarkeit der Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reward_SetVulnerability">Reward_SetVulnerability (_ScriptName, _Vulnerable)</a></td>
+	<td class="summary">Andert den Verwundbarkeitsstatus der Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reward_SetModel">Reward_SetModel (_ScriptName, _Model)</a></td>
+	<td class="summary">Ändert das Model der Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Reward_AI_SetEntityControlled">Reward_AI_SetEntityControlled (_ScriptName, _Controlled)</a></td>
+	<td class="summary">Setzt, ob die Entität von der KI kontrolliert wird.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Trigger_AmmunitionDepleted">Trigger_AmmunitionDepleted (_ScriptName)</a></td>
+	<td class="summary">Löst den Auftrag aus, sobald die Munition aufgebraucht ist.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Goal_MoveToPosition"></a>
+    <strong>Goal_MoveToPosition (_ScriptName, _Target, _Distance, _UseMarker)</strong>
+    </dt>
+    <dd>
+    Eine Entität muss zu einer Position bewegt werden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Target</span> <b>string</b> Skriptname des Ziel
+        </li>
+        <li><span class="parameter">_Distance</span> <b>integer</b> Entfernung
+        </li>
+        <li><span class="parameter">_UseMarker</span> <b>boolean</b> Marker anzeigen
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Goal_AmmunitionAmount"></a>
+    <strong>Goal_AmmunitionAmount (_ScriptName, _Relation, _Amount)</strong>
+    </dt>
+    <dd>
+    Eine Kriegsmaschine muss eine bestimmte Menge Munition haben.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Relation</span> <b>string</b> Relationszeichen
+        </li>
+        <li><span class="parameter">_Amount</span> <b>integer</b> Menge
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Goal_CityReputation"></a>
+    <strong>Goal_CityReputation (_Reputation)</strong>
+    </dt>
+    <dd>
+    Es muss ein bestimmter Ruf der Stadt erreicht werden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Reputation</span> <b>integer</b>         </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Goal_DestroySpawnedEntities"></a>
+    <strong>Goal_DestroySpawnedEntities (_SpawnPoint, _Amount, _Prefixed)</strong>
+    </dt>
+    <dd>
+    Gespawnte Feinde oder Raubtiere müssen beseitigt werden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_SpawnPoint</span> <b>string</b> Skriptname des Spawnpoint
+        </li>
+        <li><span class="parameter">_Amount</span> <b>integer</b> Menge
+        </li>
+        <li><span class="parameter">_Prefixed</span> <b>boolean</b> Skriptname ist Prefix
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Goal_StealGold"></a>
+    <strong>Goal_StealGold (_Amount, _PlayerID, _CheatEarnings, _ShowProgress)</strong>
+    </dt>
+    <dd>
+    Es muss eine bestimmte Menge Gold durch Diebstahl verdient werden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Amount</span> <b>integer</b> Menge
+        </li>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> Zu bestehlender Spieler (-1 = alle)
+        </li>
+        <li><span class="parameter">_CheatEarnings</span> <b>boolean</b> Einnahmen generieren
+        </li>
+        <li><span class="parameter">_ShowProgress</span> <b>boolean</b> Fortschritt anzeigen
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Goal_StealFromBuilding"></a>
+    <strong>Goal_StealFromBuilding (_ScriptName, _CheatEarnings)</strong>
+    </dt>
+    <dd>
+    Ein Gebäude muss von einem Dieb bestohlen werden.  Dazu muss der Dieb die
+ Einnahmen erst zurückbringen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_CheatEarnings</span> <b>boolean</b> Einnahmen generieren
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Goal_SpyOnBuilding"></a>
+    <strong>Goal_SpyOnBuilding (_ScriptName, _CheatEarnings, _DeleteThief)</strong>
+    </dt>
+    <dd>
+    Ein Gebäude muss mit einem Dieb infiltirert werden.  Sobald der Dieb das
+ Gebäude betritt, ist das Ziel erreicht.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_CheatEarnings</span> <b>boolean</b> Einnahmen generieren
+        </li>
+        <li><span class="parameter">_DeleteThief</span> <b>boolean</b> Dieb löschen
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Goal_DestroySoldiers"></a>
+    <strong>Goal_DestroySoldiers (_AttackerPlayerID, _AttackedPlayerID, _Amount)</strong>
+    </dt>
+    <dd>
+    Ein Spieler muss Soldaten eines anderen Spielers besiegen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_AttackerPlayerID</span> <b>integer</b> Angreifender Spieler
+        </li>
+        <li><span class="parameter">_AttackedPlayerID</span> <b>integer</b> Angegriffener Spieler
+        </li>
+        <li><span class="parameter">_Amount</span> <b>integer</b> Menge
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reprisal_SetPosition"></a>
+    <strong>Reprisal_SetPosition (_ScriptName, _Target, _LookAt, _Distance)</strong>
+    </dt>
+    <dd>
+    Versetzt die Entität auf die Position einer anderen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Target</span> <b>string</b> Skriptname des Ziel
+        </li>
+        <li><span class="parameter">_LookAt</span> <b>boolean</b> Ziel anschauen
+        </li>
+        <li><span class="parameter">_Distance</span> <b>integer</b> Entfernung
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reprisal_ChangePlayer"></a>
+    <strong>Reprisal_ChangePlayer (_ScriptName, _PlayerID)</strong>
+    </dt>
+    <dd>
+    Ändert den Besitzer der Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reprisal_SetVisible"></a>
+    <strong>Reprisal_SetVisible (_ScriptName, _Visible)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit der Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Visible</span> <b>boolean</b> Ist sichtbar
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reprisal_SetVulnerability"></a>
+    <strong>Reprisal_SetVulnerability (_ScriptName, _Vulnerable)</strong>
+    </dt>
+    <dd>
+    Andert den Verwundbarkeitsstatus der Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Vulnerable</span> <b>boolean</b> Ist verwundbar
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reprisal_SetModel"></a>
+    <strong>Reprisal_SetModel (_ScriptName, _Model)</strong>
+    </dt>
+    <dd>
+    Ändert das Model der Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Model</span> <b>string</b> Name des Model
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reward_SetPosition"></a>
+    <strong>Reward_SetPosition (_ScriptName, _Target, _LookAt, _Distance)</strong>
+    </dt>
+    <dd>
+    Versetzt eine Entität auf die Position einer anderen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Target</span> <b>string</b> Skriptname des Ziel
+        </li>
+        <li><span class="parameter">_LookAt</span> <b>boolean</b> Ziel anschauen
+        </li>
+        <li><span class="parameter">_Distance</span> <b>integer</b> Entfernung
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reward_ChangePlayer"></a>
+    <strong>Reward_ChangePlayer (_ScriptName, _PlayerID)</strong>
+    </dt>
+    <dd>
+    Ändert den Besitzer einer Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reward_MoveToPosition"></a>
+    <strong>Reward_MoveToPosition (_ScriptName, _Destination, _Distance, _Angle)</strong>
+    </dt>
+    <dd>
+    Bewegt eine Entität zu einer anderen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Destination</span> <b>string</b> Skriptname des Ziel
+        </li>
+        <li><span class="parameter">_Distance</span> <b>integer</b> Entfernung
+        </li>
+        <li><span class="parameter">_Angle</span> <b>integer</b> Winkel
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reward_VictoryWithParty"></a>
+    <strong>Reward_VictoryWithParty ()</strong>
+    </dt>
+    <dd>
+    Lässt den Empfänger das Spiel gewinnen und Erzeugt eine Siegesfeier auf
+ dem Marktplatz.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reward_SetVisible"></a>
+    <strong>Reward_SetVisible (_ScriptName, _Visible)</strong>
+    </dt>
+    <dd>
+    Andert die Sichtbarkeit der Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Visible</span> <b>boolean</b> Ist sichtbar
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reward_SetVulnerability"></a>
+    <strong>Reward_SetVulnerability (_ScriptName, _Vulnerable)</strong>
+    </dt>
+    <dd>
+    Andert den Verwundbarkeitsstatus der Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Vulnerable</span> <b>boolean</b> Ist verwundbar
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reward_SetModel"></a>
+    <strong>Reward_SetModel (_ScriptName, _Model)</strong>
+    </dt>
+    <dd>
+    Ändert das Model der Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Model</span> <b>string</b> Name des Model
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Reward_AI_SetEntityControlled"></a>
+    <strong>Reward_AI_SetEntityControlled (_ScriptName, _Controlled)</strong>
+    </dt>
+    <dd>
+    Setzt, ob die Entität von der KI kontrolliert wird.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+        <li><span class="parameter">_Controlled</span> <b>boolean</b> Entität wird kontrolliert
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Trigger_AmmunitionDepleted"></a>
+    <strong>Trigger_AmmunitionDepleted (_ScriptName)</strong>
+    </dt>
+    <dd>
+    Löst den Auftrag aus, sobald die Munition aufgebraucht ist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ScriptName</span> <b>string</b> Skriptname der Entität
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

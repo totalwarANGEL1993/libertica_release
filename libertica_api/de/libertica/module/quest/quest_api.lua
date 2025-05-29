@@ -7,19 +7,6 @@
 --- Alle Texte eines Quest-Texte können auch String Tables sein. Das Format für
 --- diese Texte ist "FileName/StringName".
 ---
---- #### Debug-Funktionen
---- * Debug_FailQuest(_Name) - lässt einen Quest fehlschlagen
---- * Debug_WinQuest(_Name) - Gewinnt einen Quest
---- * Debug_StartQuest(_Name) - Startet einen Quest
---- * Debug_RestartQuest(_Name) - Setzt einen Quest zurück und startet ihn neu
---- * Debug_StopQuest(_Name) - Unterbricht einen Quest
---- * Debug_FindQuests(_Name) - Sucht mit Quests mit ähnlichen Namen
---- * Debug_FailedQuests() - Listet fehlgeschlagene Quests auf
---- * Debug_StoppedQuests() - Listet abgebrochene Quests auf
---- * Debug_ActiveQuests() - Listet aktive Quests auf
---- * Debug_WonQuests() - Listed gewonnene Quests auf
---- * Debug_WaitingQuests() - Listet nicht ausgelöste Quests auf
----
 Lib.Quest = Lib.Quest or {};
 
 
@@ -27,20 +14,20 @@ Lib.Quest = Lib.Quest or {};
 --- Erstellt eine normale Quest.
 ---
 --- #### Felder der Tabelle
---- * Name:        Eindeutiger Name für die Quest
---- * Sender:      Spieler-ID des Quest-Gebers
---- * Receiver:    Spieler-ID des Quest-Empfängers
---- * Suggestion:  Vorschlagstext des Quest
---- * Success:     Erfolgsmeldung des Quest
---- * Failure:     Fehlermeldung des Quest
---- * Description: Benutzerdefinierte Quest-Beschreibung
---- * Time:        Zeit bis zum automatischen Scheitern
---- * Loop:        Loop-Funktion
---- * Callback:    Rückruffunktion
+--- * `Name`        - Eindeutiger Name für die Quest
+--- * `Sender`      - Spieler-ID des Quest-Gebers
+--- * `Receiver`    - Spieler-ID des Quest-Empfängers
+--- * `Suggestion`  - Vorschlagstext des Quest
+--- * `Success`     - Erfolgsmeldung des Quest
+--- * `Failure`     - Fehlermeldung des Quest
+--- * `Description` - Benutzerdefinierte Quest-Beschreibung
+--- * `Time`        - Zeit bis zum automatischen Scheitern
+--- * `Loop`        - Loop-Funktion
+--- * `Callback`    - Rückruffunktion
 --- 
---- #### Beispiele
+--- #### Example:
+--- Erstellt eine einfache Quest.
 --- ```lua
---- -- Erstellt eine einfache Quest
 --- SetupQuest {
 ---     Name        = "SomeQuestName",
 ---     Suggestion  = "Wir müssen das Kloster finden.",
@@ -51,6 +38,7 @@ Lib.Quest = Lib.Quest or {};
 ---     Trigger_Time(0),
 --- }
 --- ```
+--- 
 --- @param _Data table Quest-Daten
 --- @return string Name Name des Quest
 --- @return number Amount Quest-Betrag
@@ -81,9 +69,9 @@ API.CreateQuest = SetupQuest;
 --- werden. Es können zusätzliche Auslöser hinzugefügt werden (z. B. Auslösen 
 --- auf einem anderen Segment).
 ---
---- #### Beispiele
+--- #### Example:
+--- Erstellt eine verschachtelte Quest.
 --- ```lua
---- -- Erstellt eine verschachtelte Quest
 --- SetupNestedQuest {
 ---     Name        = "Hauptquest",
 ---     Segments    = {

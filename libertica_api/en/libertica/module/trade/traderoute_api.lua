@@ -4,25 +4,15 @@ Lib.Register("module/trade/TradeRoute_API");
 --- Allows to setup a AI player as a harbor more realisticly.
 --- 
 --- #### What a harbor does
---- * Ships will cycle to the port and deliver goods from a trade route
----   (Ships move faster than usual)
---- * A harbor can be served by multiple trade routs
---- * On arrival the ship will add its goods to the existing offers
---- * If the offer amount is exeeding 4 the oldest offers are removed
----   (If offers are sold out they will be removed)
---- * If the AI is destroyed all ships and routes will be deleted
+--- <li>Ships will cycle to the port and deliver goods from a trade route (Ships move faster than usual)</li>
+--- <li>A harbor can be served by multiple trade routs</li>
+--- <li>On arrival the ship will add its goods to the existing offers</li>
+--- <li>If the offer amount is exeeding 4 the oldest offers are removed (If offers are sold out they will be removed)</li>
+--- <li>If the AI is destroyed all ships and routes will be deleted</li>
 --- 
 --- #### What a harbor does not
---- * No automatic diplomacy changes when a ship arrives
---- * Spaming the player with info messages
----
---- #### Reports
---- * `Report.TradeShipSpawned` - A trade ship spawned
---- * `Report.TradeShipArrived` - A trade ship has arrived at a harbor
---- * `Report.TradeShipLeft` - A trade ship left a harbor
---- * `Report.TradeShipDespawned` - A trade ship despawned
----
-Lib.TradeRoute = Lib.TradeRoute or {};
+--- <li>No automatic diplomacy changes when a ship arrives</li>
+--- <li>Spaming the player with info messages</li>
 
 
 
@@ -183,7 +173,7 @@ API.ChangeTravelingSalesmanGoods = ChangeTravelingSalesmanGoods;
 
 --- A ship has spawned at the start of the trade route path.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_PlayerID` - PlayerID of harbor
 --- * `_RouteName` - Identifier of the route
 --- * `_ShipID` - ID of the ship
@@ -191,7 +181,7 @@ Report.TradeShipSpawned = anyInteger;
 
 --- A ship has arrived at a harbor.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_PlayerID` - PlayerID of harbor
 --- * `_RouteName` - Identifier of the route
 --- * `_ShipID` - ID of the ship
@@ -199,7 +189,7 @@ Report.TradeShipArrived = anyInteger;
 
 --- A ship has left a harbor.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_PlayerID` - PlayerID of harbor
 --- * `_RouteName` - Identifier of the route
 --- * `_ShipID` - ID of the ship
@@ -207,7 +197,7 @@ Report.TradeShipLeft = anyInteger;
 
 --- A ship has despawned at the end of the trade route path.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_PlayerID` - PlayerID of harbor
 --- * `_RouteName` - Identifier of the route
 --- * `_ShipID` - ID of the ship

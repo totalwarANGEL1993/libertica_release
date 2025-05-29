@@ -1,4 +1,6 @@
 --- Schickt einen Wagen mit einer Ware zu einem Spieler.
+
+--- Schickt einen Wagen mit einer Ware zu einem Spieler.
 --- @param _Position any ID oder Skriptname
 --- @param _PlayerID integer Spieler-ID des Empfängers
 --- @param _GoodType integer Typ der Ware

@@ -3,13 +3,10 @@
 --- Dialoge können verwendet werden, um Gespräche zwischen Charakteren unter Verwendung der
 --- animierten Köpfe in einem funktionsgestrippten Briefing zu erstellen.
 ---
-Lib.DialogSystem = Lib.DialogSystem or {};
 
 
 
 --- Startet einen Dialog.
----
---- #### Einstellungen
 ---
 --- Mögliche Felder für die Dialogtabelle:
 --- * `Starting`                - Funktion, die aufgerufen wird, wenn der Dialog gestartet wird              
@@ -22,7 +19,7 @@ Lib.DialogSystem = Lib.DialogSystem or {};
 --- * `EnableBorderPins`        - Anzeige der Grenznadeln während des Dialogs
 --- * `HideNotes`               - Nachrichten nicht anzeigen
 ---
---- #### Beispiel
+--- #### Example
 ---
 --- ```lua
 --- function Dialog1(_Name, _PlayerID)
@@ -79,7 +76,6 @@ API.AddDialogPages = AddDialogPages;
 
 --- Erstellt eine Seite.
 ---
---- #### Dialogseite
 --- Mögliche Felder für die Seite:
 ---
 --- * `Actor`           - (optional) Spieler-ID des Sprechers
@@ -95,7 +91,7 @@ API.AddDialogPages = AddDialogPages;
 --- * `FaderAlpha`      - (optional) Maskenalpha
 --- * `MC`              - (optional) Tabelle mit Auswahlmöglichkeiten zum Verzweigen in Dialogen
 ---
---- *-> Beispiel #1*
+--- *→ Beispiel #1*
 ---
 --- #### Flusssteuerung
 --- In einem Dialog kann der Spieler gezwungen werden, eine Auswahl zu treffen, die
@@ -104,35 +100,35 @@ API.AddDialogPages = AddDialogPages;
 --- für mehr Kontrolle über den Fluss. Solche Funktionen müssen einen
 --- Seitennamen zurückgeben.
 ---
---- *-> Beispiel #2*
+--- *→ Beispiel #2*
 ---
 --- Darüber hinaus kann jede Funktion markiert werden, um entfernt zu werden, wenn sie verwendet wird
 --- und nicht erneut angezeigt werden, wenn die Seite erneut betreten wird.
 ---
---- *-> Beispiel #3*
+--- *→ Beispiel #3*
 ---
 --- Außerdem können Seiten ausgeblendet werden, indem eine Funktion bereitgestellt wird, um Bedingungen zu überprüfen.
 ---
---- *-> Beispiel #4*
+--- *→ Beispiel #4*
 ---
 --- Wenn ein Dialog verzweigt ist, muss er manuell beendet werden, nachdem ein Zweig abgeschlossen ist
 --- oder es zeigt einfach die nächste Seite an. Um einen Dialog zu beenden, muss eine leere Seite
 --- hinzugefügt werden.
 ---
---- *-> Beispiel #5*
+--- *→ Beispiel #5*
 ---
 --- Alternativ kann der Dialog an einer anderen Seite fortgesetzt werden. Dies ermöglicht es, zu erstellen
 --- sich wiederholende Strukturen innerhalb eines Dialogs.
 ---
---- *-> Beispiel #6*
+--- *→ Beispiel #6*
 ---
 --- Um ausgewählte Antworten zu einem späteren Zeitpunkt zu erhalten, können die Auswahlmöglichkeiten in einer
 --- globalen Variable entweder in einem Optionsrückruf oder in der fertigen Funktion gespeichert werden. Die
 --- zurückgegebene Zahl ist die ID der Antwort.
 ---
---- *-> Beispiel #7*
+--- *→ Beispiel #7*
 ---
---- #### Beispiele
+--- #### Example:
 ---
 --- * Beispiel #1: Eine einfache Seite
 --- ```lua
@@ -222,7 +218,7 @@ end
 --- * `DialogCamera`   - Verwendung der Nahkamera
 --- * `Action`         - (Optional) Aktion, wenn die Seite angezeigt wird
 ---
---- #### Beispiele
+--- #### Example:
 ---
 --- ```lua
 --- -- Totalaufnahme

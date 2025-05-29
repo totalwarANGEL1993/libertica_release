@@ -1,3 +1,5 @@
+--- Fügt einige weitere Standard-Behavior hinzu.
+
 --- Eine Entität muss zu einer Position bewegt werden.
 --- @param _ScriptName string Skriptname der Entität
 --- @param _Target string Skriptname des Ziel

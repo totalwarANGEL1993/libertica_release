@@ -3,7 +3,7 @@
 --- Das Territorium unter der interaktiven Baustelle muss dem Spieler gehören,
 --- der das Gebäude errichten wird.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `ScriptName`            - Skriptname der Position
 --- * `PlayerID`              - Besitzer des Gebäudes
 --- * `Type`                  - Typ des Gebäudes
@@ -23,7 +23,7 @@ API.CreateIOBuildingSite = CreateIOBuildingSite;
 
 --- Eine Baustelle wurde fertiggestellt.
 ---
---- #### Parameter
+--- #### Parameters:
 --- - `ScriptName` - Skriptname der Baustelle
 --- * `PlayerID`   - ID des aktivierenden Spielers
 --- * `BuildingID` - ID des gebauten Gebäude

@@ -3,12 +3,6 @@
 --- Warehouses are modified tradeposts where the player can buy goods without
 --- an AI player involved. But goods can not be sold to the warehouse. Payment
 --- can be set to any type of resource.
----
---- #### Reports
---- * `Report.WarehouseOfferClicked` - The player clicked an offer.
---- * `Report.WarehouseOfferBought` - The player bought an offer.
----
-Lib.Warehouse = Lib.Warehouse or {};
 
 
 
@@ -110,7 +104,7 @@ API.SetWarehouseInflation = SetWarehouseInflation;
 --- @return table Offer Data of offer
 --- @return integer Index Index in table
 function GetWarehouseOfferByID(_Name, _ID)
-    return 0;
+    return {}, 0;
 end
 API.GetWarehouseOfferByID = GetWarehouseOfferByID;
 
@@ -127,7 +121,7 @@ API.GetActivWarehouseOffers = GetActivWarehouseOffers;
 
 --- The player clicked an offer.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID`      - ID of player
 --- * `ScriptName`    - Scriptname of warehouse
 --- * `Inflation`     - Calculated inflation
@@ -140,7 +134,7 @@ Report.WarehouseOfferClicked = anyInteger;
 
 --- The player bought an offer.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID`      - ID of player
 --- * `ScriptName`    - Scriptname of warehouse
 --- * `OfferGood`     - Good or entity type purchased

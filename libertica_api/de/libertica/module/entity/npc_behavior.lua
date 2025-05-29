@@ -1,3 +1,5 @@
+--- Behavior für NPCs.
+
 --- Der Held muss mit einem NPC sprechen.
 ---
 --- @param _NpcName   string Scriptname des NPC

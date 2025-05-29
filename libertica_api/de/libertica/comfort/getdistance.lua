@@ -1,4 +1,6 @@
 --- Gibt die Entfernung zwischen 2 Referenzpunkten zurück.
+
+--- Gibt die Entfernung zwischen 2 Referenzpunkten zurück.
 --- @param _Pos1 any        Erste Position oder Entität
 --- @param _Pos2 any        Zweite Position oder Entität
 --- @param _NoSqrt? boolean (Optional) Quadratwurzel nicht bestimmen

@@ -1,0 +1,632 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><strong>module.ui.uitools_api</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.ui.uitools_api</code></h1>
+<p>Bietet Werkzeuge für verschiedene Modifikationen der 2D-Benutzeroberfläche.</p>
+<p>
+<p> Die folgenden menübezogenen Elemente können geändert werden:
+ <li>Anzeigen/Verstecken der Minikarte</li>
+ <li>Anzeigen/Verstecken der Umschalt-Minikarte</li>
+ <li>Anzeigen/Verstecken des Diplomatiemenüs</li>
+ <li>Anzeigen/Verstecken des Produktionsmenüs</li>
+ <li>Anzeigen/Verstecken des Wettermenüs</li>
+ <li>Anzeigen/Verstecken des Baumenüs</li>
+ <li>Anzeigen/Verstecken des Gebietsbeanspruchungsbuttons</li>
+ <li>Anzeigen/Verstecken des Heldenfähigkeitenbuttons</li>
+ <li>Anzeigen/Verstecken des Helden auswählen-Buttons</li>
+ <li>Anzeigen/Verstecken des Einheiten auswählen-Buttons</li></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#ChangeIcon">ChangeIcon (_WidgetID, _Coordinates, _Size, _Name)</a></td>
+	<td class="summary">Setzt ein Symbol aus einer Symbolmatrix.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetTooltipNormal">SetTooltipNormal (_Title, _Text, _DisabledText)</a></td>
+	<td class="summary">Ändert die Beschreibung eines Buttons oder Symbols.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetTooltipCosts">SetTooltipCosts (_Title, _Text, _DisabledText, _Costs, _InSettlement)</a></td>
+	<td class="summary">Ändert die Beschreibung eines Buttons oder Symbols mit zusätzlichen Kosten.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HideMinimap">HideMinimap (_Flag)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit der Minikarte.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HideToggleMinimap">HideToggleMinimap (_Flag)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit des Minikarten-Buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HideDiplomacyMenu">HideDiplomacyMenu (_Flag)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit des Diplomatiemenü-Buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HideProductionMenu">HideProductionMenu (_Flag)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit des Produktionsmenü-Buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HideWeatherMenu">HideWeatherMenu (_Flag)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit des Wettermenü-Buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HideBuyTerritory">HideBuyTerritory (_Flag)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit des Gebietsbeanspruchungsbuttons.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HideKnightAbility">HideKnightAbility (_Flag)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit des Ritterfähigkeiten-Buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HideKnightButton">HideKnightButton (_Flag)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit des Ritterauswahl-Buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HideSelectionButton">HideSelectionButton (_Flag)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit des militärische Auswahl-Buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HideBuildMenu">HideBuildMenu (_Flag)</a></td>
+	<td class="summary">Ändert die Sichtbarkeit des Baumenu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddShortcutDescription">AddShortcutDescription (_Key, _Description)</a></td>
+	<td class="summary">Fügt eine neue Tastaturkürzel-Beschreibung hinzu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RemoveShortcutDescription">RemoveShortcutDescription (_ID)</a></td>
+	<td class="summary">Entfernt die Tastaturkürzel-Beschreibung mit der ID.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SpeedLimitActivate">SpeedLimitActivate (_Flag)</a></td>
+	<td class="summary">Aktiviert oder deaktiviert die Zwangsgeschwindigkeit 1.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Report.BuildingPlaced">Report.BuildingPlaced</a></td>
+	<td class="summary">Ein menschlicher Spieler hat ein Gebäude platziert.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "ChangeIcon"></a>
+    <strong>ChangeIcon (_WidgetID, _Coordinates, _Size, _Name)</strong>
+    </dt>
+    <dd>
+    Setzt ein Symbol aus einer Symbolmatrix.
+<p> Es ist möglich, eine benutzerdefinierte Symbolmatrix zu verwenden. Die Dateien müssen in gui_768,
+ gui_920 und gui_1200 kopiert und auf die entsprechende Größe skaliert werden. Dateien müssen im
+ Kartenarchiv unter graphics/textures gepackt werden.
+<p> Es gibt 3 verschiedene Symbolgrößen. Für jede Größe sucht die Spiel-Engine nach einer anderen Datei:
+<li>44:  [filename].png</li><li>64:  [filename]big.png</li><li>128: [filename]verybig.png</li><p> <h3>Example:</h3> <pre><code class="language-lua"> -- Beispiel #1: Verwendung einer Ingame-Grafik
+ ChangeIcon(AnyWidgetID, {1, 1, 1});
+<p> -- Beispiel #2: Verwendung einer benutzerdefinierten Grafik
+ -- (meinetolleniconsbig.png wird gesucht)
+ ChangeIcon(AnyWidgetID, {8, 5}, nil, "meinetollenicons");
+<p> -- Beispiel #3: Verwendung großer benutzerdefinierter Grafik
+ -- (meinetolleniconsverybig.png wird gesucht)
+ ChangeIcon(AnyWidgetID, {8, 5}, 128, "meinetollenicons");</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_WidgetID</span> <b>any</b> Pfad oder ID des Widgets
+        </li>
+        <li><span class="parameter">_Coordinates</span> <b>table</b> Tabelle mit Koordinaten
+        </li>
+        <li><span class="parameter">_Size</span> (optional) <b>number</b> Optionale Symbolgröße
+        </li>
+        <li><span class="parameter">_Name</span> (optional) <b>string</b> Optionale Symboldatei
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetTooltipNormal"></a>
+    <strong>SetTooltipNormal (_Title, _Text, _DisabledText)</strong>
+    </dt>
+    <dd>
+    Ändert die Beschreibung eines Buttons oder Symbols.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Title</span> <b>any</b> Titeltext oder lokalisierte Tabelle
+        </li>
+        <li><span class="parameter">_Text</span> <b>any</b> Text oder lokalisierte Tabelle
+        </li>
+        <li><span class="parameter">_DisabledText</span>
+         any? Text oder lokalisierte Tabelle
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetTooltipCosts"></a>
+    <strong>SetTooltipCosts (_Title, _Text, _DisabledText, _Costs, _InSettlement)</strong>
+    </dt>
+    <dd>
+    Ändert die Beschreibung eines Buttons oder Symbols mit zusätzlichen Kosten.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Title</span> <b>any</b> Titeltext oder lokalisierte Tabelle
+        </li>
+        <li><span class="parameter">_Text</span> <b>any</b> Text oder lokalisierte Tabelle
+        </li>
+        <li><span class="parameter">_DisabledText</span>
+         any? Text oder lokalisierte Tabelle
+        </li>
+        <li><span class="parameter">_Costs</span>
+         table? Tabelle mit Kosten
+        </li>
+        <li><span class="parameter">_InSettlement</span>
+         boolean? Prüft alle Quellen in der Siedlung
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HideMinimap"></a>
+    <strong>HideMinimap (_Flag)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit der Minikarte.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Widget ist versteckt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HideToggleMinimap"></a>
+    <strong>HideToggleMinimap (_Flag)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit des Minikarten-Buttons.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Widget ist versteckt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HideDiplomacyMenu"></a>
+    <strong>HideDiplomacyMenu (_Flag)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit des Diplomatiemenü-Buttons.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Widget ist versteckt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HideProductionMenu"></a>
+    <strong>HideProductionMenu (_Flag)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit des Produktionsmenü-Buttons.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Widget ist versteckt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HideWeatherMenu"></a>
+    <strong>HideWeatherMenu (_Flag)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit des Wettermenü-Buttons.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Widget ist versteckt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HideBuyTerritory"></a>
+    <strong>HideBuyTerritory (_Flag)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit des Gebietsbeanspruchungsbuttons.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Widget ist versteckt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HideKnightAbility"></a>
+    <strong>HideKnightAbility (_Flag)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit des Ritterfähigkeiten-Buttons.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Widget ist versteckt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HideKnightButton"></a>
+    <strong>HideKnightButton (_Flag)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit des Ritterauswahl-Buttons.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Widget ist versteckt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HideSelectionButton"></a>
+    <strong>HideSelectionButton (_Flag)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit des militärische Auswahl-Buttons.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Widget ist versteckt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HideBuildMenu"></a>
+    <strong>HideBuildMenu (_Flag)</strong>
+    </dt>
+    <dd>
+    Ändert die Sichtbarkeit des Baumenu.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Widget ist versteckt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddShortcutDescription"></a>
+    <strong>AddShortcutDescription (_Key, _Description)</strong>
+    </dt>
+    <dd>
+    Fügt eine neue Tastaturkürzel-Beschreibung hinzu.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Key</span> <b>string</b> Schlüssel des Tastenkürzels
+        </li>
+        <li><span class="parameter">_Description</span> <b>any</b> Text oder lokalisierte Tabelle
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID der Beschreibung
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RemoveShortcutDescription"></a>
+    <strong>RemoveShortcutDescription (_ID)</strong>
+    </dt>
+    <dd>
+    Entfernt die Tastaturkürzel-Beschreibung mit der ID.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ID</span> <b>number</b> ID des Tastenkürzels
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SpeedLimitActivate"></a>
+    <strong>SpeedLimitActivate (_Flag)</strong>
+    </dt>
+    <dd>
+    Aktiviert oder deaktiviert die Zwangsgeschwindigkeit 1.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Zwangsgeschwindigkeit aktiv
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Report.BuildingPlaced"></a>
+    <strong>Report.BuildingPlaced</strong>
+    </dt>
+    <dd>
+    Ein menschlicher Spieler hat ein Gebäude platziert.
+
+ <h3>Parameters:</h3><li><code>PlayerID</code> - ID des Spielers</li><li><code>EntityID</code> - ID der Baustelle</li>
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

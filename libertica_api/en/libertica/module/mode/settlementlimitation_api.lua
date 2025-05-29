@@ -4,13 +4,12 @@
 --- can be customized to a limited extent.
 ---
 --- Standard rules:
---- * The number of buildings in the home territory is not limited
---- * City buildings can only be built in the home territory
---- * In territories, only 3 buildings can be built.
---- * Each building type can only be built once per territory.
---- * When a outpost is upgraded, one building type can be placed twice
----   on the territory.
---- * Beehives, beautifications and fields do not count as buildings.
+--- <li>The number of buildings in the home territory is not limited</li>
+--- <li>City buildings can only be built in the home territory</li>
+--- <li>In territories, only 3 buildings can be built.</li>
+--- <li>Each building type can only be built once per territory.</li>
+--- <li>When a outpost is upgraded, one building type can be placed twice on the territory.</li>
+--- <li>Beehives, beautifications and fields do not count as buildings.</li>
 ---
 Lib.SettlementLimitation = Lib.SettlementLimitation or {};
 

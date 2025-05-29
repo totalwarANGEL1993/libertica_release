@@ -1,3 +1,5 @@
+--- Offers behaviors for dialogs.
+
 --- Calls a mapscript function assuming it beeing a dialog.
 ---
 --- Every briefing needs a unique name!

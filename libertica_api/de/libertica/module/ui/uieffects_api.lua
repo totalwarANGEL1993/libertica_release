@@ -1,13 +1,4 @@
 --- Fügt verschiedene Effekte für das Interface hinzu.
----
---- #### Reports
---- `Report.CinematicActivated` - Ein Kinoevent, empfangen von einem bestimmten Spieler, startet.
---- `Report.GameInterfaceShown` - Ein Kinoevent, empfangen von einem bestimmten Spieler, endet.
---- `Report.GameInterfaceHidden` - Die normale Oberfläche wird dem Spieler angezeigt.
---- `Report.ImageScreenShown` - Der Vollbildhintergrund wird dem Spieler angezeigt.
---- `Report.ImageScreenHidden` - Der Vollbildhintergrund wird vor dem Spieler versteckt.
----
-Lib.UIEffects = Lib.UIEffects or {};
 
 
 
@@ -103,18 +94,18 @@ API.IsCinematicEventActive = IsCinematicEventActive;
 --- abgeschnitten (durch den Spiel-Engine).
 ---
 --- #### Felder der Tabelle
---- * Text         - Anzuzeigender Text
---- * Name         - (Optional) Name für das Ereignis
---- * PlayerID     - (Optional) Spieler, dessen Text angezeigt wird
---- * Callback     - (Optional) Rückruffunktion
---- * TargetEntity - (Optional) Entität, auf die die Kamera fokussiert ist
---- * CharSpeed    - (Optional) Faktor der Schreibgeschwindigkeit (Standard: 1.0)
---- * Waittime     - (Optional) Anfangswartezeit vor dem Schreiben
---- * Opacity      - (Optional) Deckkraft des Hintergrunds (Standard: 1.0)
---- * Color        - (Optional) Hintergrundfarbe (Standard: {R= 0, G= 0, B= 0})
---- * Image        - (Optional) Hintergrundbild (muss im 16:9-Format sein)
+--- * `Text`         - Anzuzeigender Text
+--- * `Name`         - (Optional) Name für das Ereignis
+--- * `PlayerID`     - (Optional) Spieler, dessen Text angezeigt wird
+--- * `Callback`     - (Optional) Rückruffunktion
+--- * `TargetEntity` - (Optional) Entität, auf die die Kamera fokussiert ist
+--- * `CharSpeed`    - (Optional) Faktor der Schreibgeschwindigkeit (Standard: 1.0)
+--- * `Waittime`     - (Optional) Anfangswartezeit vor dem Schreiben
+--- * `Opacity`      - (Optional) Deckkraft des Hintergrunds (Standard: 1.0)
+--- * `Color`        - (Optional) Hintergrundfarbe (Standard: {R= 0, G= 0, B= 0})
+--- * `Image`        - (Optional) Hintergrundbild (muss im 16:9-Format sein)
 ---
---- #### Beispiele
+--- #### Example:
 --- ```lua
 --- local EventName = StartTypewriter {
 ---     PlayerID = 1,
@@ -138,39 +129,39 @@ API.StartTypewriter = StartTypewriter;
 
 --- Ein Kinoevent, empfangen von einem bestimmten Spieler, startet.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `EventID`  - ID des Kinoevent
 --- * `PlayerID` - ID des Empfängers
 Report.CinematicActivated = anyInteger;
 
 --- Ein Kinoevent, empfangen von einem bestimmten Spieler, endet.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `EventID`  - ID des Kinoevent
 --- * `PlayerID` - ID des Empfängers
 Report.CinematicConcluded = anyInteger;
 
 --- Die normale Oberfläche wird dem Spieler angezeigt.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID des Spielers
 Report.GameInterfaceShown = anyInteger;
 
 --- Die normale Oberfläche wird vor dem Spieler versteckt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID des Spielers
 Report.GameInterfaceHidden = anyInteger;
 
 --- Der Vollbildhintergrund wird dem Spieler angezeigt.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID des Spielers
 Report.ImageScreenShown = anyInteger;
 
 --- Der Vollbildhintergrund wird vor dem Spieler versteckt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `PlayerID` - ID des Spielers
 Report.ImageScreenHidden = anyInteger;
 

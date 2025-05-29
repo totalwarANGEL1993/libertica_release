@@ -1,0 +1,539 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><strong>module.trade.traderoute_api</strong></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.trade.traderoute_api</code></h1>
+<p>Ermöglicht die Einrichtung eines KI-Spielers als Hafen realistischer.</p>
+<p>
+
+ <h3>Was ein Hafen tut</h3> <li>Schiffe fahren zum Hafen und liefern Waren von einer Handelsroute (Schiffe bewegen sich schneller als gewöhnlich)</li>
+ <li>Ein Hafen kann von mehreren Handelswegen bedient werden</li>
+ <li>Bei der Ankunft fügt das Schiff seine Waren zu den bestehenden Angeboten hinzu</li>
+ <li>Wenn die Angebotsmenge 4 übersteigt, werden die ältesten Angebote entfernt (Wenn Angebote ausverkauft sind, werden sie entfernt)</li>
+ <li>Wenn die KI zerstört wird, werden alle Schiffe und Routen gelöscht</li>
+
+ <h3>Was ein Hafen nicht tut</h3> <li>Keine automatischen Diplomatieänderungen, wenn ein Schiff ankommt</li>
+ <li>Spamming des Spielers mit Informationsnachrichten</li></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#InitHarbor">InitHarbor (_PlayerID, ...)</a></td>
+	<td class="summary">Initialisiert das Lagerhaus des Spielers als Handelshafen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DisposeHarbor">DisposeHarbor (_PlayerID)</a></td>
+	<td class="summary">Entfernt den Handelshafen aus dem Lagerhaus des Spielers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddTradeRoute">AddTradeRoute (_PlayerID, _Route)</a></td>
+	<td class="summary">Fügt einem Handelshafen eine Handelsroute hinzu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ChangeTradeRouteGoods">ChangeTradeRouteGoods (_PlayerID, _RouteName, _RouteOffers)</a></td>
+	<td class="summary">Ändert die Angebote einer bestehenden Handelsroute.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RemoveTradeRoute">RemoveTradeRoute (_PlayerID, _RouteName)</a></td>
+	<td class="summary">Löscht eine Handelsroute, nachdem ihr Zyklus beendet ist.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#InitTravelingSalesman">InitTravelingSalesman (_Route)</a></td>
+	<td class="summary">Initialisiert einen Spieler als klassichen fahrenden Händler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DisposeTravelingSalesman">DisposeTravelingSalesman (_PlayerID)</a></td>
+	<td class="summary">Entfernt den fahrenden Händler aus dem Lagerhaus des Spielers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ChangeTravelingSalesmanGoods">ChangeTravelingSalesmanGoods (_PlayerID, _Offers)</a></td>
+	<td class="summary">Ändert die Angebote einer bestehenden Handelsroute.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Report.TradeShipSpawned">Report.TradeShipSpawned</a></td>
+	<td class="summary">Ein Schiff wurde am Anfang des Weges der Handelsroute erzeugt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.TradeShipArrived">Report.TradeShipArrived</a></td>
+	<td class="summary">Ein Schiff ist in einem Hafen angekommen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.TradeShipLeft">Report.TradeShipLeft</a></td>
+	<td class="summary">Ein Schiff hat einen Hafen verlassen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.TradeShipDespawned">Report.TradeShipDespawned</a></td>
+	<td class="summary">Ein Schiff wurde am Ende des Weges der Handelsroute entfernt.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "InitHarbor"></a>
+    <strong>InitHarbor (_PlayerID, ...)</strong>
+    </dt>
+    <dd>
+    Initialisiert das Lagerhaus des Spielers als Handelshafen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">...</span> <b>table</b> Liste der Routen
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DisposeHarbor"></a>
+    <strong>DisposeHarbor (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Entfernt den Handelshafen aus dem Lagerhaus des Spielers.  Auch Schiffe,
+ die sich derzeit auf der Karte befinden, werden gelöscht.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddTradeRoute"></a>
+    <strong>AddTradeRoute (_PlayerID, _Route)</strong>
+    </dt>
+    <dd>
+    Fügt einem Handelshafen eine Handelsroute hinzu.
+
+ <h3>Felder der Handelsroute:</h3><li><code>Name</code> - Eindeutiger Name für die Route</li><li><code>Path</code> - Liste der Wegpunkte</li><li><code>Offers</code> - Liste der Angebote (Format: {_Type, _Amount})</li><li><code>Amount</code> - Anzahl der Angebote, die bei der Ankunft ausgewählt werden sollen</li><li><code>Duration</code> - Ankerzeit des Schiffes in Sekunden</li><li><code>Interval</code> - Zeit zwischen Schiffsbesuchen</li>
+ <h3>Example:</h3> <pre><code class="language-lua"> AddTradeRoute(
+     2,
+     {
+         Name       = "Route3",
+         -- Wegpunkte (der letzte sollte sich im Hafen befinden, sonst wird es seltsam ;) )
+         Path       = {"Spawn3", "Arrived3"},
+         -- 10 Minuten vergehen zwischen den Besuchen
+         Interval   = 10*60,
+         -- Das Schiff bleibt<li>*2** Minuten im Hafen</li>         Duration   = 2*60,
+         --<li>*2** Angebote werden bei der Ankunft ausgewählt</li>         Amount     = 2,
+         -- Liste der Angebote, aus denen ausgewählt werden soll
+         Offers     = {
+             {"G_Wool", 5},
+             {"U_CatapultCart", 1},
+             {"G_Beer", 2},
+             {"G_Herb", 5},
+             {"U_Entertainer_NA_StiltWalker", 1},
+         }
+     }
+ );</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Route</span> <b>table</b> Beschreibung der Handelsroute
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ChangeTradeRouteGoods"></a>
+    <strong>ChangeTradeRouteGoods (_PlayerID, _RouteName, _RouteOffers)</strong>
+    </dt>
+    <dd>
+    Ändert die Angebote einer bestehenden Handelsroute.
+
+ <h3>Example:</h3> <pre><code class="language-lua"> ChangeTradeRouteGoods(
+     2,
+     "Route3",
+     {{"G_Wool", 3},
+      {"U_CatapultCart", 5},
+      {"G_Beer", 2},
+      {"G_Herb", 3},
+      {"U_Entertainer_NA_StiltWalker", 1}}
+ );</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_RouteName</span> <b>string</b> Kennung der Route
+        </li>
+        <li><span class="parameter">_RouteOffers</span> <b>table</b> Angebote
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RemoveTradeRoute"></a>
+    <strong>RemoveTradeRoute (_PlayerID, _RouteName)</strong>
+    </dt>
+    <dd>
+    Löscht eine Handelsroute, nachdem ihr Zyklus beendet ist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_RouteName</span> <b>string</b> Kennung der Route
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> JobID ID des Verzögerungsauftrags
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "InitTravelingSalesman"></a>
+    <strong>InitTravelingSalesman (_Route)</strong>
+    </dt>
+    <dd>
+    Initialisiert einen Spieler als klassichen fahrenden Händler.
+
+ Diese Variante legt ein anderes verhalten an den Tag. Die Diplomatie WIRD
+ sich verändern, abhängig davon, ob das Schiff im Hafen ist (Handelspartner)
+ oder nicht (Bekannt). Außerdem kann der fahrende Händler nur eine Route
+ haben und wird Standardnachrichten zum verbleib des Schiffs senden.
+
+ <h3>Aufbau Handelsroute:</h3><li><code>PlayerID</code> - ID des Spielers</li><li><code>Path</code> - Liste der Wegpunkte</li><li><code>Offers</code> - Liste der Angebote (Format: {_Type, _Amount})</li><li><code>Amount</code> - Anzahl der Angebote, die bei der Ankunft ausgewählt werden sollen</li><li><code>Duration</code> - Ankerzeit des Schiffes in Sekunden</li><li><code>Interval</code> - Zeit zwischen Schiffsbesuchen</li><li><code>Message</code> - Benachrichtungungen über Schiff ein-/ausschalten</li>
+ <h3>Example:</h3> <pre><code class="language-lua"> InitTravelingSalesman{
+     PlayerID   = 2,
+     Path       = {"Spawn3", "Arrived3"},
+     Interval   = 10*60,
+     Duration   = 2*60,
+     Amount     = 2,
+     Offers     = {
+         {"G_Wool", 5},
+         {"U_CatapultCart", 1},
+         {"G_Beer", 2},
+         {"G_Herb", 5},
+         {"U_Entertainer_NA_StiltWalker", 1},
+     }
+ };</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Route</span> <b>table</b> Beschreibung des fahrenden Händlers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DisposeTravelingSalesman"></a>
+    <strong>DisposeTravelingSalesman (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Entfernt den fahrenden Händler aus dem Lagerhaus des Spielers.  Auch Schiffe,
+ die sich derzeit auf der Karte befinden, werden gelöscht.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ChangeTravelingSalesmanGoods"></a>
+    <strong>ChangeTravelingSalesmanGoods (_PlayerID, _Offers)</strong>
+    </dt>
+    <dd>
+    Ändert die Angebote einer bestehenden Handelsroute.
+
+ <h3>Example:</h3> <pre><code class="language-lua"> ChangeTravelingSalesmanGoods(
+     2,
+     {{"G_Wool", 3},
+      {"U_CatapultCart", 5},
+      {"G_Beer", 2},
+      {"G_Herb", 3},
+      {"U_Entertainer_NA_StiltWalker", 1}}
+ );</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Offers</span> <b>table</b> Angebote
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Report.TradeShipSpawned"></a>
+    <strong>Report.TradeShipSpawned</strong>
+    </dt>
+    <dd>
+    Ein Schiff wurde am Anfang des Weges der Handelsroute erzeugt.
+<p> <h3>Parameters:</h3><li><code>_PlayerID</code> - PlayerID des Hafens</li><li><code>_RouteName</code> - Kennung der Route</li><li><code>_ShipID</code> - ID des Schiffes</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.TradeShipArrived"></a>
+    <strong>Report.TradeShipArrived</strong>
+    </dt>
+    <dd>
+    Ein Schiff ist in einem Hafen angekommen.
+<p> <h3>Parameters:</h3><li><code>_PlayerID</code> - PlayerID des Hafens</li><li><code>_RouteName</code> - Kennung der Route</li><li><code>_ShipID</code> - ID des Schiffes</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.TradeShipLeft"></a>
+    <strong>Report.TradeShipLeft</strong>
+    </dt>
+    <dd>
+    Ein Schiff hat einen Hafen verlassen.
+<p> <h3>Parameters:</h3><li><code>_PlayerID</code> - PlayerID des Hafens</li><li><code>_RouteName</code> - Kennung der Route</li><li><code>_ShipID</code> - ID des Schiffes</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.TradeShipDespawned"></a>
+    <strong>Report.TradeShipDespawned</strong>
+    </dt>
+    <dd>
+    Ein Schiff wurde am Ende des Weges der Handelsroute entfernt.
+<p> <h3>Parameters:</h3><li><code>_PlayerID</code> - PlayerID des Hafens</li><li><code>_RouteName</code> - Kennung der Route</li><li><code>_ShipID</code> - ID des Schiffes</li>
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -1,0 +1,910 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><strong>module.trade.trade_api</strong></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.trade.trade_api</code></h1>
+<p>Es kann in den Ablauf von Kauf und Verkauf eingegriffen werden.</p>
+<p></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#CreateGoodOffer">CreateGoodOffer (_VendorID, _OfferType, _OfferAmount, _RefreshRate)</a></td>
+	<td class="summary">Fügt einem Spieler ein reguläres Angebot hinzu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CreateMercenaryOffer">CreateMercenaryOffer (_VendorID, _OfferType, _OfferAmount, _RefreshRate)</a></td>
+	<td class="summary">Fügt einem Spieler ein Söldnerangebot hinzu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CreateEntertainerOffer">CreateEntertainerOffer (_VendorID, _OfferType)</a></td>
+	<td class="summary">Fügt einem Spieler ein Entertainer-Angebot hinzu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PurchaseSetTraderAbilityForPlayer">PurchaseSetTraderAbilityForPlayer (_PlayerID, _Function)</a></td>
+	<td class="summary">Ändert die Berechnung des Helden-Kaufpreisfaktors für den Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PurchaseSetDefaultTraderAbility">PurchaseSetDefaultTraderAbility (_Function)</a></td>
+	<td class="summary">Ändert die Berechnung des Helden-Kaufpreisfaktors.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PurchaseSetBasePriceForPlayer">PurchaseSetBasePriceForPlayer (_PlayerID, _Function)</a></td>
+	<td class="summary">Ändert die Berechnung des Kauf-Grundpreises für den Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PurchaseSetDefaultBasePrice">PurchaseSetDefaultBasePrice (_Function)</a></td>
+	<td class="summary">Ändert die Berechnung des Kauf-Grundpreises.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PurchaseSetInflationForPlayer">PurchaseSetInflationForPlayer (_PlayerID, _Function)</a></td>
+	<td class="summary">Ändert die Berechnung der Inflation für den Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PurchaseSetDefaultInflation">PurchaseSetDefaultInflation (_Function)</a></td>
+	<td class="summary">Ändert die Berechnung der Inflation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PurchaseSetConditionForPlayer">PurchaseSetConditionForPlayer (_PlayerID, _Function)</a></td>
+	<td class="summary">Setzt spezielle Kaufbedingungen für den Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PurchaseSetDefaultCondition">PurchaseSetDefaultCondition (_Function)</a></td>
+	<td class="summary">Setzt spezielle Kaufbedingungen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SaleSetTraderAbilityForPlayer">SaleSetTraderAbilityForPlayer (_PlayerID, _Function)</a></td>
+	<td class="summary">Ändert die Berechnung des Helden-Verkaufspreisfaktors für den Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SaleSetDefaultTraderAbility">SaleSetDefaultTraderAbility (_Function)</a></td>
+	<td class="summary">Ändert die Berechnung des Helden-Verkaufspreisfaktors.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SaleSetBasePriceForPlayer">SaleSetBasePriceForPlayer (_PlayerID, _Function)</a></td>
+	<td class="summary">Ändert die Berechnung des Verkaufs-Grundpreises für den Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SaleSetDefaultBasePrice">SaleSetDefaultBasePrice (_Function)</a></td>
+	<td class="summary">Ändert die Berechnung des Verkaufs-Grundpreises.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SaleSetDeflationForPlayer">SaleSetDeflationForPlayer (_PlayerID, _Function)</a></td>
+	<td class="summary">Ändert die Berechnung der Deflation für den Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SaleSetDefaultDeflation">SaleSetDefaultDeflation (_Function)</a></td>
+	<td class="summary">Ändert die Berechnung der Deflation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SaleSetConditionForPlayer">SaleSetConditionForPlayer (_PlayerID, _Function)</a></td>
+	<td class="summary">Setzt spezielle Verkaufsbedingungen für den Spieler.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SaleSetDefaultCondition">SaleSetDefaultCondition (_Function)</a></td>
+	<td class="summary">Setzt spezielle Verkaufsbedingungen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetOfferInformation">GetOfferInformation (_PlayerID)</a></td>
+	<td class="summary">Gibt Informationen über die Angebote des Spielers zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetOfferCount">GetOfferCount (_PlayerID)</a></td>
+	<td class="summary">Gibt die Anzahl der Angebote des Spielers zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#IsGoodOrUnitOffered">IsGoodOrUnitOffered (_PlayerID, _GoodOrEntityType)</a></td>
+	<td class="summary">Gibt zurück, ob das Gut oder die Einheit vom Spieler angeboten wird.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetTradeOfferWaggonAmount">GetTradeOfferWaggonAmount (_PlayerID, _GoodOrEntityType)</a></td>
+	<td class="summary">Gibt die Anzahl der verfügbaren Wagenladungen des Angebots zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RemoveTradeOffer">RemoveTradeOffer (_PlayerID, _GoodOrEntityType)</a></td>
+	<td class="summary">Löscht ein bestimmtes Handelsangebot des Spielers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ModifyTradeOffer">ModifyTradeOffer (_PlayerID, _GoodOrEntityType, _NewAmount)</a></td>
+	<td class="summary">Ändert die maximale Anzahl der Wagenladungen des Angebots.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Report.Purchased">Report.Purchased</a></td>
+	<td class="summary">Ein Spieler hat ein Angebot in einem Lagerhaus gekauft</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Report.GoodsSold">Report.GoodsSold</a></td>
+	<td class="summary">A player has sold goods to another player.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "CreateGoodOffer"></a>
+    <strong>CreateGoodOffer (_VendorID, _OfferType, _OfferAmount, _RefreshRate)</strong>
+    </dt>
+    <dd>
+    Fügt einem Spieler ein reguläres Angebot hinzu.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_VendorID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_OfferType</span> <b>integer</b> Art des Angebots
+        </li>
+        <li><span class="parameter">_OfferAmount</span> <b>integer</b> Betrag des Angebots
+        </li>
+        <li><span class="parameter">_RefreshRate</span> <b>integer</b> Aktualisierungsrate
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID des Angebots
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CreateMercenaryOffer"></a>
+    <strong>CreateMercenaryOffer (_VendorID, _OfferType, _OfferAmount, _RefreshRate)</strong>
+    </dt>
+    <dd>
+    Fügt einem Spieler ein Söldnerangebot hinzu.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_VendorID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_OfferType</span> <b>integer</b> Art des Angebots
+        </li>
+        <li><span class="parameter">_OfferAmount</span> <b>integer</b> Betrag des Angebots
+        </li>
+        <li><span class="parameter">_RefreshRate</span> <b>integer</b> Aktualisierungsrate
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID des Angebots
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CreateEntertainerOffer"></a>
+    <strong>CreateEntertainerOffer (_VendorID, _OfferType)</strong>
+    </dt>
+    <dd>
+    Fügt einem Spieler ein Entertainer-Angebot hinzu.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_VendorID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_OfferType</span> <b>integer</b> Art des Angebots
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PurchaseSetTraderAbilityForPlayer"></a>
+    <strong>PurchaseSetTraderAbilityForPlayer (_PlayerID, _Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung des Helden-Kaufpreisfaktors für den Spieler.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_BasePrice</code> - Grundpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PurchaseSetDefaultTraderAbility"></a>
+    <strong>PurchaseSetDefaultTraderAbility (_Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung des Helden-Kaufpreisfaktors.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_BasePrice</code> - Grundpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PurchaseSetBasePriceForPlayer"></a>
+    <strong>PurchaseSetBasePriceForPlayer (_PlayerID, _Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung des Kauf-Grundpreises für den Spieler.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PurchaseSetDefaultBasePrice"></a>
+    <strong>PurchaseSetDefaultBasePrice (_Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung des Kauf-Grundpreises.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PurchaseSetInflationForPlayer"></a>
+    <strong>PurchaseSetInflationForPlayer (_PlayerID, _Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung der Inflation für den Spieler.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Bereits gekaufter Betrag</li><li><code>_Price</code> - Kaufpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PurchaseSetDefaultInflation"></a>
+    <strong>PurchaseSetDefaultInflation (_Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung der Inflation.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Bereits gekaufter Betrag</li><li><code>_Price</code> - Kaufpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PurchaseSetConditionForPlayer"></a>
+    <strong>PurchaseSetConditionForPlayer (_PlayerID, _Function)</strong>
+    </dt>
+    <dd>
+    Setzt spezielle Kaufbedingungen für den Spieler.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Bereits gekaufter Betrag</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PurchaseSetDefaultCondition"></a>
+    <strong>PurchaseSetDefaultCondition (_Function)</strong>
+    </dt>
+    <dd>
+    Setzt spezielle Kaufbedingungen.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Bereits gekaufter Betrag</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SaleSetTraderAbilityForPlayer"></a>
+    <strong>SaleSetTraderAbilityForPlayer (_PlayerID, _Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung des Helden-Verkaufspreisfaktors für den Spieler.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_BasePrice</code> - Grundpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SaleSetDefaultTraderAbility"></a>
+    <strong>SaleSetDefaultTraderAbility (_Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung des Helden-Verkaufspreisfaktors.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_BasePrice</code> - Grundpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SaleSetBasePriceForPlayer"></a>
+    <strong>SaleSetBasePriceForPlayer (_PlayerID, _Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung des Verkaufs-Grundpreises für den Spieler.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SaleSetDefaultBasePrice"></a>
+    <strong>SaleSetDefaultBasePrice (_Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung des Verkaufs-Grundpreises.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SaleSetDeflationForPlayer"></a>
+    <strong>SaleSetDeflationForPlayer (_PlayerID, _Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung der Deflation für den Spieler.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_SaleCount</code> - Bereits verkaufter Betrag</li><li><code>_Price</code> - Verkaufspreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SaleSetDefaultDeflation"></a>
+    <strong>SaleSetDefaultDeflation (_Function)</strong>
+    </dt>
+    <dd>
+    Ändert die Berechnung der Deflation.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_SaleCount</code> - Bereits verkaufter Betrag</li><li><code>_Price</code> - Verkaufspreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SaleSetConditionForPlayer"></a>
+    <strong>SaleSetConditionForPlayer (_PlayerID, _Function)</strong>
+    </dt>
+    <dd>
+    Setzt spezielle Verkaufsbedingungen für den Spieler.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Verkaufter Betrag</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SaleSetDefaultCondition"></a>
+    <strong>SaleSetDefaultCondition (_Function)</strong>
+    </dt>
+    <dd>
+    Setzt spezielle Verkaufsbedingungen.
+
+ Parameter der Funktion:
+<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Verkaufter Betrag</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Function</span> <b>function</b> Berechnungsfunktion
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetOfferInformation"></a>
+    <strong>GetOfferInformation (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Gibt Informationen über die Angebote des Spielers zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>table</b> Info Angebotsinformationen für den Spieler
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetOfferCount"></a>
+    <strong>GetOfferCount (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Gibt die Anzahl der Angebote des Spielers zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Amount Anzahl der Angebotsplätze
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "IsGoodOrUnitOffered"></a>
+    <strong>IsGoodOrUnitOffered (_PlayerID, _GoodOrEntityType)</strong>
+    </dt>
+    <dd>
+    Gibt zurück, ob das Gut oder die Einheit vom Spieler angeboten wird.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_GoodOrEntityType</span> <b>integer</b>         </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Offered Gut oder Einheit wird angeboten
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetTradeOfferWaggonAmount"></a>
+    <strong>GetTradeOfferWaggonAmount (_PlayerID, _GoodOrEntityType)</strong>
+    </dt>
+    <dd>
+    Gibt die Anzahl der verfügbaren Wagenladungen des Angebots zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_GoodOrEntityType</span> <b>integer</b> Gut- oder Einheitstyp
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Amount Anzahl der angebotenen Wagen
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RemoveTradeOffer"></a>
+    <strong>RemoveTradeOffer (_PlayerID, _GoodOrEntityType)</strong>
+    </dt>
+    <dd>
+    Löscht ein bestimmtes Handelsangebot des Spielers.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_GoodOrEntityType</span> <b>integer</b> Gut- oder Einheitstyp
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ModifyTradeOffer"></a>
+    <strong>ModifyTradeOffer (_PlayerID, _GoodOrEntityType, _NewAmount)</strong>
+    </dt>
+    <dd>
+    Ändert die maximale Anzahl der Wagenladungen des Angebots.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_GoodOrEntityType</span> <b>integer</b> Gut- oder Einheitstyp
+        </li>
+        <li><span class="parameter">_NewAmount</span> <b>integer</b> Neuer maximaler Betrag
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Report.Purchased"></a>
+    <strong>Report.Purchased</strong>
+    </dt>
+    <dd>
+    Ein Spieler hat ein Angebot in einem Lagerhaus gekauft  <h3>Parameters:</h3><li><code>_OfferIndex</code> - Index des Angebot</li><li><code>_MerchantType</code> - Typ des Händlers</li><li><code>_Type</code> - Typ des Angebot</li><li><code>_Amount</code> - Gekaufte Menge</li><li><code>_Price</code> - Bezahlter Preis</li><li><code>_PlayerID</code> - ID des Spielers</li><li><code>_PartnerID</code> - ID des Partners</li>
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Report.GoodsSold"></a>
+    <strong>Report.GoodsSold</strong>
+    </dt>
+    <dd>
+    A player has sold goods to another player.
+<p> <h3>Parameters:</h3><li><code>_MerchantType</code> - Typ des Händlers</li><li><code>_GoodType</code> - Typ des Angebot</li><li><code>_GoodAmount</code> - Verkaufte Menge</li><li><code>_Price</code> - Erhaltenes Geld</li><li><code>_PlayerID</code> - ID des Spielers</li><li><code>_PartnerID</code> - ID des Partners</li>
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

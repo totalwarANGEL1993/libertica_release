@@ -1,8 +1,7 @@
 --- Fügt zusätzliche Funktionalität zum Quest-System hinzu.
-Lib.Core.Quest = {}
 
 --- Setzt die Menge an Ressourcen in einer Mine und optional die Auffüllmenge.
---- @param _Entity string|integer Entität, die geändert werden soll
+--- @param _Entity any Entität, die geändert werden soll
 --- @param _StartAmount integer Anfangsmenge
 --- @param _RefillAmount integer? (optional) Auffüllmenge
 function SetResourceAmount(_Entity, _StartAmount, _RefillAmount)

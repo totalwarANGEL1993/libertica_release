@@ -3,13 +3,10 @@
 --- Dialogs can be used to create conversations between characters using the
 --- animated heads in a feature stripped briefing.
 ---
-Lib.DialogSystem = Lib.DialogSystem or {};
 
 
 
 --- Starts a dialog.
----
---- #### Settings
 ---
 --- Possible fields for the dialog table:
 --- * `Starting`                - Function called when dialog is started              
@@ -22,7 +19,7 @@ Lib.DialogSystem = Lib.DialogSystem or {};
 --- * `EnableBorderPins`        - Displays the border pins during the dialog
 --- * `HideNotes`               - Do not show notes
 ---
---- #### Example
+--- #### Example:
 ---
 --- ```lua
 --- function Dialog1(_Name, _PlayerID)
@@ -95,7 +92,7 @@ API.AddDialogPages = AddDialogPages;
 --- * `FaderAlpha`      - (optional) Mask alpha
 --- * `MC`              - (optional) Table with choices to branch of in dialogs
 ---
---- *-> Example #1*
+--- *→ Example #1*
 ---
 --- #### Flow control
 --- In a dialog the player can be forced to make a choice that will have
@@ -104,33 +101,33 @@ API.AddDialogPages = AddDialogPages;
 --- be provided for more control over the flow. Such funktions must return a
 --- page name.
 ---
---- *-> Example #2*
+--- *→ Example #2*
 ---
 --- Additionally each function can be marked to be removed when used
 --- and not shown again when reentering the page.
 ---
---- *-> Example #3*
+--- *→ Example #3*
 ---
 --- Also pages can be hidden by providing a function to check conditions.
 ---
---- *-> Example #4*
+--- *→ Example #4*
 ---
 --- If a dialog is branched it must be manually ended after a branch is done
 --- or it just simply shows the next page. To end a dialog, an empty page
 --- must be added.
 ---
---- *-> Example #5*
+--- *→ Example #5*
 ---
 --- Alternativly the dialog can continue at a different page. This allows to
 --- create repeating structures within a dialog.
 ---
---- *-> Example #6*
+--- *→ Example #6*
 ---
 --- To obtain selected answers at a later point the selection can be saved in a
 --- global variable either in a option callback or in the finished function. The
 --- number returned is the ID of the answer.
 ---
---- *-> Example #7*
+--- *→ Example #7*
 ---
 --- #### Examples
 ---

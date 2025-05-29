@@ -1,9 +1,4 @@
 --- Es kann in den Ablauf von Kauf und Verkauf eingegriffen werden.
----
---- #### Berichte
---- * `Report.GoodsPurchased` - Waren wurden von einem Spieler eingekauft
---- * `Report.GoodsSold` - Waren wurden an einen Spieler verkauft
-Lib.Trade = Lib.Trade or {};
 
 
 
@@ -322,7 +317,7 @@ API.ModifyTradeOffer = ModifyTradeOffer;
 
 --- Ein Spieler hat ein Angebot in einem Lagerhaus gekauft
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_OfferIndex` - Index des Angebot
 --- * `_MerchantType` - Typ des Händlers
 --- * `_Type` - Typ des Angebot
@@ -334,7 +329,7 @@ Report.Purchased = anyInteger;
 
 --- A player has sold goods to another player.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_MerchantType` - Typ des Händlers
 --- * `_GoodType` - Typ des Angebot
 --- * `_GoodAmount` - Verkaufte Menge

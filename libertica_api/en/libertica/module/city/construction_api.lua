@@ -3,8 +3,9 @@
 --- #### Special rules
 --- The following rules are always active and can not be deactivated:
 ---
---- * Ballistas can not be placed right beside each other and always need a full
----   length wall segment between them (or multiple that are equally long).
+--- <li>Ballistas can not be placed right beside each other and always need
+--- a fulllength wall segment between them (or multiple that are equally
+--- long).</li>
 ---
 Lib.Construction = Lib.Construction or {};
 
@@ -18,7 +19,7 @@ API.UseForceBallistaDistance = UseForceBallistaDistance;
 
 --- Defines a custom rule for construction buildings.
 ---
---- The function must be located in the **global script**!
+--- The function must be located in the <b>global script</b>!
 ---
 --- #### Custom Function
 --- ```lua
@@ -38,7 +39,7 @@ API.CustomRuleConstructBuilding = CustomRuleConstructBuilding;
 
 --- Defines a custom rule for construction roads.
 ---
---- The function must be located in the **local script**!
+--- The function must be located in the <b>local script</b>!
 ---
 --- #### Custom Function
 --- ```lua
@@ -58,7 +59,7 @@ API.CustomRuleConstructRoad = CustomRuleConstructRoad;
 
 --- Defines a custom rule for construction ramparts.
 ---
---- The function must be located in the **local script**!
+--- The function must be located in the <b>local script</b>!
 ---
 --- #### Custom Function
 --- ```lua
@@ -78,7 +79,7 @@ API.CustomRuleConstructWall = CustomRuleConstructWall;
 
 --- Defines a custom rule for demolishing buildings.
 ---
---- The function must be located in the **local script**!
+--- The function must be located in the <b>local script</b>!
 ---
 --- #### Custom Function
 --- ```lua

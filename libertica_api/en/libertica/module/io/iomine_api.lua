@@ -1,15 +1,12 @@
 --- Allows to create constructable resource sources.
 ---
---- #### Reports
---- * `Report.InteractiveMineErected` - A resource source was constructed.
----
 Lib.IOMine = Lib.IOMine or {};
 
 
 
 --- Creates a buried iron mine.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `ScriptName`            - Scriptname of position
 --- * `Title`                 - (Optional) Tooltip title
 --- * `Text`                  - (Optional) Tooltip text
@@ -27,7 +24,7 @@ API.CreateIOIronMine = CreateIOIronMine;
 
 --- Creates a buried stone mine.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `ScriptName`            - Scriptname of position
 --- * `Title`                 - (Optional) Tooltip title
 --- * `Text`                  - (Optional) Tooltip text
@@ -47,7 +44,7 @@ API.CreateIOStoneMine = CreateIOStoneMine;
 
 --- A resource source was constructed.
 ---
---- #### Parameter
+--- #### Parameters:
 --- - `ScriptName` - Scriptname of mine
 --- * `KnightID`   - ID of activating hero
 --- * `PlayerID`   - ID of activating player

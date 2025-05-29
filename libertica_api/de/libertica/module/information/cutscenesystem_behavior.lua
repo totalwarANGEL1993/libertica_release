@@ -1,3 +1,5 @@
+--- Stellt Behavior für Cutscenes bereit.
+
 --- Ruft eine Mapscript-Funktion auf und geht davon aus, dass es sich um eine Zwischensequenz handelt.
 ---
 --- Jede Zwischensequenz benötigt einen eindeutigen Namen!

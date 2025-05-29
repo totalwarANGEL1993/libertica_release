@@ -7,26 +7,19 @@
 --- nach Kleidung auch für Sammler aktiv.
 ---
 --- Dinge, die Gebäude entzünden:
---- * Hohe Temperatur
+--- <li>Hohe Temperatur</li>
 ---
 --- Dinge, die Siedler krank machen:
---- * Unzureichende Hygiene
---- * Unzureichende Unterhaltung
---- * Unzureichendes Brennholz
+--- <li>Unzureichende Hygiene</li>
+--- <li>Unzureichende Unterhaltung</li>
+--- <li>Unzureichendes Brennholz</li>
 ---
 --- Dinge, die Siedler töten:
---- * Krankheit (5%ige Chance pro Periode)
---- * Hunger (5%ige Chance pro Periode)
+--- <li>Krankheit (5%ige Chance pro Periode)</li>
+--- <li>Hunger (5%ige Chance pro Periode)</li>
 ---
 --- Dinge, die Tiere töten:
---- * Krankheit (5%ige Chance pro Periode)
----
---- #### Reports
---- * `Report.AnimalDiedFromIllness` - Ein Tier ist an einer Krankheit gestorben.
---- * `Report.SettlerDiedFromStarvation` - Ein Siedler ist verhungert.
---- * `Report.SettlerDiedFromIllness` - Ein Siedler ist an einer Krankheit gestorben.
----
-Lib.SettlementSurvival = Lib.SettlementSurvival or {};
+--- <li>Krankheit (5%ige Chance pro Periode)</li>
 
 --- Aktiviert/deaktiviert den Modus.
 --- @param _Flag boolean Modus aktiv
@@ -232,19 +225,19 @@ API.BaseConsumptionActivateForAI = BaseConsumptionActivateForAI;
 
 --- Ein Tier ist an Krankheit gestorben.
 ---
---- #### Parameter
---- `EntityID` - ID des Tieres
+--- #### Parameters:
+--- * `EntityID` - ID des Tieres
 Report.AnimalDiedFromIllness = anyInteger;
 
 --- Ein Siedler ist verhungert.
 ---
---- #### Parameter
---- `EntityID` - ID des Siedlers
+--- #### Parameters:
+--- * `EntityID` - ID des Siedlers
 Report.SettlerDiedFromStarvation = anyInteger;
 
 --- Ein Siedler ist an Krankheit gestorben.
 ---
---- #### Parameter
---- `EntityID` - ID des Siedlers
+--- #### Parameters:
+--- * `EntityID` - ID des Siedlers
 Report.SettlerDiedFromIllness = anyInteger;
 

@@ -1,5 +1,4 @@
 --- Implementiert die Funktionalität zum Mithören von Berichten für die Bibliothek.
-Lib.Core.Report = {};
 
 --- Erstellt einen neuen Berichtstyp.
 --- @param _Name string Name des Berichts

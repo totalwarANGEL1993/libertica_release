@@ -1,0 +1,558 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
+  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
+  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
+  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
+  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
+  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
+  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
+  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
+  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
+  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
+  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><strong>module.information.briefingsystem_api</strong></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.information.briefingsystem_api</code></h1>
+<p>Ermöglicht das Definieren von Einleitungen.</p>
+<p>
+<p> Der Höhepunkt für die Skripting-Dialoge und einfachen Kameraanimationen. Ein vielseitiges
+ Werkzeug, um die Handlung der Karte zu skripten.
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#StartBriefing">StartBriefing (_Briefing, _Name, _PlayerID)</a></td>
+	<td class="summary">Startet eine Einleitung.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RequestBriefingAlternateGraphics">RequestBriefingAlternateGraphics ()</a></td>
+	<td class="summary">Fragt den Spieler um Erlaubnis, Grafikeinstellungen zu ändern.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#IsBriefingActive">IsBriefingActive (_PlayerID)</a></td>
+	<td class="summary">Überprüft, ob eine Einleitung aktiv ist.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetFramePosition">GetFramePosition (_Entity, _ZOffset)</a></td>
+	<td class="summary">Erstellt einen Punkt aus einer Position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetFrameVector">GetFrameVector (_Entity1, _ZOffset1, _Entity2, _ZOffset2)</a></td>
+	<td class="summary">Erstellt einen Vektor aus 2 Positionen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddBriefingPages">AddBriefingPages (_Briefing)</a></td>
+	<td class="summary">Bereitet die Einleitung vor und gibt die Seitenfunktionen zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AP">AP (_Data)</a></td>
+	<td class="summary">Erstellt eine Seite.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ASP">ASP (...)</a></td>
+	<td class="summary">Erstellt eine Seite auf vereinfachte Weise.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "StartBriefing"></a>
+    <strong>StartBriefing (_Briefing, _Name, _PlayerID)</strong>
+    </dt>
+    <dd>
+    Startet eine Einleitung.
+<p> Mögliche Felder für die Einleitungstabelle:
+<li><code>Starting</code>                - Funktion, die beim Starten der Einleitung aufgerufen wird</li><li><code>Finished</code>                - Funktion, die beim Beenden der Einleitung aufgerufen wird</li><li><code>RestoreCamera</code>           - Kameraposition wird am Ende der Einleitung gespeichert und wiederhergestellt</li><li><code>RestoreGameSpeed</code>        - Spielgeschwindigkeit wird am Ende der Einleitung gespeichert und wiederhergestellt</li><li><code>EnableGlobalImmortality</code> - Während Einleitungen sind alle Entitäten unverwundbar</li><li><code>EnableSky</code>               - Zeigt den Himmel während der Einleitung an</li><li><code>EnableFoW</code>               - Zeigt den Nebel des Krieges während der Einleitung an</li><li><code>EnableBorderPins</code>        - Zeigt die Randnadeln während der Einleitung an</li><li><code>PreloadAssets</code>           - Erlaubt weites Sichtfeld in Briefings</li><li><code>HideNotes</code>               - Nachrichten nicht anzeigen</li><p><li>→ Beispiel #1*</li><p> <h3>Animationen</h3> Die Kameraeinstellungen können vom Text der Seite getrennt werden. Dies ermöglicht nicht nur
+ das flüssige Schreiben von Dialogen, sondern auch weitere Möglichkeiten werden freigeschaltet
+ bei Verwendung der Notation. Um eine Animation zu erstellen, darf die Seite keine
+ Position haben. Andernfalls werden Standardwerte verwendet.
+<p> Die Frames der Animation sollten als Tabelle bereitgestellt werden. Der Weg
+ der Kamera wird über Bézirkurven bestimmt. Das bedeutet 2 Frames werden zu
+ einer geraden, 3 erzeugen eine Parabel und ab 4 Frames entsteht eine Kurve.
+<p><li>→ Beispiel #2*</li><p><li>→ Beispiel #3*</li><p><li>→ Beispiel #4*</li><p> Die aktuelle Animation kann auch zwischengespeichert werden, um für eine
+ Page eine neue Animation zu starten, nach deren Abschluss die vorherige
+ fortgeführt wird. Die Animation kann ebenfalls so eingestellt werden, dass
+ sie nur für ihre Aktuelle Page gültig ist und danach gelöscht wird.
+<p><li>→ Beispiel #5*</li><p> <h3>Parallax</h3> Im Kontext eines Videospiels sind Parallaxen scrollbare Hintergründe. Dies
+ Technik wurde von Side-Scrollers verwendet. Während einer Einleitungsseite bis zu 4 Ebenen
+ von Grafiken angezeigt und animiert werden. Parallaxen werden ähnlich notiert wie
+ Kameraanimationen. Das Scrollen erfolgt durch Einstellen der UV-Koordinaten.
+<p> Grafiken müssen immer im Format 16:9 vorliegen. Wenn ein Spieler eine 4:3-Auflösung hat
+ wird das Bild links und rechts beschnitten, um in den Rahmen zu passen. Koordinaten - solange
+ als relative Koordinaten bereitgestellt - werden angepasst.
+<p> Es ist auch möglich, eine Tabelle von Animationsrahmen für das Bild bereitzustellen.
+ Die Rahmen werden linear interpoliert, wenn es mindestens 2 Einträge gibt und
+ kubisch interpoliert, wenn es mindestens 4 Einträge gibt.
+<p><li>→ Beispiel #6*</li><p><li>→ Beispiel #7*</li><p><li>→ Beispiel #8*</li><p> <h3>Example:</h3><p><li>Beispiel #1: Grundlegende Struktur</li> <pre><code class="language-lua"> function Briefing1(_Name, _PlayerID)
+     local Briefing = {};
+     local AP, ASP = AddBriefingPages(Briefing);
+<p>     -- Seiten ...
+<p>     Briefing.Starting = function(_Data)
+     end
+     Briefing.Finished = function(_Data)
+     end
+     StartBriefing(Briefing, _Name, _PlayerID);
+ end</code></pre><p><li>Beispiel #2: Notation für Animationen</li> <pre><code class="language-lua"> Briefing.PageAnimation = {
+     ["Seite1"] = {
+         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
+              {GetFrameVector("pos3", 500, "pos4", 1000)}},
+     },
+     ["Seite3"] = {
+         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
+              {GetFrameVector("pos3", 500, "pos4", 1000)},
+              {GetFrameVector("pos7", 500, "pos8", 1000)},
+              {GetFrameVector("pos5", 500, "pos6", 1000)}},
+     },
+ };</code></pre><p><li>Beispiel #3: Ersetzen von Animationen</li> <pre><code class="language-lua"> Briefing.PageAnimation = {
+     ["Seite1"] = {
+         Clear = true,
+         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
+              {GetFrameVector("pos3", 500, "pos4", -3000)}},
+     },
+ };</code></pre><p><li>Beispiel #4: Endlos wiederholte Animation</li> <pre><code class="language-lua"> Briefing.PageAnimation = {
+     ["Seite1"] = {
+         Repeat = true,
+         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
+              {GetFrameVector("pos3", 500, "pos4", -3000)},
+              {GetFrameVector("pos7", 500, "pos8", -3000)},
+              {GetFrameVector("pos5", 500, "pos6", -3000)}},
+     },
+ };</code></pre><p><li>Beispiel #5: Animationen zwischenschieben</li> <pre><code class="language-lua"> Briefing.PageAnimation = {
+     ["Seite1"] = {
+         Postpone = true,
+         Local = true,
+         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
+              {GetFrameVector("pos3", 500, "pos4", -3000)},
+              {GetFrameVector("pos7", 500, "pos8", -3000)},
+              {GetFrameVector("pos5", 500, "pos6", -3000)}},
+     },
+ };</code></pre><p><li>Beispiel #6: Notation von Parallaxen</li> <pre><code class="language-lua"> Briefing.PageParallax = {
+     ["Seite1"] = {
+         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
+          {0, 0, 0.8, 1, 255},
+          {0.2, 0, 1, 1, 255}},
+     },
+     ["Seite3"] = {
+         {"maps/externalmap/mapname/graphics/Parallax1.png", 1,
+          {0, 0, 0.8, 1, 255},
+          {0.2, 0, 1, 1, 255},
+          {0, 0, 0.8, 1, 255},
+          {0.2, 0, 1, 1, 255}},
+     },
+     ["Seite7"] = {
+         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
+          {0, 0, 0.8, 1, 255}},
+     },
+ };</code></pre><p><li>Beispiel #7: Parallaxen ersetzen</li> <pre><code class="language-lua"> Briefing.PageParallax = {
+     ["Seite1"] = {
+         Clear = true,
+         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
+          {0, 0, 0.8, 1, 255},
+          {0.2, 0, 1, 1, 255}},
+     },
+ };</code></pre><p><li>Beispiel #8: Endlos wiederholte Parallaxe</li> <pre><code class="language-lua"> Briefing.PageParallax = {
+     ["Seite1"] = {
+         Repeat = true,
+         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
+          {0, 0, 0.8, 1, 255},
+          {0.2, 0, 1, 1, 255}},
+     },
+ };</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Briefing</span> <b>table</b>   Einleitungstabelle
+        </li>
+        <li><span class="parameter">_Name</span> <b>string</b>      Name der Einleitung
+        </li>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> Spieler-ID des Empfängers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RequestBriefingAlternateGraphics"></a>
+    <strong>RequestBriefingAlternateGraphics ()</strong>
+    </dt>
+    <dd>
+    Fragt den Spieler um Erlaubnis, Grafikeinstellungen zu ändern.
+<p> Diese Funktionalität ist im Multiplayer deaktiviert.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "IsBriefingActive"></a>
+    <strong>IsBriefingActive (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Überprüft, ob eine Einleitung aktiv ist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> Spieler-ID des Empfängers
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> IsActive Einleitung ist aktiv
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetFramePosition"></a>
+    <strong>GetFramePosition (_Entity, _ZOffset)</strong>
+    </dt>
+    <dd>
+    Erstellt einen Punkt aus einer Position.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b>      Zielentität
+        </li>
+        <li><span class="parameter">_ZOffset</span> <b>integer</b> Z-Offset (< 0 → Z überschreiben)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li><b>number</b> X X-Koordinate</li>
+        <li><b>number</b> Y Y-Koordinate</li>
+        <li><b>number</b> Z Z-Koordinate</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetFrameVector"></a>
+    <strong>GetFrameVector (_Entity1, _ZOffset1, _Entity2, _ZOffset2)</strong>
+    </dt>
+    <dd>
+    Erstellt einen Vektor aus 2 Positionen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity1</span> <b>any</b>      Zielpositions-Entität
+        </li>
+        <li><span class="parameter">_ZOffset1</span> <b>integer</b> Z-Offset der Position (< 0 → Z überschreiben)
+        </li>
+        <li><span class="parameter">_Entity2</span> <b>any</b>      Ziel-LookAt-Entität
+        </li>
+        <li><span class="parameter">_ZOffset2</span> <b>integer</b> Z-Offset von LookAt (< 0 → Z überschreiben)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li><b>number</b> X1        X-Koordinate Position</li>
+        <li><b>number</b> Y1        Y-Koordinate Position</li>
+        <li><b>number</b> Z1        Z-Koordinate Position</li>
+        <li><b>number</b> X2        X-Koordinate LookAt</li>
+        <li><b>number</b> Y2        Y-Koordinate LookAt</li>
+        <li><b>number</b> Z2        Z-Koordinate LookAt</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddBriefingPages"></a>
+    <strong>AddBriefingPages (_Briefing)</strong>
+    </dt>
+    <dd>
+    Bereitet die Einleitung vor und gibt die Seitenfunktionen zurück.
+<p> Muss aufgerufen werden, bevor Seiten hinzugefügt werden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Briefing</span> <b>table</b> Einleitungstabelle
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li><b>function</b> AP  Seitenfunktion</li>
+        <li><b>function</b> ASP Kurze Seitenfunktion</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AP"></a>
+    <strong>AP (_Data)</strong>
+    </dt>
+    <dd>
+    Erstellt eine Seite.
+<p> Mögliche Felder für die Seite:
+<p><li><code>Title</code>           - Angezeigter Seitentitel</li><li><code>Text</code>            - Angezeigter Seitentext</li><li><code>Speech</code>          - Pfad zum Voiceover (MP3-Datei)</li><li><code>Position</code>        - Skriptname der Position</li><li><code>Duration</code>        - Zeit bis zum automatischen Überspringen</li><li><code>DialogCamera</code>    - Verwendung der Nahaufnahmekamera</li><li><code>DisableSkipping</code> - Erlauben/Verbieten des Überspringens von Seiten</li><li><code>Action</code>          - Funktion, die aufgerufen wird, wenn die Seite angezeigt wird</li><li><code>FarClipPlane</code>    - Renderabstand</li><li><code>Rotation</code>        - Kamerarotation</li><li><code>Zoom</code>            - Kamerazoom</li><li><code>Angle</code>           - Kamerawinkel</li><li><code>FadeIn</code>          - Dauer des Einblendens aus Schwarz</li><li><code>FadeOut</code>         - Dauer des Ausblendens in Schwarz</li><li><code>FaderAlpha</code>      - Maskenalpha</li><li><code>BarOpacity</code>      - Deckkraft der Balken</li><li><code>BigBars</code>         - Verwende große Balken</li><li><code>FlyTo</code>           - Tabelle mit zweitem Satz von Kamerakonfigurationen, wobei die Kamera zufliegt</li><li><code>Performance</code>     - (Optional) Grafiksettings für diese Seite herabsetzen</li><li><code>MC</code>              - Tabelle mit Auswahlmöglichkeiten zum Abzweigen in Dialogen</li><p><li>→ Beispiel #1*</li><p> <h3>Flusskontrolle</h3> In einer Einleitung kann der Spieler gezwungen werden, eine Wahl zu treffen, die
+ verschiedene Ergebnisse haben wird. Das nennt man Multiple Choice. Optionen müssen bereitgestellt werden
+ in einer Tabelle. Die Zielseite kann mit ihrem Namen definiert werden oder eine Funktion kann
+ für mehr Kontrolle über den Ablauf bereitgestellt werden. Solche Funktionen müssen zurückgeben
+ ein Seitenname.
+<p><li>→ Beispiel #2*</li><p> Zusätzlich kann jede Funktion markiert werden, um entfernt zu werden, wenn sie verwendet wird,
+ und nicht wieder angezeigt zu werden, wenn die Seite erneut betreten wird.
+<p><li>→ Beispiel #3*</li><p> Auch Seiten können ausgeblendet werden, indem eine Funktion zum Überprüfen von Bedingungen bereitgestellt wird.
+<p><li>→ Beispiel #4*</li><p> Wenn eine Einleitung verzweigt ist, muss sie manuell beendet werden, nachdem eine Verzweigung erfolgt ist
+ oder es zeigt einfach die nächste Seite an. Um eine Einleitung zu beenden, muss eine leere Seite hinzugefügt werden.
+<p><li>→ Beispiel #5*</li><p> Alternativ kann die Einleitung an einer anderen Seite fortgesetzt werden. Dies ermöglicht es, zu erstellen
+ sich wiederholende Strukturen innerhalb einer Einleitung.
+<p><li>→ Beispiel #6*</li><p> Um ausgewählte Antworten zu einem späteren Zeitpunkt zu erhalten, kann die Auswahl in einem
+ globalen Variablen entweder in einem Optionsrückruf oder in der fertigen Funktion gespeichert werden. Die
+ Die zurückgegebene Nummer ist die ID der Antwort.
+<p><li>→ Beispiel #7*</li><p> <h3>Example:</h3><p><li>Beispiel #1: Eine einfache Seite</li> <pre><code class="language-lua"> AP {
+    Title        = "Marcus",
+    Text         = "Dies ist eine einfache Seite.",
+    Position     = "Marcus",
+    Rotation     = 30,
+    DialogCamera = true,
+ };</code></pre><p><li>Beispiel #2: Verwendung von mehreren Auswahlmöglichkeiten</li> <pre><code class="language-lua"> AP {
+    Title        = "Marcus",
+    Text         = "Das ist keine so einfache Seite.",
+    Position     = "Marcus",
+    Rotation     = 30,
+    DialogCamera = true,
+    MC = {
+        {"Option 1", "ZielSeite"},
+        {"Option 2", Option2Geklickt},
+    },
+ };</code></pre><p><li>Beispiel #3: Einmalige Verwendungsoption</li> <pre><code class="language-lua"> MC = {
+     ...
+     {"Option 3", "AndereSeite", Remove = true},
+ }</code></pre><p><li>Beispiel #4: Option mit Bedingung</li> <pre><code class="language-lua"> MC = {
+     ...
+     {"Option 3", "AndereSeite", Disable = OptionIstDeaktiviert},
+ }</code></pre><p><li>Beispiel #5: Briefing abbrechen</li> <pre><code class="language-lua"> AP()</code></pre><p><li>Beispiel #6: Springen zu anderer Seite</li> <pre><code class="language-lua"> AP("EinigeSeitenName")</code></pre><p><li>Beispiel #7: Ausgewählte Option abrufen</li> <pre><code class="language-lua"> Briefing.Finished = function(_Data)
+     MeineAusgewählteOption = _Data:GetPage("Auswahl"):GetSelected();
+ end</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Data</span> <b>table</b> Seitendaten
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ASP"></a>
+    <strong>ASP (...)</strong>
+    </dt>
+    <dd>
+    Erstellt eine Seite auf vereinfachte Weise.
+<p> Die Funktion kann einen automatischen Seitennamen basierend auf dem
+ Seitenindex erstellen. Ein Name kann ein optionales Parameter am
+ Anfang sein. Die Seite wird nicht weiter springen, bis der Skip-Button
+ geklicht wird.
+<p> Die Funktion erwartet die folgenden Parameter:
+
+<li><code>Name</code>            - (Optional) Name der Seite</li><li><code>Title</code>           - Angezeigter Seitentitel</li><li><code>Text</code>            - Angezeigter Seitentext</li><li><code>DialogCamera</code>    - Verwendung der Nahaufnahmekamera</li><li><code>Position</code>        - (Optional) Skriptname der fokussierten Entität</li><li><code>Action</code>          - (Optional) Aktion, wenn die Seite angezeigt wird</li><p> <h3>Example:</h3><p> <pre><code class="language-lua"> -- Totale Ansicht
+ ASP("Titel", "Einige wichtige Texte.", false, "HQ");
+ -- Seitennamen
+ ASP("Seite1", "Titel", "Einige wichtige Texte.", false, "HQ");
+ -- Nahaufnahme
+ ASP("Titel", "Einige wichtige Texte.", true, "Marcus");
+ -- Aktion aufrufen
+ ASP("Titel", "Einige wichtige Texte.", true, "Marcus", MyFunction);</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span> <b>any</b> Liste der Seitendaten
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

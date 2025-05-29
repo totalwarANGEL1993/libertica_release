@@ -1,4 +1,4 @@
-Lib.Register("comfort/global/GetRandomSettlerType");
+--- Funktionen, die verschiedene zufällige Bewonertypen zurückgegen.
 
 --- Gibt einen zufälligen Einwohnertyp zurück.
 --- @return integer Type Zufälliger Typ

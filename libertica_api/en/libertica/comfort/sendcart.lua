@@ -1,4 +1,6 @@
 --- Sends a cart with a good to a player.
+
+--- Sends a cart with a good to a player.
 --- @param _Position any ID or script name
 --- @param _PlayerID integer Receiving player ID
 --- @param _GoodType integer Type of good

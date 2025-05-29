@@ -61,6 +61,7 @@ Lib.Require("comfort/CopyTable");
 Lib.Require("comfort/GetQuestID");
 Lib.Require("comfort/IsValidQuest");
 Lib.Require("comfort/SendCart");
+Lib.Require("comfort/SetResourceAmount");
 Lib.Require("core/feature/Core_Report");
 Lib.Register("core/feature/Core_Quest");
 
@@ -182,6 +183,15 @@ end
 
 function Lib.Core.Quest:OverwriteGeologistRefill()
     if Framework.GetGameExtraNo() >= 1 then
+        self.Orig_SetResourceAmount = SetResourceAmount;
+        SetResourceAmount = function(_Entity, _StartAmount, _RefillAmount)
+            if Lib.Core.Quest.Orig_SetResourceAmount(_Entity, _StartAmount, _RefillAmount) then
+                local EntityID = GetID(_Entity);
+                CONST_REFILL_AMOUNT[EntityID] = _RefillAmount;
+            end
+        end
+        API.SetResourceAmount = SetResourceAmount;
+
         GameCallback_OnGeologistRefill_Orig_Lib_Core = GameCallback_OnGeologistRefill;
         GameCallback_OnGeologistRefill = function(_PlayerID, _TargetID, _GeologistID)
             GameCallback_OnGeologistRefill_Orig_Lib_Core(_PlayerID, _TargetID, _GeologistID);

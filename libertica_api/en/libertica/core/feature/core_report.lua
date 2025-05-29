@@ -1,5 +1,4 @@
 --- Implements the report listening functionality for the library.
-Lib.Core.Report = {};
 
 --- Creates a new report type.
 --- @param _Name string Name of report

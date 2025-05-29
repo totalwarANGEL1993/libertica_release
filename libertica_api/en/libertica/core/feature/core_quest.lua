@@ -1,8 +1,7 @@
 --- Adds additional functionality to the quest system.
-Lib.Core.Quest = {}
 
 --- Sets the amount of resources in a mine and optional refill amount.
---- @param _Entity string|integer Entity to change
+--- @param _Entity any Entity to change
 --- @param _StartAmount integer Initial amount
 --- @param _RefillAmount integer? (optional) Refill amount
 function SetResourceAmount(_Entity, _StartAmount, _RefillAmount)

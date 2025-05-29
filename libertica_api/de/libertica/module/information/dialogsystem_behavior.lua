@@ -1,3 +1,5 @@
+--- Stellt Behavior für Dialoge bereit.
+
 --- Ruft eine Mapscript-Funktion auf und geht davon aus, dass es sich um einen Dialog handelt.
 ---
 --- Jedes Briefing benötigt einen eindeutigen Namen!

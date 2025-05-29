@@ -1,4 +1,6 @@
 --- Gibt eine Position auf einer Linie zwischen 2 Punkten zurück.
+
+--- Gibt eine Position auf einer Linie zwischen 2 Punkten zurück.
 --- @param _Pos1 any ID, Skriptname, Position des Startpunkt
 --- @param _Pos2 any ID, Skriptname, Position des Endpunkt
 --- @param _Percentage number Relativer Abstand zum Start

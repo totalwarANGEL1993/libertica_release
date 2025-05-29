@@ -1,9 +1,4 @@
 --- Allows to manipulate buying and selling of goods and units.
----
---- #### Reports
---- * `Report.GoodsPurchased` - A player purchased goods
---- * `Report.GoodsSold` - A player has sold goods
-Lib.Trade = Lib.Trade or {};
 
 
 
@@ -322,7 +317,7 @@ API.ModifyTradeOffer = ModifyTradeOffer;
 
 --- A player purchased an offer from a storehouse.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_OfferIndex` - Index of offer
 --- * `_MerchantType` - Type of merchant
 --- * `_Type` - Type of offer
@@ -334,7 +329,7 @@ Report.Purchased = anyInteger;
 
 --- A player has sold goods to another player.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `_MerchantType` - Type of merchant
 --- * `_GoodType` - Type of good
 --- * `_GoodAmount` - Amount of good

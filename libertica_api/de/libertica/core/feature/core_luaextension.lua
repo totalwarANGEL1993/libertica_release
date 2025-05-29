@@ -1,5 +1,4 @@
 --- Fügt zusätzliche Funktionalität zur Table-, String- und Math-API hinzu.
-Lib.Core.LuaExtension = {};
 
 --- Vergleicht zwei Tabellen mit einer Vergleichsfunktion.
 --- @param t1 table Erste Tabelle

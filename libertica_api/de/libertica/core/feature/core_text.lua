@@ -1,6 +1,5 @@
 --- Bietet Kontrolle über die Ausgabe, Platzhalter für Text und Überschreibungen
 --- für Typnamen in der Benutzeroberfläche.
-Lib.Core.Text = {}
 
 --- Lokalisiert den übergebenen Text oder die Tabelle.
 --- @param _Text any Text zur Lokalisierung
@@ -12,12 +11,12 @@ API.Localize = Localize;
 
 --- Ersetzt alle Platzhalter innerhalb des Strings durch ihre jeweiligen Werte.
 ---
---- * {n:xyz} Ersetzt einen Skriptnamen durch einen vordefinierten Wert
---- * {t:xyz} Ersetzt einen Typen durch einen vordefinierten Wert
---- * {v:xyz} Ersetzt eine Variable in _G durch ihren Wert.
---- * {color} Ersetzt den Namen der Farbe durch ihren Farbcode.
+--- * `{n:xyz}` - Ersetzt einen Skriptnamen durch einen vordefinierten Wert
+--- * `{t:xyz}` - Ersetzt einen Typen durch einen vordefinierten Wert
+--- * `{v:xyz}` - Ersetzt eine Variable in _G durch ihren Wert.
+--- * `{color}` - Ersetzt den Namen der Farbe durch ihren Farbcode.
 --- 
---- Farben:
+--- <p>Farben: 
 --- red, blue, yellow, green, white, black, grey, azure, orange, amber, violet,
 --- pink, scarlet, magenta, olive, tooltip, none
 ---
@@ -99,10 +98,10 @@ end
 --- Gibt die geschätzte Anzahl Zeilen zurück, die zur Anzeige benötigt wird.
 --- 
 --- #### Einordnung:
---- * Länge 4: ABCDEFGHKLMNOPQRSTUVWXYZÄÖÜÁÂÃÅÇÈÉÊËÐÐÑÒÓÔÕÖØÙÚÛÜÝ
---- * Länge 3: abcdeghkmnopqsuvwxyzäöüßIJÆÌÍÎÏÞàáâãåæçèéêëìíîïðñòóôõ÷øùúûüýþÿ
---- * Länge 2: \"#+*~_\\§$%&=?@fijlft
---- * Länge 1: !-/()?',.|[]{}
+--- <li>Länge 4: `ABCDEFGHKLMNOPQRSTUVWXYZÄÖÜÁÂÃÅÇÈÉÊËÐÐÑÒÓÔÕÖØÙÚÛÜÝ`</li>
+--- <li>Länge 3: `abcdeghkmnopqsuvwxyzäöüßIJÆÌÍÎÏÞàáâãåæçèéêëìíîïðñòóôõ÷øùúûüýþÿ`</li>
+--- <li>Länge 2: `\"#+*~_\\§$%&=?@fijlft`</li>
+--- <li>Länge 1: `!-/()?',.|[]{}`</li>
 --- 
 --- Alle nicht gelisteten Zeichen werden mit Länge 2 geschätzt.
 --- 

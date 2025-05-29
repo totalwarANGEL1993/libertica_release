@@ -1,11 +1,10 @@
 --- Erlaubt es Namen, Farben und Portraits von Spielern anzupassen.
 ---
 --- Folgende Dinge können angepasst werden:
---- * Spielerfarbe
---- * Spielername
---- * Spielerporträt
---- * Territoriumsname
-Lib.Core.Player = {}
+--- <li>Spielerfarbe</li>
+--- <li>Spielername</li>
+--- <li>Spielerporträt</li>
+--- <li>Territoriumsname</li>
 
 --- Gibt den Namen des Gebiets zurück.
 --- @param _TerritoryID number ID des Gebiets
@@ -41,7 +40,7 @@ API.SetPlayerColor = SetPlayerColor;
 
 --- Ändert das Porträt eines Spielers.
 ---
---- #### Beispiele
+--- #### Example:
 --- ```lua
 --- -- Beispiel #1: Modell nach Spielerheld setzen
 --- SetPlayerPortrait(2);
@@ -50,6 +49,7 @@ API.SetPlayerColor = SetPlayerColor;
 --- -- Beispiel #3: Modellname direkt setzen
 --- SetPlayerPortrait(2, "H_NPC_Monk_AS");
 --- ```
+--- 
 --- @param _PlayerID number  ID des Spielers
 --- @param _Portrait? string Name des Modells
 function SetPlayerPortrait(_PlayerID, _Portrait)

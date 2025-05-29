@@ -1,3 +1,5 @@
+--- Offers behaviors for cutscenes.
+
 --- Calls a mapscript function assuming it beeing a cutscene.
 ---
 --- Every cutscene needs a unique name!

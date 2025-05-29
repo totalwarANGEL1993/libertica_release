@@ -1,5 +1,4 @@
 --- Fügt zusätzliche Funktionalitäten hinzu, um den Zugriff auf Laden und Speichern zu steuern.
-Lib.Core.Save = {};
 
 --- Deaktiviert das Autospeichern der History Edition.
 --- @param _Flag boolean Autospeichern ist deaktiviert

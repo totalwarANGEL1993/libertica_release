@@ -1,17 +1,4 @@
 --- Verbessert interaktive Objekte.
----
---- #### Reports
---- * Report.ObjectClicked - Der Spieler hat auf die Interaktions-Schaltfläche geklickt.
---- * Report.ObjectInteraction - Die Interaktion des Objekts war erfolgreich.
---- * Report.ObjectReset - Die Interaktion wird vom Objekt gelöscht.
---- * Report.ObjectDelete - Der Zustand eines Objekts wurde zurückgesetzt.
----
---- #### Debug-Funktionen
---- * Debug_EnableIO(Entity, State, Player)  - Ein Objekt wird aktiviert
---- * Debug_DisableIO(Entity, State, Player) - Ein Objekt wird deaktiviert
---- * Debug_InitIO(Entity, RG, RA, CG1, CA1, CG2, CA2) - Ein Objekt wird rudimentär aktiviert
----
-Lib.IO = Lib.IO or {};
 
 
 
@@ -21,33 +8,26 @@ Lib.IO = Lib.IO or {};
 --- Ein Objekt wird durch eine Tabelle beschrieben und (fast) alle Schlüssel sind optional.
 ---
 --- #### Felder der Tabelle
---- * ScriptName             - Skriptname des Objekts
---- * Texture                - (Optional) Tabelle mit Koordinaten
----   - Spielicons: {x, y, ExtraNumber}
----   - Benutzerdefinierte Icons: {x, y, FileNamePrefix}
---- * Title                  - (Optional) Titel des Tooltipps
---- * Text                   - (Optional) Text des Tooltipps
---- * Distance               - (Optional) Aktivierungsabstand
---- * Player                 - (Optional) Liste der Spieler
---- * Waittime               - (Optional) Aktivierungs-Wartezeit
---- * Replacement            - (Optional) Typ, mit dem ersetzt wird
---- * Costs                  - (Optional) Aktivierungskosten-Tabelle
----   - Format: {Typ, Betrag, Typ, Betrag}
---- * Reward                 - (Optional) Aktivierungsbelohnungstabelle
----   - Format: {Typ, Betrag}
---- * State                  - (Optional) Aktivierungsverhalten
----   - 0: Nur Held
----   - 1: Automatisch
----   - 2: Niemals
---- * Condition              - (Optional) Aktivierungsbedingungsfunktion
---- * ConditionInfo          - (Optional) Text bei Bedingungsfehler
---- * Action                 - (Optional) Aktivierungs-Callback-Funktion
---- * RewardResourceCartType - (Optional) Typ des Belohnungsressourcenkarrens
---- * RewardGoldCartType     - (Optional) Typ des Belohnungsgoldkarrens
---- * CostResourceCartType   - (Optional) Typ des Kostenressourcenkarrens
---- * CostGoldCartType       - (Optional) Typ des Kostengoldkarrens
+--- * `ScriptName`             - Skriptname des Objekts
+--- * `Texture`                - (Optional) Tabelle mit Koordinaten
+--- * `Title`                  - (Optional) Titel des Tooltipps
+--- * `Text`                   - (Optional) Text des Tooltipps
+--- * `Distance`               - (Optional) Aktivierungsabstand
+--- * `Player`                 - (Optional) Liste der Spieler
+--- * `Waittime`               - (Optional) Aktivierungs-Wartezeit
+--- * `Replacement`            - (Optional) Typ, mit dem ersetzt wird
+--- * `Costs`                  - (Optional) Aktivierungskosten-Tabelle
+--- * `Reward`                 - (Optional) Aktivierungsbelohnungstabelle
+--- * `State`                  - (Optional) Aktivierungsverhalten
+--- * `Condition`              - (Optional) Aktivierungsbedingungsfunktion
+--- * `ConditionInfo`          - (Optional) Text bei Bedingungsfehler
+--- * `Action`                 - (Optional) Aktivierungs-Callback-Funktion
+--- * `RewardResourceCartType` - (Optional) Typ des Belohnungsressourcenkarrens
+--- * `RewardGoldCartType`     - (Optional) Typ des Belohnungsgoldkarrens
+--- * `CostResourceCartType`   - (Optional) Typ des Kostenressourcenkarrens
+--- * `CostGoldCartType`       - (Optional) Typ des Kostengoldkarrens
 ---
---- #### Beispiele
+--- #### Example:
 --- ```lua
 --- -- Erstellt ein einfaches Objekt
 --- SetupObject {
@@ -78,7 +58,7 @@ API.ResetObject = ResetObject;
 
 --- Ändert den Namen des Objekts in der 2D-Oberfläche.
 --- 
---- #### Beispiele
+--- #### Example:
 --- ```lua
 --- InteractiveObjectAddCustomName("D_X_HabourCrane", {
 ---     de = "Hafenkran",
@@ -86,15 +66,15 @@ API.ResetObject = ResetObject;
 --- });
 --- ```
 ---
---- @param _Key string        Schlüssel zum Hinzufügen
---- @param _Text string|table Text oder Ersatztext
+--- @param _Key string Schlüssel zum Hinzufügen
+--- @param _Text any   Text oder Ersatztext
 function InteractiveObjectAddCustomName(_Key, _Text)
 end
 API.InteractiveObjectSetQuestName = InteractiveObjectAddCustomName;
 
 --- Entfernt die Änderungen am Objektnamen.
 --- 
---- #### Beispiel
+--- #### Example:
 --- ```lua
 --- InteractiveObjectDeleteCustomName("D_X_HabourCrane");
 --- ```
@@ -191,7 +171,7 @@ API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
 
 --- Der Spieler hat auf die Interaktions-Schaltfläche geklickt.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `ScriptName` - Skriptname der Entität
 --- * `KnightID`   - ID des aktivierenden Helden
 --- * `PlayerID`   - ID des aktivierenden Spielers
@@ -200,7 +180,7 @@ Report.ObjectClicked = anyInteger;
 --- Die Interaktion des Objekts war erfolgreich.
 --- Wenn das Objekt Kosten hat, wird die Aktivierung abgeschlossen, wenn die Kosten ankommen.
 --- 
---- #### Parameter
+--- #### Parameters:
 --- * `ScriptName` - Skriptname der Entität
 --- * `KnightID`   - ID des aktivierenden Helden
 --- * `PlayerID`   - ID des aktivierenden Spielers
@@ -208,13 +188,13 @@ Report.ObjectInteraction = anyInteger;
 
 --- Die Interaktion wird vom Objekt gelöscht.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `ScriptName` - Skriptname der Entität
 Report.ObjectReset = anyInteger;
 
 --- Der Zustand eines Objekts wurde zurückgesetzt.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `ScriptName` - Skriptname der Entität
 Report.ObjectDelete = anyInteger;
 

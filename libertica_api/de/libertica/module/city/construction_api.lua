@@ -3,8 +3,9 @@
 --- #### Besondere Regeln
 --- Die folgenden Regeln sind immer aktiv und können nicht deaktiviert werden:
 ---
---- * Ballisten können nicht direkt nebeneinander platziert werden und benötigen immer ein vollständiges
----   Mauersegment zwischen ihnen (oder mehrere, die gleich lang sind).
+--- <li>Ballisten können nicht direkt nebeneinander platziert werden und 
+--- benötigen immer ein vollständiges Mauersegment zwischen ihnen (oder 
+--- mehrere, die gleich lang sind).</li>
 ---
 Lib.Construction = Lib.Construction or {};
 
@@ -18,9 +19,9 @@ API.UseForceBallistaDistance = UseForceBallistaDistance;
 
 --- Definiert eine benutzerdefinierte Regel für den Bau von Gebäuden.
 ---
---- Die Funktion muss im **globalen Skript** platziert sein!
+--- Die Funktion muss im <b>globalen Skript</b> platziert sein!
 ---
---- #### Benutzerdefinierte Funktion
+--- #### Custom Function:
 --- ```lua
 --- function MyCustomBuildRestriction(_PlayerID, _Type, _x, _y, ...)
 ---     return CanBeBuild;
@@ -37,9 +38,9 @@ API.CustomRuleConstructBuilding = CustomRuleConstructBuilding;
 
 --- Definiert eine benutzerdefinierte Regel für den Bau von Straßen.
 ---
---- Die Funktion muss im **lokalen Skript** platziert sein!
+--- Die Funktion muss im <b>lokalen Skript</b> platziert sein!
 ---
---- #### Benutzerdefinierte Funktion
+--- #### Custom Function:
 --- ```lua
 --- function MyCustomRoadRestriction(_PlayerID, _IsStreet, _x, _y, ...)
 ---     return CanBeBuild;
@@ -56,9 +57,9 @@ API.CustomRuleConstructRoad = CustomRuleConstructRoad;
 
 --- Definiert eine benutzerdefinierte Regel für den Bau von Mauern.
 ---
---- Die Funktion muss im **lokalen Skript** platziert sein!
+--- Die Funktion muss im <b>lokalen Skript</b> platziert sein!
 ---
---- #### Benutzerdefinierte Funktion
+--- #### Custom Function:
 --- ```lua
 --- function MyCustomWallRestriction(_PlayerID, _IsWall, _x, _y, ...)
 ---     return CanBeBuild;
@@ -75,9 +76,9 @@ API.CustomRuleConstructWall = CustomRuleConstructWall;
 
 --- Definiert eine benutzerdefinierte Regel für den Abriss von Gebäuden.
 ---
---- Die Funktion muss im **lokalen Skript** platziert sein!
+--- Die Funktion muss im <b>lokalen Skript</b> platziert sein!
 ---
---- #### Benutzerdefinierte Funktion
+--- #### Custom Function:
 --- ```lua
 --- function MyCustomKnockdownRestriction(_PlayerID, _EntityID, _x, _y, ...)
 ---     return CanBeDemolished;

@@ -1,15 +1,10 @@
 --- Ermöglicht das Erstellen von konstruierbaren Ressourcenquellen.
----
---- #### Reports
---- * `Report.InteractiveMineErected` - Eine Ressourcenquelle wurde erstellt.
----
-Lib.IOMine = Lib.IOMine or {};
 
 
 
 --- Erstellt eine vergrabene Eisenerzmine.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `ScriptName`            - Skriptname der Position
 --- * `Title`                 - (Optional) Tooltip-Titel
 --- * `Text`                  - (Optional) Tooltip-Text
@@ -27,7 +22,7 @@ API.CreateIOIronMine = CreateIOIronMine;
 
 --- Erstellt eine vergrabene Steingrube.
 ---
---- #### Parameter
+--- #### Parameters:
 --- * `ScriptName`            - Skriptname der Position
 --- * `Title`                 - (Optional) Tooltip-Titel
 --- * `Text`                  - (Optional) Tooltip-Text
@@ -47,7 +42,7 @@ API.CreateIOStoneMine = CreateIOStoneMine;
 
 --- Eine Ressourcenquelle wurde erstellt.
 ---
---- #### Parameter
+--- #### Parameters:
 --- - `ScriptName` - Skriptname der Mine
 --- * `KnightID`   - ID des aktivierenden Helden
 --- * `PlayerID`   - ID des aktivierenden Spielers
