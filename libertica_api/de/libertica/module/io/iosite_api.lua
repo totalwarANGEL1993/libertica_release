@@ -1,9 +1,13 @@
+--- Ermöglicht das Erstellen von aktivierbaren Baustellen.
+
+
+
 --- Erzeugt eine interaktive Baustelle an der Position.
 --- 
 --- Das Territorium unter der interaktiven Baustelle muss dem Spieler gehören,
 --- der das Gebäude errichten wird.
 ---
---- #### Parameters:
+--- #### Fields `_Data`:
 --- * `ScriptName`            - Skriptname der Position
 --- * `PlayerID`              - Besitzer des Gebäudes
 --- * `Type`                  - Typ des Gebäudes
@@ -24,8 +28,8 @@ API.CreateIOBuildingSite = CreateIOBuildingSite;
 --- Eine Baustelle wurde fertiggestellt.
 ---
 --- #### Parameters:
---- - `ScriptName` - Skriptname der Baustelle
---- * `PlayerID`   - ID des aktivierenden Spielers
---- * `BuildingID` - ID des gebauten Gebäude
+--- - `ScriptName`: <b>string</b> Skriptname der Baustelle
+--- * `PlayerID`:   <b>integer</b> ID des aktivierenden Spielers
+--- * `BuildingID`: <b>integer</b> ID des gebauten Gebäude
 Report.InteractiveSiteBuild = anyInteger;
 

@@ -7,7 +7,6 @@
 --- a fulllength wall segment between them (or multiple that are equally
 --- long).</li>
 ---
-Lib.Construction = Lib.Construction or {};
 
 
 

@@ -6,13 +6,12 @@
 --- All texts inside a quest can be pulled out of string tables. The format for
 --- those texts will be "FileName/StringName".
 ---
-Lib.Quest = Lib.Quest or {};
 
 
 
 --- Creates a normal quest.
 ---
---- #### Fields of table
+--- #### Fields `_Data`:
 --- * `Name`        - A unique name for the quest
 --- * `Sender`      - Quest giver player ID
 --- * `Receiver`    - Quest receiver player ID

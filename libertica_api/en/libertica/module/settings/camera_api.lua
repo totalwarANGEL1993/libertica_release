@@ -1,5 +1,7 @@
 --- Functions to manipulate the RTS camera.
 
+
+
 --- Changes the max rendering distance until something is clipped.
 --- @param _View number Max randering distance
 function SetRenderDistance(_View)
@@ -73,24 +75,24 @@ API.FocusCameraOnEntity = FocusCameraOnEntity;
 --- Scrolling at the edge of the screen is deactivated for a player.
 ---
 --- #### Parameters:
---- * `PlayerID` - ID of Player
---- * `Position` - ID of Entity camera is fixed on
+--- * `PlayerID`: <b>integer</b> ID of Player
+--- * `Position`: <b>integer</b> ID of Entity camera is fixed on
 Report.BorderScrollLocked = anyInteger;
 
 --- Scrolling at the edge of the screen is activated for a player.
 ---
 --- #### Parameters:
---- * `PlayerID` - ID of Player
+--- * `PlayerID`: <b>integer</b> ID of Player
 Report.BorderScrollReset = anyInteger;
 
 --- Extended zoom distance is deactivated for the player.
 --- 
 --- #### Parameters:
---- * `PlayerID` - ID of Player
+--- * `PlayerID`: <b>integer</b> ID of Player
 Report.ExtendedZoomDeactivated = anyInteger;
 
 --- Extended zoom distance is activated for the player.
 --- 
 --- #### Parameters:
---- * `PlayerID` - ID of Player
+--- * `PlayerID`: <b>integer</b> ID of Player
 Report.ExtendedZoomActivated = anyInteger;

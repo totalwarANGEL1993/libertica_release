@@ -27,16 +27,13 @@ CONST_DIALOG = {
 Lib.Require("comfort/GetPosition");
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");
-Lib.Require("module/ui/UIEffects");
-Lib.Require("module/ui/UITools");
-Lib.Require("module/settings/Sound");
-Lib.Require("module/information/Requester");
+Lib.Require("module/information/Information");
 Lib.Require("module/information/DialogSystem_Text");
 Lib.Require("module/information/DialogSystem_API");
 Lib.Require("module/information/DialogSystem_Behavior");
 Lib.Register("module/information/DialogSystem");
 
-CinematicEventTypes.Dialog = 5;
+CinematicEventTypes.Dialog = 4;
 
 -- -------------------------------------------------------------------------- --
 -- Global
@@ -88,7 +85,7 @@ end
 function Lib.DialogSystem.Global:UpdateQueue()
     for i= 1, 8 do
         if self:CanStartDialog(i) then
-            local Next = Lib.UIEffects.Global:LookUpCinematicInQueue(i);
+            local Next = Lib.Information.Global:LookUpCinematicInQueue(i);
             if Next and Next[1] == CinematicEventTypes.Dialog then
                 self:NextDialog(i);
             end
@@ -111,117 +108,246 @@ function Lib.DialogSystem.Global:DialogExecutionController()
     end
 end
 
+function Lib.DialogSystem.Global:ExpandDialogTable(_Dialog)
+    assert(type(_Dialog) == "table");
+    Lib.DialogSystem.Global:CreateDialogProperties(_Dialog);
+    Lib.DialogSystem.Global:CreateDialogGetPage(_Dialog);
+    Lib.DialogSystem.Global:CreateDialogAddPage(_Dialog);
+end
+
+function Lib.DialogSystem.Global:CreateDialogProperties(_Dialog)
+    _Dialog.EnableSky = true;
+    _Dialog.EnableFoW = false;
+    _Dialog.HideNotes = false;
+    _Dialog.EnableGlobalImmortality = true;
+    _Dialog.EnableBorderPins = false;
+    _Dialog.RestoreGameSpeed = true;
+    _Dialog.RestoreCamera = true;
+
+    _Dialog.SetName = function(_self, _Name)
+        _self.Name = _Name;
+        return _self;
+    end
+
+    _Dialog.SetPlayer = function(_self, _Player)
+        _self.PlayerID = _Player;
+        return _self;
+    end
+
+    _Dialog.UseRestoreCamera = function(_self, _RestoreCamera)
+        _self.RestoreCamera = _RestoreCamera == true;
+        return _self;
+    end
+
+    _Dialog.UseRestoreGameSpeed = function(_self, _RestoreGameSpeed)
+        _self.RestoreGameSpeed = _RestoreGameSpeed == true;
+        return _self;
+    end
+
+    _Dialog.UseGlobalImmortality = function(_self, _EnableGlobalImmortality)
+        _self.EnableGlobalImmortality = _EnableGlobalImmortality == true;
+        return _self;
+    end
+
+    _Dialog.SetEnableBorderPins = function(_self, _EnableBorderPins)
+        _self.EnableBorderPins = _EnableBorderPins == true;
+        return _self;
+    end
+
+    _Dialog.SetEnableFoW = function(_self, _EnableFoW)
+        _self.EnableFoW = _EnableFoW == true;
+        return _self;
+    end
+
+    _Dialog.SetEnableSky = function(_self, _EnableSky)
+        _self.EnableSky = _EnableSky == true;
+        return _self;
+    end
+
+    _Dialog.SetHideNotes = function(_self, _HideNotes)
+        _self.HideNotes = _HideNotes == true;
+        return _self;
+    end
+
+    _Dialog.SetOnBegin = function(_self, _OnBegin)
+        _self.Starting = _OnBegin;
+        return _self;
+    end
+
+    _Dialog.SetOnFinish = function(_self, _OnFinish)
+        _self.Finished = _OnFinish;
+        return _self;
+    end
+
+    _Dialog.Start = function(_self)
+        assert(GUI == nil);
+
+        local Count = Lib.DialogSystem.Global.DialogCounter +1;
+        Lib.DialogSystem.Global.DialogCounter = Count;
+        _self.Name = _self.Name or ("DialogSystem_Dialog_" .. Count);
+        _self.PlayerID = _self.PlayerID or 1;
+
+        assert(type(_self.Name) == "string");
+        assert(_self.PlayerID ~= nil);
+        assert(type(_self) == "table", "Dialog must be a table!");
+        assert(#_self > 0, "Dialog does not contain pages!");
+
+        Lib.DialogSystem.Global:StartDialog(_self.Name, _self.PlayerID, _self);
+        return _self.Name;
+    end
+end
+
 function Lib.DialogSystem.Global:CreateDialogGetPage(_Dialog)
-    _Dialog.GetPage = function(self, _NameOrID)
+    _Dialog.GetPage = _Dialog.GetPage or function(this, _NameOrID)
         local ID = Lib.DialogSystem.Global:GetPageIDByName(_Dialog.PlayerID, _NameOrID);
         return Lib.DialogSystem.Global.Dialog[_Dialog.PlayerID][ID];
     end
 end
 
 function Lib.DialogSystem.Global:CreateDialogAddPage(_Dialog)
-    _Dialog.AddPage = function(self, _Page)
-        -- Dialog length
-        self.Length = (self.Length or 0) +1;
+    local Dialog = _Dialog;
 
-        -- Set page name
-        local Identifier = "Page" ..(#self +1);
-        if _Page.Name then
-            Identifier = _Page.Name;
-        else
-            _Page.Name = Identifier;
-        end
+    Dialog.BeginPage = Dialog.BeginPage or function(_self)
+        Dialog.Length = (Dialog.Length or 0) +1;
+        local Page = {};
+        Page.__Legit = true;
+        Page.Name = "Page" ..(#Dialog +1);
+        Page.DialogCamera = false;
+        Page.AutoSkip = false;
 
-        -- Make page legit
-        _Page.__Legit = true;
-        -- Language
-        _Page.Text = Localize(_Page.Text or "");
-
-        -- Skip page
-        _Page.AutoSkip = false;
-        if _Page.Duration then
-            if _Page.Duration == -1 then
-                _Page.Duration = string.len(_Page.Text or "") * CONST_DIALOG.TIMER_PER_CHAR;
-                _Page.Duration = (_Page.Duration < 6 and 6) or _Page.Duration < 6;
-            end
-            _Page.AutoSkip = _Page.Duration > 0;
-        end
-
-        -- Default camera rotation
-        if not _Page.Rotation then
-            _Page.Rotation = CONST_DIALOG.CAMERA_ROTATIONDEFAULT;
-            if _Page.DialogCamera then
-                _Page.Rotation = CONST_DIALOG.DLGCAMERA_ROTATIONDEFAULT;
-            end
-            if _Page.Position and type(_Page.Position) ~= "table" then
-                local ID = GetID(_Page.Position);
-                local Orientation = Logic.GetEntityOrientation(ID) +90;
-                _Page.Rotation = Orientation;
-            elseif _Page.Target then
-                local ID = GetID(_Page.Target);
-                local Orientation = Logic.GetEntityOrientation(ID) +90;
-                _Page.Rotation = Orientation;
-            end
-        end
-        -- Default camera distance
-        if not _Page.Distance then
-            _Page.Distance = CONST_DIALOG.CAMERA_ZOOMDEFAULT;
-            if _Page.DialogCamera then
-                _Page.Distance = CONST_DIALOG.DLGCAMERA_ZOOMDEFAULT;
-            end
-        end
-        -- Default camera angle
-        if not _Page.Angle then
-            _Page.Angle = CONST_DIALOG.CAMERA_ANGLEDEFAULT;
-            if _Page.DialogCamera then
-                _Page.Angle = CONST_DIALOG.DLGCAMERA_ANGLEDEFAULT;
-            end
-        end
-
-        -- Multiple choice selection
-        _Page.GetSelected = function(self)
-            return 0;
-        end
-        -- Return page
-        table.insert(self, _Page);
-        return _Page;
-    end
-end
-
-function Lib.DialogSystem.Global:CreateDialogAddMCPage(_Dialog)
-    _Dialog.AddMCPage = function(self, _Page)
-        -- Create base page
-        local Page = self:AddPage(_Page);
-
-        -- Multiple Choice options
-        if Page.MC then
-            for i= 1, #Page.MC do
-                Page.MC[i][1] = Localize(Page.MC[i][1]);
-                Page.MC[i].ID = Page.MC[i].ID or i;
-            end
-            Page.AutoSkip = false;
-            Page.Duration = -1;
-        end
-
-        -- Multiple choice selection
-        Page.GetSelected = function(self)
-            if self.MC then
-                return self.MC.Selected;
+        Page.GetSelected = function(_Page)
+            if _Page.MC then
+                return _Page.MC.Selected or 0;
             end
             return 0;
         end
-        -- Return page
+
+        Page.SetName = function(_Page, _Name)
+            _Page.Name = _Name;
+            return _Page;
+        end
+
+        Page.SetActor = function(_Page, _Actor)
+            _Page.Actor = _Actor;
+            return _Page;
+        end
+
+        Page.SetTitle = function(_Page, _Title)
+            _Page.Title = Localize(_Title or "");
+            return _Page;
+        end
+
+        Page.SetText = function(_Page, _Text)
+            _Page.Text = Localize(_Text or "");
+            return _Page;
+        end
+
+        Page.SetSpeech = function(_Page, _Speech)
+            _Page.Speech = _Speech;
+            return _Page;
+        end
+
+        Page.SetDuration = function(_Page, _Duration)
+            _Page.Duration = _Duration;
+            return _Page;
+        end
+
+        Page.UseSkipping = function(_Page, _Skip)
+            _Page.AutoSkip = _Skip ~= true;
+            return _Page;
+        end
+
+        Page.SetAction = function(_Page, _Action)
+            _Page.Action = _Action;
+            return _Page;
+        end
+
+        Page.SetFadeIn = function(_Page, _FadeIn)
+            _Page.FadeIn = _FadeIn;
+            return _Page;
+        end
+
+        Page.SetFadeOut = function(_Page, _FadeOut)
+            _Page.FadeOut = _FadeOut;
+            return _Page;
+        end
+
+        Page.SetFaderAlpha = function(_Page, _FaderAlpha)
+            _Page.FaderAlpha = _FaderAlpha;
+            return _Page;
+        end
+
+        Page.SetAngle = function(_Page, _Angle)
+            _Page.Angle = _Angle;
+            return _Page;
+        end
+
+        Page.SetRotation = function(_Page, _Rotation)
+            _Page.Rotation = _Rotation;
+            return _Page;
+        end
+
+        Page.SetZoom = function(_Page, _Zoom)
+            _Page.Distance = _Zoom;
+            if _Page.Distance ~= nil then
+                _Page.DialogCamera = false;
+            end
+            return _Page;
+        end
+
+        Page.SetPosition = function(_Page, _Position)
+            _Page.Position = _Position;
+            return _Page;
+        end
+
+        Page.SetTarget = function(_Page, _Target)
+            _Page.Target = _Target;
+            return _Page;
+        end
+
+        Page.UseCloseUp = function(_Page, _CloseUp)
+            _Page.DialogCamera = _CloseUp == true;
+            if _Page.DialogCamera ~= nil then
+                _Page.Zoom = nil;
+            end
+            return _Page;
+        end
+
+        Page.BeginChoice = function(_Page)
+            _Page.MC = {};
+            _Page.AutoSkip = false;
+
+            _Page.MC.Option = function(_Option, ...)
+                local args = {...};
+                local Index = #_Page.MC +1;
+                local ID = Index;
+                if type(args[1]) == "number" then
+                    ID = table.remove(args, 1);
+                end
+                _Page.MC[Index] = {ID = ID, Localize(args[1]), args[2], args[3]};
+                return _Option;
+            end
+
+            _Page.MC.EndChoice = function(_Choice)
+                assert(#_Page.MC > 0);
+                return _Page;
+            end
+            return _Page.MC;
+        end
+
+        Page.EndPage = function(_Page)
+            return Dialog;
+        end
+
+        table.insert(_self, Page);
         return Page;
     end
-end
 
-function Lib.DialogSystem.Global:CreateDialogAddRedirect(_Dialog)
-    _Dialog.AddRedirect = function(self, _Target)
-        -- Dialog length
-        self.Length = (self.Length or 0) +1;
-        -- Return page
+    Dialog.Redirect = Dialog.Redirect or function(_self, _Target)
+        _self.Length = (_self.Length or 0) +1;
         local Page = (_Target == nil and -1) or _Target;
-        table.insert(self, Page);
-        return Page;
+        table.insert(_self, Page);
+        return Dialog;
     end
 end
 
@@ -229,7 +355,7 @@ end
 -- all informational stuff and executed later by a job.
 function Lib.DialogSystem.Global:StartDialog(_Name, _PlayerID, _Data)
     self.DialogQueue[_PlayerID] = self.DialogQueue[_PlayerID] or {};
-    Lib.UIEffects.Global:PushCinematicEventToQueue(
+    Lib.Information.Global:PushCinematicEventToQueue(
         _PlayerID,
         CinematicEventTypes.Dialog,
         _Name,
@@ -244,28 +370,20 @@ function Lib.DialogSystem.Global:EndDialog(_PlayerID)
           Camera.RTS_FollowEntity(0);]],
         _PlayerID
     );
-    SendReport(
-        Report.DialogEnded,
-        _PlayerID,
-        self.Dialog[_PlayerID].Name
-    );
-    SendReportToLocal(
-        Report.DialogEnded,
-        _PlayerID,
-        self.Dialog[_PlayerID].Name,
-        self.Dialog[_PlayerID]
-    );
 
-    if self.Dialog[_PlayerID].Finished then
-        self.Dialog[_PlayerID]:Finished();
+    local Dialog = self.Dialog[_PlayerID];
+    SendReport(Report.DialogEnded, _PlayerID, Dialog.Name);
+    SendReportToLocal(Report.DialogEnded, _PlayerID, Dialog.Name, Dialog);
+    if Dialog.Finished then
+        Dialog:Finished();
     end
-    FinishCinematicEvent(self.Dialog[_PlayerID].Name, _PlayerID);
+    FinishCinematicEvent(Dialog.Name, _PlayerID);
     self.Dialog[_PlayerID] = nil;
 end
 
 function Lib.DialogSystem.Global:NextDialog(_PlayerID)
     if self:CanStartDialog(_PlayerID) then
-        local DialogData = Lib.UIEffects.Global:PopCinematicEventFromQueue(_PlayerID);
+        local DialogData = Lib.Information.Global:PopCinematicEventFromQueue(_PlayerID);
         assert(DialogData[1] == CinematicEventTypes.Dialog);
         StartCinematicEvent(DialogData[2], _PlayerID);
 
@@ -275,6 +393,7 @@ function Lib.DialogSystem.Global:NextDialog(_PlayerID)
         Dialog.LastSkipButtonPressed = 0;
         Dialog.CurrentPage = 0;
         self.Dialog[_PlayerID] = Dialog;
+        self:SetDefaultAttributes(_PlayerID);
 
         if Dialog.EnableGlobalImmortality then
             Logic.SetGlobalInvulnerability(1);
@@ -283,17 +402,58 @@ function Lib.DialogSystem.Global:NextDialog(_PlayerID)
             self.Dialog[_PlayerID]:Starting();
         end
 
-        SendReportToLocal(
-            Report.DialogStarted,
-            _PlayerID,
-            self.Dialog[_PlayerID].Name,
-            self.Dialog[_PlayerID]
-        );
-        SendReport(
-            Report.DialogStarted,
-            _PlayerID,
-            self.Dialog[_PlayerID].Name
-        );
+        SendReportToLocal(Report.DialogStarted, Dialog.PlayerID, Dialog.Name, Dialog);
+        SendReport(Report.DialogStarted, Dialog.PlayerID, Dialog.Name);
+    end
+end
+
+function Lib.DialogSystem.Global:SetDefaultAttributes(_PlayerID)
+    for i= 1, #self.Dialog[_PlayerID] do
+        local Page = self.Dialog[_PlayerID][i];
+        if type(Page) == "table" then
+            -- Skip page
+            Page.AutoSkip = false;
+            if Page.Duration then
+                if Page.Duration == -1 then
+                    Page.Duration = string.len(Page.Text or "") * CONST_DIALOG.TIMER_PER_CHAR;
+                    Page.AutoSkip = (Page.Duration < 6 and 6) or Page.Duration < 6;
+                end
+                Page.AutoSkip = Page.Duration > 0 and Page.MC == nil;
+            end
+
+            -- Default camera rotation
+            if not Page.Rotation then
+                Page.Rotation = CONST_DIALOG.CAMERA_ROTATIONDEFAULT;
+                if Page.DialogCamera then
+                    Page.Rotation = CONST_DIALOG.DLGCAMERA_ROTATIONDEFAULT;
+                end
+                if Page.Position and type(Page.Position) ~= "table" then
+                    local ID = GetID(Page.Position);
+                    local Orientation = Logic.GetEntityOrientation(ID) +90;
+                    Page.Rotation = Orientation;
+                elseif Page.Target then
+                    local ID = GetID(Page.Target);
+                    local Orientation = Logic.GetEntityOrientation(ID) +90;
+                    Page.Rotation = Orientation;
+                end
+            end
+            -- Default camera distance
+            if not Page.Distance then
+                Page.Distance = CONST_DIALOG.CAMERA_ZOOMDEFAULT;
+                if Page.DialogCamera then
+                    Page.Distance = CONST_DIALOG.DLGCAMERA_ZOOMDEFAULT;
+                end
+            end
+            -- Default camera angle
+            if not Page.Angle then
+                Page.Angle = CONST_DIALOG.CAMERA_ANGLEDEFAULT;
+                if Page.DialogCamera then
+                    Page.Angle = CONST_DIALOG.DLGCAMERA_ANGLEDEFAULT;
+                end
+            end
+
+            self.Dialog[_PlayerID][i] = Page;
+        end
     end
 end
 
@@ -574,7 +734,6 @@ function Lib.DialogSystem.Local:DisplayPageFader(_PlayerID, _PageID)
 
     local PageFadeOut = Page.FadeOut;
     if PageFadeOut then
-        -- FIXME: This would create jobs that are only be paused at the end!
         self.Dialog[_PlayerID].FaderJob = RequestHiResJob(function(_Time, _FadeOut)
             if Logic.GetTimeMs() > _Time - (_FadeOut * 1000) then
                 FadeOut(_FadeOut);
@@ -837,7 +996,7 @@ function Lib.DialogSystem.Local:GetPageIDByName(_PlayerID, _Name)
 end
 
 function Lib.DialogSystem.Local:IsAnyCinematicEventActive(_PlayerID)
-    for k, v in pairs(Lib.UIEffects.Local.CinematicEventStatus[_PlayerID]) do
+    for k, v in pairs(Lib.Information.Local.CinematicEventStatus[_PlayerID]) do
         if v == 1 then
             return true;
         end
@@ -923,9 +1082,7 @@ function Lib.DialogSystem.Local:ActivateCinematicMode(_PlayerID)
     if not self.Dialog[_PlayerID].EnableBorderPins then
         Display.SetRenderBorderPins(0);
     end
-    if self:IsChangingGraphicsPermited() then
-        Display.SetUserOptionOcclusionEffect(0);
-    end
+    Display.SetUserOptionOcclusionEffect(0);
     Camera.SwitchCameraBehaviour(0);
 
     -- Prepare the fader
@@ -997,34 +1154,6 @@ function Lib.DialogSystem.Local:DeactivateCinematicMode(_PlayerID)
     if ConsoleWasVisible then
         ShowScriptConsole();
     end
-end
-
--- -------------------------------------------------------------------------- --
-
-function Lib.DialogSystem.Local:IsChangingGraphicsPermited()
-    if Lib.BriefingSystem then
-        return Lib.BriefingSystem.Local:IsChangingGraphicsPermited();
-    end
-    return self.Config.DoAlternateGraphics == true;
-end
-
-function Lib.DialogSystem.Local:RequestAlternateGraphics()
-    if Lib.BriefingSystem then
-        return Lib.BriefingSystem.Local:RequestAlternateGraphics();
-    end
-    if IsMultiplayer() then
-        return;
-    end
-
-    DialogRequestBox(
-        GUI.GetPlayerID(),
-        Lib.DialogSystem.Text.Request.Title,
-        Lib.DialogSystem.Text.Request.Text,
-        function(_Yes)
-            Lib.BriefingSystem.Local.Config.DoAlternateGraphics = _Yes == true;
-        end,
-        false
-    );
 end
 
 -- -------------------------------------------------------------------------- --

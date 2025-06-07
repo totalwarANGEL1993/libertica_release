@@ -164,7 +164,7 @@ API.SpeedLimitActivate = SpeedLimitActivate;
 --- Ein menschlicher Spieler hat ein Gebäude platziert.
 --- 
 --- #### Parameters:
---- * `PlayerID` - ID des Spielers
---- * `EntityID` - ID der Baustelle
+--- * `PlayerID`: <b>integer</b> ID des Spielers
+--- * `EntityID`: <b>integer</b> ID der Baustelle
 Report.BuildingPlaced = anyInteger;
 

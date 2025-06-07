@@ -8,6 +8,8 @@
 --- <li>Fixes trebuchet selection</li>
 ---
 
+
+
 --- Deacivates (and reactivates) firing thieves.
 --- @param _Flag boolean Deactivate release thieves
 function DisableReleaseThieves(_Flag)
@@ -30,28 +32,28 @@ API.DisableReleaseSoldiers = DisableReleaseSoldiers;
 
 --- A entity has been expelled.
 ---
---- #### Parameters:s
---- * `EntityID` - ID of entity
+--- #### Parameters:
+--- * `EntityID`: <b>integer</b> ID of entity
 Report.ExpelSettler = anyInteger;
 
 --- A trebuchet is forced to stop.
 ---
---- #### Parameters:s
---- * `EntityID` - ID of entity
---- * `TaskList` - ID of Tasklist
+--- #### Parameters:
+--- * `EntityID`: <b>integer</b> ID of entity
+--- * `TaskList`: <b>integer</b> ID of Tasklist
 Report.ForceTrebuchetTasklist = anyInteger;
 
 --- A trebuchet is build from a siege engine cart.
 --- (Currently not used)
 ---
---- #### Parameters:s
---- * `EntityID` - ID of entity
+--- #### Parameters:
+--- * `EntityID`: <b>integer</b> ID of entity
 Report.ErectTrebuchet = anyInteger;
 
 --- A trebuchet is broken down to a siege engine cart.
 --- (Currently not used)
 ---
---- #### Parameters:s
---- * `EntityID` - ID of entity
+--- #### Parameters:
+--- * `EntityID`: <b>integer</b> ID of entity
 Report.DisambleTrebuchet = anyInteger;
 

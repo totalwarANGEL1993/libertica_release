@@ -1,6 +1,7 @@
 --- Erlaubt es, Pseudo-Technologien zu erzeugen.
 ---
---- Technologien sollten direkt zu Spielbeginn initialisiert werden.
+--- <b>Achtung:</b>  Technologien sollten direkt zu Spielbeginn initialisiert 
+--- werden.
 ---
 
 

@@ -1,4 +1,7 @@
---- Fügt nützliche Berichte zu Entitäten hinzu.
+--- Dieses Modul fügt Reports zu bestimmten Events bzgl. Entitäten hinzu.
+--- 
+--- Außerdem können die geskripteten Standardaktionen von Dieben deaktivert
+--- und überschrieben werden.
 
 
 
@@ -28,100 +31,100 @@ API.ThiefDisableCisternEffect = ThiefDisableCisternEffect;
 --- Eine Entität wurde erschaffen.
 ---
 --- #### Parameters:
---- * `EntityID` - ID der Entität
---- * `PlayerID` - ID des Spielers
---- * `SpawnerID` - ID des Spawners
+--- * `EntityID`:  <b>integer</b> ID der Entität
+--- * `PlayerID`:  <b>integer</b> ID des Spielers
+--- * `SpawnerID`: <b>integer</b> ID des Spawners
 Report.EntitySpawned = anyInteger;
 
 --- Ein Siedler ist der Siedlung beigetreten.
 ---
 --- #### Parameters:
---- * `EntityID` - ID der Entität
---- * `PlayerID` - ID des Spielers
+--- * `EntityID`: <b>integer</b> ID der Entität
+--- * `PlayerID`: <b>integer</b> ID des Spielers
 Report.SettlerAttracted = anyInteger;
 
 --- Eine Entität wurde auf irgendeine Weise zerstört.
 ---
 --- #### Parameters:
---- * `EntityID` - ID der Entität
---- * `PlayerID` - ID des Spielers
+--- * `EntityID`: <b>integer</b> ID der Entität
+--- * `PlayerID`: <b>integer</b> ID des Spielers
 Report.EntityDestroyed = anyInteger;
 
 --- Eine Entität wurde verletzt.
 ---
 --- #### Parameters:
---- * `AttackingEntityID` - ID der angreifenden Entität
---- * `AttackingPlayerID` - Besitzer der angreifenden Entität
---- * `AttackedEntityID` - ID der angegriffenen Entität
---- * `AttackedPlayerID` - Besitzer der angegriffenen Entität
+--- * `AttackingEntityID`: <b>integer</b> ID der angreifenden Entität
+--- * `AttackingPlayerID`: <b>integer</b> Besitzer der angreifenden Entität
+--- * `AttackedEntityID`:  <b>integer</b> ID der angegriffenen Entität
+--- * `AttackedPlayerID`:  <b>integer</b> Besitzer der angegriffenen Entität
 Report.EntityHurt = anyInteger;
 
 --- Eine Entität wurde getötet.
 ---
 --- #### Parameters:
---- * `KilledEntityID` - ID der getöteten Entität
---- * `KilledPlayerID` - Besitzer der getöteten Entität
---- * `KillerEntityID` - ID der tötenden Entität
---- * `KillerPlayerID` - Besitzer der tötenden Entität
+--- * `KilledEntityID`: <b>integer</b> ID der getöteten Entität
+--- * `KilledPlayerID`: <b>integer</b> Besitzer der getöteten Entität
+--- * `KillerEntityID`: <b>integer</b> ID der tötenden Entität
+--- * `KillerPlayerID`: <b>integer</b> Besitzer der tötenden Entität
 Report.EntityKilled = anyInteger;
 
 --- Der Besitz einer Entität hat sich geändert.
 ---
 --- #### Parameters:
---- * `OldIDList` - Liste der alten Entitäts-IDs
---- * `OldPlayer` - Vorheriger Besitzer
---- * `NewIDList` - Liste der neuen Entitäts-IDs
---- * `NewPlayer` - Neuer Besitzer
+--- * `OldID`:     <b>integer</b> Alte ID
+--- * `OldPlayer`: <b>integer</b> Vorheriger Besitzer
+--- * `NewID `:    <b>integer</b> Neue ID
+--- * `NewPlayer`: <b>integer</b> Neuer Besitzer
 Report.EntityOwnerChanged = anyInteger;
 
 --- Die Menge an Ressourcen in der Entität hat sich geändert.
 ---
 --- #### Parameters:
---- * `EntityID` - ID der Entität
---- * `GoodType` - Art der Ressource
---- * `OldAmount` - Alte Menge
---- * `NewAmount` - Neue Menge
+--- * `EntityID`:  <b>integer</b> ID der Entität
+--- * `GoodType`:  <b>integer</b> Art der Ressource
+--- * `OldAmount`: <b>integer</b> Alte Menge
+--- * `NewAmount`: <b>integer</b> Neue Menge
 Report.EntityResourceChanged = anyInteger;
 
 --- Der Bau eines Gebäudes wurde abgeschlossen.
 ---
 --- #### Parameters:
---- * `BuildingID` - ID des Gebäudes
---- * `PlayerID` - ID des Spielers
+--- * `BuildingID`: <b>integer</b> ID des Gebäudes
+--- * `PlayerID`:   <b>integer</b> ID des Spielers
 Report.BuildingConstructed = anyInteger;
 
 --- Ein Gebäudeupgrade wurde abgeschlossen.
 ---
 --- #### Parameters:
---- * `BuildingID` - ID des Gebäudes
---- * `PlayerID` - ID des Spielers
---- * `NewUpgradeLevel` - Neues Upgrade-Level
+--- * `BuildingID`:      <b>integer</b> ID des Gebäudes
+--- * `PlayerID`:        <b>integer</b> ID des Spielers
+--- * `NewUpgradeLevel`: <b>integer</b> Neues Upgrade-Level
 Report.BuildingUpgraded = anyInteger;
 
 --- Ein Upgrade-Level ist zusammengebrochen.
 ---
 --- #### Parameters:
---- * `BuildingID` - ID des Gebäudes
---- * `PlayerID` - ID des Spielers
---- * `NewUpgradeLevel` - Neues Upgrade-Level
+--- * `BuildingID`:      <b>integer</b> ID des Gebäudes
+--- * `PlayerID`:        <b>integer</b> ID des Spielers
+--- * `NewUpgradeLevel`: <b>integer</b> Neues Upgrade-Level
 Report.BuildingUpgradeCollapsed = anyInteger;
 
 --- Ein Gebäude wurde von einem Dieb infiltriert.
 ---
 --- #### Parameters:
---- * `ThiefID` - ID des Diebes
---- * `PlayerID` - ID des Spielers
---- * `BuildingID` - ID des Gebäudes
---- * `BuildingPlayerID` - ID des Spielers des Gebäudes
+--- * `ThiefID`:          <b>integer</b> ID des Diebes
+--- * `PlayerID`:         <b>integer</b> ID des Spielers
+--- * `BuildingID`:       <b>integer</b> ID des Gebäudes
+--- * `BuildingPlayerID`: <b>integer</b> ID des Spielers des Gebäudes
 Report.ThiefInfiltratedBuilding = anyInteger;
 
 --- Ein Dieb hat Einnahmen geliefert.
 ---
 --- #### Parameters:
---- * `ThiefID` - ID des Diebes
---- * `PlayerID` - ID des Spielers
---- * `BuildingID` - ID des Gebäudes
---- * `BuildingPlayerID` - ID des Spielers des Gebäudes
---- * `GoldAmount` - Menge an Gold
+--- * `ThiefID`:          <b>integer</b> ID des Diebes
+--- * `PlayerID`:         <b>integer</b> ID des Spielers
+--- * `BuildingID`:       <b>integer</b> ID des Gebäudes
+--- * `BuildingPlayerID`: <b>integer</b> ID des Spielers des Gebäudes
+--- * `GoldAmount`:       <b>integer</b> Menge an Gold
 Report.ThiefDeliverEarnings = anyInteger;
 

@@ -1,10 +1,10 @@
 --- Ermöglicht die Veränderung der Schadenswerte von Einheiten.
 ---
---- Hinweis: Die Funktionen `MakeVulnerable` und `MakeInvulnerable` wurden
---- überschrieben. Die Funktion `Logic.SetEntityInvulnerabilityFlag` wird
---- stattdessen intern benutzt und darf nicht mehr verwendet werden!
+--- <b>Achtung</b>: Die Funktionen `MakeVulnerable` und `MakeInvulnerable`
+--- wurden überschrieben. Die Funktion `Logic.SetEntityInvulnerabilityFlag`
+--- wird stattdessen intern benutzt und darf nicht mehr verwendet werden!
 ---
---- Funktionen:
+--- #### Funktionen:
 --- <li>Besseres Balancing für Bogenschützen</li>
 --- <li>Nahe Mauerkatapulte schwächen sich gegenseitig (gilt nicht für KI)</li>
 --- <li>Anpassen der Kampfkraft von Einheiten über Lua</li>
@@ -12,7 +12,11 @@
 --- <li>Anpassen des Own Territoy Bonus</li>
 --- <li>Anpassen des Height Modifier</li>
 ---
-Lib.Damage = Lib.Damage or {};
+--- <b>Achtung</b>: Diese Funktionen werden sofort aktiv, wenn das Modul
+--- geladen wird!
+---
+
+
 
 --- Setzt den Schaden für einen Entitätstypen.
 ---

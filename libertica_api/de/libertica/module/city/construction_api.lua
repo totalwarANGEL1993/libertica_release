@@ -7,7 +7,6 @@
 --- benötigen immer ein vollständiges Mauersegment zwischen ihnen (oder 
 --- mehrere, die gleich lang sind).</li>
 ---
-Lib.Construction = Lib.Construction or {};
 
 
 

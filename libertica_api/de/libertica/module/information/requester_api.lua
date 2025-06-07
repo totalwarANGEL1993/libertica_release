@@ -1,4 +1,29 @@
 --- Bietet Dialog- und Textfenster-Funktionen.
+--- 
+--- #### Info-Dialog
+--- Ein einfaches Fenster für die Ausgabe einer Information. Das Fenster muss
+--- mit OK bestätigt werden und kann anschließend eine Funktion ausführen.
+--- 
+--- #### Rückfrage-Dialog
+--- Ein einfaches Fenster für eine binäre Entscheidung. Das Fenster kann mit
+--- Ja/Nein bzw. OK/Cancel geschlossen werden. In der Callback-Funktion kann
+--- anhand der gewählten Option unterschieden werden.
+--- 
+--- #### Auswahl-Dialog
+--- Ein Fenster mit einem Text und einem Dropdown Menü. Es kann eine Option
+--- im Menü ausgewählt werden. Danach wird mit OK bestätigt. Im Callback kann
+--- anhand der gewählten Option unterschieden werden.
+--- 
+--- #### Sprachwahl-Dialog
+--- Ein spezieller Auswahl-Dialog, der die Sprache für User-Texte einstellen
+--- kann. Verwende diesen Dialog, wenn deine Map mehrsprachig ist. Wird die
+--- Sprache gewählt, wird ein Event ausgelöst.
+--- 
+--- #### Textfenster
+--- Eine modifizierte Version des Chatlog für die Ausgabe eines größeren Text.
+--- Wird das Fenster geschlossen, kann eine Callback-Funktion ausgeführt werden.
+--- Optional kann ein Button unter dem Text angezeigt werden. Der Button hat
+--- eine eigene Callback-Funktion.
 
 
 

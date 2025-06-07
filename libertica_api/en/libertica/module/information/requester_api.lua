@@ -1,4 +1,29 @@
---- Provides dialog and text windows.
+--- Provides dialog and text window functions.
+---
+--- #### Info Dialog
+--- A simple window for displaying information. The window must be confirmed
+--- with OK and can then execute a function.
+---
+--- #### Confirmation Dialog
+--- A simple window for a binary decision. The window can be closed with
+--- Yes/No or OK/Cancel. In the callback function, the chosen option
+--- can be distinguished.
+---
+--- #### Selection Dialog
+--- A window with some text and a dropdown menu. An option can be selected
+--- from the menu and then confirmed with OK. The callback can use the selected
+--- option to take action accordingly.
+---
+--- #### Language Selection Dialog
+--- A special selection dialog that sets the language for user texts.
+--- Use this dialog if your map is multilingual. When a language is chosen,
+--- an event is triggered.
+---
+--- #### Text Window
+--- A modified version of the chat log for displaying a longer text.
+--- When the window is closed, a callback function can be executed.
+--- Optionally, a button can be shown below the text. The button has its own
+--- callback function.
 
 
 

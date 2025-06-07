@@ -1,4 +1,15 @@
---- Ermöglicht das Hinzufügen von bis zu 6 zusätzlichen Schaltflächen in Gebäudemenüs.
+--- Ermöglicht das Hinzufügen von zusätzlichen Schaltflächen in Gebäudemenüs.
+--- 
+--- Da nur 6 Buttons verwendet werden können, ist die Vergabe der Buttons
+--- nach dem Bindungstyp priorisiert.
+--- <ol>
+--- <li>Buttons nach Skriptnamen</li>
+--- <li>Buttons nach Entitätstyp</li>
+--- <li>Allgemeine Buttons</li>
+--- </ol>
+--- <p>
+--- Fügst du mehr als 6 Buttons zu einem Gebäude hinzu, wird nach dieser
+--- Reihenfolge vergeben, bis die 6 Plätze voll sind.
 
 
 
@@ -140,6 +151,10 @@ API.SetDowngradeCosts = SetDowngradeBuildingCost;
 API.SetDowngradeBuildingCost = SetDowngradeBuildingCost;
 
 --- Aktiviert das Reservieren von Waren am Gebäude.
+--- <p>
+--- <b>Achtung</b>: Waren können nicht für einzelne Gebäude reserviert werden.
+--- Die Waren werden in allen Gebäuden reserviert. Diese Funktion ist also
+--- identisch zum Produktionsmenü!
 function ActivateSingleReserveBuilding()
 end
 API.ActivateSingleReserveBuilding = ActivateSingleReserveBuilding;
@@ -164,66 +179,66 @@ API.DeactivateSingleStopBuilding = DeactivateSingleStopBuilding;
 --- Der Spieler hat ein Gebäude zurückgebaut.
 --- 
 --- #### Parameters:
---- * `EntityID` - ID des Gebäudes
+--- * `EntityID`: <b>integer</b> ID des Gebäudes
 Report.DowngradeBuilding = anyInteger;
 
 --- Der Spieler hat eine Ware gesperrt.
 --- 
 --- #### Parameters:
---- * `PlayerID` - ID des Spielers
---- * `GoodType` - Typ der Ware
+--- * `PlayerID`: <b>integer</b> ID des Spielers
+--- * `GoodType`: <b>integer</b> Typ der Ware
 Report.LockGoodType = anyInteger;
 
 --- Der Spieler hat eine Wahre freigegeben.
 --- 
 --- #### Parameters:
---- * `PlayerID` - ID des Spielers
---- * `GoodType` - Typ der Ware
+--- * `PlayerID`: <b>integer</b> ID des Spielers
+--- * `GoodType`: <b>integer</b> Typ der Ware
 Report.UnlockGoodType = anyInteger;
 
 --- Der Spieler hat die Produktion im Gebäude fortgeführt.
 --- 
 --- #### Parameters:
---- * `EntityID` - ID des Gebäudes
+--- * `EntityID`: <b>integer</b> ID des Gebäudes
 Report.ResumeBuilding = anyInteger;
 
 --- Der Spieler hat die Produktion im Gebäude angehalten.
 --- 
 --- #### Parameters:
---- * `EntityID` - ID des Gebäudes
+--- * `EntityID`: <b>integer</b> ID des Gebäudes
 Report.YieldBuilding = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Upgrade abbrechen" geklickt.
 --- 
 --- #### Parameters:
---- * `EntityID` - ID des Gebäudes
---- * `PlayerID` - ID des Besitzers
+--- * `EntityID`: <b>integer</b> ID des Gebäudes
+--- * `PlayerID`: <b>integer</b> ID des Besitzers
 Report.CancelUpgradeClicked = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Upgrade starten" geklickt.
 --- 
 --- #### Parameters:
---- * `EntityID` - ID des Gebäudes
---- * `PlayerID` - ID des Besitzers
+--- * `EntityID`: <b>integer</b> ID des Gebäudes
+--- * `PlayerID`: <b>integer</b> ID des Besitzers
 Report.StartUpgradeClicked = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Festival starten" geklickt.
 --- 
 --- #### Parameters:
---- * `PlayerID` - ID des Spielers
---- * `Type`     - Festivaltyp
+--- * `PlayerID`: <b>integer</b> ID des Spielers
+--- * `Type`:     <b>integer</b> Festivaltyp
 Report.FestivalClicked = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Predigt starten" geklickt.
 --- 
 --- #### Parameters:
---- * `PlayerID` - ID des Spielers
+--- * `PlayerID`: <b>integer</b> ID des Spielers
 Report.SermonClicked = anyInteger;
 
 --- Der Spieler hat auf die Schaltfläche "Theaterstück starten" geklickt.
 --- 
 --- #### Parameters:
---- * `EntityID` - ID des Gebäudes
---- * `PlayerID` - ID des Besitzers
+--- * `EntityID`: <b>integer</b> ID des Gebäudes
+--- * `PlayerID`: <b>integer</b> ID des Besitzers
 Report.TheatrePlayClicked = anyInteger;
 

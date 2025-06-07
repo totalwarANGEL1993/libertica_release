@@ -4,13 +4,12 @@
 --- talk to them. Much like interactive objects an action can be called
 --- and some other adjustments can be made.
 ---
-Lib.NPC = Lib.NPC or {};
 
 
 
 --- Adds an NPC to an entity.
 ---
---- #### Fields of table
+--- #### Fields `_Data`:
 --- 
 --- * `ScriptName`        - Script name of entity (mandatory)
 --- * `Active`            - NPC is active
@@ -90,7 +89,7 @@ API.NpcDispose = NpcDispose;
 
 --- Updates the NPC with the data table.
 ---
---- #### Fields of table
+--- #### Fields `_Data`:
 --- * `ScriptName`        - Script name of entity (mandatory)
 --- * `Callback`          - Function called at activation
 --- * `Condition`         - Condition checked before activation
@@ -146,8 +145,8 @@ end
 
 --- Someone talks to an NPC.
 ---
---- #### Parameters:s
---- * `NpcEntityID`  - ID of npc
---- * `HeroEntityID` - ID of hero
+--- #### Parameters:
+--- * `NpcEntityID`:  <b>integer</b> ID of npc
+--- * `HeroEntityID`: <b>integer</b> ID of hero
 Report.NpcInteraction = anyInteger;
 

@@ -10,7 +10,6 @@
 --- * `Technologies.R_Cattle` - Allows to breed cows
 --- * `Technologies.R_Sheep`  - Allows to breed sheeps
 --- 
-Lib.LifestockSystem = Lib.LifestockSystem or {};
 
 
 
@@ -68,39 +67,39 @@ API.RequireTitleToBreedSheep = RequireTitleToBreedSheep;
 
 --- The player has clicked the buy animal button.
 --- 
---- #### Parameters:s
---- * `Index`      - "Cattle" or "Sheep"
---- * `PlayerID`   - ID of player
---- * `EntityID`   - ID of pasture
+--- #### Parameters:
+--- * `Index`:      <b>integer</b> "Cattle" or "Sheep"
+--- * `PlayerID`:   <b>integer</b> ID of player
+--- * `EntityID`:   <b>integer</b> ID of pasture
 Report.BreedAnimalClicked = anyInteger;
 
 --- The player has bought a cow.
 --- 
---- #### Parameters:s
---- * `PlayerID`   - ID of player
---- * `EntityID`   - ID of created cow
---- * `BuildingID` - ID of pasture
+--- #### Parameters:
+--- * `PlayerID`:   <b>integer</b> ID of player
+--- * `EntityID`:   <b>integer</b> ID of created cow
+--- * `BuildingID`: <b>integer</b> ID of pasture
 Report.CattleBought = anyInteger;
 
 --- The player has bought a sheep.
 --- 
---- #### Parameters:s
---- * `PlayerID`   - ID of player
---- * `EntityID`   - ID of created sheep
---- * `BuildingID` - ID of pasture
+--- #### Parameters:
+--- * `PlayerID`:   <b>integer</b> ID of player
+--- * `EntityID`:   <b>integer</b> ID of created sheep
+--- * `BuildingID`: <b>integer</b> ID of pasture
 Report.SheepBought = anyInteger;
 
 --- A cow has starved.
 --- 
---- #### Parameters:s
---- * `PlayerID`   - ID of player
---- * `EntityID`   - ID of created cow
+--- #### Parameters:
+--- * `PlayerID`:   <b>integer</b> ID of player
+--- * `EntityID`:   <b>integer</b> ID of created cow
 Report.CattleStarved = anyInteger;
 
 --- A sheep has starved.
 --- 
---- #### Parameters:s
---- * `PlayerID`   - ID of player
---- * `EntityID`   - ID of created cow
+--- #### Parameters:
+--- * `PlayerID`:   <b>integer</b> ID of player
+--- * `EntityID`:   <b>integer</b> ID of created cow
 Report.SheepStarved = anyInteger;
 

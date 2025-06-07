@@ -1,6 +1,6 @@
 --- Allows to create user defined technologies.
 ---
---- Technologies should be defined directly on game start.
+--- <b>Attention:</b> Technologies should be defined directly on game start.
 ---
 
 

@@ -4,7 +4,7 @@
 
 --- Erstellt eine vergrabene Eisenerzmine.
 ---
---- #### Parameters:
+--- #### Fields `_Data`:
 --- * `ScriptName`            - Skriptname der Position
 --- * `Title`                 - (Optional) Tooltip-Titel
 --- * `Text`                  - (Optional) Tooltip-Text
@@ -22,7 +22,7 @@ API.CreateIOIronMine = CreateIOIronMine;
 
 --- Erstellt eine vergrabene Steingrube.
 ---
---- #### Parameters:
+--- #### Fields `_Data`:
 --- * `ScriptName`            - Skriptname der Position
 --- * `Title`                 - (Optional) Tooltip-Titel
 --- * `Text`                  - (Optional) Tooltip-Text
@@ -43,8 +43,8 @@ API.CreateIOStoneMine = CreateIOStoneMine;
 --- Eine Ressourcenquelle wurde erstellt.
 ---
 --- #### Parameters:
---- - `ScriptName` - Skriptname der Mine
---- * `KnightID`   - ID des aktivierenden Helden
---- * `PlayerID`   - ID des aktivierenden Spielers
+--- * `ScriptName`: <b>string</b> Scriptname der Entität
+--- * `KnightID`:   <b>integer</b> ID des Helden
+--- * `PlayerID`:   <b>integer</b> ID des Spielers
 Report.InteractiveMineErected = anyInteger;
 

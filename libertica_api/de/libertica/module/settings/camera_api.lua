@@ -1,5 +1,7 @@
 --- Funktionen zur Manipulation der RTS-Kamera.
 
+
+
 --- Ändert die maximale Darstellungsreichweite, bis etwas abgeschnitten wird.
 --- @param _View number Maximale Darstellungsreichweite
 function SetRenderDistance(_View)
@@ -73,25 +75,25 @@ API.FocusCameraOnEntity = FocusCameraOnEntity;
 --- Der Bildlauf am Rand des Bildschirms ist für einen Spieler deaktiviert.
 ---
 --- #### Parameters:
---- * `PlayerID` - ID des Spielers
---- * `Position` - ID der Entität, auf die die Kamera fixiert ist
+--- * `PlayerID`: <b>integer</b> ID des Spielers
+--- * `Position`: <b>integer</b> ID der Entität, auf die die Kamera fixiert ist
 Report.BorderScrollLocked = anyInteger;
 
 --- Der Bildlauf am Rand des Bildschirms ist für einen Spieler aktiviert.
 ---
 --- #### Parameters:
---- * `PlayerID` - ID des Spielers
+--- * `PlayerID`: <b>integer</b> ID des Spielers
 Report.BorderScrollReset = anyInteger;
 
 --- Die erweiterte Zoomentfernung ist für den Spieler deaktiviert.
 --- 
 --- #### Parameters:
---- * `PlayerID` - ID des Spielers
+--- * `PlayerID`: <b>integer</b> ID des Spielers
 Report.ExtendedZoomDeactivated = anyInteger;
 
 --- Die erweiterte Zoomentfernung ist für den Spieler aktiviert.
 --- 
 --- #### Parameters:
---- * `PlayerID` - ID des Spielers
+--- * `PlayerID`: <b>integer</b> ID des Spielers
 Report.ExtendedZoomActivated = anyInteger;
 

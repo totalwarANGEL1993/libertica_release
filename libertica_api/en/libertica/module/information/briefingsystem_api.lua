@@ -1,401 +1,242 @@
---- Allows to define briefings.
+--- Allows the definition of briefings.
 ---
---- The apex for scripting dialogs and simple camera animations. A versatile
---- tool to script the plot of the map.
+--- The pinnacle for scripting dialogs and simple camera animations.
+--- A versatile tool for scripting map presentations.
 ---
 
+--- Initializes the builder for a briefing.
+---
+--- #### Functions `BriefingBuilder`:
+--- * `SetName(_Name)`:              Sets the name of the briefing.
+--- * `SetPlayer(_Player)`:          Sets the receiving player of the briefing.
+--- * `UseBigBars(_Flag)`:           Uses the wide briefing bars.
+--- * `UseRestoreCamera(_Flag)`:     Restores the camera to its original position after the briefing.
+--- * `UseRestoreGameSpeed(_Flag)`:  Restores game speed after the briefing.
+--- * `UseGlobalImmortality(_Flag)`: All entities are invulnerable during the briefing.
+--- * `UseFarClipping(_Flag)`:       Uses a wide field of view. <b>Attention</b>: May cause stuttering on low-end systems.
+--- * `SetHideNotes(_Flag)`:         Hides the notes window during the briefing.
+--- * `SetEnableSky(_Flag)`:         Displays the sky during the briefing.
+--- * `SetEnableFoW(_Flag)`:         Displays fog of war during the briefing.
+--- * `SetEnableBorderPins(_Flag)`:  Displays border pins during the briefing.
+--- * `SetOnBegin(_Function)`:       Function called at the start of the briefing.
+--- * `SetOnFinish(_Function)`:      Function called at the end of the briefing.
+--- * `BeginPage()`:                 Opens the `PageBuilder`.
+--- * `Redirect(_Target)`:           Jumps to the page with the specified name. If not specified, ends the briefing here.
+--- * `Start()`:                     Starts the briefing.
+---
+--- #### Functions `PageBuilder`:
+---
+--- A briefing can have unlimited pages.
+--- * `SetName(_Name)`:            Sets the name of the page.
+--- * `SetSpeech(_Speech)`:        Sets the path to the voice line.
+--- * `SetTitle(_Title)`:          Sets the title to be displayed on the page.
+--- * `SetText(_Text)`:            Sets the text to be displayed on the page.
+--- * `SetDuration(_Duration)`:    Sets how long the page is displayed.
+--- * `SetFadeIn(_Time)`:          Fades in from black.
+--- * `SetFadeOut(_Time)`:         Fades out to black.
+--- * `SetFaderAlpha(_Opacity)`:   Sets the alpha value of the fade mask.
+--- * `SetAction(_Action)`:        Function executed whenever the page is shown.
+--- * `UseBigBars(_Flag)`:         Uses wide briefing bars on this page.
+--- * `UsePerformanceMode(_Flag)`: Disables some graphics effects to improve performance.
+--- * `UseSkipping(_Flag)`:        Allows skipping this page.
+--- * `BeginCamera()`:             Opens the `CameraBuilder`.
+--- * `BeginCameraAnimation()`:    Opens the `CameraAnimationBuilder`.
+--- * `BeginParallaxAnimation()`:  Opens the `ParallaxAnimationBuilder`.
+--- * `BeginChoice()`:             Opens the `ChoiceBuilder`.
+--- * `EndPage()`:                 Ends the `PageBuilder` and returns to the `BriefingBuilder`.
+---
+--- #### Functions `CameraBuilder`:
+---
+--- * `UseCloseUp(_Flag)`:      Switches to close-up or distant view.
+--- * `SetPosition(_Position)`: Sets the camera position.
+--- * `SetAngle(_Angle)`:       Sets the camera elevation angle.
+--- * `SetRotation(_Rotation)`: Sets the camera rotation angle.
+--- * `SetZoom(_Zoom)`:         Sets the camera zoom.
+--- * `BeginFlyTo()`:           Opens the `FlyToBuilder`.
+--- * `EndCamera()`:            Ends the `CameraBuilder` and returns to the `PageBuilder`.
+---
+--- #### Functions `FlyToBuilder`:
+---
+--- * `SetPosition(_Position)`: Sets the camera position.
+--- * `SetAngle(_Angle)`:       Sets the camera elevation angle.
+--- * `SetRotation(_Rotation)`: Sets the camera rotation angle.
+--- * `SetZoom(_Zoom)`:         Sets the camera zoom.
+--- * `EndFlyTo()`:             Ends the `FlyToBuilder` and returns to the `CameraBuilder`.
+---
+--- #### Functions `ChoiceBuilder`:
+---
+--- * `Option(_ID?, _Text, _Target, _Condition?)`: Adds a new choice. (Parameters marked with ? are optional)
+--- * `EndChoice()`:                               Ends the `ChoiceBuilder` and returns to the `PageBuilder`.
+---
+--- #### Functions `CameraAnimationBuilder`:
+---
+--- * `SetRepeat(_Flag)`:          Repeats the animations after they end.
+--- * `SetClear(_Flag)`:           Removes all running animations from the queue.
+--- * `SetPostpone(_Flag)`:        Postpones all running animations.
+--- * `BeginAnimationSet()`:       Begins the `AnimationSetBuilder`.
+--- * `EndCameraAnimation()`:      Ends the `CameraAnimationBuilder` and returns to the `PageBuilder`.
+---
+--- #### Functions `AnimationSetBuilder`:
+---
+--- * `SetDuration(_Duration)`:                  Sets the duration of the animation.
+--- * `SetLocal(_Flag)`:                         The animation is bound to the page.
+--- * `Animation(_px, _py, _pz, _lx, _ly, _lz)`: Coordinates for position and look-at target of the camera.
+--- * `EndAnimationSet()`:                       Ends the `AnimationSetBuilder` and returns to the `CameraAnimationBuilder`.
+---
+--- #### Functions `ParallaxAnimationBuilder`:
+---
+--- * `SetRepeat(_Flag)`:       Repeats the animations after they end.
+--- * `SetClear(_Flag)`:        Removes all running animations from the queue.
+--- * `SetPostpone(_Flag)`:     Postpones all running animations.
+--- * `BeginLayer()`:           Begins the `LayerBuilder`.
+--- * `EndParallaxAnimation()`: Ends the `ParallaxAnimationBuilder` and returns to the `PageBuilder`.
+---
+--- #### Functions `LayerBuilder`:
+---
+--- Up to 6 different layers can exist.
+--- * `SetDuration(_Duration)`:            Sets the duration of the animation.
+--- * `SetImage(_Image)`:                  Path to the displayed image.
+--- * `SetLocal(_Flag)`:                   The animation is bound to the page.
+--- * `Animation(_u0, _v0, _u1, _v1, _a)`: Coordinates and alpha value of the displayed graphic portion (coordinates between 0 and 1).
+--- * `EndLayer()`:                        Ends the `LayerBuilder` and returns to the `ParallaxAnimationBuilder`.
+---
+--- #### Example:
+--- Create a simple briefing that uses the dialog camera.
+--- ```lua
+--- NewBriefing("TestBriefing", 1)
+---     :BeginPage()
+---         :SetTitle("Title")
+---         :SetText("This is a test page.")
+---         :BeginCamera()
+---             :SetPosition("Hakim")
+---             :UseCloseUp(true)
+---         :EndCamera()
+---     :EndPage()
+---     :Start();
+--- ```
+---
+--- #### Example:
+--- Create a simple briefing with a basic camera movement.
+--- ```lua
+--- NewBriefing("TestBriefing", 1)
+---     :BeginPage()
+---         :SetTitle("Title")
+---         :SetText("This is a test page.")
+---         :BeginCamera()
+---             :SetPosition("Hakim")
+---             :SetRotation(90)
+---             :SetAngle(50)
+---             :SetZoom(3000)
+---             :BeginFlyTo()
+---                 :SetPosition("Saraya")
+---                 :SetRotation(-90)
+---                 :SetAngle(20)
+---                 :SetZoom(3000)
+---             :EndFlyTo()
+---         :EndCamera()
+---     :EndPage()
+---     :Start();
+--- ```
+---
+--- #### Example:
+--- Create a briefing using complex camera animations. The function
+--- `Animation` can be used with direct coordinates, or use
+--- names to determine coordinates. A negative number indicates an absolute height,
+--- while a positive number is an offset from the entity height.
+--- ```lua
+--- NewBriefing("TestBriefing", 1)
+---     :BeginPage()
+---         :SetTitle("Title")
+---         :SetText("This is a test page.")
+---         :BeginCameraAnimation()
+---             :SetClear(true)
+---             :BeginAnimationSet()
+---                 :SetDuration(30)
+---                 :SetLocal(true)
+---                 :Animation("Pos1", -2500, "npc1", -2200)
+---                 :Animation("Pos2", -2500, "npc1", -2000)
+---             :EndAnimationSet()
+---         :EndCameraAnimation()
+---     :EndPage()
+---     :Start();
+--- ```
 
-
---- Starts a briefing.
----
---- Possible fields for the briefing table:
---- * `Starting`                - Function called when briefing is started              
---- * `Finished`                - Function called when briefing is finished             
---- * `RestoreCamera`           - Camera position is saved and restored at briefing end 
---- * `RestoreGameSpeed`        - Game speed is saved and restored at briefing end      
---- * `EnableGlobalImmortality` - During briefings all entities are invulnerable        
---- * `EnableSky`               - Display the sky during the briefing                   
---- * `EnableFoW`               - Displays the fog of war during the briefing           
---- * `EnableBorderPins`        - Displays the border pins during the briefing          
---- * `PreloadAssets`           - Allows to use a wide vision area in briefings
---- * `HideNotes`               - Do not show notes
----
---- *→ Example #1*
----
---- #### Animations
---- The camera settings can be separated from the text of the page. Not only
---- allows this to fluetly write dialogs, also more possibilities are unlocked
---- when using the notation. To create a animation the page musn't have a
---- position. Otherwise defaults will be used.
----
---- The animation frames should be provided as a table. The camera path will be 
---- calculated using Bézir Curves. This means 2 frames will result in a line,
---- 3 make it a parable and 4 or more result in a curve.
----
---- *→ Example #2*
----
---- *→ Example #3*
----
---- *→ Example #4*
----
---- The current animation can also be cached to start a new animation for a 
---- page, after which the previous one continues. The animation can also be 
---- set to only be valid for its current page and then deleted.
----
---- *→ Example #5*
----
---- #### Parallax
---- In the context of a video game parallaxes are scrollable backgrounds. This
---- technique was used by side scrollers. During a briefing page up to 4 layers
---- of graphics can be shown and animated. Parallaxes are notated similar to
---- camera animations. Scrolling is done by setting UV coordinates.
----
---- Graphics must allways be in 16:9 format. If a player has a 4:3 resolution
---- the image is cropped left and right to fit the frame. Coordinates - as long
---- as provided as relative coordinates - will be adjusted.
----
---- It is also possible to provide a table of animation frames for the image.
---- The frames are linearly interpolated, if there are at least 2 entries and
---- interpolated cubically if there are at least 4 entries.
----
---- *→ Example #6*
----
---- *→ Example #7*
----
---- *→ Example #8*
----
---- #### Examples
----
---- * Example #1: Basic structure
---- ```lua
---- function Briefing1(_Name, _PlayerID)
----     local Briefing = {};
----     local AP, ASP = AddBriefingPages(Briefing);
----
----     -- Pages ...
----
----     Briefing.Starting = function(_Data)
----     end
----     Briefing.Finished = function(_Data)
----     end
----     StartBriefing(Briefing, _Name, _PlayerID);
---- end
---- ```
----
---- * Example #2: Notation for animations
---- ```lua
---- Briefing.PageAnimation = {
----     ["Page1"] = {
----         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
----              {GetFrameVector("pos3", 500, "pos4", 1000)}},
----     },
----     ["Page3"] = {
----         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
----              {GetFrameVector("pos3", 500, "pos4", 1000)},
----              {GetFrameVector("pos7", 500, "pos8", 1000)},
----              {GetFrameVector("pos5", 500, "pos6", 1000)}},
----     },
---- };
---- ```
----
---- * Example #3: Replace animations
---- ```lua
---- Briefing.PageAnimation = {
----     ["Page1"] = {
----         Clear = true,
----         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
----              {GetFrameVector("pos3", 500, "pos4", -3000)}},
----     },
---- };
---- ```
----
---- * Example #4: Endlessly repeating animation
---- ```lua
---- Briefing.PageAnimation = {
----     ["Page1"] = {
----         Repeat = true,
----         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
----              {GetFrameVector("pos3", 500, "pos4", -3000)},
----              {GetFrameVector("pos7", 500, "pos8", -3000)},
----              {GetFrameVector("pos5", 500, "pos6", -3000)}},
----     },
---- };
---- ```
----
---- * Example #5: Inject animations
---- ```lua
---- Briefing.PageAnimation = {
----     ["Seite1"] = {
----         Postpone = true,
----         Local = true,
----         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
----              {GetFrameVector("pos3", 500, "pos4", -3000)},
----              {GetFrameVector("pos7", 500, "pos8", -3000)},
----              {GetFrameVector("pos5", 500, "pos6", -3000)}},
----     },
---- };
---- ```
----
---- * Example #6: Notation of paralaxes
---- ```lua
---- Briefing.PageParallax = {
----     ["Page1"] = {
----         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
----          {0, 0, 0.8, 1, 255},
----          {0.2, 0, 1, 1, 255}},
----     },
----     ["Page3"] = {
----         {"maps/externalmap/mapname/graphics/Parallax1.png", 1,
----          {0, 0, 0.8, 1, 255},
----          {0.2, 0, 1, 1, 255},
----          {0, 0, 0.8, 1, 255},
----          {0.2, 0, 1, 1, 255}},
----     },
----     ["Page7"] = {
----         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
----          {0, 0, 0.8, 1, 255}},
----     },
---- };
---- ```
----
---- * Example #7: Replace parallaxes
---- ```lua
---- Briefing.PageParallax = {
----     ["Page1"] = {
----         Clear = true,
----         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
----          {0, 0, 0.8, 1, 255},
----          {0.2, 0, 1, 1, 255}},
----     },
---- };
---- ```
----
---- * Example #8: Endlessly repeating parallaxes
---- ```lua
---- Briefing.PageParallax = {
----     ["Seite1"] = {
----         Repeat = true,
----         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
----          {0, 0, 0.8, 1, 255},
----          {0.2, 0, 1, 1, 255}},
----     },
---- };
---- ```
----
---- @param _Briefing table   Briefing table
---- @param _Name string      Name of briefing
---- @param _PlayerID integer Player ID of receiver
-function StartBriefing(_Briefing, _Name, _PlayerID)
+--- @param _Name string Name of the briefing
+--- @param _PlayerID integer Player ID of the receiver
+--- @return table BriefingBuilder Builder of the briefing
+function NewBriefing(_Name, _PlayerID)
+    return {};
 end
-API.StartBriefing = StartBriefing;
+API.NewBriefing = NewBriefing;
 
---- Asks the player for the permission to change graphic settings.
----
---- This feature is deactivated in Multiplayer.
-function RequestBriefingAlternateGraphics()
-end
-API.RequestBriefingAlternateGraphics = RequestBriefingAlternateGraphics;
-
---- Checks if a briefing ist active.
---- @param _PlayerID integer PlayerID of receiver
+--- Checks whether a briefing is active.
+--- @param _PlayerID integer Player ID of the receiver
 --- @return boolean IsActive Briefing is active
 function IsBriefingActive(_PlayerID)
     return true;
 end
 API.IsBriefingActive = IsBriefingActive;
 
---- Creates a point from a position.
---- @param _Entity any      Target entity
---- @param _ZOffset integer Z-Offset (< 0 → Z overwrite)
---- @return number X X-Koordinate
---- @return number Y Y-Koordinate
---- @return number Z Z-Koordinate
-function GetFramePosition(_Entity, _ZOffset)
-    return 0, 0, 0;
+--- Starts a briefing.
+--- <p>
+--- <b>Attention</b>: This function is deprecated and can only be used with the
+--- declarative API.
+---
+--- #### Fields `_Briefing`:
+--- * `Starting`:                (optional) <b>function</b> Called at the beginning of the briefing
+--- * `Finished`:                (optional) <b>function</b> Called at the end of the briefing
+--- * `RestoreCamera`:           (optional) <b>boolean</b> Saves and restores the camera position at the end
+--- * `RestoreGameSpeed`:        (optional) <b>boolean</b> Saves and restores game speed at the end
+--- * `EnableGlobalImmortality`: (optional) <b>boolean</b> All entities are invulnerable during the briefing
+--- * `EnableSky`:               (optional) <b>boolean</b> Displays the sky during the briefing
+--- * `EnableFoW`:               (optional) <b>boolean</b> Displays fog of war during the briefing
+--- * `EnableBorderPins`:        (optional) <b>boolean</b> Displays the border pins during the briefing
+--- * `PreloadAssets`:           (optional) <b>boolean</b> Allows far clipping in briefings
+--- * `HideNotes`:               (optional) <b>boolean</b> Hides messages
+---
+function StartBriefing(_Briefing, _Name, _PlayerID)
 end
-
---- Creates an vector from 2 positions.
---- @param _Entity1 any      Target position entity
---- @param _ZOffset1 integer Z-Offset of position (< 0 → Z overwrite)
---- @param _Entity2 any      Target lookat entity
---- @param _ZOffset2 integer Z-Offset of lookat (< 0 → Z overwrite)
---- @return number X1        X-Coordinate Position
---- @return number Y1        Y-Coordinate Position
---- @return number Z1        Z-Coordinate Position
---- @return number X2        X-Coordinate LookAt
---- @return number Y2        Y-Coordinate LookAt
---- @return number Z2        Z-Coordinate LookAt
-function GetFrameVector(_Entity1, _ZOffset1, _Entity2, _ZOffset2)
-    return 0, 0, 0, 0, 0, 0;
-end
+API.StartBriefing = StartBriefing;
 
 --- Prepares the briefing and returns the page functions.
+--- <p>
+--- <b>Attention</b>: This function is deprecated and can only be used with the
+--- declarative API.
 ---
 --- Must be called before pages are added.
+--- 
 --- @param _Briefing table Briefing table
 --- @return function AP  Page function
---- @return function ASP Short page function
+--- @return function ASP Simplified page function
 function AddBriefingPages(_Briefing)
     return function() end, function() end;
 end
 API.AddBriefingPages = AddBriefingPages;
 
 --- Creates a page.
----
---- Possible fields for the page:
----
---- * `Title`           - Displayed page title
---- * `Text`            - Displayed page text
---- * `Speech`          - Path to voiceover (MP3 file)
---- * `Position`        - Script name of position
---- * `Duration`        - Time until automatic skip
---- * `DialogCamera`    - Use closeup camera
---- * `DisableSkipping` - Allow/forbid skipping pages
---- * `Action`          - Function called when page is displayed
---- * `FarClipPlane`    - Render distance
---- * `Rotation`        - Camera rotation
---- * `Zoom`            - Camera zoom
---- * `Angle`           - Camera angle
---- * `FadeIn`          - Duration of fadein from black
---- * `FadeOut`         - Duration of fadeout to black
---- * `FaderAlpha`      - Mask alpha
---- * `BarOpacity`      - Opacity of bars
---- * `BigBars`         - Use big bars
---- * `FlyTo`           - Table with second set of camera configuration were camera flys to
---- * `Performance`     - (Optional) Lower graphic settings for this page
---- * `MC`              - Table with choices to branch of in dialogs
----
---- *→ Example #1*
----
---- #### Flow control
---- In a briefing the player can be forced to make a choice that will have
---- different results. That is called multiple choice. Options must be provided
---- in a table. The target page can be defined with it's name or a function can
---- be provided for more control over the flow. Such funktions must return a
---- page name.
----
---- *→ Example #2*
----
---- Additionally each funktion can be marked to be removed when used
---- and not shown again when reentering the page.
----
---- *→ Example #3*
----
---- Also pages can be hidden by providing a function to check conditions.
----
---- *→ Example #4*
----
---- If a briefing is branched it must be manually ended after a branch is done
---- or it just simply shows the next page. To end a briefing, an empty page
---- must be added.
----
---- *→ Example #5*
----
---- Alternativly the briefing can continue at a different page. This allows to
---- create repeating structures within a briefing.
----
---- *→ Example #6*
----
---- To obtain selected answers at a later point the selection can be saved in a
---- global variable either in a option callback or in the finished function. The
---- number returned is the ID of the answer.
----
---- *→ Example #7*
----
---- #### Example:
----
---- * Example #1: A simple page
---- ```lua
---- AP {
----    Title        = "Marcus",
----    Text         = "This is a simple page.",
----    Position     = "Marcus",
----    Rotation     = 30,
----    DialogCamera = true,
---- };
---- ```
----
---- * Example #2: Usage of multiple choices
---- ```lua
---- AP {
----    Title        = "Marcus",
----    Text         = "That is a not so simple page.",
----    Position     = "Marcus",
----    Rotation     = 30,
----    DialogCamera = true,
----    MC = {
----        {"Option 1", "TargetPage"},
----        {"Option 2", Option2Clicked},
----    },
---- };
---- ```
----
---- * Example #3: One time usage option
---- ```lua
---- MC = {
----     ...
----     {"Option 3", "AnotherPage", Remove = true},
---- }
---- ```
----
---- * Example #4: Option with condition
---- ```lua
---- MC = {
----     ...
----     {"Option 3", "AnotherPage", Disable = OptionIsDisabled},
---- }
---- ```
----
---- * Example #5: Abort briefing
---- ```lua
---- AP()
---- ```
----
---- * Example #6: Jump to other page
---- ```lua
---- AP("SomePageName")
---- ```
----
---- * Example #7: Get selected option
---- ```lua
---- Briefing.Finished = function(_Data)
----     MyChoosenOption = _Data:GetPage("Choice"):GetSelected();
---- end
---- ```
+--- <p>
+--- <b>Attention</b>: This function is deprecated and can only be used with the
+--- declarative API.
 ---
 --- @param _Data table Page data
+--- @return table Page Created page
 function AP(_Data)
+    return {};
 end
 
---- Creates a page in a simplified manner.
+--- Creates a simplified page.
+--- <p>
+--- <b>Attention</b>: This function is deprecated and can only be used with the
+--- declarative API.
 ---
---- The function can create a automatic page name based of the page index. A
---- name can be an optional parameter at the start. The page won't turn until
---- the player presses the skip button.
----
---- The function expects the following parameters:
---- 
---- * `Name`            - (Optional) Name of page
---- * `Title`           - Displayed page title
---- * `Text`            - Displayed page text
---- * `DialogCamera`    - Use closeup camera
---- * `Position`        - (Optional) Scriptname of focused entity
---- * `Action`          - (Optional) Action when page is shown
----
---- #### Example:
----
---- ```lua
---- -- Long shot
---- ASP("Title", "Some important text.", false, "HQ");
---- -- Page Name
---- ASP("Page1", "Title", "Some important text.", false, "HQ");
---- -- Close-Up
---- ASP("Title", "Some important text.", true, "Marcus");
---- -- Call action
---- ASP("Title", "Some important text.", true, "Marcus", MyFunction);
---- ```
----
---- @param ... any List of page parameters
+--- @param _Name? string Optional name of the page
+--- @param _Title string Displayed page title
+--- @param _Text string Displayed page text
+--- @param _DialogCamera boolean Use close-up camera
+--- @param _Position? string Script name of the focused entity
+--- @param _Action? function Function executed when the page is shown
+--- @return table Page Created page
 function ASP(...)
+    return {};
 end
 

@@ -1,16 +1,14 @@
 --- Improves on interactive objects.
 ---
-Lib.IO = Lib.IO or {};
+--- (Almost) All entities can be used as interactive object not just those
+--- that are supposed to. An object is described by a table and (almost) all
+--- keys are optional.
 
 
 
 --- Adds an interaction to a object.
 ---
---- (Almost) All entities can be used as interactive object not just those
---- that are supposed to. An object is described by a table and (almost) all
---- keys are optional.
----
---- #### Fields of table
+--- #### Fields `_Description`:
 --- * `ScriptName`             - Scriptname of object
 --- * `Texture`                - (Optional) table with coordinates
 --- * `Title`                  - (Optional) Title of tooltip
@@ -174,30 +172,30 @@ API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
 
 --- The player clicked the interaction button.
 --- 
---- #### Parameters:s
---- * `ScriptName` - Scriptname of entity
---- * `KnightID`   - ID of activating hero
---- * `PlayerID`   - ID of activating player
+--- #### Parameters:
+--- * `ScriptName`: <b>string</b> Scriptname of entity
+--- * `KnightID`:   <b>integer</b> ID of activating hero
+--- * `PlayerID`:   <b>integer</b> ID of activating player
 Report.ObjectClicked = anyInteger;
 
 --- The interaction with the object was successfull.
 --- If the object has costs the activation concludes when the costs arrive.
 --- 
---- #### Parameters:s
---- * `ScriptName` - Scriptname of entity
---- * `KnightID`   - ID of activating hero
---- * `PlayerID`   - ID of activating player
+--- #### Parameters:
+--- * `ScriptName`: <b>string</b> Scriptname of entity
+--- * `KnightID`:   <b>integer</b> ID of activating hero
+--- * `PlayerID`:   <b>integer</b> ID of activating player
 Report.ObjectInteraction = anyInteger;
 
 --- The interaction is deleted from the object.
 ---
---- #### Parameters:s
---- * `ScriptName` - Scriptname of entity
+--- #### Parameters:
+--- * `ScriptName`: <b>string</b> Scriptname of entity
 Report.ObjectReset = anyInteger;
 
 --- The state of an object has been reset.
 ---
---- #### Parameters:s
---- * `ScriptName` - Scriptname of entity
+--- #### Parameters:
+--- * `ScriptName`: <b>string</b> Scriptname of entity
 Report.ObjectDelete = anyInteger;
 

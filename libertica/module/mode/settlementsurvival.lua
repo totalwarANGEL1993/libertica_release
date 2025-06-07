@@ -36,11 +36,10 @@ Lib.SettlementSurvival.Global = {
         BanditsBlockClaim = false,
         ClothesForOuterRim = false,
     },
-
-    SuspendedSettlers = {},
 };
 Lib.SettlementSurvival.Local  = {
     IsActive = true,
+    DeadSettlers = {},
     Consume = {
         IsActive = true,
         AffectAI = false,
@@ -48,8 +47,6 @@ Lib.SettlementSurvival.Local  = {
     Misc = {
         ClothesForOuterRim = false,
     },
-
-    SuspendedSettlers = {},
 };
 Lib.SettlementSurvival.Shared = {
     AnimalPlague = {
@@ -98,6 +95,7 @@ Lib.Require("comfort/GetHealth");
 Lib.Require("comfort/SetHealth");
 Lib.Require("core/Core");
 Lib.Require("module/city/Construction");
+Lib.Require("module/faker/Permadeath");
 Lib.Require("module/ui/UIBuilding");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/mode/SettlementSurvival_API");
@@ -110,27 +108,8 @@ Lib.Register("module/mode/SettlementSurvival");
 -- Global initalizer method
 function Lib.SettlementSurvival.Global:Initialize()
     if not self.IsInstalled then
-        Report.FireAlarmDeactivated_Internal = CreateReport("Event_FireAlarmDeactivated_Internal");
-        Report.FireAlarmActivated_Internal = CreateReport("Event_FireAlarmActivated_Internal");
-        Report.RepairAlarmDeactivated_Internal = CreateReport("Event_RepairAlarmFeactivated");
-        Report.ReRepairAlarmActivated_Internal = CreateReport("Event_ReRepairAlarmActivated_Internal");
-
-        --- An animal has died from illness.
-        ---
-        --- #### Parameters
-        --- `EntityID` - ID of animal
         Report.AnimalDiedFromIllness = CreateReport("Event_AnimalDiedFromIllness");
-
-        --- A settler has starved to death.
-        ---
-        --- #### Parameters
-        --- `EntityID` - ID of settler
         Report.SettlerDiedFromStarvation = CreateReport("Event_SettlerDiedFromStarvation");
-
-        --- A settler has died from illness.
-        ---
-        --- #### Parameters
-        --- `EntityID` - ID of settler
         Report.SettlerDiedFromIllness = CreateReport("Event_SettlerDiedFromIllness");
 
         for PlayerID= 1,8 do
@@ -140,14 +119,12 @@ function Lib.SettlementSurvival.Global:Initialize()
             self.Negligence[PlayerID] = {};
             self.Plague[PlayerID] = {};
             self.Consume[PlayerID] = {Buildings = {}};
-            self.SuspendedSettlers[PlayerID] = {};
         end
 
         RequestJobByEventType(
             Events.LOGIC_EVENT_EVERY_TURN,
             function()
                 local Turn = Logic.GetCurrentTurn();
-                Lib.SettlementSurvival.Global:ResumeSettlersAfterMourning(Turn);
                 Lib.SettlementSurvival.Global:ControlSettlersBaseConsumption(Turn);
                 Lib.SettlementSurvival.Global:ControlSettlersBecomeIllDueToNegligence(Turn);
                 Lib.SettlementSurvival.Global:ControlBuildingsDuringHotWeather(Turn);
@@ -263,7 +240,7 @@ function Lib.SettlementSurvival.Global:ControlSettlersBaseConsumption(_Turn)
                 end
                 local IsStopped = Logic.IsBuildingStopped(BuildingID) == true;
                 local IsOuterRim = Logic.IsEntityInCategory(BuildingID, EntityCategories.OuterRimBuilding) == 1;
-                local AttachedSettlersAmount = self:GetEffectiveWorkerInBuilding(BuildingID);
+                local AttachedSettlersAmount = CountWorkerInBuilding(BuildingID);
                 local DistanceFactor = self:CalculateDistanceFactor(BuildingID);
                 -- Consume food
                 if Logic.IsNeedActive(BuildingID, Needs.Nutrition) then
@@ -586,7 +563,7 @@ function Lib.SettlementSurvival.Global:ControlBuildingsDuringColdWeather(_Turn)
                     local BuildingList = Array_Append(OuterRim, City);
                     for i= 1, #BuildingList do
                         if Logic.IsConstructionComplete(BuildingList[i]) == 1 then
-                            local AttachedSettlersAmount = self:GetEffectiveWorkerInBuilding(BuildingList[i]);
+                            local AttachedSettlersAmount = CountWorkerInBuilding(BuildingList[i]);
                             if not Logic.IsNeedActive(BuildingList[i], Needs.Clothes)
                             or Logic.GetNeedState(BuildingList[i], Needs.Clothes) >= 0.4 then
                                 AttachedSettlersAmount = AttachedSettlersAmount * 0.5;
@@ -648,7 +625,7 @@ function Lib.SettlementSurvival.Global:ControlSettlersBecomeIllDueToNegligence(_
                 if  not self.Negligence[PlayerID][WorkerList[i]]
                 and Logic.GetEntityType(WorkerList[i]) ~= Entities.U_Pharmacist
                 and (self:IsSettlerDirty(WorkerList[i]) or self:IsSettlerBored(WorkerList[i]))
-                and not self:IsSettlerSuspended(WorkerList[i])
+                and not IsSettlerSuspended(WorkerList[i])
                 and not Logic.IsIll(WorkerList[i]) then
                     self.Negligence[PlayerID][WorkerList[i]] = {CurrentTime};
                 end
@@ -672,7 +649,7 @@ function Lib.SettlementSurvival.Global:ControlSettlersBecomeIllDueToNegligence(_
                             if  Logic.TechnologyGetState(PlayerID, Technologies.R_Medicine) == 3
                             and not self:IsSettlerCarryingHygiene(SettlerID)
                             and not self:IsSettlerCarryingBeer(SettlerID)
-                            and not self:IsSettlerSuspended(SettlerID)
+                            and not IsSettlerSuspended(SettlerID)
                             and self:IsSettlerStriking(SettlerID) then
                                 Logic.MakeSettlerIll(SettlerID);
                                 ShowMessage = true;
@@ -730,7 +707,7 @@ function Lib.SettlementSurvival.Global:ControlSettlersSuccumToFamine(_Turn)
             for i= 1, #WorkerList do
                 if  not self.Famine[PlayerID][WorkerList[i]]
                 and self:IsSettlerHungry(WorkerList[i])
-                and not self:IsSettlerSuspended(WorkerList[i]) then
+                and not IsSettlerSuspended(WorkerList[i]) then
                     self.Famine[PlayerID][WorkerList[i]] = {CurrentTime};
                 end
             end
@@ -748,14 +725,17 @@ function Lib.SettlementSurvival.Global:ControlSettlersSuccumToFamine(_Turn)
                 --- @diagnostic disable-next-line: param-type-mismatch
                 for SettlerID,v in pairs(self.Famine[PlayerID]) do
                     if  not self:IsSettlerCarryingFood(SettlerID)
-                    and not self:IsSettlerSuspended(SettlerID)
+                    and not IsSettlerSuspended(SettlerID)
                     and self:IsSettlerStriking(SettlerID) then
                         local Chance = Lib.SettlementSurvival.Shared.Famine.DeathChance;
                         if Chance >= 1 and math.random(1, 100) <= math.ceil(Chance) then
-                            self:SuspendSettler(SettlerID, true);
+                            local Suspension = Lib.SettlementSurvival.Shared.SuspendedSettlers.MourningTime;
+                            SuspendSettler(SettlerID, Suspension);
                             SendReport(Report.SettlerDiedFromStarvation, SettlerID);
                             SendReportToLocal(Report.SettlerDiedFromStarvation, SettlerID);
                             ShowMessage = true;
+                            -- Save dead settler
+                            ExecuteLocal("Lib.SettlementSurvival.Local.DeadSettlers[%d][%d] = true", PlayerID, SettlerID);
                         end
                     end
                 end
@@ -797,7 +777,7 @@ function Lib.SettlementSurvival.Global:ControlSettlersSuccumToPlague(_Turn)
                 if  not self.Plague[PlayerID][WorkerList[i]]
                 and Logic.GetEntityType(WorkerList[i]) ~= Entities.U_Pharmacist
                 and Logic.IsIll(WorkerList[i])
-                and not self:IsSettlerSuspended(WorkerList[i]) then
+                and not IsSettlerSuspended(WorkerList[i]) then
                     self.Plague[PlayerID][WorkerList[i]] = {CurrentTime};
                 end
             end
@@ -815,7 +795,7 @@ function Lib.SettlementSurvival.Global:ControlSettlersSuccumToPlague(_Turn)
                 --- @diagnostic disable-next-line: param-type-mismatch
                 for SettlerID,v in pairs(self.Plague[PlayerID]) do
                     if  not self:IsSettlerCarryingMedicine(SettlerID)
-                    and not self:IsSettlerSuspended(SettlerID)
+                    and not IsSettlerSuspended(SettlerID)
                     and self:IsSettlerStriking(SettlerID) then
                         local Chance = Lib.SettlementSurvival.Shared.Plague.DeathChance;
                         -- Deactivated: Makes it to easy
@@ -824,10 +804,13 @@ function Lib.SettlementSurvival.Global:ControlSettlersSuccumToPlague(_Turn)
                         --     Chance = Chance / 2;
                         -- end
                         if Chance >= 1 and math.random(1, 100) <= math.ceil(Chance) then
-                            self:SuspendSettler(SettlerID, true);
+                            local Suspension = Lib.SettlementSurvival.Shared.SuspendedSettlers.MourningTime;
+                            SuspendSettler(SettlerID, Suspension);
                             SendReport(Report.SettlerDiedFromIllness, SettlerID);
                             SendReportToLocal(Report.SettlerDiedFromIllness, SettlerID);
                             ShowMessage = true;
+                            -- Save dead settler
+                            ExecuteLocal("Lib.SettlementSurvival.Local.DeadSettlers[%d][%d] = true", PlayerID, SettlerID);
                         end
                     end
                 end
@@ -847,118 +830,6 @@ function Lib.SettlementSurvival.Global:IsSettlerCarryingMedicine(_Entity)
 end
 
 -- -------------------------------------------------------------------------- --
-
--- Resumes a settler.
-function Lib.SettlementSurvival.Global:ResumeSettler(_Entity)
-    local EntityID = GetID(_Entity);
-    local PlayerID = Logic.EntityGetPlayer(EntityID);
-    local StoreHouseID = Logic.GetStoreHouse(PlayerID);
-    if StoreHouseID ~= 0 then
-        -- Resume settler
-        Logic.SetTaskList(EntityID, TaskLists.TL_WAIT_THEN_WALK);
-        Logic.SetVisible(EntityID, true);
-        -- Remove from suspension list
-        if self.SuspendedSettlers[PlayerID][EntityID] then
-            ExecuteLocal("Lib.SettlementSurvival.Local.SuspendedSettlers[%d][%d] = nil", PlayerID, EntityID);
-            self.SuspendedSettlers[PlayerID][EntityID] = nil;
-        end
-    end
-end
-
--- Suspend a settler.
-function Lib.SettlementSurvival.Global:SuspendSettler(_Entity, _Mourn)
-    local EntityID = GetID(_Entity);
-    local PlayerID = Logic.EntityGetPlayer(EntityID);
-    local StoreHouseID = Logic.GetStoreHouse(PlayerID);
-    if StoreHouseID ~= 0 then
-        -- Reset needs if building empty
-        local BuildingID = Logic.GetSettlersWorkBuilding(EntityID);
-        local AttachedSettlers = {Logic.GetWorkersAndSpousesForBuilding(BuildingID)};
-        local AnyNotSuspended = false;
-        for i= 1, #AttachedSettlers do
-            if AttachedSettlers[i] > 0 and not self:IsSettlerSuspended(AttachedSettlers[i]) then
-                AnyNotSuspended = true;
-                break;
-            end
-        end
-        if AnyNotSuspended == false then
-            Logic.SetNeedState(EntityID, Needs.Nutrition, 1.0);
-            Logic.SetNeedState(EntityID, Needs.Entertainment, 1.0);
-            Logic.SetNeedState(EntityID, Needs.Clothes, 1.0);
-            Logic.SetNeedState(EntityID, Needs.Hygiene, 1.0);
-            Logic.SetNeedState(EntityID, Needs.Medicine, 1.0);
-        end
-        -- Relocate inside storehouse and make invisible
-        local x,y,z = Logic.EntityGetPos(StoreHouseID);
-        Logic.DEBUG_SetSettlerPosition(EntityID, x, y);
-        Logic.SetVisible(EntityID, false);
-        Logic.SetTaskList(EntityID, TaskLists.TL_NPC_IDLE);
-        -- Add to suspended settler map
-        if not self.SuspendedSettlers[PlayerID][EntityID] then
-            local Time = (_Mourn and Logic.GetTime()) or -1;
-            ExecuteLocal("Lib.SettlementSurvival.Local.SuspendedSettlers[%d][%d] = {%d}", PlayerID, EntityID, Time);
-            self.SuspendedSettlers[PlayerID][EntityID] = {Time};
-        end
-    end
-end
-
-function Lib.SettlementSurvival.Global:IsSettlerSuspended(_Entity)
-    local EntityID = GetID(_Entity);
-    local PlayerID = Logic.EntityGetPlayer(EntityID);
-    return self.SuspendedSettlers[PlayerID] and self.SuspendedSettlers[PlayerID][EntityID] ~= nil;
-end
-
-function Lib.SettlementSurvival.Global:HasSuspendedInhabitants(_Entity)
-    local BuildingID = GetID(_Entity)
-    local AttachedSettlers = {Logic.GetWorkersAndSpousesForBuilding(BuildingID)};
-    for i= 1, #AttachedSettlers do
-        if AttachedSettlers[i] > 0 and self:IsSettlerSuspended(AttachedSettlers[i]) then
-            return true;
-        end
-    end
-    return false;
-end
-
-function Lib.SettlementSurvival.Global:GetEffectiveWorkerInBuilding(_Entity)
-    local WorkerCount = 0;
-    local BuildingID = GetID(_Entity);
-    local Slots = Logic.GetUpgradeLevel(BuildingID) +1;
-    for _, SettlerID in pairs({Logic.GetWorkersForBuilding(BuildingID)}) do
-        if SettlerID > 0 and not self:IsSettlerSuspended(SettlerID) then
-            WorkerCount = WorkerCount +1;
-        end
-    end
-    return math.min(WorkerCount, Slots);
-end
-
--- Restores tasklist and position of fake dead settlers.
-function Lib.SettlementSurvival.Global:RestoreSettlerSuspension()
-    for PlayerID = 1, 8 do
-        for k,v in pairs(self.SuspendedSettlers[PlayerID]) do
-            if not IsExisting(k) then
-                ExecuteLocal("Lib.SettlementSurvival.Local.SuspendedSettlers[%d][%d] = nil", PlayerID, k);
-                self.SuspendedSettlers[PlayerID][k] = nil;
-            else
-                self:SuspendSettler(k);
-            end
-        end
-    end
-end
-
--- Removes the suspended settler after the mourning time is over.
-function Lib.SettlementSurvival.Global:ResumeSettlersAfterMourning(_Turn)
-    local MournTime = Lib.SettlementSurvival.Shared.SuspendedSettlers.MourningTime;
-    local CurrentTime = Logic.GetTime();
-    local PlayerID = _Turn % 10;
-    if PlayerID >= 1 and PlayerID <= 8 then
-        for k,v in pairs(self.SuspendedSettlers[PlayerID]) do
-            if v[1] > -1 and v[1] + MournTime <= CurrentTime then
-                self:ResumeSettler(k);
-                DestroyEntity(k);
-            end
-        end
-    end
-end
 
 function Lib.SettlementSurvival.Global:IsSettlerStriking(_Entity)
     local EntityID = GetID(_Entity);
@@ -1061,24 +932,17 @@ end
 -- Local initalizer method
 function Lib.SettlementSurvival.Local:Initialize()
     if not self.IsInstalled then
-        Report.FireAlarmDeactivated_Internal = CreateReport("Event_FireAlarmDeactivated_Internal");
-        Report.FireAlarmActivated_Internal = CreateReport("Event_FireAlarmActivated_Internal");
-        Report.RepairAlarmDeactivated_Internal = CreateReport("Event_RepairAlarmFeactivated");
-        Report.ReRepairAlarmActivated_Internal = CreateReport("Event_ReRepairAlarmActivated_Internal");
         Report.AnimalDiedFromIllness = CreateReport("Event_AnimalDiedFromIllness");
         Report.SettlerDiedFromStarvation = CreateReport("Event_SettlerDiedFromStarvation");
         Report.SettlerDiedFromIllness = CreateReport("Event_SettlerDiedFromIllness");
 
-        self:OverrideSelectionChanged();
-        self:OverwriteAlarmButtons();
-        self:OverwriteGameCallbacks();
-        self:OverwriteJumpToWorker();
-        self:OverwriteUpgradeButton();
-        self:OverwriteUpdateNeeds();
-
-        for PlayerID = 1,8 do
-            self.SuspendedSettlers[PlayerID] = {};
+        for PlayerID = 1, 8 do
+            self.DeadSettlers[PlayerID] = {};
         end
+
+        self:OverrideGameCallbacks();
+        self:OverwriteUpdateNeeds();
+        self:OverwriteUpgradeButton();
 
         -- Garbage collection
         Lib.SettlementSurvival.Global = nil;
@@ -1094,145 +958,12 @@ end
 function Lib.SettlementSurvival.Local:OnReportReceived(_ID, ...)
     if _ID == Report.LoadingFinished then
         self.LoadscreenClosed = true;
-    end
-end
-
-function Lib.SettlementSurvival.Local:OverwriteJumpToWorker()
-    --- @diagnostic disable-next-line: duplicate-set-field
-    GUI_BuildingInfo.JumpToWorkerClicked = function()
-        Sound.FXPlay2DSound( "ui\\menu_click");
-        local PlayerID = GUI.GetPlayerID();
-        local SelectedEntityID = GUI.GetSelectedEntity();
-        local InhabitantsBuildingID = 0;
-        local IsSettlerSelected;
-        if Logic.IsBuilding(SelectedEntityID) == 1 then
-            InhabitantsBuildingID = SelectedEntityID;
-            IsSettlerSelected = false;
-        else
-            if Logic.IsWorker(SelectedEntityID) == 1
-            or Logic.IsSpouse(SelectedEntityID) == true
-            or Logic.GetEntityType(SelectedEntityID) == Entities.U_Priest then
-                InhabitantsBuildingID = Logic.GetSettlersWorkBuilding(SelectedEntityID);
-                IsSettlerSelected = true;
-            end
+    elseif _ID == Report.SettlerSuspensionElapsed then
+        -- Delete the dead settler
+        local PlayerID = Logic.EntityGetPlayer(arg[1]);
+        if self.DeadSettlers[PlayerID] then
+            self.DeadSettlers[PlayerID][arg[1]] = nil;
         end
-        if InhabitantsBuildingID ~= 0 then
-            local WorkersAndSpousesInBuilding = {Logic.GetWorkersAndSpousesForBuilding(InhabitantsBuildingID)}
-
-            -- To pretend settlers of the building have died, we need to remove
-            -- them from the intabitants list.
-            for i = #WorkersAndSpousesInBuilding, 1, -1 do
-                local SettlerID = WorkersAndSpousesInBuilding[i];
-                if Lib.SettlementSurvival.Local.SuspendedSettlers[PlayerID] then
-                    if Lib.SettlementSurvival.Local.SuspendedSettlers[PlayerID][SettlerID] then
-                        table.remove(WorkersAndSpousesInBuilding, i);
-                    end
-                end
-            end
-
-            local InhabitantID
-            if g_CloseUpView.Active == false and IsSettlerSelected == true then
-                InhabitantID = SelectedEntityID;
-            else
-                local InhabitantPosition = 1;
-                for i = 1, #WorkersAndSpousesInBuilding do
-                    if WorkersAndSpousesInBuilding[i] == g_LastSelectedInhabitant then
-                        InhabitantPosition = i + 1;
-                        break;
-                    end
-                end
-                InhabitantID = WorkersAndSpousesInBuilding[InhabitantPosition];
-                if InhabitantID == 0 then
-                    InhabitantID = WorkersAndSpousesInBuilding[InhabitantPosition + 1];
-                end
-            end
-            if InhabitantID == nil then
-                local x,y = Logic.GetEntityPosition(InhabitantsBuildingID);
-                g_LastSelectedInhabitant = nil;
-                ShowCloseUpView(0, x, y);
-                GUI.SetSelectedEntity(InhabitantsBuildingID);
-            else
-                GUI.SetSelectedEntity(InhabitantID);
-                ShowCloseUpView(InhabitantID);
-                g_LastSelectedInhabitant = InhabitantID;
-            end
-        end
-    end
-end
-
-function Lib.SettlementSurvival.Local:IsSettlerSuspended(_Entity)
-    local EntityID = GetID(_Entity);
-    local PlayerID = Logic.EntityGetPlayer(EntityID);
-    return self.SuspendedSettlers[PlayerID] and self.SuspendedSettlers[PlayerID][EntityID] ~= nil;
-end
-
-function Lib.SettlementSurvival.Local:HasSuspendedInhabitants(_Entity)
-    local BuildingID = GetID(_Entity);
-    local AttachedSettlers = {Logic.GetWorkersAndSpousesForBuilding(BuildingID)};
-    for i= 1, #AttachedSettlers do
-        if AttachedSettlers[i] > 0 and self:IsSettlerSuspended(AttachedSettlers[i]) then
-            return true;
-        end
-    end
-    return false;
-end
-
-function Lib.SettlementSurvival.Local:OverwriteGameCallbacks()
-    self.Orig_GameCallback_Feedback_OnBuildingBurning = GameCallback_Feedback_OnBuildingBurning;
-    GameCallback_Feedback_OnBuildingBurning = function(_PlayerID, _EntityID)
-        Lib.SettlementSurvival.Local.Orig_GameCallback_Feedback_OnBuildingBurning(_PlayerID, _EntityID);
-        SendReportToGlobal(Report.FireAlarmActivated_Internal, _EntityID);
-    end
-
-    self.Orig_GameCallback_GUI_DeleteEntityStateBuilding = GameCallback_GUI_DeleteEntityStateBuilding;
-    GameCallback_GUI_DeleteEntityStateBuilding = function(_BuildingID, _State)
-        if Lib.SettlementSurvival.Local:HasSuspendedInhabitants(_BuildingID) then
-            Message(Localize(Lib.SettlementSurvival.Text.Messages.BuildingMourning));
-            GUI.CancelBuildingKnockDown(_BuildingID);
-            return;
-        end
-        Lib.SettlementSurvival.Local.Orig_GameCallback_GUI_DeleteEntityStateBuilding(_BuildingID, _State);
-    end
-end
-
-function Lib.SettlementSurvival.Local:OverwriteAlarmButtons()
-    GUI_BuildingButtons.StartStopFireAlarmClicked_Orig_SettlementSurvival = GUI_BuildingButtons.StartStopFireAlarmClicked;
-    --- @diagnostic disable-next-line: duplicate-set-field
-    GUI_BuildingButtons.StartStopFireAlarmClicked = function()
-        GUI_BuildingButtons.StartStopFireAlarmClicked_Orig_SettlementSurvival();
-        local EntityID = GUI.GetSelectedEntity()
-        if Logic.IsFireAlarmActiveAtBuilding(EntityID) == true then
-            SendReportToGlobal(Report.FireAlarmActivated_Internal, EntityID);
-        else
-            SendReportToGlobal(Report.FireAlarmDeactivated_Internal, EntityID);
-        end
-    end
-
-    GUI_BuildingButtons.StartStopRepairAlarmClicked_Orig_SettlementSurvival = GUI_BuildingButtons.StartStopRepairAlarmClicked;
-    --- @diagnostic disable-next-line: duplicate-set-field
-    GUI_BuildingButtons.StartStopRepairAlarmClicked = function()
-        GUI_BuildingButtons.StartStopRepairAlarmClicked_Orig_SettlementSurvival();
-        local EntityID = GUI.GetSelectedEntity()
-        if Logic.IsRepairAlarmActiveAtBuilding(EntityID) == true then
-            SendReportToGlobal(Report.ReRepairAlarmActivated_Internal, EntityID);
-        else
-            SendReportToGlobal(Report.RepairAlarmDeactivated_Internal, EntityID);
-        end
-    end
-end
-
-function Lib.SettlementSurvival.Local:OverwriteUpgradeButton()
-    -- This creates a dependency to module/ui/uibuilding
-    GUI_BuildingButtons.UpgradeClicked_Orig_SettlementSurvival = GUI_BuildingButtons.UpgradeClicked;
-    --- @diagnostic disable-next-line: duplicate-set-field
-    GUI_BuildingButtons.UpgradeClicked = function()
-        local BuildingID = GUI.GetSelectedEntity();
-        if Lib.SettlementSurvival.Local:HasSuspendedInhabitants(BuildingID) then
-            Message(Localize(Lib.SettlementSurvival.Text.Messages.BuildingMourning));
-            GUI.CancelBuildingKnockDown(BuildingID);
-            return;
-        end
-        GUI_BuildingButtons.UpgradeClicked_Orig_SettlementSurvival();
     end
 end
 
@@ -1299,12 +1030,52 @@ function Lib.SettlementSurvival.Local:OverwriteUpdateNeeds()
     end
 end
 
-function Lib.SettlementSurvival.Local:OverrideSelectionChanged()
+function Lib.SettlementSurvival.Local:OverrideGameCallbacks()
     self.Orig_GameCallback_GUI_SelectionChanged = GameCallback_GUI_SelectionChanged;
     GameCallback_GUI_SelectionChanged = function(_Source)
         Lib.SettlementSurvival.Local.Orig_GameCallback_GUI_SelectionChanged(_Source);
         Lib.SettlementSurvival.Local:OnBuildingSelected();
     end
+
+    self.Orig_GameCallback_GUI_DeleteEntityStateBuilding = GameCallback_GUI_DeleteEntityStateBuilding;
+    GameCallback_GUI_DeleteEntityStateBuilding = function(_BuildingID, _State)
+        if Lib.SettlementSurvival.Local:HasBuildingDeadSettlers(_BuildingID) then
+            Message(Localize(Lib.Permadeath.Text.Messages.BuildingMourning));
+            GUI.CancelBuildingKnockDown(_BuildingID);
+            return;
+        end
+        Lib.SettlementSurvival.Local.Orig_GameCallback_GUI_DeleteEntityStateBuilding(_BuildingID, _State);
+    end
+end
+
+function Lib.SettlementSurvival.Local:OverwriteUpgradeButton()
+    -- This creates a dependency to module/ui/uibuilding
+    self.Orig_GUI_BuildingButtons_UpgradeClicked = GUI_BuildingButtons.UpgradeClicked;
+    --- @diagnostic disable-next-line: duplicate-set-field
+    GUI_BuildingButtons.UpgradeClicked = function()
+        local BuildingID = GUI.GetSelectedEntity();
+        if Lib.SettlementSurvival.Local:HasBuildingDeadSettlers(BuildingID) then
+            Message(Localize(Lib.SettlementSurvival.Text.Messages.BuildingMourning));
+            GUI.CancelBuildingKnockDown(BuildingID);
+            return;
+        end
+        Lib.SettlementSurvival.Local.Orig_GUI_BuildingButtons_UpgradeClicked();
+    end
+end
+
+-- We can not just check for suspended settler. We must check if the settler
+-- was "killed" by this module.
+function Lib.SettlementSurvival.Local:HasBuildingDeadSettlers(_BuildingID)
+    local PlayerID = Logic.EntityGetPlayer(_BuildingID);
+    if self.DeadSettlers[PlayerID] then
+        local AttachedSettlers = {Logic.GetWorkersAndSpousesForBuilding(_BuildingID)};
+        for i= 1, #AttachedSettlers do
+            if AttachedSettlers[i] > 0 and self.DeadSettlers[PlayerID][AttachedSettlers[i]] then
+                return true;
+            end
+        end
+    end
+    return false;
 end
 
 function Lib.SettlementSurvival.Local:OnBuildingSelected()

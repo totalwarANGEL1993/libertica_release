@@ -44,6 +44,7 @@
 
 <h2>Modules</h2>
 <ul class="nowrap">
+  <li><a href="../modules/comfort.addware.html">comfort.addware</a></li>
   <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
   <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
   <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
@@ -80,6 +81,7 @@
   <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
   <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
   <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isunofficialpatch.html">comfort.isunofficialpatch</a></li>
   <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
   <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
   <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
@@ -100,22 +102,14 @@
   <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
   <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
   <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
-  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
   <li><a href="../modules/core.core.html">core.core</a></li>
-  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
-  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
-  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
-  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
-  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
-  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
-  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
-  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
-  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
-  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
-  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/core.core_api.html">core.core_api</a></li>
+  <li><a href="../modules/core.core_behavior.html">core.core_behavior</a></li>
+  <li><a href="../modules/core.core_lua.html">core.core_lua</a></li>
   <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
   <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
   <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.militiasystem_api.html">module.city.militiasystem_api</a></li>
   <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
   <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
   <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
@@ -123,6 +117,7 @@
   <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
   <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
   <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.permadeath_api.html">module.faker.permadeath_api</a></li>
   <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
   <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
   <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
@@ -130,8 +125,10 @@
   <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
   <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
   <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.information_api.html">module.information.information_api</a></li>
   <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
   <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.information.typewriter_api.html">module.information.typewriter_api</a></li>
   <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
   <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
   <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
@@ -158,15 +155,24 @@
 <div id="content">
 
 <h1>Module <code>module.quest.questjornal_api</code></h1>
-<p>Ermöglicht das Hinzufügen von Notizen zu einer Quest.</p>
-<p></p>
+<p>Ermöglicht das Hinzufügen von Notizen zu einem Quest.</p>
+<p>
+
+ Notizen zu einem Auftrag werden in einem Textfenster angezeigt. Für
+ Quests mit Notizen wird ein neuer Button angezeigt, mit dem das Textfenster
+ geöffnet werden kann. Notizen können in normale (blau) und erhöhte (rot)
+ Wichtigkeit eingeteilt werden.
+
+ Zusätzlich kannst du dem Spieler erlauben, sich selbst Notizen zu machen.
+ Die Notizen des Spielers haben eine höhere Priorität gegenüber allen anderen
+ Notizen und sich violet hervorgehoben.</p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
 	<td class="name" nowrap><a href="#ShowJournalForQuest">ShowJournalForQuest (_Quest, _Flag)</a></td>
-	<td class="summary">Aktiviert oder deaktiviert das Journal oder eine bestimmte Quest.</td>
+	<td class="summary">Aktiviert oder deaktiviert das Journal oder einem bestimmtem Quest.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#AllowNotesForQuest">AllowNotesForQuest (_Quest, _Flag)</a></td>
@@ -194,11 +200,11 @@
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#AddJournalEntryToQuest">AddJournalEntryToQuest (_ID, _Quest)</a></td>
-	<td class="summary">Fügt einen Eintrag dem Journal der Quest hinzu.</td>
+	<td class="summary">Fügt einen Eintrag dem Journal des Quest hinzu.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#RemoveJournalEntryFromQuest">RemoveJournalEntryFromQuest (_ID, _Quest)</a></td>
-	<td class="summary">Entfernt einen Eintrag aus dem Journal der Quest.</td>
+	<td class="summary">Entfernt einen Eintrag aus dem Journal des Quest.</td>
 	</tr>
 </table>
 
@@ -214,7 +220,7 @@
     <strong>ShowJournalForQuest (_Quest, _Flag)</strong>
     </dt>
     <dd>
-    Aktiviert oder deaktiviert das Journal oder eine bestimmte Quest.
+    Aktiviert oder deaktiviert das Journal oder einem bestimmtem Quest.
 
 
     <h3>Parameters:</h3>
@@ -257,7 +263,7 @@
     </dt>
     <dd>
     Erstellt einen neuen Journaleintrag und gibt die ID zurück.
-<p> Der Eintrag kann jedem Journal jeder Quest hinzugefügt werden.
+<p> Der Eintrag kann jedem Journal jedem Quest hinzugefügt werden.
 
 
     <h3>Parameters:</h3>
@@ -361,14 +367,14 @@
     <strong>AddJournalEntryToQuest (_ID, _Quest)</strong>
     </dt>
     <dd>
-    Fügt einen Eintrag dem Journal der Quest hinzu.
+    Fügt einen Eintrag dem Journal des Quest hinzu.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">_ID</span> <b>integer</b> ID des Eintrags
         </li>
-        <li><span class="parameter">_Quest</span> <b>string</b> Name der Quest
+        <li><span class="parameter">_Quest</span> <b>string</b> Name des Quest
         </li>
     </ul>
 
@@ -382,14 +388,14 @@
     <strong>RemoveJournalEntryFromQuest (_ID, _Quest)</strong>
     </dt>
     <dd>
-    Entfernt einen Eintrag aus dem Journal der Quest.
+    Entfernt einen Eintrag aus dem Journal des Quest.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">_ID</span> <b>integer</b> ID des Eintrags
         </li>
-        <li><span class="parameter">_Quest</span> <b>string</b> Name der Quest
+        <li><span class="parameter">_Quest</span> <b>string</b> Name des Quest
         </li>
     </ul>
 
@@ -405,7 +411,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+<i style="float:right;">Last updated 2025-06-07 22:28:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

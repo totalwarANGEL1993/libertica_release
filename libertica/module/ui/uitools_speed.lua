@@ -38,9 +38,9 @@ function Lib.UITools.Speed:ActivateSpeedLimit(_Flag)
 end
 
 function Lib.UITools.Speed:InitForbidSpeedUp()
-    GameCallback_GameSpeedChanged_Orig_Preferences_ForbidSpeedUp = GameCallback_GameSpeedChanged;
-    GameCallback_GameSpeedChanged = function( _Speed )
-        GameCallback_GameSpeedChanged_Orig_Preferences_ForbidSpeedUp( _Speed );
+    self.Orig_GameCallback_GameSpeedChanged = GameCallback_GameSpeedChanged;
+    GameCallback_GameSpeedChanged = function(_Speed)
+        Lib.UITools.Speed.Orig_GameCallback_GameSpeedChanged(_Speed);
         if Lib.UITools.Speed.UseSpeedLimit == true then
             log("Lib.UITools.Speed: Checking speed limit.");
             if _Speed > Lib.UITools.Speed.SpeedLimit then

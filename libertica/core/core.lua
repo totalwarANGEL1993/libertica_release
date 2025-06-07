@@ -14,6 +14,7 @@ CONST_CURRENT_MODULE_CONTEXT = {};
 Lib.Require("comfort/IsHistoryEdition");
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("comfort/IsLocalScript");
+Lib.Require("comfort/IsUnofficialPatch");
 Lib.Require("comfort/HexToColorString");
 
 Lib.Require("core/QSB");

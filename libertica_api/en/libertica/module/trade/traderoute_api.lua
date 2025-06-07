@@ -1,6 +1,3 @@
-Lib.Require("comfort/IsLocalScript");
-Lib.Register("module/trade/TradeRoute_API");
-
 --- Allows to setup a AI player as a harbor more realisticly.
 --- 
 --- #### What a harbor does
@@ -174,33 +171,33 @@ API.ChangeTravelingSalesmanGoods = ChangeTravelingSalesmanGoods;
 --- A ship has spawned at the start of the trade route path.
 ---
 --- #### Parameters:
---- * `_PlayerID` - PlayerID of harbor
---- * `_RouteName` - Identifier of the route
---- * `_ShipID` - ID of the ship
+--- * `_PlayerID`:  <b>integer</b> PlayerID of harbor
+--- * `_RouteName`: <b>string</b> Identifier of the route
+--- * `_ShipID`:    <b>integer</b> ID of the ship
 Report.TradeShipSpawned = anyInteger;
 
 --- A ship has arrived at a harbor.
 ---
 --- #### Parameters:
---- * `_PlayerID` - PlayerID of harbor
---- * `_RouteName` - Identifier of the route
---- * `_ShipID` - ID of the ship
+--- * `_PlayerID`:  <b>integer</b> PlayerID of harbor
+--- * `_RouteName`: <b>string</b> Identifier of the route
+--- * `_ShipID`:    <b>integer</b> ID of the ship
 Report.TradeShipArrived = anyInteger;
 
 --- A ship has left a harbor.
 ---
 --- #### Parameters:
---- * `_PlayerID` - PlayerID of harbor
---- * `_RouteName` - Identifier of the route
---- * `_ShipID` - ID of the ship
+--- * `_PlayerID`:  <b>integer</b> PlayerID of harbor
+--- * `_RouteName`: <b>string</b> Identifier of the route
+--- * `_ShipID`:    <b>integer</b> ID of the ship
 Report.TradeShipLeft = anyInteger;
 
 --- A ship has despawned at the end of the trade route path.
 ---
 --- #### Parameters:
---- * `_PlayerID` - PlayerID of harbor
---- * `_RouteName` - Identifier of the route
---- * `_ShipID` - ID of the ship
+--- * `_PlayerID`:  <b>integer</b> PlayerID of harbor
+--- * `_RouteName`: <b>string</b> Identifier of the route
+--- * `_ShipID`:    <b>integer</b> ID of the ship
 Report.TradeShipDespawned = anyInteger;
 
 

@@ -1,4 +1,10 @@
---- Es kann in den Ablauf von Kauf und Verkauf eingegriffen werden.
+--- Dieses Modul erlaubt Kauf und Verkauf zu manipulieren.
+--- 
+--- Der Aufbau von Angeboten kann untersucht und manipuliert werden. Du kannst
+--- Einzelne Angebote löschen oder die Menge bearbeiten.
+--- 
+--- Die Berechnung von Kauf- und Verkaufspreise kann angepasst werden. So kannst
+--- du auch Elias Fähigkeit verstärken oder abschwächen.
 
 
 
@@ -34,12 +40,12 @@ API.AddEntertainerOffer = CreateEntertainerOffer;
 
 --- Ändert die Berechnung des Helden-Kaufpreisfaktors für den Spieler.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_BasePrice` - Grundpreis
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_BasePrice`: <b>integer</b> Grundpreis
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _PlayerID integer ID des Spielers
 --- @param _Function function Berechnungsfunktion
@@ -49,12 +55,12 @@ API.PurchaseSetTraderAbilityForPlayer = PurchaseSetTraderAbilityForPlayer;
 
 --- Ändert die Berechnung des Helden-Kaufpreisfaktors.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_BasePrice` - Grundpreis
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_BasePrice`: <b>integer</b> Grundpreis
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _Function function Berechnungsfunktion
 function PurchaseSetDefaultTraderAbility(_Function)
@@ -63,11 +69,11 @@ API.PurchaseSetDefaultTraderAbility = PurchaseSetDefaultTraderAbility;
 
 --- Ändert die Berechnung des Kauf-Grundpreises für den Spieler.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _PlayerID integer ID des Spielers
 --- @param _Function function Berechnungsfunktion
@@ -77,11 +83,11 @@ API.PurchaseSetBasePriceForPlayer = PurchaseSetBasePriceForPlayer;
 
 --- Ändert die Berechnung des Kauf-Grundpreises.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _Function function Berechnungsfunktion
 function PurchaseSetDefaultBasePrice(_Function)
@@ -90,13 +96,13 @@ API.PurchaseSetDefaultBasePrice = PurchaseSetDefaultBasePrice;
 
 --- Ändert die Berechnung der Inflation für den Spieler.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_Amount` - Bereits gekaufter Betrag
---- * `_Price` - Kaufpreis
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_Amount`: <b>integer</b> Bereits gekaufter Betrag
+--- * `_Price`: <b>integer</b> Kaufpreis
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _PlayerID integer ID des Spielers
 --- @param _Function function Berechnungsfunktion
@@ -106,13 +112,13 @@ API.PurchaseSetInflationForPlayer = PurchaseSetInflationForPlayer;
 
 --- Ändert die Berechnung der Inflation.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_Amount` - Bereits gekaufter Betrag
---- * `_Price` - Kaufpreis
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_Amount`: <b>integer</b> Bereits gekaufter Betrag
+--- * `_Price`: <b>integer</b> Kaufpreis
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _Function function Berechnungsfunktion
 function PurchaseSetDefaultInflation(_Function)
@@ -121,12 +127,12 @@ API.PurchaseSetDefaultInflation = PurchaseSetDefaultInflation;
 
 --- Setzt spezielle Kaufbedingungen für den Spieler.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_Amount` - Bereits gekaufter Betrag
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_Amount`: <b>integer</b> Bereits gekaufter Betrag
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _PlayerID integer ID des Spielers
 --- @param _Function function Berechnungsfunktion
@@ -136,12 +142,12 @@ API.PurchaseSetConditionForPlayer = PurchaseSetConditionForPlayer;
 
 --- Setzt spezielle Kaufbedingungen.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_Amount` - Bereits gekaufter Betrag
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_Amount`: <b>integer</b> Bereits gekaufter Betrag
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _Function function Berechnungsfunktion
 function PurchaseSetDefaultCondition(_Function)
@@ -150,12 +156,12 @@ API.PurchaseSetDefaultCondition = PurchaseSetDefaultCondition;
 
 --- Ändert die Berechnung des Helden-Verkaufspreisfaktors für den Spieler.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_BasePrice` - Grundpreis
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_BasePrice`: <b>integer</b> Grundpreis
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _PlayerID integer ID des Spielers
 --- @param _Function function Berechnungsfunktion
@@ -165,12 +171,12 @@ API.SaleSetTraderAbilityForPlayer = SaleSetTraderAbilityForPlayer;
 
 --- Ändert die Berechnung des Helden-Verkaufspreisfaktors.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_BasePrice` - Grundpreis
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_BasePrice`: <b>integer</b> Grundpreis
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _Function function Berechnungsfunktion
 function SaleSetDefaultTraderAbility(_Function)
@@ -179,11 +185,11 @@ API.SaleSetDefaultTraderAbility = SaleSetDefaultTraderAbility;
 
 --- Ändert die Berechnung des Verkaufs-Grundpreises für den Spieler.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _PlayerID integer ID des Spielers
 --- @param _Function function Berechnungsfunktion
@@ -193,11 +199,11 @@ API.SaleSetBasePriceForPlayer = SaleSetBasePriceForPlayer;
 
 --- Ändert die Berechnung des Verkaufs-Grundpreises.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _Function function Berechnungsfunktion
 function SaleSetDefaultBasePrice(_Function)
@@ -206,13 +212,13 @@ API.SaleSetDefaultBasePrice = SaleSetDefaultBasePrice;
 
 --- Ändert die Berechnung der Deflation für den Spieler.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_SaleCount` - Bereits verkaufter Betrag
---- * `_Price` - Verkaufspreis
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_SaleCount`: <b>integer</b> Bereits verkaufter Betrag
+--- * `_Price`: <b>integer</b> Verkaufspreis
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _PlayerID integer ID des Spielers
 --- @param _Function function Berechnungsfunktion
@@ -222,13 +228,13 @@ API.SaleSetDeflationForPlayer = SaleSetDeflationForPlayer;
 
 --- Ändert die Berechnung der Deflation.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_SaleCount` - Bereits verkaufter Betrag
---- * `_Price` - Verkaufspreis
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_SaleCount`: <b>integer</b> Bereits verkaufter Betrag
+--- * `_Price`: <b>integer</b> Verkaufspreis
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _Function function Berechnungsfunktion
 function SaleSetDefaultDeflation(_Function)
@@ -237,12 +243,12 @@ API.SaleSetDefaultDeflation = SaleSetDefaultDeflation;
 
 --- Setzt spezielle Verkaufsbedingungen für den Spieler.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_Amount` - Verkaufter Betrag
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_Amount`: <b>integer</b> Verkaufter Betrag
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _PlayerID integer ID des Spielers
 --- @param _Function function Berechnungsfunktion
@@ -252,12 +258,12 @@ API.SaleSetConditionForPlayer = SaleSetConditionForPlayer;
 
 --- Setzt spezielle Verkaufsbedingungen.
 --- 
---- Parameter der Funktion:
---- * `_Type` - Art des Händlers
---- * `_Good` - Art des Angebots
---- * `_Amount` - Verkaufter Betrag
---- * `_PlayerID1` - ID des kaufenden Spielers
---- * `_PlayerID2` - ID des verkaufenden Spielers
+--- #### Parameters `_Function`:
+--- * `_Type`: <b>integer</b> Art des Händlers
+--- * `_Good`: <b>integer</b> Art des Angebots
+--- * `_Amount`: <b>integer</b> Verkaufter Betrag
+--- * `_PlayerID1`: <b>integer</b> ID des kaufenden Spielers
+--- * `_PlayerID2`: <b>integer</b> ID des verkaufenden Spielers
 --- 
 --- @param _Function function Berechnungsfunktion
 function SaleSetDefaultCondition(_Function)
@@ -318,23 +324,23 @@ API.ModifyTradeOffer = ModifyTradeOffer;
 --- Ein Spieler hat ein Angebot in einem Lagerhaus gekauft
 ---
 --- #### Parameters:
---- * `_OfferIndex` - Index des Angebot
---- * `_MerchantType` - Typ des Händlers
---- * `_Type` - Typ des Angebot
---- * `_Amount` - Gekaufte Menge
---- * `_Price` - Bezahlter Preis
---- * `_PlayerID` - ID des Spielers
---- * `_PartnerID` - ID des Partners
+--- * `_OfferIndex`: <b>intege</b> Index des Angebot
+--- * `_MerchantType`: <b>intege</b> Typ des Händlers
+--- * `_Type`: <b>intege</b> Typ des Angebot
+--- * `_Amount`: <b>intege</b> Gekaufte Menge
+--- * `_Price`: <b>intege</b> Bezahlter Preis
+--- * `_PlayerID`: <b>intege</b> ID des Spielers
+--- * `_PartnerID`: <b>intege</b> ID des Partners
 Report.Purchased = anyInteger;
 
 --- A player has sold goods to another player.
 ---
 --- #### Parameters:
---- * `_MerchantType` - Typ des Händlers
---- * `_GoodType` - Typ des Angebot
---- * `_GoodAmount` - Verkaufte Menge
---- * `_Price` - Erhaltenes Geld
---- * `_PlayerID` - ID des Spielers
---- * `_PartnerID` - ID des Partners
+--- * `_MerchantType`: <b>intege</b> Typ des Händlers
+--- * `_GoodType`: <b>intege</b> Typ des Angebot
+--- * `_GoodAmount`: <b>intege</b> Verkaufte Menge
+--- * `_Price`: <b>intege</b> Erhaltenes Geld
+--- * `_PlayerID`: <b>intege</b> ID des Spielers
+--- * `_PartnerID`: <b>intege</b> ID des Partners
 Report.GoodsSold = anyInteger;
 

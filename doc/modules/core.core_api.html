@@ -1,0 +1,1902 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.addware.html">comfort.addware</a></li>
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getplayername.html">comfort.getplayername</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isunofficialpatch.html">comfort.isunofficialpatch</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setplayername.html">comfort.setplayername</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><strong>core.core_api</strong></li>
+  <li><a href="../modules/core.core_behavior.html">core.core_behavior</a></li>
+  <li><a href="../modules/core.core_lua.html">core.core_lua</a></li>
+  <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.militiasystem_api.html">module.city.militiasystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.permadeath_api.html">module.faker.permadeath_api</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.information_api.html">module.information.information_api</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.information.typewriter_api.html">module.information.typewriter_api</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>core.core_api</code></h1>
+<p>Die Funktionalotäten des Basis-Modul.</p>
+<p>
+
+ <h3>Bug Fixes:</h3> <li>Luxusgüter können in Dorflagern gelagert werden</li>
+ <li>Soldaten respawning für ME-Kaserne ist aktiv</li>
+ <li>Füge Burg und Lagerhaus als Lieferkontrollpunkte hinzu</li>
+ <li>IO-Interaktionsprüfungen für beide Güter, wenn sie verfügbar sind</li>
+ <li>Das Zerstören aller Einheiten zählt jetzt nicht mehr Standorte und spezielle Entitäten</li>
+ <li>Der große Dom zeigt den richtigen Namen in der Auswahl an</li>
+ <li>Das Hausmenü ist für Gebäude anderer Klimazonen angepasst</li>
+ <li>Fähigkeitshinweise werden nur ausgelöst, wenn der Spieler einen Ritter und ein Lagerhaus hat</li>
+ <li>Gelöschte Lagerfeuer von Banditen verusrachen keine Spielabstürze mehr</li>
+
+ <h3>Scripting Values:</h3><li><code>CONST_SCRIPTING_VALUES.Destination.X</code>: <b>integer</b> X-Koordinate des Bewegungsziels</li><li><code>CONST_SCRIPTING_VALUES.Destination.Y</code>: <b>integer</b> Y-Koordinate des Bewegungsziels</li><li><code>CONST_SCRIPTING_VALUES.Health</code>: <b>integer</b> Gesundheit der Entität</li><li><code>CONST_SCRIPTING_VALUES.Player</code>: <b>integer</b> Spieler-ID der Entität</li><li><code>CONST_SCRIPTING_VALUES.Size</code>: <b>integer</b> Skalierung der Entität</li><li><code>CONST_SCRIPTING_VALUES.Visible</code>: <b>integer</b> Ist die Entität sichtbar (= 801280)</li><li><code>CONST_SCRIPTING_VALUES.NPC</code>: <b>integer</b> Art des NPCs (> 0)</p></li>
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#ShowTextInput">ShowTextInput (_PlayerID, _AllowDebug)</a></td>
+	<td class="summary">Öffnet die Chat-Konsole.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ActivateDebugMode">ActivateDebugMode (_DisplayScriptErrors, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests)</a></td>
+	<td class="summary">Aktiviert den Debug-Modus des Spiels.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RequestJobByEventType">RequestJobByEventType (_EventType, _Function, ...)</a></td>
+	<td class="summary">Fordert einen Job des übergebenen Ereignistyps an.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RequestJob">RequestJob (_Function, ...)</a></td>
+	<td class="summary">Fordert einen Job an, der jede Sekunde ausgelöst wird.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RequestHiResJob">RequestHiResJob (_Function, ...)</a></td>
+	<td class="summary">Fordert einen Job an, der jede Runde ausgelöst wird.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RequestDelay">RequestDelay (_Waittime, _Function, ...)</a></td>
+	<td class="summary">Fordert eine verzögerte Aktion an, verzögert um Sekunden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RequestHiResDelay">RequestHiResDelay (_Waittime, _Function, ...)</a></td>
+	<td class="summary">Fordert eine verzögerte Aktion an, verzögert um Runden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RequestRealTimeDelay">RequestRealTimeDelay (_Waittime, _Function, ...)</a></td>
+	<td class="summary">Fordert eine verzögerte Aktion an, verzögert um Echtzeit-Sekunden.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#StopJob">StopJob (_JobID)</a></td>
+	<td class="summary">Beendet einen Job.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#IsJobRunning">IsJobRunning (_JobID)</a></td>
+	<td class="summary">Gibt zurück, ob der Job ausgeführt wird.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ResumeJob">ResumeJob (_JobID)</a></td>
+	<td class="summary">Setzt einen pausierten Job fort.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#YieldJob">YieldJob (_JobID)</a></td>
+	<td class="summary">Pausiert einen laufenden Job.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetSecondsRealTime">GetSecondsRealTime ()</a></td>
+	<td class="summary">Gibt die seit dem Spielstart vergangenen Echtzeit-Sekunden zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetTerritoryName">GetTerritoryName (_TerritoryID)</a></td>
+	<td class="summary">Gibt den Namen des Gebiets zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetPlayerName">GetPlayerName (_PlayerID)</a></td>
+	<td class="summary">Gibt den Namen des Spielers zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetPlayerName">SetPlayerName (_PlayerID, _Name)</a></td>
+	<td class="summary">Ändert den Namen eines Spielers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetPlayerColor">SetPlayerColor (_PlayerID, _Color, _Logo, _Pattern)</a></td>
+	<td class="summary">Ändert die Farbe eines Spielers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetPlayerPortrait">SetPlayerPortrait (_PlayerID, _Portrait)</a></td>
+	<td class="summary">Ändert das Porträt eines Spielers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetResourceAmount">SetResourceAmount (_Entity, _StartAmount, _RefillAmount)</a></td>
+	<td class="summary">Setzt die Menge an Ressourcen in einer Mine und optional die Auffüllmenge.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetCustomBehaviorText">SetCustomBehaviorText (_QuestName, _Text)</a></td>
+	<td class="summary">Ändert die angezeigte Beschreibung eines benutzerdefinierten Verhaltens.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RestartQuest">RestartQuest (_QuestName, _NoMessage)</a></td>
+	<td class="summary">Startet einen Quest neu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FailQuest">FailQuest (_QuestName, _NoMessage)</a></td>
+	<td class="summary">Scheitert an einem Quest.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#StartQuest">StartQuest (_QuestName, _NoMessage)</a></td>
+	<td class="summary">Startet einen Quest.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#StopQuest">StopQuest (_QuestName, _NoMessage)</a></td>
+	<td class="summary">Unterbricht einen Quest.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#WinQuest">WinQuest (_QuestName, _NoMessage)</a></td>
+	<td class="summary">Gewinnt einen Quest.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CreateReport">CreateReport (_Name)</a></td>
+	<td class="summary">Erstellt einen neuen Berichtstyp.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SendReport">SendReport (_ID, ...)</a></td>
+	<td class="summary">Sendet einen Bericht mit optionalen Parametern.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetReportSender">GetReportSender ()</a></td>
+	<td class="summary">Gibt den Spieler zurück, der den aktuellen Report gesendet hat.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SendReportToGlobal">SendReportToGlobal (_ID, ...)</a></td>
+	<td class="summary">Sendet einen Bericht mit optionalen Parametern an das globale Skript.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SendReportToLocal">SendReportToLocal (_ID, ...)</a></td>
+	<td class="summary">Sendet einen Bericht mit optionalen Parametern an das lokale Skript.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CreateReportReceiver">CreateReportReceiver (_EventID, _Function)</a></td>
+	<td class="summary">Erstellt einen Berichtslistener für den Berichtstyp.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RemoveReportReceiver">RemoveReportReceiver (_EventID, _ID)</a></td>
+	<td class="summary">Löscht einen Berichtslistener für den Berichtstyp.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DisableAutoSave">DisableAutoSave (_Flag)</a></td>
+	<td class="summary">Deaktiviert das Autospeichern der History Edition.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DisableSaving">DisableSaving (_Flag)</a></td>
+	<td class="summary">Deaktiviert das Speichern des Spiels.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DisableLoading">DisableLoading (_Flag)</a></td>
+	<td class="summary">Deaktiviert das Laden von Spielständen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityDestination">GetEntityDestination (_Entity)</a></td>
+	<td class="summary">Gibt das aktuelle Bewegungsziel der Entität zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityHealth">GetEntityHealth (_Entity)</a></td>
+	<td class="summary">Gibt die Gesundheit der Entität zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetEntityHealth">SetEntityHealth (_Entity, _Health)</a></td>
+	<td class="summary">Setzt die Gesundheit der Entität, ohne Prüfung auf plausibelität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityNpc">GetEntityNpc (_Entity)</a></td>
+	<td class="summary">Gibt zurück, ob die Entität ein NPC ist.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityPlayer">GetEntityPlayer (_Entity)</a></td>
+	<td class="summary">Gibt den Besitzer der Entität zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetEntityPlayer">SetEntityPlayer (_Entity, _Player)</a></td>
+	<td class="summary">Setzt den Eigentümer der Entität, ohne Prüfung auf plausibelität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityScaling">GetEntityScaling (_Entity)</a></td>
+	<td class="summary">Gibt die Skalierung der Entität zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetEntityScaling">SetEntityScaling (_Entity, _Scaling)</a></td>
+	<td class="summary">Setzt die Skalierung der Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetEntityModel">GetEntityModel (_Entity)</a></td>
+	<td class="summary">Gibt das aktuell genutzte Model der Entität zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#IsEntityInvisible">IsEntityInvisible (_Entity)</a></td>
+	<td class="summary">Gibt zurück, ob die Entität unsichtbar ist,</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#IsEntityInaccessible">IsEntityInaccessible (_Entity)</a></td>
+	<td class="summary">Gibt zurück, ob die Entität nicht auswählbar ist.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetInteger">GetInteger (_Entity, _SV)</a></td>
+	<td class="summary">Gibt den Wert des Index als Ganzzahl zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetFloat">GetFloat (_Entity, _SV)</a></td>
+	<td class="summary">Gibt den Wert des Index als Gleitkommazahl zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetInteger">SetInteger (_Entity, _SV, _Value)</a></td>
+	<td class="summary">Legt einen Ganzzahlwert am Index fest.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetFloat">SetFloat (_Entity, _SV, _Value)</a></td>
+	<td class="summary">Legt einen Gleitkommawert am Index fest.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ConvertIntegerToFloat">ConvertIntegerToFloat (_Value)</a></td>
+	<td class="summary">Konvertiert den Gleitkommawert in die Ganzzahldarstellung um.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ConvertFloatToInteger">ConvertFloatToInteger (_Value)</a></td>
+	<td class="summary">Konvertiert den Ganzzahlwert in die Gleitkommadarstellung um.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Localize">Localize (_Text)</a></td>
+	<td class="summary">Lokalisiert den übergebenen Text oder die Tabelle.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ConvertPlaceholders">ConvertPlaceholders (_Text)</a></td>
+	<td class="summary">Ersetzt alle Platzhalter innerhalb des Strings durch ihre jeweiligen Werte.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddNote">AddNote (_Text)</a></td>
+	<td class="summary">Gibt eine Nachricht in das Debug-Textfenster aus.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddStaticNote">AddStaticNote (_Text)</a></td>
+	<td class="summary">Gibt eine Nachricht in das Debug-Textfenster aus.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddMessage">AddMessage (_Text, _Sound)</a></td>
+	<td class="summary">Gibt eine Nachricht in das Nachrichtenfenster aus.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ClearNotes">ClearNotes ()</a></td>
+	<td class="summary">Entfernt alle Texte aus dem Debug-Textfenster.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddNamePlaceholder">AddNamePlaceholder (_Name, _Replacement)</a></td>
+	<td class="summary">Ersetzt einen Namen mit dem Text.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddEntityTypePlaceholder">AddEntityTypePlaceholder (_Type, _Replacement)</a></td>
+	<td class="summary">Ersetzt einen Entity Type mit dem Text.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddStringText">AddStringText (_Key, _Text)</a></td>
+	<td class="summary">Speichert eine Zeichenfolgenüberschreibung unter dem Schlüssel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DeleteStringText">DeleteStringText (_Key)</a></td>
+	<td class="summary">Löscht die Zeichenfolgenüberschreibung unter dem Schlüssel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GetStringText">GetStringText (_Key)</a></td>
+	<td class="summary">Gibt den Zeichenfolgentext am Schlüssel zurück.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DefineLanguage">DefineLanguage (_Shortcut, _Name, _Fallback, _Index)</a></td>
+	<td class="summary">Fügt eine neue Sprache zur Liste hinzu.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CountTextLines">CountTextLines (_Text, _LineLength)</a></td>
+	<td class="summary">Gibt die geschätzte Anzahl Zeilen zurück, die zur Anzeige benötigt wird.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "ShowTextInput"></a>
+    <strong>ShowTextInput (_PlayerID, _AllowDebug)</strong>
+    </dt>
+    <dd>
+    Öffnet die Chat-Konsole.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>number</b>    ID des Spielers
+        </li>
+        <li><span class="parameter">_AllowDebug</span> <b>boolean</b> Debug-Codes erlaubt
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ActivateDebugMode"></a>
+    <strong>ActivateDebugMode (_DisplayScriptErrors, _CheckAtRun, _DevelopingCheats, _DevelopingShell, _TraceQuests)</strong>
+    </dt>
+    <dd>
+    Aktiviert den Debug-Modus des Spiels.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_DisplayScriptErrors</span> <b>boolean</b> Fehlermeldungen anzeigen
+        </li>
+        <li><span class="parameter">_CheckAtRun</span> <b>boolean</b>          Benutzerdefiniertes Verhalten überprüfen an/aus
+        </li>
+        <li><span class="parameter">_DevelopingCheats</span> <b>boolean</b>    Cheats an/aus
+        </li>
+        <li><span class="parameter">_DevelopingShell</span> <b>boolean</b>     Eingabebefehle an/aus
+        </li>
+        <li><span class="parameter">_TraceQuests</span> <b>boolean</b>         Quests verfolgen an/aus
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RequestJobByEventType"></a>
+    <strong>RequestJobByEventType (_EventType, _Function, ...)</strong>
+    </dt>
+    <dd>
+    Fordert einen Job des übergebenen Ereignistyps an.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_EventType</span> <b>integer</b> Typ des Jobs
+        </li>
+        <li><span class="parameter">_Function</span> <b>any</b> Funktionsreferenz oder -name
+        </li>
+        <li><span class="parameter">...</span>
+         unknown Parameter
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID des Jobs
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RequestJob"></a>
+    <strong>RequestJob (_Function, ...)</strong>
+    </dt>
+    <dd>
+    Fordert einen Job an, der jede Sekunde ausgelöst wird.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Function</span> <b>any</b> Funktionsreferenz oder -name
+        </li>
+        <li><span class="parameter">...</span>
+         unknown Parameter
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID des Jobs
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RequestHiResJob"></a>
+    <strong>RequestHiResJob (_Function, ...)</strong>
+    </dt>
+    <dd>
+    Fordert einen Job an, der jede Runde ausgelöst wird.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Function</span> <b>any</b> Funktionsreferenz oder -name
+        </li>
+        <li><span class="parameter">...</span>
+         unknown Parameter
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID des Jobs
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RequestDelay"></a>
+    <strong>RequestDelay (_Waittime, _Function, ...)</strong>
+    </dt>
+    <dd>
+    Fordert eine verzögerte Aktion an, verzögert um Sekunden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Waittime</span> <b>integer</b> Sekunden
+        </li>
+        <li><span class="parameter">_Function</span> <b>any</b> Funktionsreferenz oder -name
+        </li>
+        <li><span class="parameter">...</span>
+         unknown Parameter
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID des Jobs
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RequestHiResDelay"></a>
+    <strong>RequestHiResDelay (_Waittime, _Function, ...)</strong>
+    </dt>
+    <dd>
+    Fordert eine verzögerte Aktion an, verzögert um Runden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Waittime</span> <b>integer</b> Runden
+        </li>
+        <li><span class="parameter">_Function</span> <b>any</b> Funktionsreferenz oder -name
+        </li>
+        <li><span class="parameter">...</span>
+         unknown Parameter
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID des Jobs
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RequestRealTimeDelay"></a>
+    <strong>RequestRealTimeDelay (_Waittime, _Function, ...)</strong>
+    </dt>
+    <dd>
+    Fordert eine verzögerte Aktion an, verzögert um Echtzeit-Sekunden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Waittime</span> <b>integer</b> Sekunden
+        </li>
+        <li><span class="parameter">_Function</span> <b>any</b> Funktionsreferenz oder -name
+        </li>
+        <li><span class="parameter">...</span>
+         unknown Parameter
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> ID ID des Jobs
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "StopJob"></a>
+    <strong>StopJob (_JobID)</strong>
+    </dt>
+    <dd>
+    Beendet einen Job.  Der Job kann nicht reaktiviert werden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_JobID</span> <b>integer</b> ID des Jobs
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "IsJobRunning"></a>
+    <strong>IsJobRunning (_JobID)</strong>
+    </dt>
+    <dd>
+    Gibt zurück, ob der Job ausgeführt wird.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_JobID</span> <b>integer</b> ID des Jobs
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Running Job wird ausgeführt
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ResumeJob"></a>
+    <strong>ResumeJob (_JobID)</strong>
+    </dt>
+    <dd>
+    Setzt einen pausierten Job fort.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_JobID</span> <b>integer</b> ID des Jobs
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "YieldJob"></a>
+    <strong>YieldJob (_JobID)</strong>
+    </dt>
+    <dd>
+    Pausiert einen laufenden Job.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_JobID</span> <b>integer</b> ID des Jobs
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetSecondsRealTime"></a>
+    <strong>GetSecondsRealTime ()</strong>
+    </dt>
+    <dd>
+    Gibt die seit dem Spielstart vergangenen Echtzeit-Sekunden zurück.
+
+
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Sekunden Anzahl der Sekunden
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetTerritoryName"></a>
+    <strong>GetTerritoryName (_TerritoryID)</strong>
+    </dt>
+    <dd>
+    Gibt den Namen des Gebiets zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_TerritoryID</span> <b>number</b> ID des Gebiets
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>string</b> Name Name des Gebiets
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetPlayerName"></a>
+    <strong>GetPlayerName (_PlayerID)</strong>
+    </dt>
+    <dd>
+    Gibt den Namen des Spielers zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>number</b> ID des Spielers
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>string</b> Name Name des Spielers
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetPlayerName"></a>
+    <strong>SetPlayerName (_PlayerID, _Name)</strong>
+    </dt>
+    <dd>
+    Ändert den Namen eines Spielers.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>number</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Name</span> <b>string</b> Spielername
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetPlayerColor"></a>
+    <strong>SetPlayerColor (_PlayerID, _Color, _Logo, _Pattern)</strong>
+    </dt>
+    <dd>
+    Ändert die Farbe eines Spielers.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>number</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Color</span> <b>any</b> Name oder ID der Farbe
+        </li>
+        <li><span class="parameter">_Logo</span> (optional) <b>number</b> ID des Logos
+        </li>
+        <li><span class="parameter">_Pattern</span> (optional) <b>number</b> ID des Musters
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetPlayerPortrait"></a>
+    <strong>SetPlayerPortrait (_PlayerID, _Portrait)</strong>
+    </dt>
+    <dd>
+    Ändert das Porträt eines Spielers.
+<p> <h3>Example:</h3> <pre><code class="language-lua"> -- Beispiel #1: Modell nach Spielerheld setzen
+ SetPlayerPortrait(2);
+ -- Beispiel #2: Modell nach Art der Entität setzen
+ SetPlayerPortrait(2, "amma");
+ -- Beispiel #3: Modellname direkt setzen
+ SetPlayerPortrait(2, "H_NPC_Monk_AS");</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>number</b>  ID des Spielers
+        </li>
+        <li><span class="parameter">_Portrait</span> (optional) <b>string</b> Name des Modells
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetResourceAmount"></a>
+    <strong>SetResourceAmount (_Entity, _StartAmount, _RefillAmount)</strong>
+    </dt>
+    <dd>
+    Setzt die Menge an Ressourcen in einer Mine und optional die Auffüllmenge.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> Entität, die geändert werden soll
+        </li>
+        <li><span class="parameter">_StartAmount</span> <b>integer</b> Anfangsmenge
+        </li>
+        <li><span class="parameter">_RefillAmount</span>
+         integer? (optional) Auffüllmenge
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetCustomBehaviorText"></a>
+    <strong>SetCustomBehaviorText (_QuestName, _Text)</strong>
+    </dt>
+    <dd>
+    Ändert die angezeigte Beschreibung eines benutzerdefinierten Verhaltens.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_QuestName</span> <b>string</b> Name des Quests
+        </li>
+        <li><span class="parameter">_Text</span> <b>string</b> Quest-Text
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RestartQuest"></a>
+    <strong>RestartQuest (_QuestName, _NoMessage)</strong>
+    </dt>
+    <dd>
+    Startet einen Quest neu.
+<p> Quests müssen beendet sein, um erneut gestartet zu werden. Entweder müssen alle Trigger erfolgreich sein
+ oder der Quest muss manuell ausgelöst werden.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_QuestName</span> <b>string</b> Name des Quests
+        </li>
+        <li><span class="parameter">_NoMessage</span> <b>boolean</b> Debug-Nachricht deaktivieren
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li><b>integer</b> ID Neue Quest-ID</li>
+        <li><b>table</b> Data Quest-Instanz</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FailQuest"></a>
+    <strong>FailQuest (_QuestName, _NoMessage)</strong>
+    </dt>
+    <dd>
+    Scheitert an einem Quest.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_QuestName</span> <b>string</b> Name des Quests
+        </li>
+        <li><span class="parameter">_NoMessage</span> <b>boolean</b> Debug-Nachricht deaktivieren
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "StartQuest"></a>
+    <strong>StartQuest (_QuestName, _NoMessage)</strong>
+    </dt>
+    <dd>
+    Startet einen Quest.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_QuestName</span> <b>string</b> Name des Quests
+        </li>
+        <li><span class="parameter">_NoMessage</span> <b>boolean</b> Debug-Nachricht deaktivieren
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "StopQuest"></a>
+    <strong>StopQuest (_QuestName, _NoMessage)</strong>
+    </dt>
+    <dd>
+    Unterbricht einen Quest.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_QuestName</span> <b>string</b> Name des Quests
+        </li>
+        <li><span class="parameter">_NoMessage</span> <b>boolean</b> Debug-Nachricht deaktivieren
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "WinQuest"></a>
+    <strong>WinQuest (_QuestName, _NoMessage)</strong>
+    </dt>
+    <dd>
+    Gewinnt einen Quest.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_QuestName</span> <b>string</b> Name des Quests
+        </li>
+        <li><span class="parameter">_NoMessage</span> <b>boolean</b> Debug-Nachricht deaktivieren
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CreateReport"></a>
+    <strong>CreateReport (_Name)</strong>
+    </dt>
+    <dd>
+    Erstellt einen neuen Berichtstyp.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Name</span> <b>string</b> Name des Berichts
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b>     </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SendReport"></a>
+    <strong>SendReport (_ID, ...)</strong>
+    </dt>
+    <dd>
+    Sendet einen Bericht mit optionalen Parametern.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ID</span> <b>integer</b> Berichts-ID
+        </li>
+        <li><span class="parameter">...</span>
+         unknown Parameter
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetReportSender"></a>
+    <strong>GetReportSender ()</strong>
+    </dt>
+    <dd>
+    Gibt den Spieler zurück, der den aktuellen Report gesendet hat.
+
+ Wird diese Funktion außerhalb der Behandlung eines Reports aufgerufen oder
+ tritt ein anderer Fehler auf, wird 0 zurückgegeben.
+
+
+
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> PlayerID ID des Ursprungsspielers
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SendReportToGlobal"></a>
+    <strong>SendReportToGlobal (_ID, ...)</strong>
+    </dt>
+    <dd>
+    Sendet einen Bericht mit optionalen Parametern an das globale Skript.
+<p> Dies wird immer eine Broadcast sein!
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ID</span> <b>integer</b> Berichts-ID
+        </li>
+        <li><span class="parameter">...</span>
+         unknown Parameter
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SendReportToLocal"></a>
+    <strong>SendReportToLocal (_ID, ...)</strong>
+    </dt>
+    <dd>
+    Sendet einen Bericht mit optionalen Parametern an das lokale Skript.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_ID</span> <b>integer</b> Berichts-ID
+        </li>
+        <li><span class="parameter">...</span>
+         unknown Parameter
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CreateReportReceiver"></a>
+    <strong>CreateReportReceiver (_EventID, _Function)</strong>
+    </dt>
+    <dd>
+    Erstellt einen Berichtslistener für den Berichtstyp.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_EventID</span> <b>integer</b> ID des Berichts
+        </li>
+        <li><span class="parameter">_Function</span> <b>function</b> Listener-Funktion
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b>     </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "RemoveReportReceiver"></a>
+    <strong>RemoveReportReceiver (_EventID, _ID)</strong>
+    </dt>
+    <dd>
+    Löscht einen Berichtslistener für den Berichtstyp.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_EventID</span> <b>integer</b> ID des Berichts
+        </li>
+        <li><span class="parameter">_ID</span> <b>integer</b> ID des Listeners
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DisableAutoSave"></a>
+    <strong>DisableAutoSave (_Flag)</strong>
+    </dt>
+    <dd>
+    Deaktiviert das Autospeichern der History Edition.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Autospeichern ist deaktiviert
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DisableSaving"></a>
+    <strong>DisableSaving (_Flag)</strong>
+    </dt>
+    <dd>
+    Deaktiviert das Speichern des Spiels.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Speichern ist deaktiviert
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DisableLoading"></a>
+    <strong>DisableLoading (_Flag)</strong>
+    </dt>
+    <dd>
+    Deaktiviert das Laden von Spielständen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Flag</span> <b>boolean</b> Laden ist deaktiviert
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityDestination"></a>
+    <strong>GetEntityDestination (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt das aktuelle Bewegungsziel der Entität zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>table</b> Position Bewegungsziel der Entität
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityHealth"></a>
+    <strong>GetEntityHealth (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt die Gesundheit der Entität zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Health Gesundheit der Entität
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetEntityHealth"></a>
+    <strong>SetEntityHealth (_Entity, _Health)</strong>
+    </dt>
+    <dd>
+    Setzt die Gesundheit der Entität, ohne Prüfung auf plausibelität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_Health</span> <b>integer</b> Gesundheit der Entität
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityNpc"></a>
+    <strong>GetEntityNpc (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt zurück, ob die Entität ein NPC ist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Active Entität ist NPC
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityPlayer"></a>
+    <strong>GetEntityPlayer (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt den Besitzer der Entität zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Player ID des Spielers
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetEntityPlayer"></a>
+    <strong>SetEntityPlayer (_Entity, _Player)</strong>
+    </dt>
+    <dd>
+    Setzt den Eigentümer der Entität, ohne Prüfung auf plausibelität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_Player</span> <b>integer</b> Player ID des Spielers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityScaling"></a>
+    <strong>GetEntityScaling (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt die Skalierung der Entität zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b>         </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>number</b> Scaling Skalierung der Entität
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetEntityScaling"></a>
+    <strong>SetEntityScaling (_Entity, _Scaling)</strong>
+    </dt>
+    <dd>
+    Setzt die Skalierung der Entität.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_Scaling</span> <b>number</b> Skalierung der Entität
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetEntityModel"></a>
+    <strong>GetEntityModel (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt das aktuell genutzte Model der Entität zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Model Model der Entität
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "IsEntityInvisible"></a>
+    <strong>IsEntityInvisible (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt zurück, ob die Entität unsichtbar ist,
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Visible Entity ist unsichtbar
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "IsEntityInaccessible"></a>
+    <strong>IsEntityInaccessible (_Entity)</strong>
+    </dt>
+    <dd>
+    Gibt zurück, ob die Entität nicht auswählbar ist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Visible Entity nicht auswählbar
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetInteger"></a>
+    <strong>GetInteger (_Entity, _SV)</strong>
+    </dt>
+    <dd>
+    Gibt den Wert des Index als Ganzzahl zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_SV</span> <b>integer</b> Index des Skriptwerts
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Wert Wert am Index
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetFloat"></a>
+    <strong>GetFloat (_Entity, _SV)</strong>
+    </dt>
+    <dd>
+    Gibt den Wert des Index als Gleitkommazahl zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_SV</span> <b>integer</b> Index des Skriptwerts
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>number</b> Wert Wert am Index
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetInteger"></a>
+    <strong>SetInteger (_Entity, _SV, _Value)</strong>
+    </dt>
+    <dd>
+    Legt einen Ganzzahlwert am Index fest.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_SV</span> <b>integer</b> Index des Skriptwerts
+        </li>
+        <li><span class="parameter">_Value</span> <b>integer</b> Zu setzender Wert
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetFloat"></a>
+    <strong>SetFloat (_Entity, _SV, _Value)</strong>
+    </dt>
+    <dd>
+    Legt einen Gleitkommawert am Index fest.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> ID oder Skriptname
+        </li>
+        <li><span class="parameter">_SV</span> <b>integer</b> Index des Skriptwerts
+        </li>
+        <li><span class="parameter">_Value</span> <b>number</b> Zu setzender Wert
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ConvertIntegerToFloat"></a>
+    <strong>ConvertIntegerToFloat (_Value)</strong>
+    </dt>
+    <dd>
+    Konvertiert den Gleitkommawert in die Ganzzahldarstellung um.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Value</span> <b>number</b> Ganzzahliger Wert
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>number</b> Wert Gleitkommawert
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ConvertFloatToInteger"></a>
+    <strong>ConvertFloatToInteger (_Value)</strong>
+    </dt>
+    <dd>
+    Konvertiert den Ganzzahlwert in die Gleitkommadarstellung um.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Value</span> <b>number</b> Gleitkommawert
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Wert Ganzzahliger Wert
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Localize"></a>
+    <strong>Localize (_Text)</strong>
+    </dt>
+    <dd>
+    Lokalisiert den übergebenen Text oder die Tabelle.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Text</span> <b>any</b> Text zur Lokalisierung
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>any</b> Lokalisierter Text
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ConvertPlaceholders"></a>
+    <strong>ConvertPlaceholders (_Text)</strong>
+    </dt>
+    <dd>
+    Ersetzt alle Platzhalter innerhalb des Strings durch ihre jeweiligen Werte.
+<p><li><code>{n:xyz}</code> - Ersetzt einen Skriptnamen durch einen vordefinierten Wert</li><li><code>{t:xyz}</code> - Ersetzt einen Typen durch einen vordefinierten Wert</li><li><code>{v:xyz}</code> - Ersetzt eine Variable in _G durch ihren Wert.</li><li><code>{color}</code> - Ersetzt den Namen der Farbe durch ihren Farbcode.</li>
+ <p>Farben:
+ red, blue, yellow, green, white, black, grey, azure, orange, amber, violet,
+ pink, scarlet, magenta, olive, tooltip, none
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Text</span> <b>string</b> Zu formatierender Text
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>string</b> Formatierter Text
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddNote"></a>
+    <strong>AddNote (_Text)</strong>
+    </dt>
+    <dd>
+    Gibt eine Nachricht in das Debug-Textfenster aus.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Text</span> <b>any</b> Text als String oder Tabelle
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddStaticNote"></a>
+    <strong>AddStaticNote (_Text)</strong>
+    </dt>
+    <dd>
+    Gibt eine Nachricht in das Debug-Textfenster aus.  Die Nachricht bleibt bestehen, bis sie
+ aktiv entfernt wird.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Text</span> <b>any</b> Text als String oder Tabelle
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddMessage"></a>
+    <strong>AddMessage (_Text, _Sound)</strong>
+    </dt>
+    <dd>
+    Gibt eine Nachricht in das Nachrichtenfenster aus.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Text</span> <b>any</b> Text als String oder Tabelle
+        </li>
+        <li><span class="parameter">_Sound</span> (optional) <b>string</b> Sound zum Abspielen
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ClearNotes"></a>
+    <strong>ClearNotes ()</strong>
+    </dt>
+    <dd>
+    Entfernt alle Texte aus dem Debug-Textfenster.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddNamePlaceholder"></a>
+    <strong>AddNamePlaceholder (_Name, _Replacement)</strong>
+    </dt>
+    <dd>
+    Ersetzt einen Namen mit dem Text.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Name</span> <b>string</b> Name zum Ersetzen
+        </li>
+        <li><span class="parameter">_Replacement</span> <b>any</b> Wert der eingefügt wird
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddEntityTypePlaceholder"></a>
+    <strong>AddEntityTypePlaceholder (_Type, _Replacement)</strong>
+    </dt>
+    <dd>
+    Ersetzt einen Entity Type mit dem Text.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Type</span> <b>integer</b> Entity Type zum Ersetzen
+        </li>
+        <li><span class="parameter">_Replacement</span> <b>any</b> Wert der eingefügt wird
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "AddStringText"></a>
+    <strong>AddStringText (_Key, _Text)</strong>
+    </dt>
+    <dd>
+    Speichert eine Zeichenfolgenüberschreibung unter dem Schlüssel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Key</span> <b>string</b> Schlüssel des Eintrags
+        </li>
+        <li><span class="parameter">_Text</span> <b>any</b> Text oder lokalisierte Tabelle
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DeleteStringText"></a>
+    <strong>DeleteStringText (_Key)</strong>
+    </dt>
+    <dd>
+    Löscht die Zeichenfolgenüberschreibung unter dem Schlüssel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Key</span> <b>string</b> Schlüssel des Eintrags
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GetStringText"></a>
+    <strong>GetStringText (_Key)</strong>
+    </dt>
+    <dd>
+    Gibt den Zeichenfolgentext am Schlüssel zurück.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Key</span> <b>string</b> Schlüssel des Eintrags
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>string</b> Text Zeichenfolgentext
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DefineLanguage"></a>
+    <strong>DefineLanguage (_Shortcut, _Name, _Fallback, _Index)</strong>
+    </dt>
+    <dd>
+    Fügt eine neue Sprache zur Liste hinzu.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Shortcut</span> <b>string</b> Sprachkürzel
+        </li>
+        <li><span class="parameter">_Name</span> <b>string</b>     Anzeigename der Sprache
+        </li>
+        <li><span class="parameter">_Fallback</span> <b>string</b> Fallback-Sprachkürzel
+        </li>
+        <li><span class="parameter">_Index</span> (optional) <b>integer</b>  Listenposition
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CountTextLines"></a>
+    <strong>CountTextLines (_Text, _LineLength)</strong>
+    </dt>
+    <dd>
+    Gibt die geschätzte Anzahl Zeilen zurück, die zur Anzeige benötigt wird.
+
+ <h3>Einordnung:</h3> <li>Länge 4: <code>ABCDEFGHKLMNOPQRSTUVWXYZÄÖÜÁÂÃÅÇÈÉÊËÐÐÑÒÓÔÕÖØÙÚÛÜÝ</code></li>
+ <li>Länge 3: <code>abcdeghkmnopqsuvwxyzäöüßIJÆÌÍÎÏÞàáâãåæçèéêëìíîïðñòóôõ÷øùúûüýþÿ</code></li>
+ <li>Länge 2: <code>\"#+*~_\\§$%&=?@fijlft</code></li>
+ <li>Länge 1: <code>!-/()?',.|[]{}</code></li>
+
+ Alle nicht gelisteten Zeichen werden mit Länge 2 geschätzt.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Text</span> <b>string</b> Text
+        </li>
+        <li><span class="parameter">_LineLength</span> <b>integer</b> Zeilenlänge
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>integer</b> Anzahl Anzahl an Zeilen
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-06-07 22:28:09 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -21,6 +21,8 @@
 --- Dinge, die Tiere töten:
 --- <li>Krankheit (5%ige Chance pro Periode)</li>
 
+
+
 --- Aktiviert/deaktiviert den Modus.
 --- @param _Flag boolean Modus aktiv
 function SettlementSurvivalActivate(_Flag)
@@ -226,18 +228,18 @@ API.BaseConsumptionActivateForAI = BaseConsumptionActivateForAI;
 --- Ein Tier ist an Krankheit gestorben.
 ---
 --- #### Parameters:
---- * `EntityID` - ID des Tieres
+--- * `EntityID`: <b>integer</b> ID des Tieres
 Report.AnimalDiedFromIllness = anyInteger;
 
 --- Ein Siedler ist verhungert.
 ---
 --- #### Parameters:
---- * `EntityID` - ID des Siedlers
+--- * `EntityID`: <b>integer</b> ID des Siedlers
 Report.SettlerDiedFromStarvation = anyInteger;
 
 --- Ein Siedler ist an Krankheit gestorben.
 ---
 --- #### Parameters:
---- * `EntityID` - ID des Siedlers
+--- * `EntityID`: <b>integer</b> ID des Siedlers
 Report.SettlerDiedFromIllness = anyInteger;
 

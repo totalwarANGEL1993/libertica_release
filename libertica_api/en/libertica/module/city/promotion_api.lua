@@ -22,5 +22,4 @@
 ---
 --- Unlocks: Technologies.R_BarracksArchers and Technologies.R_BowMaker
 ---
-Lib.Promotion = Lib.Promotion or {};
 

@@ -1,13 +1,14 @@
 --- Verbessert interaktive Objekte.
+---
+--- Fast alle Entitäten können als interaktives Objekt verwendet werden, nicht 
+--- nur die, die dafür vorgesehen sind. Ein Objekt wird durch eine Tabelle 
+--- beschrieben und (fast) alle Schlüssel sind optional.
 
 
 
 --- Fügt einem Objekt eine Interaktion hinzu.
 ---
---- Fast alle Entitäten können als interaktives Objekt verwendet werden, nicht nur die, die dafür vorgesehen sind.
---- Ein Objekt wird durch eine Tabelle beschrieben und (fast) alle Schlüssel sind optional.
----
---- #### Felder der Tabelle
+--- #### Fields `_Description`:
 --- * `ScriptName`             - Skriptname des Objekts
 --- * `Texture`                - (Optional) Tabelle mit Koordinaten
 --- * `Title`                  - (Optional) Titel des Tooltipps
@@ -172,29 +173,29 @@ API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
 --- Der Spieler hat auf die Interaktions-Schaltfläche geklickt.
 --- 
 --- #### Parameters:
---- * `ScriptName` - Skriptname der Entität
---- * `KnightID`   - ID des aktivierenden Helden
---- * `PlayerID`   - ID des aktivierenden Spielers
+--- * `ScriptName`: <b>string</b> Skriptname der Entität
+--- * `KnightID`:   <b>integer</b> ID des aktivierenden Helden
+--- * `PlayerID`:   <b>integer</b> ID des aktivierenden Spielers
 Report.ObjectClicked = anyInteger;
 
 --- Die Interaktion des Objekts war erfolgreich.
 --- Wenn das Objekt Kosten hat, wird die Aktivierung abgeschlossen, wenn die Kosten ankommen.
 --- 
 --- #### Parameters:
---- * `ScriptName` - Skriptname der Entität
---- * `KnightID`   - ID des aktivierenden Helden
---- * `PlayerID`   - ID des aktivierenden Spielers
+--- * `ScriptName`: <b>string</b> Skriptname der Entität
+--- * `KnightID`:   <b>integer</b> ID des aktivierenden Helden
+--- * `PlayerID`:   <b>integer</b> ID des aktivierenden Spielers
 Report.ObjectInteraction = anyInteger;
 
 --- Die Interaktion wird vom Objekt gelöscht.
 ---
 --- #### Parameters:
---- * `ScriptName` - Skriptname der Entität
+--- * `ScriptName`: <b>string</b> Skriptname der Entität
 Report.ObjectReset = anyInteger;
 
 --- Der Zustand eines Objekts wurde zurückgesetzt.
 ---
 --- #### Parameters:
---- * `ScriptName` - Skriptname der Entität
+--- * `ScriptName`: <b>string</b> Skriptname der Entität
 Report.ObjectDelete = anyInteger;
 

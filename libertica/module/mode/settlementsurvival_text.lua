@@ -2,6 +2,13 @@ Lib.Register("module/mode/SettlementSurvival_Text");
 
 Lib.SettlementSurvival = Lib.SettlementSurvival or {};
 Lib.SettlementSurvival.Text = {
+    Messages = {
+        BuildingMourning = {
+            de = "Keine Baumaßnahmen möglich, solange Siedler trauern.",
+            en = "No construction work possible as long as settlers mourn.",
+            fr = "Aucun travail de construction possible tant que les colons pleurent.",
+        },
+    },
     Alarms = {
         AnimalDiedFromIllness = {
             de = "{scarlet}Eure Nutztiere sterben an Krankheiten!",
@@ -34,12 +41,5 @@ Lib.SettlementSurvival.Text = {
             fr = "{scarlet}Vos colons succombent à la peste!",
         },
     },
-    Messages = {
-        BuildingMourning = {
-            de = "Keine Baumaßnahmen möglich, solange Siedler trauern.",
-            en = "No construction work possible as long as settlers mourn.",
-            fr = "Aucun travail de construction possible tant que les colons pleurent.",
-        },
-    }
 };
 

@@ -8,8 +8,7 @@
 
 --- Fügt einer Entität einen NPC hinzu.
 ---
---- #### Felder der Tabelle
---- 
+--- #### Fields `_Data`:
 --- * `ScriptName`        - Skriptname der Entität (obligatorisch)
 --- * `Active`            - NPC ist aktiv
 --- * `Callback`          - Funktion, die bei der Aktivierung aufgerufen wird
@@ -88,7 +87,7 @@ API.NpcDispose = NpcDispose;
 
 --- Aktualisiert den NPC mit der Datentabelle.
 ---
---- #### Felder der Tabelle
+--- #### Fields `_Data`:
 --- * `ScriptName`        - Skriptname der Entität (obligatorisch)
 --- * `Callback`          - Funktion, die bei der Aktivierung aufgerufen wird
 --- * `Condition`         - Bedingung, die vor der Aktivierung überprüft wird
@@ -147,7 +146,7 @@ end
 --- Jemand spricht mit einem NPC.
 ---
 --- #### Parameters:
---- * `NpcEntityID`  - ID des NPCs
---- * `HeroEntityID` - ID des Helden
+--- * `NpcEntityID`:  <b>integer</b> ID des NPCs
+--- * `HeroEntityID`: <b>integer</b> ID des Helden
 Report.NpcInteraction = anyInteger;
 

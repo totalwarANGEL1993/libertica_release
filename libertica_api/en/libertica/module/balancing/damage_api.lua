@@ -1,10 +1,10 @@
 --- Allows the modification of unit damage values.
 ---
---- Note: The functions `MakeVulnerable` and `MakeInvulnerable` have been
---- overridden. The function `Logic.SetEntityInvulnerabilityFlag` is now used
---- internally and should no longer be used!
+--- <b>Attention</b>: The functions `MakeVulnerable` and `MakeInvulnerable` have
+--- been overridden. The function `Logic.SetEntityInvulnerabilityFlag` is now
+--- used internally and should no longer be used!
 ---
---- Functions:
+--- #### Functions:
 --- <li>Better balancing for archers</li>
 --- <li>Close Wall catapults weaken each other (only for humans)</li>
 --- <li>Adjusting unit combat strength via Lua</li>
@@ -12,7 +12,8 @@
 --- <li>Adjusting the Own Territory bonus</li>
 --- <li>Adjusting the Height Modifier</li>
 ---
-Lib.Damage = Lib.Damage or {};
+--- <b>Attention</b>: This functionality will be active when the module is loaded.
+---
 
 
 

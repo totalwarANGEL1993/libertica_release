@@ -1,18 +1,27 @@
 --- Ermöglicht die Erstellung von Lagern.
 ---
 --- Lager sind modifizierte Handelsposten, an denen der Spieler Waren ohne
---- Beteiligung eines KI-Spielers kaufen kann. Es können jedoch keine Waren an das Lager verkauft werden. Die Bezahlung
---- kann auf jeden beliebigen Ressourcentyp eingestellt werden.
+--- Beteiligung eines KI-Spielers kaufen kann. Es können jedoch keine Waren 
+--- an das Lager verkauft werden. Die Bezahlung kann auf jeden beliebigen 
+--- Ressourcentyp eingestellt werden.
 
 
 
 --- Definiert eine Baustelle für einen Handelsposten als Lager.
 ---
---- #### Konfigurationsparameter
---- * `ScriptName` - Skriptname der Baustelle
---- * `Offers`     - Liste der Angebote (max. 6 sichtbare Angebote)
----
---- #### Beispiele
+--- #### Fields `_Data`:
+--- * `ScriptName`: <b>string</b> Skriptname der Baustelle
+--- * `Offers`:     <b>table</b> Liste der Angebote (max. 6 sichtbare Angebote)
+--- 
+--- #### Fields `_Data.Offers`:
+--- * `Amount`:      <b>integer</b> Menge an Angeboten
+--- * `GoodType`:    <b>integer</b> Typ der Ware des Angebot
+--- * `GoodAmount`:  <b>integer</b> Menge der Ware pro Angebot
+--- * `PaymentType`: (optional) <b>integer</b> Bezahlart der Kosten (Default: Goods.G_Gold)
+--- * `BasePrice`:   (optional) <b>integer</b> Kosten
+--- * `Refresh`:     (optional) <b>integer</b> Regenerationszeit pro Angebot
+--- 
+--- #### Ecample:
 --- ```lua
 --- CreateWarehouse {
 ---     ScriptName       = "TP3",
@@ -122,24 +131,24 @@ API.GetActivWarehouseOffers = GetActivWarehouseOffers;
 --- Der Spieler hat auf ein Angebot geklickt.
 ---
 --- #### Parameters:
---- * `PlayerID`      - ID des Spielers
---- * `ScriptName`    - Skriptname des Lagers
---- * `Inflation`     - Berechnete Inflation
---- * `OfferIndex`    - Index des Angebots
---- * `OfferGood`     - Gekauftes Gut oder Entitätstyp
---- * `GoodAmount`    - Menge der Güter
---- * `PaymentType`   - Zahlungsgut
---- * `BasePrice`     - Grundpreis
+--- * `PlayerID`:      <b>integer</b> ID des Spielers
+--- * `ScriptName`:    <b>string</b> Skriptname des Lagers
+--- * `Inflation`:     <b>integer</b> Berechnete Inflation
+--- * `OfferIndex`:    <b>integer</b> Index des Angebots
+--- * `OfferGood`:     <b>integer</b> Gekauftes Gut oder Entitätstyp
+--- * `GoodAmount`:    <b>integer</b> Menge der Güter
+--- * `PaymentType`:   <b>integer</b> Zahlungsgut
+--- * `BasePrice`:     <b>integer</b> Grundpreis
 Report.WarehouseOfferClicked = anyInteger;
 
 --- Der Spieler hat ein Angebot gekauft.
 ---
 --- #### Parameters:
---- * `PlayerID`      - ID des Spielers
---- * `ScriptName`    - Skriptname des Lagers
---- * `OfferGood`     - Gekaufter Gut- oder Entitätstyp
---- * `GoodAmount`    - Menge der Güter
---- * `PaymentGood`   - Zahlungsgut
---- * `PaymentAmount` - Menge der Zahlung
+--- * `PlayerID`:      <b>integer</b> ID des Spielers
+--- * `ScriptName`:    <b>string</b> Skriptname des Lagers
+--- * `OfferGood`:     <b>integer</b> Gekaufter Gut- oder Entitätstyp
+--- * `GoodAmount`:    <b>integer</b> Menge der Güter
+--- * `PaymentGood`:   <b>integer</b> Zahlungsgut
+--- * `PaymentAmount`: <b>integer</b> Menge der Zahlung
 Report.WarehouseOfferBought = anyInteger;
 

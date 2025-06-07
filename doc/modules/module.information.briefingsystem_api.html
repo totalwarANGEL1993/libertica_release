@@ -44,6 +44,7 @@
 
 <h2>Modules</h2>
 <ul class="nowrap">
+  <li><a href="../modules/comfort.addware.html">comfort.addware</a></li>
   <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
   <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
   <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
@@ -80,6 +81,7 @@
   <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
   <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
   <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isunofficialpatch.html">comfort.isunofficialpatch</a></li>
   <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
   <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
   <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
@@ -100,22 +102,14 @@
   <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
   <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
   <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
-  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
   <li><a href="../modules/core.core.html">core.core</a></li>
-  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
-  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
-  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
-  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
-  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
-  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
-  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
-  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
-  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
-  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
-  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/core.core_api.html">core.core_api</a></li>
+  <li><a href="../modules/core.core_behavior.html">core.core_behavior</a></li>
+  <li><a href="../modules/core.core_lua.html">core.core_lua</a></li>
   <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
   <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
   <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.militiasystem_api.html">module.city.militiasystem_api</a></li>
   <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
   <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
   <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
@@ -123,6 +117,7 @@
   <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
   <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
   <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.permadeath_api.html">module.faker.permadeath_api</a></li>
   <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
   <li><strong>module.information.briefingsystem_api</strong></li>
   <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
@@ -130,8 +125,10 @@
   <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
   <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
   <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.information_api.html">module.information.information_api</a></li>
   <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
   <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.information.typewriter_api.html">module.information.typewriter_api</a></li>
   <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
   <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
   <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
@@ -160,32 +157,24 @@
 <h1>Module <code>module.information.briefingsystem_api</code></h1>
 <p>Ermöglicht das Definieren von Einleitungen.</p>
 <p>
-<p> Der Höhepunkt für die Skripting-Dialoge und einfachen Kameraanimationen. Ein vielseitiges
- Werkzeug, um die Handlung der Karte zu skripten.
+<p> Der Höhepunkt für das Skripten von Dialogen und einfachen Kameraanimationen.
+ Ein vielseitiges Tool zum Skripten der Kartendarstellung.
 </p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#StartBriefing">StartBriefing (_Briefing, _Name, _PlayerID)</a></td>
-	<td class="summary">Startet eine Einleitung.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#RequestBriefingAlternateGraphics">RequestBriefingAlternateGraphics ()</a></td>
-	<td class="summary">Fragt den Spieler um Erlaubnis, Grafikeinstellungen zu ändern.</td>
+	<td class="name" nowrap><a href="#NewBriefing">NewBriefing (_Name, _PlayerID)</a></td>
+	<td class="summary">Initialisiert den Builder für ein Briefing.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#IsBriefingActive">IsBriefingActive (_PlayerID)</a></td>
 	<td class="summary">Überprüft, ob eine Einleitung aktiv ist.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#GetFramePosition">GetFramePosition (_Entity, _ZOffset)</a></td>
-	<td class="summary">Erstellt einen Punkt aus einer Position.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#GetFrameVector">GetFrameVector (_Entity1, _ZOffset1, _Entity2, _ZOffset2)</a></td>
-	<td class="summary">Erstellt einen Vektor aus 2 Positionen.</td>
+	<td class="name" nowrap><a href="#StartBriefing">StartBriefing (_Briefing, _Name, _PlayerID)</a></td>
+	<td class="summary">Startet eine Briefing.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#AddBriefingPages">AddBriefingPages (_Briefing)</a></td>
@@ -196,7 +185,7 @@
 	<td class="summary">Erstellt eine Seite.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#ASP">ASP (...)</a></td>
+	<td class="name" nowrap><a href="#ASP">ASP (_Name, _Title, _Text, _DialogCamera, _Position, _Action)</a></td>
 	<td class="summary">Erstellt eine Seite auf vereinfachte Weise.</td>
 	</tr>
 </table>
@@ -209,135 +198,85 @@
 
     <dl class="function">
     <dt>
-    <a name = "StartBriefing"></a>
-    <strong>StartBriefing (_Briefing, _Name, _PlayerID)</strong>
+    <a name = "NewBriefing"></a>
+    <strong>NewBriefing (_Name, _PlayerID)</strong>
     </dt>
     <dd>
-    Startet eine Einleitung.
-<p> Mögliche Felder für die Einleitungstabelle:
-<li><code>Starting</code>                - Funktion, die beim Starten der Einleitung aufgerufen wird</li><li><code>Finished</code>                - Funktion, die beim Beenden der Einleitung aufgerufen wird</li><li><code>RestoreCamera</code>           - Kameraposition wird am Ende der Einleitung gespeichert und wiederhergestellt</li><li><code>RestoreGameSpeed</code>        - Spielgeschwindigkeit wird am Ende der Einleitung gespeichert und wiederhergestellt</li><li><code>EnableGlobalImmortality</code> - Während Einleitungen sind alle Entitäten unverwundbar</li><li><code>EnableSky</code>               - Zeigt den Himmel während der Einleitung an</li><li><code>EnableFoW</code>               - Zeigt den Nebel des Krieges während der Einleitung an</li><li><code>EnableBorderPins</code>        - Zeigt die Randnadeln während der Einleitung an</li><li><code>PreloadAssets</code>           - Erlaubt weites Sichtfeld in Briefings</li><li><code>HideNotes</code>               - Nachrichten nicht anzeigen</li><p><li>→ Beispiel #1*</li><p> <h3>Animationen</h3> Die Kameraeinstellungen können vom Text der Seite getrennt werden. Dies ermöglicht nicht nur
- das flüssige Schreiben von Dialogen, sondern auch weitere Möglichkeiten werden freigeschaltet
- bei Verwendung der Notation. Um eine Animation zu erstellen, darf die Seite keine
- Position haben. Andernfalls werden Standardwerte verwendet.
-<p> Die Frames der Animation sollten als Tabelle bereitgestellt werden. Der Weg
- der Kamera wird über Bézirkurven bestimmt. Das bedeutet 2 Frames werden zu
- einer geraden, 3 erzeugen eine Parabel und ab 4 Frames entsteht eine Kurve.
-<p><li>→ Beispiel #2*</li><p><li>→ Beispiel #3*</li><p><li>→ Beispiel #4*</li><p> Die aktuelle Animation kann auch zwischengespeichert werden, um für eine
- Page eine neue Animation zu starten, nach deren Abschluss die vorherige
- fortgeführt wird. Die Animation kann ebenfalls so eingestellt werden, dass
- sie nur für ihre Aktuelle Page gültig ist und danach gelöscht wird.
-<p><li>→ Beispiel #5*</li><p> <h3>Parallax</h3> Im Kontext eines Videospiels sind Parallaxen scrollbare Hintergründe. Dies
- Technik wurde von Side-Scrollers verwendet. Während einer Einleitungsseite bis zu 4 Ebenen
- von Grafiken angezeigt und animiert werden. Parallaxen werden ähnlich notiert wie
- Kameraanimationen. Das Scrollen erfolgt durch Einstellen der UV-Koordinaten.
-<p> Grafiken müssen immer im Format 16:9 vorliegen. Wenn ein Spieler eine 4:3-Auflösung hat
- wird das Bild links und rechts beschnitten, um in den Rahmen zu passen. Koordinaten - solange
- als relative Koordinaten bereitgestellt - werden angepasst.
-<p> Es ist auch möglich, eine Tabelle von Animationsrahmen für das Bild bereitzustellen.
- Die Rahmen werden linear interpoliert, wenn es mindestens 2 Einträge gibt und
- kubisch interpoliert, wenn es mindestens 4 Einträge gibt.
-<p><li>→ Beispiel #6*</li><p><li>→ Beispiel #7*</li><p><li>→ Beispiel #8*</li><p> <h3>Example:</h3><p><li>Beispiel #1: Grundlegende Struktur</li> <pre><code class="language-lua"> function Briefing1(_Name, _PlayerID)
-     local Briefing = {};
-     local AP, ASP = AddBriefingPages(Briefing);
-<p>     -- Seiten ...
-<p>     Briefing.Starting = function(_Data)
-     end
-     Briefing.Finished = function(_Data)
-     end
-     StartBriefing(Briefing, _Name, _PlayerID);
- end</code></pre><p><li>Beispiel #2: Notation für Animationen</li> <pre><code class="language-lua"> Briefing.PageAnimation = {
-     ["Seite1"] = {
-         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
-              {GetFrameVector("pos3", 500, "pos4", 1000)}},
-     },
-     ["Seite3"] = {
-         {30, {GetFrameVector("pos1", 500, "pos2", 1000)},
-              {GetFrameVector("pos3", 500, "pos4", 1000)},
-              {GetFrameVector("pos7", 500, "pos8", 1000)},
-              {GetFrameVector("pos5", 500, "pos6", 1000)}},
-     },
- };</code></pre><p><li>Beispiel #3: Ersetzen von Animationen</li> <pre><code class="language-lua"> Briefing.PageAnimation = {
-     ["Seite1"] = {
-         Clear = true,
-         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
-              {GetFrameVector("pos3", 500, "pos4", -3000)}},
-     },
- };</code></pre><p><li>Beispiel #4: Endlos wiederholte Animation</li> <pre><code class="language-lua"> Briefing.PageAnimation = {
-     ["Seite1"] = {
-         Repeat = true,
-         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
-              {GetFrameVector("pos3", 500, "pos4", -3000)},
-              {GetFrameVector("pos7", 500, "pos8", -3000)},
-              {GetFrameVector("pos5", 500, "pos6", -3000)}},
-     },
- };</code></pre><p><li>Beispiel #5: Animationen zwischenschieben</li> <pre><code class="language-lua"> Briefing.PageAnimation = {
-     ["Seite1"] = {
-         Postpone = true,
-         Local = true,
-         {30, {GetFrameVector("pos1", 500, "pos2", -3000)},
-              {GetFrameVector("pos3", 500, "pos4", -3000)},
-              {GetFrameVector("pos7", 500, "pos8", -3000)},
-              {GetFrameVector("pos5", 500, "pos6", -3000)}},
-     },
- };</code></pre><p><li>Beispiel #6: Notation von Parallaxen</li> <pre><code class="language-lua"> Briefing.PageParallax = {
-     ["Seite1"] = {
-         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
-          {0, 0, 0.8, 1, 255},
-          {0.2, 0, 1, 1, 255}},
-     },
-     ["Seite3"] = {
-         {"maps/externalmap/mapname/graphics/Parallax1.png", 1,
-          {0, 0, 0.8, 1, 255},
-          {0.2, 0, 1, 1, 255},
-          {0, 0, 0.8, 1, 255},
-          {0.2, 0, 1, 1, 255}},
-     },
-     ["Seite7"] = {
-         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
-          {0, 0, 0.8, 1, 255}},
-     },
- };</code></pre><p><li>Beispiel #7: Parallaxen ersetzen</li> <pre><code class="language-lua"> Briefing.PageParallax = {
-     ["Seite1"] = {
-         Clear = true,
-         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
-          {0, 0, 0.8, 1, 255},
-          {0.2, 0, 1, 1, 255}},
-     },
- };</code></pre><p><li>Beispiel #8: Endlos wiederholte Parallaxe</li> <pre><code class="language-lua"> Briefing.PageParallax = {
-     ["Seite1"] = {
-         Repeat = true,
-         {"maps/externalmap/mapname/graphics/Parallax6.png", 60,
-          {0, 0, 0.8, 1, 255},
-          {0.2, 0, 1, 1, 255}},
-     },
- };</code></pre>
+    Initialisiert den Builder für ein Briefing.
+
+ <h3>Functions <code>BriefingBuilder</code>:</h3><li><code>SetName(_Name)</code>:              Setzt den Namen des Briefings.</li><li><code>SetPlayer(_Player)</code>:          Setzt den empfangenden Spieler des Briefings.</li><li><code>UseBigBars(_Flag)</code>:           Verwendet die breiten Briefing Bars.</li><li><code>UseRestoreCamera(_Flag)</code>:     Setzt die Kamera am Ende des Briefing zum Ausgang zurück.</li><li><code>UseRestoreGameSpeed(_Flag)</code>:  Setzt die Spielgeschwindigkeit am Ende des Briefing zurück.</li><li><code>UseGlobalImmortality(_Flag)</code>: Während des Briefings sind alle Entities unverwundbar.</li><li><code>UseFarClipping(_Flag)</code>:       Verwendet ein weites Blickfeld. <b>Achtung</b>: Kann auf schwachen Systemen ruckeln.</li><li><code>SetHideNotes(_Flag)</code>:         Versteckt das Notes Window wärhend des Briefing.</li><li><code>SetEnableSky(_Flag)</code>:         Zeigt den Himmel während des Briefings an.</li><li><code>SetEnableFoW(_Flag)</code>:         Zeigt den Nebel des Krieges während des Briefings an.</li><li><code>SetEnableBorderPins(_Flag)</code>:  Zeigt die Grenzsteine während des Briefing an.</li><li><code>SetOnBegin(_Function)</code>:       Funktion, die beim Start des Briefing ausgeführt wird.</li><li><code>SetOnFinish(_Function)</code>:      Funktion, die beim Ende des Briefing ausgeführt wird.</li><li><code>BeginPage()</code>:                 Eröffnet den <code>PageBuilder</code>.</li><li><code>Redirect(_Target)</code>:           Springt zur Seite mit dem angegebenen Namen. Keine Angabe beendet das Briefing an dieser Stelle.</li><li><code>Start()</code>:                     Startet das Briefing.</li>
+ <h3>Functions <code>PageBuilder</code>:</h3> Ein Briefing kann unbegrenzt viele Pages haben.
+<li><code>SetName(_Name)</code>:            Setzt den Namen der Page.</li><li><code>SetSpeech(_Speech)</code>:        Setzt den Pfad zur Voice Line.</li><li><code>SetTitle(_Title)</code>:          Setzt den anzuzeigenden Titel der Page.</li><li><code>SetText(_Text)</code>:            Setzt den anzuzeigenden Text der Page.</li><li><code>SetDuration(_Duration)</code>:    Setzt die Anzeigedauer der Page.</li><li><code>SetFadeIn(_Time)</code>:          Blendet von Schwarz ein.</li><li><code>SetFadeOut(_Time)</code>:         Blendet zu Schwarz aus.</li><li><code>SetFaderAlpha(_Opacity)</code>:   Setzt den Alphawert der Fadermaske.</li><li><code>SetAction(_Action)</code>:        Funktion, die bei jedem Anzeigen der Seite ausgeführt wird.</li><li><code>UseBigBars(_Flag)</code>:         Verwendet die breiten Briefing Bars auf dieser Seite.</li><li><code>UsePerformanceMode(_Flag)</code>: Deaktiviert verschiedene Grafikeffekte um Performance zu verbessern.</li><li><code>UseSkipping(_Flag)</code>:        Die Seite kann übersprungen werden.</li><li><code>BeginCamera()</code>:             Eröffnet den <code>CameraBuilder</code>.</li><li><code>BeginCameraAnimation()</code>:    Eröffnet den <code>CameraAnimationBuilder</code>.</li><li><code>BeginParallaxAnimation()</code>:  Eröffnet den <code>ParallaxAnimationBuilder</code>.</li><li><code>BeginChoice()</code>:             Eröffnet den <code>ChoiceBuilder</code>.</li><li><code>EndPage()</code>:                 Beendet den <code>PageBuilder</code> und kehrt zum <code>BriefingBuilder</code> zurück.</li>
+ <h3>Functions <code>CameraBuilder</code>:</h3><li><code>UseCloseUp(_Flag)</code>:      Schaltet in die Nahsicht oder die Fernsicht.</li><li><code>SetPosition(_Position)</code>: Setzt die Position der Kamera.</li><li><code>SetAngle(_Angle)</code>:       Setzt den Höhenwinkel der Kamera.</li><li><code>SetRotation(_Rotation)</code>: Setzt den Rotationswinkel der Kamera.</li><li><code>SetZoom(_Zoom)</code>:         Setzt den Zoom der Kamera.</li><li><code>BeginFlyTo()</code>:           Eröffnet den <code>FlyToBuilder</code>.</li><li><code>EndCamera()</code>:            Beendet den <code>CameraBuilder</code> und kehrt zum <code>PageBuilder</code> zurück.</li>
+ <h3>Functions <code>FlyToBuilder</code>:</h3><li><code>SetPosition(_Position)</code>: Setzt die Position der Kamera.</li><li><code>SetAngle(_Angle)</code>:       Setzt den Höhenwinkel der Kamera.</li><li><code>SetRotation(_Rotation)</code>: Setzt den Rotationswinkel der Kamera.</li><li><code>SetZoom(_Zoom)</code>:         Setzt den Zoom der Kamera.</li><li><code>EndFlyTo()</code>:             Beendet den <code>FlyToBuilder</code> und kehrt zum <code>CameraBuilder</code> zurück.</li>
+ <h3>Functions <code>ChoiceBuilder</code>:</h3><li><code>Option(_ID?, _Text, _Target, _Condition?)</code>: Fügt eine neue Option hinzu. (Mit ? gekennzeichnete Parameter können weggelassen werden)</li><li><code>EndChoice()</code>:                               Beendet den <code>ChoiceBuilder</code> und kehrt zum <code>PageBuilder</code> zurück.</li>
+ <h3>Functions <code>CameraAnimationBuilder</code>:</h3><li><code>SetRepeat(_Flag)</code>:          Die Animationen wiederholen sich nach ihrem Ende.</li><li><code>SetClear(_Flag)</code>:           Alle laufenden Animationen werden aus der Queue entfernt.</li><li><code>SetPostpone(_Flag)</code>:        Alle laufenden Animationen werden zurückgestellt.</li><li><code>BeginAnimationSet()</code>:       Beginnt den <code>AnimationSetBuilder</code>.</li><li><code>EndCameraAnimation()</code>:      Beendet den <code>CameraAnimationBuilder</code> und kehrt zum <code>PageBuilder</code> zurück.</li>
+ <h3>Functions <code>AnimationSetBuilder</code>:</h3><li><code>SetDuration(_Duration)</code>:                  Setzt die Dauer der Animation.</li><li><code>SetLocal(_Flag)</code>:                         Die Animation ist an die Page gebunden.</li><li><code>Animation(_px, _py, _pz, _lx, _ly, _lz)</code>: Koordinaten für Position und Blickziel der Kamera.</li><li><code>EndAnimationSet()</code>:                       Beendet den <code>AnimationSetBuilder</code> und kehrt zum <code>CameraAnimationBuilder</code> zurück.</li>
+ <h3>Functions <code>ParallaxAnimationBuilder</code>:</h3><li><code>SetRepeat(_Flag)</code>:       Die Animationen wiederholen sich nach ihrem Ende.</li><li><code>SetClear(_Flag)</code>:        Alle laufenden Animationen werden aus der Queue entfernt.</li><li><code>SetPostpone(_Flag)</code>:     Alle laufenden Animationen werden zurückgestellt.</li><li><code>BeginLayer()</code>:           Beginnt den <code>LayerBuilder</code>.</li><li><code>EndParallaxAnimation()</code>: Beendet den <code>ParallaxAnimationBuilder</code> und kehrt zum <code>PageBuilder</code> zurück.</li>
+ <h3>Functions <code>LayerBuilder</code>:</h3> Es kann bis zu 6 verschiedene Layer geben.
+<li><code>SetDuration(_Duration)</code>:            Setzt die Dauer der Animation.</li><li><code>SetImage(_Image)</code>:                  Pfad zum angezeigten Bild.</li><li><code>SetLocal(_Flag)</code>:                   Die Animation ist an die Page gebunden.</li><li><code>Animation(_u0, _v0, _u1, _v1, _a)</code>: Koordinaten und Alphawert der angezeigten Teilgrafik (Koordinaten zwischen 0 und 1).</li><li><code>EndLayer()</code>:                        Beendet den <code>LayerBuilder</code> und kehrt zum <code>ParallaxAnimationBuilder</code> zurück.</li>
+ <h3>Example:</h3> Eine einfaches Briefing erzeugen, das die Dialogkamera benutzt.
+ <pre><code class="language-lua"> NewBriefing("TestBriefing", 1)
+     :BeginPage()
+         :SetTitle("Title")
+         :SetText("This is a test page.")
+         :BeginCamera()
+             :SetPosition("Hakim")
+             :UseCloseUp(true)
+         :EndCamera()
+     :EndPage()
+     :Start();</code></pre>
+ <h3>Example:</h3> Eine einfaches Briefing erzeugen, das eine einfache Kamerabewegung macht.
+ <pre><code class="language-lua"> NewBriefing("TestBriefing", 1)
+     :BeginPage()
+         :SetTitle("Title")
+         :SetText("This is a test page.")
+         :BeginCamera()
+             :SetPosition("Hakim")
+             :SetRotation(90)
+             :SetAngle(50)
+             :SetZoom(3000)
+             :BeginFlyTo()
+                 :SetPosition("Saraya")
+                 :SetRotation(-90)
+                 :SetAngle(20)
+                 :SetZoom(3000)
+             :EndFlyTo()
+         :EndCamera()
+     :EndPage()
+     :Start();</code></pre>
+ <h3>Example:</h3> Eine Briefing erzeugen, das komplexe Kameraanimationen nutzt. Die Funktion
+ <code>Animation</code> kann mit direkten Koordinaten genutzt werden, oder hier die
+ Koordinaten ermitteln. Die negative Zahl bedeutet eine direkte Höhenangabe.
+ Eine positive Zahl wäre ein Offset zur Höhe der Entität.
+ <pre><code class="language-lua"> NewBriefing("TestBriefing", 1)
+     :BeginPage()
+         :SetTitle("Title")
+         :SetText("This is a test page.")
+         :BeginCameraAnimation()
+             :SetClear(true)
+             :BeginAnimationSet()
+                 :SetDuration(30)
+                 :SetLocal(true)
+                 :Animation("Pos1", -2500, "npc1", -2200)
+                 :Animation("Pos2", -2500, "npc1", -2000)
+             :EndAnimationSet()
+         :EndCameraAnimation()
+     :EndPage()
+     :Start();</code></pre>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">_Briefing</span> <b>table</b>   Einleitungstabelle
-        </li>
-        <li><span class="parameter">_Name</span> <b>string</b>      Name der Einleitung
+        <li><span class="parameter">_Name</span> <b>string</b> Name des Briefing
         </li>
         <li><span class="parameter">_PlayerID</span> <b>integer</b> Spieler-ID des Empfängers
         </li>
     </ul>
 
-
-
-
-
-</dd>
-    <dt>
-    <a name = "RequestBriefingAlternateGraphics"></a>
-    <strong>RequestBriefingAlternateGraphics ()</strong>
-    </dt>
-    <dd>
-    Fragt den Spieler um Erlaubnis, Grafikeinstellungen zu ändern.
-<p> Diese Funktionalität ist im Multiplayer deaktiviert.
-
-
-
+    <h3>Returns:</h3>
+    <ol><b>table</b> BriefingBuilder Builder des Briefing
+    </ol>
 
 
 
@@ -366,61 +305,37 @@
 
 </dd>
     <dt>
-    <a name = "GetFramePosition"></a>
-    <strong>GetFramePosition (_Entity, _ZOffset)</strong>
+    <a name = "StartBriefing"></a>
+    <strong>StartBriefing (_Briefing, _Name, _PlayerID)</strong>
     </dt>
     <dd>
-    Erstellt einen Punkt aus einer Position.
+    Startet eine Briefing.
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
+
+ <h3>Fields <code>_Briefing</code>:</h3><li><code>Starting</code>:                (optional) <b>function</b> Funktion, die beim Starten der Einleitung aufgerufen wird</li><li><code>Finished</code>:                (optional) <b>function</b> Funktion, die beim Beenden der Einleitung aufgerufen wird</li><li><code>RestoreCamera</code>:           (optional) <b>boolean</b> Kameraposition wird am Ende der Einleitung gespeichert und wiederhergestellt</li><li><code>RestoreGameSpeed</code>:        (optional) <b>boolean</b> Spielgeschwindigkeit wird am Ende der Einleitung gespeichert und wiederhergestellt</li><li><code>EnableGlobalImmortality</code>: (optional) <b>boolean</b> Während Einleitungen sind alle Entitäten unverwundbar</li><li><code>EnableSky</code>:               (optional) <b>boolean</b> Zeigt den Himmel während der Einleitung an</li><li><code>EnableFoW</code>:               (optional) <b>boolean</b> Zeigt den Nebel des Krieges während der Einleitung an</li><li><code>EnableBorderPins</code>:        (optional) <b>boolean</b> Zeigt die Randnadeln während der Einleitung an</li><li><code>PreloadAssets</code>:           (optional) <b>boolean</b> Erlaubt weites Sichtfeld in Briefings</li><li><code>HideNotes</code>:               (optional) <b>boolean</b> Nachrichten nicht anzeigen</li><p> <h3>Example:</h3> <pre><code class="language-lua"> function Briefing1(_Name, _PlayerID)
+     local Briefing = {};
+     local AP, ASP = AddBriefingPages(Briefing);
+     -- Seiten
+     Briefing.Starting = function(_Data)
+     end
+     Briefing.Finished = function(_Data)
+     end
+     StartBriefing(Briefing, _Name, _PlayerID);
+ end</code></pre>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">_Entity</span> <b>any</b>      Zielentität
+        <li><span class="parameter">_Briefing</span> <b>table</b>   Einleitungstabelle
         </li>
-        <li><span class="parameter">_ZOffset</span> <b>integer</b> Z-Offset (< 0 → Z überschreiben)
+        <li><span class="parameter">_Name</span> <b>string</b>      Name der Einleitung
         </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-        <li><b>number</b> X X-Koordinate</li>
-        <li><b>number</b> Y Y-Koordinate</li>
-        <li><b>number</b> Z Z-Koordinate</li>
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "GetFrameVector"></a>
-    <strong>GetFrameVector (_Entity1, _ZOffset1, _Entity2, _ZOffset2)</strong>
-    </dt>
-    <dd>
-    Erstellt einen Vektor aus 2 Positionen.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">_Entity1</span> <b>any</b>      Zielpositions-Entität
-        </li>
-        <li><span class="parameter">_ZOffset1</span> <b>integer</b> Z-Offset der Position (< 0 → Z überschreiben)
-        </li>
-        <li><span class="parameter">_Entity2</span> <b>any</b>      Ziel-LookAt-Entität
-        </li>
-        <li><span class="parameter">_ZOffset2</span> <b>integer</b> Z-Offset von LookAt (< 0 → Z überschreiben)
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> Spieler-ID des Empfängers
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-        <li><b>number</b> X1        X-Koordinate Position</li>
-        <li><b>number</b> Y1        Y-Koordinate Position</li>
-        <li><b>number</b> Z1        Z-Koordinate Position</li>
-        <li><b>number</b> X2        X-Koordinate LookAt</li>
-        <li><b>number</b> Y2        Y-Koordinate LookAt</li>
-        <li><b>number</b> Z2        Z-Koordinate LookAt</li>
-    </ol>
 
 
 
@@ -432,7 +347,11 @@
     </dt>
     <dd>
     Bereitet die Einleitung vor und gibt die Seitenfunktionen zurück.
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
 <p> Muss aufgerufen werden, bevor Seiten hinzugefügt werden.
+
 
 
     <h3>Parameters:</h3>
@@ -443,8 +362,8 @@
 
     <h3>Returns:</h3>
     <ol>
-        <li><b>function</b> AP  Seitenfunktion</li>
-        <li><b>function</b> ASP Kurze Seitenfunktion</li>
+        <li><b>function</b> AP  Funktion für Seiten</li>
+        <li><b>function</b> ASP Vereinfachte Funktion für Seiten</li>
     </ol>
 
 
@@ -457,47 +376,48 @@
     </dt>
     <dd>
     Erstellt eine Seite.
-<p> Mögliche Felder für die Seite:
-<p><li><code>Title</code>           - Angezeigter Seitentitel</li><li><code>Text</code>            - Angezeigter Seitentext</li><li><code>Speech</code>          - Pfad zum Voiceover (MP3-Datei)</li><li><code>Position</code>        - Skriptname der Position</li><li><code>Duration</code>        - Zeit bis zum automatischen Überspringen</li><li><code>DialogCamera</code>    - Verwendung der Nahaufnahmekamera</li><li><code>DisableSkipping</code> - Erlauben/Verbieten des Überspringens von Seiten</li><li><code>Action</code>          - Funktion, die aufgerufen wird, wenn die Seite angezeigt wird</li><li><code>FarClipPlane</code>    - Renderabstand</li><li><code>Rotation</code>        - Kamerarotation</li><li><code>Zoom</code>            - Kamerazoom</li><li><code>Angle</code>           - Kamerawinkel</li><li><code>FadeIn</code>          - Dauer des Einblendens aus Schwarz</li><li><code>FadeOut</code>         - Dauer des Ausblendens in Schwarz</li><li><code>FaderAlpha</code>      - Maskenalpha</li><li><code>BarOpacity</code>      - Deckkraft der Balken</li><li><code>BigBars</code>         - Verwende große Balken</li><li><code>FlyTo</code>           - Tabelle mit zweitem Satz von Kamerakonfigurationen, wobei die Kamera zufliegt</li><li><code>Performance</code>     - (Optional) Grafiksettings für diese Seite herabsetzen</li><li><code>MC</code>              - Tabelle mit Auswahlmöglichkeiten zum Abzweigen in Dialogen</li><p><li>→ Beispiel #1*</li><p> <h3>Flusskontrolle</h3> In einer Einleitung kann der Spieler gezwungen werden, eine Wahl zu treffen, die
- verschiedene Ergebnisse haben wird. Das nennt man Multiple Choice. Optionen müssen bereitgestellt werden
- in einer Tabelle. Die Zielseite kann mit ihrem Namen definiert werden oder eine Funktion kann
- für mehr Kontrolle über den Ablauf bereitgestellt werden. Solche Funktionen müssen zurückgeben
- ein Seitenname.
-<p><li>→ Beispiel #2*</li><p> Zusätzlich kann jede Funktion markiert werden, um entfernt zu werden, wenn sie verwendet wird,
- und nicht wieder angezeigt zu werden, wenn die Seite erneut betreten wird.
-<p><li>→ Beispiel #3*</li><p> Auch Seiten können ausgeblendet werden, indem eine Funktion zum Überprüfen von Bedingungen bereitgestellt wird.
-<p><li>→ Beispiel #4*</li><p> Wenn eine Einleitung verzweigt ist, muss sie manuell beendet werden, nachdem eine Verzweigung erfolgt ist
- oder es zeigt einfach die nächste Seite an. Um eine Einleitung zu beenden, muss eine leere Seite hinzugefügt werden.
-<p><li>→ Beispiel #5*</li><p> Alternativ kann die Einleitung an einer anderen Seite fortgesetzt werden. Dies ermöglicht es, zu erstellen
- sich wiederholende Strukturen innerhalb einer Einleitung.
-<p><li>→ Beispiel #6*</li><p> Um ausgewählte Antworten zu einem späteren Zeitpunkt zu erhalten, kann die Auswahl in einem
- globalen Variablen entweder in einem Optionsrückruf oder in der fertigen Funktion gespeichert werden. Die
- Die zurückgegebene Nummer ist die ID der Antwort.
-<p><li>→ Beispiel #7*</li><p> <h3>Example:</h3><p><li>Beispiel #1: Eine einfache Seite</li> <pre><code class="language-lua"> AP {
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
+<p> <h3>Fields <code>_Data</code>:</h3><li><code>Title</code>:           <b>any</b> Angezeigter Seitentitel (String oder Language Table)</li><li><code>Text</code>:            <b>any</b> Angezeigter Seitentext (String oder Language Table)</li><li><code>Speech</code>:          <b>string</b> Pfad zum Voiceover (MP3-Datei)</li><li><code>Position</code>:        (Optional) <b>string</b> Skriptname der Position</li><li><code>Duration</code>:        (Optional) <b>integer</b> Zeit bis zum automatischen Überspringen und Kameraanimation</li><li><code>DialogCamera</code>:    (Optional) <b>boolean</b> Verwendung der Nahaufnahmekamera</li><li><code>DisableSkipping</code>: (Optional) <b>boolean</b> Erlauben/Verbieten des Überspringens von Seiten</li><li><code>Action</code>:          (Optional) <b>function</b> Funktion, die aufgerufen wird, wenn die Seite angezeigt wird</li><li><code>FarClipPlane</code>:    (Optional) <b>integer</b> Renderabstand</li><li><code>Rotation</code>:        (Optional) <b>float</b> Kamerarotation</li><li><code>Zoom</code>:            (Optional) <b>float</b> Kamerazoom</li><li><code>Angle</code>:           (Optional) <b>float</b> Kamerawinkel</li><li><code>FadeIn</code>:          (Optional) <b>float</b> Dauer des Einblendens aus Schwarz</li><li><code>FadeOut</code>:         (Optional) <b>float</b> Dauer des Ausblendens in Schwarz</li><li><code>FaderAlpha</code>:      (Optional) <b>float</b> Maskenalpha</li><li><code>BarOpacity</code>:      (Optional) <b>float</b> Deckkraft der Balken</li><li><code>BigBars</code>:         (Optional) <b>boolean</b> Verwende große Balken</li><li><code>FlyTo</code>:           (Optional) <b>table</b> Tabelle mit zweitem Satz von Kamerakonfigurationen, wobei die Kamera zufliegt</li><li><code>Performance</code>:     (Optional) <b>boolean</b> Grafiksettings für diese Seite herabsetzen</li><li><code>MC</code>:              (Optional) <b>table</b> Tabelle mit Auswahlmöglichkeiten zum Abzweigen in Dialogen</li>
+ <h3>Fields <code>_Data.FlyTo</code>:</h3><li><code>Position</code>:     <b>string</b> Skriptname der Position</li><li><code>Action</code>:       <b>function</b> Funktion, die aufgerufen wird, wenn die Seite angezeigt wird</li><li><code>FarClipPlane</code>: <b>integer</b> Renderabstand</li><li><code>Rotation</code>:     <b>float</b> Kamerarotation</li><li><code>Zoom</code>:         <b>float</b> Kamerazoom</li><li><code>Angle</code>:        <b>float</b> Kamerawinkel</li>
+ <h3>Fields <code>_Data.MC</code>:</h3><li><code>[1]</code>: <b>any</b> Angezeigter Text (String oder Language Table)</li><li><code>[2]</code>: <b>any</b> Sprungziel (String oder Funktion)</li><p> <h3>Example:</h3> Eine einfache Seite erstellen.
+ <pre><code class="language-lua"> AP {
     Title        = "Marcus",
     Text         = "Dies ist eine einfache Seite.",
     Position     = "Marcus",
     Rotation     = 30,
     DialogCamera = true,
- };</code></pre><p><li>Beispiel #2: Verwendung von mehreren Auswahlmöglichkeiten</li> <pre><code class="language-lua"> AP {
+ };</code></pre><p> <h3>Example:</h3> Eine Multiple Choice Seite erstellen.
+ <pre><code class="language-lua"> AP {
     Title        = "Marcus",
     Text         = "Das ist keine so einfache Seite.",
     Position     = "Marcus",
     Rotation     = 30,
     DialogCamera = true,
     MC = {
-        {"Option 1", "ZielSeite"},
-        {"Option 2", Option2Geklickt},
+        {"Option 1", "Option1"},
+        {"Option 2", "Option2"},
     },
- };</code></pre><p><li>Beispiel #3: Einmalige Verwendungsoption</li> <pre><code class="language-lua"> MC = {
-     ...
-     {"Option 3", "AndereSeite", Remove = true},
- }</code></pre><p><li>Beispiel #4: Option mit Bedingung</li> <pre><code class="language-lua"> MC = {
-     ...
-     {"Option 3", "AndereSeite", Disable = OptionIstDeaktiviert},
- }</code></pre><p><li>Beispiel #5: Briefing abbrechen</li> <pre><code class="language-lua"> AP()</code></pre><p><li>Beispiel #6: Springen zu anderer Seite</li> <pre><code class="language-lua"> AP("EinigeSeitenName")</code></pre><p><li>Beispiel #7: Ausgewählte Option abrufen</li> <pre><code class="language-lua"> Briefing.Finished = function(_Data)
-     MeineAusgewählteOption = _Data:GetPage("Auswahl"):GetSelected();
- end</code></pre>
+ };
+
+ -- Die Verzweigungen in einem Briefing müssen mit einer leeren Seite
+ -- getrennt werden, damit das Briefing weiß, dass es zier zuende ist.
+ ASP("Option1", "Erste Option", "Dies ist die erste Option.", false, "Marcus");
+ AP();
+ ASP("Option2", "Zweite Option", "Dies ist die zweite Option.", false, "Marcus");</code></pre><p> <h3>Example:</h3> Das Sprungziel einer Option kann durch eine Funktion bestimmt werden. Die
+ Funktion muss den Namen der Zielseite zurückgeben.
+ <pre><code class="language-lua"> AP {
+    Title        = "Marcus",
+    Text         = "Das ist keine so einfache Seite.",
+    Position     = "Marcus",
+    Rotation     = 30,
+    DialogCamera = true,
+    MC = {
+        {"Option 1", "Option1"},
+        {"Option 2", ForkingFunction},
+    },
+ };</code></pre>
 
 
     <h3>Parameters:</h3>
@@ -506,6 +426,9 @@
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol><b>table</b> Page Erzeugte Seite
+    </ol>
 
 
 
@@ -513,32 +436,48 @@
 </dd>
     <dt>
     <a name = "ASP"></a>
-    <strong>ASP (...)</strong>
+    <strong>ASP (_Name, _Title, _Text, _DialogCamera, _Position, _Action)</strong>
     </dt>
     <dd>
     Erstellt eine Seite auf vereinfachte Weise.
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
 <p> Die Funktion kann einen automatischen Seitennamen basierend auf dem
  Seitenindex erstellen. Ein Name kann ein optionales Parameter am
  Anfang sein. Die Seite wird nicht weiter springen, bis der Skip-Button
  geklicht wird.
-<p> Die Funktion erwartet die folgenden Parameter:
-
-<li><code>Name</code>            - (Optional) Name der Seite</li><li><code>Title</code>           - Angezeigter Seitentitel</li><li><code>Text</code>            - Angezeigter Seitentext</li><li><code>DialogCamera</code>    - Verwendung der Nahaufnahmekamera</li><li><code>Position</code>        - (Optional) Skriptname der fokussierten Entität</li><li><code>Action</code>          - (Optional) Aktion, wenn die Seite angezeigt wird</li><p> <h3>Example:</h3><p> <pre><code class="language-lua"> -- Totale Ansicht
+<p> <h3>Example:</h3><p> <pre><code class="language-lua"> -- Totale Ansicht
  ASP("Titel", "Einige wichtige Texte.", false, "HQ");
  -- Seitennamen
  ASP("Seite1", "Titel", "Einige wichtige Texte.", false, "HQ");
  -- Nahaufnahme
  ASP("Titel", "Einige wichtige Texte.", true, "Marcus");
  -- Aktion aufrufen
- ASP("Titel", "Einige wichtige Texte.", true, "Marcus", MyFunction);</code></pre>
+ ASP("Titel", "Einige wichtige Texte.", true, "Marcus", MyFunction);
+ -- Seite ohne Positionsangabe
+ ASP("Seite1", "Titel", "Einige wichtige Texte.");</code></pre>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">...</span> <b>any</b> Liste der Seitendaten
+        <li><span class="parameter">_Name</span> (optional) <b>string</b> Name der Seite
+        </li>
+        <li><span class="parameter">_Title</span> <b>string</b> Angezeigter Seitentitel
+        </li>
+        <li><span class="parameter">_Text</span> <b>string</b> Angezeigter Seitentext
+        </li>
+        <li><span class="parameter">_DialogCamera</span> <b>boolean</b> Verwendung der Nahaufnahmekamera
+        </li>
+        <li><span class="parameter">_Position</span> (optional) <b>string</b> Skriptname der fokussierten Entität
+        </li>
+        <li><span class="parameter">_Action</span> (optional) <b>function</b> Aktion bei Anzeige
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol><b>table</b> Page Erzeugte Seite
+    </ol>
 
 
 
@@ -551,7 +490,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+<i style="float:right;">Last updated 2025-06-07 22:28:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

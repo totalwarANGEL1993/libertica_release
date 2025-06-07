@@ -44,6 +44,7 @@
 
 <h2>Modules</h2>
 <ul class="nowrap">
+  <li><a href="../modules/comfort.addware.html">comfort.addware</a></li>
   <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
   <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
   <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
@@ -80,6 +81,7 @@
   <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
   <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
   <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isunofficialpatch.html">comfort.isunofficialpatch</a></li>
   <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
   <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
   <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
@@ -100,22 +102,14 @@
   <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
   <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
   <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
-  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
   <li><a href="../modules/core.core.html">core.core</a></li>
-  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
-  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
-  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
-  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
-  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
-  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
-  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
-  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
-  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
-  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
-  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/core.core_api.html">core.core_api</a></li>
+  <li><a href="../modules/core.core_behavior.html">core.core_behavior</a></li>
+  <li><a href="../modules/core.core_lua.html">core.core_lua</a></li>
   <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
   <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
   <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.militiasystem_api.html">module.city.militiasystem_api</a></li>
   <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
   <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
   <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
@@ -123,6 +117,7 @@
   <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
   <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
   <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.permadeath_api.html">module.faker.permadeath_api</a></li>
   <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
   <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
   <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
@@ -130,8 +125,10 @@
   <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
   <li><strong>module.information.dialogsystem_api</strong></li>
   <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.information_api.html">module.information.information_api</a></li>
   <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
   <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.information.typewriter_api.html">module.information.typewriter_api</a></li>
   <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
   <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
   <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
@@ -168,12 +165,8 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#StartDialog">StartDialog (_Dialog, _Name, _PlayerID)</a></td>
-	<td class="summary">Startet einen Dialog.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#RequestDialogAlternateGraphics">RequestDialogAlternateGraphics ()</a></td>
-	<td class="summary">Fragt den Spieler um Erlaubnis, Grafikeinstellungen zu ändern.</td>
+	<td class="name" nowrap><a href="#NewDialog">NewDialog (_Name, _PlayerID)</a></td>
+	<td class="summary">Überprüft, ob ein Dialog aktiv ist.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#IsDialogActive">IsDialogActive (_PlayerID)</a></td>
@@ -184,11 +177,15 @@
 	<td class="summary">Bereitet den Dialog vor und gibt die Seitenfunktionen zurück.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#StartDialog">StartDialog (_Dialog, _Name, _PlayerID)</a></td>
+	<td class="summary">Startet einen Dialog.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#AP">AP (_Data)</a></td>
 	<td class="summary">Erstellt eine Seite.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#ASP">ASP (...)</a></td>
+	<td class="name" nowrap><a href="#ASP">ASP (_Name, _Sender, _Target, _Title, _Text, _DialogCamera, _Action)</a></td>
 	<td class="summary">Erstellt eine Seite auf vereinfachte Weise.</td>
 	</tr>
 </table>
@@ -201,53 +198,29 @@
 
     <dl class="function">
     <dt>
-    <a name = "StartDialog"></a>
-    <strong>StartDialog (_Dialog, _Name, _PlayerID)</strong>
+    <a name = "NewDialog"></a>
+    <strong>NewDialog (_Name, _PlayerID)</strong>
     </dt>
     <dd>
-    Startet einen Dialog.
-<p> Mögliche Felder für die Dialogtabelle:
-<li><code>Starting</code>                - Funktion, die aufgerufen wird, wenn der Dialog gestartet wird</li><li><code>Finished</code>                - Funktion, die aufgerufen wird, wenn der Dialog beendet ist</li><li><code>RestoreCamera</code>           - Kameraposition wird am Ende des Dialogs gespeichert und wiederhergestellt</li><li><code>RestoreGameSpeed</code>        - Spielgeschwindigkeit wird am Ende des Dialogs gespeichert und wiederhergestellt</li><li><code>EnableGlobalImmortality</code> - Während der Dialoge sind alle Einheiten unverwundbar</li><li><code>EnableSky</code>               - Anzeige des Himmels während des Dialogs</li><li><code>EnableFoW</code>               - Anzeige des Nebels des Krieges während des Dialogs</li><li><code>EnableBorderPins</code>        - Anzeige der Grenznadeln während des Dialogs</li><li><code>HideNotes</code>               - Nachrichten nicht anzeigen</li><p> <h3>Example</h3><p> <pre><code class="language-lua"> function Dialog1(_Name, _PlayerID)
-     local Dialog = {
-         DisableFow = true,
-         DisableBoderPins = true,
-     };
-     local AP, ASP = API.AddDialogPages(Dialog);
-<p>     -- Seiten ...
-<p>     Dialog.Starting = function(_Data)
-     end
-     Dialog.Finished = function(_Data)
-     end
-     API.StartDialog(Dialog, _Name, _PlayerID);
- end</code></pre>
+    Überprüft, ob ein Dialog aktiv ist.
+
+ <h3>Functions <code>BriefingBuilder</code>:</h3><li><code>SetName(_Name)</code>:              Setzt den Namen des Briefings.</li><li><code>SetPlayer(_Player)</code>:          Setzt den empfangenden Spieler des Briefings.</li><li><code>UseRestoreCamera(_Flag)</code>:     Setzt die Kamera am Ende des Briefing zum Ausgang zurück.</li><li><code>UseRestoreGameSpeed(_Flag)</code>:  Setzt die Spielgeschwindigkeit am Ende des Briefing zurück.</li><li><code>UseGlobalImmortality(_Flag)</code>: Während des Briefings sind alle Entities unverwundbar.</li><li><code>SetHideNotes(_Flag)</code>:         Versteckt das Notes Window wärhend des Briefing.</li><li><code>SetEnableSky(_Flag)</code>:         Zeigt den Himmel während des Briefings an.</li><li><code>SetEnableFoW(_Flag)</code>:         Zeigt den Nebel des Krieges während des Briefings an.</li><li><code>SetEnableBorderPins(_Flag)</code>:  Zeigt die Grenzsteine während des Briefing an.</li><li><code>SetOnBegin(_Function)</code>:       Funktion, die beim Start des Briefing ausgeführt wird.</li><li><code>SetOnFinish(_Function)</code>:      Funktion, die beim Ende des Briefing ausgeführt wird.</li><li><code>BeginPage()</code>:                 Eröffnet den <code>PageBuilder</code>.</li><li><code>Redirect(_Target)</code>:           Springt zur Seite mit dem angegebenen Namen. Keine Angabe beendet das Briefing an dieser Stelle.</li><li><code>Start()</code>:                     Startet das Briefing.</li>
+ <h3>Functions <code>PageBuilder</code>:</h3> Ein Briefing kann unbegrenzt viele Pages haben.
+<li><code>SetName(_Name)</code>:            Setzt den Namen der Page.</li><li><code>SetActor(_Actor)</code>:          Setzt den Actor der Page.</li><li><code>SetTitle(_Title)</code>:          Setzt den anzuzeigenden Titel der Page.</li><li><code>SetText(_Text)</code>:            Setzt den anzuzeigenden Text der Page.</li><li><code>SetSpeech(_Speech)</code>:        Setzt den Pfad zur Voice Line.</li><li><code>SetDuration(_Duration)</code>:    Setzt die Anzeigedauer der Page.</li><li><code>UseCloseUp(_Flag)</code>:         Schaltet in die Nahsicht oder die Fernsicht.</li><li><code>SetPosition(_Position)</code>:    Setzt die Position der Kamera.</li><li><code>SetAngle(_Angle)</code>:          Setzt den Höhenwinkel der Kamera.</li><li><code>SetRotation(_Rotation)</code>:    Setzt den Rotationswinkel der Kamera.</li><li><code>SetZoom(_Zoom)</code>:            Setzt den Zoom der Kamera.</li><li><code>SetFadeIn(_Time)</code>:          Blendet von Schwarz ein.</li><li><code>SetFadeOut(_Time)</code>:         Blendet zu Schwarz aus.</li><li><code>SetFaderAlpha(_Opacity)</code>:   Setzt den Alphawert der Fadermaske.</li><li><code>SetAction(_Action)</code>:        Funktion, die bei jedem Anzeigen der Seite ausgeführt wird.</li><li><code>UseBigBars(_Flag)</code>:         Verwendet die breiten Briefing Bars auf dieser Seite.</li><li><code>UsePerformanceMode(_Flag)</code>: Deaktiviert verschiedene Grafikeffekte um Performance zu verbessern.</li><li><code>UseSkipping(_Flag)</code>:        Die Seite kann übersprungen werden.</li><li><code>BeginChoice()</code>:             Eröffnet den <code>ChoiceBuilder</code>.</li><li><code>EndPage()</code>:                 Beendet den <code>PageBuilder</code> und kehrt zum <code>BriefingBuilder</code> zurück.</li>
+ <h3>Functions <code>ChoiceBuilder</code>:</h3><li><code>Option(_ID?, _Text, _Target, _Condition?)</code>: Fügt eine neue Option hinzu. (Mit ? gekennzeichnete Parameter können weggelassen werden)</li><li><code>EndChoice()</code>:                               Beendet den <code>ChoiceBuilder</code> und kehrt zum <code>PageBuilder</code> zurück.</li>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">_Dialog</span> <b>table</b>     Dialogtabelle
-        </li>
-        <li><span class="parameter">_Name</span> <b>string</b>      Name des Dialogs
+        <li><span class="parameter">_Name</span> <b>string</b> Name des NewDialog
         </li>
         <li><span class="parameter">_PlayerID</span> <b>integer</b> Spieler-ID des Empfängers
         </li>
     </ul>
 
-
-
-
-
-</dd>
-    <dt>
-    <a name = "RequestDialogAlternateGraphics"></a>
-    <strong>RequestDialogAlternateGraphics ()</strong>
-    </dt>
-    <dd>
-    Fragt den Spieler um Erlaubnis, Grafikeinstellungen zu ändern.
-<p> Ist das BriefingSystem geladen, wird dessen Funktionalität genutzt.
-<p> Diese Funktionalität ist im Multiplayer deaktiviert.
-
-
-
+    <h3>Returns:</h3>
+    <ol><b>table</b> BriefingBuilder Builder des NewDialog
+    </ol>
 
 
 
@@ -281,6 +254,9 @@
     </dt>
     <dd>
     Bereitet den Dialog vor und gibt die Seitenfunktionen zurück.
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
 <p> Muss aufgerufen werden, bevor Seiten hinzugefügt werden.
 
 
@@ -301,69 +277,36 @@
 
 </dd>
     <dt>
-    <a name = "AP"></a>
-    <strong>AP (_Data)</strong>
+    <a name = "StartDialog"></a>
+    <strong>StartDialog (_Dialog, _Name, _PlayerID)</strong>
     </dt>
     <dd>
-    Erstellt eine Seite.
-<p> Mögliche Felder für die Seite:
-<p><li><code>Actor</code>           - (optional) Spieler-ID des Sprechers</li><li><code>Title</code>           - (optional) Name des Akteurs (nur mit Akteur)</li><li><code>Text</code>            - (optional) Angezeigter Seitentext</li><li><code>Speech</code>          - Pfad zum Voiceover (MP3-Datei)</li><li><code>Position</code>        - Position der Kamera (nicht mit Ziel)</li><li><code>Target</code>          - Einheit, der die Kamera folgt (nicht mit Position)</li><li><code>Distance</code>        - (optional) Entfernung der Kamera</li><li><code>Action</code>          - (optional) Funktion, die aufgerufen wird, wenn die Seite angezeigt wird</li><li><code>FadeIn</code>          - (optional) Dauer des Einblendens aus Schwarz</li><li><code>FadeOut</code>         - (optional) Dauer des Ausblendens zu Schwarz</li><li><code>FaderAlpha</code>      - (optional) Maskenalpha</li><li><code>MC</code>              - (optional) Tabelle mit Auswahlmöglichkeiten zum Verzweigen in Dialogen</li><p><li>→ Beispiel #1*</li><p> <h3>Flusssteuerung</h3> In einem Dialog kann der Spieler gezwungen werden, eine Auswahl zu treffen, die
- unterschiedliche Ergebnisse haben wird. Das nennt man Mehrfachauswahl. Optionen müssen bereitgestellt werden
- in einer Tabelle. Die Zielseite kann mit ihrem Namen definiert werden oder eine Funktion kann bereitgestellt werden
- für mehr Kontrolle über den Fluss. Solche Funktionen müssen einen
- Seitennamen zurückgeben.
-<p><li>→ Beispiel #2*</li><p> Darüber hinaus kann jede Funktion markiert werden, um entfernt zu werden, wenn sie verwendet wird
- und nicht erneut angezeigt werden, wenn die Seite erneut betreten wird.
-<p><li>→ Beispiel #3*</li><p> Außerdem können Seiten ausgeblendet werden, indem eine Funktion bereitgestellt wird, um Bedingungen zu überprüfen.
-<p><li>→ Beispiel #4*</li><p> Wenn ein Dialog verzweigt ist, muss er manuell beendet werden, nachdem ein Zweig abgeschlossen ist
- oder es zeigt einfach die nächste Seite an. Um einen Dialog zu beenden, muss eine leere Seite
- hinzugefügt werden.
-<p><li>→ Beispiel #5*</li><p> Alternativ kann der Dialog an einer anderen Seite fortgesetzt werden. Dies ermöglicht es, zu erstellen
- sich wiederholende Strukturen innerhalb eines Dialogs.
-<p><li>→ Beispiel #6*</li><p> Um ausgewählte Antworten zu einem späteren Zeitpunkt zu erhalten, können die Auswahlmöglichkeiten in einer
- globalen Variable entweder in einem Optionsrückruf oder in der fertigen Funktion gespeichert werden. Die
- zurückgegebene Zahl ist die ID der Antwort.
-<p><li>→ Beispiel #7*</li><p> <h3>Example:</h3><p><li>Beispiel #1: Eine einfache Seite</li> <pre><code class="language-lua"> AP {
-     Title        = "Hero",
-     Text         = "Diese Seite hat einen Schauspieler und eine Auswahl.",
-     Actor        = 1,
-     Duration     = 2,
-     FadeIn       = 2,
-     Position     = "npc1",
-     DialogCamera = true,
- };</code></pre><p>
-<li>Beispiel #2: Verwendung von Mehrfachauswahlen</li> <pre><code class="language-lua"> AP {
-     Title        = "Hero",
-     Text         = "Diese Seite hat einen Schauspieler und eine Auswahl.",
-     Actor        = 1,
-     Duration     = 2,
-     FadeIn       = 2,
-     Position     = "npc1",
-     DialogCamera = true,
-     MC = {
-         {"Option 1", "TargetPage"},
-         {"Option 2", Option2Clicked},
-     },
- };</code></pre><p>
-<li>Beispiel #3: Einmalige Verwendungsoption</li> <pre><code class="language-lua"> MC = {
-     ...,
-     {"Option 3", "AnotherPage", Remove = true},
- }</code></pre><p>
-<li>Beispiel #4: Option mit Bedingung</li> <pre><code class="language-lua"> MC = {
-     ...,
-     {"Option 3", "AnotherPage", Disable = OptionIsDisabled},
- }</code></pre><p>
-<li>Beispiel #5: Dialog abbrechen</li> <pre><code class="language-lua"> AP()</code></pre><p>
-<li>Beispiel #6: Zu anderer Seite springen</li> <pre><code class="language-lua"> AP("SomePageName")</code></pre><p>
-<li>Beispiel #7: Ausgewählte Option abrufen</li> <pre><code class="language-lua"> Dialog.Finished = function(_Data)
-     MyChoosenOption = _Data:GetPage("Choice"):GetSelected();
+    Startet einen Dialog.
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
+<p> <h3>Fields <code>_Dialog</code>:</h3><li><code>Starting</code>:                (optional) <b>function</b> Funktion, die beim Starten der Einleitung aufgerufen wird</li><li><code>Finished</code>:                (optional) <b>function</b> Funktion, die beim Beenden der Einleitung aufgerufen wird</li><li><code>RestoreCamera</code>:           (optional) <b>boolean</b> Kameraposition wird am Ende der Einleitung gespeichert und wiederhergestellt</li><li><code>RestoreGameSpeed</code>:        (optional) <b>boolean</b> Spielgeschwindigkeit wird am Ende der Einleitung gespeichert und wiederhergestellt</li><li><code>EnableGlobalImmortality</code>: (optional) <b>boolean</b> Während Einleitungen sind alle Entitäten unverwundbar</li><li><code>EnableSky</code>:               (optional) <b>boolean</b> Zeigt den Himmel während der Einleitung an</li><li><code>EnableFoW</code>:               (optional) <b>boolean</b> Zeigt den Nebel des Krieges während der Einleitung an</li><li><code>EnableBorderPins</code>:        (optional) <b>boolean</b> Zeigt die Randnadeln während der Einleitung an</li><li><code>HideNotes</code>:               (optional) <b>boolean</b> Nachrichten nicht anzeigen</li><p> <h3>Example</h3><p> <pre><code class="language-lua"> function Dialog1(_Name, _PlayerID)
+     local Dialog = {
+         DisableFow = true,
+         DisableBoderPins = true,
+     };
+     local AP, ASP = API.AddDialogPages(Dialog);
+     -- Seiten
+     Dialog.Starting = function(_Data)
+     end
+     Dialog.Finished = function(_Data)
+     end
+     API.StartDialog(Dialog, _Name, _PlayerID);
  end</code></pre>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">_Data</span>
-
+        <li><span class="parameter">_Dialog</span> <b>table</b>     Dialogtabelle
+        </li>
+        <li><span class="parameter">_Name</span> <b>string</b>      Name des Dialogs
+        </li>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> Spieler-ID des Empfängers
         </li>
     </ul>
 
@@ -373,16 +316,85 @@
 
 </dd>
     <dt>
+    <a name = "AP"></a>
+    <strong>AP (_Data)</strong>
+    </dt>
+    <dd>
+    Erstellt eine Seite.
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
+<p> <h3>Fields <code>_Data</code>:</h3><li><code>Actor</code>:      (optional) <b>integer</b> Spieler-ID des Sprechers</li><li><code>Title</code>:      (optional) <b>any</b> Name des Akteurs (nur mit Akteur)</li><li><code>Text</code>:       (optional) <b>any</b> Angezeigter Seitentext</li><li><code>Speech</code>:     <b>string</b> Pfad zum Voiceover (MP3-Datei)</li><li><code>Position</code>:   <b>string</b> Position der Kamera (nicht mit Ziel)</li><li><code>Target</code>:     <b>string</b> Einheit, der die Kamera folgt (nicht mit Position)</li><li><code>Distance</code>:   (optional) <b>float</b> Entfernung der Kamera</li><li><code>Action</code>:     (optional) <b>function</b> Funktion, die aufgerufen wird, wenn die Seite angezeigt wird</li><li><code>FadeIn</code>:     (optional) <b>float</b> Dauer des Einblendens aus Schwarz</li><li><code>FadeOut</code>:    (optional) <b>float</b> Dauer des Ausblendens zu Schwarz</li><li><code>FaderAlpha</code>: (optional) <b>float</b> Maskenalpha</li><li><code>MC</code>:         (optional) <b>table</b> Tabelle mit Auswahlmöglichkeiten zum Verzweigen in Dialogen</li>
+ <h3>Fields <code>_Data.MC</code>:</h3><li><code>[1]</code>: <b>any</b> Angezeigter Text (String oder Language Table)</li><li><code>[2]</code>: <b>any</b> Sprungziel (String oder Funktion)</li><p> <h3>Example:</h3> Eine einfache Seite erstellen.
+ <pre><code class="language-lua"> AP {
+    Title        = "Marcus",
+    Text         = "Dies ist eine einfache Seite.",
+    Actor        = 1,
+    Duration     = 2,
+    FadeIn       = 2,
+    Position     = "npc1",
+    DialogCamera = true,
+ };</code></pre><p> <h3>Example:</h3> Eine Multiple Choice Seite erstellen.
+ <pre><code class="language-lua"> AP {
+    Title        = "Marcus",
+    Text         = "Das ist keine so einfache Seite.",
+    Actor        = 1,
+    Duration     = 2,
+    FadeIn       = 2,
+    Position     = "npc1",
+    DialogCamera = true,
+    MC = {
+        {"Option 1", "Option1"},
+        {"Option 2", "Option2"},
+    },
+ };
+
+ -- Die Verzweigungen in einem Briefing müssen mit einer leeren Seite
+ -- getrennt werden, damit das Briefing weiß, dass es zier zuende ist.
+ ASP("Option1", "Erste Option", "Dies ist die erste Option.", false, "Marcus");
+ AP();
+ ASP("Option2", "Zweite Option", "Dies ist die zweite Option.", false, "Marcus");</code></pre><p> <h3>Example:</h3> Das Sprungziel einer Option kann durch eine Funktion bestimmt werden.
+ <pre><code class="language-lua"> AP {
+    Title        = "Marcus",
+    Text         = "Das ist keine so einfache Seite.",
+    Actor        = 1,
+    Duration     = 2,
+    FadeIn       = 2,
+    Position     = "npc1",
+    DialogCamera = true,
+    MC = {
+        {"Option 1", "Option1"},
+        {"Option 2", ForkingFunction},
+    },
+ };</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Data</span> <b>table</b> Seitendaten
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>table</b> Erzeugte Seite
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "ASP"></a>
-    <strong>ASP (...)</strong>
+    <strong>ASP (_Name, _Sender, _Target, _Title, _Text, _DialogCamera, _Action)</strong>
     </dt>
     <dd>
     Erstellt eine Seite auf vereinfachte Weise.
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
 <p> Die Funktion kann einen automatischen Seitennamen basierend auf dem Seitenindex erstellen. Ein
  Name kann ein optionales Parameter am Anfang sein.
-<p> <h3>Einstellungen</h3> Die Funktion erwartet die folgenden Parameter:
-
-<li><code>Name</code>           - (Optional) Name der Seite</li><li><code>Sender</code>         - Spieler-ID des Akteurs</li><li><code>Target</code>         - Einheit, auf die die Kamera schaut</li><li><code>Title</code>          - Angezeigter Seitentitel</li><li><code>Text</code>           - Angezeigter Seitentext</li><li><code>DialogCamera</code>   - Verwendung der Nahkamera</li><li><code>Action</code>         - (Optional) Aktion, wenn die Seite angezeigt wird</li><p> <h3>Example:</h3><p> <pre><code class="language-lua"> -- Totalaufnahme
+<p> <h3>Example:</h3> <pre><code class="language-lua"> -- Totalaufnahme
  ASP("Titel", "Einige wichtige Texte.", false, "HQ");
  -- Seitennamen
  ASP("Seite1", "Titel", "Einige wichtige Texte.", false, "HQ");
@@ -393,13 +405,27 @@
  -- Überspringen erlauben/verbieten
  ASP("Titel", "Einige wichtige Texte.", true, "HQ", nil, true);</code></pre>
 
-
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">...</span> <b>any</b> Liste der Seiteneinstellungen
+        <li><span class="parameter">_Name</span> (optional) <b>string</b> Name der Seite
+        </li>
+        <li><span class="parameter">_Sender</span> <b>integer</b> Spieler-ID des Akteurs
+        </li>
+        <li><span class="parameter">_Target</span> <b>string</b> Einheit, auf die die Kamera schaut
+        </li>
+        <li><span class="parameter">_Title</span> <b>string</b> Angezeigter Seitentitel
+        </li>
+        <li><span class="parameter">_Text</span> <b>string</b> Angezeigter Seitentext
+        </li>
+        <li><span class="parameter">_DialogCamera</span> <b>boolean</b> Verwendung der Nahkamera
+        </li>
+        <li><span class="parameter">_Action</span> (optional) <b>boolean</b> Aktion, wenn die Seite angezeigt wird
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol><b>table</b> Page Erzeugte Seite
+    </ol>
 
 
 
@@ -412,7 +438,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+<i style="float:right;">Last updated 2025-06-07 22:28:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

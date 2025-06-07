@@ -64,42 +64,10 @@ Lib.Register("module/city/LifestockSystem");
 -- Global initalizer method
 function Lib.LifestockSystem.Global:Initialize()
     if not self.IsInstalled then
-        --- The player has clicked the buy animal button
-        --- 
-        --- #### Parameters
-        --- * `Index   `   - "Cattle" or "Sheep"
-        --- * `PlayerID`   - ID of player
-        --- * `EntityID`   - ID of pasture
         Report.BreedAnimalClicked = CreateReport("Event_BreedAnimalClicked");
-
-        --- The player has bought a cow.
-        --- 
-        --- #### Parameters
-        --- * `PlayerID`   - ID of player
-        --- * `EntityID`   - ID of created cow
-        --- * `BuildingID` - ID of pasture
         Report.CattleBought = CreateReport("Event_CattleBought");
-
-        --- The player has bought a sheep.
-        --- 
-        --- #### Parameters
-        --- * `PlayerID`   - ID of player
-        --- * `EntityID`   - ID of created sheep
-        --- * `BuildingID` - ID of pasture
         Report.SheepBought = CreateReport("Event_SheepBought");
-
-        --- A cow has starved.
-        --- 
-        --- #### Parameters
-        --- * `PlayerID`   - ID of player
-        --- * `EntityID`   - ID of created cow
         Report.CattleStarved = CreateReport("Event_CattleStarved");
-
-        --- A sheep has starved.
-        --- 
-        --- #### Parameters
-        --- * `PlayerID`   - ID of player
-        --- * `EntityID`   - ID of created cow
         Report.SheepStarved = CreateReport("Event_SheepStarved");
 
         -- Get texts

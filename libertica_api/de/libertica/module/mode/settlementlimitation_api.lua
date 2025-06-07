@@ -10,8 +10,8 @@
 --- <li>Jeder Gebäudetyp kann nur 1 mal pro Territorium gebaut werden.</li>
 --- <li>Wird der Außenposten ausgebaut, kann ein Gebäudetyp dauerhaft doppelt im Territorium platziert werden.</li>
 --- <li>Bienenstöcke, Felder und Ziergebäude zählen nicht als Gebäude.</li>
----
-Lib.SettlementLimitation = Lib.SettlementLimitation or {};
+
+
 
 --- Aktiviert/deaktiviert den Modus.
 --- @param _Flag boolean Modus ist aktiv

@@ -32,27 +32,27 @@ API.DisableReleaseSoldiers = DisableReleaseSoldiers;
 --- Eine Einheit wurde entlassen.
 ---
 --- #### Parameters:
---- * `EntityID` - ID der Einheit
+--- * `EntityID`: <b>integer</b> ID der Einheit
 Report.ExpelSettler = anyInteger;
 
 --- Ein Trebuchet wird zum Anhalten gezwungen.
 ---
 --- #### Parameters:
---- * `EntityID` - ID der Einheit
---- * `TaskList` - ID der Taskliste
+--- * `EntityID`: <b>integer</b> ID der Einheit
+--- * `TaskList`: <b>integer</b> ID der Taskliste
 Report.ForceTrebuchetTasklist = anyInteger;
 
 --- Ein Trebuchet wird aus einem Belagerungsmaschinenwagen gebaut.
 --- (Derzeit nicht verwendet)
 ---
 --- #### Parameters:
---- * `EntityID` - ID der Einheit
+--- * `EntityID`: <b>integer</b> ID der Einheit
 Report.ErectTrebuchet = anyInteger;
 
 --- Ein Trebuchet wird zu einem Belagerungsmaschinenwagen abgebaut.
 --- (Derzeit nicht verwendet)
 ---
 --- #### Parameters:
---- * `EntityID` - ID der Einheit
+--- * `EntityID`: <b>integer</b> ID der Einheit
 Report.DisambleTrebuchet = anyInteger;
 

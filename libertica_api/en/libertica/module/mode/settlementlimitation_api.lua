@@ -10,8 +10,8 @@
 --- <li>Each building type can only be built once per territory.</li>
 --- <li>When a outpost is upgraded, one building type can be placed twice on the territory.</li>
 --- <li>Beehives, beautifications and fields do not count as buildings.</li>
----
-Lib.SettlementLimitation = Lib.SettlementLimitation or {};
+
+
 
 --- Activates or deactivates the mode.
 --- @param _Flag boolean Indicates whether the mode is active

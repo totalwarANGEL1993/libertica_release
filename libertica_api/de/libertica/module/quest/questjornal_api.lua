@@ -1,8 +1,17 @@
---- Ermöglicht das Hinzufügen von Notizen zu einer Quest.
+--- Ermöglicht das Hinzufügen von Notizen zu einem Quest.
+--- 
+--- Notizen zu einem Auftrag werden in einem Textfenster angezeigt. Für
+--- Quests mit Notizen wird ein neuer Button angezeigt, mit dem das Textfenster
+--- geöffnet werden kann. Notizen können in normale (blau) und erhöhte (rot)
+--- Wichtigkeit eingeteilt werden.
+--- 
+--- Zusätzlich kannst du dem Spieler erlauben, sich selbst Notizen zu machen.
+--- Die Notizen des Spielers haben eine höhere Priorität gegenüber allen anderen
+--- Notizen und sich violet hervorgehoben.
 
 
 
---- Aktiviert oder deaktiviert das Journal oder eine bestimmte Quest.
+--- Aktiviert oder deaktiviert das Journal oder einem bestimmtem Quest.
 --- @param _Quest string Name der Quest
 --- @param _Flag boolean Aktivieren/Deaktivieren
 function ShowJournalForQuest(_Quest, _Flag)
@@ -16,7 +25,7 @@ end
 
 --- Erstellt einen neuen Journaleintrag und gibt die ID zurück.
 ---
---- Der Eintrag kann jedem Journal jeder Quest hinzugefügt werden.
+--- Der Eintrag kann jedem Journal jedem Quest hinzugefügt werden.
 --- @param _Text string Text des Eintrags
 --- @return integer ID ID des Eintrags
 function CreateJournalEntry(_Text)
@@ -47,15 +56,15 @@ end
 function RestoreJournalEntry(_ID)
 end
 
---- Fügt einen Eintrag dem Journal der Quest hinzu.
+--- Fügt einen Eintrag dem Journal des Quest hinzu.
 --- @param _ID integer ID des Eintrags
---- @param _Quest string Name der Quest
+--- @param _Quest string Name des Quest
 function AddJournalEntryToQuest(_ID, _Quest)
 end
 
---- Entfernt einen Eintrag aus dem Journal der Quest.
+--- Entfernt einen Eintrag aus dem Journal des Quest.
 --- @param _ID integer ID des Eintrags
---- @param _Quest string Name der Quest
+--- @param _Quest string Name des Quest
 function RemoveJournalEntryFromQuest(_ID, _Quest)
 end
 

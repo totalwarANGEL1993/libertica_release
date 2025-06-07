@@ -45,6 +45,7 @@
 
 <h2>Modules</h2>
 <ul class="nowrap">
+  <li><a href="../modules/comfort.addware.html">comfort.addware</a></li>
   <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
   <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
   <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
@@ -81,6 +82,7 @@
   <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
   <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
   <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isunofficialpatch.html">comfort.isunofficialpatch</a></li>
   <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
   <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
   <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
@@ -101,22 +103,14 @@
   <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
   <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
   <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
-  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
   <li><a href="../modules/core.core.html">core.core</a></li>
-  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
-  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
-  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
-  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
-  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
-  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
-  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
-  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
-  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
-  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
-  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/core.core_api.html">core.core_api</a></li>
+  <li><a href="../modules/core.core_behavior.html">core.core_behavior</a></li>
+  <li><a href="../modules/core.core_lua.html">core.core_lua</a></li>
   <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
   <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
   <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.militiasystem_api.html">module.city.militiasystem_api</a></li>
   <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
   <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
   <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
@@ -124,6 +118,7 @@
   <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
   <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
   <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.permadeath_api.html">module.faker.permadeath_api</a></li>
   <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
   <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
   <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
@@ -131,8 +126,10 @@
   <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
   <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
   <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.information_api.html">module.information.information_api</a></li>
   <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
   <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.information.typewriter_api.html">module.information.typewriter_api</a></li>
   <li><strong>module.io.io_api</strong></li>
   <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
   <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
@@ -160,7 +157,10 @@
 
 <h1>Module <code>module.io.io_api</code></h1>
 <p>Verbessert interaktive Objekte.</p>
-<p></p>
+<p>
+<p> Fast alle Entitäten können als interaktives Objekt verwendet werden, nicht
+ nur die, die dafür vorgesehen sind. Ein Objekt wird durch eine Tabelle
+ beschrieben und (fast) alle Schlüssel sind optional.</p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
@@ -259,9 +259,7 @@
     </dt>
     <dd>
     Fügt einem Objekt eine Interaktion hinzu.
-<p> Fast alle Entitäten können als interaktives Objekt verwendet werden, nicht nur die, die dafür vorgesehen sind.
- Ein Objekt wird durch eine Tabelle beschrieben und (fast) alle Schlüssel sind optional.
-<p> <h3>Felder der Tabelle</h3><li><code>ScriptName</code>             - Skriptname des Objekts</li><li><code>Texture</code>                - (Optional) Tabelle mit Koordinaten</li><li><code>Title</code>                  - (Optional) Titel des Tooltipps</li><li><code>Text</code>                   - (Optional) Text des Tooltipps</li><li><code>Distance</code>               - (Optional) Aktivierungsabstand</li><li><code>Player</code>                 - (Optional) Liste der Spieler</li><li><code>Waittime</code>               - (Optional) Aktivierungs-Wartezeit</li><li><code>Replacement</code>            - (Optional) Typ, mit dem ersetzt wird</li><li><code>Costs</code>                  - (Optional) Aktivierungskosten-Tabelle</li><li><code>Reward</code>                 - (Optional) Aktivierungsbelohnungstabelle</li><li><code>State</code>                  - (Optional) Aktivierungsverhalten</li><li><code>Condition</code>              - (Optional) Aktivierungsbedingungsfunktion</li><li><code>ConditionInfo</code>          - (Optional) Text bei Bedingungsfehler</li><li><code>Action</code>                 - (Optional) Aktivierungs-Callback-Funktion</li><li><code>RewardResourceCartType</code> - (Optional) Typ des Belohnungsressourcenkarrens</li><li><code>RewardGoldCartType</code>     - (Optional) Typ des Belohnungsgoldkarrens</li><li><code>CostResourceCartType</code>   - (Optional) Typ des Kostenressourcenkarrens</li><li><code>CostGoldCartType</code>       - (Optional) Typ des Kostengoldkarrens</li><p> <h3>Example:</h3> <pre><code class="language-lua"> -- Erstellt ein einfaches Objekt
+<p> <h3>Fields <code>_Description</code>:</h3><li><code>ScriptName</code>             - Skriptname des Objekts</li><li><code>Texture</code>                - (Optional) Tabelle mit Koordinaten</li><li><code>Title</code>                  - (Optional) Titel des Tooltipps</li><li><code>Text</code>                   - (Optional) Text des Tooltipps</li><li><code>Distance</code>               - (Optional) Aktivierungsabstand</li><li><code>Player</code>                 - (Optional) Liste der Spieler</li><li><code>Waittime</code>               - (Optional) Aktivierungs-Wartezeit</li><li><code>Replacement</code>            - (Optional) Typ, mit dem ersetzt wird</li><li><code>Costs</code>                  - (Optional) Aktivierungskosten-Tabelle</li><li><code>Reward</code>                 - (Optional) Aktivierungsbelohnungstabelle</li><li><code>State</code>                  - (Optional) Aktivierungsverhalten</li><li><code>Condition</code>              - (Optional) Aktivierungsbedingungsfunktion</li><li><code>ConditionInfo</code>          - (Optional) Text bei Bedingungsfehler</li><li><code>Action</code>                 - (Optional) Aktivierungs-Callback-Funktion</li><li><code>RewardResourceCartType</code> - (Optional) Typ des Belohnungsressourcenkarrens</li><li><code>RewardGoldCartType</code>     - (Optional) Typ des Belohnungsgoldkarrens</li><li><code>CostResourceCartType</code>   - (Optional) Typ des Kostenressourcenkarrens</li><li><code>CostGoldCartType</code>       - (Optional) Typ des Kostengoldkarrens</li><p> <h3>Example:</h3> <pre><code class="language-lua"> -- Erstellt ein einfaches Objekt
  SetupObject {
      Name     = "hut",
      Distance = 1500,
@@ -577,7 +575,7 @@
     <dd>
     Der Spieler hat auf die Interaktions-Schaltfläche geklickt.
 
- <h3>Parameters:</h3><li><code>ScriptName</code> - Skriptname der Entität</li><li><code>KnightID</code>   - ID des aktivierenden Helden</li><li><code>PlayerID</code>   - ID des aktivierenden Spielers</li>
+ <h3>Parameters:</h3><li><code>ScriptName</code>: <b>string</b> Skriptname der Entität</li><li><code>KnightID</code>:   <b>integer</b> ID des aktivierenden Helden</li><li><code>PlayerID</code>:   <b>integer</b> ID des aktivierenden Spielers</li>
 
 
 
@@ -593,7 +591,7 @@
     Die Interaktion des Objekts war erfolgreich.
  Wenn das Objekt Kosten hat, wird die Aktivierung abgeschlossen, wenn die Kosten ankommen.
 
- <h3>Parameters:</h3><li><code>ScriptName</code> - Skriptname der Entität</li><li><code>KnightID</code>   - ID des aktivierenden Helden</li><li><code>PlayerID</code>   - ID des aktivierenden Spielers</li>
+ <h3>Parameters:</h3><li><code>ScriptName</code>: <b>string</b> Skriptname der Entität</li><li><code>KnightID</code>:   <b>integer</b> ID des aktivierenden Helden</li><li><code>PlayerID</code>:   <b>integer</b> ID des aktivierenden Spielers</li>
 
 
 
@@ -607,7 +605,7 @@
     </dt>
     <dd>
     Die Interaktion wird vom Objekt gelöscht.
-<p> <h3>Parameters:</h3><li><code>ScriptName</code> - Skriptname der Entität</li>
+<p> <h3>Parameters:</h3><li><code>ScriptName</code>: <b>string</b> Skriptname der Entität</li>
 
 
 
@@ -621,7 +619,7 @@
     </dt>
     <dd>
     Der Zustand eines Objekts wurde zurückgesetzt.
-<p> <h3>Parameters:</h3><li><code>ScriptName</code> - Skriptname der Entität</li>
+<p> <h3>Parameters:</h3><li><code>ScriptName</code>: <b>string</b> Skriptname der Entität</li>
 
 
 
@@ -636,7 +634,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+<i style="float:right;">Last updated 2025-06-07 22:28:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

@@ -1,4 +1,12 @@
---- Allows to add notes to a quest.
+--- Allows adding notes to a quest.
+---
+--- Notes for a quest are displayed in a text window. For quests with notes,
+--- a new button is shown that can be used to open the text window.
+--- Notes can be categorized into normal (blue) and high (red) importance.
+---
+--- Additionally, you can allow the player to create their own notes.
+--- Player-created notes take priority over all other notes and are
+--- highlighted in violet.
 
 
 

@@ -45,6 +45,7 @@
 
 <h2>Modules</h2>
 <ul class="nowrap">
+  <li><a href="../modules/comfort.addware.html">comfort.addware</a></li>
   <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
   <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
   <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
@@ -81,6 +82,7 @@
   <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
   <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
   <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isunofficialpatch.html">comfort.isunofficialpatch</a></li>
   <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
   <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
   <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
@@ -101,22 +103,14 @@
   <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
   <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
   <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
-  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
   <li><a href="../modules/core.core.html">core.core</a></li>
-  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
-  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
-  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
-  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
-  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
-  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
-  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
-  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
-  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
-  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
-  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/core.core_api.html">core.core_api</a></li>
+  <li><a href="../modules/core.core_behavior.html">core.core_behavior</a></li>
+  <li><a href="../modules/core.core_lua.html">core.core_lua</a></li>
   <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
   <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
   <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.militiasystem_api.html">module.city.militiasystem_api</a></li>
   <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
   <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
   <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
@@ -124,6 +118,7 @@
   <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
   <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
   <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.permadeath_api.html">module.faker.permadeath_api</a></li>
   <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
   <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
   <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
@@ -131,8 +126,10 @@
   <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
   <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
   <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.information_api.html">module.information.information_api</a></li>
   <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
   <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.information.typewriter_api.html">module.information.typewriter_api</a></li>
   <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
   <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
   <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
@@ -159,8 +156,14 @@
 <div id="content">
 
 <h1>Module <code>module.trade.trade_api</code></h1>
-<p>Es kann in den Ablauf von Kauf und Verkauf eingegriffen werden.</p>
-<p></p>
+<p>Dieses Modul erlaubt Kauf und Verkauf zu manipulieren.</p>
+<p>
+
+ Der Aufbau von Angeboten kann untersucht und manipuliert werden. Du kannst
+ Einzelne Angebote löschen oder die Menge bearbeiten.
+
+ Die Berechnung von Kauf- und Verkaufspreise kann angepasst werden. So kannst
+ du auch Elias Fähigkeit verstärken oder abschwächen.</p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
@@ -369,8 +372,7 @@
     <dd>
     Ändert die Berechnung des Helden-Kaufpreisfaktors für den Spieler.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_BasePrice</code> - Grundpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_BasePrice</code>: <b>integer</b> Grundpreis</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -393,8 +395,7 @@
     <dd>
     Ändert die Berechnung des Helden-Kaufpreisfaktors.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_BasePrice</code> - Grundpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_BasePrice</code>: <b>integer</b> Grundpreis</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -415,8 +416,7 @@
     <dd>
     Ändert die Berechnung des Kauf-Grundpreises für den Spieler.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -439,8 +439,7 @@
     <dd>
     Ändert die Berechnung des Kauf-Grundpreises.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -461,8 +460,7 @@
     <dd>
     Ändert die Berechnung der Inflation für den Spieler.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Bereits gekaufter Betrag</li><li><code>_Price</code> - Kaufpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_Amount</code>: <b>integer</b> Bereits gekaufter Betrag</li><li><code>_Price</code>: <b>integer</b> Kaufpreis</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -485,8 +483,7 @@
     <dd>
     Ändert die Berechnung der Inflation.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Bereits gekaufter Betrag</li><li><code>_Price</code> - Kaufpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_Amount</code>: <b>integer</b> Bereits gekaufter Betrag</li><li><code>_Price</code>: <b>integer</b> Kaufpreis</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -507,8 +504,7 @@
     <dd>
     Setzt spezielle Kaufbedingungen für den Spieler.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Bereits gekaufter Betrag</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_Amount</code>: <b>integer</b> Bereits gekaufter Betrag</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -531,8 +527,7 @@
     <dd>
     Setzt spezielle Kaufbedingungen.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Bereits gekaufter Betrag</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_Amount</code>: <b>integer</b> Bereits gekaufter Betrag</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -553,8 +548,7 @@
     <dd>
     Ändert die Berechnung des Helden-Verkaufspreisfaktors für den Spieler.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_BasePrice</code> - Grundpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_BasePrice</code>: <b>integer</b> Grundpreis</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -577,8 +571,7 @@
     <dd>
     Ändert die Berechnung des Helden-Verkaufspreisfaktors.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_BasePrice</code> - Grundpreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_BasePrice</code>: <b>integer</b> Grundpreis</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -599,8 +592,7 @@
     <dd>
     Ändert die Berechnung des Verkaufs-Grundpreises für den Spieler.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -623,8 +615,7 @@
     <dd>
     Ändert die Berechnung des Verkaufs-Grundpreises.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -645,8 +636,7 @@
     <dd>
     Ändert die Berechnung der Deflation für den Spieler.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_SaleCount</code> - Bereits verkaufter Betrag</li><li><code>_Price</code> - Verkaufspreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_SaleCount</code>: <b>integer</b> Bereits verkaufter Betrag</li><li><code>_Price</code>: <b>integer</b> Verkaufspreis</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -669,8 +659,7 @@
     <dd>
     Ändert die Berechnung der Deflation.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_SaleCount</code> - Bereits verkaufter Betrag</li><li><code>_Price</code> - Verkaufspreis</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_SaleCount</code>: <b>integer</b> Bereits verkaufter Betrag</li><li><code>_Price</code>: <b>integer</b> Verkaufspreis</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -691,8 +680,7 @@
     <dd>
     Setzt spezielle Verkaufsbedingungen für den Spieler.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Verkaufter Betrag</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_Amount</code>: <b>integer</b> Verkaufter Betrag</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -715,8 +703,7 @@
     <dd>
     Setzt spezielle Verkaufsbedingungen.
 
- Parameter der Funktion:
-<li><code>_Type</code> - Art des Händlers</li><li><code>_Good</code> - Art des Angebots</li><li><code>_Amount</code> - Verkaufter Betrag</li><li><code>_PlayerID1</code> - ID des kaufenden Spielers</li><li><code>_PlayerID2</code> - ID des verkaufenden Spielers</li>
+ <h3>Parameters <code>_Function</code>:</h3><li><code>_Type</code>: <b>integer</b> Art des Händlers</li><li><code>_Good</code>: <b>integer</b> Art des Angebots</li><li><code>_Amount</code>: <b>integer</b> Verkaufter Betrag</li><li><code>_PlayerID1</code>: <b>integer</b> ID des kaufenden Spielers</li><li><code>_PlayerID2</code>: <b>integer</b> ID des verkaufenden Spielers</li>
 
 
     <h3>Parameters:</h3>
@@ -874,7 +861,7 @@
     <strong>Report.Purchased</strong>
     </dt>
     <dd>
-    Ein Spieler hat ein Angebot in einem Lagerhaus gekauft  <h3>Parameters:</h3><li><code>_OfferIndex</code> - Index des Angebot</li><li><code>_MerchantType</code> - Typ des Händlers</li><li><code>_Type</code> - Typ des Angebot</li><li><code>_Amount</code> - Gekaufte Menge</li><li><code>_Price</code> - Bezahlter Preis</li><li><code>_PlayerID</code> - ID des Spielers</li><li><code>_PartnerID</code> - ID des Partners</li>
+    Ein Spieler hat ein Angebot in einem Lagerhaus gekauft  <h3>Parameters:</h3><li><code>_OfferIndex</code>: <b>intege</b> Index des Angebot</li><li><code>_MerchantType</code>: <b>intege</b> Typ des Händlers</li><li><code>_Type</code>: <b>intege</b> Typ des Angebot</li><li><code>_Amount</code>: <b>intege</b> Gekaufte Menge</li><li><code>_Price</code>: <b>intege</b> Bezahlter Preis</li><li><code>_PlayerID</code>: <b>intege</b> ID des Spielers</li><li><code>_PartnerID</code>: <b>intege</b> ID des Partners</li>
 
 
 
@@ -888,7 +875,7 @@
     </dt>
     <dd>
     A player has sold goods to another player.
-<p> <h3>Parameters:</h3><li><code>_MerchantType</code> - Typ des Händlers</li><li><code>_GoodType</code> - Typ des Angebot</li><li><code>_GoodAmount</code> - Verkaufte Menge</li><li><code>_Price</code> - Erhaltenes Geld</li><li><code>_PlayerID</code> - ID des Spielers</li><li><code>_PartnerID</code> - ID des Partners</li>
+<p> <h3>Parameters:</h3><li><code>_MerchantType</code>: <b>intege</b> Typ des Händlers</li><li><code>_GoodType</code>: <b>intege</b> Typ des Angebot</li><li><code>_GoodAmount</code>: <b>intege</b> Verkaufte Menge</li><li><code>_Price</code>: <b>intege</b> Erhaltenes Geld</li><li><code>_PlayerID</code>: <b>intege</b> ID des Spielers</li><li><code>_PartnerID</code>: <b>intege</b> ID des Partners</li>
 
 
 
@@ -903,7 +890,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+<i style="float:right;">Last updated 2025-06-07 22:28:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

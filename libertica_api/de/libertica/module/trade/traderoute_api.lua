@@ -171,32 +171,32 @@ API.ChangeTravelingSalesmanGoods = ChangeTravelingSalesmanGoods;
 --- Ein Schiff wurde am Anfang des Weges der Handelsroute erzeugt.
 ---
 --- #### Parameters:
---- * `_PlayerID` - PlayerID des Hafens
---- * `_RouteName` - Kennung der Route
---- * `_ShipID` - ID des Schiffes
+--- * `_PlayerID`:  <b>integer</b> PlayerID des Hafens
+--- * `_RouteName`: <b>string</b> Kennung der Route
+--- * `_ShipID`:    <b>integer</b> ID des Schiffes
 Report.TradeShipSpawned = anyInteger;
 
 --- Ein Schiff ist in einem Hafen angekommen.
 ---
 --- #### Parameters:
---- * `_PlayerID` - PlayerID des Hafens
---- * `_RouteName` - Kennung der Route
---- * `_ShipID` - ID des Schiffes
+--- * `_PlayerID`:  <b>integer</b> PlayerID des Hafens
+--- * `_RouteName`: <b>string</b> Kennung der Route
+--- * `_ShipID`:    <b>integer</b> ID des Schiffes
 Report.TradeShipArrived = anyInteger;
 
 --- Ein Schiff hat einen Hafen verlassen.
 ---
 --- #### Parameters:
---- * `_PlayerID` - PlayerID des Hafens
---- * `_RouteName` - Kennung der Route
---- * `_ShipID` - ID des Schiffes
+--- * `_PlayerID`:  <b>integer</b> PlayerID des Hafens
+--- * `_RouteName`: <b>string</b> Kennung der Route
+--- * `_ShipID`:    <b>integer</b> ID des Schiffes
 Report.TradeShipLeft = anyInteger;
 
 --- Ein Schiff wurde am Ende des Weges der Handelsroute entfernt.
 ---
 --- #### Parameters:
---- * `_PlayerID` - PlayerID des Hafens
---- * `_RouteName` - Kennung der Route
---- * `_ShipID` - ID des Schiffes
+--- * `_PlayerID`:  <b>integer</b> PlayerID des Hafens
+--- * `_RouteName`: <b>string</b> Kennung der Route
+--- * `_ShipID`:    <b>integer</b> ID des Schiffes
 Report.TradeShipDespawned = anyInteger;
 

@@ -44,6 +44,7 @@
 
 <h2>Modules</h2>
 <ul class="nowrap">
+  <li><a href="../modules/comfort.addware.html">comfort.addware</a></li>
   <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
   <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
   <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
@@ -80,6 +81,7 @@
   <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
   <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
   <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isunofficialpatch.html">comfort.isunofficialpatch</a></li>
   <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
   <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
   <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
@@ -100,22 +102,14 @@
   <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
   <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
   <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
-  <li><a href="../modules/core.behavior.html">core.behavior</a></li>
   <li><a href="../modules/core.core.html">core.core</a></li>
-  <li><a href="../modules/core.feature.core_bugfix.html">core.feature.core_bugfix</a></li>
-  <li><a href="../modules/core.feature.core_chat.html">core.feature.core_chat</a></li>
-  <li><a href="../modules/core.feature.core_debug.html">core.feature.core_debug</a></li>
-  <li><a href="../modules/core.feature.core_job.html">core.feature.core_job</a></li>
-  <li><a href="../modules/core.feature.core_luaextension.html">core.feature.core_luaextension</a></li>
-  <li><a href="../modules/core.feature.core_player.html">core.feature.core_player</a></li>
-  <li><a href="../modules/core.feature.core_quest.html">core.feature.core_quest</a></li>
-  <li><a href="../modules/core.feature.core_report.html">core.feature.core_report</a></li>
-  <li><a href="../modules/core.feature.core_save.html">core.feature.core_save</a></li>
-  <li><a href="../modules/core.feature.core_scriptingvalue.html">core.feature.core_scriptingvalue</a></li>
-  <li><a href="../modules/core.feature.core_text.html">core.feature.core_text</a></li>
+  <li><a href="../modules/core.core_api.html">core.core_api</a></li>
+  <li><a href="../modules/core.core_behavior.html">core.core_behavior</a></li>
+  <li><a href="../modules/core.core_lua.html">core.core_lua</a></li>
   <li><a href="../modules/module.balancing.damage_api.html">module.balancing.damage_api</a></li>
   <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
   <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.militiasystem_api.html">module.city.militiasystem_api</a></li>
   <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
   <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
   <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
@@ -123,6 +117,7 @@
   <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
   <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
   <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.permadeath_api.html">module.faker.permadeath_api</a></li>
   <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
   <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
   <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
@@ -130,8 +125,10 @@
   <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
   <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
   <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.information_api.html">module.information.information_api</a></li>
   <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
   <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.information.typewriter_api.html">module.information.typewriter_api</a></li>
   <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
   <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
   <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
@@ -169,16 +166,16 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#StartCutscene">StartCutscene (_Cutscene, _Name, _PlayerID)</a></td>
-	<td class="summary">Startet eine Zwischensequenz.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#RequestCutsceneAlternateGraphics">RequestCutsceneAlternateGraphics ()</a></td>
-	<td class="summary">Fragt den Spieler um Erlaubnis, Grafikeinstellungen zu ändern.</td>
+	<td class="name" nowrap><a href="#NewCutscene">NewCutscene (_Name, _PlayerID)</a></td>
+	<td class="summary">Initialisiert den Builder für eine Cutscene.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#IsCutsceneActive">IsCutsceneActive (_PlayerID)</a></td>
 	<td class="summary">Überprüft, ob eine Zwischensequenz aktiv ist.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#StartCutscene">StartCutscene (_Cutscene, _Name, _PlayerID)</a></td>
+	<td class="summary">Startet eine Zwischensequenz.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#AddCutscenePages">AddCutscenePages (_Cutscene)</a></td>
@@ -198,51 +195,47 @@
 
     <dl class="function">
     <dt>
-    <a name = "StartCutscene"></a>
-    <strong>StartCutscene (_Cutscene, _Name, _PlayerID)</strong>
+    <a name = "NewCutscene"></a>
+    <strong>NewCutscene (_Name, _PlayerID)</strong>
     </dt>
     <dd>
-    Startet eine Zwischensequenz.
-<p> Mögliche Felder für die Zwischensequenz-Tabelle:
-<li><code>Starting</code>                - Funktion, die beim Starten der Zwischensequenz aufgerufen wird</li><li><code>Finished</code>                - Funktion, die beim Beenden der Zwischensequenz aufgerufen wird</li><li><code>EnableGlobalImmortality</code> - Während der Zwischensequenz sind alle Entitäten unverwundbar</li><li><code>EnableSky</code>               - Anzeigen des Himmels während der Zwischensequenz</li><li><code>EnableFoW</code>               - Anzeigen des Nebels des Krieges während der Zwischensequenz</li><li><code>EnableBorderPins</code>        - Anzeigen der Grenzstifte während der Zwischensequenz</li><li><code>HideNotes</code>               - Nachrichten nicht anzeigen</li><p> <h3>Example:</h3><p> <pre><code class="language-lua"> function Cutscene1(_Name, _PlayerID)
-     local Cutscene = {};
-     local AP = API.AddCutscenePages(Cutscene);
-<p>     -- Seiten ...
-<p>     Cutscene.Starting = function(_Data)
-     end
-     Cutscene.Finished = function(_Data)
-     end
-     API.StartCutscene(Cutscene, _Name, _PlayerID);
- end</code></pre>
+    Initialisiert den Builder für eine Cutscene.
+
+ <h3>Functions <code>CutsceneBuilder</code>:</h3><li><code>SetName(_Name)</code>:              Setzt den Namen der Cutscene.</li><li><code>SetPlayer(_Player)</code>:          Setzt den empfangenden Spieler der Cutscene.</li><li><code>UseBigBars(_Flag)</code>:           Verwendet die breiten Briefing Bars. (Aus ästhetischen Gründen nicht zu empfehlen.)</li><li><code>UseGlobalImmortality(_Flag)</code>: Während der Cutscene sind alle Entities unverwundbar.</li><li><code>SetHideNotes(_Flag)</code>:         Versteckt das Notes Window wärhend der Cutscene.</li><li><code>SetEnableSky(_Flag)</code>:         Zeigt den Himmel während der Cutscene an.</li><li><code>SetEnableFoW(_Flag)</code>:         Zeigt den Nebel des Krieges während der Cutscene an.</li><li><code>SetEnableBorderPins(_Flag)</code>:  Zeigt die Grenzsteine während der Cutscene an.</li><li><code>SetOnBegin(_OnBegin)</code>:        Funktion, die beim Start der Cutscene ausgeführt wird.</li><li><code>SetOnFinish(_OnFinish)</code>:      Funktion, die beim Ende der Cutscene ausgeführt wird.</li><li><code>BeginFlight()</code>:               Eröffnet den <code>FlightBuilder</code>.</li><li><code>Start()</code>:                     Startet die Cutscene.</li><p> <h3>Functions <code>FlightBuilder</code>:</h3><li><code>SetSpeech(_Speech)</code>:         Setzt den Pfad zur Voice Line.</li><li><code>SetTitle(_Title)</code>:           Setzt den anzuzeigenden Titel der Page.</li><li><code>SetText(_Text)</code>:             Setzt den anzuzeigenden Text der Page.</li><li><code>SetFadeIn(_Time)</code>:           Blendet von Schwarz ein.</li><li><code>SetFadeOut(_Time)</code>:          Blendet zu Schwarz aus.</li><li><code>SetFaderAlpha(_Opacity)</code>:    Setzt den Alphawert der Fadermaske.</li><li><code>UseBigBars(_Flag)</code>:          Verwendet die breiten Cutscene Bars auf dieser Seite. (Aus ästhetischen Gründen nicht zu empfehlen.)</li><li><code>UseSkipping(_Flag)</code>:         Die Seite kann übersprungen werden.</li><li><code>SetFarClipPlane(_Distance)</code>: Setzt die maximale Sichtweite. <b>Achtung</b>: Kann auf schwachen Systemen ruckeln.</li><li><code>EndFlight()</code>:                Beendet den <code>FlightBuilder</code> und kehrt zum <code>CutsceneBuilder</code> zurück.</li>
+ <h3>Example:</h3> <pre><code class="language-lua"> NewCutscene("TestCutscene", 1)
+     :SetEnableBorderPins(true)
+     :SetEnableSky(true)
+     :BeginFlight()
+         :SetFlight("c01")
+         :SetTitle("Flight 1")
+         :SetText("This is the shown text.")
+         :SetFadeIn(3)
+     :EndFlight()
+     :BeginFlight()
+         :SetFlight("c02")
+         :SetTitle("Flight 2")
+         :SetText("This is the shown text.")
+     :EndFlight()
+     :BeginFlight()
+         :SetFlight("c03")
+         :SetTitle("Flight 3")
+         :SetText("This is the shown text.")
+         :SetFadeOut(3)
+     :EndFlight()
+     :Start();</code></pre>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">_Cutscene</span> <b>table</b>   Zwischensequenz-Tabelle
-        </li>
-        <li><span class="parameter">_Name</span> <b>string</b>      Name der Zwischensequenz
+        <li><span class="parameter">_Name</span> <b>string</b> Name der Cutscene
         </li>
         <li><span class="parameter">_PlayerID</span> <b>integer</b> Spieler-ID des Empfängers
         </li>
     </ul>
 
-
-
-
-
-</dd>
-    <dt>
-    <a name = "RequestCutsceneAlternateGraphics"></a>
-    <strong>RequestCutsceneAlternateGraphics ()</strong>
-    </dt>
-    <dd>
-    Fragt den Spieler um Erlaubnis, Grafikeinstellungen zu ändern.
-<p> Ist das BriefingSystem oder das DialogSystem geladen, werden stattdessen
- deren Funktionen verwendet.
-<p> Diese Funktionalität ist im Multiplayer deaktiviert.
-
-
-
+    <h3>Returns:</h3>
+    <ol><b>table</b> BriefingBuilder Builder der Cutscene
+    </ol>
 
 
 
@@ -271,11 +264,50 @@
 
 </dd>
     <dt>
+    <a name = "StartCutscene"></a>
+    <strong>StartCutscene (_Cutscene, _Name, _PlayerID)</strong>
+    </dt>
+    <dd>
+    Startet eine Zwischensequenz.
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
+<p> <h3>Fields <code>_Cutscene</code>:</h3><li><code>Starting</code>:                (optional) <b>function</b> Funktion, die beim Starten der Einleitung aufgerufen wird</li><li><code>Finished</code>:                (optional) <b>function</b> Funktion, die beim Beenden der Einleitung aufgerufen wird</li><li><code>EnableGlobalImmortality</code>: (optional) <b>boolean</b> Während Einleitungen sind alle Entitäten unverwundbar</li><li><code>EnableSky</code>:               (optional) <b>boolean</b> Zeigt den Himmel während der Einleitung an</li><li><code>EnableFoW</code>:               (optional) <b>boolean</b> Zeigt den Nebel des Krieges während der Einleitung an</li><li><code>EnableBorderPins</code>:        (optional) <b>boolean</b> Zeigt die Randnadeln während der Einleitung an</li><li><code>HideNotes</code>:               (optional) <b>boolean</b> Nachrichten nicht anzeigen</li><p> <h3>Example:</h3> <pre><code class="language-lua"> function Cutscene1(_Name, _PlayerID)
+     local Cutscene = {};
+     local AP = API.AddCutscenePages(Cutscene);
+     -- Seiten
+     Cutscene.Starting = function(_Data)
+     end
+     Cutscene.Finished = function(_Data)
+     end
+     API.StartCutscene(Cutscene, _Name, _PlayerID);
+ end</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Cutscene</span> <b>table</b>   Zwischensequenz-Tabelle
+        </li>
+        <li><span class="parameter">_Name</span> <b>string</b>      Name der Zwischensequenz
+        </li>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> Spieler-ID des Empfängers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "AddCutscenePages"></a>
     <strong>AddCutscenePages (_Cutscene)</strong>
     </dt>
     <dd>
     Bereitet die Zwischensequenz vor und gibt die Seitenfunktion zurück.
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
 <p> Muss aufgerufen werden, bevor Seiten hinzugefügt werden.
 
 
@@ -299,8 +331,10 @@
     </dt>
     <dd>
     Erstellt eine Seite.
-<p> <h3>Zwischensequenzseite</h3> Mögliche Felder für die Seite:
-<p><li><code>Flight</code>          - Name der Flug-XML (ohne .cs)</li><li><code>Title</code>           - Angezeigter Seitentitel</li><li><code>Text</code>            - Angezeigter Seitentext</li><li><code>Speech</code>          - Pfad zum Voiceover (MP3-Datei)</li><li><code>Action</code>          - Funktion, die beim Anzeigen der Seite aufgerufen wird</li><li><code>FarClipPlane</code>    - Render-Entfernung</li><li><code>FadeIn</code>          - Dauer des Einblendens aus Schwarz</li><li><code>FadeOut</code>         - Dauer des Ausblendens nach Schwarz</li><li><code>FaderAlpha</code>      - Maskenalpha</li><li><code>DisableSkipping</code> - Erlauben/Verbieten des Überspringens von Seiten</li><li><code>BarOpacity</code>      - Deckkraft der Leisten</li><li><code>BigBars</code>         - Verwendung großer Leisten</li><p> <h3>Example:</h3><p> <pre><code class="language-lua"> AP {
+ <p>
+ <b>Achtung</b>: Diese Funktion ist veraltet und kann nur mit der
+ deklarativen API benutzt werden.
+<p> <h3>Fields <code>_Data</code>:</h3><li><code>Flight</code>:          <b>string</b> Name der Flug-XML (ohne .cs)</li><li><code>Title</code>:           (optional) <b>any</b> Angezeigter Seitentitel (String oder Language Table)</li><li><code>Text</code>:            (optional) <b>any</b> Angezeigter Seitentext (String oder Language Table)</li><li><code>Speech</code>:          (optional) <b>string</b> Pfad zum Voiceover (MP3-Datei)</li><li><code>Action</code>:          (optional) <b>function</b> Funktion, die beim Anzeigen der Seite aufgerufen wird</li><li><code>FarClipPlane</code>:    (optional) <b>boolean</b> Render-Entfernung</li><li><code>FadeIn</code>:          (optional) <b>float</b> Dauer des Einblendens aus Schwarz</li><li><code>FadeOut</code>:         (optional) <b>float</b> Dauer des Ausblendens nach Schwarz</li><li><code>FaderAlpha</code>:      (optional) <b>float</b> Maskenalpha</li><li><code>DisableSkipping</code>: (optional) <b>boolean</b> Erlauben/Verbieten des Überspringens von Seiten</li><li><code>BarOpacity</code>:      (optional) <b>float</b> Deckkraft der Leisten</li><li><code>BigBars</code>:         (optional) <b>boolean</b> Verwendung großer Leisten</li><p> <h3>Example:</h3><p> <pre><code class="language-lua"> AP {
      Flight       = "c02",
      FarClipPlane = 45000,
      Title        = "Titel",
@@ -314,6 +348,9 @@
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol><b>table</b> Page Erzeugte Seite
+    </ol>
 
 
 
@@ -326,7 +363,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2025-05-29 18:34:21 </i>
+<i style="float:right;">Last updated 2025-06-07 22:28:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

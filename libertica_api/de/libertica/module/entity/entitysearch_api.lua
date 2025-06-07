@@ -1,4 +1,8 @@
 --- Fügt Suchfunktionen zu Entitäten hinzu.
+--- 
+--- <b>Achtung</b>: Die in diesem Modul hinzugefügten Suchfunktionen iterieren
+--- über alle(!) Entitäten und können resourcenintensiv sein. Vermeide also
+--- sie in Jobs zu verwenden.
 
 
 

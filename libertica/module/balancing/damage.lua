@@ -147,6 +147,19 @@ function Lib.Damage.Global:InitEntityBaseDamageBsg()
     SetEntityTypeDamage(Entities.U_MilitarySiegeTower, 0);
     SetEntityTypeDamage(Entities.U_MilitaryTrap, 800);
     --
+    SetEntityTypeDamage(Entities.U_KnightChivalry, 50);
+    SetEntityTypeDamage(Entities.U_KnightHealing, 50);
+    SetEntityTypeDamage(Entities.U_KnightPlunder, 50);
+    SetEntityTypeDamage(Entities.U_KnightTrading, 50);
+    SetEntityTypeDamage(Entities.U_KnightSong, 50);
+    SetEntityTypeDamage(Entities.U_KnightWisdom, 50);
+    SetEntityTypeDamage(Entities.U_KnightSabatta, 50);
+    SetEntityTypeDamage(Entities.U_KnightRedPrince, 50);
+    SetEntityTypeDamage(Entities.U_NPC_Castellan_ME, 50);
+    SetEntityTypeDamage(Entities.U_NPC_Castellan_NE, 50);
+    SetEntityTypeDamage(Entities.U_NPC_Castellan_NE, 50);
+    SetEntityTypeDamage(Entities.U_NPC_Castellan_SE, 50);
+    --
     SetEntityTypeDamage(Entities.A_ME_Bear, 120);
     SetEntityTypeDamage(Entities.A_ME_Bear_black, 120);
     SetEntityTypeDamage(Entities.A_ME_Wolf, 20);
@@ -185,6 +198,11 @@ function Lib.Damage.Global:InitEntityBaseDamageExt()
         EntityCategories.PalisadeSegment,
         EntityCategories.SpecialBuilding
     );
+    --
+    SetEntityTypeDamage(Entities.U_KnightSaraya, 50);
+    SetEntityTypeDamage(Entities.U_KnightPraphat, 50);
+    SetEntityTypeDamage(Entities.U_KnightKhana, 50);
+    SetEntityTypeDamage(Entities.U_NPC_Castellan_AS, 50);
     --
     SetEntityTypeDamage(Entities.A_AS_BearBlack, 120);
     SetEntityTypeDamage(Entities.A_AS_Tiger, 40);
@@ -252,7 +270,7 @@ function Lib.Damage.Global:OnEntityHurtEntity(_EntityID1, _PlayerID1, _EntityID2
     Damage = Damage * (math.max(MoralFactor, 0.5) + TerritoryBonus) * HeightModifier;
     Damage = self:ApllyRangedCloseCombatDamage(AggressorID, Damage);
     Damage = self:ApllyWallCatapultCombatDamage(AggressorID, Damage);
-    Damage = math.abs(Damage - Armor);
+    Damage = math.max(Damage - Armor, 1);
     if GameCallback_Lib_CalculateBattleDamage ~= nil then
         Damage = GameCallback_Lib_CalculateBattleDamage(AggressorID, _PlayerID1, TargetID, _PlayerID2, Damage);
     end

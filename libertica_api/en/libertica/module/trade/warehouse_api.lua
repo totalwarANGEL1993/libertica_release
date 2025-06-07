@@ -1,18 +1,24 @@
---- Allows to create warehouses.
+--- Allows the creation of warehouses.
 ---
---- Warehouses are modified tradeposts where the player can buy goods without
---- an AI player involved. But goods can not be sold to the warehouse. Payment
---- can be set to any type of resource.
+--- Warehouses are modified trade posts where the player can buy goods without
+--- involving an AI player. However, goods cannot be sold to the warehouse.
+--- Payment can be set to any resource type.
 
-
-
---- Defines a tradepost construction site as warehouse.
+--- Defines a construction site for a trade post as a warehouse.
 ---
---- #### Config parameters
---- * `ScriptName` - Script name of construction site
---- * `Offers`     - List of offers (max. 6 visible offers)
+--- #### Fields `_Data`:
+--- * `ScriptName`: <b>string</b> Script name of the construction site
+--- * `Offers`:     <b>table</b> List of offers (max. 6 visible offers)
 ---
---- #### Examples
+--- #### Fields `_Data.Offers`:
+--- * `Amount`:      <b>integer</b> Number of offers
+--- * `GoodType`:    <b>integer</b> Type of the offered good
+--- * `GoodAmount`:  <b>integer</b> Amount of good per offer
+--- * `PaymentType`: (optional) <b>integer</b> Type of payment (Default: Goods.G_Gold)
+--- * `BasePrice`:   (optional) <b>integer</b> Cost
+--- * `Refresh`:     (optional) <b>integer</b> Refresh time per offer
+---
+--- #### Example:
 --- ```lua
 --- CreateWarehouse {
 ---     ScriptName       = "TP3",
@@ -30,7 +36,7 @@
 ---          GoodType    = Goods.G_Gems,
 ---          GoodAmount  = 27,
 ---          BasePrice   = 300},
----         -- Entertainer offer
+---         -- Entertainment offer
 ---         {GoodType    = Entities.U_Entertainer_NA_FireEater,
 ---          BasePrice   = 250,
 ---          Refresh     = 500},
@@ -46,100 +52,98 @@
 ---     },
 --- };
 --- ```
----
---- @param _Data table Config of warehouse
+
+--- @param _Data table Configuration of the warehouse
 function CreateWarehouse(_Data)
 end
 API.CreateWarehouse = CreateWarehouse;
 
 --- Creates an offer for the warehouse.
---- @param _Name string                     Scriptname of warehouse
---- @param _Amount integer                  Amount of offers
+--- @param _Name string                     Script name of the warehouse
+--- @param _Amount integer                  Number of offers
 --- @param _GoodOrEntityType integer        Type of offered good or entity
---- @param __GoodOrEntityTypeAmount integer Amount of sold (only goods)
---- @param _Payment integer                 Type of paymend good (resource only)
---- @param _BasePrice integer               Basic price without inflation
---- @param _Refresh integer                 Time until offer respawns (0 = no respawn)
---- @return integer ID ID of offer or 0 on error
+--- @param __GoodOrEntityTypeAmount integer Amount of the good (only for goods)
+--- @param _Payment integer                 Payment type (only resources)
+--- @param _BasePrice integer               Base price without inflation
+--- @param _Refresh integer                 Time until the offer reappears (0 = no respawn)
+--- @return integer ID ID of the offer or 0 on error
 function CreateWarehouseOffer(_Name, _Amount, _GoodOrEntityType, __GoodOrEntityTypeAmount, _Payment, _BasePrice, _Refresh)
     return 0;
 end
 API.CreateWarehouseOffer = CreateWarehouseOffer;
 
 --- Removes the offer from the warehouse.
---- @param _Name string Scriptname of warehouse
---- @param _ID integer ID of offer
+--- @param _Name string Script name of the warehouse
+--- @param _ID integer ID of the offer
 function RemoveWarehouseOffer(_Name, _ID)
 end
 API.RemoveWarehouseOffer = RemoveWarehouseOffer;
 
---- Removes the offer from the warehouse.
---- @param _Name string Scriptname of warehouse
---- @param _ID integer ID of offer
+--- Deactivates the offer in the warehouse.
+--- @param _Name string Script name of the warehouse
+--- @param _ID integer ID of the offer
 --- @param _Deactivate boolean Offer is deactivated
 function DeactivateWarehouseOffer(_Name, _ID, _Deactivate)
 end
 API.DeactivateWarehouseOffer = DeactivateWarehouseOffer;
 
 --- Returns the global inflation for the good or entity type.
---- @param _PlayerID integer ID of player
+--- @param _PlayerID integer Player ID
 --- @param _GoodOrEntityType integer Offer type
---- @return number Inflation Inflation factor
+--- @return number Inflation factor
 function GetWarehouseInflation(_PlayerID, _GoodOrEntityType)
     return 0;
 end
 API.GetWarehouseInflation = GetWarehouseInflation;
 
---- Changes the global inflation for the good or entity type.
---- @param _PlayerID integer ID of player
+--- Sets the global inflation for the good or entity type.
+--- @param _PlayerID integer Player ID
 --- @param _GoodOrEntityType integer Offer type
 --- @param _Inflation number Inflation factor
 function SetWarehouseInflation(_PlayerID, _GoodOrEntityType, _Inflation)
 end
 API.SetWarehouseInflation = SetWarehouseInflation;
 
---- Returns offer data and index in offer table of the offer.
---- @param _Name string Scriptname of warehouse
---- @param _ID integer ID of offer
---- @return table Offer Data of offer
---- @return integer Index Index in table
+--- Returns the data of the offer and the index in the offer array.
+--- @param _Name string Script name of the warehouse
+--- @param _ID integer ID of the offer
+--- @return table Offer data of the offer
+--- @return integer Index in the array
 function GetWarehouseOfferByID(_Name, _ID)
-    return {}, 0;
+    return {},0;
 end
 API.GetWarehouseOfferByID = GetWarehouseOfferByID;
 
 --- Returns all active offers of the warehouse.
---- @param _Name string Scriptname of warehouse
---- @param _VisibleOnly boolean Only the visible offers
---- @return table Offers List of active offers
+--- @param _Name string Script name of the warehouse
+--- @param _VisibleOnly boolean Only visible offers
+--- @return table Offers list of active offers
 function GetActivWarehouseOffers(_Name, _VisibleOnly)
     return {};
 end
 API.GetActivWarehouseOffers = GetActivWarehouseOffers;
 
-
-
---- The player clicked an offer.
+--- The player clicked on an offer.
 ---
 --- #### Parameters:
---- * `PlayerID`      - ID of player
---- * `ScriptName`    - Scriptname of warehouse
---- * `Inflation`     - Calculated inflation
---- * `OfferIndex`    - Index of offer
---- * `OfferGood`     - Good or entity type purchased
---- * `GoodAmount`    - Amount of goods
---- * `PaymentType`   - Money good
---- * `BasePrice`     - Base price
+--- * `PlayerID`:      <b>integer</b> ID of the player
+--- * `ScriptName`:    <b>string</b> Script name of the warehouse
+--- * `Inflation`:     <b>integer</b> Calculated inflation
+--- * `OfferIndex`:    <b>integer</b> Index of the offer
+--- * `OfferGood`:     <b>integer</b> Purchased good or entity type
+--- * `GoodAmount`:    <b>integer</b> Quantity of goods
+--- * `PaymentType`:   <b>integer</b> Type of payment
+--- * `BasePrice`:     <b>integer</b> Base price
 Report.WarehouseOfferClicked = anyInteger;
 
 --- The player bought an offer.
 ---
 --- #### Parameters:
---- * `PlayerID`      - ID of player
---- * `ScriptName`    - Scriptname of warehouse
---- * `OfferGood`     - Good or entity type purchased
---- * `GoodAmount`    - Amount of goods
---- * `PaymentGood`   - Good of payment
---- * `PaymentAmount` - Amount of payment
+--- * `PlayerID`:      <b>integer</b> ID of the player
+--- * `ScriptName`:    <b>string</b> Script name of the warehouse
+--- * `OfferGood`:     <b>integer</b> Purchased good or entity type
+--- * `GoodAmount`:    <b>integer</b> Quantity of goods
+--- * `PaymentGood`:   <b>integer</b> Type of payment
+--- * `PaymentAmount`: <b>integer</b> Amount paid
 Report.WarehouseOfferBought = anyInteger;
 
