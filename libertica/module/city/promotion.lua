@@ -7,11 +7,6 @@ Lib.Promotion.Global = {};
 Lib.Promotion.Local = {};
 Lib.Promotion.Shared = {
     TechnologiesToResearch = {},
-    TechnologyConfig = {
-        -- Tech name, Description, Icon, Extra Number
-        {"R_MilitarySword", "UI_ObjectNames/BuySwordfighters", {9, 7, 0}, 0},
-        {"R_MilitaryBow",   "UI_ObjectNames/BuyBowmen",        {9, 8, 0}, 0},
-    }
 };
 
 CONST_REQUIREMENT_TOOLTIP_TYPE = {};
@@ -714,10 +709,12 @@ function Lib.Promotion.Shared:InitRelatedTechnologies()
 end
 
 function Lib.Promotion.Shared:CreateTechnologies()
-    for i= 1, #self.TechnologyConfig do
-        if g_GameExtraNo >= self.TechnologyConfig[i][4] then
-            if not Technologies[self.TechnologyConfig[i][1]] then
-                AddCustomTechnology(self.TechnologyConfig[i][1], self.TechnologyConfig[i][2], self.TechnologyConfig[i][3]);
+    for i= 1, #Lib.Promotion.Config.Technology do
+        local Technology = Lib.Promotion.Config.Technology[i];
+        if g_GameExtraNo >= Technology[4] then
+            if not Technologies[Technology[1]] then
+                AddCustomTechnology(Technology[1], Technology[2], Technology[3]);
+                -- The technologies are not to be researched EVER!
             end
         end
     end

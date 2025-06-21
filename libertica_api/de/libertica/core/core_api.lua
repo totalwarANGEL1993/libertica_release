@@ -1,16 +1,5 @@
 --- Die Funktionalotäten des Basis-Modul.
 --- 
---- #### Bug Fixes:
---- <li>Luxusgüter können in Dorflagern gelagert werden</li>
---- <li>Soldaten respawning für ME-Kaserne ist aktiv</li>
---- <li>Füge Burg und Lagerhaus als Lieferkontrollpunkte hinzu</li>
---- <li>IO-Interaktionsprüfungen für beide Güter, wenn sie verfügbar sind</li>
---- <li>Das Zerstören aller Einheiten zählt jetzt nicht mehr Standorte und spezielle Entitäten</li>
---- <li>Der große Dom zeigt den richtigen Namen in der Auswahl an</li>
---- <li>Das Hausmenü ist für Gebäude anderer Klimazonen angepasst</li>
---- <li>Fähigkeitshinweise werden nur ausgelöst, wenn der Spieler einen Ritter und ein Lagerhaus hat</li>
---- <li>Gelöschte Lagerfeuer von Banditen verusrachen keine Spielabstürze mehr</li>
---- 
 --- #### Scripting Values:
 --- * `CONST_SCRIPTING_VALUES.Destination.X`: <b>integer</b> X-Koordinate des Bewegungsziels
 --- * `CONST_SCRIPTING_VALUES.Destination.Y`: <b>integer</b> Y-Koordinate des Bewegungsziels
@@ -19,6 +8,17 @@
 --- * `CONST_SCRIPTING_VALUES.Size`: <b>integer</b> Skalierung der Entität
 --- * `CONST_SCRIPTING_VALUES.Visible`: <b>integer</b> Ist die Entität sichtbar (= 801280)
 --- * `CONST_SCRIPTING_VALUES.NPC`: <b>integer</b> Art des NPCs (> 0)
+--- 
+--- #### Console Commands:
+--- In der Konsole können spezielle Komandos eingegeben werden. Eingeklammerte
+--- Angaben sind dabei optional.
+--- * `restartmap`:        Startet die Map sofort neu
+--- * `clear`:             Entfernt alle Nachrichten vom Bildschirm
+--- * `version`:           Zeigt die aktuelle Version von Libertica an
+--- * `&gt; any code`:     Führt beliebigen Code in der globalen Umgebung aus
+--- * `&gt;&gt; any code`: Führt beliebigen Code in der lokalen Umgebung aus
+--- * `&lt; path`:         Läd ein Lua-File in die globale Umgebung
+--- * `&lt;&lt; path`:     Läd ein Lua-File in die lokale Umgebung
 
 --- Öffnet die Chat-Konsole.
 --- 
@@ -305,14 +305,14 @@ API.SendScriptEventToLocal = SendReportToLocal;
 function CreateReportReceiver(_EventID, _Function)
     return 0;
 end
-API.CreateScriptEventReceiver = CreateReportReceiver;
+API.CreateReportReceiver = CreateReportReceiver;
 
 --- Löscht einen Berichtslistener für den Berichtstyp.
 --- @param _EventID integer ID des Berichts
 --- @param _ID integer ID des Listeners
 function RemoveReportReceiver(_EventID, _ID)
 end
-API.RemoveScriptEventReceiver = RemoveReportReceiver;
+API.RemoveReportReceiver = RemoveReportReceiver;
 
 --- Deaktiviert das Autospeichern der History Edition.
 --- @param _Flag boolean Autospeichern ist deaktiviert
@@ -577,4 +577,14 @@ end
 function CountTextLines(_Text, _LineLength)
     return 0;
 end
+
+--- Setzt den inoffiziellen Patch als Bedingung.
+--- 
+--- Diese Funktion muss zu Spielbeginn aufgerufen werden! Ist der inoffizielle
+--- Patch nicht installiert, sieht der Spieler eine Information und wird ins 
+--- Hauptmenü zurück geschickt.
+--- @param _Version? string Patch version (Beispiel: "UP 1.0.0")
+function SetUnofficialPatchRequired(_Version)
+end
+API.SetUnofficialPatchRequired = SetUnofficialPatchRequired;
 

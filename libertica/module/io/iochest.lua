@@ -15,17 +15,7 @@ Lib.Register("module/io/IOChest");
 -- Global initalizer method
 function Lib.IOChest.Global:Initialize()
     if not self.IsInstalled then
-        --- The player activated a treasure
-        --- 
-        --- #### Parameters
-        --- * `ScriptName` - Scriptname of entity
-        --- * `KnightID`   - ID of activating hero
-        --- * `PlayerID`   - ID of activating player
         Report.InteractiveTreasureActivated = CreateReport("Event_InteractiveTreasureActivated");
-
-        Report.Internal_DebugGoldChest = CreateReport("Event_Internal_DebugGoldChest");
-        Report.Internal_DebugResourceChest = CreateReport("Event_Internal_DebugResourceChest");
-        Report.Internal_DebugLuxuryChest = CreateReport("Event_Internal_DebugLuxuryChest");
 
         -- Garbage collection
         Lib.IOChest.Local = nil;
@@ -53,35 +43,21 @@ function Lib.IOChest.Global:OnReportReceived(_ID, ...)
         if CONST_IO[arg[1]] and CONST_IO[arg[1]].IsInteractiveChest then
             -- Nothing to do?
         end
-    elseif _ID == Report.Internal_DebugGoldChest then
-        error(IsExisting(arg[1]), "entity " ..arg[1].. " does not exist!");
-        CreateRandomGoldChest(arg[1]);
-    elseif _ID == Report.Internal_DebugResourceChest then
-        error(IsExisting(arg[1]), "entity " ..arg[1].. " does not exist!");
-        CreateRandomResourceChest(arg[1]);
-    elseif _ID == Report.Internal_DebugLuxuryChest then
-        error(IsExisting(arg[1]), "entity " ..arg[1].. " does not exist!");
-        CreateRandomLuxuryChest(arg[1]);
     end
 end
 
 function Lib.IOChest.Global:ProcessChatInput(_Text)
-    if IsHistoryEdition() then
-        local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
-        for i= 1, #Commands, 1 do
-            if Commands[i][1] == "goldchest" then
-                if not IsExisting(Commands[i][2]) then
-                    CreateRandomGoldChest(Commands[i][2]);
-                end
-            elseif Commands[i][1] == "goodchest" then
-                if not IsExisting(Commands[i][2]) then
-                    CreateRandomResourceChest(Commands[i][2]);
-                end
-            elseif Commands[i][1] == "luxurychest" then
-                if not IsExisting(Commands[i][2]) then
-                    CreateRandomLuxuryChest(Commands[i][2]);
-                end
-            end
+    local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
+    for i= 1, #Commands, 1 do
+        if Commands[i][1] == "goldchest" then
+            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+            CreateRandomGoldChest(Commands[i][2]);
+        elseif Commands[i][1] == "goodchest" then
+            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+            CreateRandomResourceChest(Commands[i][2]);
+        elseif Commands[i][1] == "luxurychest" then
+            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+            CreateRandomLuxuryChest(Commands[i][2]);
         end
     end
 end
@@ -200,10 +176,6 @@ end
 function Lib.IOChest.Local:Initialize()
     if not self.IsInstalled then
         Report.InteractiveTreasureActivated = CreateReport("Event_InteractiveTreasureActivated");
-
-        Report.Internal_DebugGoldChest = CreateReport("Event_Internal_DebugGoldChest");
-        Report.Internal_DebugResourceChest = CreateReport("Event_Internal_DebugResourceChest");
-        Report.Internal_DebugLuxuryChest = CreateReport("Event_Internal_DebugLuxuryChest");
 
         self:CreateDefaultObjectNames();
 

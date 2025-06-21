@@ -1,7 +1,7 @@
 Lib.Register("module/entity/NPC_Behavior");
 
-function Goal_NPC(_NpcName, _HeroName)
-    return B_Goal_NPC:new(_NpcName, _HeroName);
+function Goal_NPC(...)
+    return B_Goal_NPC:new(...);
 end
 
 B_Goal_NPC = {

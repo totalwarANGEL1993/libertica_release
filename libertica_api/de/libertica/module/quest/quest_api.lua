@@ -6,6 +6,21 @@
 ---
 --- Alle Texte eines Quest-Texte können auch String Tables sein. Das Format für
 --- diese Texte ist "FileName/StringName".
+--- 
+--- #### Console Commands:
+--- In der Konsole können spezielle Komandos eingegeben werden. Eingeklammerte
+--- Angaben sind dabei optional.
+--- * `fail pattern`:    Lässt einen Quest fehlschlagen
+--- * `start pattern`:   Startet einen Quest
+--- * `restart pattern`: Startet einen beendeten Quest erneut
+--- * `stop pattern`:    Stoppt einen Quest
+--- * `win pattern`:     Beendet einen Quest erfolgreich
+--- * `stopped`:         Listet alle Quests, die unterbrochen wurden
+--- * `active`:          Listet alle Quests, die aktiv sind
+--- * `won`:             Listet alle Quests, die gewonnen wurden
+--- * `failed`:          Listet alle Quests, die fehlgeschlagen sind
+--- * `waiting`:         Listet alle Quests, die nicht ausgelöst sind
+--- * `find pattern`:    Sucht alle Quests mit ähnlichen Namen
 
 
 

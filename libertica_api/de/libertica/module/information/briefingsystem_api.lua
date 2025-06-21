@@ -349,8 +349,6 @@ end
 --- ASP("Titel", "Einige wichtige Texte.", true, "Marcus");
 --- -- Aktion aufrufen
 --- ASP("Titel", "Einige wichtige Texte.", true, "Marcus", MyFunction);
---- -- Seite ohne Positionsangabe
---- ASP("Seite1", "Titel", "Einige wichtige Texte.");
 --- ```
 ---
 --- @param _Name? string Name der Seite

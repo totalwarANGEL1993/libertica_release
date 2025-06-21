@@ -6,5 +6,5 @@
 function GetBattalionSizeBySoldierType(_Type)
     return 0;
 end
-API.GetAngleBetween = GetAngleBetween;
+API.GetBattalionSizeBySoldierType = GetBattalionSizeBySoldierType;
 

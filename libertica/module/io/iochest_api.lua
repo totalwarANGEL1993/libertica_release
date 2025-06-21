@@ -19,7 +19,7 @@ function CreateRandomChest(_Name, _Good, _Min, _Max, _Condition, _Action)
 end
 API.CreateRandomChest = CreateRandomChest;
 
-function CreateRandomChest(_Name, _Good, _Min, _Max, _Condition, _Action)
+function CreateRandomTreasure(_Name, _Good, _Min, _Max, _Condition, _Action)
     if IsLocalScript() then
         return;
     end
@@ -35,7 +35,7 @@ function CreateRandomChest(_Name, _Good, _Min, _Max, _Condition, _Action)
     assert(_Max >= _Min, "Maximum can not be lower than minimum!");
     Lib.IOChest.Global:CreateRandomChest(_Name, _Good, _Min, _Max, false, true, _Condition, _Action);
 end
-API.CreateRandomChest = CreateRandomChest;
+API.CreateRandomTreasure = CreateRandomTreasure;
 
 function CreateRandomGoldChest(_Name)
     if IsLocalScript() then
@@ -63,21 +63,4 @@ function CreateRandomLuxuryChest(_Name)
     Lib.IOChest.Global:CreateRandomLuxuryChest(_Name);
 end
 API.CreateRandomLuxuryChest = CreateRandomLuxuryChest;
-
-
-
-function Debug_GoldChest(_Entity)
-    assert(IsLocalScript(), "Debug function must be used in local script!");
-    SendReportToGlobal(Report.Internal_DebugGoldChest, _Entity);
-end
-
-function Debug_GoodChest(_Entity)
-    assert(IsLocalScript(), "Debug function must be used in local script!");
-    SendReportToGlobal(Report.Internal_DebugResourceChest, _Entity);
-end
-
-function Debug_LuxuryChest(_Entity)
-    assert(IsLocalScript(), "Debug function must be used in local script!");
-    SendReportToGlobal(Report.Internal_DebugLuxuryChest, _Entity);
-end
 

@@ -1,16 +1,5 @@
 --- Functionality provided by the base module.
 --- 
---- #### Bug Fixes:
---- <li>Luxury goods can be stored in village storehouses</li>
---- <li>Soldier respawning for ME barracks is active</li>
---- <li>Add castle and storehouse as delivery checkpoints</li>
---- <li>IO interaction checks for both goods if they available</li>
---- <li>The destroy all units now dosen't count sites and special entities</li>
---- <li>The big cathedral has the right name displayed in the selection</li>
---- <li>House menu is fixed for buildings of other climate zones</li>
---- <li>Ability hints only trigger if player has knight and storehouse</li>
---- <li>Deleted camp fires don't crash the game anymore</li>
---- 
 --- #### Scripting values:
 --- * `CONST_SCRIPTING_VALUES.Destination.X`: <b>integer</b> X coordinate of movement target
 --- * `CONST_SCRIPTING_VALUES.Destination.Y`: <b>integer</b> Y coordinate of movement target
@@ -19,6 +8,17 @@
 --- * `CONST_SCRIPTING_VALUES.Size`: <b>integer</b> Scaling of entity
 --- * `CONST_SCRIPTING_VALUES.Visible`: <b>integer</b> Is entity visible (= 801280)
 --- * `CONST_SCRIPTING_VALUES.NPC`: <b>integer</b> Type of npc (> 0)
+--- 
+--- #### Console Commands:
+--- There are special commands that can be entered into the console. Things in
+--- brackets are optional.
+--- * `restartmap`:        Restarts the current map
+--- * `clear`:             Removes all messages from the screen
+--- * `version`:           Shows the current version of Libertica
+--- * `&gt; any code`:     Runs code inside the global environment
+--- * `&gt;&gt; any code`: Runs code inside the local environment
+--- * `&lt; path`:         Loads a file into the global environment
+--- * `&lt;&lt; path`:     Loads a file into the local environment
 
 --- Open the chat console.
 --- 
@@ -297,14 +297,14 @@ API.SendScriptEventToLocal = SendReportToLocal;
 function CreateReportReceiver(_EventID, _Function)
     return 0;
 end
-API.CreateScriptEventReceiver = CreateReportReceiver;
+API.CreateReportReceiver = CreateReportReceiver;
 
 --- Deletes a report listener for the report type.
 --- @param _EventID integer ID of report
 --- @param _ID integer ID of listener
 function RemoveReportReceiver(_EventID, _ID)
 end
-API.RemoveScriptEventReceiver = RemoveReportReceiver;
+API.RemoveReportReceiver = RemoveReportReceiver;
 
 --- Deactivates the autosave of the History Edition.
 --- @param _Flag boolean Auto save is disabled
@@ -569,4 +569,13 @@ end
 function CountTextLines(_Text, _LineLength)
     return 0;
 end
+
+--- Sets the unofficial patch as required.
+--- 
+--- This function must be called on game start! If the inofficial patch is not
+--- installed the player is informed and send back to the main menu.
+--- @param _Version? string Patch version (Example: "UP 1.0.0")
+function SetUnofficialPatchRequired(_Version)
+end
+API.SetUnofficialPatchRequired = SetUnofficialPatchRequired;
 

@@ -1,5 +1,6 @@
 Lib.Register("module/information/DialogSystem_Text");
 
+Lib.DialogSystem = Lib.DialogSystem or {};
 Lib.DialogSystem.Text = {
     Continue = {
         de = "{cr}{cr}{azure}Weiter mit ESC",

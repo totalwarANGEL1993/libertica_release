@@ -50,6 +50,7 @@ function AddCutscenePages(_Cutscene)
     local Cutscene = NewCutscene(nil, nil, _Cutscene);
     return Cutscene.AP;
 end
+API.AddFlights = AddCutscenePages;
 API.AddCutscenePages = AddCutscenePages;
 
 function RequestCutsceneAlternateGraphics()
@@ -104,6 +105,7 @@ function StartCutscene(_Cutscene, _Name, _PlayerID)
     end
     Lib.CutsceneSystem.Global:StartCutscene(_Name, PlayerID, _Cutscene);
 end
+API.CutsceneStart = StartCutscene;
 API.StartCutscene = StartCutscene;
 
 function AP(_Data)

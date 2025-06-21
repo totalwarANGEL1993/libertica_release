@@ -1,7 +1,7 @@
 Lib.Register("module/information/DialogSystem_Behavior");
 
-function Reprisal_Dialog(_Name, _Dialog)
-    return B_Reprisal_Dialog:new(_Name, _Dialog);
+function Reprisal_Dialog(...)
+    return B_Reprisal_Dialog:new(...);
 end
 
 B_Reprisal_Dialog = {
@@ -49,8 +49,8 @@ RegisterBehavior(B_Reprisal_Dialog);
 
 -- -------------------------------------------------------------------------- --
 
-function Reward_Dialog(_Name, _Dialog)
-    return B_Reward_Dialog:new(_Name, _Dialog);
+function Reward_Dialog(...)
+    return B_Reward_Dialog:new(...);
 end
 
 B_Reward_Dialog = CopyTable(B_Reprisal_Dialog);
@@ -68,8 +68,8 @@ RegisterBehavior(B_Reward_Dialog);
 
 -- -------------------------------------------------------------------------- --
 
-function Trigger_Dialog(_Name, _PlayerID, _Waittime)
-    return B_Trigger_Dialog:new(_Name, _PlayerID, _Waittime);
+function Trigger_Dialog(...)
+    return B_Trigger_Dialog:new(...);
 end
 
 B_Trigger_Dialog = {

@@ -7,6 +7,7 @@ function SetupObject(_Description)
     end
     return Lib.IO.Global:CreateObject(_Description);
 end
+API.SetupObject = SetupObject;
 API.CreateObject = SetupObject;
 
 function DisposeObject(_ScriptName)
@@ -174,21 +175,4 @@ InteractiveObjectDeactivate = function(_ScriptName, ...)
     end
 end
 API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
-
-
-
-function Debug_EnableIO(_Entity, _State, _PlayerID)
-    assert(IsLocalScript(), "Debug function must be used in local script!");
-    SendReportToGlobal(Report.Internal_DebugEnableObject, _Entity, _State, _PlayerID);
-end
-
-function Debug_DisableIO(_Entity, _State, _PlayerID)
-    assert(IsLocalScript(), "Debug function must be used in local script!");
-    SendReportToGlobal(Report.Internal_DebugDisableObject, _Entity, _State, _PlayerID);
-end
-
-function Debug_InitIO(_Entity, _RewardType, _RewardAmount, _Cost1Type, _Cost1Amount, _Cost2Type, _Cost2Amount)
-    assert(IsLocalScript(), "Debug function must be used in local script!");
-    SendReportToGlobal(Report.Internal_DebugInitObject, _Entity, _RewardType, _RewardAmount, _Cost1Type, _Cost1Amount, _Cost2Type, _Cost2Amount);
-end
 

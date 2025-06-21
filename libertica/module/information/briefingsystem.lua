@@ -1643,11 +1643,6 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     end
     local ScreenX, ScreenY = GUI.GetScreenSize();
 
-    local ConsoleWasVisible = IsScriptConsoleShown();
-    if ConsoleWasVisible then
-        HideScriptConsole();
-    end
-
     -- Parallax
     function EndScreen_ExitGame() end
     function MissionFadeInEndScreen() end
@@ -1734,9 +1729,6 @@ function Lib.BriefingSystem.Local:ActivateCinematicMode(_PlayerID)
     g_Fade.To = 0;
     SetFaderAlpha(0);
 
-    if ConsoleWasVisible then
-        ShowScriptConsole();
-    end
     if not self.LoadscreenClosed then
         XGUIEng.PushPage("/LoadScreen/LoadScreen", false);
     end
@@ -1749,11 +1741,6 @@ end
 function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     if not self.CinematicActive or GUI.GetPlayerID() ~= _PlayerID then
         return;
-    end
-
-    local ConsoleWasVisible = IsScriptConsoleShown();
-    if ConsoleWasVisible then
-        HideScriptConsole();
     end
 
     g_Fade.To = 0;
@@ -1805,9 +1792,6 @@ function Lib.BriefingSystem.Local:DeactivateCinematicMode(_PlayerID)
     ResetRenderDistance();
     self:SetQualityMode();
 
-    if ConsoleWasVisible then
-        ShowScriptConsole();
-    end
     self.CinematicActive = false;
 end
 

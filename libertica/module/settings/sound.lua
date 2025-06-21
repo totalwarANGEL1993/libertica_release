@@ -1,5 +1,3 @@
---- @diagnostic disable: duplicate-set-field
-
 Lib.Sound = Lib.Sound or {};
 Lib.Sound.Name = "Sound";
 Lib.Sound.Global = {};
@@ -9,9 +7,6 @@ Lib.Sound.Local = {
     },
     SoundBackup = {},
 };
-
-CONST_FARCLIPPLANE = 45000;
-CONST_FARCLIPPLANE_DEFAULT = 0;
 
 Lib.Require("comfort/IsMultiplayer");
 Lib.Require("core/Core");

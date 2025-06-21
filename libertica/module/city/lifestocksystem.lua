@@ -39,13 +39,7 @@ Lib.LifestockSystem.Local  = {
         SheepDisabled = "",
     }
 };
-Lib.LifestockSystem.Shared = {
-    TechnologyConfig = {
-        -- Tech name, Description, Icon, Extra Number
-        {"R_Cattle", {de = "Kühe züchten",   en = "Breeding Cows",   fr = "Vaches reproductrices"}, {3, 16, 0}, 0},
-        {"R_Sheep",  {de = "Schafe züchten", en = "Breeding Sheeps", fr = "Moutons reproducteurs"}, {4,  1, 0}, 0},
-    },
-};
+Lib.LifestockSystem.Shared = {};
 
 Lib.Require("comfort/SetHealth");
 Lib.Require("core/Core");
@@ -55,6 +49,7 @@ Lib.Require("module/ui/UIBuilding");
 Lib.Require("module/faker/Technology");
 Lib.Require("module/city/Promotion");
 Lib.Require("module/city/LifestockSystem_API");
+Lib.Require("module/city/LifestockSystem_Config");
 Lib.Require("module/city/LifestockSystem_Text");
 Lib.Register("module/city/LifestockSystem");
 
@@ -376,13 +371,14 @@ end
 -- Shared
 
 function Lib.LifestockSystem.Shared:CreateTechnologies()
-    for i= 1, #self.TechnologyConfig do
-        if g_GameExtraNo >= self.TechnologyConfig[i][4] then
-            if not Technologies[self.TechnologyConfig[i][1]] then
-                AddCustomTechnology(self.TechnologyConfig[i][1], self.TechnologyConfig[i][2], self.TechnologyConfig[i][3]);
+    for i= 1, #Lib.LifestockSystem.Config.Technology do
+        local Technology = Lib.LifestockSystem.Config.Technology[i];
+        if g_GameExtraNo >= Technology[4] then
+            if not Technologies[Technology[1]] then
+                AddCustomTechnology(Technology[1], Technology[2], Technology[3]);
                 if not IsLocalScript() then
                     for j= 1, 8 do
-                        Logic.TechnologySetState(j, Technologies[self.TechnologyConfig[i][1]], 3);
+                        Logic.TechnologySetState(j, Technologies[Technology[1]], 3);
                     end
                 end
             end

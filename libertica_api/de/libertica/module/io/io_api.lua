@@ -3,6 +3,14 @@
 --- Fast alle Entitäten können als interaktives Objekt verwendet werden, nicht 
 --- nur die, die dafür vorgesehen sind. Ein Objekt wird durch eine Tabelle 
 --- beschrieben und (fast) alle Schlüssel sind optional.
+--- 
+--- #### Console Commands:
+--- In der Konsole können spezielle Komandos eingegeben werden. Eingeklammerte
+--- Angaben sind dabei optional.
+--- * `enableobject object (state (player))`: Ein interaktives Objekt wird aktiviert
+--- * `disableobject object (player)`:        Ein interaktives Objekt wird deaktiviert
+--- * `initobject object `:                   Eine Entität wird aktivierbar gemacht
+--- 
 
 
 
@@ -169,14 +177,6 @@ end
 API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
 
 
-
---- Der Spieler hat auf die Interaktions-Schaltfläche geklickt.
---- 
---- #### Parameters:
---- * `ScriptName`: <b>string</b> Skriptname der Entität
---- * `KnightID`:   <b>integer</b> ID des aktivierenden Helden
---- * `PlayerID`:   <b>integer</b> ID des aktivierenden Spielers
-Report.ObjectClicked = anyInteger;
 
 --- Die Interaktion des Objekts war erfolgreich.
 --- Wenn das Objekt Kosten hat, wird die Aktivierung abgeschlossen, wenn die Kosten ankommen.

@@ -1,6 +1,6 @@
 Lib.Core = Lib.Core or {};
 Lib.Core.Save = {
-    HistoryEditionQuickSave = false,
+    AutoSaveDisabled = true,
     SavingDisabled = false,
     LoadingDisabled = false,
 };
@@ -13,10 +13,11 @@ Lib.Register("core/feature/Core_Save");
 
 function DisableAutoSave(_Flag)
     if not IsLocalScript() then
-        Lib.Core.Save.HistoryEditionQuickSave = _Flag == true;
-        ExecuteLocal([[Lib.Core.Save.HistoryEditionQuickSave = %s]], tostring(_Flag == true))
+        Lib.Core.Save.AutoSaveDisabled = _Flag == true;
+        ExecuteLocal([[Lib.Core.Save.AutoSaveDisabled = %s]], tostring(_Flag == true))
     end
 end
+API.DisableAutomaticQuickSave = DisableAutoSave;
 API.DisableAutoSave = DisableAutoSave;
 
 function DisableSaving(_Flag)
@@ -76,47 +77,16 @@ function Lib.Core.Save:SetupQuicksaveKeyCallback()
                 return;
             end
             -- No quicksave if forced by History Edition
-            if not Lib.Core.Save.HistoryEditionQuickSave and not arg[1] then
+            if Lib.Core.Save.AutoSaveDisabled and not arg[1] then
                 return;
-            end
-            -- Close script console
-            if IsScriptConsoleShown() then
-                HideScriptConsole();
             end
             -- Do quicksave
             KeyBindings_SaveGame_Orig_Core();
         end
 
-        SaveDialog_SaveFile_Orig_Core = SaveDialog_SaveFile;
-        SaveDialog_SaveFile = function(...)
-            -- Close script console
-            if IsScriptConsoleShown() then
-                HideScriptConsole();
-            end
-            -- Do save
-            SaveDialog_SaveFile_Orig_Core();
-        end
-
-        self.Orig_GUI_Window_MainMenuSaveClicked = GUI_Window.MainMenuSaveClicked;
-        --- @diagnostic disable-next-line: duplicate-set-field
-        GUI_Window.MainMenuSaveClicked = function()
-            -- Close script console
-            if IsScriptConsoleShown() then
-                HideScriptConsole();
-            end
-            -- Do save
-            Lib.Core.Save.Orig_GUI_Window_MainMenuSaveClicked();
-        end
-
-        self.Orig_GUI_Window_MainMenuExit = GUI_Window.MainMenuExit;
-        --- @diagnostic disable-next-line: duplicate-set-field
-        GUI_Window.MainMenuExit = function()
-            -- Close script console
-            if IsScriptConsoleShown() then
-                HideScriptConsole();
-            end
-            -- Close game
-            Lib.Core.Save.Orig_GUI_Window_MainMenuExit();
+        -- Unofficial patch: disable autosave
+        GameCallback_Option_CanAutoSave = function()
+            return Lib.Core.Save.AutoSaveDisabled ~= true;
         end
     end
 end

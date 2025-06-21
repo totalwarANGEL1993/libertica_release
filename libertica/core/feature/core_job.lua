@@ -84,6 +84,7 @@ function RequestJobByEventType(_EventType, _Function, ...)
     assert(type(Function) == "function", "Function does not exist!");
     return Lib.Core.Job:CreateEventJob(_EventType, _Function, ...);
 end
+API.StartEventJob = RequestJobByEventType;
 API.RequestJobByEventType = RequestJobByEventType;
 API.StartJobByEventType = RequestJobByEventType;
 
@@ -162,6 +163,7 @@ function RequestRealTimeDelay(_Waittime, _Function, ...)
     );
 end
 API.RequestRealTimeDelay = RequestRealTimeDelay;
+API.RealTimeWait = RequestRealTimeDelay;
 API.StartRealTimeDelay = RequestRealTimeDelay;
 
 function StopJob(_JobID)

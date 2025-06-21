@@ -1,7 +1,7 @@
 Lib.Register("module/information/CutsceneSystem_Behavior");
 
-function Reprisal_Cutscene(_Name, _Cutscene)
-    return B_Reprisal_Cutscene:new(_Name, _Cutscene);
+function Reprisal_Cutscene(...)
+    return B_Reprisal_Cutscene:new(...);
 end
 
 B_Reprisal_Cutscene = {
@@ -49,8 +49,8 @@ RegisterBehavior(B_Reprisal_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 
-function Reward_Cutscene(_Name, _Cutscene)
-    return B_Reward_Cutscene:new(_Name, _Cutscene);
+function Reward_Cutscene(...)
+    return B_Reward_Cutscene:new(...);
 end
 
 B_Reward_Cutscene = CopyTable(B_Reprisal_Cutscene);
@@ -68,8 +68,8 @@ RegisterBehavior(B_Reward_Cutscene);
 
 -- -------------------------------------------------------------------------- --
 
-function Trigger_Cutscene(_Name, _PlayerID, _Waittime)
-    return B_Trigger_Cutscene:new(_Name, _PlayerID, _Waittime);
+function Trigger_Cutscene(...)
+    return B_Trigger_Cutscene:new(...);
 end
 
 B_Trigger_Cutscene = {

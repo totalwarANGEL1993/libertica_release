@@ -41,10 +41,6 @@ function Lib.Core.Debug:OnReportReceived(_ID, ...)
         if not IsLocalScript() then
             self:CallFunctionFromString(...);
         end
-    -- elseif _ID == Report.EscapePressed then
-    --     if IsLocalScript() and Framework.IsDevM() then
-    --         ToggleScriptConsole();
-    --     end
     end
 end
 
@@ -183,7 +179,6 @@ end
 function Lib.Core.Debug:ProcessDebugShortcut(_Type, _Params)
     if self.DevelopingCheats then
         if _Type == "RestartMap" then
-            self:HideDebugInput();
             Framework.RestartMap();
         end
     end
@@ -288,69 +283,45 @@ end
 
 -- -------------------------------------------------------------------------- --
 
-function Lib.Core.Debug:ToggleDebugInput()
-    if self.ConsoleIsVisible then
-        self:HideDebugInput();
-    else
-        self:ShowDebugInput();
+function log(_Text, ...)
+    local Text = _Text;
+    if #arg > 0 then
+        Text = string.format(Text, unpack(arg));
+    end
+    Text = string.gsub(Text, "{cr}", "\n");
+    Framework.WriteToLog(Text);
+    return Text;
+end
+
+function warn(_Condition, _Text, ...)
+    if not _Condition then
+        local Color = "{@color:255,0,0,255}";
+        local Text = Color .. log(_Text, unpack(arg));
+        if GUI then
+            GUI.AddNote(Text);
+        else
+            Logic.DEBUG_AddNote(Text);
+        end
+        return Text;
     end
 end
 
-function Lib.Core.Debug:ShowDebugInput()
-    local MotherPath = "/InGame/TempStuff/BGTopBar/temp";
-    local TopWidget = XGUIEng.GetWidgetPathByID(XGUIEng.GetTopPage());
-    if not self.LoadscreenClosed
-    or not self.DevelopingShell
-    or self.ConsoleIsVisible then
-        return;
+function error(_Condition, _Text, ...)
+    if not _Condition then
+        local Text = log(_Text, unpack(arg));
+        return assert(false, Text);
     end
-    Display.ToggleScriptConsole();
-    if TopWidget ~= MotherPath then
-        XGUIEng.PushPage(MotherPath, false);
-    end
-    XGUIEng.ShowWidget(MotherPath, 0);
-    RequestHiResDelay(0, function()
-        XGUIEng.ShowWidget(MotherPath, 1);
-        XGUIEng.ShowAllSubWidgets(MotherPath, 1);
-        XGUIEng.ShowWidget(MotherPath.. "/ShadowBottom", 0);
-        XGUIEng.ShowWidget(MotherPath.. "/ShadowTop", 0);
-        XGUIEng.ShowWidget(MotherPath.. "/BGTopBarRightBound", 0);
-        XGUIEng.SetWidgetLocalPosition(MotherPath, 0, 0);
-        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/1", 0, -22)
-        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/2", 295, -22)
-        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/3", 592, -22)
-        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/4", 889, -22)
-        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/5", 1184, -22)
-        XGUIEng.SetWidgetLocalPosition(MotherPath.. "/BGTopBarLeftBound/6", 1483, -22);
-        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6", 275, 300);
-        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame", 275, 300);
-        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Bottom", 275, 300);
-        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Bottom/1", 275, 100);
-        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Top", 275, 300);
-        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/Frame/Top/1", 275, 60);
-        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6", 275, 60);
-        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/DialogBG", 275, 60);
-        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/DialogBG/1", 275, 60);
-        XGUIEng.SetWidgetSize(MotherPath.. "/BGTopBarLeftBound/6/DialogBG/1/1", 275, 60);
-        XGUIEng.SetWidgetLocalPosition(MotherPath, 0, -140);
-    end);
-
-    self.ConsoleIsVisible = true;
 end
 
-function Lib.Core.Debug:HideDebugInput()
-    local ChatPath = "/InGame/Root/Normal/ChatInput";
-    if XGUIEng.IsWidgetShown(ChatPath) == 1 then
-        return;
+function debug(_Condition, _Text, ...)
+    if not _Condition then
+        local Text = log(_Text, unpack(arg));
+        if GUI then
+            GUI.AddNote(Text);
+        else
+            Logic.DEBUG_AddNote(Text);
+        end
     end
-    local MotherPath = "/InGame/TempStuff/BGTopBar/temp";
-    if not self.ConsoleIsVisible then
-        return;
-    end
-    Display.ToggleScriptConsole();
-    XGUIEng.ShowWidget(MotherPath, 0);
-
-    self.ConsoleIsVisible = false;
 end
 
 -- -------------------------------------------------------------------------- --
@@ -364,31 +335,4 @@ function ToggleDisplayScriptErrors(_active)
     Lib.Core.Debug:LegacyToggleDisplayScriptErrors(_active);
 end
 API.ToggleDisplayScriptErrors = ToggleDisplayScriptErrors;
-
-function ShowScriptConsole()
-    Lib.Core.Debug:ShowDebugInput();
-end
-
-function HideScriptConsole()
-    Lib.Core.Debug:HideDebugInput();
-end
-
-function ToggleScriptConsole()
-    Lib.Core.Debug:ToggleDebugInput();
-end
-
-function IsScriptConsoleShown()
-    return Lib.Core.Debug.ConsoleIsVisible == true;
-end
-
--- -------------------------------------------------------------------------- --
-
-function Debug_ShowVersion()
-    GUI.AddStaticNote("Version: " ..Lib.Loader.Version);
-end
-
-function Debug_Execute(_Function, ...)
-    error(type(_Function) == "string", "function must be a string!");
-    SendReportToGlobal(Report.DebugCallGlobal, _Function, unpack(arg));
-end
 

@@ -70,6 +70,7 @@ Lib.Register("core/feature/Core_Quest");
 function SaveCustomVariable(_Name, _Value)
     Lib.Core.Quest:SetCustomVariable(_Name, _Value);
 end
+API.SaveCustomVariable = SaveCustomVariable;
 
 function ObtainCustomVariable(_Name, _Default)
     local Value = Lib.CustomVariable[_Name];
@@ -78,6 +79,7 @@ function ObtainCustomVariable(_Name, _Default)
     end
     return Value;
 end
+API.ObtainCustomVariable = ObtainCustomVariable;
 
 -- -------------------------------------------------------------------------- --
 
@@ -267,6 +269,7 @@ function InteractiveObjectActivate(_ScriptName, _State)
         Logic.InteractiveObjectSetPlayerState(GetID(_ScriptName), i, _State);
     end
 end
+API.ActivateIO = InteractiveObjectActivate;
 API.InteractiveObjectActivate = InteractiveObjectActivate;
 
 function InteractiveObjectDeactivate(_ScriptName)
@@ -277,6 +280,7 @@ function InteractiveObjectDeactivate(_ScriptName)
         Logic.InteractiveObjectSetPlayerState(GetID(_ScriptName), i, 2);
     end
 end
+API.DeactivateIO = InteractiveObjectDeactivate;
 API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
 
 -- -------------------------------------------------------------------------- --

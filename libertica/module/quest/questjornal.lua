@@ -20,6 +20,7 @@ Lib.Require("core/core");
 Lib.Require("module/information/Requester");
 Lib.Require("module/quest/Quest");
 Lib.Require("module/quest/QuestJornal_API");
+Lib.Require("module/quest/QuestJornal_Behavior");
 Lib.Register("module/quest/QuestJornal");
 
 -- -------------------------------------------------------------------------- --

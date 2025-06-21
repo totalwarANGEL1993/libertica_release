@@ -179,3 +179,17 @@ function BlacklistKnockdownCategoryInTerritory(_PlayerID, _Category, _Territory)
 end
 API.BlacklistKnockdownCategoryInTerritory = BlacklistKnockdownCategoryInTerritory;
 
+function DeleteFromProtectionList(_ID)
+    assert(not IsLocalScript(), "Can not be used in local script!");
+    Lib.Construction.Global:UnlistKnockdown(_ID);
+end
+API.DeleteProtection = DeleteFromProtectionList;
+API.DeleteFromProtectionList = DeleteFromProtectionList;
+
+function DeleteFromRestrictionList(_ID)
+    assert(not IsLocalScript(), "Can not be used in local script!");
+    Lib.Construction.Global:UnlistConstruction(_ID);
+end
+API.DeleteRestriction = DeleteFromRestrictionList;
+API.DeleteFromRestrictionList = DeleteFromRestrictionList;
+

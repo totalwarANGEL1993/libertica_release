@@ -17,7 +17,7 @@ Lib.MilitiaSystem.Shared = {
 Lib.Require("comfort/AddWare");
 Lib.Require("comfort/GetBattalionSizeBySoldierType");
 Lib.Require("core/Core");
-Lib.Require("module/balancing/Damage");
+Lib.Require("module/fix/Damage");
 Lib.Require("module/faker/Permadeath");
 Lib.Require("module/faker/Technology");
 Lib.Require("module/ui/UIBuilding");

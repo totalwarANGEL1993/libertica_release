@@ -52,6 +52,7 @@ function DropBuildingButton(_ID)
     this:RemoveButtonBinding(0, _ID);
     Lib.UIBuilding.ReleaseContext();
 end
+API.RemoveCustomBuildingButton = DropBuildingButton;
 API.DropBuildingButton = DropBuildingButton;
 
 function DropBuildingButtonFromType(_Type, _ID)

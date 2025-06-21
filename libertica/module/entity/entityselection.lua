@@ -12,6 +12,7 @@ Lib.EntitySelection.Local  = {
 };
 
 Lib.Require("comfort/GetPosition");
+Lib.Require("comfort/IsUnofficialPatch");
 Lib.Require("core/Core");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/entity/EntitySelection_API");
@@ -132,11 +133,13 @@ function Lib.EntitySelection.Local:Initialize()
         self:OverwriteMilitaryErect();
         self:OverwriteMilitaryDisamble();
         self:OverwriteMultiselectIcon();
-        self:OverwriteMilitaryDismount();
-        self:OverwriteThiefDeliver();
         self:OverwriteSelectKnight();
         self:OverwriteSelectAllUnits();
         self:OverwriteNamesAndDescription();
+        if not IsUnofficialPatch() then
+            self:OverwriteMilitaryDismount();
+            self:OverwriteThiefDeliver();
+        end
 
         -- Garbage collection
         Lib.EntitySelection.Global = nil;
@@ -401,7 +404,7 @@ function Lib.EntitySelection.Local:OverwriteMilitaryDismount()
         end
         if Type == Entities.U_AmmunitionCart or Type == Entities.U_BatteringRamCart
         or Type == Entities.U_CatapultCart or Type == Entities.U_SiegeTowerCart
-        or Type == Entities.U_MilitaryBatteringRam or Entities.U_MilitaryCatapult
+        or Type == Entities.U_MilitaryBatteringRam or Type == Entities.U_MilitaryCatapult
         or Type == Entities.U_MilitarySiegeTower then
             if Lib.EntitySelection.Local.SiegeEngineRelease and Guardian == 0 then
                 Sound.FXPlay2DSound( "ui\\menu_click");
@@ -443,7 +446,7 @@ function Lib.EntitySelection.Local:OverwriteMilitaryDismount()
         end
         if Type == Entities.U_AmmunitionCart or Type == Entities.U_BatteringRamCart
         or Type == Entities.U_CatapultCart or Type == Entities.U_SiegeTowerCart
-        or Type == Entities.U_MilitaryBatteringRam or Entities.U_MilitaryCatapult
+        or Type == Entities.U_MilitaryBatteringRam or Type == Entities.U_MilitaryCatapult
         or Type == Entities.U_MilitarySiegeTower then
             if Guardian ~= 0 then
                 SetIcon(CurrentWidgetID, {12, 1});
@@ -731,22 +734,24 @@ function Lib.EntitySelection.Local:OverwriteNamesAndDescription()
             return;
         end
 
-        if XGUIEng.GetWidgetID(MotherWidget.. "/DialogButtons/SiegeEngineCart/Dismount") == CurrentWidgetID
-        or XGUIEng.GetWidgetID(MotherWidget.. "/DialogButtons/AmmunitionCart/Dismount") == CurrentWidgetID
-        or XGUIEng.GetWidgetID(MotherWidget.. "/DialogButtons/Military/Dismount") == CurrentWidgetID
-        then
-            local SelectedEntity = GUI.GetSelectedEntity();
-            if SelectedEntity ~= 0 then
-                if Logic.IsEntityInCategory(SelectedEntity, EntityCategories.Military) == 1 then
-                    local GuardianEntity = Logic.GetGuardianEntityID(SelectedEntity);
-                    local GuardedEntity = Logic.GetGuardedEntityID(SelectedEntity);
-                    if GuardianEntity == 0 and GuardedEntity == 0 then
-                        SetTooltipNormal(
-                            Localize(Lib.EntitySelection.Text.Tooltips.ReleaseSoldiers.Title),
-                            Localize(Lib.EntitySelection.Text.Tooltips.ReleaseSoldiers.Text),
-                            Localize(Lib.EntitySelection.Text.Tooltips.ReleaseSoldiers.Disabled)
-                        );
-                        return;
+        if not IsUnofficialPatch() then
+            if XGUIEng.GetWidgetID(MotherWidget.. "/DialogButtons/SiegeEngineCart/Dismount") == CurrentWidgetID
+            or XGUIEng.GetWidgetID(MotherWidget.. "/DialogButtons/AmmunitionCart/Dismount") == CurrentWidgetID
+            or XGUIEng.GetWidgetID(MotherWidget.. "/DialogButtons/Military/Dismount") == CurrentWidgetID
+            then
+                local SelectedEntity = GUI.GetSelectedEntity();
+                if SelectedEntity ~= 0 then
+                    if Logic.IsEntityInCategory(SelectedEntity, EntityCategories.Military) == 1 then
+                        local GuardianEntity = Logic.GetGuardianEntityID(SelectedEntity);
+                        local GuardedEntity = Logic.GetGuardedEntityID(SelectedEntity);
+                        if GuardianEntity == 0 and GuardedEntity == 0 then
+                            SetTooltipNormal(
+                                Localize(Lib.EntitySelection.Text.Tooltips.ReleaseSoldiers.Title),
+                                Localize(Lib.EntitySelection.Text.Tooltips.ReleaseSoldiers.Text),
+                                Localize(Lib.EntitySelection.Text.Tooltips.ReleaseSoldiers.Disabled)
+                            );
+                            return;
+                        end
                     end
                 end
             end

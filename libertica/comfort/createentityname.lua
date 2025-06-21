@@ -17,5 +17,6 @@ function CreateEntityName(_EntityID)
         return name;
     end
 end
+API.EnsureScriptName = CreateEntityName;
 API.CreateEntityName = CreateEntityName;
 

@@ -6,16 +6,7 @@ Lib.IO.Global = {
 Lib.IO.Local  = {
     Data = {},
 };
-Lib.IO.Shared = {
-    TechnologyConfig = {
-        -- Tech name, Description, Icon, Extra Number
-        {"R_CallGeologist", {de = "Geologen rufen", en = "Order geologist", fr = "Ordre géologue"}, {8, 1, 1}, 1},
-        {"R_RefillIronMine", {de = "Eisenmine auffüllen", en = "Refill mine", fr = "Recharger le mien"}, {8, 2, 1}, 1},
-        {"R_RefillStoneMine", {de = "Steinbruch auffüllen", en = "Refill quarry", fr = "Carrière de recharge"}, {8, 3, 1}, 1},
-        {"R_RefillCistern", {de = "Brunnen auffüllen", en = "Refill well", fr = "Bien remplir"}, {8, 4, 1}, 1},
-        {"R_Tradepost", {de = "Handelsposten bauen", en = "Build Tradepost", fr = "Route commerciale"}, {3, 1, 1}, 1},
-    }
-};
+Lib.IO.Shared = {};
 
 CONST_IO = {};
 CONST_IO_SLAVE_TO_MASTER = {};
@@ -32,6 +23,7 @@ Lib.Require("core/Core");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/faker/Technology");
 Lib.Require("module/io/IO_API");
+Lib.Require("module/io/IO_Config");
 Lib.Require("module/io/IO_Behavior");
 Lib.Register("module/io/IO");
 
@@ -41,38 +33,9 @@ Lib.Register("module/io/IO");
 -- Global initalizer method
 function Lib.IO.Global:Initialize()
     if not self.IsInstalled then
-        --- The player clicked the interaction button.
-        --- 
-        --- #### Parameters
-        --- * `ScriptName` - Scriptname of entity
-        --- * `KnightID`   - ID of activating hero
-        --- * `PlayerID`   - ID of activating player
-        Report.ObjectClicked = CreateReport("Event_ObjectClicked");
-
-        --- The interaction of the object was successfull.
-        --- If the object has costs the activation concludes when the costs arrive.
-        --- 
-        --- #### Parameters
-        --- * `ScriptName` - Scriptname of entity
-        --- * `KnightID`   - ID of activating hero
-        --- * `PlayerID`   - ID of activating player
         Report.ObjectInteraction = CreateReport("Event_ObjectInteraction");
-
-        --- The interaction is deleted from the object.
-        ---
-        --- #### Parameters
-        --- * `ScriptName` - Scriptname of entity
         Report.ObjectReset = CreateReport("Event_ObjectReset");
-
-        --- The state of an object has been reset.
-        ---
-        --- #### Parameters
-        --- * `ScriptName` - Scriptname of entity
         Report.ObjectDelete = CreateReport("Event_ObjectDelete");
-
-        Report.Internal_DebugEnableObject = CreateReport("Event_Internal_DebugEnableObject");
-        Report.Internal_DebugDisableObject = CreateReport("Event_Internal_DebugDisableObject");
-        Report.Internal_DebugInitObject = CreateReport("Event_Internal_DebugInitObject");
 
         Lib.IO.Shared:CreateTechnologies();
 
@@ -100,23 +63,6 @@ function Lib.IO.Global:OnReportReceived(_ID, ...)
         if arg[3] then
             self:ProcessChatInput(arg[1]);
         end
-    elseif _ID == Report.Internal_DebugEnableObject then
-        error(IsExisting(arg[1]), "object " ..arg[1].. " does not exist!");
-        InteractiveObjectActivate(arg[1], arg[2], arg[3]);
-    elseif _ID == Report.Internal_DebugDeableObject then
-        error(IsExisting(arg[1]), "object " ..arg[1].. " does not exist!");
-        InteractiveObjectDeactivate(arg[1], arg[2], arg[3]);
-    elseif _ID == Report.Internal_DebugInitObject then
-        error(IsExisting(arg[1]), "object " ..arg[1].. " does not exist!");
-        local Reward = (arg[2] ~= nil and {arg[2], arg[3]});
-        local Costs = (arg[4] ~= nil and {arg[4], arg[5], arg[6], arg[7]});
-        API.SetupObject({
-            Name = arg[1],
-            Costs = Costs,
-            Reward = Reward,
-            Waittime = 0,
-            State = 0
-        });
     end
 end
 
@@ -313,30 +259,28 @@ function Lib.IO.Global:OverrideObjectInteraction()
 end
 
 function Lib.IO.Global:ProcessChatInput(_Text)
-    if IsHistoryEdition() then
-        local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
-        for i= 1, #Commands, 1 do
-            if Commands[i][1] == "enableobject" then
-                local State = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
-                local PlayerID = (Commands[i][4] and tonumber(Commands[i][4])) or nil;
-                error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
-                ---@diagnostic disable-next-line: param-type-mismatch
-                InteractiveObjectActivate(Commands[i][2], State, PlayerID);
-                log("activated object " ..Commands[i][2].. ".");
-            elseif Commands[i][1] == "disableobject" then
-                local PlayerID = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
-                error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
-                InteractiveObjectDeactivate(Commands[i][2], PlayerID);
-                log("deactivated object " ..Commands[i][2].. ".");
-            elseif Commands[i][1] == "initobject" then
-                error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
-                API.SetupObject({
-                    Name     = Commands[i][2],
-                    Waittime = 0,
-                    State    = 0
-                });
-                log("quick initalization of object " ..Commands[i][2].. ".");
-            end
+    local Commands = Lib.Core.Debug:CommandTokenizer(_Text);
+    for i= 1, #Commands, 1 do
+        if Commands[i][1] == "enableobject" then
+            local State = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
+            local PlayerID = (Commands[i][4] and tonumber(Commands[i][4])) or nil;
+            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+            ---@diagnostic disable-next-line: param-type-mismatch
+            InteractiveObjectActivate(Commands[i][2], State, PlayerID);
+            log("activated object " ..Commands[i][2].. ".");
+        elseif Commands[i][1] == "disableobject" then
+            local PlayerID = (Commands[i][3] and tonumber(Commands[i][3])) or nil;
+            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+            InteractiveObjectDeactivate(Commands[i][2], PlayerID);
+            log("deactivated object " ..Commands[i][2].. ".");
+        elseif Commands[i][1] == "initobject" then
+            error(IsExisting(Commands[i][2]), "object " ..Commands[i][2].. " does not exist!");
+            self:CreateObject({
+                Name     = Commands[i][2],
+                Waittime = 0,
+                State    = 0
+            });
+            log("quick initalization of object " ..Commands[i][2].. ".");
         end
     end
 end
@@ -392,14 +336,9 @@ end
 -- Local initalizer method
 function Lib.IO.Local:Initialize()
     if not self.IsInstalled then
-        Report.ObjectClicked = CreateReport("Event_ObjectClicked");
         Report.ObjectInteraction = CreateReport("Event_ObjectInteraction");
         Report.ObjectReset = CreateReport("Event_ObjectReset");
         Report.ObjectDelete = CreateReport("Event_ObjectDelete");
-
-        Report.Internal_DebugEnableObject = CreateReport("Event_Internal_DebugEnableObject");
-        Report.Internal_DebugDisableObject = CreateReport("Event_Internal_DebugDisableObject");
-        Report.Internal_DebugInitObject = CreateReport("Event_Internal_DebugInitObject");
 
         Lib.IO.Shared:CreateTechnologies();
 
@@ -464,16 +403,6 @@ function Lib.IO.Local:OverrideGameFunctions()
             end
         end
         GUI_Interaction.InteractiveObjectClicked_Orig_Lib_IO();
-
-        -- Send additional click event
-        -- This is supposed to be used in singleplayer only!
-        if not Framework.IsNetworkGame() then
-            local KnightIDs = {};
-            Logic.GetKnights(PlayerID, KnightIDs);
-            local KnightID = GetClosestToTarget(EntityID, KnightIDs);
-            SendReportToGlobal(Report.ObjectClicked, ScriptName, KnightID, PlayerID);
-            SendReport(Report.ObjectClicked, ScriptName, KnightID, PlayerID);
-        end
     end
 
     --- @diagnostic disable-next-line: duplicate-set-field
@@ -799,13 +728,14 @@ end
 -- Shared
 
 function Lib.IO.Shared:CreateTechnologies()
-    for i= 1, #self.TechnologyConfig do
-        if g_GameExtraNo >= self.TechnologyConfig[i][4] then
-            if not Technologies[self.TechnologyConfig[i][1]] then
-                AddCustomTechnology(self.TechnologyConfig[i][1], self.TechnologyConfig[i][2], self.TechnologyConfig[i][3]);
+    for i= 1, #Lib.IO.Config.Technology do
+        local Technology = Lib.IO.Config.Technology[i];
+        if g_GameExtraNo >= Technology[4] then
+            if not Technologies[Technology[1]] then
+                AddCustomTechnology(Technology[1], Technology[2], Technology[3]);
                 if not IsLocalScript() then
                     for j= 1, 8 do
-                        Logic.TechnologySetState(j, Technologies[self.TechnologyConfig[i][1]], 3);
+                        Logic.TechnologySetState(j, Technologies[Technology[1]], 3);
                     end
                 end
             end

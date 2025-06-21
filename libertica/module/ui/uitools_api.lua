@@ -147,6 +147,7 @@ function AddShortcutDescription(_Key, _Description)
     table.insert(Lib.UITools.Shortcut.HotkeyDescriptions, {ID = ID, _Key, _Description});
     return #Lib.UITools.Shortcut.HotkeyDescriptions;
 end
+API.AddShortcutEntry = AddShortcutDescription;
 API.AddShortcutDescription = AddShortcutDescription;
 
 function RemoveShortcutDescription(_ID)
@@ -160,6 +161,8 @@ function RemoveShortcutDescription(_ID)
         end
     end
 end
+API.RemoveHotKey = RemoveShortcutDescription;
+API.RemoveShortcutEntry = RemoveShortcutDescription;
 API.RemoveShortcutDescription = RemoveShortcutDescription;
 
 function SpeedLimitActivate(_Flag)
@@ -180,5 +183,6 @@ function SpeedLimitSetLimit(_Limit)
     ExecuteLocal("Lib.UITools.Speed:SetSpeedLimit(%f)",_Limit);
 end
 API.SetSpeedLimit = SpeedLimitSetLimit;
+API.SpeedLimitSet = SpeedLimitSetLimit;
 API.SpeedLimitSetLimit = SpeedLimitSetLimit;
 

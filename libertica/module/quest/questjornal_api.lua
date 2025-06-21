@@ -8,6 +8,7 @@ function ShowJournalForQuest(_Quest, _Flag)
         Quest.QuestNotes = _Flag == true;
     end
 end
+API.ShowJournalForQuest = ShowJournalForQuest;
 
 function AllowNotesForQuest(_Quest, _Flag)
     assert(not IsLocalScript(), "Can not be used in local script!");
@@ -16,6 +17,7 @@ function AllowNotesForQuest(_Quest, _Flag)
         Lib.QuestJornal.Global.CustomInputAllowed[_Quest] = _Flag == true;
     end
 end
+API.AllowNotesForQuest = AllowNotesForQuest;
 
 function CreateJournalEntry(_Text)
     assert(not IsLocalScript(), "Can not be used in local script!");
@@ -23,6 +25,7 @@ function CreateJournalEntry(_Text)
     _Text = _Text:gsub("{[A-Za-z0-9_]+}", "");
     return Lib.QuestJornal.Global:CreateJournalEntry(_Text, 0, false);
 end
+API.CreateJournalEntry = CreateJournalEntry;
 
 function AlterJournalEntry(_ID, _Text)
     assert(not IsLocalScript(), "Can not be used in local script!");
@@ -39,6 +42,7 @@ function AlterJournalEntry(_ID, _Text)
         );
     end
 end
+API.AlterJournalEntry = AlterJournalEntry;
 
 function HighlightJournalEntry(_ID, _Important)
     assert(not IsLocalScript(), "Can not be used in local script!");
@@ -53,6 +57,7 @@ function HighlightJournalEntry(_ID, _Important)
         );
     end
 end
+API.HighlightJournalEntry = HighlightJournalEntry;
 
 function DeleteJournalEntry(_ID)
     assert(not IsLocalScript(), "Can not be used in local script!");
@@ -67,6 +72,7 @@ function DeleteJournalEntry(_ID)
         );
     end
 end
+API.DeleteJournalEntry = DeleteJournalEntry;
 
 function RestoreJournalEntry(_ID)
     assert(not IsLocalScript(), "Can not be used in local script!");
@@ -81,6 +87,7 @@ function RestoreJournalEntry(_ID)
         );
     end
 end
+API.RestoreJournalEntry = RestoreJournalEntry;
 
 function AddJournalEntryToQuest(_ID, _Quest)
     assert(not IsLocalScript(), "Can not be used in local script!");
@@ -89,6 +96,7 @@ function AddJournalEntryToQuest(_ID, _Quest)
         Lib.QuestJornal.Global:AssociateJournalEntryWithQuest(_ID, _Quest, true);
     end
 end
+API.AddJournalEntryToQuest = AddJournalEntryToQuest
 
 function RemoveJournalEntryFromQuest(_ID, _Quest)
     assert(not IsLocalScript(), "Can not be used in local script!");
@@ -97,4 +105,5 @@ function RemoveJournalEntryFromQuest(_ID, _Quest)
         Lib.QuestJornal.Global:AssociateJournalEntryWithQuest(_ID, _Quest, false);
     end
 end
+API.RemoveJournalEntryFromQuest = RemoveJournalEntryFromQuest;
 

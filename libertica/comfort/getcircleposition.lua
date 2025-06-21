@@ -22,4 +22,6 @@ function GetCirclePosition(_Target, _Distance, _Angle)
     return Result;
 end
 API.GetRelatiePos = GetCirclePosition;
+API.GetRelativePosition = GetCirclePosition;
+API.GetCirclePosition = GetCirclePosition;
 

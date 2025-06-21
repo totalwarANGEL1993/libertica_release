@@ -12,5 +12,6 @@ function GetSlotByPlayer(_PlayerID)
     end
     return -1;
 end
+API.GetPlayerSlotID = GetSlotByPlayer;
 API.GetSlotByPlayer = GetSlotByPlayer;
 

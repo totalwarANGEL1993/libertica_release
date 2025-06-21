@@ -34,5 +34,6 @@ function CopyTable(_Source, _Dest)
     end
     return Result;
 end
+API.InstanceTable  = CopyTable;
 API.CopyTable = CopyTable;
 

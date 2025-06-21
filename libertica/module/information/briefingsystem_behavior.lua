@@ -1,7 +1,7 @@
 Lib.Register("module/information/BriefingSystem_Behavior");
 
-function Reprisal_Briefing(_Name, _Briefing)
-    return B_Reprisal_Briefing:new(_Name, _Briefing);
+function Reprisal_Briefing(...)
+    return B_Reprisal_Briefing:new(...);
 end
 
 B_Reprisal_Briefing = {
@@ -49,8 +49,8 @@ RegisterBehavior(B_Reprisal_Briefing);
 
 -- -------------------------------------------------------------------------- --
 
-function Reward_Briefing(_Name, _Briefing)
-    return B_Reward_Briefing:new(_Name, _Briefing);
+function Reward_Briefing(...)
+    return B_Reward_Briefing:new(...);
 end
 
 B_Reward_Briefing = CopyTable(B_Reprisal_Briefing);
@@ -68,8 +68,8 @@ RegisterBehavior(B_Reward_Briefing);
 
 -- -------------------------------------------------------------------------- --
 
-function Trigger_Briefing(_Name, _PlayerID, _Waittime)
-    return B_Trigger_Briefing:new(_Name, _PlayerID, _Waittime);
+function Trigger_Briefing(...)
+    return B_Trigger_Briefing:new(...);
 end
 
 B_Trigger_Briefing = {

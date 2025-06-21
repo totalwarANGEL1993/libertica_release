@@ -24,6 +24,7 @@ function SetCattleBreedingParameters(_Data)
     ExecuteLocal([[Lib.LifestockSystem.Global.CattleStarveChance = %d]], CattleStarveChance);
     Lib.LifestockSystem.Global.CattleStarveChance = CattleStarveChance;
 end
+API.ConfigureCattleBreeding = SetCattleBreedingParameters;
 API.SetCattleBreedingParameters = SetCattleBreedingParameters;
 
 function SetSheepBreedingParameters(_Data)
@@ -49,6 +50,7 @@ function SetSheepBreedingParameters(_Data)
     ExecuteLocal([[Lib.LifestockSystem.Global.SheepStarveChance = %d]], SheepStarveChance);
     Lib.LifestockSystem.Global.SheepStarveChance = SheepStarveChance;
 end
+API.ConfigureSheepBreeding = SetSheepBreedingParameters;
 API.SetSheepBreedingParameters = SetSheepBreedingParameters;
 
 function RequireTitleToBreedCattle(_Title)

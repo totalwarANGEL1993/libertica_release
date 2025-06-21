@@ -303,9 +303,9 @@ function Lib.NPC.Global:OverrideQuestFunctions()
                     end
                     if not this.Objectives[i].Data[4].NpcInstance then
                         this.Objectives[i].Data[4].NpcInstance = NpcCompose {
-                            Name   = Npc,
-                            Hero   = Hero,
-                            Player = this.ReceivingPlayer,
+                            ScriptName = Npc,
+                            Hero       = Hero,
+                            Player     = this.ReceivingPlayer,
                         };
                     end
                 end

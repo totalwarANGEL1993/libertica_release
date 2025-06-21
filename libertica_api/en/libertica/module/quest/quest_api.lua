@@ -5,7 +5,21 @@
 ---
 --- All texts inside a quest can be pulled out of string tables. The format for
 --- those texts will be "FileName/StringName".
----
+--- 
+--- #### Console Commands:
+--- There are special commands that can be entered into the console. Things in
+--- brackets are optional.
+--- * `fail pattern`:    Lets the quest fail
+--- * `start pattern`:   Starts the quest
+--- * `restart pattern`: Restarts the quest
+--- * `stop pattern`:    Stops the quest
+--- * `win pattern`:     Wins the quest
+--- * `stopped`:         Lists all quests that were interrupted
+--- * `active`:          Lists all quests that are active
+--- * `won`:             Lists all quests that were won
+--- * `failed`:          Lists all quests that have failed
+--- * `waiting`:         Lists all quests that are not triggered
+--- * `find pattern`:    Finds quests like the pattern
 
 
 

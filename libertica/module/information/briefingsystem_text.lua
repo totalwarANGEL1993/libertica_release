@@ -1,5 +1,6 @@
 Lib.Register("module/information/BriefingSystem_Text");
 
+Lib.BriefingSystem = Lib.BriefingSystem or {};
 Lib.BriefingSystem.Text = {
     NextButton = {de = "Weiter",  en = "Forward",  fr = "Continuer"},
     PrevButton = {de = "Zurück",  en = "Previous", fr = "Retour"},

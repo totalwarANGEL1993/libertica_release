@@ -1,7 +1,13 @@
 Lib.Register("module/city/Promotion_Config");
 
 Lib.Promotion = Lib.Promotion or {};
-Lib.Promotion.Config = {};
+Lib.Promotion.Config = {
+    Technology = {
+        -- Tech name, Description, Icon, Extra Number
+        {"R_MilitarySword", "UI_ObjectNames/BuySwordfighters", {9, 7, 0}, 0},
+        {"R_MilitaryBow",   "UI_ObjectNames/BuyBowmen",        {9, 8, 0}, 0},
+    }
+};
 
 function Lib.Promotion.Config:InitAddonText()
     if Framework.GetGameExtraNo() ~= 0 then

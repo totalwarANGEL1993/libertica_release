@@ -25,5 +25,5 @@ function GetBattalionSizeBySoldierType(_Type)
 	local TypeName = Logic.GetEntityTypeName(_Type);
     return CONST_TYPE_SOLDIER_AMOUNT_MAP[TypeName] or 0;
 end
-API.GetAngleBetween = GetAngleBetween;
+API.GetBattalionSizeBySoldierType = GetBattalionSizeBySoldierType;
 

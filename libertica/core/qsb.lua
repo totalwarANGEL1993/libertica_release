@@ -66,23 +66,21 @@ function RegisterBehavior(_Behavior)
     end
 
     if _Behavior.CustomFunction then
-        _Behavior.CustomFunction_Orig = _Behavior.CustomFunction;
-        _Behavior.CustomFunction = function(self, _quest)
-			if Lib.Core.Debug.CheckAtRun
-			and self.DEBUG
-			and not self.DEBUG_ERROR_FOUND
-			and self:Debug(_quest)
-			then
-				self.DEBUG_ERROR_FOUND = true
-			end
-			return self:CustomFunction_Orig(_quest);
-		end
+        if not _Behavior.CustomFunction_Orig then
+            _Behavior.CustomFunction_Orig = _Behavior.CustomFunction;
+            _Behavior.CustomFunction = function(_self, _quest)
+                if Lib.Core.Debug.CheckAtRun
+                and _self.DEBUG
+                and not _self.DEBUG_ERROR_FOUND
+                and _self:Debug(_quest)
+                then
+                    _self.DEBUG_ERROR_FOUND = true
+                end
+                return _self:CustomFunction_Orig(_quest);
+            end
+        end
     end
 
     table.insert(g_QuestBehaviorTypes, _Behavior);
-end
-
-if not MapEditor and GUI then
-    return;
 end
 

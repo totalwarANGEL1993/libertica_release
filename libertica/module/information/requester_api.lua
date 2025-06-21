@@ -97,17 +97,17 @@ function DialogLanguageSelection(_PlayerID)
     end
 
     local DisplayedList = {};
-    for i= 1, #Lib.Core.Text.Languages do
-        table.insert(DisplayedList, Lib.Core.Text.Languages[i][2]);
+    for i= 1, #Lib.Core.Placeholder.Languages do
+        table.insert(DisplayedList, Lib.Core.Placeholder.Languages[i][2]);
     end
     local Action = function(_Selected)
-        SendReportToGlobal(Report.LanguageSelectionClosed, PlayerID, IsGuiPlayer, Lib.Core.Text.Languages[_Selected][1]);
-        SendReport(Report.LanguageSelectionClosed, PlayerID, IsGuiPlayer, Lib.Core.Text.Languages[_Selected][1]);
+        SendReportToGlobal(Report.LanguageSelectionClosed, PlayerID, IsGuiPlayer, Lib.Core.Placeholder.Languages[_Selected][1]);
+        SendReport(Report.LanguageSelectionClosed, PlayerID, IsGuiPlayer, Lib.Core.Placeholder.Languages[_Selected][1]);
     end
     DialogSelectBox(
         PlayerID,
-        Localize(Lib.Requester.Shared.Text.ChooseLanguage.Title),
-        Localize(Lib.Requester.Shared.Text.ChooseLanguage.Text),
+        Localize(Lib.Requester.Text.ChooseLanguage.Title),
+        Localize(Lib.Requester.Text.ChooseLanguage.Text),
         Action,
         DisplayedList
     );

@@ -1,4 +1,4 @@
-Lib.Register("module/mode/SettlementLimitation_Text");
+Lib.Register("module/io/IOSite_Text");
 
 Lib.IOSite = Lib.IOSite or {};
 Lib.IOSite.Text = {

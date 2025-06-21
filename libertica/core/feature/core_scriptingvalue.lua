@@ -198,12 +198,14 @@ function GetEntityScaling(_Entity)
     assert(IsExisting(_Entity), "Entity does not exist.");
     return GetFloat(_Entity, CONST_SCRIPTING_VALUES.Size);
 end
+API.GetEntityScale = GetEntityScaling;
 API.GetEntityScaling = GetEntityScaling;
 
 function SetEntityScaling(_Entity, _Scaling)
     assert(IsExisting(_Entity), "Entity does not exist.");
     SetFloat(_Entity, CONST_SCRIPTING_VALUES.Size, _Scaling);
 end
+API.SetEntityScale = SetEntityScaling;
 API.SetEntityScaling = SetEntityScaling;
 
 function GetEntityModel(_Entity)

@@ -1034,11 +1034,6 @@ function Lib.DialogSystem.Local:ActivateCinematicMode(_PlayerID)
         XGUIEng.PopPage();
     end
 
-    local ConsoleWasVisible = IsScriptConsoleShown();
-    if ConsoleWasVisible then
-        HideScriptConsole();
-    end
-
     -- Show throneroom updater
     XGUIEng.ShowWidget("/InGame/ThroneRoom", 1);
     XGUIEng.PushPage("/InGame/ThroneRoom/Main", false);
@@ -1090,9 +1085,6 @@ function Lib.DialogSystem.Local:ActivateCinematicMode(_PlayerID)
     g_Fade.To = 0;
     SetFaderAlpha(0);
 
-    if ConsoleWasVisible then
-        ShowScriptConsole();
-    end
     if not self.LoadscreenClosed then
         XGUIEng.PushPage("/LoadScreen/LoadScreen", false);
     end
@@ -1104,11 +1096,6 @@ function Lib.DialogSystem.Local:DeactivateCinematicMode(_PlayerID)
         return;
     end
     self.CinematicActive = false;
-
-    local ConsoleWasVisible = IsScriptConsoleShown();
-    if ConsoleWasVisible then
-        HideScriptConsole();
-    end
 
     -- Reset ui state
     g_Fade.To = 0;
@@ -1150,10 +1137,6 @@ function Lib.DialogSystem.Local:DeactivateCinematicMode(_PlayerID)
 
     ResetRenderDistance();
     self:ResetSubtitlesPosition(_PlayerID);
-
-    if ConsoleWasVisible then
-        ShowScriptConsole();
-    end
 end
 
 -- -------------------------------------------------------------------------- --

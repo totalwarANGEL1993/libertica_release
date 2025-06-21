@@ -356,3 +356,15 @@ function BlacklistKnockdownCategoryInTerritory(_PlayerID, _Category, _Territory)
 end
 API.BlacklistKnockdownCategoryInTerritory = BlacklistKnockdownCategoryInTerritory;
 
+--- Entfernt eine beliebige Protektion anhand der ID.
+--- @param _ID integer ID der Protektion
+function DeleteFromProtectionList(_ID)
+end
+API.DeleteFromProtectionList = DeleteFromProtectionList;
+
+--- Entfernt eine beliebige Restriktion anhand der ID.
+--- @param _ID integer ID der Restriktion
+function DeleteFromRestrictionList(_ID)
+end
+API.DeleteFromRestrictionList = DeleteFromRestrictionList;
+

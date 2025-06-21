@@ -11,4 +11,5 @@ function UnlockTitleForPlayer(_PlayerID, _KnightTitle)
         end
     end
 end
+API.UnlockTitleForPlayer = UnlockTitleForPlayer;
 

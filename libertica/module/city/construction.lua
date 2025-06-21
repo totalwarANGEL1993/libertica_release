@@ -249,6 +249,19 @@ function Lib.Construction.Global:MirrorConstructionRestrictionsToLocalScript()
     ExecuteLocal([[Lib.Construction.Local.Construction.Restriction = %s]], Table);
 end
 
+function Lib.Construction.Global:UnlistConstruction(_ID)
+    for List, PlayerData in pairs(self.Construction.Restriction) do
+        for PlayerID = 1, 8 do
+            for i= #PlayerData[PlayerID], 1, -1 do
+                if PlayerData[PlayerID][i].ID == _ID then
+                    table.remove(self.Construction.Restriction[List][PlayerID], 1);
+                end
+            end
+        end
+    end
+    ExecuteLocal([[Lib.Construction.Local:UnlistConstruction(%d)]], _ID);
+end
+
 -- -------------------------------------------------------------------------- --
 
 function Lib.Construction.Global:WhitelistKnockdownTypeInArea(_PlayerID, _Type, _X, _Y, _Area)
@@ -333,6 +346,19 @@ end
 function Lib.Construction.Global:MirrorKnockdownRestrictionsToLocalScript()
     local Table = table.tostring(self.Knockdown.Restriction);
     ExecuteLocal([[Lib.Construction.Local.Knockdown.Restriction = %s]], Table);
+end
+
+function Lib.Construction.Global:UnlistKnockdown(_ID)
+    for List, PlayerData in pairs(self.Knockdown.Restriction) do
+        for PlayerID = 1, 8 do
+            for i= #PlayerData[PlayerID], 1, -1 do
+                if PlayerData[PlayerID][i].ID == _ID then
+                    table.remove(self.Knockdown.Restriction[List][PlayerID], 1);
+                end
+            end
+        end
+    end
+    ExecuteLocal([[Lib.Construction.Local:UnlistKnockdown(%d)]], _ID);
 end
 
 -- -------------------------------------------------------------------------- --
@@ -448,6 +474,32 @@ function Lib.Construction.Local:OnReportReceived(_ID, ...)
         self:OverwriteGameCallbacks();
 
         self.LoadscreenClosed = true;
+    end
+end
+
+-- -------------------------------------------------------------------------- --
+
+function Lib.Construction.Local:UnlistConstruction(_ID)
+    for List, PlayerData in pairs(self.Construction.Restriction) do
+        for PlayerID = 1, 8 do
+            for i= #PlayerData[PlayerID], 1, -1 do
+                if PlayerData[PlayerID][i].ID == _ID then
+                    table.remove(self.Construction.Restriction[List][PlayerID], 1);
+                end
+            end
+        end
+    end
+end
+
+function Lib.Construction.Local:UnlistKnockdown(_ID)
+    for List, PlayerData in pairs(self.Knockdown.Restriction) do
+        for PlayerID = 1, 8 do
+            for i= #PlayerData[PlayerID], 1, -1 do
+                if PlayerData[PlayerID][i].ID == _ID then
+                    table.remove(self.Knockdown.Restriction[List][PlayerID], 1);
+                end
+            end
+        end
     end
 end
 

@@ -3,6 +3,13 @@
 --- (Almost) All entities can be used as interactive object not just those
 --- that are supposed to. An object is described by a table and (almost) all
 --- keys are optional.
+--- 
+--- #### Console Commands:
+--- There are special commands that can be entered into the console. Things in
+--- brackets are optional.
+--- * `enableobject object (state (player))`: An interactive object is made available
+--- * `disableobject object (player)`:        An interactive object is made unavailable
+--- * `initobject object `:                   An entity is turned into an interactive object
 
 
 
@@ -169,14 +176,6 @@ end
 API.InteractiveObjectDeactivate = InteractiveObjectDeactivate;
 
 
-
---- The player clicked the interaction button.
---- 
---- #### Parameters:
---- * `ScriptName`: <b>string</b> Scriptname of entity
---- * `KnightID`:   <b>integer</b> ID of activating hero
---- * `PlayerID`:   <b>integer</b> ID of activating player
-Report.ObjectClicked = anyInteger;
 
 --- The interaction with the object was successfull.
 --- If the object has costs the activation concludes when the costs arrive.

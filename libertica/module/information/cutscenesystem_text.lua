@@ -1,5 +1,6 @@
 Lib.Register("module/information/CutsceneSystem_Text");
 
+Lib.CutsceneSystem = Lib.CutsceneSystem or {};
 Lib.CutsceneSystem.Text = {
     FastForwardActivate   = {de = "Beschleunigen",      en = "Fast Forward", fr = "Accélérer"},
     FastForwardDeactivate = {de = "Zurücksetzen",       en = "Normal Speed", fr = "Réinitialiser"},

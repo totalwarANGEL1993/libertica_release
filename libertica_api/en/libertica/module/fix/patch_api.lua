@@ -1,0 +1,13 @@
+--- This module fixes some bugs in the game.
+--- 
+--- #### Bug Fixes:
+--- <li>Luxury goods can be stored in village storehouses</li>
+--- <li>Soldier respawning for ME barracks is active</li>
+--- <li>Add castle and storehouse as delivery checkpoints</li>
+--- <li>IO interaction checks for both goods if they available</li>
+--- <li>The destroy all units now dosen't count sites and special entities</li>
+--- <li>The big cathedral has the right name displayed in the selection</li>
+--- <li>House menu is fixed for buildings of other climate zones</li>
+--- <li>Ability hints only trigger if player has knight and storehouse</li>
+--- <li>Deleted camp fires don't crash the game anymore</li>
+--- 

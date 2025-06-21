@@ -9,6 +9,7 @@ function InitHarbor(_PlayerID, ...)
         AddTradeRoute(_PlayerID, arg[i]);
     end
 end
+API.TravelingSalesmanCreate = InitHarbor;
 API.InitHarbor = InitHarbor;
 
 function DisposeHarbor(_PlayerID)
@@ -16,6 +17,7 @@ function DisposeHarbor(_PlayerID)
     assert(Logic.GetStoreHouse(_PlayerID) ~= 0, "Player " .._PlayerID.. " is dead! :(");
     Lib.TradeRoute.Global:DisposeHarbor(_PlayerID);
 end
+API.TravelingSalesmanDelete = DisposeHarbor;
 API.DisposeHarbor = DisposeHarbor;
 
 function AddTradeRoute(_PlayerID, _Route)

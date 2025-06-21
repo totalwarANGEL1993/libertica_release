@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link href="../prism.min.css" rel="stylesheet" />
+    <script src="../prism.min.js"></script>
+    <script src="../prism-lua.min.js"></script>
+    <script src="../prism-xml.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/comfort.addware.html">comfort.addware</a></li>
+  <li><a href="../modules/comfort.colortohex.html">comfort.colortohex</a></li>
+  <li><a href="../modules/comfort.copytable.html">comfort.copytable</a></li>
+  <li><a href="../modules/comfort.createcartbygoodtype.html">comfort.createcartbygoodtype</a></li>
+  <li><a href="../modules/comfort.createentityname.html">comfort.createentityname</a></li>
+  <li><a href="../modules/comfort.createstock.html">comfort.createstock</a></li>
+  <li><a href="../modules/comfort.dumptable.html">comfort.dumptable</a></li>
+  <li><a href="../modules/comfort.getactiveplayers.html">comfort.getactiveplayers</a></li>
+  <li><a href="../modules/comfort.getanglebetween.html">comfort.getanglebetween</a></li>
+  <li><a href="../modules/comfort.getbattalionsizebysoldiertype.html">comfort.getbattalionsizebysoldiertype</a></li>
+  <li><a href="../modules/comfort.getcategoriesofentity.html">comfort.getcategoriesofentity</a></li>
+  <li><a href="../modules/comfort.getcategoriesoftype.html">comfort.getcategoriesoftype</a></li>
+  <li><a href="../modules/comfort.getcircleposition.html">comfort.getcircleposition</a></li>
+  <li><a href="../modules/comfort.getcirclepositions.html">comfort.getcirclepositions</a></li>
+  <li><a href="../modules/comfort.getclosesttotarget.html">comfort.getclosesttotarget</a></li>
+  <li><a href="../modules/comfort.getdelayedplayers.html">comfort.getdelayedplayers</a></li>
+  <li><a href="../modules/comfort.getdistance.html">comfort.getdistance</a></li>
+  <li><a href="../modules/comfort.getgeometricfocus.html">comfort.getgeometricfocus</a></li>
+  <li><a href="../modules/comfort.gethealth.html">comfort.gethealth</a></li>
+  <li><a href="../modules/comfort.getlineposition.html">comfort.getlineposition</a></li>
+  <li><a href="../modules/comfort.getlinepositions.html">comfort.getlinepositions</a></li>
+  <li><a href="../modules/comfort.getplayeratslot.html">comfort.getplayeratslot</a></li>
+  <li><a href="../modules/comfort.getposition.html">comfort.getposition</a></li>
+  <li><a href="../modules/comfort.getpredatorspawnertypes.html">comfort.getpredatorspawnertypes</a></li>
+  <li><a href="../modules/comfort.getquestid.html">comfort.getquestid</a></li>
+  <li><a href="../modules/comfort.getrandomsettlertype.html">comfort.getrandomsettlertype</a></li>
+  <li><a href="../modules/comfort.getsiegecarttypebyenginetype.html">comfort.getsiegecarttypebyenginetype</a></li>
+  <li><a href="../modules/comfort.getsiegeenginetypebycarttype.html">comfort.getsiegeenginetypebycarttype</a></li>
+  <li><a href="../modules/comfort.getslotbyplayer.html">comfort.getslotbyplayer</a></li>
+  <li><a href="../modules/comfort.getsoldiersofgroup.html">comfort.getsoldiersofgroup</a></li>
+  <li><a href="../modules/comfort.getterritoryid.html">comfort.getterritoryid</a></li>
+  <li><a href="../modules/comfort.hextocolor.html">comfort.hextocolor</a></li>
+  <li><a href="../modules/comfort.hextocolorstring.html">comfort.hextocolorstring</a></li>
+  <li><a href="../modules/comfort.ishistoryedition.html">comfort.ishistoryedition</a></li>
+  <li><a href="../modules/comfort.isincone.html">comfort.isincone</a></li>
+  <li><a href="../modules/comfort.isinsight.html">comfort.isinsight</a></li>
+  <li><a href="../modules/comfort.islocalscript.html">comfort.islocalscript</a></li>
+  <li><a href="../modules/comfort.ismultiplayer.html">comfort.ismultiplayer</a></li>
+  <li><a href="../modules/comfort.ismultiplayerready.html">comfort.ismultiplayerready</a></li>
+  <li><a href="../modules/comfort.isunofficialpatch.html">comfort.isunofficialpatch</a></li>
+  <li><a href="../modules/comfort.isvalidposition.html">comfort.isvalidposition</a></li>
+  <li><a href="../modules/comfort.isvalidquest.html">comfort.isvalidquest</a></li>
+  <li><a href="../modules/comfort.isvalidquestname.html">comfort.isvalidquestname</a></li>
+  <li><a href="../modules/comfort.keyof.html">comfort.keyof</a></li>
+  <li><a href="../modules/comfort.lookat.html">comfort.lookat</a></li>
+  <li><a href="../modules/comfort.move.html">comfort.move</a></li>
+  <li><a href="../modules/comfort.moveandlookat.html">comfort.moveandlookat</a></li>
+  <li><a href="../modules/comfort.movetoposition.html">comfort.movetoposition</a></li>
+  <li><a href="../modules/comfort.replaceentity.html">comfort.replaceentity</a></li>
+  <li><a href="../modules/comfort.round.html">comfort.round</a></li>
+  <li><a href="../modules/comfort.sendcart.html">comfort.sendcart</a></li>
+  <li><a href="../modules/comfort.serializetable.html">comfort.serializetable</a></li>
+  <li><a href="../modules/comfort.sethealth.html">comfort.sethealth</a></li>
+  <li><a href="../modules/comfort.setposition.html">comfort.setposition</a></li>
+  <li><a href="../modules/comfort.setpositionandlookat.html">comfort.setpositionandlookat</a></li>
+  <li><a href="../modules/comfort.setpositionrelativeto.html">comfort.setpositionrelativeto</a></li>
+  <li><a href="../modules/comfort.setresourceamount.html">comfort.setresourceamount</a></li>
+  <li><a href="../modules/comfort.toboolean.html">comfort.toboolean</a></li>
+  <li><a href="../modules/comfort.unlocktitleforplayer.html">comfort.unlocktitleforplayer</a></li>
+  <li><a href="../modules/core.core.html">core.core</a></li>
+  <li><a href="../modules/core.core_api.html">core.core_api</a></li>
+  <li><a href="../modules/core.core_behavior.html">core.core_behavior</a></li>
+  <li><a href="../modules/core.core_lua.html">core.core_lua</a></li>
+  <li><a href="../modules/module.city.construction_api.html">module.city.construction_api</a></li>
+  <li><a href="../modules/module.city.lifestocksystem_api.html">module.city.lifestocksystem_api</a></li>
+  <li><a href="../modules/module.city.militiasystem_api.html">module.city.militiasystem_api</a></li>
+  <li><a href="../modules/module.city.promotion_api.html">module.city.promotion_api</a></li>
+  <li><a href="../modules/module.diplomacy.diplomacy_api.html">module.diplomacy.diplomacy_api</a></li>
+  <li><a href="../modules/module.entity.entityevent_api.html">module.entity.entityevent_api</a></li>
+  <li><a href="../modules/module.entity.entitysearch_api.html">module.entity.entitysearch_api</a></li>
+  <li><a href="../modules/module.entity.entityselection_api.html">module.entity.entityselection_api</a></li>
+  <li><a href="../modules/module.entity.npc_api.html">module.entity.npc_api</a></li>
+  <li><a href="../modules/module.entity.npc_behavior.html">module.entity.npc_behavior</a></li>
+  <li><a href="../modules/module.faker.permadeath_api.html">module.faker.permadeath_api</a></li>
+  <li><a href="../modules/module.faker.technology_api.html">module.faker.technology_api</a></li>
+  <li><strong>module.fix.damage_api</strong></li>
+  <li><a href="../modules/module.fix.patch_api.html">module.fix.patch_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_api.html">module.information.briefingsystem_api</a></li>
+  <li><a href="../modules/module.information.briefingsystem_behavior.html">module.information.briefingsystem_behavior</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_api.html">module.information.cutscenesystem_api</a></li>
+  <li><a href="../modules/module.information.cutscenesystem_behavior.html">module.information.cutscenesystem_behavior</a></li>
+  <li><a href="../modules/module.information.dialogsystem_api.html">module.information.dialogsystem_api</a></li>
+  <li><a href="../modules/module.information.dialogsystem_behavior.html">module.information.dialogsystem_behavior</a></li>
+  <li><a href="../modules/module.information.information_api.html">module.information.information_api</a></li>
+  <li><a href="../modules/module.information.requester_api.html">module.information.requester_api</a></li>
+  <li><a href="../modules/module.information.requester_behavior.html">module.information.requester_behavior</a></li>
+  <li><a href="../modules/module.information.typewriter_api.html">module.information.typewriter_api</a></li>
+  <li><a href="../modules/module.io.io_api.html">module.io.io_api</a></li>
+  <li><a href="../modules/module.io.io_behavior.html">module.io.io_behavior</a></li>
+  <li><a href="../modules/module.io.iochest_api.html">module.io.iochest_api</a></li>
+  <li><a href="../modules/module.io.iomine_api.html">module.io.iomine_api</a></li>
+  <li><a href="../modules/module.io.iosite_api.html">module.io.iosite_api</a></li>
+  <li><a href="../modules/module.mode.settlementlimitation_api.html">module.mode.settlementlimitation_api</a></li>
+  <li><a href="../modules/module.mode.settlementsurvival_api.html">module.mode.settlementsurvival_api</a></li>
+  <li><a href="../modules/module.quest.quest_api.html">module.quest.quest_api</a></li>
+  <li><a href="../modules/module.quest.quest_behavior.html">module.quest.quest_behavior</a></li>
+  <li><a href="../modules/module.quest.questbehavior_behavior.html">module.quest.questbehavior_behavior</a></li>
+  <li><a href="../modules/module.quest.questjornal_api.html">module.quest.questjornal_api</a></li>
+  <li><a href="../modules/module.quest.questjornal_behavior.html">module.quest.questjornal_behavior</a></li>
+  <li><a href="../modules/module.settings.camera_api.html">module.settings.camera_api</a></li>
+  <li><a href="../modules/module.settings.sound_api.html">module.settings.sound_api</a></li>
+  <li><a href="../modules/module.trade.trade_api.html">module.trade.trade_api</a></li>
+  <li><a href="../modules/module.trade.traderoute_api.html">module.trade.traderoute_api</a></li>
+  <li><a href="../modules/module.trade.warehouse_api.html">module.trade.warehouse_api</a></li>
+  <li><a href="../modules/module.ui.uibuilding_api.html">module.ui.uibuilding_api</a></li>
+  <li><a href="../modules/module.ui.uieffects_api.html">module.ui.uieffects_api</a></li>
+  <li><a href="../modules/module.ui.uitools_api.html">module.ui.uitools_api</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>module.fix.damage_api</code></h1>
+<p>Ermöglicht die Veränderung der Schadenswerte von Einheiten.</p>
+<p>
+<p> <b>Achtung</b>: Die Funktionen <code>MakeVulnerable</code> und <code>MakeInvulnerable</code>
+ wurden überschrieben. Die Funktion <code>Logic.SetEntityInvulnerabilityFlag</code>
+ wird stattdessen intern benutzt und darf nicht mehr verwendet werden!
+<p> <h3>Funktionen:</h3> <li>Besseres Balancing für Bogenschützen</li>
+ <li>Nahe Mauerkatapulte schwächen sich gegenseitig (gilt nicht für KI)</li>
+ <li>Anpassen der Kampfkraft von Einheiten über Lua</li>
+ <li>Zusätzliche Rüstung für Einheiten vergeben</li>
+ <li>Anpassen des Own Territoy Bonus</li>
+ <li>Anpassen des Height Modifier</li>
+<p> <b>Achtung</b>: Diese Funktionen werden sofort aktiv, wenn das Modul
+ geladen wird!
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#SetEntityTypeDamage">SetEntityTypeDamage (_Type, _Damage, ...)</a></td>
+	<td class="summary">Setzt den Schaden für einen Entitätstypen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetEntityNameDamage">SetEntityNameDamage (_Name, _Damage, ...)</a></td>
+	<td class="summary">Setzt den Schaden für eine benannte Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetEntityTypeArmor">SetEntityTypeArmor (_Type, _Armor)</a></td>
+	<td class="summary">Setzt Die Rüstung für einen Entitätstypen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetEntityNameArmor">SetEntityNameArmor (_Name, _Armor)</a></td>
+	<td class="summary">Setzt die Rüstung für eine benannte Entität.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetTerritoryBonus">SetTerritoryBonus (_PlayerID, _Bonus)</a></td>
+	<td class="summary">Setzt den Bonusfaktor für den Schaden bei Kämpfen auf eigenem Gebiet.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#SetHeightModifier">SetHeightModifier (_PlayerID, _Bonus)</a></td>
+	<td class="summary">Setzt den Bonusfaktor für den Schaden bei Kämpfen von erhöhter Position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#IsInvulnerable">IsInvulnerable (_Entity)</a></td>
+	<td class="summary">Prüft, ob die Entität unverwundbar ist.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "SetEntityTypeDamage"></a>
+    <strong>SetEntityTypeDamage (_Type, _Damage, ...)</strong>
+    </dt>
+    <dd>
+    Setzt den Schaden für einen Entitätstypen.
+<p> Optional können Feindkategorien angegeben werden, für die der Schaden gilt.
+<p> Der angegebene Schaden zu einer Liste von Kategorien ersetzt den Basischaden
+ des Entitätstypen. Der finale Schaden Ergibt sich aus Moral, Höhenbonus und
+ Territorienbonus.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Type</span> <b>integer</b> Entitätstyp
+        </li>
+        <li><span class="parameter">_Damage</span> <b>integer</b> Höhe des Schaden
+        </li>
+        <li><span class="parameter">...</span>
+         integer? Optionale Feindkategorien
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetEntityNameDamage"></a>
+    <strong>SetEntityNameDamage (_Name, _Damage, ...)</strong>
+    </dt>
+    <dd>
+    Setzt den Schaden für eine benannte Entität.
+<p> Optional können Feindkategorien angegeben werden, für die der Schaden gilt.
+<p> Der angegebene Schaden zu einer Liste von Kategorien ersetzt den Basischaden
+ der Entität. Der finale Schaden Ergibt sich aus Moral, Höhenbonus und
+ Territorienbonus.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Name</span> <b>string</b> Scriptname der Entität
+        </li>
+        <li><span class="parameter">_Damage</span> <b>integer</b> Höhe des Schaden
+        </li>
+        <li><span class="parameter">...</span>
+         integer? Optionale Feindkategorien
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetEntityTypeArmor"></a>
+    <strong>SetEntityTypeArmor (_Type, _Armor)</strong>
+    </dt>
+    <dd>
+    Setzt Die Rüstung für einen Entitätstypen.
+<p> Der Rüstungswert wird nach der eigentlichen Schadensberechnung vom übrigen
+ Schaden abgezogen. Der Schaden kann niemals kleiner als 1 werden.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Type</span> <b>integer</b> Entitätstyp
+        </li>
+        <li><span class="parameter">_Armor</span> <b>integer</b> Stärke der Rüstung
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetEntityNameArmor"></a>
+    <strong>SetEntityNameArmor (_Name, _Armor)</strong>
+    </dt>
+    <dd>
+    Setzt die Rüstung für eine benannte Entität.
+<p> Der Rüstungswert wird nach der eigentlichen Schadensberechnung vom übrigen
+ Schaden abgezogen. Der Schaden kann niemals kleiner als 1 werden.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Name</span> <b>string</b> Scriptname der Entität
+        </li>
+        <li><span class="parameter">_Armor</span> <b>integer</b> Stärke der Rüstung
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetTerritoryBonus"></a>
+    <strong>SetTerritoryBonus (_PlayerID, _Bonus)</strong>
+    </dt>
+    <dd>
+    Setzt den Bonusfaktor für den Schaden bei Kämpfen auf eigenem Gebiet.
+<p> Der angegebene Faktor wird mit dem eigentlichen Faktor multipliziert. Für
+ 0.5 bedeutet dies, der Territorienbonus wird halbiert. Bei der Berechnung
+ wird der Territorienbonus zur Moral dazu addiert.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Bonus</span> <b>number</b> Faktor
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "SetHeightModifier"></a>
+    <strong>SetHeightModifier (_PlayerID, _Bonus)</strong>
+    </dt>
+    <dd>
+    Setzt den Bonusfaktor für den Schaden bei Kämpfen von erhöhter Position.
+<p> Der angegebene Faktor wird mit dem eigentlichen Faktor multipliziert. Für
+ 0.5 bedeutet dies, der Höhenbonus wird halbiert. Bei der Berechnung wird
+ die Summe von Moral und Territorienbonus mit dem Höhenbonus multipliziert.
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_PlayerID</span> <b>integer</b> ID des Spielers
+        </li>
+        <li><span class="parameter">_Bonus</span> <b>number</b> Faktor
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "IsInvulnerable"></a>
+    <strong>IsInvulnerable (_Entity)</strong>
+    </dt>
+    <dd>
+    Prüft, ob die Entität unverwundbar ist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_Entity</span> <b>any</b> Skriptname oder Entität-ID
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol><b>boolean</b> Invulnerable Entität ist unverwundbar
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-06-21 22:41:01 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

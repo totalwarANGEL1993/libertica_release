@@ -3,6 +3,8 @@ Lib.Register("module/ui/UIBuilding_Buttons");
 
 -- Global ------------------------------------------------------------------- --
 
+Lib.UIBuilding = Lib.UIBuilding or {};
+Lib.UIBuilding.Global = Lib.UIBuilding.Global or {};
 Lib.UIBuilding.Global.ExtraButton = {};
 
 -- -------------------------------------------------------------------------- --
@@ -52,6 +54,7 @@ end
 
 -- Local -------------------------------------------------------------------- --
 
+Lib.UIBuilding.Local = Lib.UIBuilding.Local or {};
 Lib.UIBuilding.Local.ExtraButton = {};
 
 -- -------------------------------------------------------------------------- --

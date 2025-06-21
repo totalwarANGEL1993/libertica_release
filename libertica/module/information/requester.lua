@@ -15,27 +15,12 @@ Lib.Requester.Local = {
         Queue = {},
     },
 };
-Lib.Requester.Shared = {
-    Text = {
-        ChooseLanguage = {
-            Title = {
-                de = "Wählt die Sprache",
-                en = "Chose your Tongue",
-                fr = "Sélectionnez la langue",
-            },
-            Text = {
-                de = "Wählt aus der Liste die Sprache aus, in die Handlungstexte übersetzt werden sollen.",
-                en = "Choose from the list below which language story texts shall be presented to you.",
-                fr = "Sélectionne dans la liste la langue dans laquelle les textes narratifs doivent être traduits.",
-            }
-        }
-    },
-};
 
 Lib.Require("core/core");
 Lib.Require("module/ui/UITools");
 Lib.Require("module/information/Requester_API");
 Lib.Require("module/information/Requester_Behavior");
+Lib.Require("module/information/Requester_Text");
 Lib.Register("module/information/Requester");
 
 -- -------------------------------------------------------------------------- --
@@ -66,7 +51,7 @@ function Lib.Requester.Global:OnReportReceived(_ID, ...)
         g_GoalDecideDialogDisplayed = false;
         g_DecisionWindowResult = arg[3] == true;
     elseif _ID == Report.LanguageSelectionClosed then
-        Lib.Core.Text:ChangeSystemLanguage(arg[1], arg[2], arg[3]);
+        Lib.Core.Placeholder:ChangeSystemLanguage(arg[1], arg[2], arg[3]);
     end
 end
 
@@ -189,8 +174,8 @@ function Lib.Requester.Local:OpenDialog(_PlayerID, _Title, _Text, _Action)
         assert(type(_Text) == "string");
 
 
-        _Title = "{center}" .. Lib.Core.Text:ConvertPlaceholders(_Title);
-        _Text  = Lib.Core.Text:ConvertPlaceholders(_Text);
+        _Title = "{center}" .. Lib.Core.Placeholder:ConvertPlaceholders(_Title);
+        _Text  = Lib.Core.Placeholder:ConvertPlaceholders(_Text);
         if string.len(_Text) < 35 then
             _Text = _Text .. "{cr}";
         end
@@ -329,6 +314,7 @@ function Lib.Requester.Local:DialogOverwriteOriginal()
         if XGUIEng.IsWidgetShown(RequesterDialog) == 0 then
             local Action = "XGUIEng.ShowWidget(RequesterDialog, 0)";
             Action = Action .. "; XGUIEng.PopPage()";
+            XGUIEng.SetActionFunction(RequesterDialog_Ok, Action);
             Lib.Requester.Local.Orig_OpenDialog(_Message, _Title, _IsMPError);
         end
     end

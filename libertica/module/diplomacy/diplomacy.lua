@@ -71,13 +71,13 @@ function Lib.Diplomacy.Global:ResetDiplomacy()
 end
 
 function Lib.Diplomacy.Global:OverwriteDiplomaticEntity()
-    self.Orig_DiplomaticEntity.OnDiplomacyStatusChange = DiplomaticEntity.OnDiplomacyStatusChange;
+    self.Orig_DiplomaticEntity_OnDiplomacyStatusChange = DiplomaticEntity.OnDiplomacyStatusChange;
     DiplomaticEntity.OnDiplomacyStatusChange = function(_this, _relation, _diplomaticEntity, _oldState)
         -- Send event
         SendReport(Report.DiplomacyChanged, _this.ID, _diplomaticEntity.ID, _oldState, _relation.Status.State);
         SendReportToLocal(Report.DiplomacyChanged, _this.ID, _diplomaticEntity.ID, _oldState, _relation.Status.State);
         -- Call original
-        Lib.Diplomacy.Global.Orig_DiplomaticEntity.OnDiplomacyStatusChange(_this, _relation, _diplomaticEntity, _oldState);
+        Lib.Diplomacy.Global.Orig_DiplomaticEntity_OnDiplomacyStatusChange(_this, _relation, _diplomaticEntity, _oldState);
     end
 end
 
